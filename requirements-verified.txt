@@ -1,0 +1,32 @@
+# CPU-only environment re-verified to import the MetaGNN framework and pass the
+# pytest suite (Python 3.10.12). Every version below was installed and confirmed
+# importable; see TEST_REPORT.md. For GPU training, prefer framework/requirements.txt
+# (PyTorch 2.2.0 + CUDA 12.1), which is the environment the published results used.
+
+# --- scientific core ---
+numpy==2.2.6
+scipy==1.15.3
+pandas==2.3.3
+scikit-learn==1.7.2
+h5py==3.16.0
+networkx==3.4.2
+matplotlib==3.10.9
+seaborn>=0.13
+
+# --- deep learning (CPU wheels) ---
+torch==2.12.1            # any torch 2.x works; CPU build verified
+torch-geometric==2.8.0   # pure-Python GATv2 path; compiled scatter/sparse not required
+
+# --- metabolic modeling / chemistry ---
+cobra==0.31.1
+rdkit==2026.3.3
+
+# --- utilities ---
+pyyaml>=6.0
+tqdm>=4.66
+requests>=2.31
+
+# --- testing ---
+pytest>=7.0
+pytest-timeout>=2.1
+pytest-cov>=4.0

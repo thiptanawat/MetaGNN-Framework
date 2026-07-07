@@ -1,0 +1,34 @@
+# MetaGNN-CRC Dataset — DataInBrief Repository
+# Python >= 3.9 required
+# Install: pip install -r requirements.txt
+
+# Data processing
+numpy==1.26.3
+pandas==2.1.4
+scipy==1.11.4
+h5py==3.10.0
+
+# Bioinformatics
+pydeseq2==0.4.3          # VST normalisation for RNA-seq
+cobra==0.29.0            # COBRApy for Recon3D GEM handling
+
+# Cheminformatics (metabolite features)
+# conda install -c conda-forge rdkit  (recommended install method)
+# rdkit>=2023.03.1
+
+# Graph processing
+torch==2.1.2
+torch-geometric==2.4.0
+
+# Quality control & statistics
+scikit-learn==1.3.2
+statsmodels==0.14.1
+
+# Visualisation (figure generation)
+matplotlib==3.8.2
+seaborn==0.13.0
+
+# Utilities
+tqdm==4.66.1
+requests==2.31.0
+pyyaml==6.0.1

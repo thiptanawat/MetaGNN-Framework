@@ -1,0 +1,59 @@
+# MetaGNN Configuration: CRC 220-patient Benchmark
+#
+# This configuration defines the setup for training MetaGNN on the
+# colorectal cancer (CRC) 220-patient benchmark cohort with a single
+# train/val/test split.
+
+# Data and paths
+data_root: ./data
+output_dir: ./output
+
+# Cancer type and cohort information
+cancer_type: CRC
+cohort: benchmark_220
+patients: 220
+
+# Feature type determines dimensionality of metabolite/reaction features
+# - enriched: 3D features (metabolite properties + regulatory context)
+# - scalar: 2D features (metabolite properties only)
+features: enriched
+
+# Graph structure configuration
+# Edge types determine which relationships to include in the metabolic graph
+# substrate_of: enzyme-catalyzed reaction substrate relationships
+# produces: enzyme-catalyzed reaction product relationships
+# shared_metabolite: reactions sharing metabolites (with sparsification)
+edge_types:
+  - substrate_of
+  - produces
+# Note: shared_metabolite NOT included for benchmark 220 to reduce sparsity
+
+# Model architecture
+hidden_dim: 256         # Hidden dimension for graph embeddings
+layers: 3              # Number of MetaGNN layers
+heads: 8               # Number of attention heads in multi-head attention
+
+# Training configuration
+epochs: 200            # Maximum training epochs
+learning_rate: 1.0e-3 # Adam optimizer learning rate
+batch_size: 32        # Batch size for training
+patience: 15           # Early stopping patience (epochs without improvement)
+
+# Data split configuration
+# Single split divides data into train/val/test with fixed ratios
+split:
+  mode: single         # single split (not k-fold)
+  train_ratio: 0.7    # 70% training data
+  val_ratio: 0.15     # 15% validation data
+  test_ratio: 0.15    # 15% test data
+
+# Random seeds for reproducibility
+# Model will be trained multiple times with different seeds
+seeds: [2024, 42, 123]
+
+# Data acquisition settings
+# Configure which optional datasets to download
+include_proteomics: false  # Skip CPTAC proteomics (not needed for 220-patient benchmark)
+
+# Optional: GPU configuration
+gpu: 0                     # GPU device ID (0 for first GPU, -1 for CPU)

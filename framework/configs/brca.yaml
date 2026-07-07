@@ -1,0 +1,55 @@
+# MetaGNN Configuration: BRCA (Breast Cancer) Cross-Cancer Study
+#
+# This configuration defines the setup for training MetaGNN on breast cancer
+# data from TCGA as part of a cross-cancer analysis. Uses a single train/val/test
+# split to evaluate generalization to breast cancer.
+
+# Data and paths
+data_root: ./data
+output_dir: ./output
+
+# Cancer type and cohort information
+cancer_type: BRCA
+cohort: brca_tcga
+patients: 1095
+
+# Feature type determines dimensionality of metabolite/reaction features
+# - enriched: 3D features (metabolite properties + regulatory context)
+# - scalar: 2D features (metabolite properties only)
+features: enriched
+
+# Graph structure configuration
+# Edge types determine which relationships to include in the metabolic graph
+edge_types:
+  - substrate_of
+  - produces
+
+# Model architecture
+hidden_dim: 256         # Hidden dimension for graph embeddings
+layers: 3              # Number of MetaGNN layers
+heads: 8               # Number of attention heads in multi-head attention
+
+# Training configuration
+epochs: 90             # BRCA converges faster (fewer epochs needed)
+learning_rate: 1.0e-3 # Adam optimizer learning rate
+batch_size: 32        # Batch size for training
+patience: 15           # Early stopping patience
+
+# Data split configuration
+# Single split with standard ratios
+split:
+  mode: single         # single split (not k-fold)
+  train_ratio: 0.7    # 70% training data
+  val_ratio: 0.15     # 15% validation data
+  test_ratio: 0.15    # 15% test data
+
+# Random seeds for reproducibility
+# Model will be trained multiple times with different seeds
+seeds: [2024, 42, 123]
+
+# Data acquisition settings
+# Include proteomics data if available for BRCA
+include_proteomics: true  # PDC000116 available for BRCA
+
+# Optional: GPU configuration
+gpu: 0                    # GPU device ID (0 for first GPU, -1 for CPU)

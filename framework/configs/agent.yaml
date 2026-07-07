@@ -1,0 +1,46 @@
+# Module 6: Agent Validation Configuration
+# Configures LLM-based agentic validation system
+
+# Agent version to run (v1-v6 or 'all')
+version: v6
+
+# LLM Configuration
+llm_model: Qwen3-32B-AWQ
+llm_endpoint: http://localhost:8000/v1
+temperature_resolver: 0.1
+max_tokens: 1024
+
+# Reconciliation Strategy
+reconciler_weights:
+  gnn: 0.7      # Weight for GNN prediction
+  llm: 0.3      # Weight for LLM plausibility score
+
+override_threshold: 0.8  # LLM confidence threshold for score override
+
+# Filtering Configuration
+boundary_range: [0.3, 0.7]  # MetaGNN score range for uncertainty zone
+min_sigma: null             # Minimum uncertainty (null = median)
+gpr_required: true          # Only validate GPR-associated reactions
+
+# KEGG Configuration
+kegg_cache_dir: ./cache/kegg
+kegg_rate_limit_delay: 1.0  # seconds between API calls
+kegg_timeout: 10            # seconds per request
+
+# FAISS Configuration
+faiss_index_path: ./cache/faiss
+faiss_top_k: 5              # Number of passages to retrieve
+embedding_model: sentence-transformers/all-MiniLM-L6-v2
+
+# Knowledge Graph Configuration
+recon3d_path: ./data/recon3d.json
+shared_metabolite_k: 10      # Top-k shared metabolites for subsystem neighbors
+
+# Execution Configuration
+batch_size: 5               # Reactions to process before logging
+max_workers: 4              # For async operations
+request_timeout: 30         # seconds
+
+# Output Configuration
+save_intermediate: true     # Save version-specific results
+output_format: parquet      # Results format (parquet or csv)

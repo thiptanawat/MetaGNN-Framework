@@ -1,0 +1,61 @@
+# MetaGNN Configuration: CRC 624-patient Full Cohort
+#
+# This configuration defines the setup for training MetaGNN on the full
+# colorectal cancer cohort with 624 patients using 5-fold stratified
+# cross-validation (stratified by microsatellite instability status).
+
+# Data and paths
+data_root: ./data
+output_dir: ./output
+
+# Cancer type and cohort information
+cancer_type: CRC
+cohort: full_624
+patients: 624
+
+# Feature type determines dimensionality of metabolite/reaction features
+# - enriched: 3D features (metabolite properties + regulatory context)
+# - scalar: 2D features (metabolite properties only)
+features: scalar
+
+# Graph structure configuration
+# Edge types determine which relationships to include in the metabolic graph
+# The full 624-patient cohort uses shared_metabolite edges with sparsification
+edge_types:
+  - substrate_of
+  - produces
+  - shared_metabolite
+
+# For shared_metabolite edge type, keep only top-k neighbors per metabolite
+# This reduces sparsity and improves training stability
+shared_metabolite_k: 10
+
+# Model architecture
+hidden_dim: 256         # Hidden dimension for graph embeddings
+layers: 3              # Number of MetaGNN layers
+heads: 8               # Number of attention heads in multi-head attention
+
+# Training configuration
+epochs: 200            # Maximum training epochs
+learning_rate: 1.0e-3 # Adam optimizer learning rate
+batch_size: 32        # Batch size for training
+patience: 20           # Early stopping patience (higher for k-fold due to variability)
+
+# Data split configuration
+# K-fold cross-validation provides better generalization estimates
+# Stratification by MSI status ensures balanced class distribution
+split:
+  mode: kfold                # k-fold cross-validation mode
+  num_folds: 5               # 5-fold cross-validation
+  stratify_by: msi_status    # Stratify by MSI status (microsatellite instability)
+
+# Random seeds for reproducibility
+# Model will be trained multiple times with different seeds
+seeds: [2024, 42, 123]
+
+# Data acquisition settings
+# Configure which optional datasets to download
+include_proteomics: false  # Skip CPTAC proteomics
+
+# Optional: GPU configuration
+gpu: 0                     # GPU device ID (0 for first GPU, -1 for CPU)

@@ -1,0 +1,55 @@
+name: metagnn
+channels:
+  - pytorch
+  - pyg
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Python version
+  - python=3.11
+
+  # PyTorch and GPU support
+  - pytorch::pytorch=2.2.0
+  - pytorch::pytorch-cuda=12.1
+  - pytorch::torchvision
+  - pytorch::torchaudio
+
+  # PyTorch Geometric and dependencies
+  - pyg::pytorch-geometric=2.5.0
+  - pyg::pyg-lib
+  - pyg::torch-scatter
+  - pyg::torch-sparse
+  - pyg::torch-cluster
+  - pyg::torch-spline-conv
+
+  # Bioinformatics and chemistry
+  - conda-forge::cobrapy=0.29.0
+  - conda-forge::rdkit=2023.09.5
+  - conda-forge::networkx
+
+  # Machine learning and scientific computing
+  - scikit-learn
+  - numpy
+  - pandas
+  - scipy
+
+  # Visualization
+  - matplotlib
+  - seaborn
+
+  # Utilities
+  - pyyaml
+  - tqdm
+
+  # Agent module dependencies (optional)
+  - conda-forge::requests
+  - pip
+
+  - pip:
+    # Additional pip packages for agent module
+    - vllm>=0.6.0
+    - langgraph>=0.1.0
+    - faiss-cpu>=1.8.0
+    - sentence-transformers>=2.2.0
+    - mygene>=3.2.0
