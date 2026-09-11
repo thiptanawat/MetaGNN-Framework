@@ -129,6 +129,7 @@
   "phenotype_probe_ivr.json",
   "phenotype_sex.json",
   "phenotype_site.json",
+  "prediction_arrays.json",
   "split_audit.json",
   "split_audit_fam.json",
   "strata.json"
@@ -14861,7 +14862,7 @@
   "rfolds": 3,
   "split": "family_disjoint",
   "family_scheme": "union",
-  "family_map": "../data/families/families_union.json"
+  "family_map": "data/families/families_union.json"
  },
  "phenotype_annotation": {
   "n_rows": 624,
@@ -15178,6 +15179,140 @@
     "baseline_ridge_expression": 0.5733997821807861,
     "baseline_random_forest": 0.558237612247467
    },
+   "explicit_only_verdicts": {
+    "mean": {
+     "donor_effect": 0.0009809992043301463,
+     "ci_lines": [
+      -0.007089360058307648,
+      0.007630388438701622
+     ],
+     "ci_families": [
+      -0.0064904575585387645,
+      0.008396036433987314
+     ],
+     "label_lines": "no sample-specific advantage larger than 0.01",
+     "label_families": "no sample-specific advantage larger than 0.01"
+    },
+    "within": {
+     "donor_effect": 0.008632414042949677,
+     "ci_lines": [
+      -0.0030575692653656006,
+      0.018698680400848388
+     ],
+     "ci_families": [
+      -0.0034583224973175676,
+      0.021375952102243887
+     ],
+     "label_lines": "inconclusive",
+     "label_families": "inconclusive"
+    },
+    "cross": {
+     "donor_effect": 0.013868479058146477,
+     "ci_lines": [
+      0.0016635984182357788,
+      0.022156935930252065
+     ],
+     "ci_families": [
+      0.003852508252020925,
+      0.023483933135867115
+     ],
+     "label_lines": "inconclusive",
+     "label_families": "inconclusive"
+    },
+    "within_expr": {
+     "donor_effect": 0.0038002580404281616,
+     "ci_lines": [
+      -0.006102070212364197,
+      0.012477633357048032
+     ],
+     "ci_families": [
+      -0.006349567323923111,
+      0.014188520307652646
+     ],
+     "label_lines": "inconclusive",
+     "label_families": "inconclusive"
+    },
+    "within_graph": {
+     "donor_effect": 0.003736635437235236,
+     "ci_lines": [
+      -0.0029907703399658205,
+      0.007939137518405906
+     ],
+     "ci_families": [
+      -0.0009825546789215879,
+      0.008705359487794337
+     ],
+     "label_lines": "no sample-specific advantage larger than 0.01",
+     "label_families": "no sample-specific advantage larger than 0.01"
+    }
+   },
+   "zero_fill_verdicts": {
+    "mean": {
+     "donor_effect": 0.0018054425017908216,
+     "ci_lines": [
+      -0.00027489215135574336,
+      0.00401589423418045
+     ],
+     "ci_families": [
+      0.0005863130456418731,
+      0.003083899785997346
+     ],
+     "label_lines": "no sample-specific advantage larger than 0.01",
+     "label_families": "no sample-specific advantage larger than 0.01"
+    },
+    "within": {
+     "donor_effect": 0.0030695456080138683,
+     "ci_lines": [
+      0.00016924291849136354,
+      0.005822142213582991
+     ],
+     "ci_families": [
+      0.0014191108843078838,
+      0.004797076038084924
+     ],
+     "label_lines": "no sample-specific advantage larger than 0.01",
+     "label_families": "no sample-specific advantage larger than 0.01"
+    },
+    "cross": {
+     "donor_effect": 0.006341541185975075,
+     "ci_lines": [
+      0.00325361043214798,
+      0.009535704553127288
+     ],
+     "ci_families": [
+      0.004211142309941351,
+      0.008458370971493422
+     ],
+     "label_lines": "no sample-specific advantage larger than 0.01",
+     "label_families": "no sample-specific advantage larger than 0.01"
+    },
+    "within_expr": {
+     "donor_effect": 0.0025656402576714754,
+     "ci_lines": [
+      4.328787326812759e-06,
+      0.005152752995491027
+     ],
+     "ci_families": [
+      0.0013128098100423813,
+      0.0039038730319589376
+     ],
+     "label_lines": "no sample-specific advantage larger than 0.01",
+     "label_families": "no sample-specific advantage larger than 0.01"
+    },
+    "within_graph": {
+     "donor_effect": 0.0006510730599984527,
+     "ci_lines": [
+      -0.0005908295512199402,
+      0.0019025191664695737
+     ],
+     "ci_families": [
+      -0.0005336570320650935,
+      0.0018128224066458628
+     ],
+     "label_lines": "no sample-specific advantage larger than 0.01",
+     "label_families": "no sample-specific advantage larger than 0.01"
+    }
+   },
    "explicit_only_donor": {
     "mean": 0.0009809992043301463,
     "within": 0.008632414042949677,
@@ -15321,32 +15456,25 @@
    "P": 60,
    "R": 400,
    "pfolds": 3,
-   "rfolds": 3
+   "rfolds": 3,
+   "inner_frac": 0.2,
+   "rounds": [
+    20,
+    80,
+    200
+   ],
+   "dev_seeds": [
+    1,
+    60
+   ],
+   "test_seeds": [
+    100000,
+    100239
+   ]
   },
-  "rule": "learned model: own>mean and own>donor, each sign-flip p<0.05 across cells",
+  "rule": "learned model: own>mean and own>donor, each exact two-sided sign-flip p<0.05 over the cells",
+  "arms": "own: each patient's own column; mean: every patient given the training-cohort mean column, predictor refitted on those inputs; donor: every patient given another patient's real column (a derangement among training patients and one among held-out patients), predictor refitted on those inputs",
   "test_confusion": {
-   "learned": {
-    "tp": 88,
-    "fp": 0,
-    "tn": 152,
-    "fn": 0,
-    "false_positive_rate": 0.0,
-    "fpr_binom_se": 0.0,
-    "power": 1.0,
-    "n_null": 152,
-    "n_positive": 88
-   },
-   "oracle": {
-    "tp": 68,
-    "fp": 0,
-    "tn": 152,
-    "fn": 20,
-    "false_positive_rate": 0.0,
-    "fpr_binom_se": 0.0,
-    "power": 0.7727,
-    "n_null": 152,
-    "n_positive": 88
-   },
    "blind": {
     "tp": 0,
     "fp": 0,
@@ -15358,14 +15486,14 @@
     "n_null": 152,
     "n_positive": 88
    },
-   "restricted_nonlinear": {
-    "tp": 83,
+   "oracle": {
+    "tp": 88,
     "fp": 0,
     "tn": 152,
-    "fn": 5,
+    "fn": 0,
     "false_positive_rate": 0.0,
     "fpr_binom_se": 0.0,
-    "power": 0.9432,
+    "power": 1.0,
     "n_null": 152,
     "n_positive": 88
    },
@@ -15379,31 +15507,31 @@
     "power": 0.0,
     "n_null": 152,
     "n_positive": 88
-   }
-  },
-  "dev_confusion": {
-   "learned": {
-    "tp": 22,
+   },
+   "restricted_nonlinear": {
+    "tp": 87,
     "fp": 0,
-    "tn": 38,
+    "tn": 152,
+    "fn": 1,
+    "false_positive_rate": 0.0,
+    "fpr_binom_se": 0.0,
+    "power": 0.9886,
+    "n_null": 152,
+    "n_positive": 88
+   },
+   "learned": {
+    "tp": 88,
+    "fp": 0,
+    "tn": 152,
     "fn": 0,
     "false_positive_rate": 0.0,
     "fpr_binom_se": 0.0,
     "power": 1.0,
-    "n_null": 38,
-    "n_positive": 22
-   },
-   "oracle": {
-    "tp": 17,
-    "fp": 0,
-    "tn": 38,
-    "fn": 5,
-    "false_positive_rate": 0.0,
-    "fpr_binom_se": 0.0,
-    "power": 0.7727,
-    "n_null": 38,
-    "n_positive": 22
-   },
+    "n_null": 152,
+    "n_positive": 88
+   }
+  },
+  "dev_confusion": {
    "blind": {
     "tp": 0,
     "fp": 0,
@@ -15414,6 +15542,126 @@
     "power": 0.0,
     "n_null": 38,
     "n_positive": 22
+   },
+   "oracle": {
+    "tp": 22,
+    "fp": 0,
+    "tn": 38,
+    "fn": 0,
+    "false_positive_rate": 0.0,
+    "fpr_binom_se": 0.0,
+    "power": 1.0,
+    "n_null": 38,
+    "n_positive": 22
+   },
+   "label_irrelevant": {
+    "tp": 0,
+    "fp": 0,
+    "tn": 38,
+    "fn": 22,
+    "false_positive_rate": 0.0,
+    "fpr_binom_se": 0.0,
+    "power": 0.0,
+    "n_null": 38,
+    "n_positive": 22
+   },
+   "restricted_nonlinear": {
+    "tp": 21,
+    "fp": 0,
+    "tn": 38,
+    "fn": 1,
+    "false_positive_rate": 0.0,
+    "fpr_binom_se": 0.0,
+    "power": 0.9545,
+    "n_null": 38,
+    "n_positive": 22
+   },
+   "learned": {
+    "tp": 22,
+    "fp": 0,
+    "tn": 38,
+    "fn": 0,
+    "false_positive_rate": 0.0,
+    "fpr_binom_se": 0.0,
+    "power": 1.0,
+    "n_null": 38,
+    "n_positive": 22
+   }
+  },
+  "test_null_subsets": {
+   "learned": {
+    "shared_label": {
+     "n": 120,
+     "false_positives": 0,
+     "what": "shared label: the donor contrast is identically zero for a fixed predictor and zero up to the arithmetic of a refit for the learned one, so only the cohort-mean contrast can fire the rule",
+     "worlds_with_all_donor_contrasts_zero": 18,
+     "max_abs_donor_contrast": 4.9343245538895844e-17,
+     "mean_contrast_positive_sig": 0
+    },
+    "varying_label_no_signal": {
+     "n": 32,
+     "false_positives": 0,
+     "what": "varying label with alpha = 0: both contrasts are free to move, the informative null for the donor contrast",
+     "worlds_with_all_donor_contrasts_zero": 0,
+     "max_abs_donor_contrast": 0.006773750862456647,
+     "mean_contrast_positive_sig": 0
+    }
+   },
+   "oracle": {
+    "shared_label": {
+     "n": 120,
+     "false_positives": 0,
+     "what": "shared label: the donor contrast is identically zero for a fixed predictor and zero up to the arithmetic of a refit for the learned one, so only the cohort-mean contrast can fire the rule",
+     "worlds_with_all_donor_contrasts_zero": 0,
+     "max_abs_donor_contrast": 6.78469626159818e-17,
+     "mean_contrast_positive_sig": 0
+    },
+    "varying_label_no_signal": {
+     "n": 32,
+     "false_positives": 0,
+     "what": "varying label with alpha = 0: both contrasts are free to move, the informative null for the donor contrast",
+     "worlds_with_all_donor_contrasts_zero": 0,
+     "max_abs_donor_contrast": 0.0081473605697795,
+     "mean_contrast_positive_sig": 0
+    }
+   },
+   "label_irrelevant": {
+    "shared_label": {
+     "n": 120,
+     "false_positives": 0,
+     "what": "shared label: the donor contrast is identically zero for a fixed predictor and zero up to the arithmetic of a refit for the learned one, so only the cohort-mean contrast can fire the rule",
+     "worlds_with_all_donor_contrasts_zero": 0,
+     "max_abs_donor_contrast": 7.401486830834377e-17,
+     "mean_contrast_positive_sig": 3
+    },
+    "varying_label_no_signal": {
+     "n": 32,
+     "false_positives": 0,
+     "what": "varying label with alpha = 0: both contrasts are free to move, the informative null for the donor contrast",
+     "worlds_with_all_donor_contrasts_zero": 0,
+     "max_abs_donor_contrast": 0.008507904488097228,
+     "mean_contrast_positive_sig": 1
+    }
+   }
+  },
+  "dev_null_subsets": {
+   "learned": {
+    "shared_label": {
+     "n": 30,
+     "false_positives": 0,
+     "what": "shared label: the donor contrast is identically zero for a fixed predictor and zero up to the arithmetic of a refit for the learned one, so only the cohort-mean contrast can fire the rule",
+     "worlds_with_all_donor_contrasts_zero": 1,
+     "max_abs_donor_contrast": 5.551115123125783e-17,
+     "mean_contrast_positive_sig": 1
+    },
+    "varying_label_no_signal": {
+     "n": 8,
+     "false_positives": 0,
+     "what": "varying label with alpha = 0: both contrasts are free to move, the informative null for the donor contrast",
+     "worlds_with_all_donor_contrasts_zero": 0,
+     "max_abs_donor_contrast": 0.004014148484993343,
+     "mean_contrast_positive_sig": 0
+    }
    }
   },
   "counterexample": {
@@ -15422,86 +15670,279 @@
     "own_auroc": 1.0,
     "cohort_mean_auroc": 0.5,
     "own_minus_mean": 0.5,
-    "note": "shared label; own (x-1)^2 ranks every patient's pair correctly (AUROC 1) while the cohort-mean column is constant at 1 for both reactions (AUROC 0.5), so own-minus-mean is +0.5"
+    "note": "shared label; own (x-1)^2 ranks every patient's pair correctly (AUROC 1) while the cohort-mean input is constant at 1 for both reactions (AUROC 0.5), so own-minus-mean is +0.5"
    },
-   "note": "the constructed case proves a shared target does not force own-minus-mean below zero; in the noisy generic worlds the generic (x-1)^2 scorer is not aligned with the generic label, so its contrast sits near zero",
-   "generic_restricted_nonlinear_own_minus_mean_mean": 0.001,
-   "generic_blind_own_minus_mean_mean": 0.0
+   "note": "the constructed case shows a shared target does not force own-minus-mean below zero; in the noisy generic worlds the generic (x-1)^2 scorer is not aligned with the generic label, so its contrast sits near zero",
+   "generic_restricted_nonlinear_own_minus_mean_mean_test": 0.0003,
+   "generic_blind_own_minus_mean_mean_test": 0.0
   },
   "decision_table": [
    {
     "regime": "shared label, alpha=0 (no sample signal)",
-    "n_worlds": 150,
-    "learned": {
-     "own_minus_mean": -0.0,
-     "own_minus_donor": -0.0,
-     "verdict_rate": 0.0
-    },
-    "oracle": {
-     "own_minus_mean": -0.0461,
-     "own_minus_donor": -0.0,
-     "verdict_rate": 0.0
-    },
+    "n_worlds": 120,
     "blind": {
      "own_minus_mean": 0.0,
      "own_minus_donor": 0.0,
      "verdict_rate": 0.0
     },
+    "oracle": {
+     "own_minus_mean": -0.0506,
+     "own_minus_donor": 0.0,
+     "verdict_rate": 0.0
+    },
+    "label_irrelevant": {
+     "own_minus_mean": -0.001,
+     "own_minus_donor": 0.0,
+     "verdict_rate": 0.0
+    },
     "restricted_nonlinear": {
-     "own_minus_mean": 0.001,
+     "own_minus_mean": 0.0003,
+     "own_minus_donor": -0.0,
+     "verdict_rate": 0.0
+    },
+    "learned": {
+     "own_minus_mean": -0.0001,
      "own_minus_donor": 0.0,
      "verdict_rate": 0.0
     }
    },
    {
     "regime": "varying label, alpha=0 (threshold on own column, weak)",
-    "n_worlds": 40,
-    "learned": {
-     "own_minus_mean": 0.0,
-     "own_minus_donor": 0.0001,
-     "verdict_rate": 0.0
-    },
-    "oracle": {
-     "own_minus_mean": -0.0462,
-     "own_minus_donor": -0.0006,
-     "verdict_rate": 0.0
-    },
+    "n_worlds": 32,
     "blind": {
      "own_minus_mean": 0.0,
      "own_minus_donor": 0.0,
      "verdict_rate": 0.0
     },
+    "oracle": {
+     "own_minus_mean": -0.0502,
+     "own_minus_donor": 0.0001,
+     "verdict_rate": 0.0
+    },
+    "label_irrelevant": {
+     "own_minus_mean": -0.0015,
+     "own_minus_donor": 0.0001,
+     "verdict_rate": 0.0
+    },
     "restricted_nonlinear": {
-     "own_minus_mean": -0.0,
-     "own_minus_donor": -0.0002,
+     "own_minus_mean": -0.0056,
+     "own_minus_donor": 0.0002,
+     "verdict_rate": 0.0
+    },
+    "learned": {
+     "own_minus_mean": 0.0001,
+     "own_minus_donor": 0.0004,
      "verdict_rate": 0.0
     }
    },
    {
-    "regime": "varying label, alpha>=1.5 (strong sample signal)",
-    "n_worlds": 70,
-    "learned": {
-     "own_minus_mean": 0.104,
-     "own_minus_donor": 0.1225,
-     "verdict_rate": 1.0
-    },
-    "oracle": {
-     "own_minus_mean": 0.3411,
-     "own_minus_donor": 0.4219,
-     "verdict_rate": 1.0
-    },
+    "regime": "varying label, alpha=0.5 (weak sample signal)",
+    "n_worlds": 32,
     "blind": {
      "own_minus_mean": 0.0,
      "own_minus_donor": 0.0,
      "verdict_rate": 0.0
     },
+    "oracle": {
+     "own_minus_mean": 0.0918,
+     "own_minus_donor": 0.1366,
+     "verdict_rate": 1.0
+    },
+    "label_irrelevant": {
+     "own_minus_mean": 0.0021,
+     "own_minus_donor": -0.0014,
+     "verdict_rate": 0.0
+    },
     "restricted_nonlinear": {
-     "own_minus_mean": 0.0807,
-     "own_minus_donor": 0.0991,
-     "verdict_rate": 0.9429
+     "own_minus_mean": 0.0819,
+     "own_minus_donor": 0.0698,
+     "verdict_rate": 1.0
+    },
+    "learned": {
+     "own_minus_mean": 0.0651,
+     "own_minus_donor": 0.0637,
+     "verdict_rate": 1.0
+    }
+   },
+   {
+    "regime": "varying label, alpha>=1.5 (strong sample signal)",
+    "n_worlds": 56,
+    "blind": {
+     "own_minus_mean": 0.0,
+     "own_minus_donor": 0.0,
+     "verdict_rate": 0.0
+    },
+    "oracle": {
+     "own_minus_mean": 0.4038,
+     "own_minus_donor": 0.4137,
+     "verdict_rate": 1.0
+    },
+    "label_irrelevant": {
+     "own_minus_mean": 0.0006,
+     "own_minus_donor": -0.0005,
+     "verdict_rate": 0.0
+    },
+    "restricted_nonlinear": {
+     "own_minus_mean": 0.0969,
+     "own_minus_donor": 0.0974,
+     "verdict_rate": 0.9821
+    },
+    "learned": {
+     "own_minus_mean": 0.1236,
+     "own_minus_donor": 0.1241,
+     "verdict_rate": 1.0
     }
    }
-  ]
+  ],
+  "dev_decision_table": [
+   {
+    "regime": "shared label, alpha=0 (no sample signal)",
+    "n_worlds": 30,
+    "blind": {
+     "own_minus_mean": 0.0,
+     "own_minus_donor": 0.0,
+     "verdict_rate": 0.0
+    },
+    "oracle": {
+     "own_minus_mean": -0.0504,
+     "own_minus_donor": 0.0,
+     "verdict_rate": 0.0
+    },
+    "label_irrelevant": {
+     "own_minus_mean": 0.0034,
+     "own_minus_donor": 0.0,
+     "verdict_rate": 0.0
+    },
+    "restricted_nonlinear": {
+     "own_minus_mean": 0.0024,
+     "own_minus_donor": -0.0,
+     "verdict_rate": 0.0
+    },
+    "learned": {
+     "own_minus_mean": 0.0001,
+     "own_minus_donor": -0.0,
+     "verdict_rate": 0.0
+    }
+   },
+   {
+    "regime": "varying label, alpha=0 (threshold on own column, weak)",
+    "n_worlds": 8,
+    "blind": {
+     "own_minus_mean": 0.0,
+     "own_minus_donor": 0.0,
+     "verdict_rate": 0.0
+    },
+    "oracle": {
+     "own_minus_mean": -0.051,
+     "own_minus_donor": -0.0004,
+     "verdict_rate": 0.0
+    },
+    "label_irrelevant": {
+     "own_minus_mean": -0.0074,
+     "own_minus_donor": -0.0032,
+     "verdict_rate": 0.0
+    },
+    "restricted_nonlinear": {
+     "own_minus_mean": 0.0068,
+     "own_minus_donor": 0.0013,
+     "verdict_rate": 0.0
+    },
+    "learned": {
+     "own_minus_mean": -0.0005,
+     "own_minus_donor": -0.0009,
+     "verdict_rate": 0.0
+    }
+   },
+   {
+    "regime": "varying label, alpha=0.5 (weak sample signal)",
+    "n_worlds": 8,
+    "blind": {
+     "own_minus_mean": 0.0,
+     "own_minus_donor": 0.0,
+     "verdict_rate": 0.0
+    },
+    "oracle": {
+     "own_minus_mean": 0.0919,
+     "own_minus_donor": 0.1349,
+     "verdict_rate": 1.0
+    },
+    "label_irrelevant": {
+     "own_minus_mean": 0.0008,
+     "own_minus_donor": 0.0013,
+     "verdict_rate": 0.0
+    },
+    "restricted_nonlinear": {
+     "own_minus_mean": 0.0799,
+     "own_minus_donor": 0.0698,
+     "verdict_rate": 0.875
+    },
+    "learned": {
+     "own_minus_mean": 0.0612,
+     "own_minus_donor": 0.0612,
+     "verdict_rate": 1.0
+    }
+   },
+   {
+    "regime": "varying label, alpha>=1.5 (strong sample signal)",
+    "n_worlds": 14,
+    "blind": {
+     "own_minus_mean": 0.0,
+     "own_minus_donor": 0.0,
+     "verdict_rate": 0.0
+    },
+    "oracle": {
+     "own_minus_mean": 0.3994,
+     "own_minus_donor": 0.4094,
+     "verdict_rate": 1.0
+    },
+    "label_irrelevant": {
+     "own_minus_mean": -0.0004,
+     "own_minus_donor": -0.0034,
+     "verdict_rate": 0.0
+    },
+    "restricted_nonlinear": {
+     "own_minus_mean": 0.1015,
+     "own_minus_donor": 0.106,
+     "verdict_rate": 1.0
+    },
+    "learned": {
+     "own_minus_mean": 0.1278,
+     "own_minus_donor": 0.127,
+     "verdict_rate": 1.0
+    }
+   }
+  ],
+  "world_counts": {
+   "dev": {
+    "shared": 30,
+    "varying_alpha0": 8,
+    "varying_weak": 8,
+    "varying_strong": 14
+   },
+   "test": {
+    "shared": 120,
+    "varying_alpha0": 32,
+    "varying_weak": 32,
+    "varying_strong": 56
+   }
+  },
+  "rounds_chosen": {
+   "own": [
+    20,
+    80,
+    200
+   ],
+   "mean": [
+    20,
+    80,
+    200
+   ],
+   "donor": [
+    20,
+    80,
+    200
+   ]
+  }
  },
  "robustness": {
   "ht29": {

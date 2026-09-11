@@ -32,11 +32,17 @@ def sha256(path, chunk=1 << 20):
 def record(name, root):
     files = []
     for dirpath, _dirs, names in os.walk(root):
+        # the Hub cache keeps zero-byte markers for files a revision does not have (.no_exist/);
+        # they are bookkeeping, not artifacts, and are left out
+        if ".no_exist" in dirpath.split(os.sep):
+            continue
         for n in sorted(names):
             if not n.endswith(INTERESTING):
                 continue
             p = os.path.join(dirpath, n)
             if os.path.islink(p) and not os.path.exists(p):
+                continue
+            if os.path.getsize(p) == 0:
                 continue
             files.append(dict(path=os.path.relpath(p, root), bytes=os.path.getsize(p), sha256=sha256(p)))
     files.sort(key=lambda d: d["path"])

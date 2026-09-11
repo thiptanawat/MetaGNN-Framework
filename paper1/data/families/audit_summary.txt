@@ -1,7 +1,7 @@
 DATA AUDIT
   n_reactions: 10600
   n_distinct_metabolite_ids: 5835
-  compartment_suffix_counts: {'e': 1579, 'x': 312, 'c': 2125, 'l': 234, 'm': 690, 'n': 95, 'r': 571, 'g': 228, 'i': 1}
+  compartment_suffix_counts: {'c': 2125, 'e': 1579, 'g': 228, 'i': 1, 'l': 234, 'm': 690, 'n': 95, 'r': 571, 'x': 312}
   n_metabolite_ids_without_underscore: 0
   n_metabolite_ids_with_non_single_letter_suffix: 0
   n_reactions_with_empty_metabolite_dict: 0

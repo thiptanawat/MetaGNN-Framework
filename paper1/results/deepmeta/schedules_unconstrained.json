@@ -1,0 +1,3016 @@
+{
+ "generated_utc": "2026-09-11T10:29:32Z",
+ "n_heldout": 134,
+ "primary_seed": 11,
+ "schedules": {
+  "11": {
+   "seed": 11,
+   "within": {
+    "ACH-001401": "ACH-000317",
+    "ACH-000242": "ACH-001414",
+    "ACH-000862": "ACH-000896",
+    "ACH-000896": "ACH-000862",
+    "ACH-001408": "ACH-000242",
+    "ACH-001414": "ACH-001408",
+    "ACH-000350": "ACH-001786",
+    "ACH-000798": "ACH-000935",
+    "ACH-000935": "ACH-002654",
+    "ACH-000943": "ACH-002660",
+    "ACH-001786": "ACH-002662",
+    "ACH-002535": "ACH-000798",
+    "ACH-002538": "ACH-000350",
+    "ACH-002654": "ACH-000943",
+    "ACH-002660": "ACH-002535",
+    "ACH-002662": "ACH-002538",
+    "ACH-000276": "ACH-000668",
+    "ACH-000330": "ACH-000276",
+    "ACH-000668": "ACH-001662",
+    "ACH-000849": "ACH-001683",
+    "ACH-001662": "ACH-002399",
+    "ACH-001683": "ACH-002401",
+    "ACH-002399": "ACH-000330",
+    "ACH-002401": "ACH-002499",
+    "ACH-002499": "ACH-000849",
+    "ACH-000075": "ACH-001624",
+    "ACH-000095": "ACH-001020",
+    "ACH-000208": "ACH-000075",
+    "ACH-000211": "ACH-002681",
+    "ACH-000631": "ACH-000760",
+    "ACH-000760": "ACH-000807",
+    "ACH-000807": "ACH-002806",
+    "ACH-001016": "ACH-002680",
+    "ACH-001020": "ACH-000095",
+    "ACH-001624": "ACH-000631",
+    "ACH-002070": "ACH-000208",
+    "ACH-002680": "ACH-000211",
+    "ACH-002681": "ACH-001016",
+    "ACH-002806": "ACH-002070",
+    "ACH-001451": "ACH-002020",
+    "ACH-002020": "ACH-001451",
+    "ACH-000144": "ACH-000693",
+    "ACH-000239": "ACH-000694",
+    "ACH-000693": "ACH-000144",
+    "ACH-000694": "ACH-002544",
+    "ACH-002544": "ACH-002705",
+    "ACH-002705": "ACH-002706",
+    "ACH-002706": "ACH-000239",
+    "ACH-000549": "ACH-001694",
+    "ACH-000619": "ACH-001691",
+    "ACH-000846": "ACH-002711",
+    "ACH-001508": "ACH-000846",
+    "ACH-001676": "ACH-000619",
+    "ACH-001691": "ACH-001676",
+    "ACH-001694": "ACH-001695",
+    "ACH-001695": "ACH-002043",
+    "ACH-002043": "ACH-000549",
+    "ACH-002711": "ACH-001508",
+    "ACH-000096": "ACH-002533",
+    "ACH-000234": "ACH-000096",
+    "ACH-000317": "ACH-000234",
+    "ACH-000433": "ACH-002528",
+    "ACH-000495": "ACH-000317",
+    "ACH-002528": "ACH-000433",
+    "ACH-002533": "ACH-000495",
+    "ACH-000217": "ACH-000422",
+    "ACH-000422": "ACH-000217",
+    "ACH-000537": "ACH-002523",
+    "ACH-002523": "ACH-000537",
+    "ACH-000337": "ACH-000781",
+    "ACH-000390": "ACH-000337",
+    "ACH-000395": "ACH-000496",
+    "ACH-000454": "ACH-000871",
+    "ACH-000463": "ACH-000900",
+    "ACH-000496": "ACH-002650",
+    "ACH-000515": "ACH-000749",
+    "ACH-000559": "ACH-000390",
+    "ACH-000563": "ACH-000878",
+    "ACH-000639": "ACH-002490",
+    "ACH-000672": "ACH-000700",
+    "ACH-000700": "ACH-002052",
+    "ACH-000747": "ACH-002051",
+    "ACH-000749": "ACH-000454",
+    "ACH-000781": "ACH-000563",
+    "ACH-000871": "ACH-000747",
+    "ACH-000878": "ACH-002526",
+    "ACH-000900": "ACH-002035",
+    "ACH-002035": "ACH-000463",
+    "ACH-002051": "ACH-000559",
+    "ACH-002052": "ACH-000515",
+    "ACH-002077": "ACH-000672",
+    "ACH-002490": "ACH-000639",
+    "ACH-002522": "ACH-000395",
+    "ACH-002526": "ACH-002531",
+    "ACH-002531": "ACH-002522",
+    "ACH-002650": "ACH-002077",
+    "ACH-000373": "ACH-000920",
+    "ACH-000498": "ACH-000604",
+    "ACH-000604": "ACH-000498",
+    "ACH-000920": "ACH-000373",
+    "ACH-001613": "ACH-002475",
+    "ACH-002475": "ACH-001613",
+    "ACH-000116": "ACH-000885",
+    "ACH-000608": "ACH-002524",
+    "ACH-000885": "ACH-000116",
+    "ACH-002486": "ACH-000608",
+    "ACH-002524": "ACH-002486",
+    "ACH-000093": "ACH-000235",
+    "ACH-000235": "ACH-000599",
+    "ACH-000599": "ACH-001353",
+    "ACH-001353": "ACH-000093",
+    "ACH-000979": "ACH-000276",
+    "ACH-000632": "ACH-001972",
+    "ACH-000788": "ACH-002928",
+    "ACH-000884": "ACH-001990",
+    "ACH-000968": "ACH-000884",
+    "ACH-001972": "ACH-001986",
+    "ACH-001975": "ACH-000968",
+    "ACH-001986": "ACH-000788",
+    "ACH-001990": "ACH-000632",
+    "ACH-002928": "ACH-001975",
+    "ACH-001502": "ACH-001668",
+    "ACH-001578": "ACH-002291",
+    "ACH-001668": "ACH-001578",
+    "ACH-002291": "ACH-001502",
+    "ACH-000174": "ACH-001307",
+    "ACH-000191": "ACH-001306",
+    "ACH-000716": "ACH-000191",
+    "ACH-001306": "ACH-000716",
+    "ACH-001307": "ACH-000174",
+    "ACH-000302": "ACH-001530",
+    "ACH-000972": "ACH-002027",
+    "ACH-001530": "ACH-000302",
+    "ACH-002027": "ACH-000972"
+   },
+   "within_flags": {
+    "ACH-001401": {
+     "flag": "cross_lineage_fallback",
+     "reason": "only one held-out line in this lineage",
+     "lineage": "Adrenal Gland",
+     "donor_lineage": "Kidney"
+    },
+    "ACH-000979": {
+     "flag": "cross_lineage_fallback",
+     "reason": "only one held-out line in this lineage",
+     "lineage": "Prostate",
+     "donor_lineage": "Breast"
+    }
+   },
+   "within_same_lineage_pairs": 132,
+   "within_rejection_draws_by_lineage": {
+    "Bladder/Urinary Tract": 2,
+    "Bowel": 5,
+    "Breast": 1,
+    "CNS/Brain": 2,
+    "Cervix": 3,
+    "Esophagus/Stomach": 2,
+    "Head and Neck": 2,
+    "Kidney": 1,
+    "Liver": 2,
+    "Lung": 2,
+    "Myeloid": 4,
+    "Ovary/Fallopian Tube": 1,
+    "Pancreas": 2,
+    "Skin": 5,
+    "Testis": 2,
+    "Thyroid": 3,
+    "Uterus": 1
+   },
+   "cross": {
+    "ACH-000075": "ACH-001695",
+    "ACH-000093": "ACH-001990",
+    "ACH-000095": "ACH-001408",
+    "ACH-000096": "ACH-002522",
+    "ACH-000116": "ACH-000390",
+    "ACH-000144": "ACH-000559",
+    "ACH-000174": "ACH-000896",
+    "ACH-000191": "ACH-000075",
+    "ACH-000208": "ACH-002490",
+    "ACH-000211": "ACH-000302",
+    "ACH-000217": "ACH-000549",
+    "ACH-000234": "ACH-001624",
+    "ACH-000235": "ACH-000878",
+    "ACH-000239": "ACH-000885",
+    "ACH-000242": "ACH-000537",
+    "ACH-000276": "ACH-002681",
+    "ACH-000302": "ACH-002533",
+    "ACH-000317": "ACH-002706",
+    "ACH-000330": "ACH-000884",
+    "ACH-000337": "ACH-000846",
+    "ACH-000350": "ACH-002052",
+    "ACH-000373": "ACH-000395",
+    "ACH-000390": "ACH-002043",
+    "ACH-000395": "ACH-001578",
+    "ACH-000422": "ACH-000211",
+    "ACH-000433": "ACH-001691",
+    "ACH-000454": "ACH-000095",
+    "ACH-000463": "ACH-000276",
+    "ACH-000495": "ACH-000235",
+    "ACH-000496": "ACH-000807",
+    "ACH-000498": "ACH-000943",
+    "ACH-000515": "ACH-001530",
+    "ACH-000537": "ACH-000700",
+    "ACH-000549": "ACH-000900",
+    "ACH-000559": "ACH-001662",
+    "ACH-000563": "ACH-002544",
+    "ACH-000599": "ACH-002654",
+    "ACH-000604": "ACH-000337",
+    "ACH-000608": "ACH-000174",
+    "ACH-000619": "ACH-002524",
+    "ACH-000631": "ACH-002399",
+    "ACH-000632": "ACH-001694",
+    "ACH-000639": "ACH-001414",
+    "ACH-000668": "ACH-002077",
+    "ACH-000672": "ACH-000096",
+    "ACH-000693": "ACH-000495",
+    "ACH-000694": "ACH-001668",
+    "ACH-000700": "ACH-001786",
+    "ACH-000716": "ACH-002711",
+    "ACH-000747": "ACH-001306",
+    "ACH-000749": "ACH-001401",
+    "ACH-000760": "ACH-000463",
+    "ACH-000781": "ACH-001353",
+    "ACH-000788": "ACH-002020",
+    "ACH-000798": "ACH-000422",
+    "ACH-000807": "ACH-000694",
+    "ACH-000846": "ACH-000871",
+    "ACH-000849": "ACH-000496",
+    "ACH-000862": "ACH-000330",
+    "ACH-000871": "ACH-000631",
+    "ACH-000878": "ACH-000433",
+    "ACH-000884": "ACH-002486",
+    "ACH-000885": "ACH-002499",
+    "ACH-000896": "ACH-001683",
+    "ACH-000900": "ACH-000239",
+    "ACH-000920": "ACH-001975",
+    "ACH-000935": "ACH-000788",
+    "ACH-000943": "ACH-002401",
+    "ACH-000968": "ACH-000242",
+    "ACH-000972": "ACH-000749",
+    "ACH-000979": "ACH-000747",
+    "ACH-001016": "ACH-000454",
+    "ACH-001020": "ACH-002705",
+    "ACH-001306": "ACH-002291",
+    "ACH-001307": "ACH-002806",
+    "ACH-001353": "ACH-000935",
+    "ACH-001401": "ACH-002535",
+    "ACH-001408": "ACH-002526",
+    "ACH-001414": "ACH-000116",
+    "ACH-001451": "ACH-000619",
+    "ACH-001502": "ACH-001986",
+    "ACH-001508": "ACH-000234",
+    "ACH-001530": "ACH-001016",
+    "ACH-001578": "ACH-002680",
+    "ACH-001613": "ACH-002523",
+    "ACH-001624": "ACH-000639",
+    "ACH-001662": "ACH-001972",
+    "ACH-001668": "ACH-000373",
+    "ACH-001676": "ACH-000563",
+    "ACH-001683": "ACH-002538",
+    "ACH-001691": "ACH-001020",
+    "ACH-001694": "ACH-002051",
+    "ACH-001695": "ACH-000515",
+    "ACH-001786": "ACH-000208",
+    "ACH-001972": "ACH-002531",
+    "ACH-001975": "ACH-000979",
+    "ACH-001986": "ACH-002528",
+    "ACH-001990": "ACH-002662",
+    "ACH-002020": "ACH-000093",
+    "ACH-002027": "ACH-000849",
+    "ACH-002035": "ACH-000498",
+    "ACH-002043": "ACH-000760",
+    "ACH-002051": "ACH-000144",
+    "ACH-002052": "ACH-000350",
+    "ACH-002070": "ACH-000632",
+    "ACH-002077": "ACH-001451",
+    "ACH-002291": "ACH-000972",
+    "ACH-002399": "ACH-000599",
+    "ACH-002401": "ACH-001307",
+    "ACH-002475": "ACH-000217",
+    "ACH-002486": "ACH-000672",
+    "ACH-002490": "ACH-001502",
+    "ACH-002499": "ACH-000693",
+    "ACH-002522": "ACH-000668",
+    "ACH-002523": "ACH-000968",
+    "ACH-002524": "ACH-002475",
+    "ACH-002526": "ACH-000716",
+    "ACH-002528": "ACH-000781",
+    "ACH-002531": "ACH-001508",
+    "ACH-002533": "ACH-000920",
+    "ACH-002535": "ACH-000608",
+    "ACH-002538": "ACH-000604",
+    "ACH-002544": "ACH-002660",
+    "ACH-002650": "ACH-002070",
+    "ACH-002654": "ACH-002027",
+    "ACH-002660": "ACH-002035",
+    "ACH-002662": "ACH-001613",
+    "ACH-002680": "ACH-002650",
+    "ACH-002681": "ACH-002928",
+    "ACH-002705": "ACH-000317",
+    "ACH-002706": "ACH-001676",
+    "ACH-002711": "ACH-000191",
+    "ACH-002806": "ACH-000862",
+    "ACH-002928": "ACH-000798"
+   },
+   "cross_rejection_draws": 214367,
+   "mean": {
+    "ACH-000075": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000093": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-000095": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000096": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000116": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-000144": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000174": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-000191": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-000208": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000211": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000217": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-000234": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000235": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-000239": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000242": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-000276": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000302": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-000317": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000330": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000337": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000350": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000373": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000390": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000395": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000422": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-000433": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000454": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000463": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000495": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000496": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000498": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000515": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000537": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-000549": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-000559": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000563": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000599": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-000604": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000608": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-000619": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-000631": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000632": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000639": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000668": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000672": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000693": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000694": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000700": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000716": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-000747": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000749": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000760": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000781": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000788": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000798": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000807": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000846": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-000849": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000862": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-000871": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000878": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000884": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000885": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-000896": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-000900": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000920": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000935": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000943": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000968": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000972": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-000979": {
+     "source": "development_wide_mean",
+     "lineage": "Prostate",
+     "n_development": 4,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001016": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-001020": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-001306": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-001307": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-001353": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-001401": {
+     "source": "development_wide_mean",
+     "lineage": "Adrenal Gland",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001408": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-001414": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-001451": {
+     "source": "lineage_mean",
+     "lineage": "Cervix",
+     "n_development": 16
+    },
+    "ACH-001502": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001508": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001530": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-001578": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001613": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-001624": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-001662": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-001668": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001676": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001683": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-001691": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001694": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001695": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001786": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-001972": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-001975": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-001986": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-001990": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-002020": {
+     "source": "lineage_mean",
+     "lineage": "Cervix",
+     "n_development": 16
+    },
+    "ACH-002027": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-002035": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002043": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-002051": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002052": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002070": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002077": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002291": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-002399": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-002401": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-002475": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-002486": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-002490": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002499": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-002522": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002523": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-002524": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-002526": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002528": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-002531": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002533": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-002535": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002538": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002544": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-002650": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002654": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002660": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002662": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002680": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002681": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002705": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-002706": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-002711": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-002806": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002928": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    }
+   },
+   "mean_fallback_cells": [
+    "ACH-000979",
+    "ACH-001401",
+    "ACH-001502",
+    "ACH-001578",
+    "ACH-001668",
+    "ACH-002291"
+   ],
+   "seconds": 0.8
+  },
+  "22": {
+   "seed": 22,
+   "within": {
+    "ACH-001401": "ACH-002052",
+    "ACH-000242": "ACH-000896",
+    "ACH-000862": "ACH-000242",
+    "ACH-000896": "ACH-000862",
+    "ACH-001408": "ACH-001414",
+    "ACH-001414": "ACH-001408",
+    "ACH-000350": "ACH-002538",
+    "ACH-000798": "ACH-000350",
+    "ACH-000935": "ACH-002660",
+    "ACH-000943": "ACH-002654",
+    "ACH-001786": "ACH-000935",
+    "ACH-002535": "ACH-000798",
+    "ACH-002538": "ACH-002535",
+    "ACH-002654": "ACH-002662",
+    "ACH-002660": "ACH-001786",
+    "ACH-002662": "ACH-000943",
+    "ACH-000276": "ACH-001683",
+    "ACH-000330": "ACH-000668",
+    "ACH-000668": "ACH-002401",
+    "ACH-000849": "ACH-001662",
+    "ACH-001662": "ACH-002499",
+    "ACH-001683": "ACH-000849",
+    "ACH-002399": "ACH-000276",
+    "ACH-002401": "ACH-002399",
+    "ACH-002499": "ACH-000330",
+    "ACH-000075": "ACH-000807",
+    "ACH-000095": "ACH-000211",
+    "ACH-000208": "ACH-000075",
+    "ACH-000211": "ACH-001020",
+    "ACH-000631": "ACH-000760",
+    "ACH-000760": "ACH-002681",
+    "ACH-000807": "ACH-000095",
+    "ACH-001016": "ACH-002680",
+    "ACH-001020": "ACH-001624",
+    "ACH-001624": "ACH-002070",
+    "ACH-002070": "ACH-002806",
+    "ACH-002680": "ACH-001016",
+    "ACH-002681": "ACH-000631",
+    "ACH-002806": "ACH-000208",
+    "ACH-001451": "ACH-002020",
+    "ACH-002020": "ACH-001451",
+    "ACH-000144": "ACH-002706",
+    "ACH-000239": "ACH-000144",
+    "ACH-000693": "ACH-002544",
+    "ACH-000694": "ACH-002705",
+    "ACH-002544": "ACH-000694",
+    "ACH-002705": "ACH-000693",
+    "ACH-002706": "ACH-000239",
+    "ACH-000549": "ACH-000846",
+    "ACH-000619": "ACH-001691",
+    "ACH-000846": "ACH-002043",
+    "ACH-001508": "ACH-001676",
+    "ACH-001676": "ACH-001695",
+    "ACH-001691": "ACH-000549",
+    "ACH-001694": "ACH-001508",
+    "ACH-001695": "ACH-002711",
+    "ACH-002043": "ACH-000619",
+    "ACH-002711": "ACH-001694",
+    "ACH-000096": "ACH-000234",
+    "ACH-000234": "ACH-002528",
+    "ACH-000317": "ACH-002533",
+    "ACH-000433": "ACH-000495",
+    "ACH-000495": "ACH-000096",
+    "ACH-002528": "ACH-000317",
+    "ACH-002533": "ACH-000433",
+    "ACH-000217": "ACH-000537",
+    "ACH-000422": "ACH-002523",
+    "ACH-000537": "ACH-000217",
+    "ACH-002523": "ACH-000422",
+    "ACH-000337": "ACH-002077",
+    "ACH-000390": "ACH-000878",
+    "ACH-000395": "ACH-000563",
+    "ACH-000454": "ACH-000496",
+    "ACH-000463": "ACH-002051",
+    "ACH-000496": "ACH-000559",
+    "ACH-000515": "ACH-000781",
+    "ACH-000559": "ACH-002526",
+    "ACH-000563": "ACH-002650",
+    "ACH-000639": "ACH-000749",
+    "ACH-000672": "ACH-000700",
+    "ACH-000700": "ACH-002052",
+    "ACH-000747": "ACH-002490",
+    "ACH-000749": "ACH-000395",
+    "ACH-000781": "ACH-002531",
+    "ACH-000871": "ACH-000390",
+    "ACH-000878": "ACH-000871",
+    "ACH-000900": "ACH-002522",
+    "ACH-002035": "ACH-000639",
+    "ACH-002051": "ACH-000337",
+    "ACH-002052": "ACH-000515",
+    "ACH-002077": "ACH-000463",
+    "ACH-002490": "ACH-000747",
+    "ACH-002522": "ACH-000454",
+    "ACH-002526": "ACH-002035",
+    "ACH-002531": "ACH-000900",
+    "ACH-002650": "ACH-000672",
+    "ACH-000373": "ACH-000920",
+    "ACH-000498": "ACH-002475",
+    "ACH-000604": "ACH-000373",
+    "ACH-000920": "ACH-000498",
+    "ACH-001613": "ACH-000604",
+    "ACH-002475": "ACH-001613",
+    "ACH-000116": "ACH-000608",
+    "ACH-000608": "ACH-002524",
+    "ACH-000885": "ACH-002486",
+    "ACH-002486": "ACH-000885",
+    "ACH-002524": "ACH-000116",
+    "ACH-000093": "ACH-000235",
+    "ACH-000235": "ACH-000093",
+    "ACH-000599": "ACH-001353",
+    "ACH-001353": "ACH-000599",
+    "ACH-000979": "ACH-000096",
+    "ACH-000632": "ACH-002928",
+    "ACH-000788": "ACH-000968",
+    "ACH-000884": "ACH-001986",
+    "ACH-000968": "ACH-001972",
+    "ACH-001972": "ACH-001975",
+    "ACH-001975": "ACH-000788",
+    "ACH-001986": "ACH-000632",
+    "ACH-001990": "ACH-000884",
+    "ACH-002928": "ACH-001990",
+    "ACH-001502": "ACH-001578",
+    "ACH-001578": "ACH-001668",
+    "ACH-001668": "ACH-002291",
+    "ACH-002291": "ACH-001502",
+    "ACH-000174": "ACH-001306",
+    "ACH-000191": "ACH-000716",
+    "ACH-000716": "ACH-000174",
+    "ACH-001306": "ACH-001307",
+    "ACH-001307": "ACH-000191",
+    "ACH-000302": "ACH-002027",
+    "ACH-000972": "ACH-001530",
+    "ACH-001530": "ACH-000972",
+    "ACH-002027": "ACH-000302"
+   },
+   "within_flags": {
+    "ACH-001401": {
+     "flag": "cross_lineage_fallback",
+     "reason": "only one held-out line in this lineage",
+     "lineage": "Adrenal Gland",
+     "donor_lineage": "Lung"
+    },
+    "ACH-000979": {
+     "flag": "cross_lineage_fallback",
+     "reason": "only one held-out line in this lineage",
+     "lineage": "Prostate",
+     "donor_lineage": "Kidney"
+    }
+   },
+   "within_same_lineage_pairs": 132,
+   "within_rejection_draws_by_lineage": {
+    "Bladder/Urinary Tract": 10,
+    "Bowel": 3,
+    "Breast": 5,
+    "CNS/Brain": 5,
+    "Cervix": 1,
+    "Esophagus/Stomach": 1,
+    "Head and Neck": 1,
+    "Kidney": 14,
+    "Liver": 2,
+    "Lung": 3,
+    "Myeloid": 2,
+    "Ovary/Fallopian Tube": 1,
+    "Pancreas": 1,
+    "Skin": 1,
+    "Testis": 2,
+    "Thyroid": 5,
+    "Uterus": 2
+   },
+   "cross": {
+    "ACH-000075": "ACH-000900",
+    "ACH-000093": "ACH-000619",
+    "ACH-000095": "ACH-001530",
+    "ACH-000096": "ACH-000639",
+    "ACH-000116": "ACH-000075",
+    "ACH-000144": "ACH-002051",
+    "ACH-000174": "ACH-000093",
+    "ACH-000191": "ACH-000781",
+    "ACH-000208": "ACH-001695",
+    "ACH-000211": "ACH-002490",
+    "ACH-000217": "ACH-000694",
+    "ACH-000234": "ACH-000537",
+    "ACH-000235": "ACH-000747",
+    "ACH-000239": "ACH-000330",
+    "ACH-000242": "ACH-000878",
+    "ACH-000276": "ACH-002711",
+    "ACH-000302": "ACH-002399",
+    "ACH-000317": "ACH-002662",
+    "ACH-000330": "ACH-000559",
+    "ACH-000337": "ACH-000979",
+    "ACH-000350": "ACH-002043",
+    "ACH-000373": "ACH-002524",
+    "ACH-000390": "ACH-000239",
+    "ACH-000395": "ACH-002291",
+    "ACH-000422": "ACH-000849",
+    "ACH-000433": "ACH-000144",
+    "ACH-000454": "ACH-001451",
+    "ACH-000463": "ACH-002535",
+    "ACH-000495": "ACH-001613",
+    "ACH-000496": "ACH-002706",
+    "ACH-000498": "ACH-000563",
+    "ACH-000515": "ACH-000174",
+    "ACH-000537": "ACH-001408",
+    "ACH-000549": "ACH-000302",
+    "ACH-000559": "ACH-002544",
+    "ACH-000563": "ACH-001624",
+    "ACH-000599": "ACH-002070",
+    "ACH-000604": "ACH-000760",
+    "ACH-000608": "ACH-001694",
+    "ACH-000619": "ACH-002526",
+    "ACH-000631": "ACH-000700",
+    "ACH-000632": "ACH-000604",
+    "ACH-000639": "ACH-000116",
+    "ACH-000668": "ACH-000242",
+    "ACH-000672": "ACH-000896",
+    "ACH-000693": "ACH-002531",
+    "ACH-000694": "ACH-001691",
+    "ACH-000700": "ACH-000433",
+    "ACH-000716": "ACH-000972",
+    "ACH-000747": "ACH-000422",
+    "ACH-000749": "ACH-002660",
+    "ACH-000760": "ACH-000496",
+    "ACH-000781": "ACH-000217",
+    "ACH-000788": "ACH-001508",
+    "ACH-000798": "ACH-000208",
+    "ACH-000807": "ACH-002928",
+    "ACH-000846": "ACH-000884",
+    "ACH-000849": "ACH-001668",
+    "ACH-000862": "ACH-000454",
+    "ACH-000871": "ACH-001972",
+    "ACH-000878": "ACH-001786",
+    "ACH-000884": "ACH-000862",
+    "ACH-000885": "ACH-000693",
+    "ACH-000896": "ACH-001353",
+    "ACH-000900": "ACH-000549",
+    "ACH-000920": "ACH-000395",
+    "ACH-000935": "ACH-002681",
+    "ACH-000943": "ACH-000317",
+    "ACH-000968": "ACH-001578",
+    "ACH-000972": "ACH-000276",
+    "ACH-000979": "ACH-002523",
+    "ACH-001016": "ACH-000749",
+    "ACH-001020": "ACH-001683",
+    "ACH-001306": "ACH-002705",
+    "ACH-001307": "ACH-000515",
+    "ACH-001353": "ACH-002027",
+    "ACH-001401": "ACH-001676",
+    "ACH-001408": "ACH-002035",
+    "ACH-001414": "ACH-001401",
+    "ACH-001451": "ACH-000095",
+    "ACH-001502": "ACH-002528",
+    "ACH-001508": "ACH-000599",
+    "ACH-001530": "ACH-000608",
+    "ACH-001578": "ACH-002680",
+    "ACH-001613": "ACH-002522",
+    "ACH-001624": "ACH-000798",
+    "ACH-001662": "ACH-002533",
+    "ACH-001668": "ACH-002650",
+    "ACH-001676": "ACH-000943",
+    "ACH-001683": "ACH-000390",
+    "ACH-001691": "ACH-002401",
+    "ACH-001694": "ACH-002806",
+    "ACH-001695": "ACH-000871",
+    "ACH-001786": "ACH-001986",
+    "ACH-001972": "ACH-000920",
+    "ACH-001975": "ACH-000373",
+    "ACH-001986": "ACH-000191",
+    "ACH-001990": "ACH-001020",
+    "ACH-002020": "ACH-000235",
+    "ACH-002027": "ACH-000498",
+    "ACH-002035": "ACH-002499",
+    "ACH-002043": "ACH-001414",
+    "ACH-002051": "ACH-001307",
+    "ACH-002052": "ACH-001016",
+    "ACH-002070": "ACH-000234",
+    "ACH-002077": "ACH-000495",
+    "ACH-002291": "ACH-000807",
+    "ACH-002399": "ACH-000846",
+    "ACH-002401": "ACH-000350",
+    "ACH-002475": "ACH-000716",
+    "ACH-002486": "ACH-000935",
+    "ACH-002490": "ACH-000211",
+    "ACH-002499": "ACH-001975",
+    "ACH-002522": "ACH-000788",
+    "ACH-002523": "ACH-002538",
+    "ACH-002524": "ACH-001306",
+    "ACH-002526": "ACH-001502",
+    "ACH-002528": "ACH-002654",
+    "ACH-002531": "ACH-000885",
+    "ACH-002533": "ACH-000337",
+    "ACH-002535": "ACH-002077",
+    "ACH-002538": "ACH-001662",
+    "ACH-002544": "ACH-002486",
+    "ACH-002650": "ACH-000096",
+    "ACH-002654": "ACH-000672",
+    "ACH-002660": "ACH-002475",
+    "ACH-002662": "ACH-002052",
+    "ACH-002680": "ACH-002020",
+    "ACH-002681": "ACH-000463",
+    "ACH-002705": "ACH-000968",
+    "ACH-002706": "ACH-000668",
+    "ACH-002711": "ACH-000632",
+    "ACH-002806": "ACH-001990",
+    "ACH-002928": "ACH-000631"
+   },
+   "cross_rejection_draws": 371545,
+   "mean": {
+    "ACH-000075": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000093": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-000095": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000096": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000116": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-000144": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000174": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-000191": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-000208": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000211": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000217": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-000234": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000235": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-000239": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000242": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-000276": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000302": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-000317": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000330": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000337": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000350": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000373": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000390": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000395": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000422": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-000433": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000454": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000463": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000495": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000496": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000498": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000515": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000537": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-000549": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-000559": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000563": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000599": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-000604": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000608": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-000619": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-000631": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000632": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000639": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000668": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000672": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000693": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000694": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000700": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000716": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-000747": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000749": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000760": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000781": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000788": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000798": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000807": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000846": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-000849": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000862": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-000871": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000878": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000884": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000885": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-000896": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-000900": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000920": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000935": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000943": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000968": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000972": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-000979": {
+     "source": "development_wide_mean",
+     "lineage": "Prostate",
+     "n_development": 4,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001016": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-001020": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-001306": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-001307": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-001353": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-001401": {
+     "source": "development_wide_mean",
+     "lineage": "Adrenal Gland",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001408": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-001414": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-001451": {
+     "source": "lineage_mean",
+     "lineage": "Cervix",
+     "n_development": 16
+    },
+    "ACH-001502": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001508": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001530": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-001578": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001613": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-001624": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-001662": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-001668": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001676": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001683": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-001691": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001694": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001695": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001786": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-001972": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-001975": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-001986": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-001990": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-002020": {
+     "source": "lineage_mean",
+     "lineage": "Cervix",
+     "n_development": 16
+    },
+    "ACH-002027": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-002035": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002043": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-002051": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002052": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002070": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002077": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002291": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-002399": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-002401": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-002475": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-002486": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-002490": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002499": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-002522": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002523": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-002524": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-002526": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002528": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-002531": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002533": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-002535": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002538": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002544": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-002650": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002654": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002660": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002662": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002680": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002681": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002705": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-002706": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-002711": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-002806": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002928": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    }
+   },
+   "mean_fallback_cells": [
+    "ACH-000979",
+    "ACH-001401",
+    "ACH-001502",
+    "ACH-001578",
+    "ACH-001668",
+    "ACH-002291"
+   ],
+   "seconds": 1.3
+  },
+  "33": {
+   "seed": 33,
+   "within": {
+    "ACH-001401": "ACH-002528",
+    "ACH-000242": "ACH-001408",
+    "ACH-000862": "ACH-000242",
+    "ACH-000896": "ACH-000862",
+    "ACH-001408": "ACH-001414",
+    "ACH-001414": "ACH-000896",
+    "ACH-000350": "ACH-000935",
+    "ACH-000798": "ACH-002654",
+    "ACH-000935": "ACH-002660",
+    "ACH-000943": "ACH-002538",
+    "ACH-001786": "ACH-002662",
+    "ACH-002535": "ACH-000350",
+    "ACH-002538": "ACH-000798",
+    "ACH-002654": "ACH-000943",
+    "ACH-002660": "ACH-002535",
+    "ACH-002662": "ACH-001786",
+    "ACH-000276": "ACH-001662",
+    "ACH-000330": "ACH-000276",
+    "ACH-000668": "ACH-000849",
+    "ACH-000849": "ACH-000330",
+    "ACH-001662": "ACH-001683",
+    "ACH-001683": "ACH-002499",
+    "ACH-002399": "ACH-000668",
+    "ACH-002401": "ACH-002399",
+    "ACH-002499": "ACH-002401",
+    "ACH-000075": "ACH-002680",
+    "ACH-000095": "ACH-000211",
+    "ACH-000208": "ACH-002681",
+    "ACH-000211": "ACH-000631",
+    "ACH-000631": "ACH-000095",
+    "ACH-000760": "ACH-002806",
+    "ACH-000807": "ACH-000208",
+    "ACH-001016": "ACH-001624",
+    "ACH-001020": "ACH-000075",
+    "ACH-001624": "ACH-001020",
+    "ACH-002070": "ACH-000760",
+    "ACH-002680": "ACH-001016",
+    "ACH-002681": "ACH-002070",
+    "ACH-002806": "ACH-000807",
+    "ACH-001451": "ACH-002020",
+    "ACH-002020": "ACH-001451",
+    "ACH-000144": "ACH-002706",
+    "ACH-000239": "ACH-000694",
+    "ACH-000693": "ACH-002544",
+    "ACH-000694": "ACH-000144",
+    "ACH-002544": "ACH-000239",
+    "ACH-002705": "ACH-000693",
+    "ACH-002706": "ACH-002705",
+    "ACH-000549": "ACH-000846",
+    "ACH-000619": "ACH-001691",
+    "ACH-000846": "ACH-001676",
+    "ACH-001508": "ACH-002043",
+    "ACH-001676": "ACH-000619",
+    "ACH-001691": "ACH-001694",
+    "ACH-001694": "ACH-001508",
+    "ACH-001695": "ACH-000549",
+    "ACH-002043": "ACH-002711",
+    "ACH-002711": "ACH-001695",
+    "ACH-000096": "ACH-000495",
+    "ACH-000234": "ACH-000317",
+    "ACH-000317": "ACH-002528",
+    "ACH-000433": "ACH-000234",
+    "ACH-000495": "ACH-002533",
+    "ACH-002528": "ACH-000433",
+    "ACH-002533": "ACH-000096",
+    "ACH-000217": "ACH-002523",
+    "ACH-000422": "ACH-000217",
+    "ACH-000537": "ACH-000422",
+    "ACH-002523": "ACH-000537",
+    "ACH-000337": "ACH-002035",
+    "ACH-000390": "ACH-002051",
+    "ACH-000395": "ACH-000515",
+    "ACH-000454": "ACH-000559",
+    "ACH-000463": "ACH-002650",
+    "ACH-000496": "ACH-000878",
+    "ACH-000515": "ACH-000454",
+    "ACH-000559": "ACH-000781",
+    "ACH-000563": "ACH-002531",
+    "ACH-000639": "ACH-000496",
+    "ACH-000672": "ACH-002077",
+    "ACH-000700": "ACH-000390",
+    "ACH-000747": "ACH-000871",
+    "ACH-000749": "ACH-002490",
+    "ACH-000781": "ACH-002526",
+    "ACH-000871": "ACH-000639",
+    "ACH-000878": "ACH-000700",
+    "ACH-000900": "ACH-000672",
+    "ACH-002035": "ACH-000749",
+    "ACH-002051": "ACH-000395",
+    "ACH-002052": "ACH-000747",
+    "ACH-002077": "ACH-000463",
+    "ACH-002490": "ACH-002522",
+    "ACH-002522": "ACH-000337",
+    "ACH-002526": "ACH-002052",
+    "ACH-002531": "ACH-000900",
+    "ACH-002650": "ACH-000563",
+    "ACH-000373": "ACH-002475",
+    "ACH-000498": "ACH-000604",
+    "ACH-000604": "ACH-000373",
+    "ACH-000920": "ACH-001613",
+    "ACH-001613": "ACH-000498",
+    "ACH-002475": "ACH-000920",
+    "ACH-000116": "ACH-000608",
+    "ACH-000608": "ACH-002486",
+    "ACH-000885": "ACH-002524",
+    "ACH-002486": "ACH-000116",
+    "ACH-002524": "ACH-000885",
+    "ACH-000093": "ACH-001353",
+    "ACH-000235": "ACH-000093",
+    "ACH-000599": "ACH-000235",
+    "ACH-001353": "ACH-000599",
+    "ACH-000979": "ACH-000496",
+    "ACH-000632": "ACH-001990",
+    "ACH-000788": "ACH-002928",
+    "ACH-000884": "ACH-000968",
+    "ACH-000968": "ACH-001975",
+    "ACH-001972": "ACH-001986",
+    "ACH-001975": "ACH-000884",
+    "ACH-001986": "ACH-000632",
+    "ACH-001990": "ACH-000788",
+    "ACH-002928": "ACH-001972",
+    "ACH-001502": "ACH-001578",
+    "ACH-001578": "ACH-001502",
+    "ACH-001668": "ACH-002291",
+    "ACH-002291": "ACH-001668",
+    "ACH-000174": "ACH-000716",
+    "ACH-000191": "ACH-001307",
+    "ACH-000716": "ACH-000174",
+    "ACH-001306": "ACH-000191",
+    "ACH-001307": "ACH-001306",
+    "ACH-000302": "ACH-001530",
+    "ACH-000972": "ACH-002027",
+    "ACH-001530": "ACH-000302",
+    "ACH-002027": "ACH-000972"
+   },
+   "within_flags": {
+    "ACH-001401": {
+     "flag": "cross_lineage_fallback",
+     "reason": "only one held-out line in this lineage",
+     "lineage": "Adrenal Gland",
+     "donor_lineage": "Kidney"
+    },
+    "ACH-000979": {
+     "flag": "cross_lineage_fallback",
+     "reason": "only one held-out line in this lineage",
+     "lineage": "Prostate",
+     "donor_lineage": "Lung"
+    }
+   },
+   "within_same_lineage_pairs": 132,
+   "within_rejection_draws_by_lineage": {
+    "Bladder/Urinary Tract": 5,
+    "Bowel": 5,
+    "Breast": 4,
+    "CNS/Brain": 2,
+    "Cervix": 4,
+    "Esophagus/Stomach": 1,
+    "Head and Neck": 1,
+    "Kidney": 4,
+    "Liver": 2,
+    "Lung": 3,
+    "Myeloid": 4,
+    "Ovary/Fallopian Tube": 2,
+    "Pancreas": 1,
+    "Skin": 1,
+    "Testis": 4,
+    "Thyroid": 8,
+    "Uterus": 6
+   },
+   "cross": {
+    "ACH-000075": "ACH-002401",
+    "ACH-000093": "ACH-000619",
+    "ACH-000095": "ACH-002650",
+    "ACH-000096": "ACH-000781",
+    "ACH-000116": "ACH-000639",
+    "ACH-000144": "ACH-000979",
+    "ACH-000174": "ACH-002077",
+    "ACH-000191": "ACH-000968",
+    "ACH-000208": "ACH-000239",
+    "ACH-000211": "ACH-002662",
+    "ACH-000217": "ACH-002070",
+    "ACH-000234": "ACH-000599",
+    "ACH-000235": "ACH-000537",
+    "ACH-000239": "ACH-001676",
+    "ACH-000242": "ACH-002528",
+    "ACH-000276": "ACH-002928",
+    "ACH-000302": "ACH-000604",
+    "ACH-000317": "ACH-001975",
+    "ACH-000330": "ACH-001986",
+    "ACH-000337": "ACH-002706",
+    "ACH-000350": "ACH-000395",
+    "ACH-000373": "ACH-000884",
+    "ACH-000390": "ACH-000096",
+    "ACH-000395": "ACH-000694",
+    "ACH-000422": "ACH-000515",
+    "ACH-000433": "ACH-001668",
+    "ACH-000454": "ACH-002523",
+    "ACH-000463": "ACH-000317",
+    "ACH-000495": "ACH-000211",
+    "ACH-000496": "ACH-001691",
+    "ACH-000498": "ACH-001624",
+    "ACH-000515": "ACH-000330",
+    "ACH-000537": "ACH-000878",
+    "ACH-000549": "ACH-000495",
+    "ACH-000559": "ACH-000422",
+    "ACH-000563": "ACH-001694",
+    "ACH-000599": "ACH-002486",
+    "ACH-000604": "ACH-000846",
+    "ACH-000608": "ACH-000749",
+    "ACH-000619": "ACH-002399",
+    "ACH-000631": "ACH-000747",
+    "ACH-000632": "ACH-001695",
+    "ACH-000639": "ACH-000093",
+    "ACH-000668": "ACH-001307",
+    "ACH-000672": "ACH-001578",
+    "ACH-000693": "ACH-000943",
+    "ACH-000694": "ACH-002020",
+    "ACH-000700": "ACH-000174",
+    "ACH-000716": "ACH-000217",
+    "ACH-000747": "ACH-000116",
+    "ACH-000749": "ACH-002535",
+    "ACH-000760": "ACH-000920",
+    "ACH-000781": "ACH-000631",
+    "ACH-000788": "ACH-000208",
+    "ACH-000798": "ACH-000885",
+    "ACH-000807": "ACH-001613",
+    "ACH-000846": "ACH-002660",
+    "ACH-000849": "ACH-000242",
+    "ACH-000862": "ACH-000798",
+    "ACH-000871": "ACH-001353",
+    "ACH-000878": "ACH-000302",
+    "ACH-000884": "ACH-002052",
+    "ACH-000885": "ACH-000496",
+    "ACH-000896": "ACH-000672",
+    "ACH-000900": "ACH-000896",
+    "ACH-000920": "ACH-000463",
+    "ACH-000935": "ACH-000862",
+    "ACH-000943": "ACH-000235",
+    "ACH-000968": "ACH-002027",
+    "ACH-000972": "ACH-000337",
+    "ACH-000979": "ACH-000563",
+    "ACH-001016": "ACH-002526",
+    "ACH-001020": "ACH-000433",
+    "ACH-001306": "ACH-000900",
+    "ACH-001307": "ACH-000559",
+    "ACH-001353": "ACH-000693",
+    "ACH-001401": "ACH-001020",
+    "ACH-001408": "ACH-002654",
+    "ACH-001414": "ACH-002522",
+    "ACH-001451": "ACH-000849",
+    "ACH-001502": "ACH-000700",
+    "ACH-001508": "ACH-000095",
+    "ACH-001530": "ACH-002711",
+    "ACH-001578": "ACH-000807",
+    "ACH-001613": "ACH-000234",
+    "ACH-001624": "ACH-000788",
+    "ACH-001662": "ACH-002531",
+    "ACH-001668": "ACH-002043",
+    "ACH-001676": "ACH-002705",
+    "ACH-001683": "ACH-002051",
+    "ACH-001691": "ACH-002035",
+    "ACH-001694": "ACH-002291",
+    "ACH-001695": "ACH-001408",
+    "ACH-001786": "ACH-002475",
+    "ACH-001972": "ACH-002538",
+    "ACH-001975": "ACH-001508",
+    "ACH-001986": "ACH-001530",
+    "ACH-001990": "ACH-000549",
+    "ACH-002020": "ACH-002806",
+    "ACH-002027": "ACH-000350",
+    "ACH-002035": "ACH-000144",
+    "ACH-002043": "ACH-001662",
+    "ACH-002051": "ACH-001786",
+    "ACH-002052": "ACH-001451",
+    "ACH-002070": "ACH-002499",
+    "ACH-002077": "ACH-000498",
+    "ACH-002291": "ACH-002681",
+    "ACH-002399": "ACH-000191",
+    "ACH-002401": "ACH-001502",
+    "ACH-002475": "ACH-000608",
+    "ACH-002486": "ACH-002490",
+    "ACH-002490": "ACH-000716",
+    "ACH-002499": "ACH-000972",
+    "ACH-002522": "ACH-001016",
+    "ACH-002523": "ACH-000668",
+    "ACH-002524": "ACH-000632",
+    "ACH-002526": "ACH-001990",
+    "ACH-002528": "ACH-000276",
+    "ACH-002531": "ACH-000935",
+    "ACH-002533": "ACH-002524",
+    "ACH-002535": "ACH-002544",
+    "ACH-002538": "ACH-001306",
+    "ACH-002544": "ACH-000454",
+    "ACH-002650": "ACH-001401",
+    "ACH-002654": "ACH-000390",
+    "ACH-002660": "ACH-000373",
+    "ACH-002662": "ACH-002533",
+    "ACH-002680": "ACH-000871",
+    "ACH-002681": "ACH-001414",
+    "ACH-002705": "ACH-002680",
+    "ACH-002706": "ACH-000760",
+    "ACH-002711": "ACH-001972",
+    "ACH-002806": "ACH-001683",
+    "ACH-002928": "ACH-000075"
+   },
+   "cross_rejection_draws": 412146,
+   "mean": {
+    "ACH-000075": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000093": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-000095": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000096": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000116": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-000144": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000174": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-000191": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-000208": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000211": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000217": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-000234": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000235": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-000239": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000242": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-000276": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000302": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-000317": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000330": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000337": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000350": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000373": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000390": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000395": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000422": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-000433": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000454": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000463": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000495": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-000496": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000498": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000515": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000537": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-000549": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-000559": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000563": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000599": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-000604": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000608": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-000619": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-000631": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000632": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000639": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000668": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000672": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000693": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000694": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-000700": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000716": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-000747": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000749": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000760": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000781": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000788": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000798": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000807": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-000846": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-000849": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-000862": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-000871": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000878": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000884": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000885": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-000896": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-000900": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-000920": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-000935": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000943": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-000968": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-000972": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-000979": {
+     "source": "development_wide_mean",
+     "lineage": "Prostate",
+     "n_development": 4,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001016": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-001020": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-001306": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-001307": {
+     "source": "lineage_mean",
+     "lineage": "Thyroid",
+     "n_development": 6
+    },
+    "ACH-001353": {
+     "source": "lineage_mean",
+     "lineage": "Pancreas",
+     "n_development": 41
+    },
+    "ACH-001401": {
+     "source": "development_wide_mean",
+     "lineage": "Adrenal Gland",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001408": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-001414": {
+     "source": "lineage_mean",
+     "lineage": "Bladder/Urinary Tract",
+     "n_development": 28
+    },
+    "ACH-001451": {
+     "source": "lineage_mean",
+     "lineage": "Cervix",
+     "n_development": 16
+    },
+    "ACH-001502": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001508": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001530": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-001578": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001613": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-001624": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-001662": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-001668": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-001676": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001683": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-001691": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001694": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001695": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-001786": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-001972": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-001975": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-001986": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-001990": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    },
+    "ACH-002020": {
+     "source": "lineage_mean",
+     "lineage": "Cervix",
+     "n_development": 16
+    },
+    "ACH-002027": {
+     "source": "lineage_mean",
+     "lineage": "Uterus",
+     "n_development": 30
+    },
+    "ACH-002035": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002043": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-002051": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002052": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002070": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002077": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002291": {
+     "source": "development_wide_mean",
+     "lineage": "Testis",
+     "n_development": 0,
+     "flag": "too_few_development_lines",
+     "n_development_total": 669
+    },
+    "ACH-002399": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-002401": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-002475": {
+     "source": "lineage_mean",
+     "lineage": "Myeloid",
+     "n_development": 33
+    },
+    "ACH-002486": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-002490": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002499": {
+     "source": "lineage_mean",
+     "lineage": "Breast",
+     "n_development": 41
+    },
+    "ACH-002522": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002523": {
+     "source": "lineage_mean",
+     "lineage": "Liver",
+     "n_development": 20
+    },
+    "ACH-002524": {
+     "source": "lineage_mean",
+     "lineage": "Ovary/Fallopian Tube",
+     "n_development": 50
+    },
+    "ACH-002526": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002528": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-002531": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002533": {
+     "source": "lineage_mean",
+     "lineage": "Kidney",
+     "n_development": 23
+    },
+    "ACH-002535": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002538": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002544": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-002650": {
+     "source": "lineage_mean",
+     "lineage": "Lung",
+     "n_development": 95
+    },
+    "ACH-002654": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002660": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002662": {
+     "source": "lineage_mean",
+     "lineage": "Bowel",
+     "n_development": 48
+    },
+    "ACH-002680": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002681": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002705": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-002706": {
+     "source": "lineage_mean",
+     "lineage": "Esophagus/Stomach",
+     "n_development": 55
+    },
+    "ACH-002711": {
+     "source": "lineage_mean",
+     "lineage": "Head and Neck",
+     "n_development": 50
+    },
+    "ACH-002806": {
+     "source": "lineage_mean",
+     "lineage": "CNS/Brain",
+     "n_development": 67
+    },
+    "ACH-002928": {
+     "source": "lineage_mean",
+     "lineage": "Skin",
+     "n_development": 62
+    }
+   },
+   "mean_fallback_cells": [
+    "ACH-000979",
+    "ACH-001401",
+    "ACH-001502",
+    "ACH-001578",
+    "ACH-001668",
+    "ACH-002291"
+   ],
+   "seconds": 1.5
+  }
+ }
+}

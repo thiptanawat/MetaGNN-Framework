@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Check that every file path named in the manuscripts exists in the repository.
+"""Check the release: the versioned required-artifact manifest, then every file path the manuscripts name.
+
+The first check reads tools/release_manifest.json and fails on any required file or file set that
+is absent or short, whether or not the manuscript sources are present. The second walks the .tex
+sources when they are in the checkout; a checkout without them reports that the path check was
+skipped rather than passing it.
 
 A manuscript that names a file the reader cannot find is a broken promise, and
 the promise is easy to break silently: a script gets renamed, a result moves,
@@ -144,15 +149,54 @@ def collect():
     return by_path
 
 
+def check_manifest():
+    """The versioned required-artifact manifest: every listed file must exist, every glob must reach
+    its count, and the ledger must record the counts the manifest fixes. This part runs whether or
+    not the manuscript sources are present, so a checkout without them cannot pass by default."""
+    import json
+    mp = os.path.join(HERE, "release_manifest.json")
+    M = json.load(open(mp))
+    problems = []
+    for rel in M["required_files"]:
+        if not os.path.exists(os.path.join(REPO, rel)):
+            problems.append(f"required file missing: {rel}")
+    for pat, n in M["required_globs"].items():
+        got = len(glob.glob(os.path.join(REPO, pat)))
+        if got < n:
+            problems.append(f"required set short: {pat} has {got} files, {n} required")
+    lp = os.path.join(REPO, "paper1", "results", "LEDGER.json")
+    if os.path.exists(lp):
+        L = json.load(open(lp)); want = M.get("ledger_counts", {})
+        got_pa = (L.get("prediction_arrays") or {}).get("n_arrays", 0)
+        if got_pa != want.get("prediction_arrays_listed", got_pa):
+            problems.append(f"ledger lists {got_pa} prediction arrays; manifest requires {want['prediction_arrays_listed']}")
+        got_dm = (L.get("external_audit_predictions") or {}).get("n_files", 0)
+        if got_dm != want.get("external_audit_prediction_files", got_dm):
+            problems.append(f"ledger lists {got_dm} external-audit prediction files; manifest requires {want['external_audit_prediction_files']}")
+    print(f"release manifest v{M['version']} ({M['release']}): {len(M['required_files'])} required files, "
+          f"{len(M['required_globs'])} required sets, {len(problems)} problem{'s' if len(problems) != 1 else ''}")
+    for p in problems:
+        print("  " + p)
+    return problems
+
+
 def main():
+    manifest_problems = check_manifest()
+
+    present = [d for d in MANUSCRIPT_DIRS if os.path.isdir(d)]
     for d in MANUSCRIPT_DIRS:
         if not os.path.isdir(d):
-            print(f"warning: manuscript directory not found: {os.path.relpath(d, REPO)}")
+            print(f"note: manuscript directory not in this checkout: {os.path.relpath(d, REPO)} "
+                  f"(the manuscript-path check needs the .tex sources and is skipped for it)")
 
     by_path = collect()
     if not by_path:
-        print("No \\texttt{...} or \\path{...} file-path-like strings found in the manuscripts.")
-        return 0
+        if not present:
+            print("Manuscript sources are not in this checkout, so no manuscript-named path was checked; "
+                  "only the release manifest above applies.")
+        else:
+            print("No \\texttt{...} or \\path{...} file-path-like strings found in the manuscripts.")
+        return 1 if manifest_problems else 0
 
     name_w = max(len(p) for p in by_path)
     header = f"{'PATH'.ljust(name_w)}  STATUS    RESOLVED AS / SOURCE"
@@ -191,7 +235,7 @@ def main():
             sources = ", ".join(sorted(by_path[path]))
             print(f"  {path}  (referenced in {sources})")
         return 1
-    return 0
+    return 1 if manifest_problems else 0
 
 
 if __name__ == "__main__":

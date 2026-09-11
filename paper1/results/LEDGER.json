@@ -1,8 +1,8 @@
 {
  "_generated_by": "code/make_ledger.py",
- "note": "One row per result family behind Paper 1: what produced it, the settings its own output records, the checkpoint policy and endpoint, and a SHA-256 of every file. Fields a result file does not carry are absent rather than guessed. The prediction arrays the mask and clean-subset rescorings read are not in this repository; they are deposited separately and the scripts that read them are named above.",
+ "note": "One row per result family behind Paper 1: what produced it, the settings its own output records, the checkpoint policy and endpoint, and a SHA-256 of every file. Fields a result file does not carry are absent rather than guessed. The prediction arrays the mask and clean-subset rescorings read are not committed; they are attached to the tagged release, and prediction_arrays below records their checksums.",
  "n_families": 18,
- "n_result_files": 335,
+ "n_result_files": 342,
  "data_records": [
   {
    "file": "data/activity_labels_ht29.pt",
@@ -16,13 +16,13 @@
   },
   {
    "file": "data/families/audit.json",
-   "bytes": 306274,
-   "sha256": "2bd318cbb2d1acd96c9dc4ac1b1cab9e6eed3bb24167678e522dc2fe6ca7a62d"
+   "bytes": 306248,
+   "sha256": "92e21fbd13e106e1c432096c104b98b7550a6fffb0f546af66283533fbf59d9b"
   },
   {
    "file": "data/families/audit_summary.txt",
    "bytes": 205071,
-   "sha256": "8a95f0f089a821fb9cefc073f0532a8abab659e488cb25875dc1a074783bb471"
+   "sha256": "c95714a8b6669518d5ff064f2d5ed52215dfa83e813e035a89e754c6b1525ccb"
   },
   {
    "file": "data/families/families_S2.json",
@@ -56,8 +56,8 @@
   },
   {
    "file": "data/results_p1.json",
-   "bytes": 521385,
-   "sha256": "23af5ba91a967983cd33d1f07e144ce1143a4c1b806ab3e1c65c12c5b0e16838"
+   "bytes": 535400,
+   "sha256": "106454cb091984bfb49074cb16fb981c76220440cfd345be9747469e64753ac3"
   }
  ],
  "families": [
@@ -1769,7 +1769,7 @@
    },
    "n_files": 3,
    "settings": {
-    "family_map": "paper1/data/families/families_union.json",
+    "family_map": "data/families/families_union.json",
     "family_scheme": "union",
     "n_reactions": 10600,
     "rfolds": 3,
@@ -1783,18 +1783,18 @@
    "files": [
     {
      "file": "results/fam_matched.json",
-     "bytes": 65757,
-     "sha256": "4cdcd9744fc72bfec58850acf032abda2d1ff217cccdcd0d253cec137baaaca5"
+     "bytes": 65750,
+     "sha256": "cc4ed9b399485adac1035acfedf37f07ad4af948d59c8307e010d31faaf2bb5e"
     },
     {
      "file": "results/split_audit.json",
-     "bytes": 12620,
-     "sha256": "8a9b170773daad9a91c18bca606cbf46d58ce06ce05045a392dc794af45721f7"
+     "bytes": 12584,
+     "sha256": "db0bbe2815103030a08881e2c635f2d45bea033af00bad92323fb54655034c59"
     },
     {
      "file": "results/split_audit_fam.json",
-     "bytes": 11845,
-     "sha256": "f79d0f6fd61cde565043919e498d20b33f3a8e4d984dd4379a204e39211ff679"
+     "bytes": 11802,
+     "sha256": "f81fbe1a1c3f07c4dc5857c976d301dafc54f5db3439d5d571ebaad6a00a7764"
     }
    ]
   },
@@ -1946,33 +1946,52 @@
    "files": [
     {
      "file": "results/diagnostic_sim.json",
-     "bytes": 605025,
-     "sha256": "706f45e8e899870802cdb5a8e2a42bef54892dccc1defc77db9a4367c9bb3b85"
+     "bytes": 1544495,
+     "sha256": "e1f23179301cddb1f1a8d5e547e0ce2db271ecf676a398b51fab069b787307c0"
     }
    ]
   },
   {
    "family": "external audit of a published predictor",
    "directory": "results/deepmeta",
-   "runner": "the released model as published, driven by the audit wrapper; see Supplementary Section 16",
+   "runner": "the authors' released checkpoint, unmodified, driven by the pipeline in code/deepmeta_audit/ (manifest.py, arms.py, build_arms.py, run_arms.py, native_repro.py, metrics.py; run_donor_arms.sh is the launcher that ran)",
    "policy": {
     "selection": "not applicable: the released checkpoint is used unchanged",
     "checkpoint": "the authors' released checkpoint, unmodified",
     "endpoint": "CPU or GPU, single process",
     "target": "measured CRISPR gene effect, DepMap 24Q4 Chronos"
    },
-   "n_files": 3,
+   "n_files": 10,
    "settings": {
-    "seed": 11
+    "seed": {
+     "min": 11,
+     "max": 33,
+     "n_distinct": 3
+    }
    },
    "files": [
     {
      "file": "results/deepmeta/audit_results.json",
-     "bytes": 32709,
-     "sha256": "0b533b9646530136545d713c79405bfca69545d2a8cda6f0a415cf4f17e7faa5"
+     "bytes": 2019103,
+     "sha256": "90a0e4207673fdc22917b0f897d6a78b3953943af1603ebd4efaaea8ddf9a501"
+    },
+    {
+     "file": "results/deepmeta/audit_results_seed22.json",
+     "bytes": 2019619,
+     "sha256": "09bbf1b098cc4475a86e6d7fb793ff74e1bd64704b07d2d03d770957efec428d"
+    },
+    {
+     "file": "results/deepmeta/audit_results_seed33.json",
+     "bytes": 2018599,
+     "sha256": "661fd9fbfbd20510677e515390715954bd3bcd4cfb83d7e6c0261dc8f2dc5b6e"
     },
     {
      "file": "results/deepmeta/manifest.json",
+     "bytes": 521605,
+     "sha256": "bb6493d9747b77fb675d5bd7bebbac88da4597164eb8c42a5860ca1032e0126b"
+    },
+    {
+     "file": "results/deepmeta/manifest_138.json",
      "bytes": 521293,
      "sha256": "83ae817167d2e492d43f024772d627dce6b454101ecd1951d0e9e58d550bc55d"
     },
@@ -1980,6 +1999,26 @@
      "file": "results/deepmeta/native_repro.json",
      "bytes": 1003,
      "sha256": "19d2ed859664eb4c1ec6859d425fcffcbc0999263d14d92bed1fb27c69e53da7"
+    },
+    {
+     "file": "results/deepmeta/recompute_cells.json",
+     "bytes": 1862,
+     "sha256": "d7be67bfd55dd15a06f3a0547c8bb22e1e05d2ae2028196b538e74e2c60eb577"
+    },
+    {
+     "file": "results/deepmeta/schedules.json",
+     "bytes": 75720,
+     "sha256": "3c215c0cf180f99b245b5fe9012e1c186eea6eb636f3ebe6810d8409143e5542"
+    },
+    {
+     "file": "results/deepmeta/schedules_138.json",
+     "bytes": 77364,
+     "sha256": "5b3a4ea605cb015fc6a884eb0089b37a559f50669e6e1a813c6e43397bdea4b2"
+    },
+    {
+     "file": "results/deepmeta/schedules_unconstrained.json",
+     "bytes": 75248,
+     "sha256": "42ced898ce0fa5e88114244c1421d0c8052a50f1830efd40301fc54b7cecb0cd"
     }
    ]
   },
@@ -2299,5 +2338,195 @@
    ]
   }
  ],
+ "external_audit_predictions": {
+  "note": "per-arm predictions of the external audit, one CSV per arm and donor schedule (cell, gene, raw prediction), scored by code/deepmeta_audit/metrics.py into the audit_results files of the family above",
+  "n_files": 18,
+  "files": [
+   {
+    "file": "results/deepmeta/preds/seed11/preds_cross.csv",
+    "bytes": 2553543,
+    "sha256": "072b7d705e6268f03da19d35368060b6246628e6687af60bf1c2f21d8b2f66ed"
+   },
+   {
+    "file": "results/deepmeta/preds/seed11/preds_mean.csv",
+    "bytes": 2629761,
+    "sha256": "00386a18c8d7aa23260fdcce738ab56834b92eae2d1aca2f94e9aaeead287c4e"
+   },
+   {
+    "file": "results/deepmeta/preds/seed11/preds_own.csv",
+    "bytes": 2546404,
+    "sha256": "f8fdccedcc890f5a84554aa8eb95c998f3fdd71f2c5bc86dce1c310301282ce0"
+   },
+   {
+    "file": "results/deepmeta/preds/seed11/preds_within.csv",
+    "bytes": 2547856,
+    "sha256": "58d1bd86f0e6be1f91a4acd35f4f33ebd3c7653fc625b25a7d9ca0568f48ebd8"
+   },
+   {
+    "file": "results/deepmeta/preds/seed11/preds_within_expr.csv",
+    "bytes": 2546596,
+    "sha256": "f1ce428c85d4abf539656d5bb6ee756c2088f14afeec9ea16c899f818339d83a"
+   },
+   {
+    "file": "results/deepmeta/preds/seed11/preds_within_graph.csv",
+    "bytes": 2547590,
+    "sha256": "497345a592b0f070e4f893fa684850019ccb5262ff2a5ee6f78dc27c07db1714"
+   },
+   {
+    "file": "results/deepmeta/preds/seed22/preds_cross.csv",
+    "bytes": 2552772,
+    "sha256": "dbd630acf73b599b0d6848bf44f16e4a05a1899d3c6060762100d23f0d3201cc"
+   },
+   {
+    "file": "results/deepmeta/preds/seed22/preds_mean.csv",
+    "bytes": 2629761,
+    "sha256": "00386a18c8d7aa23260fdcce738ab56834b92eae2d1aca2f94e9aaeead287c4e"
+   },
+   {
+    "file": "results/deepmeta/preds/seed22/preds_own.csv",
+    "bytes": 2546404,
+    "sha256": "f8fdccedcc890f5a84554aa8eb95c998f3fdd71f2c5bc86dce1c310301282ce0"
+   },
+   {
+    "file": "results/deepmeta/preds/seed22/preds_within.csv",
+    "bytes": 2546136,
+    "sha256": "645ebc9842c92f0d389c26e9f8d7c4a36ee05d757f9f69c7d266ed1b48205f5b"
+   },
+   {
+    "file": "results/deepmeta/preds/seed22/preds_within_expr.csv",
+    "bytes": 2546517,
+    "sha256": "43c3b1b0656ebd038c6464de559953e5d1c8ccd699ce7a832ea93cf1f3cd8bb2"
+   },
+   {
+    "file": "results/deepmeta/preds/seed22/preds_within_graph.csv",
+    "bytes": 2545959,
+    "sha256": "4c21b4995d318b9de85bf60c5b6f430767f07f77685c17ade7196f0f66ef4888"
+   },
+   {
+    "file": "results/deepmeta/preds/seed33/preds_cross.csv",
+    "bytes": 2552140,
+    "sha256": "255615107e5e9111c3cab89648482a01daecb846e751f790cacd30456eb269e1"
+   },
+   {
+    "file": "results/deepmeta/preds/seed33/preds_mean.csv",
+    "bytes": 2629761,
+    "sha256": "00386a18c8d7aa23260fdcce738ab56834b92eae2d1aca2f94e9aaeead287c4e"
+   },
+   {
+    "file": "results/deepmeta/preds/seed33/preds_own.csv",
+    "bytes": 2546404,
+    "sha256": "f8fdccedcc890f5a84554aa8eb95c998f3fdd71f2c5bc86dce1c310301282ce0"
+   },
+   {
+    "file": "results/deepmeta/preds/seed33/preds_within.csv",
+    "bytes": 2547354,
+    "sha256": "db5df44b8612f6ca4074e3fd6c172284c097b9ce9822e9f219f63ca34f5c33d4"
+   },
+   {
+    "file": "results/deepmeta/preds/seed33/preds_within_expr.csv",
+    "bytes": 2546553,
+    "sha256": "d063e6391c6545b231ef86df295726b41acd53afaac9193507fb62559c177399"
+   },
+   {
+    "file": "results/deepmeta/preds/seed33/preds_within_graph.csv",
+    "bytes": 2546862,
+    "sha256": "93d17e7ec6253c427fedea7bb70d67be9a42fd816caa3f0c8c60965e3db66529"
+   }
+  ]
+ },
+ "prediction_arrays": {
+  "total_bytes": 2888899574,
+  "tarballs_total_bytes": 2889185280,
+  "note": "one array per training cell (scores, uncertainties, the held-out and fit masks and, for the synthetic cells, the labels), read by the per-patient, mask, clean-subset, phenotype and collapse scripts; released as one tarball per result family, attached to the tagged release, and verified by code/verify_ledger.py against these lists",
+  "n_arrays": 299,
+  "arrays_by_family": {
+   "dh": 52,
+   "ctrl": 33,
+   "rewire": 12,
+   "fam": 79,
+   "ivr": 75,
+   "synth": 24,
+   "ht29": 9,
+   "seedrep": 6,
+   "rankgnn": 6,
+   "permute": 3
+  },
+  "checksums": "results/prediction_arrays.sha256",
+  "tarballs": [
+   {
+    "file": "preds_ctrl.tar",
+    "sha256": "5875410ccd905838cb73d04228fd117495de7ddace2313bfa9bb5eccb734774e",
+    "family": "ctrl",
+    "bytes": 323348480,
+    "n_arrays": 33
+   },
+   {
+    "file": "preds_dh.tar",
+    "sha256": "204401fab0acbe860ac139e4fe0f8cbd6200ceb238e3f93d72fe8767b75fd286",
+    "family": "dh",
+    "bytes": 492677120,
+    "n_arrays": 52
+   },
+   {
+    "file": "preds_fam.tar",
+    "sha256": "3d737f7ea274e680c78d0b93308260196e460da7b47fdc8c9e9ae9390e828514",
+    "family": "fam",
+    "bytes": 757442560,
+    "n_arrays": 79
+   },
+   {
+    "file": "preds_ht29.tar",
+    "sha256": "55ef6accf88c096bfec35aaa976205151a86a674785cf862c85bda814a4c0ad2",
+    "family": "ht29",
+    "bytes": 89384960,
+    "n_arrays": 9
+   },
+   {
+    "file": "preds_ivr.tar",
+    "sha256": "9b4fc2e3e08c986bff32dfe0b642a4e63eed2bd25e56bb73d604754283a88273",
+    "family": "ivr",
+    "bytes": 724275200,
+    "n_arrays": 75
+   },
+   {
+    "file": "preds_permute.tar",
+    "sha256": "c8111820d399b527a07ea26ae390d1eee6898afe7a7b612c4db0073dbdd0217f",
+    "family": "permute",
+    "bytes": 29644800,
+    "n_arrays": 3
+   },
+   {
+    "file": "preds_rankgnn.tar",
+    "sha256": "647fdb56ad2fbdb436de9a97dcded2ad8955b64994617869121a0f202c5907ee",
+    "family": "rankgnn",
+    "bytes": 59248640,
+    "n_arrays": 6
+   },
+   {
+    "file": "preds_rewire.tar",
+    "sha256": "a1ffedee4b523a4c9f2919c10d64fec658952d350a9bda7a02be240ac3f8a659",
+    "family": "rewire",
+    "bytes": 118497280,
+    "n_arrays": 12
+   },
+   {
+    "file": "preds_seedrep.tar",
+    "sha256": "5bda55b9e1c8ca4b7c652a41e367611cebfa00a46ecba6c24ad21f5c908b7bfe",
+    "family": "seedrep",
+    "bytes": 59228160,
+    "n_arrays": 6
+   },
+   {
+    "file": "preds_synth.tar",
+    "sha256": "92d615e18a216f9f4706a46fee0c0468a898cb133300e108b612373fcfa40448",
+    "family": "synth",
+    "bytes": 235438080,
+    "n_arrays": 24
+   }
+  ],
+  "tarball_checksums": "results/prediction_array_tarballs.sha256",
+  "local_root": "results/prediction_arrays",
+  "hosted_at": "the assets of the tagged release named in the repository's release.json"
+ },
  "result_files_not_in_any_family": []
 }

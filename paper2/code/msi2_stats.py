@@ -19,7 +19,7 @@ null permutes the profile-label alignment. Percentiles are cohort midranks compu
 outcome was read, and are held fixed inside every resample, so every interval here conditions on
 them.
 """
-import os, json, glob, numpy as np
+import os, sys, json, glob, numpy as np
 from scipy.stats import rankdata
 from sklearn.metrics import roc_auc_score, average_precision_score, brier_score_loss, log_loss
 import _paths as PATHS
@@ -128,6 +128,10 @@ def analyze(run):
                                            round(float(np.percentile(ddiffs, 97.5)), 4)] if len(ddiffs) else None),
              own_minus_donor_direct_null_p=(round(float((dnull >= (a_own_paired - a_don_direct)).mean()), 4)
                                             if len(dnull) else None),
+             own_minus_donor_direct_null_exceedances=(int((dnull >= (a_own_paired - a_don_direct)).sum()) if len(dnull) else None),
+             own_minus_donor_direct_null_draws=int(len(dnull)),
+             own_minus_donor_direct_null_p_mc=(round(float(((dnull >= (a_own_paired - a_don_direct)).sum() + 1) / (len(dnull) + 1)), 4)
+                                               if len(dnull) else None),
              donor_served_vs_cached_n=int(len(_dd)),
              donor_served_vs_cached_n_changed=int((_dd > 0).sum()) if len(_dd) else None,
              donor_served_vs_cached_median_abs=round(float(np.median(_dd)), 4) if len(_dd) else None,
@@ -136,6 +140,10 @@ def analyze(run):
              own_minus_donor_ci95=[round(float(np.percentile(diffs, 2.5)), 4), round(float(np.percentile(diffs, 97.5)), 4)],
              own_minus_donor_boot_mean=round(float(np.mean(diffs)), 4),
              exch_null_mean=round(float(null.mean()), 4), exch_null_p=round(float((null >= (a_own - a_don0)).mean()), 4),
+             # the count behind the proportion, and the Monte Carlo estimator (b + 1) / (B + 1) that
+             # never reports zero exceedances as a probability of zero
+             exch_null_exceedances=int((null >= (a_own - a_don0)).sum()), exch_null_draws=int(len(null)),
+             exch_null_p_mc=round(float(((null >= (a_own - a_don0)).sum() + 1) / (len(null) + 1)), 4),
              serving_repeat_n=len(rep_delta), serving_repeat_median_abs=round(float(np.median(rep_delta)), 4) if rep_delta else None,
              serving_repeat_max_abs=round(float(np.max(rep_delta)), 4) if rep_delta else None,
              # a median of zero says the typical repeat is identical, not that every repeat is: the
@@ -156,16 +164,50 @@ def analyze(run):
     return R, (d, y, own)
 
 def calibration_map(dev_scores, dev_y):
-    """A monotone logistic map fitted on development own scores; returns (a, b) for
-    logit(p_cal) = a*logit(p)+b, a>=0 enforced by refusing a<0 (report constant if so)."""
+    """A logistic map on the logit of the returned probability, logit(p_cal) = a*logit(p) + b, fitted
+    on the development cohort's own scores. The analysis plan reserves the map for a nondecreasing
+    repair: a fitted slope at or below zero is replaced by the constant map at the development
+    prevalence (a = 0, b = logit(prevalence)) and flagged, because a negative slope would reverse
+    the ranking rather than repair the probabilities. The fitted slope and intercept are kept
+    beside the applied ones so the substitution is visible."""
     from sklearn.linear_model import LogisticRegression
     ok = np.isfinite(dev_scores); p = np.clip(dev_scores[ok], 1e-4, 1 - 1e-4); z = np.log(p / (1 - p)).reshape(-1, 1)
     m = LogisticRegression(C=1e6, max_iter=5000).fit(z, dev_y[ok])
-    return float(m.coef_[0, 0]), float(m.intercept_[0])
+    a, b = float(m.coef_[0, 0]), float(m.intercept_[0])
+    rec = dict(fitted_a=round(a, 4), fitted_b=round(b, 4), n_fit=int(ok.sum()))
+    if a <= 0:
+        prev = float(np.mean(dev_y[ok])); prev = min(max(prev, 1e-4), 1 - 1e-4)
+        rec.update(a=0.0, b=round(float(np.log(prev / (1 - prev))), 4), constant_fallback=True,
+                   note="fitted slope at or below zero; the constant map at the development prevalence is applied, as the plan specifies")
+    else:
+        rec.update(a=round(a, 4), b=round(b, 4), constant_fallback=False)
+    return rec
 
 def apply_map(scores, ab):
     a, b = ab; p = np.clip(scores, 1e-4, 1 - 1e-4); z = a * np.log(p / (1 - p)) + b
     return 1.0 / (1.0 + np.exp(-z))
+
+def calibrate(OUT, store):
+    """Fit each map on the development cohort of the same backbone and configuration, apply it
+    unchanged to the external cohorts, and record both the applied and the fitted parameters."""
+    OUT["calibration"] = {}
+    for run, (d, y, own) in store.items():
+        if d["cohort"] != "tcga": continue
+        rec = calibration_map(own, y); rec["fitted_on"] = run
+        OUT["calibration"][f"{d.get('model')}|{d['config']}|{d['endpoint']}"] = rec
+    for run, (d, y, own) in store.items():
+        if d["cohort"] == "tcga": continue
+        key = f"{d.get('model')}|{d['config']}|{d['endpoint']}"
+        rec = OUT["calibration"].get(key)
+        if not rec or run not in OUT["runs"]: continue
+        ab = (rec["a"], rec["b"]); ok = np.isfinite(own); pc = apply_map(own[ok], ab)
+        OUT["runs"][run]["calibrated"] = dict(
+            brier=round(float(brier_score_loss(y[ok], pc)), 4),
+            logloss=round(float(log_loss(y[ok], np.clip(pc, 0.005, 0.995), labels=[0, 1])), 4),
+            # a constant map carries no ranking, so its AUROC is not reported as a discrimination
+            auroc=(None if rec["constant_fallback"] else round(float(roc_auc_score(y[ok], pc)), 4)),
+            constant_fallback=bool(rec["constant_fallback"]), map=dict(a=rec["a"], b=rec["b"]),
+            fitted=dict(a=rec["fitted_a"], b=rec["fitted_b"]))
 
 # the frozen supervised reference applied to each cohort's percentiles: does even the logistic
 # reference, fitted on TCGA, transfer? (a transfer failure where the reference also loses signal is
@@ -217,6 +259,18 @@ OUT = dict(note="frozen percentile-only interface; primary confirmatory contrast
 if _incomplete:
     for _r, _v in _incomplete.items():
         print(f"{_r:44s} INCOMPLETE ({_v['responses']} of {_complete_n} responses); not analyzed", flush=True)
+# --calibration-only: keep every statistic of the existing results file and recompute only the
+# calibration maps and the calibrated fields, which need no resampling
+if "--calibration-only" in sys.argv:
+    _prev = os.path.join(PATHS.ROOT, "results", "msi2_frozen.json")
+    OUT = json.load(open(_prev)); store = {}
+    for run in runs:
+        if run in OUT["runs"]:
+            d, y, own, _, _, _ = load(run); store[run] = (d, y, own)
+    calibrate(OUT, store)
+    json.dump(OUT, open(_prev, "w"), indent=1)
+    for k, v in OUT["calibration"].items(): print(k, v)
+    print("rewrote the calibration fields of results/msi2_frozen.json"); sys.exit(0)
 store = {}
 for run in runs:
     try:
@@ -228,20 +282,7 @@ for run in runs:
     except Exception as e:
         print(run, "FAILED", type(e).__name__, str(e)[:120], flush=True)
 # calibration: fit each map on the development cohort of the same backbone+config, apply to external
-for run, (d, y, own) in store.items():
-    if d["cohort"] != "tcga": continue
-    key = (d.get("model"), d["config"], d["endpoint"])
-    ab = calibration_map(own, y); OUT["calibration"][f"{d.get('model')}|{d['config']}|{d['endpoint']}"] = dict(a=round(ab[0], 4), b=round(ab[1], 4), fitted_on=run)
-for run, (d, y, own) in store.items():
-    if d["cohort"] == "tcga": continue
-    key = f"{d.get('model')}|{d['config']}|{d['endpoint']}"
-    ab = OUT["calibration"].get(key)
-    if not ab: continue
-    ab = (ab["a"], ab["b"]); ok = np.isfinite(own); pc = apply_map(own[ok], ab)
-    OUT["runs"][run]["calibrated"] = dict(brier=round(float(brier_score_loss(y[ok], pc)), 4),
-                                          logloss=round(float(log_loss(y[ok], np.clip(pc, 0.005, 0.995), labels=[0, 1])), 4),
-                                          auroc=round(float(roc_auc_score(y[ok], pc)), 4),
-                                          slope_positive=bool(ab[0] > 0), map=dict(a=ab[0], b=ab[1]))
+calibrate(OUT, store)
 OUT["frozen_reference_transfer"] = {}
 for _c in ("tcga", "gse39582", "gse13294"):
     try:

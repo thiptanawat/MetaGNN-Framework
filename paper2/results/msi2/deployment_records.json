@@ -1,0 +1,206 @@
+{
+ "source": "results/msi2/*/design.json and raw.json",
+ "backbones": [
+  {
+   "ordinal": 1,
+   "served_name": "qwen3-8-27b",
+   "url": [
+    "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions"
+   ],
+   "host": "remote",
+   "launch": {
+    "launcher": "code/provenance/run_msi2_qwen.sh",
+    "hub_id": null,
+    "dtype": null,
+    "max_model_len": null,
+    "template": "thinking disabled through the chat-template flag",
+    "extra": "",
+    "served_by": "a vLLM/Ray Serve deployment not under our control"
+   },
+   "n_collections": 6,
+   "collections": [
+    "gse13294_qwen_evidence_s11",
+    "gse13294_qwen_zero_shot_s11",
+    "gse39582_qwen_evidence_s11",
+    "gse39582_qwen_zero_shot_s11",
+    "tcga_qwen_evidence_s11",
+    "tcga_qwen_zero_shot_s11"
+   ],
+   "first_started_utc": "2026-09-10 13:35 UTC",
+   "last_started_utc": "2026-09-10 14:25 UTC",
+   "temperature": [
+    0.0
+   ],
+   "max_tokens": [
+    160
+   ],
+   "plain_chat": [
+    false
+   ],
+   "retries": [
+    3
+   ],
+   "seed": [
+    2024
+   ],
+   "donor_seed": [
+    11
+   ],
+   "minutes_total": 53.1,
+   "calls_archived": 6938,
+   "failed_calls": 0,
+   "calls_needing_retry": 0,
+   "echoed_names": {
+    "qwen3-8-27b": 6938
+   },
+   "finish_reasons": {
+    "stop": 6938
+   },
+   "prompt_tokens_median": 931.0,
+   "prompt_tokens_min": 819,
+   "prompt_tokens_max": 2588,
+   "latency_s_median": 5.31,
+   "not_recorded": [
+    "weight revision or artifact digest",
+    "tokenizer file identity",
+    "serving software version (known for the local backbones only from the serving environment, not from the archives)",
+    "serving precision",
+    "hardware"
+   ]
+  },
+  {
+   "ordinal": 2,
+   "served_name": "gemma-4-31b-it",
+   "url": [
+    "http://127.0.0.1:8001/v1/chat/completions"
+   ],
+   "host": "loopback",
+   "launch": {
+    "launcher": "code/provenance/run_msi2_local.sh",
+    "hub_id": "google/gemma-4-31B-it",
+    "dtype": "bfloat16",
+    "max_model_len": 8192,
+    "template": "thinking disabled through the chat-template flag",
+    "extra": "",
+    "served_by": "vLLM on one accelerator, loopback host"
+   },
+   "n_collections": 6,
+   "collections": [
+    "gse13294_gemma-4-31b-it_evidence_s11",
+    "gse13294_gemma-4-31b-it_zero_shot_s11",
+    "gse39582_gemma-4-31b-it_evidence_s11",
+    "gse39582_gemma-4-31b-it_zero_shot_s11",
+    "tcga_gemma-4-31b-it_evidence_s11",
+    "tcga_gemma-4-31b-it_zero_shot_s11"
+   ],
+   "first_started_utc": "2026-09-10 15:32 UTC",
+   "last_started_utc": "2026-09-10 16:04 UTC",
+   "temperature": [
+    0.0
+   ],
+   "max_tokens": [
+    160
+   ],
+   "plain_chat": [
+    false
+   ],
+   "retries": [
+    3
+   ],
+   "seed": [
+    2024
+   ],
+   "donor_seed": [
+    11
+   ],
+   "minutes_total": 34.2,
+   "calls_archived": 6938,
+   "failed_calls": 0,
+   "calls_needing_retry": 0,
+   "echoed_names": {
+    "gemma-4-31b-it": 6938
+   },
+   "finish_reasons": {
+    "stop": 6938
+   },
+   "prompt_tokens_median": 870.0,
+   "prompt_tokens_min": 759,
+   "prompt_tokens_max": 2417,
+   "latency_s_median": 2.49,
+   "not_recorded": [
+    "weight revision or artifact digest",
+    "tokenizer file identity",
+    "serving software version (known for the local backbones only from the serving environment, not from the archives)"
+   ]
+  },
+  {
+   "ordinal": 3,
+   "served_name": "mistral-small-3.2-24b-instruct",
+   "url": [
+    "http://127.0.0.1:8002/v1/chat/completions"
+   ],
+   "host": "loopback",
+   "launch": {
+    "launcher": "code/provenance/run_msi2_local.sh",
+    "hub_id": "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "dtype": "bfloat16",
+    "max_model_len": 8192,
+    "template": "plain chat (no template flag; the chat template has no reasoning switch)",
+    "extra": "Mistral tokenizer, configuration and load format; image inputs disabled",
+    "served_by": "vLLM on one accelerator, loopback host"
+   },
+   "n_collections": 9,
+   "collections": [
+    "gse13294_mistral-small-3.2-24b-instruct_evidence_s11",
+    "gse13294_mistral-small-3.2-24b-instruct_tool_s11",
+    "gse13294_mistral-small-3.2-24b-instruct_zero_shot_s11",
+    "gse39582_mistral-small-3.2-24b-instruct_evidence_s11",
+    "gse39582_mistral-small-3.2-24b-instruct_tool_s11",
+    "gse39582_mistral-small-3.2-24b-instruct_zero_shot_s11",
+    "tcga_mistral-small-3.2-24b-instruct_evidence_s11",
+    "tcga_mistral-small-3.2-24b-instruct_tool_s11",
+    "tcga_mistral-small-3.2-24b-instruct_zero_shot_s11"
+   ],
+   "first_started_utc": "2026-09-10 15:07 UTC",
+   "last_started_utc": "2026-09-10 15:29 UTC",
+   "temperature": [
+    0.0
+   ],
+   "max_tokens": [
+    160
+   ],
+   "plain_chat": [
+    true
+   ],
+   "retries": [
+    3
+   ],
+   "seed": [
+    2024
+   ],
+   "donor_seed": [
+    11
+   ],
+   "minutes_total": 22.5,
+   "calls_archived": 10407,
+   "failed_calls": 0,
+   "calls_needing_retry": 0,
+   "echoed_names": {
+    "mistral-small-3.2-24b-instruct": 10407
+   },
+   "finish_reasons": {
+    "stop": 10405,
+    "length": 2
+   },
+   "prompt_tokens_median": 938,
+   "prompt_tokens_min": 776,
+   "prompt_tokens_max": 2447,
+   "latency_s_median": 1.17,
+   "not_recorded": [
+    "weight revision or artifact digest",
+    "tokenizer file identity",
+    "serving software version (known for the local backbones only from the serving environment, not from the archives)"
+   ]
+  }
+ ]
+}

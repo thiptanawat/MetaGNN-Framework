@@ -1303,6 +1303,10 @@ if DMA and DMN and DMM:
         constant_genes=_pri["genes_with_constant_scores"],
         secondary=dict(explicit_only=DMA["analyses"]["secondary_explicit_only"]["concordance"],
                        zero_fill=DMA["analyses"]["tertiary_zero_fill_all"]["concordance"],
+                       # the smallest-effect verdicts of the two secondary domains, kept so the text can
+                       # say where they agree with the primary domain and where they do not
+                       explicit_only_verdicts=DMA["analyses"]["secondary_explicit_only"]["verdicts_vs_sesi_0.01"],
+                       zero_fill_verdicts=DMA["analyses"]["tertiary_zero_fill_all"]["verdicts_vs_sesi_0.01"],
                        explicit_only_donor=DMA["analyses"]["secondary_explicit_only"]["donor_effect"],
                        zero_fill_donor=DMA["analyses"]["tertiary_zero_fill_all"]["donor_effect"],
                        explicit_only_per_line={k: v["mean"] for k, v in DMA["analyses"]["secondary_explicit_only"]["per_line_auroc_dependency_lt_-0.5"].items()},
@@ -1356,9 +1360,23 @@ if DMA and DMN and DMM:
 # the diagnostic calibration simulation (diagnostic_sim.py), folded in as its own block
 DSIM = opt("diagnostic_sim.json")
 if DSIM:
-    R["diagnostic_sim"] = dict(params={k: DSIM["params"][k] for k in ("n_dev", "n_test", "P", "R", "pfolds", "rfolds")},
-                               rule=DSIM["rule"], test_confusion=DSIM["test_confusion"], dev_confusion=DSIM["dev_confusion"],
-                               counterexample=DSIM["counterexample"], decision_table=DSIM["decision_table"])
+    R["diagnostic_sim"] = dict(params={k: DSIM["params"][k] for k in ("n_dev", "n_test", "P", "R", "pfolds", "rfolds",
+                                                                          "inner_frac", "rounds", "dev_seeds", "test_seeds")
+                                       if k in DSIM["params"]},
+                               rule=DSIM["rule"], arms=DSIM.get("arms"),
+                               test_confusion=DSIM["test_confusion"], dev_confusion=DSIM["dev_confusion"],
+                               test_null_subsets=DSIM.get("test_null_subsets"), dev_null_subsets=DSIM.get("dev_null_subsets"),
+                               counterexample=DSIM["counterexample"], decision_table=DSIM["decision_table"],
+                               dev_decision_table=DSIM.get("dev_decision_table"),
+                               # how many worlds of each configuration each set holds, so the text can say so
+                               world_counts={tag: {"shared": sum(1 for w in DSIM[tag + "_worlds"] if w["label"] == "shared"),
+                                                   "varying_alpha0": sum(1 for w in DSIM[tag + "_worlds"] if w["label"] == "varying" and w["alpha"] == 0),
+                                                   "varying_weak": sum(1 for w in DSIM[tag + "_worlds"] if w["label"] == "varying" and 0 < w["alpha"] < 1.5),
+                                                   "varying_strong": sum(1 for w in DSIM[tag + "_worlds"] if w["label"] == "varying" and w["alpha"] >= 1.5)}
+                                             for tag in ("dev", "test") if tag + "_worlds" in DSIM},
+                               # the learned model's chosen rounds, pooled over test worlds, per arm
+                               rounds_chosen={arm: sorted({r for w in DSIM.get("test_worlds", []) for r in w["audit"]["learned"].get("rounds_chosen", {}).get(arm, [])})
+                                              for arm in ("own", "mean", "donor")})
 
 if ROB:
     R["robustness"] = ROB

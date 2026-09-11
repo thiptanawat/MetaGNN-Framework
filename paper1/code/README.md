@@ -64,6 +64,18 @@ guards in the manuscript switch on.
 | `make_numbers_p1.py` | emits one LaTeX macro per quoted result into `../manuscript/numbers.tex` |
 | `make_figures_p1.py` | draws the four figures from the same file the text reads |
 | `check_macros_p1.py` | fails the build if the manuscript uses a macro the pipeline does not define, and if a sentence inside an `\ifdefined` guard reads a direction off an absolute value instead of a signed or `*Word` macro |
+| `make_ledger.py` | writes `../results/LEDGER.json`: every result family with the script that produced it, the settings its files carry and a SHA-256 of every result and data file, plus the checksums of the external audit's prediction CSVs and of the released prediction arrays |
+| `verify_ledger.py` | checks every hash the ledger records against the file it names, that every result file is listed, and any released prediction arrays present locally against their checksum list; exits nonzero on a mismatch |
+| `build_families.py` | rebuilds the label-blind reaction families behind the family-disjoint split from the reference network alone |
+| `diagnostic_sim.py` | the synthetic worlds in which the substitution audit's decision rule is fixed on development worlds and read on test worlds |
 
-Run them in that order, or run `bash ../../reproduce.sh analysis` from the repository root,
-which does the same for both papers.
+Run them in the order `reproduce.sh` gives, or run `bash ../../reproduce.sh analysis` from
+the repository root, which does the same for both papers.
+
+## The external audit of a published predictor
+
+`deepmeta_audit/` holds the pipeline behind the manuscript's external audit as it ran, with
+its own `RUN_FULL.md` (stages, costs, restart behavior) and `PROVENANCE.md` (inputs, fixed
+choices, deviations, and the two corrections made after the first run). Its outputs are under
+`../results/deepmeta/`, including the per-arm prediction CSVs that `deepmeta_audit/metrics.py`
+scores. Its environment differs from the rest of this directory (`RUN_FULL.md`, section 0).

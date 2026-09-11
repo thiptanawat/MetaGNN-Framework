@@ -1,0 +1,88 @@
+{
+ "tarballs": [
+  {
+   "file": "preds_ctrl.tar",
+   "family": "ctrl",
+   "bytes": 323348480,
+   "n_arrays": 33,
+   "arrays_bytes": 323320028,
+   "sha256": "5875410ccd905838cb73d04228fd117495de7ddace2313bfa9bb5eccb734774e"
+  },
+  {
+   "file": "preds_dh.tar",
+   "family": "dh",
+   "bytes": 492677120,
+   "n_arrays": 52,
+   "arrays_bytes": 492631059,
+   "sha256": "204401fab0acbe860ac139e4fe0f8cbd6200ceb238e3f93d72fe8767b75fd286"
+  },
+  {
+   "file": "preds_fam.tar",
+   "family": "fam",
+   "bytes": 757442560,
+   "n_arrays": 79,
+   "arrays_bytes": 757377004,
+   "sha256": "3d737f7ea274e680c78d0b93308260196e460da7b47fdc8c9e9ae9390e828514"
+  },
+  {
+   "file": "preds_ht29.tar",
+   "family": "ht29",
+   "bytes": 89384960,
+   "n_arrays": 9,
+   "arrays_bytes": 89367715,
+   "sha256": "55ef6accf88c096bfec35aaa976205151a86a674785cf862c85bda814a4c0ad2"
+  },
+  {
+   "file": "preds_ivr.tar",
+   "family": "ivr",
+   "bytes": 724275200,
+   "n_arrays": 75,
+   "arrays_bytes": 724214456,
+   "sha256": "9b4fc2e3e08c986bff32dfe0b642a4e63eed2bd25e56bb73d604754283a88273"
+  },
+  {
+   "file": "preds_permute.tar",
+   "family": "permute",
+   "bytes": 29644800,
+   "n_arrays": 3,
+   "arrays_bytes": 29636569,
+   "sha256": "c8111820d399b527a07ea26ae390d1eee6898afe7a7b612c4db0073dbdd0217f"
+  },
+  {
+   "file": "preds_rankgnn.tar",
+   "family": "rankgnn",
+   "bytes": 59248640,
+   "n_arrays": 6,
+   "arrays_bytes": 59242677,
+   "sha256": "647fdb56ad2fbdb436de9a97dcded2ad8955b64994617869121a0f202c5907ee"
+  },
+  {
+   "file": "preds_rewire.tar",
+   "family": "rewire",
+   "bytes": 118497280,
+   "n_arrays": 12,
+   "arrays_bytes": 118480161,
+   "sha256": "a1ffedee4b523a4c9f2919c10d64fec658952d350a9bda7a02be240ac3f8a659"
+  },
+  {
+   "file": "preds_seedrep.tar",
+   "family": "seedrep",
+   "bytes": 59228160,
+   "n_arrays": 6,
+   "arrays_bytes": 59214218,
+   "sha256": "5bda55b9e1c8ca4b7c652a41e367611cebfa00a46ecba6c24ad21f5c908b7bfe"
+  },
+  {
+   "file": "preds_synth.tar",
+   "family": "synth",
+   "bytes": 235438080,
+   "n_arrays": 24,
+   "arrays_bytes": 235415687,
+   "sha256": "92d615e18a216f9f4706a46fee0c0468a898cb133300e108b612373fcfa40448"
+  }
+ ],
+ "arrays_total_bytes": 2888899574,
+ "n_arrays": 299,
+ "tarballs_total_bytes": 2889185280,
+ "note": "the per-cell prediction arrays of the study, released as one tarball per result family attached to the tagged release named in release.json; prediction_arrays.sha256 lists every array and this file every tarball"
+}

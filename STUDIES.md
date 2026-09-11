@@ -193,8 +193,13 @@ parsed Recon3D network. That is the record's concept identifier, so it always re
 the current version. The archived framework is at
 <https://doi.org/10.5281/zenodo.21217568> under MIT, likewise a concept identifier.
 
-Per-cell prediction arrays (`*_preds.npz`, 375 MB) are too large for this repository and
-are deposited with the data record. Every quoted result is derived from the
+The per-cell prediction arrays of the first study (`*_preds.npz`, 299 files, 2.7 GB) are too
+large to commit and are not in the data record above, which predates these studies. They are
+attached to the tagged release named in `release.json` as ten tarballs, one per result
+family, and their checksums are committed (`paper1/results/prediction_arrays.sha256` for
+every array, `paper1/results/prediction_array_tarballs.sha256` for every tarball), so a
+downloaded copy can be verified with `paper1/code/verify_ledger.py`;
+`docs/REPRODUCTION_PAPER1.md` gives the layout. Every quoted result is derived from the
 committed JSON files, so `reproduce.sh` regenerates every number and figure without them.
 What the arrays are needed for is recomputing those committed JSON files from scratch, which
 is more than one table: ten scripts read them, and between them they produce `per_patient.json`
@@ -202,8 +207,10 @@ is more than one table: ten scripts read them, and between them they produce `pe
 every p-value in Paper 1 traces back to them), `strata.json`, the phenotype probes and their
 permutation nulls, `mask_scores.json`, `arm_noise.json`, `collapse_noise.json` and
 `fam_clean_scores.json`. A reader who wants to re-derive those rollups rather than take them
-from the repository needs the deposited arrays; a reader who wants to check that the reported
-numbers follow from the rollups does not.
+from the repository needs the arrays; a reader who wants to check that the reported numbers
+follow from the rollups does not. The external audit's per-arm predictions are small and are
+committed under `paper1/results/deepmeta/preds/`, with the pipeline that produced them under
+`paper1/code/deepmeta_audit/`.
 
 ## License
 

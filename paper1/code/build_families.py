@@ -365,7 +365,7 @@ def main():
     data_audit = {
         "n_reactions": n,
         "n_distinct_metabolite_ids": len(all_mets),
-        "compartment_suffix_counts": dict(suffixes),
+        "compartment_suffix_counts": dict(sorted(suffixes.items())),   # sorted, so the file is byte-stable across runs
         "n_metabolite_ids_without_underscore": int(sum(1 for m in all_mets if "_" not in m)),
         "n_metabolite_ids_with_non_single_letter_suffix": int(
             sum(1 for m in all_mets if "_" in m and not (len(m.rsplit("_", 1)[1]) == 1 and m.rsplit("_", 1)[1].isalpha()))),

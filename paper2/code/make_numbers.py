@@ -877,6 +877,62 @@ if _mr:
         else:
             cmd(pre + 'Digest', 'not recorded')
     cmd('mrRecorded', _nrec, 'int'); cmd('mrModels', len(_mr['models']), 'int')
+    cmd('mrRecordedWord', ['no', 'one', 'two', 'three'][_nrec] if _nrec < 4 else str(_nrec))
+    cmd('mrGeneratedDate', str(_mr.get('generated_utc', ''))[:10])
+
+# what the archives of the external collections record about their deployments
+# (deployment_records.py): per backbone, the served name, endpoint, launch identity, timestamps,
+# decoding settings and call counts, and the list of what was not recorded
+_dp = None
+for _cand in ('results/msi2/deployment_records.json', 'msi2/deployment_records.json'):
+    if os.path.exists(_cand): _dp = json.load(open(_cand)); break
+if _dp:
+    _DB = {'mistral-small-3.2-24b-instruct': 'Mi', 'gemma-4-31b-it': 'Ge', 'qwen3-8-27b': 'Qw'}
+    _tex = lambda s: s.replace('_', '\\_').replace('%', '\\%').replace('#', '\\#')
+    _ndp = 0
+    for _b in _dp['backbones']:
+        _t = _DB.get(_b['served_name'])
+        if not _t: continue
+        _ndp += 1; pre = 'xdp' + _t
+        cmd(pre + 'Served', _tex(_b['served_name']))
+        # breakable forms for narrow table columns: a break is allowed after every hyphen and slash
+        _brk = lambda t: _tex(t).replace('-', '-\\allowbreak{}').replace('/', '/\\allowbreak{}')
+        cmd(pre + 'ServedBrk', _brk(_b['served_name']))
+        cmd(pre + 'Host', 'loopback' if _b['host'] == 'loopback' else 'remote')
+        _u = _b['url'][0]
+        _host = _u.split('//', 1)[-1].split('/', 1)[0]           # host[:port] only; the path names the model
+        # a loopback address is printed; a remote host is left to the design records in the release
+        cmd(pre + 'Endpoint', _tex(_host) if _b['host'] == 'loopback' else 'URL in the design records')
+        _l = _b.get('launch') or {}
+        cmd(pre + 'HubId', _tex(_l['hub_id']) if _l.get('hub_id') else 'not held by us')
+        cmd(pre + 'HubIdBrk', _brk(_l['hub_id']) if _l.get('hub_id') else 'not held by us')
+        cmd(pre + 'Dtype', _l['dtype'] if _l.get('dtype') else 'not recorded')
+        cmd(pre + 'Template', _l.get('template') or 'n/a')
+        cmd(pre + 'Coll', _b['n_collections'], 'int')
+        cmd(pre + 'Calls', _b['calls_archived'], 'int')
+        cmd(pre + 'Failed', _b['failed_calls'], 'int')
+        cmd(pre + 'Retried', _b['calls_needing_retry'], 'int')
+        cmd(pre + 'First', _b['first_started_utc'].replace(' UTC', ''))
+        cmd(pre + 'Last', _b['last_started_utc'].replace(' UTC', ''))
+        cmd(pre + 'Minutes', _b['minutes_total'], '{:.0f}')
+        cmd(pre + 'Temp', _b['temperature'][0], '{:g}')
+        cmd(pre + 'MaxTok', _b['max_tokens'][0], 'int')
+        _len = _b['finish_reasons'].get('length', 0)
+        cmd(pre + 'LenStops', _len, 'int')
+        _echo = set(_b['echoed_names'].keys()) == {_b['served_name']}
+        cmd(pre + 'Echo', 'every reply' if _echo else 'not every reply')
+        cmd(pre + 'PromptTokMed', _b['prompt_tokens_median'], '{:.0f}')
+        cmd(pre + 'PromptTokMin', _b['prompt_tokens_min'], 'int')
+        cmd(pre + 'PromptTokMax', _b['prompt_tokens_max'], 'int')
+        cmd(pre + 'LatencyMed', _b['latency_s_median'], '{:.1f}')
+    cmd('xdpBackbones', _ndp, 'int')
+    _dates = sorted({_b['first_started_utc'][:10] for _b in _dp['backbones']} |
+                    {_b['last_started_utc'][:10] for _b in _dp['backbones']})
+    cmd('xdpDate', _dates[0] if len(_dates) == 1 else f'{_dates[0]} to {_dates[-1]}')
+    _allcalls = sum(_b['calls_archived'] for _b in _dp['backbones'])
+    _allfail = sum(_b['failed_calls'] for _b in _dp['backbones'])
+    _alllen = sum(_b['finish_reasons'].get('length', 0) for _b in _dp['backbones'])
+    cmd('xdpCallsAll', _allcalls, 'int'); cmd('xdpFailedAll', _allfail, 'int'); cmd('xdpLenStopsAll', _alllen, 'int')
 
 # the frozen percentile-only interface on the external cohorts (msi2_stats.py): the primary
 # confirmatory contrast and every secondary row
@@ -896,8 +952,16 @@ if _m2:
         # the interval and the null must belong to the same estimate as the point: the collected
         # donor arm where it exists, the cached reconstruction only where it does not
         _ci = r.get('own_minus_donor_direct_ci95') or r['own_minus_donor_ci95']
-        _np_ = r.get('own_minus_donor_direct_null_p')
-        _np_ = r['exch_null_p'] if _np_ is None else _np_
+        # the reported p is the Monte Carlo estimator (b + 1) / (B + 1) on the collected arm where it
+        # exists; the plain proportion is kept beside it, and neither reports zero exceedances as zero
+        _np_ = r.get('own_minus_donor_direct_null_p_mc')
+        if _np_ is None: _np_ = r.get('own_minus_donor_direct_null_p')
+        if _np_ is None: _np_ = r.get('exch_null_p_mc', r['exch_null_p'])
+        _b = r.get('own_minus_donor_direct_null_exceedances')
+        if _b is None: _b = r.get('exch_null_exceedances')
+        if _b is not None:
+            cmd(pre + 'NullExceed', int(_b), 'int')
+            cmd(pre + 'NullDraws', int(r.get('own_minus_donor_direct_null_draws') or r.get('exch_null_draws') or 0), 'int')
         cmd(pre + 'DiffLo', _ci[0], '{:+.4f}'); cmd(pre + 'DiffHi', _ci[1], '{:+.4f}')
         cmd(pre + 'DiffCachedLo', r['own_minus_donor_ci95'][0], '{:+.4f}')
         cmd(pre + 'DiffCachedHi', r['own_minus_donor_ci95'][1], '{:+.4f}')
@@ -942,12 +1006,47 @@ if _m2:
         if r.get('calibrated'):
             cmd(pre + 'CalBrier', r['calibrated']['brier']); cmd(pre + 'CalAuroc', r['calibrated']['auroc'])
             cmd(pre + 'CalLogloss', r['calibrated']['logloss'])
+            cmd(pre + 'CalFallback', 'yes' if r['calibrated'].get('constant_fallback') else 'no')
+    # the calibration maps themselves (secondary; fitted on the development cohort, applied unchanged
+    # externally; a slope at or below zero is replaced by the constant map, and both are recorded)
+    _nfb = 0; _ncal = 0
+    for _key, _c in (_m2.get('calibration') or {}).items():
+        _mdl, _cfg, _ep = _key.split('|')
+        b = _BB.get(_mdl); f = _CF.get(_cfg)
+        if not (b and f) or _ep != 'nonmsih': continue
+        pre = 'xCal' + b + f; _ncal += 1
+        cmd(pre + 'FitA', _c.get('fitted_a', _c['a']), '{:+.3f}'); cmd(pre + 'FitB', _c.get('fitted_b', _c['b']), '{:+.3f}')
+        cmd(pre + 'A', _c['a'], '{:+.3f}'); cmd(pre + 'B', _c['b'], '{:+.3f}')
+        _fb = bool(_c.get('constant_fallback'))
+        cmd(pre + 'Fallback', 'constant' if _fb else 'fitted'); _nfb += int(_fb)
+    if _ncal:
+        cmd('xCalMaps', _ncal, 'int'); cmd('xCalFallbackN', _nfb, 'int')
+        cmd('xCalMapsWord', ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'][_ncal] if _ncal < 10 else str(_ncal))
+        cmd('xCalFallbackWord', ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven'][_nfb] if _nfb < 8 else str(_nfb))
+        _fbk = [k for k, c in _m2['calibration'].items() if c.get('constant_fallback') and k.endswith('|nonmsih')]
+        _ord = {'qwen3-8-27b': 'first', 'gemma-4-31b-it': 'second', 'mistral-small-3.2-24b-instruct': 'third'}
+        _cfn = {'zero_shot': 'zero-shot', 'evidence': 'evidence-assisted', 'tool': 'tool-assisted'}
+        _parts = [f"the {_ord.get(k.split('|')[0], k.split('|')[0])} backbone's {_cfn.get(k.split('|')[1], k.split('|')[1])} map" for k in _fbk]
+        cmd('xCalFallbackList', (', '.join(_parts[:-1]) + ' and ' + _parts[-1]) if len(_parts) > 1 else (_parts[0] if _parts else 'none'))
     # the fixed design constants of the external inference, emitted so the text can name them
     cmd('xNullDraws', 10000, 'int'); cmd('xBootDrawsExt', 2000, 'int')
     cmd('xNullSeed', 13, 'int'); cmd('xBootSeed', 7, 'int'); cmd('xBootSeedDirect', 17, 'int')
     cmd('xNullSeedDirect', 23, 'int')
     cmd('planDate', '2026-09-10')
     cmd('xSchedSeedList', '11, 22, 33, 44, 55'); cmd('xSchedPrimarySeed', 11, 'int')
+    # the five-schedule spread per backbone and configuration across the three cohorts, so the text
+    # names every cohort's value rather than quoting one of them as a bound
+    _CN = {'tcga': 'the development cohort', 'gse39582': 'the first external cohort', 'gse13294': 'the second external cohort'}
+    _sd = {}
+    for run, r in _m2['runs'].items():
+        b = _BB.get(r.get('backbone')); f = _CF.get(r['config'])
+        if b and f and r.get('own_minus_donor_schedule_sd') is not None:
+            _sd.setdefault((b, f), {})[r['cohort']] = r['own_minus_donor_schedule_sd']
+    for (b, f), _v in _sd.items():
+        pre = 'x' + b + f
+        cmd(pre + 'SchedSDMax', max(_v.values()))
+        _parts = [f"{_v[c]:.4f} on {_CN[c]}" for c in ('tcga', 'gse39582', 'gse13294') if c in _v]
+        cmd(pre + 'SchedSDList', (', '.join(_parts[:-1]) + ' and ' + _parts[-1]) if len(_parts) > 1 else _parts[0])
     # the collection ledger: every configuration attempted, and what became of it
     if _m2.get('collections_attempted') is not None:
         cmd('xColAttempted', _m2['collections_attempted'], 'int')
@@ -991,6 +1090,15 @@ if _m2:
 
     _fr = _m2['frozen_reference']['msih_vs_nonmsih']
     cmd('xRefDevOof', _fr['auroc_oof']); cmd('xRefC', _fr['C'], '{:g}')
+    # the out-of-fold AUPRC and Brier score on the same out-of-fold prediction vector, so the
+    # development row of the external table describes one vector throughout; the in-sample refit
+    # applied to the development patients keeps its own name and is not put beside out-of-fold values
+    if isinstance(_fr.get('oof'), dict) and 'score' in _fr['oof']:
+        import numpy as _np
+        from sklearn.metrics import average_precision_score as _aps, brier_score_loss as _bsl
+        _yo = _np.array(_fr['oof']['y']); _so = _np.array(_fr['oof']['score'])
+        cmd('xRefDevOofAuprc', float(_aps(_yo, _so))); cmd('xRefDevOofBrier', float(_bsl(_yo, _np.clip(_so, 0, 1))))
+        cmd('xRefDevOofN', int(len(_yo)), 'int'); cmd('xRefDevOofNPos', int(_yo.sum()), 'int')
     cmd('xRefSingleId', _fr['single_feature']['reaction_id'].replace('_', '\\_'))
     cmd('xRefSingleAuroc', _fr['single_feature']['auroc_dev'])
     cmd('xRefPrev', 100.0 * _fr['prevalence'], '{:.1f}')

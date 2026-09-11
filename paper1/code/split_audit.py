@@ -190,7 +190,9 @@ def summarize(matched, rte, label):
 
 R = dict(_generated_by="code/split_audit.py", seed=SEED, n_reactions=N, rfolds=len(rfolds),
          split=("family_disjoint" if A.family_map else "random"), family_scheme=_scheme,
-         family_map=(os.path.relpath(A.family_map, ROOT) if A.family_map and A.family_map.startswith(ROOT) else A.family_map),
+         # recorded relative to the paper directory whatever form the command line used, so the file
+         # does not change with the working directory it was produced from
+         family_map=(os.path.relpath(os.path.abspath(A.family_map), ROOT) if A.family_map else None),
          source=source, aligned=os.path.relpath(aligned, ROOT) if aligned.startswith(ROOT) else aligned,
          checks=dict(n_active=int(y.sum()), n_expression_bearing=int(has.sum()),
                      heldout_sizes=[int(len(te)) for _, te in rfolds]),
@@ -258,7 +260,7 @@ print("wrote", os.path.relpath(A.out, ROOT) if os.path.abspath(A.out).startswith
 if A.matched_out:
     json.dump(dict(_generated_by="code/split_audit.py --matched_out", seed=SEED,
                    split=("family_disjoint" if A.family_map else "random"),
-                   family_map=(os.path.relpath(A.family_map, ROOT) if A.family_map and A.family_map.startswith(ROOT) else A.family_map),
+                   family_map=(os.path.relpath(os.path.abspath(A.family_map), ROOT) if A.family_map else None),
                    criteria="any of stoich, stoich_comp, gpr", folds=MATCHED),
               open(A.matched_out, "w"))
     print("wrote", A.matched_out)

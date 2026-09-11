@@ -5,7 +5,7 @@
  "rfolds": 3,
  "split": "family_disjoint",
  "family_scheme": "union",
- "family_map": "../data/families/families_union.json",
+ "family_map": "data/families/families_union.json",
  "source": {
   "labels": "paper2/rxn_context.npz",
   "availability": "paper2/rxn_context.npz [has]"

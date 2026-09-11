@@ -826,6 +826,13 @@ if os.path.exists(_LG):
     _lg = json.load(open(_LG))
     cmd("ledgerFamilies", _lg["n_families"], "int"); cmd("ledgerFiles", _lg["n_result_files"], "int")
     cmd("ledgerRecords", len(_lg["data_records"]), "int")
+    _pa = _lg.get("prediction_arrays")
+    if _pa:
+        cmd("ledgerArrays", _pa["n_arrays"], "int"); cmd("ledgerTarballs", len(_pa.get("tarballs", [])), "int")
+        # the tarball sizes are not in the ledger; the arrays' total is read from the checksum list's
+        # companion when present, else from the released tarballs' recorded total
+        _gib = _pa.get("total_bytes")
+        if _gib: cmd("ledgerArraysGB", _gib / 1e9, "{:.1f}")
 
 # ---- status -----------------------------------------------------------------
 St = R["status"]
@@ -952,6 +959,43 @@ if EA:
         cmd("dmLineOwnVsGeneMean", _d, "{:+.4f}"); cmd("dmLineOwnVsGeneMeanAbs", abs(_d))
         cmd("dmLineOwnVsGeneMeanDir", "above" if _d > 0 else "below")
     _sec = EA["secondary"]
+    # the smallest-effect verdicts domain by domain. The three domains do not give the same split of
+    # below-threshold and inconclusive readings, and the text must report the split each one gives
+    # rather than assert that they agree.
+    _DOMS = (("primary", EA["verdicts"]), ("Sec", _sec.get("explicit_only_verdicts")), ("Ter", _sec.get("zero_fill_verdicts")))
+    _AN = (("mean", "Mean"), ("within", "Within"), ("cross", "Cross"), ("within_expr", "ExprSwap"), ("within_graph", "GraphSwap"))
+    _dom_counts = {}
+    for _dnm, _dv in _DOMS:
+        if not _dv: continue
+        _b = [k for k, v in _dv.items() if v["label_lines"].startswith("no sample-specific")]
+        _i = [k for k, v in _dv.items() if v["label_lines"] == "inconclusive"]
+        _dom_counts[_dnm] = (len(_b), len(_i))
+        if _dnm != "primary":
+            for k, nm in _AN:
+                v = _dv.get(k)
+                if not v: continue
+                cmd("dm" + _dnm + "De" + nm, v["donor_effect"], "{:+.4f}")
+                cmd("dm" + _dnm + "De" + nm + "Lo", v["ci_lines"][0], "{:+.4f}"); cmd("dm" + _dnm + "De" + nm + "Hi", v["ci_lines"][1], "{:+.4f}")
+                cmd("dm" + _dnm + "De" + nm + "Read", "below" if v["label_lines"].startswith("no sample-specific") else "spans")
+            cmd("dm" + _dnm + "BelowN", len(_b), "int"); cmd("dm" + _dnm + "InconN", len(_i), "int")
+    for k, nm in _AN:
+        v = EA["verdicts"].get(k)
+        if v: cmd("dmDe" + nm + "Read", "below" if v["label_lines"].startswith("no sample-specific") else "spans")
+    if len(_dom_counts) == 3:
+        _same = len({v for v in _dom_counts.values()}) == 1
+        cmd("dmDomainsAgree", "yes" if _same else "no")
+        cmd("dmDomainSplitPhrase",
+            ("the three domains give the same split" if _same else
+             f"the split is not the same in every domain: {_word(_dom_counts['primary'][0])} below the threshold and "
+             f"{_word(_dom_counts['primary'][1])} inconclusive on the primary domain, "
+             f"{_word(_dom_counts['Sec'][0])} and {_word(_dom_counts['Sec'][1])} with the pairs explicit in every arm, "
+             f"{_word(_dom_counts['Ter'][0])} and {_word(_dom_counts['Ter'][1])} on the whole grid with absent nodes scored as not dependent"))
+        # what does hold in every domain: no lower endpoint above the threshold
+        _any_adv = any(v["label_lines"] == "advantage" for _, dv in _DOMS if dv for v in dv.values())
+        _min_lo = min(v["ci_lines"][0] for _, dv in _DOMS if dv for v in dv.values())
+        _max_lo = max(v["ci_lines"][0] for _, dv in _DOMS if dv for v in dv.values())
+        cmd("dmDomainsMaxLower", _max_lo, "{:+.4f}")
+        cmd("dmDomainsAnyAdvantage", "yes" if _any_adv else "no")
     cmd("dmSecOwn", _sec["explicit_only"]["own"]); cmd("dmSecRidge", _sec["explicit_only"]["baseline_ridge_expression"])
     cmd("dmTerOwn", _sec["zero_fill"]["own"]); cmd("dmTerLineOwn", _sec["zero_fill_per_line"]["own"])
     cmd("dmSecLineOwn", _sec["explicit_only_per_line"]["own"])
@@ -1030,44 +1074,112 @@ if EA:
          if not _incon else
          f"all {_word(len(_dl))} substitutions are inconclusive, with intervals that span 0.01"))
 
-# the diagnostic calibration simulation (P1-E3): the constructed (x-1)^2 counterexample and the
-# locked rule's error control on the disjoint test worlds
+# the diagnostic calibration simulation (P1-E3): input-substitution arms with the predictor refitted
+# on the substituted inputs, the matched selection rule for the learned model, exact sign-flip tests,
+# and the decision rule fixed on the development worlds and read on the disjoint test worlds
 DS = R.get("diagnostic_sim")
+def _bound(k, n, upper):
+    """one-sided 95% bound on a proportion k/n: the rule of three at the boundary, Wilson otherwise"""
+    if n == 0: return None
+    if upper and k == 0: return 3.0 / n
+    if (not upper) and k == n: return 1.0 - 3.0 / n
+    ph = k / n; z = 1.645
+    c = (ph + z*z/(2*n) + (1 if upper else -1) * z*((ph*(1-ph)/n + z*z/(4*n*n))**0.5)) / (1 + z*z/n)
+    return min(max(c, 0.0), 1.0)
 if DS:
-    cmd("dsimNDev", DS["params"]["n_dev"], "int"); cmd("dsimNTest", DS["params"]["n_test"], "int")
-    cmd("dsimP", DS["params"]["P"], "int"); cmd("dsimR", DS["params"]["R"], "int")
-    tc = DS["test_confusion"]["learned"]
-    cmd("dsimFP", tc["fp"], "int"); cmd("dsimFPR", 100.0 * tc["false_positive_rate"], "{:.1f}")
-    # a one-sided 95% upper bound on the false-positive rate: the rule of three when no false positive
-    # occurred, else the Wilson upper limit
-    _n = tc["n_null"]; _fp = tc["fp"]
-    if _fp == 0:
-        _ub = 3.0 / _n
-    else:
-        _ph = _fp / _n; _z = 1.645
-        _ub = (_ph + _z*_z/(2*_n) + _z*((_ph*(1-_ph)/_n + _z*_z/(4*_n*_n))**0.5)) / (1 + _z*_z/_n)
-    cmd("dsimFPRUpper", 100.0 * _ub, "{:.1f}")
-    cmd("dsimNNull", tc["n_null"], "int"); cmd("dsimNPos", tc["n_positive"], "int")
-    if tc.get("power") is not None:
-        cmd("dsimPower", 100.0 * tc["power"], "{:.0f}")
-        # the detection rate carries the same Monte Carlo uncertainty as the false-alarm rate: a
-        # one-sided 95% lower bound, by the rule of three when no positive world was missed and by
-        # the Wilson lower limit otherwise
-        _np, _tp = tc["n_positive"], tc["tp"]
-        if _tp == _np:
-            _lb = 1.0 - 3.0 / _np
-        else:
-            _ph = _tp / _np; _z = 1.645
-            _lb = (_ph + _z*_z/(2*_np) - _z*((_ph*(1-_ph)/_np + _z*_z/(4*_np*_np))**0.5)) / (1 + _z*_z/_np)
-        cmd("dsimPowerLower", 100.0 * _lb, "{:.1f}")
-    cmd("dsimOracleFPR", 100.0 * DS["test_confusion"]["oracle"]["false_positive_rate"], "{:.1f}")
+    pr = DS["params"]
+    cmd("dsimNDev", pr["n_dev"], "int"); cmd("dsimNTest", pr["n_test"], "int")
+    cmd("dsimP", pr["P"], "int"); cmd("dsimR", pr["R"], "int")
+    cmd("dsimPFolds", pr["pfolds"], "int"); cmd("dsimRFolds", pr["rfolds"], "int")
+    cmd("dsimCells", pr["pfolds"] * pr["rfolds"], "int")
+    if "inner_frac" in pr: cmd("dsimInnerFrac", 100.0 * pr["inner_frac"], "{:.0f}")
+    if "rounds" in pr:
+        _r = [str(x) for x in pr["rounds"]]
+        cmd("dsimRounds", (", ".join(_r[:-1]) + " and " + _r[-1]) if len(_r) > 1 else _r[0])
+    if "dev_seeds" in pr: cmd("dsimDevSeedLo", pr["dev_seeds"][0], "int"); cmd("dsimDevSeedHi", pr["dev_seeds"][1], "int")
+    if "test_seeds" in pr: cmd("dsimTestSeedLo", pr["test_seeds"][0], "int"); cmd("dsimTestSeedHi", pr["test_seeds"][1], "int")
+    # error control of the fixed rule on the test worlds, for the learned model and the references
+    for kind, pre in (("learned", "dsim"), ("oracle", "dsimOracle"), ("label_irrelevant", "dsimLirr"), ("blind", "dsimBlind")):
+        tc = DS["test_confusion"].get(kind)
+        if not tc: continue
+        cmd(pre + "FP", tc["fp"], "int"); cmd(pre + "TP", tc["tp"], "int")
+        cmd(pre + "NNull", tc["n_null"], "int"); cmd(pre + "NPos", tc["n_positive"], "int")
+        cmd(pre + "FPR", 100.0 * tc["false_positive_rate"], "{:.1f}")
+        _ub = _bound(tc["fp"], tc["n_null"], True)
+        if _ub is not None: cmd(pre + "FPRUpper", 100.0 * _ub, "{:.1f}")
+        if tc.get("power") is not None:
+            cmd(pre + "Power", 100.0 * tc["power"], "{:.0f}")
+            _lb = _bound(tc["tp"], tc["n_positive"], False)
+            if _lb is not None: cmd(pre + "PowerLower", 100.0 * _lb, "{:.1f}")
+    # the same rule on the development worlds, reported separately and never pooled with the test set
+    dc = DS["dev_confusion"]["learned"]
+    cmd("dsimDevFP", dc["fp"], "int"); cmd("dsimDevNNull", dc["n_null"], "int")
+    cmd("dsimDevTP", dc["tp"], "int"); cmd("dsimDevNPos", dc["n_positive"], "int")
+    if dc.get("power") is not None: cmd("dsimDevPower", 100.0 * dc["power"], "{:.0f}")
+    # the two kinds of null world, separately: the donor contrast is structurally zero under a shared
+    # label, so the informative null for it is the varying label with no signal
+    ns = (DS.get("test_null_subsets") or {}).get("learned") or {}
+    if "shared_label" in ns:
+        q = ns["shared_label"]
+        cmd("dsimSharedN", q["n"], "int"); cmd("dsimSharedFP", q["false_positives"], "int")
+        cmd("dsimSharedDonorZeroWorlds", q["worlds_with_all_donor_contrasts_zero"], "int")
+        # a floating-point residue is printed as such rather than rounded to a zero it is not
+        _m = q["max_abs_donor_contrast"]
+        cmd("dsimSharedMaxAbsDonor", ("$%s\\times10^{%d}$" % (("%.0e" % _m).split("e")[0], int(("%.0e" % _m).split("e")[1])))
+            if 0 < _m < 1e-6 else "%.4f" % _m)
+        cmd("dsimSharedMeanSig", q["mean_contrast_positive_sig"], "int")
+    if "varying_label_no_signal" in ns:
+        q = ns["varying_label_no_signal"]
+        cmd("dsimVaryN", q["n"], "int"); cmd("dsimVaryFP", q["false_positives"], "int")
+        cmd("dsimVaryMaxAbsDonor", q["max_abs_donor_contrast"], "{:.4f}")
+        cmd("dsimVaryMeanSig", q["mean_contrast_positive_sig"], "int")
+        _ub = _bound(q["false_positives"], q["n"], True)
+        if _ub is not None: cmd("dsimVaryFPRUpper", 100.0 * _ub, "{:.1f}")
+    for kind, pre in (("oracle", "dsimOracle"), ("label_irrelevant", "dsimLirr")):
+        q = (DS.get("test_null_subsets") or {}).get(kind) or {}
+        if "varying_label_no_signal" in q: cmd(pre + "VaryFP", q["varying_label_no_signal"]["false_positives"], "int")
+        if "shared_label" in q: cmd(pre + "SharedFP", q["shared_label"]["false_positives"], "int")
+    # world counts per configuration in each set
+    for tag, pre in (("test", "dsimTest"), ("dev", "dsimDev")):
+        wc = (DS.get("world_counts") or {}).get(tag)
+        if wc:
+            cmd(pre + "Shared", wc["shared"], "int"); cmd(pre + "VaryZero", wc["varying_alpha0"], "int")
+            cmd(pre + "VaryWeak", wc["varying_weak"], "int"); cmd(pre + "VaryStrong", wc["varying_strong"], "int")
+    # the boosting rounds the matched rule chose, pooled over the test worlds
+    rc = DS.get("rounds_chosen") or {}
+    if rc.get("own"):
+        _all = sorted({r for v in rc.values() for r in v})
+        cmd("dsimRoundsChosen", (", ".join(str(x) for x in _all[:-1]) + " and " + str(_all[-1])) if len(_all) > 1 else str(_all[0]))
     ce = DS["counterexample"]["constructed"]
     cmd("dsimCeOwn", ce["own_auroc"]); cmd("dsimCeMean", ce["cohort_mean_auroc"]); cmd("dsimCeDelta", ce["own_minus_mean"], "{:+.2f}")
     cmd("dsimCePairs", ce["n_pairs"], "int")
-    # the verdict rate the learned model reaches in each regime, for the decision-table sentence
+    if "generic_restricted_nonlinear_own_minus_mean_mean_test" in DS["counterexample"]:
+        cmd("dsimGenericRestrOwnMean", DS["counterexample"]["generic_restricted_nonlinear_own_minus_mean_mean_test"], "{:+.4f}")
+        cmd("dsimGenericBlindOwnMean", DS["counterexample"]["generic_blind_own_minus_mean_mean_test"], "{:+.4f}")
+    # the decision table on the test worlds: one row per regime, every predictor
+    _REG = {"shared label": "Shared", "alpha=0 (threshold": "VaryZero", "alpha=0.5": "Weak", "alpha>=1.5": "Strong"}
+    _KN = {"learned": "", "oracle": "Oracle", "label_irrelevant": "Lirr", "blind": "Blind", "restricted_nonlinear": "Restr"}
+    rows = []
     for row in DS["decision_table"]:
-        if row["regime"].startswith("shared label"): cmd("dsimSharedVerdict", 100.0 * row["learned"]["verdict_rate"], "{:.0f}"); cmd("dsimSharedOwnMean", row["learned"]["own_minus_mean"], "{:+.4f}")
-        elif "alpha>=1.5" in row["regime"]: cmd("dsimStrongVerdict", 100.0 * row["learned"]["verdict_rate"], "{:.0f}"); cmd("dsimStrongOwnMean", row["learned"]["own_minus_mean"], "{:+.4f}"); cmd("dsimStrongOracleVerdict", 100.0 * row["oracle"]["verdict_rate"], "{:.0f}")
+        reg = next((v for k, v in _REG.items() if k in row["regime"]), None)
+        if not reg: continue
+        cmd(f"dsim{reg}Worlds", row["n_worlds"], "int")
+        for kind, kp in _KN.items():
+            if kind not in row: continue
+            cmd(f"dsim{reg}{kp}OwnMean", row[kind]["own_minus_mean"], "{:+.4f}")
+            cmd(f"dsim{reg}{kp}OwnDonor", row[kind]["own_minus_donor"], "{:+.4f}")
+            cmd(f"dsim{reg}{kp}Verdict", 100.0 * row[kind]["verdict_rate"], "{:.0f}")
+        _lab = {"Shared": "shared label, no signal", "VaryZero": "varying label, no signal ($\\alpha=0$)",
+                "Weak": "varying label, weak signal ($\\alpha=0.5$)",
+                "Strong": "varying label, strong signal ($\\alpha\\geq 1.5$)"}[reg]
+        rows.append(f"{_lab} & {row['n_worlds']} & ${row['learned']['own_minus_mean']:+.4f}$ & ${row['learned']['own_minus_donor']:+.4f}$ & "
+                    f"{100*row['learned']['verdict_rate']:.0f} & {100*row['oracle']['verdict_rate']:.0f} & "
+                    f"{100*row['label_irrelevant']['verdict_rate']:.0f} & ${row['blind']['own_minus_mean']:+.4f}$ \\\\")
+    if rows: cmd("dsimRows", "\n".join(rows))
+    # and on the development worlds, kept apart
+    for row in DS.get("dev_decision_table") or []:
+        reg = next((v for k, v in _REG.items() if k in row["regime"]), None)
+        if reg: cmd(f"dsimDev{reg}Verdict", 100.0 * row["learned"]["verdict_rate"], "{:.0f}"); cmd(f"dsimDev{reg}Worlds", row["n_worlds"], "int")
 
 ROB = R.get("robustness", {})
 def arm_macros(pre, blk):

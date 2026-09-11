@@ -1,0 +1,74 @@
+unmasked: per-gene concordance matches brute force over 147 pairs
+masked (template-domain path): per-gene concordance matches brute force over 60 pairs
+bootstrap replicate 0: quadratic form matches the resampled multiset
+bootstrap replicate 1: quadratic form matches the resampled multiset
+bootstrap replicate 2: quadratic form matches the resampled multiset
+bootstrap replicate 3: quadratic form matches the resampled multiset
+bootstrap replicate 4: quadratic form matches the resampled multiset
+selfcheck OK
+== smoke cells: ACH-000337 ACH-000390 ACH-000395 ACH-000454 ACH-000463 ACH-000496
+[13:24:07] seed 11: 6 recipients, arms ['own', 'within'], sources ['own', 'within']
+[13:24:09] SEN[own]: 6 cells, 6 to build
+[13:24:13]   SEN[own] 3/6 (5s/batch)
+[13:24:14]   SEN[own] 6/6 (1s/batch)
+[13:24:15] diff_exp[own]: +6 rows -> 6 (nan 0, inf 0)
+[13:24:15] SEN[within]: 6 cells, 6 to build
+[13:24:16]   SEN[within] 3/6 (1s/batch)
+[13:24:18]   SEN[within] 6/6 (1s/batch)
+[13:24:18] diff_exp[within]: +6 rows -> 6 (nan 0, inf 0)
+[13:24:18] arm own: SEN own, exp own, 6 cells
+[13:24:18] arm within: SEN within, exp within, 6 cells
+[13:24:18] arm own: SEN own, exp own
+[13:24:18] own: 6 cells, 6 to run
+[13:24:43]   own 3/6 cells, 1278 rows, 25s/batch
+[13:25:05]   own 6/6 cells, 1294 rows, 22s/batch
+[13:25:05] own finished in 47s -> preds/smoke/preds_own.csv
+[13:25:05] arm within: SEN within, exp within
+[13:25:05] within: 6 cells, 6 to run
+[13:25:29]   within 3/6 cells, 1285 rows, 24s/batch
+[13:25:53]   within 6/6 cells, 1296 rows, 24s/batch
+[13:25:53] within finished in 48s -> preds/smoke/preds_within.csv
+[13:25:54] arms ['own', 'within']: 6 held-out lines x 770 panel genes
+[13:25:54] fitting baselines on the development lines
+[13:26:32] baseline held-out MSE: {"baseline_gene_mean": 0.04527283862997567, "baseline_lineage_mean": 0.04491578137943434, "baseline_ridge_expression": 0.0418198268158177, "baseline_random_forest": 0.04357997604680214}
+[13:26:32] analysis: primary_template_domain
+[13:26:33]   line bootstrap 2000 reps in 0s
+[13:26:34] analysis: secondary_explicit_only
+[13:26:35]   line bootstrap 2000 reps in 1s
+[13:26:35] analysis: tertiary_zero_fill_all
+[13:26:37]   line bootstrap 2000 reps in 1s
+[13:26:37] wrote smoke_results.json
+{
+ "analysis": "primary_template_domain",
+ "concordance": {
+  "own": 0.5023519992828369,
+  "within": 0.4949716627597809,
+  "baseline_gene_mean": 0.5,
+  "baseline_lineage_mean": 0.5,
+  "baseline_ridge_expression": 0.546309769153595,
+  "baseline_random_forest": 0.5440389513969421
+ },
+ "donor_effect": {
+  "within": 0.007380371913313866
+ },
+ "verdicts": {
+  "within": {
+   "donor_effect": 0.007380371913313866,
+   "ci_lines": [
+    -0.027382680773735044,
+    0.044357091188430786
+   ],
+   "ci_families": [
+    -0.014915802958421409,
+    0.031205207901075477
+   ],
+   "label_lines": "inconclusive",
+   "label_families": "inconclusive"
+  }
+ }
+}
+== smoke test finished in 152s; results in smoke_results.json
+
+real	2m32.204s
+user	2m48.801s
+sys	0m40.643s

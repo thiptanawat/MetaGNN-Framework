@@ -1,21 +1,40 @@
 # Reproducing Paper 1
 
-Paper 1 is "Holding out reactions as well as patients changes what transcriptome-based
-metabolic reaction scoring benchmarks measure". Its manuscript sources are withheld until
-publication; the table and figure numbers below are the manuscript's, and everything they
-rest on is here.
+Paper 1 is "Auditing patient-specific metabolic reaction scoring with joint holdouts and
+input-substitution controls". Its manuscript sources are withheld from this repository until
+publication; everything the manuscript's numbers rest on is here, and the map at the end of
+this guide gives, for every table and figure of the last built documents, the result files
+behind it and the script that produced them.
 
-Start at `reproduce.sh`, which runs the whole chain from the committed per-cell outputs and
-ends by writing `paper1/manuscript/numbers.tex`, the macro file that carries every number
-the paper quotes. The sections below say which script produced which of those numbers, in
-case you want to rerun one of them alone. Two things cannot be regenerated from this
-repository: the training cells themselves, which need the GPU host, and anything that reads
-the patient cohort, which is deposited separately.
+## Three levels of reproduction
 
-Labels and captions below are read from the current `.tex` sources, and table and figure
-numbers are the ones the current source produces in document order. The committed PDF and
-`.aux` file are rebuilt from that same source, so their numbers should agree; if the two
-ever diverge, the source order given here is the current one.
+The word "reproduce" covers three different things here, and this guide keeps them apart.
+
+1. **Regenerating the reported numbers from the committed results.** `bash reproduce.sh
+   analysis` reads the per-cell result files under `paper1/results/`, aggregates them into
+   `paper1/data/results_p1.json`, writes every quoted number as a LaTeX macro into
+   `paper1/manuscript/numbers.tex`, draws the figures, rebuilds the ledger of result-file
+   hashes and verifies it. No GPU, no network and no deposited data are needed, and the run
+   takes a few minutes on a laptop. This is the level a public checkout reproduces.
+2. **Recomputing the committed results from the raw predictions.** The per-cell scripts that
+   turn prediction arrays into result files (`per_patient_auc.py`, `mask_scores_p1.py`,
+   `fam_clean_scores.py`, `probe_preds.py`, `collapse_noise.py`, `arm_noise.py`,
+   `strata_eval.py`, `phenotype_probe.py`, `phenotype_probe_multi.py`, `phenotype_null.py`)
+   read the per-cell prediction arrays, which are released as assets of the tagged release
+   rather than committed (2.7 GB; see "The prediction arrays" below), and the cohort files of
+   the data deposit. For the external audit of a published predictor, the same level is
+   `paper1/code/deepmeta_audit/metrics.py` run on the committed per-arm prediction CSVs
+   under `paper1/results/deepmeta/preds/`, which needs the DepMap inputs that
+   `fetch_inputs.sh` retrieves.
+3. **Regenerating the predictions themselves.** The training cells need the GPU host and the
+   deposited cohort, and a retrained cell is a new realization of the same protocol, not a
+   bit-identical copy. The external audit's predictions need the authors' released checkpoint
+   and the DepMap inputs, and regenerate deterministically up to float32 reduction-order noise
+   (`paper1/code/deepmeta_audit/PROVENANCE.md`, deviation 6).
+
+The `paper` mode of `reproduce.sh` typesets the manuscripts after level 1. It needs the
+manuscript sources, which are not part of the public checkout, and says so and stops when they
+are absent; a public checkout runs the analysis mode only.
 
 ## Environment
 
@@ -25,10 +44,14 @@ One `requirements.txt` at the repository root covers both papers. For Paper 1:
 - NumPy 2.2.6, SciPy 1.15.3, scikit-learn 1.7.2, h5py 3.16.0 (pinned; a scikit-learn minor
   version can move a four-decimal logistic-regression AUROC)
 - PyTorch 2.10.0 (CUDA 12.8 build) and PyTorch Geometric 2.7.0, needed only for the GPU
-  experiment scripts; the analysis scripts that regenerate numbers, figures and this table
-  run on CPU
+  experiment scripts; the analysis scripts that regenerate numbers, figures and the map run
+  on CPU
 - pandas, joblib and matplotlib as lower bounds only (used by the analysis and figure
   scripts; no quoted number depends on their exact version)
+
+The external audit pipeline has its own environment note in
+`paper1/code/deepmeta_audit/RUN_FULL.md` (the versions it was run under, and two settings that
+are not optional).
 
 The Genomic Data Commons manifest behind the cohort was retrieved 9 March 2026; the eleven
 Human Metabolic Atlas reconstructions behind the activity label are cited to Robinson et al.
@@ -40,150 +63,133 @@ in the manuscript's reference list.
 bash reproduce.sh analysis
 ```
 
-run from the repository root, regenerates `paper1/manuscript/numbers.tex` and all five
-figures under `paper1/manuscript/figures/` from the per-cell result files already committed
-under `paper1/results/`. It calls, in order:
+runs, for Paper 1 and in this order,
 
 ```
+python3 paper1/code/split_audit.py
+python3 paper1/code/build_families.py
+python3 paper1/code/split_audit.py --family_map paper1/data/families/families_union.json \
+    --out paper1/results/split_audit_fam.json --matched_out paper1/results/fam_matched.json
 python3 paper1/code/inference_p1.py
 python3 paper1/code/build_results_p1.py
+python3 paper1/code/make_ledger.py
 python3 paper1/code/make_numbers_p1.py
 python3 paper1/code/make_figures_p1.py
 python3 paper1/code/check_macros_p1.py
+python3 paper1/code/verify_ledger.py
 ```
 
-`bash reproduce.sh paper` additionally typesets both papers' PDFs with `pdflatex` (three
-passes each). The last recorded end-to-end timing for `bash reproduce.sh paper` across both
-papers, with no GPU and no network access, was 7 minutes 54 seconds; the analysis-only steps
-above are a small fraction of that, dominated by loading and aggregating the per-cell JSON
-files.
+and then the Paper 2 chain, and finally `tools/check_release.py`. The ledger runs after the
+last script that writes a hashed file (`build_results_p1.py` writes `data/results_p1.json`)
+and before the macros that quote its counts, so nothing it hashes changes after it is written;
+`verify_ledger.py` then checks every hash against the file it names and fails the run on a
+mismatch, which is what catches a ledger committed beside newer results.
 
-The `paper` mode writes three documents for paper1: `manuscript/paper1.pdf`, the combined
-reading copy whose order is article, references, supplement; `manuscript/paper1_main.pdf`,
-the article alone, which is the manuscript file a journal takes; and
-`manuscript/paper1_supp.pdf`, the supplement alone, which is the supplementary file. The two
-separate documents resolve their cross-references into each other through the `xr` package,
-so section, table and figure numbers agree across all three; `tools/make_supp.py` generates
-their wrappers and the supplement's own short reference list from the same bodies, so none of
-the three can drift from the others.
+## The ledger and the release check
 
+`paper1/results/LEDGER.json` records, for every result family, the script that produced it,
+the settings the result files themselves carry, the checkpoint policy and endpoint, and the
+SHA-256 of every result and data file. It also records the checksums of the external audit's
+prediction CSVs and of the released prediction arrays (below). `python3
+paper1/code/verify_ledger.py` checks it; `python3 tools/check_release.py` checks the
+versioned required-artifact manifest in `tools/release_manifest.json` (every file and file
+set a public checkout must carry, with counts) and, when the manuscript sources are present,
+every file path the manuscripts name. A checkout without the sources gets the manifest check
+and an explicit note that the path check was skipped, not a pass.
 
-**One script `paper1/code/README.md` lists is not on this call list.** `split_audit.py`
-recomputes the near-duplicate held-out-reaction audit behind the split-audit macros and
-writes `paper1/results/split_audit.json`; `reproduce.sh` does not invoke it, so those macros
-are only regenerated if that file is already present (`build_results_p1.py` reads it if
-found and leaves the corresponding macros undefined otherwise). The file is present in this
-repository, so `bash reproduce.sh analysis` currently reproduces every split-audit number in
-the text; run `python3 paper1/code/split_audit.py` by hand first if that file is ever
-removed or needs to be regenerated.
+## The prediction arrays
 
-### The path-existence check
+Each training cell wrote one array beside its result file (`<cell>_preds.npz`: scores and
+uncertainties for the cell's test patients over all reactions, the held-out and fit masks and,
+for the synthetic cells, the per-patient labels). There are 299 of them, 2.7 GB in all, too
+large to commit. They are attached to the tagged release named in `release.json` as one
+tarball per result family (`preds_dh.tar`, `preds_ctrl.tar`, `preds_rewire.tar`,
+`preds_fam.tar`, `preds_ivr.tar`, `preds_synth.tar`, `preds_ht29.tar`, `preds_seedrep.tar`,
+`preds_rankgnn.tar`, `preds_permute.tar`), and their checksums are committed:
+`paper1/results/prediction_arrays.sha256` lists every array and
+`paper1/results/prediction_array_tarballs.sha256` every tarball. To use them, download the
+tarballs, check them against the tarball list, unpack them under
+`paper1/results/prediction_arrays/` (so that, for instance,
+`paper1/results/prediction_arrays/fam/gnn_B_mb0.0_p0_r0_ivr_fam_preds.npz` exists) and run
+`verify_ledger.py`, which checks every array it finds there against the array list. Every
+array was checked, before release, against the result file written beside it: the mean
+per-patient held-out AUROC recomputed from the array equals the figure the result file reports
+to the four decimals it carries, for all 299.
 
-```
-python3 tools/check_release.py
-```
+The scripts of level 2 read the arrays from the directory named by `P1_OUTD` (default
+`~/metagnn/out`); point it at `paper1/results/prediction_arrays` after unpacking.
 
-scans both manuscripts for every file path named in a `\texttt{...}` or `\path{...}` span
-and checks that it exists in the repository. As of this writing it reports every path found
-except the deposited-data files listed below (which are named in the text but are not meant
-to be in this repository) and one HuggingFace model identifier that contains a slash but is
-not a filesystem path (`Qwen/Qwen3.8-27B`, in Paper 2's bibliography). See the end of this
-document, and `docs/OVERLAP.md`, for the full current output.
+## The external audit of a published predictor
 
-## Table and figure map
+`paper1/code/deepmeta_audit/` is the pipeline behind the manuscript's external audit, as it
+ran: `manifest.py` (eligible lines, the held-out set, the gene panel, the gene families and
+the input checksums), `arms.py` (donor schedules), `build_arms.py` and `run_arms.py` (the
+inputs and predictions of the six arms), `native_repro.py` (the authors' own benchmark
+reproduced on the current inputs), `metrics.py` (every statistic) and `fetch_inputs.sh`
+(the retrieval recipe for the two pinned repositories, the DepMap 24Q4 files and the
+checkpoint, each verified by md5). `run_donor_arms.sh` is the launcher that produced the donor
+arms the results carry, kept unedited; `RUN_FULL.md` gives the stage-by-stage commands, costs
+and restart behavior, and `PROVENANCE.md` every fixed choice, every deviation from the
+specification, and the two corrections made after the first run (the held-out population and
+the donor constraint), with the superseded records kept beside the current ones.
 
-Every row below is produced by the same pipeline: `build_results_p1.py` aggregates the
-per-cell files under `paper1/results/` into `paper1/data/results_p1.json`,
-`make_numbers_p1.py` turns that into `paper1/manuscript/numbers.tex`, and the manuscript's
-tables are typeset directly from those macros (there is no separate generated file per
-table). The five figures are the exception: each is its own script-drawn file. The "input
-result files" column names the raw files a table or figure's numbers ultimately trace back
-to, one level up from `results_p1.json`; the "produced by" column names the experiment
-script that generated those raw files, for readers who want to regenerate the inputs
-themselves (which needs the GPU host and the deposited cohort; see below).
-
-The main text carries tables numbered 1 to 7 and figures numbered 1 to 4. Supplementary
-material follows the main text, numbered S1 onward, and carries four more tables (S1 to
-S4) and one more figure (S1).
-
-### Main text
-
-| Label (number) | Caption (lead) | Input result files | Produced by (experiment script) | Output | Macros file |
-|---|---|---|---|---|---|
-| `tab:practice` (Table 1) | What is held out in representative studies of reaction- and gene-level metabolic scoring | `results/cohort.json`, `results/param_counts.json`, and the manuscript's own description of cited prior work | `cohort_stats.py`, `count_params.py` | typeset from macros, no separate file | `numbers.tex` |
-| `tab:settings` (Table 2) | Target and deployment settings | none; a conceptual table of the three ways to split this benchmark, written directly into `body_methods.tex` and not read from any result file | n/a, not generated | typeset directly in the manuscript body, no separate file | n/a |
-| `tab:main` (Table 3) / `fig:memorization` (Fig. 1) | The same protocol, two axes / What the standard protocol rewards | `results/<model>_mb<lambda>_p<pfold>_r<rfold>.json` (the main grid, every architecture x patient-fold x reaction-fold cell) | `double_holdout.py` | table typeset from macros; figure at `manuscript/figures/fig_memorization.png` | `numbers.tex` |
-| `tab:naive` (Table 4) | Naive predictors on held-out reactions | `results/naive_baselines.json`, `results/naive_baselines2.json` | the fold-0 naive-baseline suites (superseded for the all-fold rows by `naive_baselines_allfolds.py`, below) | typeset from macros | `numbers.tex` |
-| `tab:ladder` (Table 5) / `fig:ladder` (Fig. 2) | The decomposition | `results/<model>_mb*_mean.json`, `results/<model>_mb*_zero.json` (input-substitution cells), `results/naive_allfolds.json` (reference rows), `results/ivr/*.json` (the same arms, and the indicator and permuted arms, selected on withheld reactions) | `double_holdout_ctrl.py --feature_mode {mean,zero,indicator,permute}`, `naive_baselines_allfolds.py` | table typeset from macros; figure at `manuscript/figures/fig_ladder.png` | `numbers.tex` |
-| `tab:collapse` (Table 6) | Collapsing predictions to their cohort mean | `results/collapse.json`, `results/collapse_noise.json` | `probe_preds.py`, `collapse_noise.py`, reading the main grid's saved per-patient predictions and uncertainties | typeset from macros | `numbers.tex` |
-| `fig:phenotype` (Fig. 3) | What the benchmark cannot see | `results/phenotype_probe.json`, `results/phenotype_probe_multi.json`, `results/phenotype_null_{msi,cin_vs_gs,sex,site}.json` | `phenotype_probe.py`, `phenotype_probe_multi.py`, `phenotype_null.py` | figure at `manuscript/figures/fig_phenotype.png` | `numbers.tex` |
-| `fig:personalization` (Fig. 4) | Ten related estimates of the individual-versus-cohort-mean contrast | the substitution ladder, `naive_allfolds.json`, `naive_pooled.json` and `inference.json` together (this figure spans several of the sources above) | `double_holdout_ctrl.py`, `naive_baselines_allfolds.py`, `pooled_baselines.py`, `inference_p1.py` | `manuscript/figures/fig_personalization.png` | `numbers.tex` |
-| `tab:synth` (Table 7) | The audit on a synthetic patient-varying target | `results/synth/*.json` (the graph model's unsubstituted and cohort-mean arms on the fold-0 cells, with all or half of the expression-bearing reactions given a patient-varying label, under both selection rules) | `double_holdout_ctrl.py --synth_target cohortmedian --synth_frac {1.0,0.5}` with and without `--inner_val_rxn 0.2` | typeset from macros (the section, its title and its closing sentence are guarded on the `syn*` macros and generated from the sign of the result) | `numbers.tex` |
-
-| `sec:family` (Section 4.6) / `fig:family` (Fig. 3) | The same question with biochemically related reactions withheld together | `data/families/families_union.json` (the label-blind family map), `results/fam/*.json` (the five arms refitted on family-disjoint folds), `results/naive_allfolds_fam.json` and `results/naive_pooled_fam.json` (the linear rows on the same folds), `results/split_audit_fam.json` and `results/fam_matched.json` (the audit rerun against those folds), `results/fam_clean_scores.json` (the arms rescored with the audited residue dropped), `results/naive_allfolds_rerun.json` (the nearest-family lookup row and the reproduction check) | `build_families.py` (the map), `family_folds.py` (the folds), `double_holdout_ctrl.py --family_map ... --family_tag fam --inner_val_rxn 0.2`, `naive_baselines_allfolds.py` and `pooled_baselines.py` with `P1_FAMILY_MAP` set, `split_audit.py --family_map ... --matched_out ...`, `fam_clean_scores.py` | prose and figure typeset from macros, all behind `\ifdefined\famPat` | `numbers.tex` |
-
-### Supplementary material
-
-| Label (number) | Caption (lead) | Input result files | Produced by (experiment script) | Output | Macros file |
-|---|---|---|---|---|---|
-| `tab:label` (Table S1) / `fig:provenance` (Fig. S1) | The eleven reconstructions behind the label / Where the inputs and the label come from | `data/labels_ht29.json` (both); `results/cohort.json` (figure only, for the network, gene and expression-mask counts) | `build_labels_ht29.py` (writes `labels_ht29.json`); `cohort_stats.py` (writes `cohort.json`); drawn by `make_figures_p1.py` | table typeset from one macro (`\lblRows`); figure at `manuscript/figures/fig_provenance.png` | `numbers.tex` |
-| `tab:strata` (Table S2) | Where the signal lives | `results/strata.json` | `strata_eval.py`, reading the main grid's saved per-reaction predictions | typeset from macros | `numbers.tex` |
-| `tab:phenotypes` (Table S3) | Four patient attributes the model never saw | `results/phenotype_probe.json`, `results/phenotype_probe_multi.json`, `results/phenotype_null_{msi,cin_vs_gs,sex,site}.json` | `phenotype_probe.py`, `phenotype_probe_multi.py`, `phenotype_null.py` | typeset from macros | `numbers.tex` |
-| `tab:robust` (Table S4) | The individual-versus-cohort-mean contrast under the upstream changes tried | `results/ht29/*.json`, `results/seedrep/*.json`, `results/rankgnn/*.json`, `results/permute/*.json`, `results/naive_allfolds_ht29.json`, `results/naive_allfolds_rank.json` | `double_holdout_ctrl.py --feature_mode permute`, `double_holdout_ctrl.py --train_seed S`, `double_holdout_ctrl.py --expr_transform rank`, runs against the HT29-only label, `naive_baselines_allfolds.py` with `P1_EXPR_TRANSFORM=rank` or the HT29 label | typeset from macros (rows guarded by `\ifdefined` are silently omitted when their cells are absent; all are present in the current build, see below) | `numbers.tex` |
-
-`inference_p1.py` also feeds the sign-flip and block-level significance figures quoted
-throughout the Results text (the `inf*` macros), from `results/per_patient.json` and
-(when present) `results/naive_pooled.json`; it is not tied to a single table or figure and
-is listed once here rather than repeated in every row that cites a p-value.
-
-| `supp:family` (Supp. Section) | The family-disjoint reaction split: construction, audit and two stability checks | same as `sec:family` | same as `sec:family` | prose and one table typeset from macros | `numbers.tex` |
-| the prediction ledger | What produced every result file, under which seed and policy | every file under `results/` and `data/` | `make_ledger.py` | `results/LEDGER.json`; the counts it reports are quoted in the back matter | `numbers.tex` |
+Its outputs are committed under `paper1/results/deepmeta/`: `manifest.json`,
+`schedules.json`, `native_repro.json`, `audit_results.json` and the two schedule-sensitivity
+files, the superseded `manifest_138.json`, `schedules_138.json` and
+`schedules_unconstrained.json`, `recompute_cells.json`, and the per-arm predictions themselves
+under `preds/seed11`, `preds/seed22` and `preds/seed33` (one CSV per arm: cell, gene, raw
+prediction). `metrics.py` recomputes the audit_results files from those CSVs and the DepMap
+gene-effect and expression files (level 2); `run_arms.py` recomputes the CSVs from the
+checkpoint (level 3).
 
 ## What needs the GPU host or the deposited cohort
 
-None of the following can be regenerated from this repository alone; each needs either the
-GPU host the original runs used, or the cohort deposited on Zenodo (`activity_pseudolabels.pt`,
-`clinical_metadata.tsv`, `11models.mat`, the raw expression and per-cell prediction arrays),
-or both. `tools/check_release.py` confirms these three data file names are absent from the
-repository, which is expected: they are deposited data, not released code.
+- **The training cells.** `double_holdout.py`, `double_holdout_ctrl.py` and
+  `double_holdout_rewire.py`, with `naive_baselines_allfolds.py`, `pooled_baselines.py`,
+  `structure_floor.py` and the alignment and label builders `build_aligned_recon3d.py` and
+  `build_labels_ht29.py`, are the experiment tier of `paper1/code/README.md`; every per-cell
+  result file is their output, and they need the GPU host and the deposited cohort.
+- **The deposited-only data files** named in the manuscript's methods: `activity_pseudolabels.pt`
+  (the label input before alignment), `clinical_metadata.tsv` and `11models.mat` (the eleven raw
+  reconstruction files the label union is built from). These are part of the Zenodo data deposit
+  referenced in `STUDIES.md`, not this repository.
+- **The prediction arrays**, released as tagged-release assets as described above, are needed
+  for level 2 and not for level 1.
 
-- **The entire "Experiments" tier** of `paper1/code/README.md`: `double_holdout.py`,
-  `double_holdout_ctrl.py`, `double_holdout_rewire.py`, `naive_baselines_allfolds.py`,
-  `pooled_baselines.py`, `structure_floor.py`, `per_patient_auc.py`, `probe_preds.py`,
-  `collapse_noise.py`, `strata_eval.py`, `phenotype_probe.py`, `phenotype_probe_multi.py`,
-  `phenotype_null.py`, and the alignment/label builders `build_aligned_recon3d.py` and
-  `build_labels_ht29.py`. Every result file in the table above is this tier's output; the
-  Analysis tier only reads what these scripts already wrote.
-- **The robustness cells are now complete.** `paper1/results/rankgnn/` and
-  `paper1/results/seedrep/` each hold six files, a real and a mean-substituted run on every
-  reaction fold of patient fold 0, behind the rank-normalization-replicate and
-  training-seed-replicate rows of `tab:robust`; `paper1/results/ht29/` holds nine files, all
-  three input conditions (real, mean, zero) on the same three reaction folds, behind its
-  tissue-matched-label rows. `paper1/results/permute/` still holds the wrong-patient
-  (individual-versus-cohort-mean consistency check) cells for fold 0 only, three files,
-  unchanged. Every macro these feed (`\robSeedPat`, `\robHtGnnPat`, `\robRkGnnPat`,
-  `\robIvrPat`, and the pooled-and-frozen variants) is defined in the committed
-  `numbers.tex`, so every row of `tab:robust` is present in the current build.
-  `build_results_p1.py` only ever reports the cells that exist, and every count of cells
-  behind an average is itself quoted in the manuscript.
-- **The deposited-only data files** named in `paper1/manuscript/body_methods.tex` and
-  cited by `paper1/code/README.md`: `activity_pseudolabels.pt` (the HT29-only label input
-  before alignment), `clinical_metadata.tsv` and `11models.mat` (the eleven raw Human
-  Metabolic Atlas reconstruction files the label union is built from). These are part of the
-  Zenodo data deposit referenced in `README.md`, not this repository.
-- **The per-cell prediction arrays** (`*_preds.npz`, roughly 375 MB total per `README.md`)
-  that back the per-patient AUROC and collapse computations are deposited alongside the
-  cohort and are not committed here; `per_patient.json`, `collapse.json` and the other
-  already-aggregated result files this repository does carry are what let `reproduce.sh
-  analysis` regenerate every quoted number without them.
+## Table and figure map
 
-## The path-existence check, in full
+<!-- map:start -->
+_Generated by `tools/make_repro_map.py` from the documents built on 2026-09-11; the manuscript sources are not in the public checkout, so this is the last built numbering._
 
-Running `python3 tools/check_release.py` against this repository currently reports 8 paths
-found and 4 missing, all four of them the deposited-data files above plus one non-path
-HuggingFace identifier: `11models.mat`, `activity_pseudolabels.pt` and `clinical_metadata.tsv`
-(all named in `paper1/manuscript/body_methods.tex`), and `Qwen/Qwen3.8-27B` (named in Paper
-2's bibliography, `paper2/manuscript/body_bib.tex`, and not a repository path at all).
-Everything else `\texttt{...}` or `\path{...}` names in either manuscript, including
-cross-references into the other paper's `code/` and `data/` directories, resolves to a file
-that exists in this repository today.
+### Main text
+
+| Label (number in the built document) | Caption lead | Input result files (relative to `paper1/`) | Produced by |
+|---|---|---|---|
+| `fig:family` (Figure 1) | The family-disjoint reaction split. | data/families/families_union.json, results/fam/*.json, results/fam_clean_scores.json | build_families.py, double_holdout_ctrl.py, fam_clean_scores.py; drawn by make_figures_p1.py |
+| `tab:ladder` (Table 1) | The decomposition. | results/*_mean.json, results/*_zero.json, results/ivr/*.json, results/naive_allfolds.json, results/naive_pooled.json | double_holdout_ctrl.py, naive_baselines_allfolds.py, pooled_baselines.py |
+| `fig:personalization` (Figure 2) | <estNWordCap> related estimates of the individual-versus-cohort-mean contrast. | the substitution ladder (results/ivr/*.json, results/fam/*.json), results/naive_allfolds*.json, results/naive_pooled*.json, results/inference.json and the robustness cells | double_holdout_ctrl.py, naive_baselines_allfolds.py, pooled_baselines.py, inference_p1.py; drawn by make_figures_p1.py |
+| `tab:deepmeta` (Table 2) | The same predictions read two ways. | results/deepmeta/audit_results.json, audit_results_seed22.json, audit_results_seed33.json, schedules.json, manifest.json | code/deepmeta_audit/metrics.py on results/deepmeta/preds/seed*/*.csv (run_donor_arms.sh is the launcher that ran) |
+
+### Supplementary material
+
+| Label (number in the built document) | Caption lead | Input result files (relative to `paper1/`) | Produced by |
+|---|---|---|---|
+| `fig:provenance` (Figure S1) | Where the inputs and the label come from. | data/labels_ht29.json, results/cohort.json | build_labels_ht29.py, cohort_stats.py; drawn by make_figures_p1.py |
+| `tab:label` (Table S1) | The eleven reconstructions behind the label. | data/labels_ht29.json | build_labels_ht29.py |
+| `fig:memorization` (Figure S2) | What the standard protocol rewards. | the main grid, as tab:main | double_holdout.py; drawn by make_figures_p1.py |
+| `tab:strata` (Table S2) | Where the signal lives. | results/strata.json | strata_eval.py |
+| `fig:ladder` (Figure S3) | The decomposition. | as tab:ladder | drawn by make_figures_p1.py |
+| `tab:phenotypes` (Table S3) | Four patient attributes the model never saw. | results/phenotype_probe.json, results/phenotype_probe_multi.json, results/phenotype_null_*.json | phenotype_probe.py, phenotype_probe_multi.py, phenotype_null.py |
+| `fig:phenotype` (Figure S4) | What the benchmark cannot see. | results/phenotype_probe.json, results/phenotype_null_*.json | phenotype_probe.py, phenotype_null.py; drawn by make_figures_p1.py |
+| `tab:masks` (Table S4) | Scores on the three reaction masks, both selection rules. | results/mask_scores.json | mask_scores_p1.py, on the released prediction arrays |
+| `tab:robust` (Table S5) | The individual-versus-cohort-mean contrast under the upstream changes tried. | results/ht29/*.json, results/seedrep/*.json, results/rankgnn/*.json, results/permute/*.json, results/naive_allfolds_ht29.json, results/naive_allfolds_rank.json | double_holdout_ctrl.py under each change, naive_baselines_allfolds.py |
+| `tab:family` (Table S6) | The five arms on both reaction splits. | results/fam/*.json, results/naive_allfolds_fam.json, results/naive_pooled_fam.json, results/split_audit_fam.json, results/fam_matched.json, results/fam_clean_scores.json | double_holdout_ctrl.py, naive_baselines_allfolds.py, pooled_baselines.py, split_audit.py, fam_clean_scores.py |
+| `tab:dsim` (Table S7) | The audit on the <dsimNTest> test worlds, by regime. | results/diagnostic_sim.json | diagnostic_sim.py |
+| `tab:domains` (Table S8) | The donor-effect readings, domain by domain. | results/deepmeta/audit_results.json | code/deepmeta_audit/metrics.py |
+| `tab:settings` (Table S9) | Target and deployment settings. | none: a conceptual table written into the methods | not generated |
+| `tab:practice` (Table S10) | What is held out in representative studies of reaction- and gene-level metabolic scoring. | results/cohort.json, results/param_counts.json | cohort_stats.py, count_params.py |
+| `tab:main` (Table S11) | The same protocol, two axes. | results/<model>_mb<lambda>_p<pf>_r<rf>.json (the main grid) | double_holdout.py |
+| `tab:collapse` (Table S12) | Collapsing predictions to their cohort mean. | results/collapse.json, results/collapse_noise.json, results/arm_noise.json | compare_ctrl.py, collapse_noise.py, arm_noise.py |
+| `tab:naive` (Table S13) | Naive predictors on held-out reactions. | results/naive_baselines.json, results/naive_baselines2.json | naive_baselines.py, naive_baselines2.py |
+| `tab:synth` (Table S14) | The audit on a synthetic patient-varying target. | results/synth/*.json | double_holdout_ctrl.py with the synthetic target options |
+<!-- map:end -->

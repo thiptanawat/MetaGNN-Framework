@@ -87,7 +87,7 @@ SCRIPTS = [
                      checkpoint="not applicable", endpoint="CPU",
                      target="synthetic targets whose sample-specific signal is known by construction")),
     dict(family="external audit of a published predictor", pattern=r".*\.json$", where="deepmeta",
-         runner="the released model as published, driven by the audit wrapper; see Supplementary Section 16",
+         runner="the authors' released checkpoint, unmodified, driven by the pipeline in code/deepmeta_audit/ (manifest.py, arms.py, build_arms.py, run_arms.py, native_repro.py, metrics.py; run_donor_arms.sh is the launcher that ran)",
          policy=dict(selection="not applicable: the released checkpoint is used unchanged",
                      checkpoint="the authors' released checkpoint, unmodified", endpoint="CPU or GPU, single process",
                      target="measured CRISPR gene effect, DepMap 24Q4 Chronos")),
@@ -165,24 +165,64 @@ for spec in SCRIPTS:
                          settings={k: collect(v) for k, v in sorted(fields.items()) if collect(v) is not None},
                          files=recs))
 
+# the per-arm predictions of the external audit are CSV, not JSON, so the family loop above does not
+# see them; they are hashed here so the audit's summaries can be traced to the predictions they score
+dm_preds = [dict(file=os.path.relpath(p, HERE), bytes=os.path.getsize(p), sha256=sha256(p))
+            for p in sorted(glob.glob(os.path.join(RES, "deepmeta", "preds", "*", "*.csv")))]
+
 # the data records the whole chain rests on
 records = []
 for p in sorted(glob.glob(os.path.join(DATA, "*")) + glob.glob(os.path.join(DATA, "families", "*"))):
     if os.path.isfile(p):
         records.append(dict(file=os.path.relpath(p, HERE), bytes=os.path.getsize(p), sha256=sha256(p)))
 
+# the ledger itself and the release-asset description are not result files
 unassigned = sorted(os.path.relpath(p, HERE) for p in glob.glob(os.path.join(RES, "**", "*.json"), recursive=True)
-                    if p not in assigned and os.path.basename(p) != "LEDGER.json")
+                    if p not in assigned and os.path.basename(p) not in ("LEDGER.json", "prediction_arrays.json"))
+
+# the per-cell prediction arrays are released as tarballs attached to the tagged release rather than
+# committed (2.7 GB); their per-array and per-tarball SHA-256 lists are committed here and are what
+# verify_ledger.py checks a downloaded copy against
+PA_LIST = os.path.join(RES, "prediction_arrays.sha256")
+PA_TARS = os.path.join(RES, "prediction_array_tarballs.sha256")
+prediction_arrays = None
+if os.path.exists(PA_LIST):
+    _arr = [ln.split() for ln in open(PA_LIST) if ln.strip()]
+    _tar = [ln.split() for ln in open(PA_TARS) if ln.strip()] if os.path.exists(PA_TARS) else []
+    _fams = {}
+    for _h, _rel in _arr: _fams[_rel.split("/")[0]] = _fams.get(_rel.split("/")[0], 0) + 1
+    PA_JSON = os.path.join(RES, "prediction_arrays.json")
+    _pj = json.load(open(PA_JSON)) if os.path.exists(PA_JSON) else {}
+    if _pj.get("tarballs"):
+        _tar = [(t["sha256"], t["file"]) for t in _pj["tarballs"]]
+    prediction_arrays = dict(
+        total_bytes=_pj.get("arrays_total_bytes"), tarballs_total_bytes=_pj.get("tarballs_total_bytes"),
+        note=("one array per training cell (scores, uncertainties, the held-out and fit masks and, for "
+              "the synthetic cells, the labels), read by the per-patient, mask, clean-subset, "
+              "phenotype and collapse scripts; released as one tarball per result family, attached "
+              "to the tagged release, and verified by code/verify_ledger.py against these lists"),
+        n_arrays=len(_arr), arrays_by_family=_fams, checksums=os.path.relpath(PA_LIST, HERE),
+        tarballs=[dict(file=t, sha256=h, **({k: v for k, v in next((x for x in _pj.get("tarballs", []) if x["file"] == t), {}).items() if k in ("bytes", "family", "n_arrays")}))
+                  for h, t in _tar],
+        tarball_checksums=os.path.relpath(PA_TARS, HERE),
+        local_root="results/prediction_arrays",
+        hosted_at="the assets of the tagged release named in the repository's release.json")
 
 L = dict(
     _generated_by="code/make_ledger.py",
     note=("One row per result family behind Paper 1: what produced it, the settings its own output "
           "records, the checkpoint policy and endpoint, and a SHA-256 of every file. Fields a result "
           "file does not carry are absent rather than guessed. The prediction arrays the mask and "
-          "clean-subset rescorings read are not in this repository; they are deposited separately and "
-          "the scripts that read them are named above."),
+          "clean-subset rescorings read are not committed; they are attached to the tagged release, "
+          "and prediction_arrays below records their checksums."),
     n_families=len(families), n_result_files=sum(f["n_files"] for f in families),
     data_records=records, families=families,
+    external_audit_predictions=dict(
+        note=("per-arm predictions of the external audit, one CSV per arm and donor schedule "
+              "(cell, gene, raw prediction), scored by code/deepmeta_audit/metrics.py into the "
+              "audit_results files of the family above"),
+        n_files=len(dm_preds), files=dm_preds),
+    prediction_arrays=prediction_arrays,
     result_files_not_in_any_family=unassigned)
 json.dump(L, open(OUT, "w"), indent=1)
 assert not unassigned, ("every result file must belong to a family in the ledger; these do not: "
