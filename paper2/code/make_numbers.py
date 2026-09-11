@@ -813,7 +813,11 @@ for _cand in (os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__fil
     if os.path.exists(_cand):
         _rel = json.load(open(_cand))
         for _k, _m in (('tag', 'releaseTag'), ('version_doi_code', 'releaseDoiCode'), ('version_doi_data', 'releaseDoiData'), ('commit', 'releaseCommit')):
-            if _rel.get(_k): cmd(_m, str(_rel[_k]).replace('_', '\\_'))
+            if _rel.get(_k):
+                _v = str(_rel[_k])
+                # twelve hex digits identify the commit without printing a wall of hash
+                if _m == 'releaseCommit' and len(_v) > 12: _v = _v[:12]
+                cmd(_m, _v.replace('_', '\\_'))
         break
 
 # the crossed bootstrap at 10,000 draws under three recorded seeds (crossed_boot_10k.py): the

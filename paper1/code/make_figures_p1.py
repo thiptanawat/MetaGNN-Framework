@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MS = "manuscript" if os.path.isdir(os.path.join(HERE, "manuscript")) else "ms"
+MS = "ms" if os.path.isdir(os.path.join(HERE, "ms")) else "manuscript"
 FIG = os.path.join(HERE, MS, "figures"); os.makedirs(FIG, exist_ok=True)
 
 # One palette across all four figures, keyed to the predictor family rather than to the panel, so

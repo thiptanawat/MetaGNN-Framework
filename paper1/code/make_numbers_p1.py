@@ -10,7 +10,7 @@ import json, os, math, statistics as st
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 R = json.load(open(os.path.join(HERE, "data", "results_p1.json")))
-MS = "manuscript" if os.path.isdir(os.path.join(HERE, "manuscript")) else "ms"
+MS = "ms" if os.path.isdir(os.path.join(HERE, "ms")) else "manuscript"
 L = []
 
 def pfmt(p):
@@ -1699,7 +1699,12 @@ for _cand in (os.path.join(HERE, "..", "release.json"), os.path.join(HERE, "..",
     if os.path.exists(_cand):
         _rel = json.load(open(_cand))
         for _k, _m in (("tag", "releaseTag"), ("version_doi_code", "releaseDoiCode"), ("version_doi_data", "releaseDoiData"), ("commit", "releaseCommit")):
-            if _rel.get(_k): cmd(_m, str(_rel[_k]).replace("_", "\\_"))
+            if _rel.get(_k):
+                _v = str(_rel[_k])
+                # a commit is quoted to identify a state, not to be retyped; twelve hex digits
+                # are unambiguous in a repository of this size and read as a word rather than a wall
+                if _m == "releaseCommit" and len(_v) > 12: _v = _v[:12]
+                cmd(_m, _v.replace("_", "\\_"))
         break
 out = os.path.join(HERE, MS, "numbers.tex")
 # a checkout that carries the analysis without the manuscript sources has no such directory;

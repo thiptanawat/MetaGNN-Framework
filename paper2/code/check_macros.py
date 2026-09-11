@@ -8,7 +8,13 @@ resolves those guards against the macros numbers.tex currently defines and then 
 branch that LaTeX would typeset, so a macro that is used only inside a guard that is off is not
 reported, while a macro missing from an active branch is."""
 import re, glob, os, sys
-MS = 'manuscript' if os.path.isdir('manuscript') else 'ms'
+MS = 'ms' if os.path.isdir('ms') else 'manuscript'
+# a checkout that carries the analysis without the manuscript sources has nothing to check
+# against; say so rather than pass silently on an empty set of files
+if not glob.glob(f'{MS}/body_*.tex'):
+    print('no manuscript sources in this checkout: the macro file is written, but there is '
+          'no text to check it against. This is the expected state of a code-and-results release.')
+    raise SystemExit(0)
 defined = set(re.findall(r'\\newcommand\{\\([A-Za-z]+)\}', open(f'{MS}/numbers.tex').read()))
 
 TOK = re.compile(r'\\ifdefined\\([A-Za-z]+)|\\else\b|\\fi\b')

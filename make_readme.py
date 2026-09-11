@@ -229,11 +229,17 @@ L += ["",
       f"returning one probability for {100 * M['arms']['own']['modal_share']:.1f} % of patients under {M['reason_distinct']} distinct rationales.",
       ""]
 
-readme = os.path.join(HERE, "README.md")
+# the generated tables live in whichever front-page file carries the markers: README.md in a
+# checkout of the studies alone, STUDIES.md where the studies share a repository with the scorer
+readme = next((q for q in (os.path.join(HERE, "README.md"), os.path.join(HERE, "STUDIES.md"))
+               if os.path.exists(q) and "<!-- generated:start -->" in open(q).read()), None)
+if readme is None:
+    raise SystemExit("no front-page file carries the generated-section markers "
+                     "(looked in README.md and STUDIES.md)")
 txt = open(readme).read()
 start, end = "<!-- generated:start -->", "<!-- generated:end -->"
 if start not in txt:
     raise SystemExit("README.md lacks the generated-section markers")
 new = txt[: txt.index(start) + len(start)] + "\n" + "\n".join(L) + txt[txt.index(end):]
 open(readme, "w").write(new)
-print("README.md regenerated:", len(L), "lines")
+print(os.path.basename(readme), "regenerated:", len(L), "lines")

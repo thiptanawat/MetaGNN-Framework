@@ -7,7 +7,12 @@ appear in the text through a macro, and a macro only exists if a run produced it
 import re, os, sys, glob
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MS = os.path.join(HERE, "manuscript" if os.path.isdir(os.path.join(HERE, "manuscript")) else "ms")
+MS = os.path.join(HERE, "ms" if os.path.isdir(os.path.join(HERE, "ms")) else "manuscript")
+# a checkout that carries the analysis without the manuscript sources has nothing to check
+# against; say so rather than pass silently on an empty set of files
+if not glob.glob(os.path.join(MS, "body_*.tex")):
+    print("no manuscript sources in this checkout: the macro file is written, but there is\nno text to check it against. This is the expected state of a code-and-results release.")
+    raise SystemExit(0)
 defs = set(re.findall(r"\\newcommand\{\\(\w+)\}", open(os.path.join(MS, "numbers.tex")).read()))
 
 def strip_undefined_blocks(txt):
