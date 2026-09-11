@@ -61,7 +61,7 @@ L += [f"| graph model, cohort-mean expression | {f4(LB['gnn_cohort_mean'])} | to
       f"| graph model, patient's own expression | {f4(LB['gnn_real'])} | everything |", ""]
 
 lin = INF["lin_tuned_structure_only_vs_expr_cohortmean_lr"]
-L += ["Three findings survive a matched comparison.", "",
+L += ["A matched comparison leaves three things standing.", "",
       "**The reference network predicts these labels far better than the transcriptome does, and a linear "
       "model on it comes close to the graph model.** With both sides fitted the same way on the same cells, the "
       f"network features lead the fitted expression baseline by {s4(LB['structure_over_expression_fitted'])} (topology alone "
