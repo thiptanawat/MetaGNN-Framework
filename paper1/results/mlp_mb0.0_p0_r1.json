@@ -1,0 +1,20 @@
+{
+ "model": "mlp",
+ "lambda_mb": 0.0,
+ "pfold": 0,
+ "rfold": 1,
+ "n_train": 424,
+ "n_test": 125,
+ "n_heldout_rxn": 3533,
+ "epochs": 31,
+ "best_val": 0.6508,
+ "minutes": 0.7,
+ "heldout_AUROC_perpatient": 0.6488,
+ "heldout_AUROC_pooled": 0.649,
+ "heldout_exprbearing_AUROC": 0.6045,
+ "trainrxn_AUROC_perpatient": 0.652,
+ "baseline_rawexpr": 0.6308,
+ "baseline_indicator": 0.6085,
+ "rho": 7.2703,
+ "interpatient_r_median": 0.9004
+}

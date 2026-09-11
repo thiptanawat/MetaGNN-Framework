@@ -1,0 +1,22 @@
+{
+ "model": "gnn_B",
+ "lambda_mb": 0.0,
+ "pfold": 0,
+ "rfold": 2,
+ "n_train": 424,
+ "n_test": 125,
+ "n_heldout_rxn": 3533,
+ "epochs": 80,
+ "best_val": 0.9986,
+ "minutes": 201.7,
+ "heldout_AUROC_perpatient": 0.6238,
+ "heldout_AUROC_pooled": 0.6238,
+ "heldout_exprbearing_AUROC": 0.5549,
+ "trainrxn_AUROC_perpatient": 0.9986,
+ "baseline_rawexpr": 0.638,
+ "baseline_indicator": 0.6085,
+ "rho": 2.0263,
+ "interpatient_r_median": 0.9833,
+ "rewired": true,
+ "rewire_seed": 7
+}

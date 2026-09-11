@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: If you use this software or the checks it implements, please cite it.
+title: metabench and the benchmark-validity studies for metabolic reaction activity scoring
+abstract: >-
+  Reusable checks for benchmarks whose labels are shared across samples, together with
+  the code and results of two studies that apply them to transcriptome-based metabolic
+  reaction activity scoring on Recon3D.
+type: software
+authors:
+  - family-names: Phongwattana
+    given-names: Thiptanawat
+    affiliation: School of Information Technology, King Mongkut's University of Technology Thonburi
+  - family-names: Chan
+    given-names: Jonathan H.
+    affiliation: School of Information Technology, King Mongkut's University of Technology Thonburi
+license: MIT
+repository-code: https://github.com/thiptanawat/MetaGNN-Framework
+keywords:
+  - benchmark validity
+  - genome-scale metabolic models
+  - graph neural networks
+  - data leakage
+  - cross-validation

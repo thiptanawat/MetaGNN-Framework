@@ -1,0 +1,895 @@
+{
+ "_generated_by": "code/collection_manifest.py",
+ "note": "Per collection, the provenance fields its own design.json carries. `absent` names the fields it does not carry; `defaults_not_recorded` gives the collector's default for an absent field, which is a property of the code and not a record of the run.",
+ "n_collections": 45,
+ "fields": [
+  "url",
+  "model",
+  "max_tokens",
+  "temperature",
+  "seed",
+  "donor_seed",
+  "started_at",
+  "interleave",
+  "full_archive",
+  "plain_chat",
+  "minutes"
+ ],
+ "n_recording_field": {
+  "url": 35,
+  "model": 45,
+  "max_tokens": 35,
+  "temperature": 28,
+  "seed": 25,
+  "donor_seed": 25,
+  "started_at": 35,
+  "interleave": 31,
+  "full_archive": 35,
+  "plain_chat": 35,
+  "minutes": 45
+ },
+ "collections": {
+  "det_patient": {
+   "records": {
+    "model": "qwen3-8-27b",
+    "minutes": 3.6
+   },
+   "absent": [
+    "url",
+    "max_tokens",
+    "temperature",
+    "seed",
+    "donor_seed",
+    "started_at",
+    "interleave",
+    "full_archive",
+    "plain_chat"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "fmt_cat": {
+   "records": {
+    "model": "qwen3-8-27b",
+    "minutes": 22.5
+   },
+   "absent": [
+    "url",
+    "max_tokens",
+    "temperature",
+    "seed",
+    "donor_seed",
+    "started_at",
+    "interleave",
+    "full_archive",
+    "plain_chat"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "fmt_pct": {
+   "records": {
+    "model": "qwen3-8-27b",
+    "minutes": 19.9
+   },
+   "absent": [
+    "url",
+    "max_tokens",
+    "temperature",
+    "seed",
+    "donor_seed",
+    "started_at",
+    "interleave",
+    "full_archive",
+    "plain_chat"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "msi": {
+   "records": {
+    "model": "qwen3-8-27b",
+    "minutes": 10.7
+   },
+   "absent": [
+    "url",
+    "max_tokens",
+    "temperature",
+    "seed",
+    "donor_seed",
+    "started_at",
+    "interleave",
+    "full_archive",
+    "plain_chat"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "msi2/gse13294_gemma-4-31b-it_evidence_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8001/v1/chat/completions",
+    "model": "gemma-4-31b-it",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T23:04:05+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 3.0
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse13294_gemma-4-31b-it_zero_shot_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8001/v1/chat/completions",
+    "model": "gemma-4-31b-it",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:42:56+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 1.6
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse13294_mistral-small-3.2-24b-instruct_evidence_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:22:17+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 1.3
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse13294_mistral-small-3.2-24b-instruct_tool_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:29:18+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 0.9
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse13294_mistral-small-3.2-24b-instruct_zero_shot_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:12:28+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 0.7
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse13294_qwen_evidence_s11": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T14:25:23+0000",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 3.8
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse13294_qwen_zero_shot_s11": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T13:57:24+0000",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 3.3
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse39582_gemma-4-31b-it_evidence_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8001/v1/chat/completions",
+    "model": "gemma-4-31b-it",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:55:06+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 9.0
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse39582_gemma-4-31b-it_zero_shot_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8001/v1/chat/completions",
+    "model": "gemma-4-31b-it",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:38:21+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 4.6
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse39582_mistral-small-3.2-24b-instruct_evidence_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:18:09+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 4.1
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse39582_mistral-small-3.2-24b-instruct_tool_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:26:40+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 2.6
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse39582_mistral-small-3.2-24b-instruct_zero_shot_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:10:16+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 2.2
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse39582_qwen_evidence_s11": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T14:14:12+0000",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 11.2
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/gse39582_qwen_zero_shot_s11": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T13:47:15+0000",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 10.1
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/tcga_gemma-4-31b-it_evidence_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8001/v1/chat/completions",
+    "model": "gemma-4-31b-it",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:44:32+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 10.6
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/tcga_gemma-4-31b-it_zero_shot_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8001/v1/chat/completions",
+    "model": "gemma-4-31b-it",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:32:58+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 5.4
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/tcga_mistral-small-3.2-24b-instruct_evidence_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:13:11+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 5.0
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/tcga_mistral-small-3.2-24b-instruct_tool_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:23:34+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 3.1
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/tcga_mistral-small-3.2-24b-instruct_zero_shot_s11": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T22:07:42+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 2.6
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/tcga_qwen_evidence_s11": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T14:00:41+0000",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 13.5
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi2/tcga_qwen_zero_shot_s11": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 11,
+    "started_at": "2026-09-10T13:35:59+0000",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 11.2
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "msi_b2": {
+   "records": {
+    "model": "gemma-4-31b-it",
+    "minutes": 6.0
+   },
+   "absent": [
+    "url",
+    "max_tokens",
+    "temperature",
+    "seed",
+    "donor_seed",
+    "started_at",
+    "interleave",
+    "full_archive",
+    "plain_chat"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "msi_b2il": {
+   "records": {
+    "url": "http://127.0.0.1:8001/v1/chat/completions",
+    "model": "gemma-4-31b-it",
+    "max_tokens": 160,
+    "started_at": "2026-09-06T10:58:27+0700",
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 6.0
+   },
+   "absent": [
+    "temperature",
+    "seed",
+    "donor_seed",
+    "interleave"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "msi_b2int": {
+   "records": {
+    "url": "http://127.0.0.1:8001/v1/chat/completions",
+    "model": "gemma-4-31b-it",
+    "max_tokens": 160,
+    "started_at": "2026-09-07T02:03:23+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 6.1
+   },
+   "absent": [
+    "temperature",
+    "seed",
+    "donor_seed"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "msi_b3": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "started_at": "2026-09-06T10:33:40+0700",
+    "full_archive": false,
+    "plain_chat": true,
+    "minutes": 2.9
+   },
+   "absent": [
+    "temperature",
+    "seed",
+    "donor_seed",
+    "interleave"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "msi_b3il": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "started_at": "2026-09-06T13:35:12+0700",
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 2.9
+   },
+   "absent": [
+    "temperature",
+    "seed",
+    "donor_seed",
+    "interleave"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "msi_b3int": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "started_at": "2026-09-07T02:10:55+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 2.9
+   },
+   "absent": [
+    "temperature",
+    "seed",
+    "donor_seed"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "msi_il": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "started_at": "2026-09-06T11:05:00+0700",
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 9.4
+   },
+   "absent": [
+    "temperature",
+    "seed",
+    "donor_seed",
+    "interleave"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "msi_int": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "started_at": "2026-09-07T01:52:55+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 9.3
+   },
+   "absent": [
+    "temperature",
+    "seed",
+    "donor_seed"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "pilot": {
+   "records": {
+    "model": "qwen3-8-27b",
+    "minutes": 37.2
+   },
+   "absent": [
+    "url",
+    "max_tokens",
+    "temperature",
+    "seed",
+    "donor_seed",
+    "started_at",
+    "interleave",
+    "full_archive",
+    "plain_chat"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "repr": {
+   "records": {
+    "model": "qwen3-8-27b",
+    "minutes": 55.5
+   },
+   "absent": [
+    "url",
+    "max_tokens",
+    "temperature",
+    "seed",
+    "donor_seed",
+    "started_at",
+    "interleave",
+    "full_archive",
+    "plain_chat"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "repr40": {
+   "records": {
+    "model": "qwen3-8-27b",
+    "minutes": 202.8
+   },
+   "absent": [
+    "url",
+    "max_tokens",
+    "temperature",
+    "seed",
+    "donor_seed",
+    "started_at",
+    "interleave",
+    "full_archive",
+    "plain_chat"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "repr40_il": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 2025,
+    "started_at": "2026-09-06T11:14:46+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 163.2
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "repr40_il_d2": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 4048,
+    "started_at": "2026-09-06T18:08:50+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 162.4
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "repr_b2": {
+   "records": {
+    "model": "gemma-4-31b-it",
+    "minutes": 16.9
+   },
+   "absent": [
+    "url",
+    "max_tokens",
+    "temperature",
+    "seed",
+    "donor_seed",
+    "started_at",
+    "interleave",
+    "full_archive",
+    "plain_chat"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  },
+  "repr_b2il": {
+   "records": {
+    "url": "http://127.0.0.1:8001/v1/chat/completions",
+    "model": "gemma-4-31b-it",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "started_at": "2026-09-06T10:41:53+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 16.6
+   },
+   "absent": [
+    "seed",
+    "donor_seed"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed"
+   }
+  },
+  "repr_b3": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "started_at": "2026-09-06T10:26:17+0700",
+    "interleave": false,
+    "full_archive": false,
+    "plain_chat": true,
+    "minutes": 6.8
+   },
+   "absent": [
+    "seed",
+    "donor_seed"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed"
+   }
+  },
+  "repr_b3il": {
+   "records": {
+    "url": "http://127.0.0.1:8002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 2025,
+    "started_at": "2026-09-06T13:27:43+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 6.9
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "repr_il": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "started_at": "2026-09-06T10:24:58+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 40.0
+   },
+   "absent": [
+    "seed",
+    "donor_seed"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed"
+   }
+  },
+  "repr_il_d2": {
+   "records": {
+    "url": "http://ray-serve.203.156.3.39.nip.io/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 2024,
+    "donor_seed": 4048,
+    "started_at": "2026-09-06T13:57:59+0700",
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 42.5
+   },
+   "absent": [],
+   "defaults_not_recorded": {}
+  },
+  "think": {
+   "records": {
+    "model": "qwen3-8-27b",
+    "minutes": 153.2
+   },
+   "absent": [
+    "url",
+    "max_tokens",
+    "temperature",
+    "seed",
+    "donor_seed",
+    "started_at",
+    "interleave",
+    "full_archive",
+    "plain_chat"
+   ],
+   "defaults_not_recorded": {
+    "seed": 2024,
+    "donor_seed": "seed + 1 unless --donor_seed was passed",
+    "temperature": 0.0
+   }
+  }
+ }
+}

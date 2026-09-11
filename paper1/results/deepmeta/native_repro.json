@@ -1,0 +1,35 @@
+{
+ "generated_utc": "2026-09-10T15:28:08Z",
+ "authors_test_lines": 76,
+ "excluded": {
+  "ACH-001211": "lineage 'Soft Tissue' has no DeepMeta tissue template"
+ },
+ "runnable_lines": 75,
+ "ours_vs_authors_labels": {
+  "n_pairs": 35131,
+  "n_cells": 75,
+  "n_nodes": 910,
+  "positive_rate": 0.25188579886709744,
+  "auroc": 0.9391044354765508,
+  "f1_at_0.5": 0.7681023133345872,
+  "our_rows_without_label": 6,
+  "label_rows_without_prediction": 13
+ },
+ "authors_vs_authors_labels": {
+  "n_pairs": 35143,
+  "positive_rate": 0.25185669976951314,
+  "auroc": 0.9391292099541434,
+  "f1_at_0.5": 0.7682376535472549
+ },
+ "ours_vs_authors_predictions": {
+  "n_shared_pairs": 35131,
+  "pearson_r": 0.9999541980702412,
+  "spearman_rho": 0.9998466766659581,
+  "binary_agreement_at_0.5": 0.9999430702228801,
+  "our_positive_rate": 0.20215763855284508,
+  "authors_positive_rate": 0.20215763855284508,
+  "mean_abs_difference": 0.0001406362178728188,
+  "our_pairs_not_in_authors": 6,
+  "authors_pairs_not_in_ours": 12
+ }
+}

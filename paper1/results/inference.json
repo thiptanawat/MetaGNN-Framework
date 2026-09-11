@@ -1,0 +1,8288 @@
+{
+ "reproducibility": {
+  "real": {
+   "n_pairs": 15,
+   "r_mean": 0.49990237317948494,
+   "r_min": 0.3011619437742305,
+   "r_max": 0.7614899097248393
+  },
+  "mean": {
+   "n_pairs": 15,
+   "r_mean": 0.010463276050709019,
+   "r_min": -0.1669632872663169,
+   "r_max": 0.1748408783862085
+  },
+  "zero": {
+   "n_pairs": 15,
+   "r_mean": -0.022860744268458785,
+   "r_min": -0.23118262189743213,
+   "r_max": 0.1271635602209904
+  }
+ },
+ "_note": "Cells are the inference unit. Patients inside a substituted cell receive an identical input and differ only by Monte Carlo dropout.",
+ "comparisons": {
+  "real_vs_mean": {
+   "label": "patient identity: own expression minus cohort mean",
+   "arms": [
+    "real",
+    "mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.020199,
+    "p0r1": -0.006999,
+    "p0r2": -0.015723,
+    "p1r0": -0.010662,
+    "p1r1": -0.01472,
+    "p1r2": -0.017898,
+    "p2r0": -0.015385,
+    "p2r1": -0.009242,
+    "p2r2": -0.022015,
+    "p3r0": -0.018098,
+    "p3r1": -0.0136,
+    "p3r2": -0.012697,
+    "p4r0": -0.016073,
+    "p4r1": -0.012555,
+    "p4r2": -0.010195
+   },
+   "mean": -0.01440412152223746,
+   "sd": 0.004167311390869062,
+   "cohens_dz": -3.456454334993572,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.014307008379288702,
+     -0.014426389294476963,
+     -0.015547533330574978,
+     -0.01479866830596562,
+     -0.012941008300881037
+    ],
+    "mean": -0.01440412152223746,
+    "sd": 0.0009504847240642234,
+    "t": -33.886493979796356,
+    "p": 4.524051195997335e-06,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.01608333569360689,
+     -0.01142317403895432,
+     -0.015705854834151167
+    ],
+    "mean": -0.014404121522237459,
+    "sd": 0.002588466509998327,
+    "t": -9.63839795436556,
+    "p": 0.010593663319301951,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.04458939573134276,
+    "frac_reaction_fold": 0.2755783901762446,
+    "frac_residual": 0.6798322140924128
+   },
+   "within_cell_sd": {
+    "a": 0.002698394387716388,
+    "b": 0.0010553935704737292
+   },
+   "ratio_between_to_within": 1.5443670539189778
+  },
+  "mean_vs_zero": {
+   "label": "aggregate expression: cohort mean minus zeroed",
+   "arms": [
+    "mean",
+    "zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.117656,
+    "p0r1": 0.11206,
+    "p0r2": 0.108009,
+    "p1r0": 0.101688,
+    "p1r1": 0.104025,
+    "p1r2": 0.094746,
+    "p2r0": 0.110893,
+    "p2r1": 0.104488,
+    "p2r2": 0.113545,
+    "p3r0": 0.103775,
+    "p3r1": 0.105404,
+    "p3r2": 0.114194,
+    "p4r0": 0.102256,
+    "p4r1": 0.107273,
+    "p4r2": 0.111176
+   },
+   "mean": 0.10741253372009019,
+   "sd": 0.005939510839033083,
+   "cohens_dz": 18.084407391632322,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.11257502278230835,
+     0.10015295733898777,
+     0.10964196246094438,
+     0.1077908046977943,
+     0.10690192132041614
+    ],
+    "mean": 0.10741253372009019,
+    "sd": 0.0046023610521232225,
+    "t": 52.18663297239711,
+    "p": 8.069595893202976e-07,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.10725374132337848,
+     0.10665004993766744,
+     0.10833380989922463
+    ],
+    "mean": 0.10741253372009019,
+    "sd": 0.0008530376140451554,
+    "t": 218.09585264437504,
+    "p": 2.1022845112814585e-05,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.5146514770016478,
+    "frac_reaction_fold": 0.01473353532995009,
+    "frac_residual": 0.4706149876684019
+   },
+   "within_cell_sd": {
+    "a": 0.0010553935704737292,
+    "b": 0.0012172129705934813
+   },
+   "ratio_between_to_within": 5.627768640249575
+  },
+  "real_vs_zero": {
+   "label": "expression in total: own minus zeroed",
+   "arms": [
+    "real",
+    "zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.097457,
+    "p0r1": 0.105061,
+    "p0r2": 0.092285,
+    "p1r0": 0.091027,
+    "p1r1": 0.089305,
+    "p1r2": 0.076848,
+    "p2r0": 0.095508,
+    "p2r1": 0.095246,
+    "p2r2": 0.09153,
+    "p3r0": 0.085677,
+    "p3r1": 0.091804,
+    "p3r2": 0.101496,
+    "p4r0": 0.086183,
+    "p4r1": 0.094718,
+    "p4r2": 0.100981
+   },
+   "mean": 0.09300841219785273,
+   "sd": 0.007061731672464978,
+   "cohens_dz": 13.170765544733179,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.09826801440301965,
+     0.0857265680445108,
+     0.0940944291303694,
+     0.09299213639182868,
+     0.09396091301953509
+    ],
+    "mean": 0.09300841219785272,
+    "sd": 0.004549055537280155,
+    "t": 45.717870544632845,
+    "p": 1.3690626344418909e-06,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.09117040562977159,
+     0.09522687589871312,
+     0.09262795506507346
+    ],
+    "mean": 0.09300841219785272,
+    "sd": 0.002054823224297799,
+    "t": 78.39861529355713,
+    "p": 0.00016265867982357952,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.35569131851995783,
+    "frac_reaction_fold": 0.060478146490382925,
+    "frac_residual": 0.5838305349896594
+   },
+   "within_cell_sd": {
+    "a": 0.002698394387716388,
+    "b": 0.0012172129705934813
+   },
+   "ratio_between_to_within": 2.6170124369555996
+  },
+  "real_vs_rewire7": {
+   "label": "network identity: real minus degree-preserving rewiring",
+   "arms": [
+    "real",
+    "rewire7"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2"
+   ],
+   "n": 9,
+   "per_cell": {
+    "p0r0": 0.224955,
+    "p0r1": 0.221511,
+    "p0r2": 0.223858,
+    "p1r0": 0.23003,
+    "p1r1": 0.229031,
+    "p1r2": 0.217246,
+    "p2r0": 0.231367,
+    "p2r1": 0.222064,
+    "p2r2": 0.212445
+   },
+   "mean": 0.22361195953285862,
+   "sd": 0.006170570204040865,
+   "cohens_dz": 36.23845967856,
+   "signflip_p": 0.00390625,
+   "signflip_floor": 0.00390625,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 9,
+   "block_patient": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 3,
+    "means": [
+     0.22344147633998926,
+     0.225435681187934,
+     0.2219587210706526
+    ],
+    "mean": 0.22361195953285862,
+    "sd": 0.001744738176225758,
+    "t": 221.98590044540404,
+    "p": 2.0292520748550873e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.22878380283671787,
+     0.22420245962105298,
+     0.217849616140805
+    ],
+    "mean": 0.22361195953285862,
+    "sd": 0.00549095869961591,
+    "t": 70.53545587914162,
+    "p": 0.00020093432508728118,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 3,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.05996132147952321,
+    "frac_reaction_fold": 0.5938913806031043,
+    "frac_residual": 0.34614729791737253
+   },
+   "within_cell_sd": {
+    "a": 0.002779205659380326,
+    "b": 0.004164510431905583
+   },
+   "ratio_between_to_within": 2.2202639747850488
+  },
+  "real_vs_rewire11": {
+   "label": "network identity, second permutation seed: real minus rewiring 11",
+   "arms": [
+    "real",
+    "rewire11"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.224809,
+    "p0r1": 0.216555,
+    "p0r2": 0.214959
+   },
+   "mean": 0.21877435747617838,
+   "sd": 0.0052865303296694005,
+   "cohens_dz": 41.38335426704337,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.21877435747617838
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.22480872964058907,
+     0.21655539903227783,
+     0.21495894375566826
+    ],
+    "mean": 0.21877435747617838,
+    "sd": 0.0052865303296694005,
+    "t": 71.6780721781414,
+    "p": 0.0001945810734493608,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   },
+   "within_cell_sd": {
+    "a": 0.0026270239363995495,
+    "b": 0.0038516612898559293
+   },
+   "ratio_between_to_within": 2.0123647357834202
+  },
+  "rewire7_vs_rewire11": {
+   "label": "two rewirings against each other: seed 7 minus seed 11",
+   "arms": [
+    "rewire7",
+    "rewire11"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": -0.000146,
+    "p0r1": -0.004956,
+    "p0r2": -0.008899
+   },
+   "mean": -0.004667118863810882,
+   "sd": 0.004383883157467528,
+   "cohens_dz": -1.0646084067867752,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 3,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     -0.004667118863810882
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.0001459304771022074,
+     -0.004956020074663781,
+     -0.008899406039666657
+    ],
+    "mean": -0.004667118863810882,
+    "sd": 0.004383883157467528,
+    "t": -1.8439558507196498,
+    "p": 0.20650046810175343,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   },
+   "within_cell_sd": {
+    "a": 0.004356292190765331,
+    "b": 0.0038516612898559293
+   },
+   "ratio_between_to_within": 1.0063335895513816
+  },
+  "indicator_vs_zero": {
+   "label": "presence pattern: indicator minus zeroed",
+   "arms": [
+    "indicator",
+    "zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.08704,
+    "p0r1": 0.08357,
+    "p0r2": 0.074388
+   },
+   "mean": 0.08166597716208794,
+   "sd": 0.006537235661923026,
+   "cohens_dz": 12.49243279353718,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.08166597716208794
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.0870395743854161,
+     0.08357034286469078,
+     0.07438801423615693
+    ],
+    "mean": 0.08166597716208794,
+    "sd": 0.006537235661923026,
+    "t": 21.637528308546,
+    "p": 0.0021290996682154523,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   },
+   "within_cell_sd": {
+    "a": 0.0011246230174377606,
+    "b": 0.0012595736651702114
+   },
+   "ratio_between_to_within": 5.8128239957393655
+  },
+  "mean_vs_indicator": {
+   "label": "magnitudes: cohort mean minus indicator",
+   "arms": [
+    "mean",
+    "indicator"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.030617,
+    "p0r1": 0.02849,
+    "p0r2": 0.03362
+   },
+   "mean": 0.030909045620220416,
+   "sd": 0.002577674611473018,
+   "cohens_dz": 11.99105794138903,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.030909045620220416
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.03061655796149132,
+     0.028490090699049064,
+     0.03362048820012087
+    ],
+    "mean": 0.030909045620220416,
+    "sd": 0.002577674611473018,
+    "t": 20.76912159098807,
+    "p": 0.0023102380117348835,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   },
+   "within_cell_sd": {
+    "a": 0.0010803203585119708,
+    "b": 0.0011246230174377606
+   },
+   "ratio_between_to_within": 2.386027988053004
+  },
+  "real_vs_indicator": {
+   "label": "own expression minus indicator",
+   "arms": [
+    "real",
+    "indicator"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.010418,
+    "p0r1": 0.021491,
+    "p0r2": 0.017897
+   },
+   "mean": 0.016602037240931716,
+   "sd": 0.005649005360298405,
+   "cohens_dz": 2.9389310475100565,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.016602037240931716
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.01041790931433717,
+     0.021490954815772012,
+     0.01789724759268596
+    ],
+    "mean": 0.016602037240931716,
+    "sd": 0.005649005360298405,
+    "t": 5.09037789422904,
+    "p": 0.03649281516649105,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   },
+   "within_cell_sd": {
+    "a": 0.0026270239363995495,
+    "b": 0.0011246230174377606
+   },
+   "ratio_between_to_within": 2.1503440764383033
+  },
+  "collapse_mlp": {
+   "label": "cohort-mean collapse, mlp",
+   "arms": [
+    "cohmean",
+    "perpat"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.017619,
+    "p0r1": 0.01062,
+    "p0r2": 0.007764,
+    "p1r0": 0.009435,
+    "p1r1": 0.011387,
+    "p1r2": 0.003187,
+    "p2r0": 0.010882,
+    "p2r1": 0.020125,
+    "p2r2": 0.016486,
+    "p3r0": 0.016869,
+    "p3r1": 0.004082,
+    "p3r2": 0.009605,
+    "p4r0": 0.007978,
+    "p4r1": 0.00299,
+    "p4r2": 0.008589
+   },
+   "mean": 0.010507850458795343,
+   "sd": 0.005285995084451278,
+   "cohens_dz": 1.9878661048520683,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.012001063371296361,
+     0.008003067468559092,
+     0.01583099550799738,
+     0.010185156659896019,
+     0.00651896928622786
+    ],
+    "mean": 0.010507850458795343,
+    "sd": 0.003635065341290037,
+    "t": 6.463781450192646,
+    "p": 0.002950528636849146,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.012556888961945178,
+     0.009840713456528571,
+     0.009125948957912277
+    ],
+    "mean": 0.010507850458795343,
+    "sd": 0.0018101494862754958,
+    "t": 10.054490532943477,
+    "p": 0.00974750729055812,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.40534436893058146,
+    "frac_reaction_fold": 0.0837620576074287,
+    "frac_residual": 0.5108935734619899
+   }
+  },
+  "collapse_mlp_emb": {
+   "label": "cohort-mean collapse, mlp_emb",
+   "arms": [
+    "cohmean",
+    "perpat"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.00025,
+    "p0r1": 0.000112,
+    "p0r2": 0.000529,
+    "p1r0": 0.000644,
+    "p1r1": 0.000207,
+    "p1r2": 0.000754,
+    "p2r0": 0.000205,
+    "p2r1": 0.000401,
+    "p2r2": 2.4e-05,
+    "p3r0": 0.000155,
+    "p3r1": 0.000456,
+    "p3r2": -0.000153,
+    "p4r0": 0.000303,
+    "p4r1": 0.000459,
+    "p4r2": 0.00044
+   },
+   "mean": 0.0003190971735176277,
+   "sd": 0.00024040711552094084,
+   "cohens_dz": 1.3273200039282218,
+   "signflip_p": 0.00030517578125,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": true,
+   "all_same_sign": false,
+   "n_negative": 1,
+   "n_positive": 14,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.0002972132173865531,
+     0.00053496703981278,
+     0.000209972170476617,
+     0.00015256074003559364,
+     0.0004007726998765948
+    ],
+    "mean": 0.00031909717351762774,
+    "sd": 0.00015280072666864564,
+    "t": 4.669630746984363,
+    "p": 0.009520936096497443,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.000311169249405352,
+     0.0003270857780756087,
+     0.0003190364930719225
+    ],
+    "mean": 0.00031909717351762774,
+    "sd": 7.958437837612614e-06,
+    "t": 69.44736245498538,
+    "p": 0.00020727811069426677,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.3462656524720218,
+    "frac_reaction_fold": 0.0007827678605435863,
+    "frac_residual": 0.6529515796674349
+   }
+  },
+  "collapse_gnn_B": {
+   "label": "cohort-mean collapse, gnn_B",
+   "arms": [
+    "cohmean",
+    "perpat"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.006839,
+    "p0r1": 0.007507,
+    "p0r2": 0.007439,
+    "p1r0": 0.005997,
+    "p1r1": 0.006866,
+    "p1r2": 0.007688,
+    "p2r0": 0.006998,
+    "p2r1": 0.006806,
+    "p2r2": 0.007488,
+    "p3r0": 0.007098,
+    "p3r1": 0.00715,
+    "p3r2": 0.007118,
+    "p4r0": 0.006627,
+    "p4r1": 0.006792,
+    "p4r2": 0.006972
+   },
+   "mean": 0.007025646559953613,
+   "sd": 0.0004199069449126437,
+   "cohens_dz": 16.731436917327503,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.007261527532375522,
+     0.006850368796178619,
+     0.0070973702451749094,
+     0.007121912225990752,
+     0.006797054000048264
+    ],
+    "mean": 0.007025646559953613,
+    "sd": 0.00019559400013040193,
+    "t": 80.31853371509423,
+    "p": 1.4402553227708485e-07,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.006711662063588042,
+     0.007024265559700904,
+     0.007341012056571894
+    ],
+    "mean": 0.007025646559953613,
+    "sd": 0.00031467726925926356,
+    "t": 38.67065716728103,
+    "p": 0.000668038569072596,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.18597653522676735,
+    "frac_reaction_fold": 0.4011405768345063,
+    "frac_residual": 0.41288288793872624
+   }
+  },
+  "collapse_identity_mlp": {
+   "label": "cohort-mean collapse net of noise averaging, mlp",
+   "arms": [
+    "identity component",
+    "zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.014706,
+    "p0r1": 0.009092,
+    "p0r2": 0.011035,
+    "p1r0": 0.009873,
+    "p1r1": 0.01165,
+    "p1r2": 0.006248,
+    "p2r0": 0.011469,
+    "p2r1": 0.018645,
+    "p2r2": 0.012534,
+    "p3r0": 0.014228,
+    "p3r1": 0.005484,
+    "p3r2": 0.010633,
+    "p4r0": 0.008018,
+    "p4r1": 0.005478,
+    "p4r2": 0.011952
+   },
+   "mean": 0.010736326628697132,
+   "sd": 0.0036144606144774675,
+   "cohens_dz": 2.970381413396381,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.011611157347638993,
+     0.009256863728709026,
+     0.014216058613354177,
+     0.01011482930255141,
+     0.00848272415123205
+    ],
+    "mean": 0.010736326628697132,
+    "sd": 0.0022653728720198494,
+    "t": 10.597441360283748,
+    "p": 0.00044874195640223855,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.011658800907215446,
+     0.010069816453571754,
+     0.010480362525304194
+    ],
+    "mean": 0.010736326628697132,
+    "sd": 0.0008248370233868313,
+    "t": 22.54489393698934,
+    "p": 0.0019616622470749736,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.3367019316019651,
+    "frac_reaction_fold": 0.03719814332765476,
+    "frac_residual": 0.6260999250703801
+   }
+  },
+  "collapse_identity_mlp_emb": {
+   "label": "cohort-mean collapse net of noise averaging, mlp_emb",
+   "arms": [
+    "identity component",
+    "zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.000286,
+    "p0r1": -0.000299,
+    "p0r2": 0.000256,
+    "p1r0": 7.6e-05,
+    "p1r1": 0.000322,
+    "p1r2": 0.000499,
+    "p2r0": -0.000763,
+    "p2r1": 0.000144,
+    "p2r2": 0.000362,
+    "p3r0": -8.6e-05,
+    "p3r1": -0.000159,
+    "p3r2": -0.0008,
+    "p4r0": -0.000344,
+    "p4r1": -0.00021,
+    "p4r2": 0.000514
+   },
+   "mean": -1.3347002692411328e-05,
+   "sd": 0.00041631949247313655,
+   "cohens_dz": -0.0320595190321831,
+   "signflip_p": 0.9019775390625,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": false,
+   "all_same_sign": false,
+   "n_negative": 7,
+   "n_positive": 8,
+   "block_patient": {
+    "p": 0.8125,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 1.0,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     8.100873944651978e-05,
+     0.00029915135522174584,
+     -8.54414302360514e-05,
+     -0.00034843479907006685,
+     -1.3018878824204005e-05
+    ],
+    "mean": -1.3347002692411326e-05,
+    "sd": 0.00023666420050515895,
+    "t": -0.12610612527116816,
+    "p": 0.9057324527135873,
+    "all_same_sign": false
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.00016615989569396695,
+     -4.03206636918929e-05,
+     0.00016643955130862586
+    ],
+    "mean": -1.3347002692411328e-05,
+    "sd": 0.00016793237277962176,
+    "t": -0.1376606928692208,
+    "p": 0.9031171024440242,
+    "all_same_sign": false
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.27699048862114306,
+    "frac_reaction_fold": 0.11622172634353317,
+    "frac_residual": 0.6067877850353238
+   }
+  },
+  "collapse_identity_gnn_B": {
+   "label": "cohort-mean collapse net of noise averaging, gnn_B",
+   "arms": [
+    "identity component",
+    "zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.003615,
+    "p0r1": 0.004241,
+    "p0r2": 0.004158,
+    "p1r0": 0.002533,
+    "p1r1": 0.004353,
+    "p1r2": 0.005035,
+    "p2r0": 0.00432,
+    "p2r1": 0.003603,
+    "p2r2": 0.004017,
+    "p3r0": 0.004242,
+    "p3r1": 0.004115,
+    "p3r2": 0.004111,
+    "p4r0": 0.003559,
+    "p4r1": 0.004116,
+    "p4r2": 0.003878
+   },
+   "mean": 0.003993026716207466,
+   "sd": 0.000544167132381888,
+   "cohens_dz": 7.337868236785058,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.004004850483998827,
+     0.003973518489386074,
+     0.003979826572128431,
+     0.004155988895622927,
+     0.0038509491399010723
+    ],
+    "mean": 0.003993026716207466,
+    "sd": 0.00010890055763303296,
+    "t": 81.98928791071963,
+    "p": 1.326454053278189e-07,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.0036538943613845867,
+     0.004085436849316313,
+     0.004239748937921499
+    ],
+    "mean": 0.003993026716207466,
+    "sd": 0.00030366284056204055,
+    "t": 22.7756716483663,
+    "p": 0.0019222239804858629,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.03432802388829743,
+    "frac_reaction_fold": 0.222428611600778,
+    "frac_residual": 0.7432433645109249
+   }
+  },
+  "lin_fixed_structure_only_vs_expr_cohortmean_lr": {
+   "label": "structure over fitted expression, linear [fixed C]",
+   "arms": [
+    "structure_only",
+    "expr_cohortmean_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.207807,
+    "p0r1": 0.206689,
+    "p0r2": 0.206652,
+    "p1r0": 0.207625,
+    "p1r1": 0.20672,
+    "p1r2": 0.208159,
+    "p2r0": 0.208195,
+    "p2r1": 0.20718,
+    "p2r2": 0.207179,
+    "p3r0": 0.208107,
+    "p3r1": 0.206336,
+    "p3r2": 0.206506,
+    "p4r0": 0.209053,
+    "p4r1": 0.207493,
+    "p4r2": 0.20865
+   },
+   "mean": 0.20749022485160043,
+   "sd": 0.0008307513541195089,
+   "cohens_dz": 249.76212656495005,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.20704940282774806,
+     0.20750162354388105,
+     0.20751811981747417,
+     0.20698308472609928,
+     0.2083988933427995
+    ],
+    "mean": 0.2074902248516004,
+    "sd": 0.000565265789211467,
+    "t": 820.7860024257111,
+    "p": 1.321987007742973e-11,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.20815755141853715,
+     0.20688382242143075,
+     0.20742930071483337
+    ],
+    "mean": 0.20749022485160043,
+    "sd": 0.0006390463225369708,
+    "t": 562.3748996631945,
+    "p": 3.1618850913727762e-06,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.39684096660182916,
+    "frac_reaction_fold": 0.42266328937853953,
+    "frac_residual": 0.18049574401963292
+   }
+  },
+  "lin_fixed_topology_only_vs_expr_cohortmean_lr": {
+   "label": "topology alone over fitted expression, linear [fixed C]",
+   "arms": [
+    "topology_only",
+    "expr_cohortmean_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.075249,
+    "p0r1": 0.079932,
+    "p0r2": 0.105612,
+    "p1r0": 0.075068,
+    "p1r1": 0.079964,
+    "p1r2": 0.107119,
+    "p2r0": 0.075637,
+    "p2r1": 0.080424,
+    "p2r2": 0.106139,
+    "p3r0": 0.075549,
+    "p3r1": 0.07958,
+    "p3r2": 0.105466,
+    "p4r0": 0.076496,
+    "p4r1": 0.080737,
+    "p4r2": 0.10761
+   },
+   "mean": 0.08737210505259094,
+   "sd": 0.014064033620813337,
+   "cohens_dz": 6.21244995626924,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.08693128302873858,
+     0.08738350374487158,
+     0.08740000001846471,
+     0.0868649649270898,
+     0.08828077354379005
+    ],
+    "mean": 0.08737210505259094,
+    "sd": 0.0005652657892114729,
+    "t": 345.62496079478086,
+    "p": 4.204425060207815e-10,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.07559996741240897,
+     0.0801272708891548,
+     0.10638907685620905
+    ],
+    "mean": 0.08737210505259094,
+    "sd": 0.016624019719290017,
+    "t": 9.103269105229145,
+    "p": 0.01185304207636458,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.0013846462142365452,
+    "frac_reaction_fold": 0.9979855731691533,
+    "frac_residual": 0.0006297806166099712
+   }
+  },
+  "lin_fixed_annotation_only_vs_expr_cohortmean_lr": {
+   "label": "annotation alone over fitted expression, linear [fixed C]",
+   "arms": [
+    "annotation_only",
+    "expr_cohortmean_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.17205,
+    "p0r1": 0.170909,
+    "p0r2": 0.154799,
+    "p1r0": 0.171868,
+    "p1r1": 0.17094,
+    "p1r2": 0.156306,
+    "p2r0": 0.172438,
+    "p2r1": 0.1714,
+    "p2r2": 0.155326,
+    "p3r0": 0.17235,
+    "p3r1": 0.170556,
+    "p3r2": 0.154653,
+    "p4r0": 0.173296,
+    "p4r1": 0.171713,
+    "p4r2": 0.156797
+   },
+   "mean": 0.16636001127181668,
+   "sd": 0.00793708137416686,
+   "cohens_dz": 20.959847005383537,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.1659191892479643,
+     0.1663714099640973,
+     0.16638790623769042,
+     0.16585287114631553,
+     0.16726867976301577
+    ],
+    "mean": 0.16636001127181665,
+    "sd": 0.000565265789211467,
+    "t": 658.0838625672608,
+    "p": 3.19903948163404e-11,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.17240041154736124,
+     0.1711034128551938,
+     0.155576209412895
+    ],
+    "mean": 0.16636001127181668,
+    "sd": 0.009361535039790916,
+    "t": 30.779566667834967,
+    "p": 0.0010538724187024895,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.0043474735526884,
+    "frac_reaction_fold": 0.9936751588377686,
+    "frac_residual": 0.0019773676095429715
+   }
+  },
+  "lin_fixed_structure_plus_perpat_vs_structure_plus_cohortmean": {
+   "label": "patient identity, linear with structure [fixed C]",
+   "arms": [
+    "structure_plus_perpat",
+    "structure_plus_cohortmean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.000822,
+    "p0r1": 0.001015,
+    "p0r2": 0.000845,
+    "p1r0": 0.000809,
+    "p1r1": 0.001038,
+    "p1r2": 0.001439,
+    "p2r0": 0.000786,
+    "p2r1": 0.000835,
+    "p2r2": 0.000853,
+    "p3r0": 0.00072,
+    "p3r1": 0.001016,
+    "p3r2": 0.000864,
+    "p4r0": 0.001019,
+    "p4r1": 0.001155,
+    "p4r2": 0.001242
+   },
+   "mean": 0.0009637763646797471,
+   "sd": 0.00019682346112061982,
+   "cohens_dz": 4.896653880550924,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.0008937438735732902,
+     0.0010953769246237293,
+     0.0008245505101672398,
+     0.0008663929085602762,
+     0.0011388176064742
+    ],
+    "mean": 0.0009637763646797471,
+    "sd": 0.00014294235692019396,
+    "t": 15.076493161049088,
+    "p": 0.00011280240474570219,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.0008310788536820546,
+     0.0010117183116120422,
+     0.0010485319287451445
+    ],
+    "mean": 0.0009637763646797471,
+    "sd": 0.00011638420283845528,
+    "t": 14.343094595719354,
+    "p": 0.004825715584332206,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.4520863128224868,
+    "frac_reaction_fold": 0.24975046630018982,
+    "frac_residual": 0.2981632208773233
+   }
+  },
+  "lin_fixed_expr_perpat_lr_vs_expr_cohortmean_lr": {
+   "label": "patient identity, linear expression only [fixed C]",
+   "arms": [
+    "expr_perpat_lr",
+    "expr_cohortmean_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.008134,
+    "p0r1": -0.009979,
+    "p0r2": -0.005894,
+    "p1r0": -0.009377,
+    "p1r1": -0.011034,
+    "p1r2": -0.004996,
+    "p2r0": -0.006917,
+    "p2r1": -0.009362,
+    "p2r2": -0.004615,
+    "p3r0": -0.008974,
+    "p3r1": -0.011635,
+    "p3r2": -0.007305,
+    "p4r0": -0.00744,
+    "p4r1": -0.009401,
+    "p4r2": -0.003768
+   },
+   "mean": -0.007922141443630829,
+   "sd": 0.0023560735905493106,
+   "cohens_dz": -3.362433786197573,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.008002322792046157,
+     -0.008469057870880925,
+     -0.006964820420571227,
+     -0.009304737944520173,
+     -0.006869768190135665
+    ],
+    "mean": -0.007922141443630829,
+    "sd": 0.0010296932452392128,
+    "t": -17.20361561778676,
+    "p": 6.698114107554715e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.008168437222254332,
+     -0.01028216998773912,
+     -0.005315817120899036
+    ],
+    "mean": -0.007922141443630829,
+    "sd": 0.0024923204864981748,
+    "t": -5.505532518570701,
+    "p": 0.03144367156338199,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.16371604156497277,
+    "frac_reaction_fold": 0.7992856878312348,
+    "frac_residual": 0.036998270603792495
+   }
+  },
+  "lin_fixed_structure_plus_cohortmean_vs_structure_only": {
+   "label": "aggregate expression, linear [fixed C]",
+   "arms": [
+    "structure_plus_cohortmean",
+    "structure_only"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.004046,
+    "p0r1": 0.003491,
+    "p0r2": 0.00529,
+    "p1r0": 0.004061,
+    "p1r1": 0.00357,
+    "p1r2": 0.004942,
+    "p2r0": 0.004103,
+    "p2r1": 0.003532,
+    "p2r2": 0.005356,
+    "p3r0": 0.004102,
+    "p3r1": 0.003487,
+    "p3r2": 0.005153,
+    "p4r0": 0.003818,
+    "p4r1": 0.003437,
+    "p4r2": 0.005106
+   },
+   "mean": 0.004232943171052154,
+   "sd": 0.0007285084037991529,
+   "cohens_dz": 5.810424627880011,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.004275601932389961,
+     0.004190920086392398,
+     0.004330499297691211,
+     0.00424729800542593,
+     0.00412039653336127
+    ],
+    "mean": 0.004232943171052154,
+    "sd": 8.058491535863622e-05,
+    "t": 117.45558871957994,
+    "p": 3.150987408746341e-08,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.0040261526477970875,
+     0.003503436173800356,
+     0.005169240691559019
+    ],
+    "mean": 0.0042329431710521545,
+    "sd": 0.000851937740229514,
+    "t": 8.60587844815852,
+    "p": 0.013234898668844974,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.01048797362603659,
+    "frac_reaction_fold": 0.9768290070292303,
+    "frac_residual": 0.012683019344732925
+   }
+  },
+  "gnn_zero_vs_lin_fixed_structure_only": {
+   "label": "graph model over linear, no expression [fixed C]",
+   "arms": [
+    "gnn zero",
+    "structure_only"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.092174,
+    "p0r1": -0.102005,
+    "p0r2": -0.094608,
+    "p1r0": -0.083035,
+    "p1r1": -0.087023,
+    "p1r2": -0.0842,
+    "p2r0": -0.085542,
+    "p2r1": -0.092363,
+    "p2r2": -0.09569,
+    "p3r0": -0.079039,
+    "p3r1": -0.094026,
+    "p3r2": -0.100307,
+    "p4r0": -0.07712,
+    "p4r1": -0.089468,
+    "p4r2": -0.098416
+   },
+   "mean": -0.09033453937165155,
+   "sd": 0.007544403163417283,
+   "cohens_dz": -11.973715801626643,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.09626263155402241,
+     -0.08475286421205978,
+     -0.09119835354803392,
+     -0.09112397079174162,
+     -0.08833487675240004
+    ],
+    "mean": -0.09033453937165155,
+    "sd": 0.004232771019056745,
+    "t": -47.72149729851382,
+    "p": 1.153518923698086e-06,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.08338202732750874,
+     -0.09297723564344722,
+     -0.09464435514399869
+    ],
+    "mean": -0.09033453937165155,
+    "sd": 0.006078477576683396,
+    "t": -25.740657902599875,
+    "p": 0.0015058401922163676,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.26980685733408744,
+    "frac_reaction_fold": 0.46367301903869407,
+    "frac_residual": 0.26652012362721844
+   }
+  },
+  "gnn_mean_vs_lin_fixed_structure_plus_cohortmean": {
+   "label": "graph model over linear, aggregate expression [fixed C]",
+   "arms": [
+    "gnn mean",
+    "structure_plus_cohortmean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.021436,
+    "p0r1": 0.006565,
+    "p0r2": 0.00811,
+    "p1r0": 0.014593,
+    "p1r1": 0.013431,
+    "p1r2": 0.005604,
+    "p2r0": 0.021248,
+    "p2r1": 0.008592,
+    "p2r2": 0.0125,
+    "p3r0": 0.020634,
+    "p3r1": 0.007891,
+    "p3r2": 0.008734,
+    "p4r0": 0.021318,
+    "p4r1": 0.014368,
+    "p4r2": 0.007654
+   },
+   "mean": 0.01284505117738648,
+   "sd": 0.0058765983897569995,
+   "cohens_dz": 2.185797007972435,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.012036789295895986,
+     0.011209173040535592,
+     0.01411310961521924,
+     0.012419535900626758,
+     0.014446648034654822
+    ],
+    "mean": 0.01284505117738648,
+    "sd": 0.001385959279111753,
+    "t": 20.72384668148964,
+    "p": 3.203009575305375e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.019845561348072648,
+     0.01016937812041987,
+     0.00852021406366692
+    ],
+    "mean": 0.01284505117738648,
+    "sd": 0.006118438731321237,
+    "t": 3.6362677215616155,
+    "p": 0.06800480486516697,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.04767625431252526,
+    "frac_reaction_fold": 0.7742855808606024,
+    "frac_residual": 0.1780381648268721
+   }
+  },
+  "gnn_real_vs_lin_fixed_structure_plus_perpat": {
+   "label": "graph model over linear, own expression [fixed C]",
+   "arms": [
+    "gnn real",
+    "structure_plus_perpat"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.000415,
+    "p0r1": -0.001449,
+    "p0r2": -0.008458,
+    "p1r0": 0.003122,
+    "p1r1": -0.002327,
+    "p1r2": -0.013733,
+    "p2r0": 0.005077,
+    "p2r1": -0.001485,
+    "p2r2": -0.010369,
+    "p3r0": 0.001816,
+    "p3r1": -0.006725,
+    "p3r2": -0.004827,
+    "p4r0": 0.004226,
+    "p4r1": 0.000658,
+    "p4r2": -0.003784
+   },
+   "mean": -0.0025228467095307276,
+   "sd": 0.005490387528018956,
+   "cohens_dz": -0.4595024844158901,
+   "signflip_p": 0.0972900390625,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": false,
+   "all_same_sign": false,
+   "n_negative": 9,
+   "n_positive": 6,
+   "block_patient": {
+    "p": 0.125,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.75,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.003163962956966008,
+     -0.004312593178565101,
+     -0.002258974225522977,
+     -0.003245525313899137,
+     0.0003668221272995857
+    ],
+    "mean": -0.0025228467095307276,
+    "sd": 0.0017717435978241217,
+    "t": -3.1840141802969693,
+    "p": 0.03340672866343812,
+    "all_same_sign": false
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.0029311468007837014,
+     -0.0022655142301464927,
+     -0.008234172699229391
+    ],
+    "mean": -0.0025228467095307276,
+    "sd": 0.005587106128225298,
+    "t": -0.7821041126353515,
+    "p": 0.51604607216643,
+    "all_same_sign": false
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.08925837087542379,
+    "frac_reaction_fold": 0.7396730705784587,
+    "frac_residual": 0.17106855854611752
+   }
+  },
+  "gnn_mean_vs_lin_fixed_structure_only": {
+   "label": "graph model with cohort mean over the no-patient linear model [fixed C]",
+   "arms": [
+    "gnn mean",
+    "structure_only"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.025482,
+    "p0r1": 0.010055,
+    "p0r2": 0.0134,
+    "p1r0": 0.018653,
+    "p1r1": 0.017002,
+    "p1r2": 0.010545,
+    "p2r0": 0.025351,
+    "p2r1": 0.012124,
+    "p2r2": 0.017855,
+    "p3r0": 0.024736,
+    "p3r1": 0.011378,
+    "p3r2": 0.013887,
+    "p4r0": 0.025136,
+    "p4r1": 0.017805,
+    "p4r2": 0.01276
+   },
+   "mean": 0.017077994348438635,
+   "sd": 0.005717497239140581,
+   "cohens_dz": 2.98697028334826,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.016312391228285945,
+     0.01540009312692799,
+     0.018443608912910452,
+     0.016666833906052687,
+     0.018567044568016094
+    ],
+    "mean": 0.017077994348438635,
+    "sd": 0.0013831781565690196,
+    "t": 27.608559389912887,
+    "p": 1.0237345093198899e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.023871713995869737,
+     0.013672814294220226,
+     0.013689454755225938
+    ],
+    "mean": 0.017077994348438635,
+    "sd": 0.005883539683910882,
+    "t": 5.027577868431678,
+    "p": 0.03735940499824036,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.05016462001770189,
+    "frac_reaction_fold": 0.7563754273852766,
+    "frac_residual": 0.19345995259702167
+   }
+  },
+  "gnn_real_vs_lin_fixed_structure_only": {
+   "label": "graph model with own expression over the no-patient linear model [fixed C]",
+   "arms": [
+    "gnn real",
+    "structure_only"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.005283,
+    "p0r1": 0.003056,
+    "p0r2": -0.002323,
+    "p1r0": 0.007992,
+    "p1r1": 0.002282,
+    "p1r2": -0.007353,
+    "p2r0": 0.009966,
+    "p2r1": 0.002883,
+    "p2r2": -0.00416,
+    "p3r0": 0.006638,
+    "p3r1": -0.002223,
+    "p3r2": 0.001189,
+    "p4r0": 0.009063,
+    "p4r1": 0.00525,
+    "p4r2": 0.002565
+   },
+   "mean": 0.0026738728262011733,
+   "sd": 0.005001226047494012,
+   "cohens_dz": 0.5346434655840008,
+   "signflip_p": 0.05914306640625,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": false,
+   "all_same_sign": false,
+   "n_negative": 4,
+   "n_positive": 11,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.5,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.0020053828489972427,
+     0.0009737038324510264,
+     0.0028960755823354742,
+     0.0018681656000870683,
+     0.0056260362671350555
+    ],
+    "mean": 0.0026738728262011733,
+    "sd": 0.0017854453672658428,
+    "t": 3.348722684094915,
+    "p": 0.028602779271701573,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.0077883783022628435,
+     0.0022496402552659054,
+     -0.002016400078925229
+    ],
+    "mean": 0.0026738728262011733,
+    "sd": 0.0049161366673166245,
+    "t": 0.9420575344757679,
+    "p": 0.44560601886955326,
+    "all_same_sign": false
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.1092429383731204,
+    "frac_reaction_fold": 0.6901871842145912,
+    "frac_residual": 0.20056987741228835
+   }
+  },
+  "lin_tuned_structure_only_vs_expr_cohortmean_lr": {
+   "label": "structure over fitted expression, linear [tuned C]",
+   "arms": [
+    "structure_only",
+    "expr_cohortmean_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.20478,
+    "p0r1": 0.20942,
+    "p0r2": 0.203922,
+    "p1r0": 0.206399,
+    "p1r1": 0.209461,
+    "p1r2": 0.205505,
+    "p2r0": 0.20925,
+    "p2r1": 0.210117,
+    "p2r2": 0.204777,
+    "p3r0": 0.209508,
+    "p3r1": 0.209604,
+    "p3r2": 0.204085,
+    "p4r0": 0.210294,
+    "p4r1": 0.210212,
+    "p4r2": 0.205716
+   },
+   "mean": 0.20753664906693045,
+   "sd": 0.0025171374213169753,
+   "cohens_dz": 82.44947109734936,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.20604068684841279,
+     0.20712146051687183,
+     0.2080481334996088,
+     0.20773240751692626,
+     0.20874055695283258
+    ],
+    "mean": 0.20753664906693045,
+    "sd": 0.001019756880914082,
+    "t": 455.07518882363286,
+    "p": 1.3989578772357596e-10,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.20804614904251845,
+     0.2097629324181026,
+     0.2048008657401703
+    ],
+    "mean": 0.20753664906693045,
+    "sd": 0.0025199641064714796,
+    "t": 142.64648440562377,
+    "p": 4.9141209449733906e-05,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.1406800930421718,
+    "frac_reaction_fold": 0.7158908666195197,
+    "frac_residual": 0.1434290403383085
+   }
+  },
+  "lin_tuned_topology_only_vs_expr_cohortmean_lr": {
+   "label": "topology alone over fitted expression, linear [tuned C]",
+   "arms": [
+    "topology_only",
+    "expr_cohortmean_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.08294,
+    "p0r1": 0.090714,
+    "p0r2": 0.101498,
+    "p1r0": 0.084559,
+    "p1r1": 0.090754,
+    "p1r2": 0.103082,
+    "p2r0": 0.087411,
+    "p2r1": 0.091411,
+    "p2r2": 0.102354,
+    "p3r0": 0.087668,
+    "p3r1": 0.090898,
+    "p3r2": 0.101662,
+    "p4r0": 0.088454,
+    "p4r1": 0.091506,
+    "p4r2": 0.103293
+   },
+   "mean": 0.0932135230861545,
+   "sd": 0.007140853448554912,
+   "cohens_dz": 13.05355497878451,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.09171756086763683,
+     0.09279833453609587,
+     0.09372500751883284,
+     0.09340928153615032,
+     0.09441743097205664
+    ],
+    "mean": 0.09321352308615449,
+    "sd": 0.0010197568809140868,
+    "t": 204.39359414378646,
+    "p": 3.4372635079401167e-09,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.08620634359486094,
+     0.09105646571094814,
+     0.10237775995265441
+    ],
+    "mean": 0.09321352308615449,
+    "sd": 0.008298695629086939,
+    "t": 19.45493185360717,
+    "p": 0.002631622475400996,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.017480194430643747,
+    "frac_reaction_fold": 0.9646980408981978,
+    "frac_residual": 0.017821764671158577
+   }
+  },
+  "lin_tuned_annotation_only_vs_expr_cohortmean_lr": {
+   "label": "annotation alone over fitted expression, linear [tuned C]",
+   "arms": [
+    "annotation_only",
+    "expr_cohortmean_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.165562,
+    "p0r1": 0.170224,
+    "p0r2": 0.148242,
+    "p1r0": 0.167181,
+    "p1r1": 0.170264,
+    "p1r2": 0.149825,
+    "p2r0": 0.170033,
+    "p2r1": 0.170921,
+    "p2r2": 0.149097,
+    "p3r0": 0.17029,
+    "p3r1": 0.170408,
+    "p3r2": 0.148405,
+    "p4r0": 0.171076,
+    "p4r1": 0.171015,
+    "p4r2": 0.150036
+   },
+   "mean": 0.16283845868373137,
+   "sd": 0.010156088978253616,
+   "cohens_dz": 16.0335793662702,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.1613424964652137,
+     0.16242327013367275,
+     0.1633499431164097,
+     0.1630342171337272,
+     0.16404236656963353
+    ],
+    "mean": 0.16283845868373137,
+    "sd": 0.0010197568809140916,
+    "t": 357.0634038200612,
+    "p": 3.691026630617167e-10,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.1688282364841675,
+     0.1705662731774775,
+     0.14912086638954913
+    ],
+    "mean": 0.16283845868373137,
+    "sd": 0.011911525790127771,
+    "t": 23.678283440412446,
+    "p": 0.0017788509021544124,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.008641586969074102,
+    "frac_reaction_fold": 0.9825479658726151,
+    "frac_residual": 0.008810447158311011
+   }
+  },
+  "lin_tuned_structure_plus_perpat_vs_structure_plus_cohortmean": {
+   "label": "patient identity, linear with structure [tuned C]",
+   "arms": [
+    "structure_plus_perpat",
+    "structure_plus_cohortmean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.001271,
+    "p0r1": 0.000554,
+    "p0r2": 0.000554,
+    "p1r0": 0.00135,
+    "p1r1": 0.000939,
+    "p1r2": 0.000996,
+    "p2r0": 0.001214,
+    "p2r1": 0.000383,
+    "p2r2": 0.000695,
+    "p3r0": 0.001159,
+    "p3r1": 0.000776,
+    "p3r2": 0.000563,
+    "p4r0": 0.001242,
+    "p4r1": 0.000751,
+    "p4r2": 0.000844
+   },
+   "mean": 0.0008860641431180186,
+   "sd": 0.0003085608559609701,
+   "cohens_dz": 2.871602557487386,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.0007928323422670136,
+     0.0010950455774186851,
+     0.0007640878622277766,
+     0.0008326369460950334,
+     0.0009457179875815847
+    ],
+    "mean": 0.0008860641431180186,
+    "sd": 0.00013569881006581883,
+    "t": 14.60071503557025,
+    "p": 0.00012799528520222398,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.0012470575304287079,
+     0.0006807020819235676,
+     0.0007304328170017804
+    ],
+    "mean": 0.0008860641431180186,
+    "sd": 0.0003136167338717576,
+    "t": 4.893578527199871,
+    "p": 0.039312679793663194,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.1657767525649206,
+    "frac_reaction_fold": 0.7378851297159043,
+    "frac_residual": 0.09633811771917515
+   }
+  },
+  "lin_tuned_expr_perpat_lr_vs_expr_cohortmean_lr": {
+   "label": "patient identity, linear expression only [tuned C]",
+   "arms": [
+    "expr_perpat_lr",
+    "expr_cohortmean_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.011541,
+    "p0r1": -0.009188,
+    "p0r2": -0.008153,
+    "p1r0": -0.010979,
+    "p1r1": -0.010123,
+    "p1r2": -0.007659,
+    "p2r0": -0.006464,
+    "p2r1": -0.008769,
+    "p2r2": -0.006814,
+    "p3r0": -0.007104,
+    "p3r1": -0.009696,
+    "p3r2": -0.008573,
+    "p4r0": -0.00602,
+    "p4r1": -0.008211,
+    "p4r2": -0.006426
+   },
+   "mean": -0.008381323140495164,
+   "sd": 0.0016923238456303569,
+   "cohens_dz": -4.9525527647300205,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.009626992012612376,
+     -0.009587007893254099,
+     -0.007348800419211561,
+     -0.008458012335026558,
+     -0.006885803042371223
+    ],
+    "mean": -0.008381323140495164,
+    "sd": 0.0012563768770172579,
+    "t": -14.916868199637976,
+    "p": 0.00011763582677246412,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.008421811655781241,
+     -0.009197332664181102,
+     -0.007524825101523147
+    ],
+    "mean": -0.008381323140495164,
+    "sd": 0.0008369885762001569,
+    "t": -17.34417640428919,
+    "p": 0.0033077574568114334,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.4724176688230977,
+    "frac_reaction_fold": 0.1747205859467162,
+    "frac_residual": 0.352861745230186
+   }
+  },
+  "lin_tuned_structure_plus_cohortmean_vs_structure_only": {
+   "label": "aggregate expression, linear [tuned C]",
+   "arms": [
+    "structure_plus_cohortmean",
+    "structure_only"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.003614,
+    "p0r1": 0.004036,
+    "p0r2": 0.005557,
+    "p1r0": 0.003555,
+    "p1r1": 0.003726,
+    "p1r2": 0.00537,
+    "p2r0": 0.003691,
+    "p2r1": 0.004132,
+    "p2r2": 0.005548,
+    "p3r0": 0.003649,
+    "p3r1": 0.003792,
+    "p3r2": 0.005447,
+    "p4r0": 0.003635,
+    "p4r1": 0.003939,
+    "p4r2": 0.005472
+   },
+   "mean": 0.0043442669086822296,
+   "sd": 0.0008459359519404225,
+   "cohens_dz": 5.1354560575387245,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.004402346476890122,
+     0.004216897382150364,
+     0.004456991972359048,
+     0.004296319972157477,
+     0.004348778739854138
+    ],
+    "mean": 0.0043442669086822296,
+    "sd": 9.30355279661243e-05,
+    "t": 104.41254360112177,
+    "p": 5.045160869625411e-08,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.0036289084373475776,
+     0.003925163506970875,
+     0.005478728781728237
+    ],
+    "mean": 0.0043442669086822296,
+    "sd": 0.00099357665663786,
+    "t": 7.573135859431067,
+    "p": 0.016992901453824767,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.010367544259719664,
+    "frac_reaction_fold": 0.9853709577194122,
+    "frac_residual": 0.004261498020868028
+   }
+  },
+  "gnn_zero_vs_lin_tuned_structure_only": {
+   "label": "graph model over linear, no expression [tuned C]",
+   "arms": [
+    "gnn zero",
+    "structure_only"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.095635,
+    "p0r1": -0.105421,
+    "p0r2": -0.098435,
+    "p1r0": -0.086496,
+    "p1r1": -0.09044,
+    "p1r2": -0.088027,
+    "p2r0": -0.089003,
+    "p2r1": -0.095779,
+    "p2r2": -0.099517,
+    "p3r0": -0.0825,
+    "p3r1": -0.097442,
+    "p3r2": -0.104134,
+    "p4r0": -0.080581,
+    "p4r1": -0.092884,
+    "p4r2": -0.102243
+   },
+   "mean": -0.09390251617506688,
+   "sd": 0.007615600600177377,
+   "cohens_dz": -12.330283730068484,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.09983060835743773,
+     -0.0883208410154751,
+     -0.09476633035144925,
+     -0.09469194759515694,
+     -0.09190285355581536
+    ],
+    "mean": -0.09390251617506688,
+    "sd": 0.0042327710190567455,
+    "t": -49.606370975511574,
+    "p": 9.881565819342996e-07,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.08684280001468378,
+     -0.09639348531783536,
+     -0.09847126319268149
+    ],
+    "mean": -0.09390251617506687,
+    "sd": 0.0062015308128865,
+    "t": -26.226416328659926,
+    "p": 0.0014506954659664804,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.26478564794579856,
+    "frac_reaction_fold": 0.47365427043684133,
+    "frac_residual": 0.26156008161736016
+   }
+  },
+  "gnn_mean_vs_lin_tuned_structure_plus_cohortmean": {
+   "label": "graph model over linear, aggregate expression [tuned C]",
+   "arms": [
+    "gnn mean",
+    "structure_plus_cohortmean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.018407,
+    "p0r1": 0.002603,
+    "p0r2": 0.004016,
+    "p1r0": 0.011638,
+    "p1r1": 0.00986,
+    "p1r2": 0.001348,
+    "p2r0": 0.018199,
+    "p2r1": 0.004576,
+    "p2r2": 0.008481,
+    "p3r0": 0.017626,
+    "p3r1": 0.004169,
+    "p3r2": 0.004613,
+    "p4r0": 0.01804,
+    "p4r1": 0.01045,
+    "p4r2": 0.003461
+   },
+   "mean": 0.009165750636341079,
+   "sd": 0.006302273892507777,
+   "cohens_dz": 1.454356124896038,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.0083420679479805,
+     0.007615218941362301,
+     0.010418640137136078,
+     0.008802537130479885,
+     0.010650289024746629
+    ],
+    "mean": 0.009165750636341079,
+    "sd": 0.0013217518760087637,
+    "t": 15.506118704789884,
+    "p": 0.00010096994464084039,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.01678203287134712,
+     0.006331401112861212,
+     0.004383817924814903
+    ],
+    "mean": 0.009165750636341077,
+    "sd": 0.006667389772695279,
+    "t": 2.3810736034458437,
+    "p": 0.14021677227931623,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.03770149176009598,
+    "frac_reaction_fold": 0.7994459498018469,
+    "frac_residual": 0.162852558438057
+   }
+  },
+  "gnn_real_vs_lin_tuned_structure_plus_perpat": {
+   "label": "graph model over linear, own expression [tuned C]",
+   "arms": [
+    "gnn real",
+    "structure_plus_perpat"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.003062,
+    "p0r1": -0.004951,
+    "p0r2": -0.012261,
+    "p1r0": -0.000374,
+    "p1r1": -0.005799,
+    "p1r2": -0.017546,
+    "p2r0": 0.001599,
+    "p2r1": -0.005049,
+    "p2r2": -0.014229,
+    "p3r0": -0.001631,
+    "p3r1": -0.010207,
+    "p3r2": -0.008648,
+    "p4r0": 0.000726,
+    "p4r1": -0.002857,
+    "p4r2": -0.007578
+   },
+   "mean": -0.0061244350290144,
+   "sd": 0.005615524059623117,
+   "cohens_dz": -1.0906257303838243,
+   "signflip_p": 0.00054931640625,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": true,
+   "all_same_sign": false,
+   "n_negative": 13,
+   "n_positive": 2,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.006757772773575217,
+     -0.007906215930533348,
+     -0.0058929810556666755,
+     -0.006828768121580768,
+     -0.003236437263715993
+    ],
+    "mean": -0.0061244350290144,
+    "sd": 0.0017653644821349359,
+    "t": -7.757408278711672,
+    "p": 0.0014881299199940808,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.0005483603526884817,
+     -0.005772475008016675,
+     -0.012052469726338045
+    ],
+    "mean": -0.0061244350290144,
+    "sd": 0.005760124999729475,
+    "t": -1.8415976456076408,
+    "p": 0.20687675991541027,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.08471130945160542,
+    "frac_reaction_fold": 0.7515453566242069,
+    "frac_residual": 0.16374333392418744
+   }
+  },
+  "gnn_mean_vs_lin_tuned_structure_only": {
+   "label": "graph model with cohort mean over the no-patient linear model [tuned C]",
+   "arms": [
+    "gnn mean",
+    "structure_only"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.022021,
+    "p0r1": 0.006639,
+    "p0r2": 0.009573,
+    "p1r0": 0.015192,
+    "p1r1": 0.013585,
+    "p1r2": 0.006718,
+    "p2r0": 0.02189,
+    "p2r1": 0.008708,
+    "p2r2": 0.014028,
+    "p3r0": 0.021275,
+    "p3r1": 0.007961,
+    "p3r2": 0.01006,
+    "p4r0": 0.021675,
+    "p4r1": 0.014389,
+    "p4r2": 0.008933
+   },
+   "mean": 0.013510017545023309,
+   "sd": 0.005788259019173429,
+   "cohens_dz": 2.3340381797483136,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.01274441442487062,
+     0.011832116323512665,
+     0.014875632109495126,
+     0.013098857102637362,
+     0.014999067764600768
+    ],
+    "mean": 0.013510017545023309,
+    "sd": 0.0013831781565690191,
+    "t": 21.84051090195157,
+    "p": 2.6004866548923587e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.020410941308694697,
+     0.010256564619832088,
+     0.00986254670654314
+    ],
+    "mean": 0.013510017545023309,
+    "sd": 0.005979621570216757,
+    "t": 3.9132972754794397,
+    "p": 0.05952892339546897,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.048945586824144065,
+    "frac_reaction_fold": 0.7622956644104726,
+    "frac_residual": 0.1887587487653834
+   }
+  },
+  "gnn_real_vs_lin_tuned_structure_only": {
+   "label": "graph model with own expression over the no-patient linear model [tuned C]",
+   "arms": [
+    "gnn real",
+    "structure_only"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.001823,
+    "p0r1": -0.00036,
+    "p0r2": -0.00615,
+    "p1r0": 0.004531,
+    "p1r1": -0.001134,
+    "p1r2": -0.011179,
+    "p2r0": 0.006505,
+    "p2r1": -0.000534,
+    "p2r2": -0.007987,
+    "p3r0": 0.003177,
+    "p3r1": -0.005639,
+    "p3r2": -0.002638,
+    "p4r0": 0.005603,
+    "p4r1": 0.001834,
+    "p4r2": -0.001262
+   },
+   "mean": -0.000894103977214152,
+   "sd": 0.0051246137861370635,
+   "cohens_dz": -0.1744724606628606,
+   "signflip_p": 0.51031494140625,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": false,
+   "all_same_sign": false,
+   "n_negative": 9,
+   "n_positive": 6,
+   "block_patient": {
+    "p": 0.3125,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.75,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.0015625939544180827,
+     -0.002594272970964299,
+     -0.0006719012210798514,
+     -0.001699811203328257,
+     0.0020580594637197303
+    ],
+    "mean": -0.000894103977214152,
+    "sd": 0.001785445367265843,
+    "t": -1.1197639024180153,
+    "p": 0.3255074289373594,
+    "all_same_sign": false
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.004327605615087804,
+     -0.001166609419122233,
+     -0.005843308127608027
+    ],
+    "mean": -0.0008941039772141521,
+    "sd": 0.005090929777775555,
+    "t": -0.304194633079575,
+    "p": 0.7897116337283936,
+    "all_same_sign": false
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.10404568188072041,
+    "frac_reaction_fold": 0.7049265961367592,
+    "frac_residual": 0.19102772198252038
+   }
+  },
+  "lin_fixed_expr_pooled_lr_vs_expr_perpat_lr": {
+   "label": "pooled frozen expression model over the per-patient one [fixed C]",
+   "arms": [
+    "expr_pooled_lr",
+    "expr_perpat_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.002557,
+    "p0r1": 0.001168,
+    "p0r2": 0.001461,
+    "p1r0": 0.003095,
+    "p1r1": 0.001247,
+    "p1r2": 0.002839,
+    "p2r0": 0.000469,
+    "p2r1": -9.9e-05,
+    "p2r2": -0.000226,
+    "p3r0": 0.001308,
+    "p3r1": -0.000787,
+    "p3r2": 0.00059,
+    "p4r0": 0.002875,
+    "p4r1": -4e-05,
+    "p4r2": 0.002544
+   },
+   "mean": 0.001266763817382377,
+   "sd": 0.0012778066656808202,
+   "cohens_dz": 0.9913579662753133,
+   "signflip_p": 0.0020751953125,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": true,
+   "all_same_sign": false,
+   "n_negative": 4,
+   "n_positive": 11,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.00172873988402585,
+     0.0023937798186066304,
+     4.7882711900001006e-05,
+     0.0003701878894886897,
+     0.0017932287828907139
+    ],
+    "mean": 0.001266763817382377,
+    "sd": 0.001006264360997514,
+    "t": 2.814936230372093,
+    "p": 0.04807492668549137,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.0020606156402908525,
+     0.0002980806639546918,
+     0.0014415951479015865
+    ],
+    "mean": 0.001266763817382377,
+    "sd": 0.0008941794458051557,
+    "t": 2.4537572443532554,
+    "p": 0.13359813692169287,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.5315536378940305,
+    "frac_reaction_fold": 0.3497768248478858,
+    "frac_residual": 0.11866953725808359
+   }
+  },
+  "lin_fixed_expr_pooled_lr_vs_expr_cohortmean_lr": {
+   "label": "pooled frozen expression model over the cohort-mean one [fixed C]",
+   "arms": [
+    "expr_pooled_lr",
+    "expr_cohortmean_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.005577,
+    "p0r1": -0.008811,
+    "p0r2": -0.004433,
+    "p1r0": -0.006282,
+    "p1r1": -0.009787,
+    "p1r2": -0.002157,
+    "p2r0": -0.006448,
+    "p2r1": -0.009461,
+    "p2r2": -0.004841,
+    "p3r0": -0.007667,
+    "p3r1": -0.012421,
+    "p3r2": -0.006716,
+    "p4r0": -0.004565,
+    "p4r1": -0.009441,
+    "p4r2": -0.001224
+   },
+   "mean": -0.006655377626248452,
+   "sd": 0.003024119330038689,
+   "cohens_dz": -2.2007655452416643,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.006273582908020307,
+     -0.006075278052274295,
+     -0.0069169377086712265,
+     -0.008934550055031484,
+     -0.005076539407244951
+    ],
+    "mean": -0.006655377626248453,
+    "sd": 0.0014351004739407453,
+    "t": -10.369919778060916,
+    "p": 0.0004881957795517363,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.006107821581963479,
+     -0.009984089323784428,
+     -0.0038742219729974493
+    ],
+    "mean": -0.006655377626248452,
+    "sd": 0.0030915179082900246,
+    "t": -3.7287353766601714,
+    "p": 0.06499130365680174,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.19302785192437694,
+    "frac_reaction_fold": 0.7464790936813188,
+    "frac_residual": 0.06049305439430424
+   }
+  },
+  "lin_fixed_structure_plus_pooled_vs_structure_plus_perpat": {
+   "label": "pooled frozen network + expression model over the per-patient one [fixed C]",
+   "arms": [
+    "structure_plus_pooled",
+    "structure_plus_perpat"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.006131,
+    "p0r1": 0.004656,
+    "p0r2": 0.005961,
+    "p1r0": 0.006176,
+    "p1r1": 0.005055,
+    "p1r2": 0.005937,
+    "p2r0": 0.006083,
+    "p2r1": 0.005594,
+    "p2r2": 0.006195,
+    "p3r0": 0.006523,
+    "p3r1": 0.006038,
+    "p3r2": 0.006604,
+    "p4r0": 0.006542,
+    "p4r1": 0.00574,
+    "p4r2": 0.00602
+   },
+   "mean": 0.005950324546260188,
+   "sd": 0.0005297154074944627,
+   "cohens_dz": 11.233059227793726,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.005582769401962562,
+     0.005722760223568324,
+     0.005957153702147148,
+     0.0063885261526424415,
+     0.006100413250980467
+    ],
+    "mean": 0.005950324546260189,
+    "sd": 0.0003168107516927821,
+    "t": 41.99772293879036,
+    "p": 1.9213591471947546e-06,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.0062909389884164835,
+     0.005416414856580421,
+     0.0061436197937836615
+    ],
+    "mean": 0.005950324546260189,
+    "sd": 0.0004682097861293325,
+    "t": 22.01206540522841,
+    "p": 0.0020574840107863432,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.3065969455500955,
+    "frac_reaction_fold": 0.5580430804821092,
+    "frac_residual": 0.13535997396779537
+   }
+  },
+  "lin_fixed_structure_plus_pooled_vs_structure_plus_cohortmean": {
+   "label": "pooled frozen network + expression model over the cohort-mean one [fixed C]",
+   "arms": [
+    "structure_plus_pooled",
+    "structure_plus_cohortmean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.006953,
+    "p0r1": 0.005671,
+    "p0r2": 0.006806,
+    "p1r0": 0.006985,
+    "p1r1": 0.006093,
+    "p1r2": 0.007376,
+    "p2r0": 0.006868,
+    "p2r1": 0.006429,
+    "p2r2": 0.007048,
+    "p3r0": 0.007243,
+    "p3r1": 0.007053,
+    "p3r2": 0.007468,
+    "p4r0": 0.007561,
+    "p4r1": 0.006894,
+    "p4r2": 0.007262
+   },
+   "mean": 0.006914100910939936,
+   "sd": 0.0005128133657204376,
+   "cohens_dz": 13.482684682421453,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.006476513275535852,
+     0.006818137148192053,
+     0.006781704212314388,
+     0.007254919061202718,
+     0.0072392308574546664
+    ],
+    "mean": 0.006914100910939936,
+    "sd": 0.00033169540315454687,
+    "t": 46.61023183656076,
+    "p": 1.2673444815028e-06,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.007122017842098538,
+     0.0064281331681924625,
+     0.007192151722528806
+    ],
+    "mean": 0.006914100910939936,
+    "sd": 0.0004223188079394018,
+    "t": 28.35671497757351,
+    "p": 0.0012413062420598647,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.35860260842425706,
+    "frac_reaction_fold": 0.48443346713176927,
+    "frac_residual": 0.15696392444397392
+   }
+  },
+  "gnn_real_vs_lin_fixed_structure_plus_pooled": {
+   "label": "graph model over the pooled frozen linear model, own expression [fixed C]",
+   "arms": [
+    "gnn real",
+    "structure_plus_pooled"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.005716,
+    "p0r1": -0.006105,
+    "p0r2": -0.014419,
+    "p1r0": -0.003054,
+    "p1r1": -0.007382,
+    "p1r2": -0.01967,
+    "p2r0": -0.001006,
+    "p2r1": -0.007079,
+    "p2r2": -0.016564,
+    "p3r0": -0.004708,
+    "p3r1": -0.012763,
+    "p3r2": -0.011432,
+    "p4r0": -0.002316,
+    "p4r1": -0.005082,
+    "p4r2": -0.009804
+   },
+   "mean": -0.008473171255790916,
+   "sd": 0.005478457490616105,
+   "cohens_dz": -1.5466344806552523,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.00874673235892857,
+     -0.010035353402133426,
+     -0.008216127927670125,
+     -0.009634051466541579,
+     -0.005733591123680881
+    ],
+    "mean": -0.008473171255790916,
+    "sd": 0.0016907292932339237,
+    "t": -11.206162328154775,
+    "p": 0.0003610876177619346,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.003359792187632782,
+     -0.007681929086726913,
+     -0.014377792493013053
+    ],
+    "mean": -0.008473171255790916,
+    "sd": 0.0055514530359103975,
+    "t": -2.643625555566878,
+    "p": 0.11824050739772886,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.08163657435833872,
+    "frac_reaction_fold": 0.7334469590577546,
+    "frac_residual": 0.18491646658390656
+   }
+  },
+  "lin_tuned_expr_pooled_lr_vs_expr_perpat_lr": {
+   "label": "pooled frozen expression model over the per-patient one [tuned C]",
+   "arms": [
+    "expr_pooled_lr",
+    "expr_perpat_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.001067,
+    "p0r1": -0.000824,
+    "p0r2": -0.001649,
+    "p1r0": 9e-06,
+    "p1r1": -0.000328,
+    "p1r2": -0.001504,
+    "p2r0": -0.002374,
+    "p2r1": -0.001274,
+    "p2r2": -0.004734,
+    "p3r0": -0.004041,
+    "p3r1": -0.002909,
+    "p3r2": -0.004873,
+    "p4r0": -0.000962,
+    "p4r1": -0.001927,
+    "p4r2": -0.002484
+   },
+   "mean": -0.002062717407479971,
+   "sd": 0.0015142840006532308,
+   "cohens_dz": -1.3621734143596298,
+   "signflip_p": 0.0001220703125,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": true,
+   "all_same_sign": false,
+   "n_negative": 14,
+   "n_positive": 1,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.0011799993315234996,
+     -0.0006075724982415043,
+     -0.002793983133784761,
+     -0.003941113308148651,
+     -0.0017909187657014398
+    ],
+    "mean": -0.002062717407479971,
+    "sd": 0.0013260498795570012,
+    "t": -3.4782826895155887,
+    "p": 0.025391588260978766,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.0016867545747578428,
+     -0.0014524007512514369,
+     -0.0030489968964306337
+    ],
+    "mean": -0.002062717407479971,
+    "sd": 0.0008621431733718031,
+    "t": -4.144011646510258,
+    "p": 0.053593252610998676,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.6572918746912834,
+    "frac_reaction_fold": 0.23153469810123845,
+    "frac_residual": 0.11117342720747843
+   }
+  },
+  "lin_tuned_expr_pooled_lr_vs_expr_cohortmean_lr": {
+   "label": "pooled frozen expression model over the cohort-mean one [tuned C]",
+   "arms": [
+    "expr_pooled_lr",
+    "expr_cohortmean_lr"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.012607,
+    "p0r1": -0.010012,
+    "p0r2": -0.009802,
+    "p1r0": -0.01097,
+    "p1r1": -0.010451,
+    "p1r2": -0.009163,
+    "p2r0": -0.008838,
+    "p2r1": -0.010043,
+    "p2r2": -0.011548,
+    "p3r0": -0.011145,
+    "p3r1": -0.012606,
+    "p3r2": -0.013446,
+    "p4r0": -0.006982,
+    "p4r1": -0.010138,
+    "p4r2": -0.00891
+   },
+   "mean": -0.010444040547975134,
+   "sd": 0.0016852972232739003,
+   "cohens_dz": -6.19715051074865,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.010806991344135874,
+     -0.010194580391495603,
+     -0.010142783552996323,
+     -0.01239912564317521,
+     -0.008676721808072663
+    ],
+    "mean": -0.010444040547975134,
+    "sd": 0.0013444787730764029,
+    "t": -17.36999132503927,
+    "p": 6.447883772501838e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.010108566230539084,
+     -0.010649733415432539,
+     -0.010573821997953781
+    ],
+    "mean": -0.010444040547975134,
+    "sd": 0.00029299812127434657,
+    "t": -61.73967528093589,
+    "p": 0.00026224091842000336,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.5455167620448498,
+    "frac_reaction_fold": 0.02158980029408737,
+    "frac_residual": 0.43289343766106303
+   }
+  },
+  "lin_tuned_structure_plus_pooled_vs_structure_plus_perpat": {
+   "label": "pooled frozen network + expression model over the per-patient one [tuned C]",
+   "arms": [
+    "structure_plus_pooled",
+    "structure_plus_perpat"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.002809,
+    "p0r1": 0.001397,
+    "p0r2": 0.002317,
+    "p1r0": 0.002842,
+    "p1r1": 0.001894,
+    "p1r2": 0.002139,
+    "p2r0": 0.002769,
+    "p2r1": 0.002315,
+    "p2r2": 0.002446,
+    "p3r0": 0.003313,
+    "p3r1": 0.002821,
+    "p3r2": 0.002904,
+    "p4r0": 0.00303,
+    "p4r1": 0.002225,
+    "p4r2": 0.002344
+   },
+   "mean": 0.0025043419174772077,
+   "sd": 0.0004912359514035186,
+   "cohens_dz": 5.0980428250864165,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.0021742961444773945,
+     0.0022915322239137246,
+     0.002510068783662852,
+     0.003012851774085797,
+     0.0025329606612462716
+    ],
+    "mean": 0.002504341917477208,
+    "sd": 0.00032157902672163793,
+    "t": 17.413693994504552,
+    "p": 6.384096991670773e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.002952633677054073,
+     0.0021303692454713863,
+     0.002430022829906164
+    ],
+    "mean": 0.0025043419174772077,
+    "sd": 0.00041613963274908587,
+    "t": 10.42353839729176,
+    "p": 0.009078704613567152,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.36732319778613326,
+    "frac_reaction_fold": 0.5125896544843117,
+    "frac_residual": 0.12008714772955488
+   }
+  },
+  "lin_tuned_structure_plus_pooled_vs_structure_plus_cohortmean": {
+   "label": "pooled frozen network + expression model over the cohort-mean one [tuned C]",
+   "arms": [
+    "structure_plus_pooled",
+    "structure_plus_cohortmean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.004079,
+    "p0r1": 0.001951,
+    "p0r2": 0.002871,
+    "p1r0": 0.004192,
+    "p1r1": 0.002833,
+    "p1r2": 0.003135,
+    "p2r0": 0.003984,
+    "p2r1": 0.002698,
+    "p2r2": 0.003141,
+    "p3r0": 0.004472,
+    "p3r1": 0.003597,
+    "p3r2": 0.003468,
+    "p4r0": 0.004272,
+    "p4r1": 0.002976,
+    "p4r2": 0.003188
+   },
+   "mean": 0.0033904060605952266,
+   "sd": 0.0007038302957516195,
+   "cohens_dz": 4.817078891119082,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.002967128486744408,
+     0.0033865778013324097,
+     0.003274156645890628,
+     0.0038454887201808305,
+     0.0034786786488278563
+    ],
+    "mean": 0.0033904060605952266,
+    "sd": 0.00031921182755420194,
+    "t": 23.749678954270326,
+    "p": 1.86382256304413e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.004199691207482781,
+     0.002811071327394954,
+     0.0031604556469079447
+    ],
+    "mean": 0.0033904060605952266,
+    "sd": 0.0007223047746000278,
+    "t": 8.130024557143711,
+    "p": 0.01479430592648458,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.1763093101473669,
+    "frac_reaction_fold": 0.7522756804554828,
+    "frac_residual": 0.07141500939715034
+   }
+  },
+  "gnn_real_vs_lin_tuned_structure_plus_pooled": {
+   "label": "graph model over the pooled frozen linear model, own expression [tuned C]",
+   "arms": [
+    "gnn real",
+    "structure_plus_pooled"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.005871,
+    "p0r1": -0.006348,
+    "p0r2": -0.014578,
+    "p1r0": -0.003216,
+    "p1r1": -0.007693,
+    "p1r2": -0.019685,
+    "p2r0": -0.00117,
+    "p2r1": -0.007364,
+    "p2r2": -0.016675,
+    "p3r0": -0.004944,
+    "p3r1": -0.013028,
+    "p3r2": -0.011553,
+    "p4r0": -0.002305,
+    "p4r1": -0.005082,
+    "p4r2": -0.009922
+   },
+   "mean": -0.008628776946491609,
+   "sd": 0.005466299869636366,
+   "cohens_dz": -1.5785407226599186,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.008932068918052613,
+     -0.010197748154447073,
+     -0.008403049839329527,
+     -0.009841619895666565,
+     -0.005769397924962265
+    ],
+    "mean": -0.008628776946491609,
+    "sd": 0.0017501175536546012,
+    "t": -11.02470618316318,
+    "p": 0.00038479547322619543,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.0035009940297425547,
+     -0.007902844253488061,
+     -0.014482492556244208
+    ],
+    "mean": -0.008628776946491609,
+    "sd": 0.005526622945159913,
+    "t": -2.704269899865595,
+    "p": 0.11385770041414238,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.08786193164208668,
+    "frac_reaction_fold": 0.7301376285064562,
+    "frac_residual": 0.18200043985145714
+   }
+  },
+  "ivr_real_vs_mean": {
+   "label": "patient identity under inner-validation stopping: own expression minus cohort mean",
+   "arms": [
+    "ivr real",
+    "ivr mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.0079,
+    "p0r1": -0.0103,
+    "p0r2": -0.0008,
+    "p1r0": 0.0018,
+    "p1r1": -0.0056,
+    "p1r2": -0.0188,
+    "p2r0": -0.0059,
+    "p2r1": -0.0033,
+    "p2r2": -0.0179,
+    "p3r0": -0.0168,
+    "p3r1": 0.0003,
+    "p3r2": -0.03,
+    "p4r0": -0.0143,
+    "p4r1": -0.0065,
+    "p4r2": -0.0083
+   },
+   "mean": -0.00856666666666667,
+   "sd": 0.009711676820542732,
+   "cohens_dz": -0.8820996440641367,
+   "signflip_p": 0.0035400390625,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": true,
+   "all_same_sign": false,
+   "n_negative": 12,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.0010666666666666231,
+     -0.0075333333333333545,
+     -0.009033333333333338,
+     -0.015500000000000033,
+     -0.009700000000000005
+    ],
+    "mean": -0.00856666666666667,
+    "sd": 0.005169407874967698,
+    "t": -3.7055789503489134,
+    "p": 0.020733996741492837,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.005459999999999998,
+     -0.005080000000000018,
+     -0.015159999999999996
+    ],
+    "mean": -0.00856666666666667,
+    "sd": 0.005713154411823056,
+    "t": -2.597147013472483,
+    "p": 0.12176176434918176,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.24285461843334424,
+    "frac_reaction_fold": 0.24719258829172092,
+    "frac_residual": 0.5099527932749348
+   }
+  },
+  "main_real_vs_mean_on_ivr_cells": {
+   "label": "patient identity under the main selection rule, on the cells rerun with inner-validation stopping",
+   "arms": [
+    "real",
+    "mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.020199,
+    "p0r1": -0.006999,
+    "p0r2": -0.015723,
+    "p1r0": -0.010662,
+    "p1r1": -0.01472,
+    "p1r2": -0.017898,
+    "p2r0": -0.015385,
+    "p2r1": -0.009242,
+    "p2r2": -0.022015,
+    "p3r0": -0.018098,
+    "p3r1": -0.0136,
+    "p3r2": -0.012697,
+    "p4r0": -0.016073,
+    "p4r1": -0.012555,
+    "p4r2": -0.010195
+   },
+   "mean": -0.01440412152223746,
+   "sd": 0.004167311390869062,
+   "cohens_dz": -3.456454334993572,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.014307008379288702,
+     -0.014426389294476963,
+     -0.015547533330574978,
+     -0.01479866830596562,
+     -0.012941008300881037
+    ],
+    "mean": -0.01440412152223746,
+    "sd": 0.0009504847240642234,
+    "t": -33.886493979796356,
+    "p": 4.524051195997335e-06,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.01608333569360689,
+     -0.01142317403895432,
+     -0.015705854834151167
+    ],
+    "mean": -0.014404121522237459,
+    "sd": 0.002588466509998327,
+    "t": -9.63839795436556,
+    "p": 0.010593663319301951,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.04458939573134276,
+    "frac_reaction_fold": 0.2755783901762446,
+    "frac_residual": 0.6798322140924128
+   }
+  },
+  "ivr_real_vs_main_real": {
+   "label": "own-expression arm: inner-validation stopping minus the main rule",
+   "arms": [
+    "ivr real",
+    "real"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.002404,
+    "p0r1": -0.010826,
+    "p0r2": -0.001379,
+    "p1r0": -0.011005,
+    "p1r1": -0.006351,
+    "p1r2": -0.00685,
+    "p2r0": -0.007079,
+    "p2r1": -0.004752,
+    "p2r2": -0.003942,
+    "p3r0": -0.005051,
+    "p3r1": 0.001953,
+    "p3r2": -0.018592,
+    "p4r0": -0.008576,
+    "p4r1": -0.01742,
+    "p4r2": -0.013667
+   },
+   "mean": -0.007408807654424828,
+   "sd": 0.006192531236068344,
+   "cohens_dz": -1.1964102193416954,
+   "signflip_p": 0.00048828125,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": true,
+   "all_same_sign": false,
+   "n_negative": 13,
+   "n_positive": 2,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.0032669843438875392,
+     -0.00806863866067468,
+     -0.0052576770772257975,
+     -0.007229767094977395,
+     -0.013220971095358728
+    ],
+    "mean": -0.007408807654424828,
+    "sd": 0.003742684178458531,
+    "t": -4.426394736394198,
+    "p": 0.011453958649240224,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.005861312110745897,
+     -0.007479186450089892,
+     -0.008885924402438693
+    ],
+    "mean": -0.007408807654424828,
+    "sd": 0.0015135338648091874,
+    "t": -8.47845666313307,
+    "p": 0.013627543432535895,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.31310006740852686,
+    "frac_reaction_fold": 0.04266972438911254,
+    "frac_residual": 0.6442302082023605
+   }
+  },
+  "ivr_mean_vs_main_mean": {
+   "label": "cohort-mean arm: inner-validation stopping minus the main rule",
+   "arms": [
+    "ivr mean",
+    "mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.025695,
+    "p0r1": -0.007525,
+    "p0r2": -0.016302,
+    "p1r0": -0.023466,
+    "p1r1": -0.015471,
+    "p1r2": -0.005948,
+    "p2r0": -0.016564,
+    "p2r1": -0.010694,
+    "p2r2": -0.008058,
+    "p3r0": -0.006349,
+    "p3r1": -0.011947,
+    "p3r2": -0.001289,
+    "p4r0": -0.010349,
+    "p4r1": -0.023475,
+    "p4r2": -0.015562
+   },
+   "mean": -0.013246262509995617,
+   "sd": 0.007145273637855884,
+   "cohens_dz": -1.8538495768470646,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.01650732605650962,
+     -0.014961694621818289,
+     -0.011771877074467437,
+     -0.006528435400942982,
+     -0.01646197939623976
+    ],
+    "mean": -0.013246262509995617,
+    "sd": 0.0042196294670495274,
+    "t": -7.019465488961032,
+    "p": 0.0021694311200900172,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.01648464780435279,
+     -0.013822360489044195,
+     -0.009431779236589865
+    ],
+    "mean": -0.013246262509995617,
+    "sd": 0.0035615523890057347,
+    "t": -6.441909923473629,
+    "p": 0.0232599682670995,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.2989262903973651,
+    "frac_reaction_fold": 0.17746507938990805,
+    "frac_residual": 0.5236086302127265
+   }
+  },
+  "ivr_mean_vs_zero": {
+   "label": "aggregate expression under inner-validation stopping: cohort mean minus zeroed",
+   "arms": [
+    "ivr mean",
+    "ivr zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.082,
+    "p0r1": 0.0861,
+    "p0r2": 0.0885,
+    "p1r0": 0.0813,
+    "p1r1": 0.0794,
+    "p1r2": 0.0891,
+    "p2r0": 0.1014,
+    "p2r1": 0.0855,
+    "p2r2": 0.099,
+    "p3r0": 0.0963,
+    "p3r1": 0.0883,
+    "p3r2": 0.1048,
+    "p4r0": 0.0979,
+    "p4r1": 0.0841,
+    "p4r2": 0.0935
+   },
+   "mean": 0.09048,
+   "sd": 0.007879285681909405,
+   "cohens_dz": 11.483274455670426,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.08553333333333331,
+     0.08326666666666671,
+     0.09529999999999998,
+     0.0964666666666667,
+     0.09183333333333332
+    ],
+    "mean": 0.09048,
+    "sd": 0.005861010530995862,
+    "t": 34.51954736034304,
+    "p": 4.202086841677003e-06,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.09178,
+     0.08468000000000005,
+     0.09497999999999998
+    ],
+    "mean": 0.09048,
+    "sd": 0.005271622141238847,
+    "t": 29.728222712108746,
+    "p": 0.0011296027800867655,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.4742687609396323,
+    "frac_reaction_fold": 0.3197325245868415,
+    "frac_residual": 0.2059987144735263
+   }
+  },
+  "ivr_real_vs_zero": {
+   "label": "expression in total under inner-validation stopping: own minus zeroed",
+   "arms": [
+    "ivr real",
+    "ivr zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.0899,
+    "p0r1": 0.0758,
+    "p0r2": 0.0877,
+    "p1r0": 0.0831,
+    "p1r1": 0.0738,
+    "p1r2": 0.0703,
+    "p2r0": 0.0955,
+    "p2r1": 0.0822,
+    "p2r2": 0.0811,
+    "p3r0": 0.0795,
+    "p3r1": 0.0886,
+    "p3r2": 0.0748,
+    "p4r0": 0.0836,
+    "p4r1": 0.0776,
+    "p4r2": 0.0852
+   },
+   "mean": 0.08191333333333334,
+   "sd": 0.006842500239226102,
+   "cohens_dz": 11.971257649908079,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.08446666666666669,
+     0.07573333333333336,
+     0.08626666666666664,
+     0.08096666666666667,
+     0.08213333333333332
+    ],
+    "mean": 0.08191333333333334,
+    "sd": 0.004018955088079474,
+    "t": 45.57497597826125,
+    "p": 1.3862859253484842e-06,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.08632,
+     0.07960000000000003,
+     0.07981999999999997
+    ],
+    "mean": 0.08191333333333334,
+    "sd": 0.003817870261459036,
+    "t": 37.16157057061403,
+    "p": 0.0007233366467856344,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.2956990122211189,
+    "frac_reaction_fold": 0.22237433076760396,
+    "frac_residual": 0.48192665701127674
+   }
+  },
+  "ivr_indicator_vs_zero": {
+   "label": "presence under inner-validation stopping: indicator minus zeroed",
+   "arms": [
+    "ivr indicator",
+    "ivr zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.0659,
+    "p0r1": 0.0437,
+    "p0r2": 0.0618,
+    "p1r0": 0.064,
+    "p1r1": 0.0335,
+    "p1r2": 0.0547,
+    "p2r0": 0.0622,
+    "p2r1": 0.0612,
+    "p2r2": 0.0706,
+    "p3r0": 0.0614,
+    "p3r1": 0.0587,
+    "p3r2": 0.0735,
+    "p4r0": 0.0613,
+    "p4r1": 0.0682,
+    "p4r2": 0.0645
+   },
+   "mean": 0.06034666666666667,
+   "sd": 0.010148882180999512,
+   "cohens_dz": 5.9461392486796445,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.057133333333333335,
+     0.05073333333333337,
+     0.06466666666666665,
+     0.06453333333333333,
+     0.06466666666666669
+    ],
+    "mean": 0.06034666666666667,
+    "sd": 0.006276835720860192,
+    "t": 21.497973641995358,
+    "p": 2.7689959046766663e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.06295999999999999,
+     0.05306000000000002,
+     0.06502000000000001
+    ],
+    "mean": 0.06034666666666667,
+    "sd": 0.006393945052417421,
+    "t": 16.347261647888523,
+    "p": 0.0037211790308561213,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.32786745791485405,
+    "frac_reaction_fold": 0.2835132381197187,
+    "frac_residual": 0.38861930396542727
+   }
+  },
+  "ivr_mean_vs_indicator": {
+   "label": "magnitude under inner-validation stopping: cohort mean minus indicator",
+   "arms": [
+    "ivr mean",
+    "ivr indicator"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.0161,
+    "p0r1": 0.0424,
+    "p0r2": 0.0267,
+    "p1r0": 0.0173,
+    "p1r1": 0.0459,
+    "p1r2": 0.0344,
+    "p2r0": 0.0392,
+    "p2r1": 0.0243,
+    "p2r2": 0.0284,
+    "p3r0": 0.0349,
+    "p3r1": 0.0296,
+    "p3r2": 0.0313,
+    "p4r0": 0.0366,
+    "p4r1": 0.0159,
+    "p4r2": 0.029
+   },
+   "mean": 0.03013333333333333,
+   "sd": 0.009180621412726355,
+   "cohens_dz": 3.282276000572458,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.02839999999999998,
+     0.03253333333333334,
+     0.03063333333333333,
+     0.03193333333333337,
+     0.027166666666666634
+    ],
+    "mean": 0.03013333333333333,
+    "sd": 0.002294316649656056,
+    "t": 29.368300897827115,
+    "p": 8.003621203581931e-06,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.028820000000000002,
+     0.03162000000000002,
+     0.029959999999999966
+    ],
+    "mean": 0.03013333333333333,
+    "sd": 0.0014080246209968671,
+    "t": 37.067863414057655,
+    "p": 0.0007269944516312539,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.053532283215440735,
+    "frac_reaction_fold": 0.01680150963863647,
+    "frac_residual": 0.929666207145923
+   }
+  },
+  "ivr_real_vs_permute": {
+   "label": "wrong-patient check under inner-validation stopping: own minus permuted column",
+   "arms": [
+    "ivr real",
+    "ivr permute"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.0222,
+    "p0r1": -0.0012,
+    "p0r2": 0.0023,
+    "p1r0": 0.0007,
+    "p1r1": 0.0032,
+    "p1r2": 0.0019,
+    "p2r0": 0.0006,
+    "p2r1": 0.003,
+    "p2r2": 0.0013,
+    "p3r0": -0.0011,
+    "p3r1": 0.0048,
+    "p3r2": 0.0016,
+    "p4r0": 0.0018,
+    "p4r1": -0.0051,
+    "p4r2": 0.0013
+   },
+   "mean": 0.002486666666666674,
+   "sd": 0.005915822206671898,
+   "cohens_dz": 0.42034168367369074,
+   "signflip_p": 0.0589599609375,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": false,
+   "all_same_sign": false,
+   "n_negative": 3,
+   "n_positive": 12,
+   "block_patient": {
+    "p": 0.125,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.0077666666666666995,
+     0.0019333333333333425,
+     0.0016333333333333015,
+     0.0017666666666666941,
+     -0.0006666666666666673
+    ],
+    "mean": 0.002486666666666674,
+    "sd": 0.0031374618191568095,
+    "t": 1.7722464924031598,
+    "p": 0.1510433616930802,
+    "all_same_sign": false
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.00484,
+     0.0009400000000000075,
+     0.0016800000000000148
+    ],
+    "mean": 0.002486666666666674,
+    "sd": 0.002071360261599442,
+    "t": 2.0793258845416194,
+    "p": 0.17312378955618773,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.24109038065899846,
+    "frac_reaction_fold": 0.0875695298638243,
+    "frac_residual": 0.6713400894771772
+   }
+  },
+  "ivr_permute_vs_mean": {
+   "label": "wrong-patient arm against the cohort mean under inner-validation stopping",
+   "arms": [
+    "ivr permute",
+    "ivr mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.0143,
+    "p0r1": -0.0091,
+    "p0r2": -0.0031,
+    "p1r0": 0.0011,
+    "p1r1": -0.0088,
+    "p1r2": -0.0207,
+    "p2r0": -0.0065,
+    "p2r1": -0.0063,
+    "p2r2": -0.0192,
+    "p3r0": -0.0157,
+    "p3r1": -0.0045,
+    "p3r2": -0.0316,
+    "p4r0": -0.0161,
+    "p4r1": -0.0014,
+    "p4r2": -0.0096
+   },
+   "mean": -0.011053333333333344,
+   "sd": 0.008621473744309016,
+   "cohens_dz": -1.2820700568310126,
+   "signflip_p": 0.0001220703125,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": true,
+   "all_same_sign": false,
+   "n_negative": 14,
+   "n_positive": 1,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.008833333333333323,
+     -0.009466666666666698,
+     -0.010666666666666639,
+     -0.017266666666666725,
+     -0.009033333333333338
+    ],
+    "mean": -0.011053333333333344,
+    "sd": 0.0035454665889461576,
+    "t": -6.971157135807111,
+    "p": 0.0022263047193289156,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.010299999999999998,
+     -0.006020000000000025,
+     -0.01684000000000001
+    ],
+    "mean": -0.011053333333333346,
+    "sd": 0.005449195659299937,
+    "t": -3.5133506160040473,
+    "p": 0.07233340736708806,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.1449562631412395,
+    "frac_reaction_fold": 0.2853472874434775,
+    "frac_residual": 0.569696449415283
+   }
+  },
+  "ivr_real_vs_lin_tuned_structure_plus_perpat": {
+   "label": "ivr graph model over the per-patient linear model, own expression [tuned C]",
+   "arms": [
+    "ivr real",
+    "structure_plus_perpat"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.000658,
+    "p0r1": -0.015776,
+    "p0r2": -0.01364,
+    "p1r0": -0.011378,
+    "p1r1": -0.01215,
+    "p1r2": -0.024396,
+    "p2r0": -0.005479,
+    "p2r1": -0.009801,
+    "p2r2": -0.018172,
+    "p3r0": -0.006682,
+    "p3r1": -0.008254,
+    "p3r2": -0.02724,
+    "p4r0": -0.00785,
+    "p4r1": -0.020276,
+    "p4r2": -0.021245
+   },
+   "mean": -0.013533242683439228,
+   "sd": 0.007538400565168885,
+   "cohens_dz": -1.7952405906857034,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.010024757117462757,
+     -0.015974854591208027,
+     -0.011150658132892474,
+     -0.014058535216558163,
+     -0.01645740835907472
+    ],
+    "mean": -0.013533242683439228,
+    "sd": 0.0028624432727672963,
+    "t": -10.571825434610764,
+    "p": 0.00045298089123494475,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.006409672463434379,
+     -0.013251661458106568,
+     -0.02093839412877674
+    ],
+    "mean": -0.013533242683439228,
+    "sd": 0.007268452675576281,
+    "t": -3.224931765414301,
+    "p": 0.08418774723157488,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.12358579806194053,
+    "frac_reaction_fold": 0.6640449483853541,
+    "frac_residual": 0.21236925355270547
+   }
+  },
+  "ivr_real_vs_lin_tuned_structure_plus_pooled": {
+   "label": "ivr graph model over the pooled frozen linear model, own expression [tuned C]",
+   "arms": [
+    "ivr real",
+    "structure_plus_pooled"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.003467,
+    "p0r1": -0.017173,
+    "p0r2": -0.015957,
+    "p1r0": -0.01422,
+    "p1r1": -0.014044,
+    "p1r2": -0.026535,
+    "p2r0": -0.008248,
+    "p2r1": -0.012116,
+    "p2r2": -0.020617,
+    "p3r0": -0.009995,
+    "p3r1": -0.011075,
+    "p3r2": -0.030144,
+    "p4r0": -0.010881,
+    "p4r1": -0.022501,
+    "p4r2": -0.023589
+   },
+   "mean": -0.016037584600916435,
+   "sd": 0.007364643348545098,
+   "cohens_dz": -2.1776457924584625,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.012199053261940151,
+     -0.018266386815121754,
+     -0.013660726916555324,
+     -0.01707138699064396,
+     -0.01899036902032099
+    ],
+    "mean": -0.016037584600916435,
+    "sd": 0.002963908644448269,
+    "t": -12.099269466258644,
+    "p": 0.00026766488945075147,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.009362306140488452,
+     -0.015382030703577954,
+     -0.023368416958682903
+    ],
+    "mean": -0.016037584600916435,
+    "sd": 0.007026030048834311,
+    "t": -3.9535713861742074,
+    "p": 0.0584259556397159,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.13882874491037323,
+    "frac_reaction_fold": 0.6501125205961702,
+    "frac_residual": 0.21105873449345675
+   }
+  },
+  "ivr_mean_vs_lin_tuned_structure_plus_cohortmean": {
+   "label": "ivr graph model over the linear model, cohort mean [tuned C]",
+   "arms": [
+    "ivr mean",
+    "structure_plus_cohortmean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.007288,
+    "p0r1": -0.004922,
+    "p0r2": -0.012286,
+    "p1r0": -0.011829,
+    "p1r1": -0.005611,
+    "p1r2": -0.004599,
+    "p2r0": 0.001635,
+    "p2r1": -0.006118,
+    "p2r2": 0.000423,
+    "p3r0": 0.011277,
+    "p3r1": -0.007778,
+    "p3r2": 0.003324,
+    "p4r0": 0.007691,
+    "p4r1": -0.013025,
+    "p4r2": -0.012101
+   },
+   "mean": -0.004080511873654539,
+   "sd": 0.007489648237331035,
+   "cohens_dz": -0.5448202297827334,
+   "signflip_p": 0.0545654296875,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": false,
+   "all_same_sign": false,
+   "n_negative": 10,
+   "n_positive": 5,
+   "block_patient": {
+    "p": 0.1875,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.5,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.00816525810852912,
+     -0.007346475680455988,
+     -0.001353236937331359,
+     0.0022741017295369037,
+     -0.005811690371493132
+    ],
+    "mean": -0.004080511873654539,
+    "sd": 0.004420627585711109,
+    "t": -2.064028637467509,
+    "p": 0.10795824903903306,
+    "all_same_sign": false
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.00029738506699432675,
+     -0.007490959376182982,
+     -0.005047961311774962
+    ],
+    "mean": -0.004080511873654539,
+    "sd": 0.003983283331986611,
+    "t": -1.774328687417984,
+    "p": 0.21800390318229979,
+    "all_same_sign": false
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.2986057920807867,
+    "frac_reaction_fold": 0.20203728349098574,
+    "frac_residual": 0.4993569244282278
+   }
+  },
+  "ivr_real_vs_lin_tuned_structure_only": {
+   "label": "ivr graph model with own expression over the no-patient linear model [tuned C]",
+   "arms": [
+    "ivr real",
+    "structure_only"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.004226,
+    "p0r1": -0.011186,
+    "p0r2": -0.007529,
+    "p1r0": -0.006474,
+    "p1r1": -0.007486,
+    "p1r2": -0.018029,
+    "p2r0": -0.000574,
+    "p2r1": -0.005286,
+    "p2r2": -0.011929,
+    "p3r0": -0.001874,
+    "p3r1": -0.003686,
+    "p3r2": -0.021229,
+    "p4r0": -0.002974,
+    "p4r1": -0.015586,
+    "p4r2": -0.014929
+   },
+   "mean": -0.00830291163163898,
+   "sd": 0.007079096695369057,
+   "cohens_dz": -1.1728772736033553,
+   "signflip_p": 0.00048828125,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": true,
+   "all_same_sign": false,
+   "n_negative": 14,
+   "n_positive": 1,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.004829578298305622,
+     -0.01066291163163898,
+     -0.005929578298305649,
+     -0.008929578298305652,
+     -0.011162911631638997
+    ],
+    "mean": -0.00830291163163898,
+    "sd": 0.0028212881218809844,
+    "t": -6.580637644034873,
+    "p": 0.0027606576514403167,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.0015337064956580937,
+     -0.008645795869212125,
+     -0.01472923253004672
+    ],
+    "mean": -0.00830291163163898,
+    "sd": 0.006604441992427453,
+    "t": -2.1774837016120996,
+    "p": 0.16135390606314098,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.13614208646162054,
+    "frac_reaction_fold": 0.6217109770587161,
+    "frac_residual": 0.2421469364796635
+   }
+  },
+  "ivr_mean_vs_lin_tuned_structure_only": {
+   "label": "ivr graph model with cohort mean over the no-patient linear model [tuned C]",
+   "arms": [
+    "ivr mean",
+    "structure_only"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.003674,
+    "p0r1": -0.000886,
+    "p0r2": -0.006729,
+    "p1r0": -0.008274,
+    "p1r1": -0.001886,
+    "p1r2": 0.000771,
+    "p2r0": 0.005326,
+    "p2r1": -0.001986,
+    "p2r2": 0.005971,
+    "p3r0": 0.014926,
+    "p3r1": -0.003986,
+    "p3r2": 0.008771,
+    "p4r0": 0.011326,
+    "p4r1": -0.009086,
+    "p4r2": -0.006629
+   },
+   "mean": 0.0002637550350276907,
+   "sd": 0.0074136828451757866,
+   "cohens_dz": 0.0355767896382728,
+   "signflip_p": 0.8914794921875,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": false,
+   "all_same_sign": false,
+   "n_negative": 9,
+   "n_positive": 6,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.75,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.0037629116316389988,
+     -0.003129578298305624,
+     0.003103755035027689,
+     0.0065704217016943805,
+     -0.001462911631638993
+    ],
+    "mean": 0.00026375503502769067,
+    "sd": 0.004431415625332896,
+    "t": 0.1330893415544721,
+    "p": 0.900549630106921,
+    "all_same_sign": false
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.003926293504341904,
+     -0.0035657958692121073,
+     0.00043076746995327484
+    ],
+    "mean": 0.00026375503502769056,
+    "sd": 0.003748835907371122,
+    "t": 0.12186106106213296,
+    "p": 0.9141493509837152,
+    "all_same_sign": false
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.3062458227326168,
+    "frac_reaction_fold": 0.18264038762631102,
+    "frac_residual": 0.5111137896410721
+   }
+  },
+  "fam_real_vs_mean": {
+   "label": "patient identity on the family-disjoint split: own expression minus cohort mean",
+   "arms": [
+    "fam real",
+    "fam mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.0258,
+    "p0r1": 0.0059,
+    "p0r2": -0.001,
+    "p1r0": 0.0088,
+    "p1r1": -0.0074,
+    "p1r2": 0.0036,
+    "p2r0": 0.0223,
+    "p2r1": -0.0106,
+    "p2r2": -0.0432,
+    "p3r0": 0.0059,
+    "p3r1": -0.0115,
+    "p3r2": -0.0515,
+    "p4r0": 0.0192,
+    "p4r1": -0.0114,
+    "p4r2": -0.0483
+   },
+   "mean": -0.006226666666666669,
+   "sd": 0.024482835581182968,
+   "cohens_dz": -0.2543278390290855,
+   "signflip_p": 0.34234619140625,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": false,
+   "all_same_sign": false,
+   "n_negative": 8,
+   "n_positive": 7,
+   "block_patient": {
+    "p": 0.3125,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.75,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.010233333333333353,
+     0.001666666666666668,
+     -0.01049999999999999,
+     -0.019033333333333385,
+     -0.013499999999999993
+    ],
+    "mean": -0.006226666666666669,
+    "sd": 0.011920672986222082,
+    "t": -1.1679919377027783,
+    "p": 0.3076787623104767,
+    "all_same_sign": false
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.01639999999999997,
+     -0.006999999999999962,
+     -0.028080000000000015
+    ],
+    "mean": -0.0062266666666666685,
+    "sd": 0.02225008164779026,
+    "t": -0.48471296416718096,
+    "p": 0.6757715989970455,
+    "all_same_sign": false
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.2032035669405929,
+    "frac_reaction_fold": 0.5899453064660323,
+    "frac_residual": 0.20685112659337498
+   }
+  },
+  "fam_mean_vs_zero": {
+   "label": "aggregate expression on the family-disjoint split: cohort mean minus zeroed",
+   "arms": [
+    "fam mean",
+    "fam zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.1095,
+    "p0r1": 0.0591,
+    "p0r2": 0.1584,
+    "p1r0": 0.1026,
+    "p1r1": 0.0794,
+    "p1r2": 0.1696,
+    "p2r0": 0.0863,
+    "p2r1": 0.0744,
+    "p2r2": 0.1483,
+    "p3r0": 0.0985,
+    "p3r1": 0.0936,
+    "p3r2": 0.1798,
+    "p4r0": 0.0717,
+    "p4r1": 0.0825,
+    "p4r2": 0.1278
+   },
+   "mean": 0.10943333333333331,
+   "sd": 0.03834174648877546,
+   "cohens_dz": 2.854156196702461,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.10899999999999994,
+     0.11720000000000001,
+     0.10299999999999998,
+     0.12396666666666667,
+     0.09399999999999997
+    ],
+    "mean": 0.10943333333333331,
+    "sd": 0.011739912927937579,
+    "t": 20.84345717381014,
+    "p": 3.1306691483905456e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.09371999999999998,
+     0.07779999999999995,
+     0.15678
+    ],
+    "mean": 0.10943333333333331,
+    "sd": 0.04176890869215205,
+    "t": 4.537923046348767,
+    "p": 0.04528747297336929,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.08035986146616286,
+    "frac_reaction_fold": 0.8476848834602884,
+    "frac_residual": 0.07195525507354886
+   }
+  },
+  "fam_real_vs_zero": {
+   "label": "expression in total on the family-disjoint split: own minus zeroed",
+   "arms": [
+    "fam real",
+    "fam zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.1353,
+    "p0r1": 0.065,
+    "p0r2": 0.1574,
+    "p1r0": 0.1114,
+    "p1r1": 0.072,
+    "p1r2": 0.1732,
+    "p2r0": 0.1086,
+    "p2r1": 0.0638,
+    "p2r2": 0.1051,
+    "p3r0": 0.1044,
+    "p3r1": 0.0821,
+    "p3r2": 0.1283,
+    "p4r0": 0.0909,
+    "p4r1": 0.0711,
+    "p4r2": 0.0795
+   },
+   "mean": 0.10320666666666664,
+   "sd": 0.03356565988937985,
+   "cohens_dz": 3.074769481869211,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.1192333333333333,
+     0.11886666666666668,
+     0.09249999999999999,
+     0.10493333333333328,
+     0.08049999999999997
+    ],
+    "mean": 0.10320666666666664,
+    "sd": 0.01684708019542589,
+    "t": 13.698345334670275,
+    "p": 0.00016451464774606668,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.11011999999999995,
+     0.0708,
+     0.12869999999999998
+    ],
+    "mean": 0.10320666666666664,
+    "sd": 0.029562613777089002,
+    "t": 6.046799234140457,
+    "p": 0.026276288984430057,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.21592956874729405,
+    "frac_reaction_fold": 0.5540733273135392,
+    "frac_residual": 0.22999710393916675
+   }
+  },
+  "fam_indicator_vs_zero": {
+   "label": "presence on the family-disjoint split: indicator minus zeroed",
+   "arms": [
+    "fam indicator",
+    "fam zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.1165,
+    "p0r1": 0.0501,
+    "p0r2": 0.1152,
+    "p1r0": 0.0642,
+    "p1r1": 0.0459,
+    "p1r2": 0.0853,
+    "p2r0": 0.0822,
+    "p2r1": 0.0663,
+    "p2r2": 0.0658,
+    "p3r0": 0.0728,
+    "p3r1": 0.0594,
+    "p3r2": 0.109,
+    "p4r0": 0.0337,
+    "p4r1": 0.0498,
+    "p4r2": 0.0538
+   },
+   "mean": 0.07133333333333332,
+   "sd": 0.025680333405341985,
+   "cohens_dz": 2.7777417141513694,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 15,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.09393333333333327,
+     0.06513333333333338,
+     0.07143333333333331,
+     0.08039999999999996,
+     0.04576666666666666
+    ],
+    "mean": 0.07133333333333332,
+    "sd": 0.01792392876079966,
+    "t": 8.899063621801,
+    "p": 0.0008811925296917976,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.07387999999999997,
+     0.05429999999999997,
+     0.08582000000000001
+    ],
+    "mean": 0.07133333333333332,
+    "sd": 0.015913570728574206,
+    "t": 7.763999652493438,
+    "p": 0.016187618204618844,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.4175594462299624,
+    "frac_reaction_fold": 0.27428744312795095,
+    "frac_residual": 0.3081531106420867
+   }
+  },
+  "fam_mean_vs_indicator": {
+   "label": "magnitude on the family-disjoint split: cohort mean minus indicator",
+   "arms": [
+    "fam mean",
+    "fam indicator"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.007,
+    "p0r1": 0.009,
+    "p0r2": 0.0432,
+    "p1r0": 0.0384,
+    "p1r1": 0.0335,
+    "p1r2": 0.0843,
+    "p2r0": 0.0041,
+    "p2r1": 0.0081,
+    "p2r2": 0.0825,
+    "p3r0": 0.0257,
+    "p3r1": 0.0342,
+    "p3r2": 0.0708,
+    "p4r0": 0.038,
+    "p4r1": 0.0327,
+    "p4r2": 0.074
+   },
+   "mean": 0.0381,
+   "sd": 0.02884208235002657,
+   "cohens_dz": 1.3209864508955924,
+   "signflip_p": 0.00018310546875,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": true,
+   "all_same_sign": false,
+   "n_negative": 1,
+   "n_positive": 14,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.015066666666666673,
+     0.05206666666666663,
+     0.031566666666666666,
+     0.04356666666666672,
+     0.048233333333333316
+    ],
+    "mean": 0.0381,
+    "sd": 0.01500712793604721,
+    "t": 5.676915017037007,
+    "p": 0.004751247320249099,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.019840000000000014,
+     0.023499999999999986,
+     0.07096
+    ],
+    "mean": 0.038099999999999995,
+    "sd": 0.028516374243581524,
+    "t": 2.3141488887994774,
+    "p": 0.14672004709379494,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.23205725740990685,
+    "frac_reaction_fold": 0.6982442221100248,
+    "frac_residual": 0.06969852048006846
+   }
+  },
+  "fam_real_vs_permute": {
+   "label": "wrong-patient check on the family-disjoint split: own minus permuted column",
+   "arms": [
+    "fam real",
+    "fam permute"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.0118,
+    "p0r1": 0.0192,
+    "p0r2": 0.0024,
+    "p1r0": 0.0167,
+    "p1r1": -0.0065,
+    "p1r2": 0.0164,
+    "p2r0": 0.0117,
+    "p2r1": 0.0091,
+    "p2r2": 0.0199,
+    "p3r0": -0.0052,
+    "p3r1": 0.004,
+    "p3r2": 0.0113,
+    "p4r0": 0.0144,
+    "p4r1": -0.0114,
+    "p4r2": -0.0179
+   },
+   "mean": 0.006393333333333318,
+   "sd": 0.011755817202357223,
+   "cohens_dz": 0.5438442282048547,
+   "signflip_p": 0.05596923828125,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": false,
+   "all_same_sign": false,
+   "n_negative": 4,
+   "n_positive": 11,
+   "block_patient": {
+    "p": 0.1875,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.011133333333333328,
+     0.008866666666666653,
+     0.013566666666666652,
+     0.003366666666666629,
+     -0.004966666666666675
+    ],
+    "mean": 0.006393333333333318,
+    "sd": 0.007386677196141714,
+    "t": 1.935366546627463,
+    "p": 0.12504143402083723,
+    "all_same_sign": false
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.009879999999999955,
+     0.002880000000000016,
+     0.006419999999999981
+    ],
+    "mean": 0.006393333333333317,
+    "sd": 0.003500076189646894,
+    "t": 3.163810603841214,
+    "p": 0.08705536170606601,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.3384120372795111,
+    "frac_reaction_fold": 0.06331714322730625,
+    "frac_residual": 0.5982708194931825
+   }
+  },
+  "fam_permute_vs_mean": {
+   "label": "wrong-patient arm against the cohort mean on the family-disjoint split",
+   "arms": [
+    "fam permute",
+    "fam mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.014,
+    "p0r1": -0.0133,
+    "p0r2": -0.0034,
+    "p1r0": -0.0079,
+    "p1r1": -0.0009,
+    "p1r2": -0.0128,
+    "p2r0": 0.0106,
+    "p2r1": -0.0197,
+    "p2r2": -0.0631,
+    "p3r0": 0.0111,
+    "p3r1": -0.0155,
+    "p3r2": -0.0628,
+    "p4r0": 0.0048,
+    "p4r1": 0.0,
+    "p4r2": -0.0304
+   },
+   "mean": -0.012619999999999987,
+   "sd": 0.023843393814040603,
+   "cohens_dz": -0.5292870678740573,
+   "signflip_p": 0.0523681640625,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": false,
+   "all_same_sign": false,
+   "n_negative": 10,
+   "n_positive": 4,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.5,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.0008999999999999749,
+     -0.007199999999999984,
+     -0.024066666666666642,
+     -0.022400000000000014,
+     -0.008533333333333318
+    ],
+    "mean": -0.012619999999999987,
+    "sd": 0.010125589146096918,
+    "t": -2.7869171333032887,
+    "p": 0.049467544923632326,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.0065200000000000145,
+     -0.009879999999999977,
+     -0.034499999999999996
+    ],
+    "mean": -0.012619999999999985,
+    "sd": 0.0206468108917576,
+    "t": -1.0586855910151876,
+    "p": 0.40071559361231396,
+    "all_same_sign": false
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.15458155423860104,
+    "frac_reaction_fold": 0.5356014948416298,
+    "frac_residual": 0.30981695091976913
+   }
+  },
+  "fam_real_vs_rand_real": {
+   "label": "own-expression arm: family-disjoint split minus random split",
+   "arms": [
+    "fam real",
+    "ivr real"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.0688,
+    "p0r1": -0.0419,
+    "p0r2": -0.0506,
+    "p1r0": -0.0657,
+    "p1r1": -0.0367,
+    "p1r2": -0.0274,
+    "p2r0": -0.0667,
+    "p2r1": -0.0402,
+    "p2r2": -0.0606,
+    "p3r0": -0.0724,
+    "p3r1": -0.0374,
+    "p3r2": -0.0469,
+    "p4r0": -0.0616,
+    "p4r1": -0.0274,
+    "p4r2": -0.0594
+   },
+   "mean": -0.050913333333333345,
+   "sd": 0.015194306577825546,
+   "cohens_dz": -3.3508165096284075,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.053766666666666706,
+     -0.043266666666666675,
+     -0.055833333333333325,
+     -0.052233333333333354,
+     -0.04946666666666666
+    ],
+    "mean": -0.050913333333333345,
+    "sd": 0.004864531495084258,
+    "t": -23.403214556115728,
+    "p": 1.975974899163701e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.06704000000000002,
+     -0.036719999999999996,
+     -0.048980000000000024
+    ],
+    "mean": -0.050913333333333345,
+    "sd": 0.015252177986547811,
+    "t": -5.78176311565475,
+    "p": 0.028635636354470518,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.08785641534208741,
+    "frac_reaction_fold": 0.7197371563832063,
+    "frac_residual": 0.19240642827470644
+   }
+  },
+  "fam_mean_vs_rand_mean": {
+   "label": "cohort-mean arm: family-disjoint split minus random split",
+   "arms": [
+    "fam mean",
+    "ivr mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.0867,
+    "p0r1": -0.0581,
+    "p0r2": -0.0504,
+    "p1r0": -0.0727,
+    "p1r1": -0.0349,
+    "p1r2": -0.0498,
+    "p2r0": -0.0949,
+    "p2r1": -0.0329,
+    "p2r2": -0.0353,
+    "p3r0": -0.0951,
+    "p3r1": -0.0256,
+    "p3r2": -0.0254,
+    "p4r0": -0.0951,
+    "p4r1": -0.0225,
+    "p4r2": -0.0194
+   },
+   "mean": -0.05325333333333335,
+   "sd": 0.02863925544389992,
+   "cohens_dz": -1.8594524371504273,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.06506666666666668,
+     -0.052466666666666696,
+     -0.054366666666666674,
+     -0.0487,
+     -0.04566666666666667
+    ],
+    "mean": -0.05325333333333334,
+    "sd": 0.0074112002326808665,
+    "t": -16.067312934913716,
+    "p": 8.774966859444102e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.08889999999999998,
+     -0.03480000000000005,
+     -0.03606
+    ],
+    "mean": -0.05325333333333335,
+    "sd": 0.030877346604482252,
+    "t": -2.987221673780258,
+    "p": 0.0961701552853891,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.057399334639469196,
+    "frac_reaction_fold": 0.8302874315227988,
+    "frac_residual": 0.11231323383773197
+   }
+  },
+  "fam_zero_vs_rand_zero": {
+   "label": "zeroed arm: family-disjoint split minus random split",
+   "arms": [
+    "fam zero",
+    "ivr zero"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.1142,
+    "p0r1": -0.0311,
+    "p0r2": -0.1203,
+    "p1r0": -0.094,
+    "p1r1": -0.0349,
+    "p1r2": -0.1303,
+    "p2r0": -0.0798,
+    "p2r1": -0.0218,
+    "p2r2": -0.0846,
+    "p3r0": -0.0973,
+    "p3r1": -0.0309,
+    "p3r2": -0.1004,
+    "p4r0": -0.0689,
+    "p4r1": -0.0209,
+    "p4r2": -0.0537
+   },
+   "mean": -0.07220666666666666,
+   "sd": 0.037679484123452706,
+   "cohens_dz": -1.916339046205872,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.08853333333333331,
+     -0.08639999999999999,
+     -0.06206666666666668,
+     -0.07619999999999998,
+     -0.04783333333333332
+    ],
+    "mean": -0.07220666666666666,
+    "sd": 0.017181650418720284,
+    "t": -9.397177288592543,
+    "p": 0.0007146050043858301,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.09083999999999996,
+     -0.027919999999999966,
+     -0.09786000000000003
+    ],
+    "mean": -0.07220666666666666,
+    "sd": 0.03851365645239796,
+    "t": -3.2473056788683543,
+    "p": 0.08317184828665651,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.17822682527434347,
+    "frac_reaction_fold": 0.7462624201675063,
+    "frac_residual": 0.0755107545581503
+   }
+  },
+  "fam_indicator_vs_rand_indicator": {
+   "label": "presence-only arm: family-disjoint split minus random split",
+   "arms": [
+    "fam indicator",
+    "ivr indicator"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.0636,
+    "p0r1": -0.0247,
+    "p0r2": -0.0669,
+    "p1r0": -0.0938,
+    "p1r1": -0.0225,
+    "p1r2": -0.0997,
+    "p2r0": -0.0598,
+    "p2r1": -0.0167,
+    "p2r2": -0.0894,
+    "p3r0": -0.0859,
+    "p3r1": -0.0302,
+    "p3r2": -0.0649,
+    "p4r0": -0.0965,
+    "p4r1": -0.0393,
+    "p4r2": -0.0644
+   },
+   "mean": -0.06122000000000002,
+   "sd": 0.028674732530823817,
+   "cohens_dz": -2.134980681482966,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.051733333333333374,
+     -0.072,
+     -0.055300000000000016,
+     -0.06033333333333335,
+     -0.06673333333333335
+    ],
+    "mean": -0.06122000000000002,
+    "sd": 0.008252797505492694,
+    "t": -16.587354953447953,
+    "p": 7.737351584333417e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.07991999999999999,
+     -0.026680000000000016,
+     -0.07706000000000005
+    ],
+    "mean": -0.06122000000000002,
+    "sd": 0.029946679281683302,
+    "t": -3.5408316709166163,
+    "p": 0.07133178222579549,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.07099975293979041,
+    "frac_reaction_fold": 0.7790593712439292,
+    "frac_residual": 0.14994087581628052
+   }
+  },
+  "fam_permute_vs_rand_permute": {
+   "label": "wrong-patient arm: family-disjoint split minus random split",
+   "arms": [
+    "fam permute",
+    "ivr permute"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.0584,
+    "p0r1": -0.0623,
+    "p0r2": -0.0507,
+    "p1r0": -0.0817,
+    "p1r1": -0.027,
+    "p1r2": -0.0419,
+    "p2r0": -0.0778,
+    "p2r1": -0.0463,
+    "p2r2": -0.0792,
+    "p3r0": -0.0683,
+    "p3r1": -0.0366,
+    "p3r2": -0.0566,
+    "p4r0": -0.0742,
+    "p4r1": -0.0211,
+    "p4r2": -0.0402
+   },
+   "mean": -0.05481999999999999,
+   "sd": 0.019249163247120265,
+   "cohens_dz": -2.847916000099445,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.057133333333333335,
+     -0.05019999999999999,
+     -0.06776666666666668,
+     -0.05383333333333329,
+     -0.045166666666666654
+    ],
+    "mean": -0.05481999999999999,
+    "sd": 0.008492238286288917,
+    "t": -14.434503883911397,
+    "p": 0.00013389799254333938,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.07207999999999996,
+     -0.03866000000000001,
+     -0.05371999999999999
+    ],
+    "mean": -0.05481999999999999,
+    "sd": 0.016737132370869247,
+    "t": -5.673076078204819,
+    "p": 0.029694511759916522,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.1668298819092745,
+    "frac_reaction_fold": 0.5400206345191746,
+    "frac_residual": 0.29314948357155085
+   }
+  },
+  "fam_pat_minus_rand_pat": {
+   "label": "patient identity: the family-disjoint contrast minus the random-split contrast on the same cells",
+   "arms": [
+    "fam real minus mean",
+    "ivr real minus mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": 0.0179,
+    "p0r1": 0.0162,
+    "p0r2": -0.0002,
+    "p1r0": 0.007,
+    "p1r1": -0.0018,
+    "p1r2": 0.0224,
+    "p2r0": 0.0282,
+    "p2r1": -0.0073,
+    "p2r2": -0.0253,
+    "p3r0": 0.0227,
+    "p3r1": -0.0118,
+    "p3r2": -0.0215,
+    "p4r0": 0.0335,
+    "p4r1": -0.0049,
+    "p4r2": -0.04
+   },
+   "mean": 0.0023400000000000014,
+   "sd": 0.021391613844147967,
+   "cohens_dz": 0.10938866123184751,
+   "signflip_p": 0.6748046875,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": false,
+   "signflip_certifiable": false,
+   "all_same_sign": false,
+   "n_negative": 8,
+   "n_positive": 7,
+   "block_patient": {
+    "p": 0.5,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 1.0,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     0.011299999999999977,
+     0.009200000000000022,
+     -0.0014666666666666532,
+     -0.0035333333333333514,
+     -0.0037999999999999887
+    ],
+    "mean": 0.002340000000000001,
+    "sd": 0.007314840318755349,
+    "t": 0.7153128215162219,
+    "p": 0.5139485821590483,
+    "all_same_sign": false
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.02185999999999997,
+     -0.0019199999999999439,
+     -0.01292000000000002
+    ],
+    "mean": 0.002340000000000002,
+    "sd": 0.017777030123167354,
+    "t": 0.22799077582870458,
+    "p": 0.8408411705254517,
+    "all_same_sign": false
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.10022494116315067,
+    "frac_reaction_fold": 0.4932911006715759,
+    "frac_residual": 0.4064839581652736
+   }
+  },
+  "lookup_fam_vs_rand": {
+   "label": "nearest-family label lookup: family-disjoint split minus random split",
+   "arms": [
+    "lookup (family folds)",
+    "lookup (random folds)"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.229153,
+    "p0r1": -0.15699,
+    "p0r2": -0.209981,
+    "p1r0": -0.229153,
+    "p1r1": -0.15699,
+    "p1r2": -0.209981,
+    "p2r0": -0.229153,
+    "p2r1": -0.15699,
+    "p2r2": -0.209981,
+    "p3r0": -0.229153,
+    "p3r1": -0.15699,
+    "p3r2": -0.209981,
+    "p4r0": -0.229153,
+    "p4r1": -0.15699,
+    "p4r2": -0.209981
+   },
+   "mean": -0.1987083357170039,
+   "sd": 0.03159098574090453,
+   "cohens_dz": -6.290032775384817,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.1987083357170039,
+     -0.1987083357170039,
+     -0.1987083357170039,
+     -0.1987083357170039,
+     -0.1987083357170039
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.22915344615276412,
+     -0.1569903474958566,
+     -0.20998121350239096
+    ],
+    "mean": -0.1987083357170039,
+    "sd": 0.03737895841399071,
+    "t": -9.20766516652006,
+    "p": 0.011590415577434721,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 6.947309250840812e-30,
+    "frac_reaction_fold": 1.0,
+    "frac_residual": 1.1799398251428047e-29
+   }
+  },
+  "fam_gnn_real_vs_lin_structure_only": {
+   "label": "graph model with own expression over the no-patient linear model, family-disjoint split",
+   "arms": [
+    "fam real",
+    "structure_only (family folds)"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.022846,
+    "p0r1": -0.044505,
+    "p0r2": -0.044439,
+    "p1r0": -0.030446,
+    "p1r1": -0.035605,
+    "p1r2": -0.031739,
+    "p2r0": -0.025546,
+    "p2r1": -0.036905,
+    "p2r2": -0.058839,
+    "p3r0": -0.032546,
+    "p3r1": -0.032505,
+    "p3r2": -0.054439,
+    "p4r0": -0.022846,
+    "p4r1": -0.034405,
+    "p4r2": -0.060639
+   },
+   "mean": -0.037883107991468996,
+   "sd": 0.012221347684293659,
+   "cohens_dz": -3.0997488141307614,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.037263107991469,
+     -0.03259644132480233,
+     -0.04042977465813565,
+     -0.039829774658135676,
+     -0.03929644132480233
+    ],
+    "mean": -0.037883107991468996,
+    "sd": 0.0031861331492020932,
+    "t": -26.586837618228238,
+    "p": 1.189596248687168e-05,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.026845752939787436,
+     -0.03678477183998634,
+     -0.050018799194633215
+    ],
+    "mean": -0.037883107991468996,
+    "sd": 0.011625501060536952,
+    "t": -5.6440980434448695,
+    "p": 0.02998659722260328,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.058256294036028874,
+    "frac_reaction_fold": 0.6463341834257675,
+    "frac_residual": 0.29540952253820346
+   }
+  },
+  "fam_gnn_mean_vs_lin_structure_only": {
+   "label": "graph model with the cohort mean over the no-patient linear model, family-disjoint split",
+   "arms": [
+    "fam mean",
+    "structure_only (family folds)"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.048646,
+    "p0r1": -0.050405,
+    "p0r2": -0.043439,
+    "p1r0": -0.039246,
+    "p1r1": -0.028205,
+    "p1r2": -0.035339,
+    "p2r0": -0.047846,
+    "p2r1": -0.026305,
+    "p2r2": -0.015639,
+    "p3r0": -0.038446,
+    "p3r1": -0.021005,
+    "p3r2": -0.002939,
+    "p4r0": -0.042046,
+    "p4r1": -0.023005,
+    "p4r2": -0.012339
+   },
+   "mean": -0.031656441324802324,
+   "sd": 0.014514887172186582,
+   "cohens_dz": -2.1809636512684976,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.04749644132480235,
+     -0.034263107991469,
+     -0.02992977465813566,
+     -0.020796441324802295,
+     -0.025796441324802338
+    ],
+    "mean": -0.03165644132480233,
+    "sd": 0.010160719572068828,
+    "t": -6.966628123718479,
+    "p": 0.0022317305176744583,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.043245752939787406,
+     -0.02978477183998638,
+     -0.021938799194633197
+    ],
+    "mean": -0.03165644132480233,
+    "sd": 0.010776081359651506,
+    "t": -5.088172864644541,
+    "p": 0.03652273927658886,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.42002468273470955,
+    "frac_reaction_fold": 0.39370085598748444,
+    "frac_residual": 0.18627446127780606
+   }
+  },
+  "fam_lin_structure_only_vs_rand": {
+   "label": "the no-patient linear model: family-disjoint split minus random split",
+   "arms": [
+    "structure_only (family folds)",
+    "structure_only (random folds)"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.041728,
+    "p0r1": -0.008581,
+    "p0r2": -0.01369,
+    "p1r0": -0.041728,
+    "p1r1": -0.008581,
+    "p1r2": -0.01369,
+    "p2r0": -0.041728,
+    "p2r1": -0.008581,
+    "p2r2": -0.01369,
+    "p3r0": -0.041728,
+    "p3r1": -0.008581,
+    "p3r2": -0.01369,
+    "p4r0": -0.041728,
+    "p4r1": -0.008581,
+    "p4r2": -0.01369
+   },
+   "mean": -0.021333136973503326,
+   "sd": 0.015082817173285155,
+   "cohens_dz": -1.4144000241074859,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.021333136973503326,
+     -0.021333136973503326,
+     -0.021333136973503326,
+     -0.021333136973503326,
+     -0.021333136973503326
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.04172795355587067,
+     -0.008581024029225781,
+     -0.013690433335413532
+    ],
+    "mean": -0.021333136973503326,
+    "sd": 0.017846229950212,
+    "t": -2.070469630057354,
+    "p": 0.17424254030844216,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": -1.4361874599747854e-30,
+    "frac_reaction_fold": 1.0000000000000002,
+    "frac_residual": 1.8330287318099235e-30
+   }
+  },
+  "fam_gnn_lin_gap_change": {
+   "label": "the graph model's standing against the no-patient linear model: the family-disjoint gap minus the random-split gap",
+   "arms": [
+    "fam gnn minus structure_only",
+    "random gnn minus structure_only"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "n": 15,
+   "per_cell": {
+    "p0r0": -0.027072,
+    "p0r1": -0.033319,
+    "p0r2": -0.03691,
+    "p1r0": -0.023972,
+    "p1r1": -0.028119,
+    "p1r2": -0.01371,
+    "p2r0": -0.024972,
+    "p2r1": -0.031619,
+    "p2r2": -0.04691,
+    "p3r0": -0.030672,
+    "p3r1": -0.028819,
+    "p3r2": -0.03321,
+    "p4r0": -0.019872,
+    "p4r1": -0.018819,
+    "p4r2": -0.04571
+   },
+   "mean": -0.029580196359830016,
+   "sd": 0.009142927188143874,
+   "cohens_dz": -3.2353091904951676,
+   "signflip_p": 6.103515625e-05,
+   "signflip_floor": 6.103515625e-05,
+   "signflip_at_floor": true,
+   "signflip_certifiable": true,
+   "all_same_sign": true,
+   "n_negative": 15,
+   "n_positive": 0,
+   "block_patient": {
+    "p": 0.0625,
+    "floor": 0.0625,
+    "n_blocks": 5
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 5,
+    "means": [
+     -0.032433529693163377,
+     -0.02193352969316335,
+     -0.03450019635983,
+     -0.030900196359830028,
+     -0.028133529693163333
+    ],
+    "mean": -0.02958019635983002,
+    "sd": 0.004864531495084258,
+    "t": -13.597060665597786,
+    "p": 0.0001693833804759993,
+    "all_same_sign": true
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     -0.025312046444129342,
+     -0.028138975970774215,
+     -0.03528956666458649
+    ],
+    "mean": -0.029580196359830016,
+    "sd": 0.005142525118536655,
+    "t": -9.962888233333256,
+    "p": 0.009924903382350699,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 5,
+    "n_reaction_folds": 3,
+    "balanced": true,
+    "frac_patient_fold": 0.2426413016683578,
+    "frac_reaction_fold": 0.2259718209573096,
+    "frac_residual": 0.5313868773743329
+   }
+  },
+  "synth_full_ivr_real_vs_mean": {
+   "label": "synthetic patient-varying target (synth_full_ivr): own expression minus cohort mean, all held-out reactions",
+   "arms": [
+    "real",
+    "mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.1083,
+    "p0r1": 0.103,
+    "p0r2": 0.1016
+   },
+   "mean": 0.10429999999999999,
+   "sd": 0.0035341194094144256,
+   "cohens_dz": 29.51230219390964,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.10429999999999999
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.10829999999999995,
+     0.10299999999999998,
+     0.10160000000000002
+    ],
+    "mean": 0.10429999999999999,
+    "sd": 0.0035341194094144256,
+    "t": 51.11680684817794,
+    "p": 0.0003824928659849897,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   }
+  },
+  "synth_full_ivr_real_vs_mean_vary": {
+   "label": "synthetic patient-varying target (synth_full_ivr): own expression minus cohort mean, varying held-out reactions",
+   "arms": [
+    "real",
+    "mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.2888,
+    "p0r1": 0.2938,
+    "p0r2": 0.2983
+   },
+   "mean": 0.2936333333333333,
+   "sd": 0.004752192476461087,
+   "cohens_dz": 61.78902365335153,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.2936333333333333
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.2888,
+     0.29379999999999995,
+     0.2983
+    ],
+    "mean": 0.2936333333333333,
+    "sd": 0.004752192476461087,
+    "t": 107.02172831768,
+    "p": 8.729697759642245e-05,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   }
+  },
+  "synth_half_ivr_real_vs_mean": {
+   "label": "synthetic patient-varying target (synth_half_ivr): own expression minus cohort mean, all held-out reactions",
+   "arms": [
+    "real",
+    "mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.0085,
+    "p0r1": 0.0097,
+    "p0r2": 0.0205
+   },
+   "mean": 0.012900000000000023,
+   "sd": 0.006609084656743371,
+   "cohens_dz": 1.951858792856877,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.012900000000000023
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.008499999999999952,
+     0.009700000000000042,
+     0.020500000000000074
+    ],
+    "mean": 0.012900000000000023,
+    "sd": 0.006609084656743371,
+    "t": 3.3807185984281674,
+    "p": 0.07746466363786307,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   }
+  },
+  "synth_half_ivr_real_vs_mean_vary": {
+   "label": "synthetic patient-varying target (synth_half_ivr): own expression minus cohort mean, varying held-out reactions",
+   "arms": [
+    "real",
+    "mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.077,
+    "p0r1": 0.0806,
+    "p0r2": 0.0995
+   },
+   "mean": 0.0857,
+   "sd": 0.012085942247090236,
+   "cohens_dz": 7.09088279986054,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.0857
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.07700000000000001,
+     0.08059999999999995,
+     0.09950000000000003
+    ],
+    "mean": 0.0857,
+    "sd": 0.012085942247090236,
+    "t": 12.281769279874709,
+    "p": 0.006564255089592993,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   }
+  },
+  "synth_full_main_real_vs_mean": {
+   "label": "synthetic patient-varying target (synth_full_main): own expression minus cohort mean, all held-out reactions",
+   "arms": [
+    "real",
+    "mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.106,
+    "p0r1": 0.1039,
+    "p0r2": 0.1066
+   },
+   "mean": 0.1055,
+   "sd": 0.0014177446878757948,
+   "cohens_dz": 74.41396247308147,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.1055
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.10599999999999998,
+     0.10389999999999999,
+     0.10660000000000003
+    ],
+    "mean": 0.1055,
+    "sd": 0.0014177446878757948,
+    "t": 128.8887637959009,
+    "p": 6.019087700415385e-05,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   }
+  },
+  "synth_full_main_real_vs_mean_vary": {
+   "label": "synthetic patient-varying target (synth_full_main): own expression minus cohort mean, varying held-out reactions",
+   "arms": [
+    "real",
+    "mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.3117,
+    "p0r1": 0.3153,
+    "p0r2": 0.313
+   },
+   "mean": 0.3133333333333333,
+   "sd": 0.0018230011885167026,
+   "cohens_dz": 171.87774495543752,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.3133333333333333
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.3117,
+     0.31529999999999997,
+     0.313
+    ],
+    "mean": 0.3133333333333333,
+    "sd": 0.0018230011885167026,
+    "t": 297.70098695318313,
+    "p": 1.1283195178964862e-05,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   }
+  },
+  "synth_half_main_real_vs_mean": {
+   "label": "synthetic patient-varying target (synth_half_main): own expression minus cohort mean, all held-out reactions",
+   "arms": [
+    "real",
+    "mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.0132,
+    "p0r1": 0.0117,
+    "p0r2": 0.0116
+   },
+   "mean": 0.012166666666666659,
+   "sd": 0.0008962886439832505,
+   "cohens_dz": 13.574496060327219,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.012166666666666659
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.01319999999999999,
+     0.011700000000000044,
+     0.011599999999999944
+    ],
+    "mean": 0.012166666666666659,
+    "sd": 0.0008962886439832505,
+    "t": 23.5117168636303,
+    "p": 0.001804075982768671,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   }
+  },
+  "synth_half_main_real_vs_mean_vary": {
+   "label": "synthetic patient-varying target (synth_half_main): own expression minus cohort mean, varying held-out reactions",
+   "arms": [
+    "real",
+    "mean"
+   ],
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2"
+   ],
+   "n": 3,
+   "per_cell": {
+    "p0r0": 0.16,
+    "p0r1": 0.1623,
+    "p0r2": 0.1713
+   },
+   "mean": 0.16453333333333336,
+   "sd": 0.005971878543082874,
+   "cohens_dz": 27.551352919578303,
+   "signflip_p": 0.25,
+   "signflip_floor": 0.25,
+   "signflip_at_floor": true,
+   "signflip_certifiable": false,
+   "all_same_sign": true,
+   "n_negative": 0,
+   "n_positive": 3,
+   "block_patient": {
+    "p": 1.0,
+    "floor": 1.0,
+    "n_blocks": 1
+   },
+   "block_reaction": {
+    "p": 0.25,
+    "floor": 0.25,
+    "n_blocks": 3
+   },
+   "t_patient_folds": {
+    "n": 1,
+    "means": [
+     0.16453333333333336
+    ],
+    "t": null,
+    "p": null
+   },
+   "t_reaction_folds": {
+    "n": 3,
+    "means": [
+     0.16000000000000003,
+     0.1623,
+     0.17130000000000006
+    ],
+    "mean": 0.16453333333333336,
+    "sd": 0.005971878543082874,
+    "t": 47.72034307397075,
+    "p": 0.0004388407343204906,
+    "all_same_sign": true
+   },
+   "variance": {
+    "n_patient_folds": 1,
+    "n_reaction_folds": 3,
+    "balanced": null,
+    "frac_patient_fold": null,
+    "frac_reaction_fold": null,
+    "frac_residual": null
+   }
+  }
+ },
+ "basis": [
+  "p0r0",
+  "p0r1",
+  "p0r2",
+  "p1r0",
+  "p1r1",
+  "p1r2",
+  "p2r0",
+  "p2r1",
+  "p2r2",
+  "p3r0",
+  "p3r1",
+  "p3r2",
+  "p4r0",
+  "p4r1",
+  "p4r2"
+ ]
+}

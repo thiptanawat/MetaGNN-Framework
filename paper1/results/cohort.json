@@ -1,0 +1,29 @@
+{
+ "n_patients": 624,
+ "n_reactions": 10600,
+ "n_metabolites": 5835,
+ "n_active": 3379,
+ "base_rate": 0.3187735849056604,
+ "n_gpr_rule": 5938,
+ "n_no_gpr_rule": 4662,
+ "n_gene_and_expression": 5635,
+ "n_gene_no_expression": 303,
+ "n_expression_no_gene": 0,
+ "n_reactions_aligned_to_json": 10311,
+ "n_reactions_unaligned": 289,
+ "n_expression_bearing_probe20": 5635,
+ "n_expression_bearing_alltrain": 5635,
+ "n_cohortmean_nonzero": 5635,
+ "prevalence_expr": 0.4074534161490683,
+ "prevalence_no_expr": 0.21812688821752266,
+ "n_train_patients": 424,
+ "n_val_patients": 75,
+ "n_test_patients": 125,
+ "indicator_tpr": 0.6794909736608464,
+ "indicator_fpr": 0.4624013294557541,
+ "indicator_closed_form": 0.6085448221025462,
+ "msi_column": "msi_status",
+ "msi_counts": {
+  "(missing)": 624
+ }
+}

@@ -1,0 +1,587 @@
+{
+ "note": "patients and reactions resampled with replacement together, arms paired within cells; percentile intervals of the mean over patients of the paired own-minus-stranger AUROC difference; B draws per seed",
+ "B": 10000,
+ "seeds": [
+  29,
+  1029,
+  2029
+ ],
+ "designs": {
+  "A_representative": {
+   "run": "repr_il",
+   "n_patients": 10,
+   "n_reactions": 300,
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0272,
+      0.0324
+     ],
+     "ci95": [
+      -0.0337,
+      0.0384
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0029
+    },
+    "1029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0263,
+      0.0319
+     ],
+     "ci95": [
+      -0.0327,
+      0.0372
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0029
+    },
+    "2029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0266,
+      0.0322
+     ],
+     "ci95": [
+      -0.0329,
+      0.0383
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0027
+    }
+   },
+   "ci90_upper_range": [
+    0.0319,
+    0.0324
+   ],
+   "ci90_lower_range": [
+    -0.0272,
+    -0.0263
+   ],
+   "ci95_upper_range": [
+    0.0372,
+    0.0384
+   ],
+   "ci95_lower_range": [
+    -0.0337,
+    -0.0327
+   ],
+   "within_002_90_all_seeds": false,
+   "within_002_90_any_seed": false,
+   "within_002_95_all_seeds": false,
+   "within_005_90_all_seeds": true
+  },
+  "A_blocked": {
+   "run": "repr",
+   "n_patients": 10,
+   "n_reactions": 300,
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0252,
+      0.0362
+     ],
+     "ci95": [
+      -0.0317,
+      0.0421
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0061
+    },
+    "1029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0239,
+      0.0352
+     ],
+     "ci95": [
+      -0.03,
+      0.0408
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0062
+    },
+    "2029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0241,
+      0.036
+     ],
+     "ci95": [
+      -0.0307,
+      0.0421
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.006
+    }
+   },
+   "ci90_upper_range": [
+    0.0352,
+    0.0362
+   ],
+   "ci90_lower_range": [
+    -0.0252,
+    -0.0239
+   ],
+   "ci95_upper_range": [
+    0.0408,
+    0.0421
+   ],
+   "ci95_lower_range": [
+    -0.0317,
+    -0.03
+   ],
+   "within_002_90_all_seeds": false,
+   "within_002_90_any_seed": false,
+   "within_002_95_all_seeds": false,
+   "within_005_90_all_seeds": true
+  },
+  "A_backbone2": {
+   "run": "repr_b2il",
+   "n_patients": 10,
+   "n_reactions": 300,
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0253,
+      0.0297
+     ],
+     "ci95": [
+      -0.0316,
+      0.0349
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0032
+    },
+    "1029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0251,
+      0.0299
+     ],
+     "ci95": [
+      -0.0317,
+      0.0348
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0032
+    },
+    "2029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0253,
+      0.0297
+     ],
+     "ci95": [
+      -0.0321,
+      0.0348
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0029
+    }
+   },
+   "ci90_upper_range": [
+    0.0297,
+    0.0299
+   ],
+   "ci90_lower_range": [
+    -0.0253,
+    -0.0251
+   ],
+   "ci95_upper_range": [
+    0.0348,
+    0.0349
+   ],
+   "ci95_lower_range": [
+    -0.0321,
+    -0.0316
+   ],
+   "within_002_90_all_seeds": false,
+   "within_002_90_any_seed": false,
+   "within_002_95_all_seeds": false,
+   "within_005_90_all_seeds": true
+  },
+  "A_backbone3": {
+   "run": "repr_b3il",
+   "n_patients": 10,
+   "n_reactions": 300,
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0348,
+      0.0424
+     ],
+     "ci95": [
+      -0.0433,
+      0.0498
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0046
+    },
+    "1029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0337,
+      0.0426
+     ],
+     "ci95": [
+      -0.0423,
+      0.0493
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0049
+    },
+    "2029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0346,
+      0.0427
+     ],
+     "ci95": [
+      -0.043,
+      0.0496
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0043
+    }
+   },
+   "ci90_upper_range": [
+    0.0424,
+    0.0427
+   ],
+   "ci90_lower_range": [
+    -0.0348,
+    -0.0337
+   ],
+   "ci95_upper_range": [
+    0.0493,
+    0.0498
+   ],
+   "ci95_lower_range": [
+    -0.0433,
+    -0.0423
+   ],
+   "within_002_90_all_seeds": false,
+   "within_002_90_any_seed": false,
+   "within_002_95_all_seeds": false,
+   "within_005_90_all_seeds": true
+  },
+  "E_representative40": {
+   "run": "repr40_il",
+   "n_patients": 40,
+   "n_reactions": 300,
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0079,
+      0.0194
+     ],
+     "ci95": [
+      -0.0107,
+      0.0223
+     ],
+     "within_002_90": true,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0058
+    },
+    "1029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0077,
+      0.0193
+     ],
+     "ci95": [
+      -0.0106,
+      0.022
+     ],
+     "within_002_90": true,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0057
+    },
+    "2029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0078,
+      0.0194
+     ],
+     "ci95": [
+      -0.0105,
+      0.0222
+     ],
+     "within_002_90": true,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0059
+    }
+   },
+   "ci90_upper_range": [
+    0.0193,
+    0.0194
+   ],
+   "ci90_lower_range": [
+    -0.0079,
+    -0.0077
+   ],
+   "ci95_upper_range": [
+    0.022,
+    0.0223
+   ],
+   "ci95_lower_range": [
+    -0.0107,
+    -0.0105
+   ],
+   "within_002_90_all_seeds": true,
+   "within_002_90_any_seed": true,
+   "within_002_95_all_seeds": false,
+   "within_005_90_all_seeds": true
+  },
+  "E_blocked": {
+   "run": "repr40",
+   "n_patients": 40,
+   "n_reactions": 300,
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0092,
+      0.0174
+     ],
+     "ci95": [
+      -0.0121,
+      0.0201
+     ],
+     "within_002_90": true,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0042
+    },
+    "1029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.009,
+      0.0175
+     ],
+     "ci95": [
+      -0.0116,
+      0.0203
+     ],
+     "within_002_90": true,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0042
+    },
+    "2029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0092,
+      0.0175
+     ],
+     "ci95": [
+      -0.0117,
+      0.0201
+     ],
+     "within_002_90": true,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": 0.0043
+    }
+   },
+   "ci90_upper_range": [
+    0.0174,
+    0.0175
+   ],
+   "ci90_lower_range": [
+    -0.0092,
+    -0.009
+   ],
+   "ci95_upper_range": [
+    0.0201,
+    0.0203
+   ],
+   "ci95_lower_range": [
+    -0.0121,
+    -0.0116
+   ],
+   "within_002_90_all_seeds": true,
+   "within_002_90_any_seed": true,
+   "within_002_95_all_seeds": false,
+   "within_005_90_all_seeds": true
+  },
+  "E_donor2": {
+   "run": "repr40_il_d2",
+   "n_patients": 40,
+   "n_reactions": 300,
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0136,
+      0.013
+     ],
+     "ci95": [
+      -0.0163,
+      0.0157
+     ],
+     "within_002_90": true,
+     "within_002_95": true,
+     "within_005_90": true,
+     "mean": -0.0004
+    },
+    "1029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0138,
+      0.0127
+     ],
+     "ci95": [
+      -0.0164,
+      0.0153
+     ],
+     "within_002_90": true,
+     "within_002_95": true,
+     "within_005_90": true,
+     "mean": -0.0005
+    },
+    "2029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0139,
+      0.0128
+     ],
+     "ci95": [
+      -0.0166,
+      0.0154
+     ],
+     "within_002_90": true,
+     "within_002_95": true,
+     "within_005_90": true,
+     "mean": -0.0004
+    }
+   },
+   "ci90_upper_range": [
+    0.0127,
+    0.013
+   ],
+   "ci90_lower_range": [
+    -0.0139,
+    -0.0136
+   ],
+   "ci95_upper_range": [
+    0.0153,
+    0.0157
+   ],
+   "ci95_lower_range": [
+    -0.0166,
+    -0.0163
+   ],
+   "within_002_90_all_seeds": true,
+   "within_002_90_any_seed": true,
+   "within_002_95_all_seeds": true,
+   "within_005_90_all_seeds": true
+  },
+  "A_donor2": {
+   "run": "repr_il_d2",
+   "n_patients": 10,
+   "n_reactions": 300,
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0471,
+      0.0095
+     ],
+     "ci95": [
+      -0.0525,
+      0.0152
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": -0.0186
+    },
+    "1029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.0465,
+      0.0094
+     ],
+     "ci95": [
+      -0.052,
+      0.0148
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": -0.0185
+    },
+    "2029": {
+     "n_draws": 10000,
+     "ci90": [
+      -0.047,
+      0.0094
+     ],
+     "ci95": [
+      -0.0525,
+      0.0146
+     ],
+     "within_002_90": false,
+     "within_002_95": false,
+     "within_005_90": true,
+     "mean": -0.0188
+    }
+   },
+   "ci90_upper_range": [
+    0.0094,
+    0.0095
+   ],
+   "ci90_lower_range": [
+    -0.0471,
+    -0.0465
+   ],
+   "ci95_upper_range": [
+    0.0146,
+    0.0152
+   ],
+   "ci95_lower_range": [
+    -0.0525,
+    -0.052
+   ],
+   "within_002_90_all_seeds": false,
+   "within_002_90_any_seed": false,
+   "within_002_95_all_seeds": false,
+   "within_005_90_all_seeds": true
+  }
+ }
+}

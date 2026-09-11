@@ -1,0 +1,6 @@
+{
+ "_note": "Completion time (Unix seconds, from the archive file's last write on the collection host) of the collections whose records carry no per-call timestamps. The later collections record sent_at per call in their archives, so their timing is read from the records themselves.",
+ "repr": 1788564695, "repr40": 1788574974, "repr_b2": 1788626439, "repr_b3": 1788665585, "pilot": 1788563600,
+ "msi": 1788566081, "msi_b2": 1788626890, "msi_b3": 1788665794, "det_patient": 1788566296, "think": 1788577510,
+ "pc": 1788565405, "pc_b2": 1788626527, "pc_b3": 1788665619
+}

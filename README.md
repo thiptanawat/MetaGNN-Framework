@@ -14,7 +14,28 @@ framework/     the installable metagnn package (GATv2 model, trainer, graph buil
 pipelines/     per-cancer pipelines (TCGA-CRC, TCGA-BRCA, TCGA-LUAD)
 tests/         18-module pytest suite
 validators/    per-experiment result validators used by the tests
+paper1/        the joint patient-and-reaction holdout study: code and results
+paper2/        the language-model probe: code and the archived model responses
+metabench/     the five benchmark-validity checks, framework-agnostic
+docs/          reproduction notes, the frozen analysis plan, the protocol
+reproduce.sh   regenerates every reported number from the committed results
 ```
+
+## Two studies of what this benchmark measures
+
+The scorer above is trained against reaction activity labels that are the same for every
+patient in a cohort, and cross-validated by holding out patients. Two studies in this
+repository ask what that arrangement can and cannot establish, and they do not flatter the
+model: under a joint patient-and-reaction holdout a logistic regression on network features,
+given no patient data at all, matches the graph scorer, and giving the scorer each patient's
+own transcriptome in place of one cohort average does not reliably help. The same audit is
+then applied unchanged to an independently published metabolic-dependency predictor scored
+against measured CRISPR gene effect.
+
+`STUDIES.md` is the entry point: what was found, how the repository is laid out, and the one
+command that regenerates every number from the committed outputs. `metabench/` packages the
+five checks so they can be pointed at another benchmark. The manuscripts themselves are under
+review and are not in this repository yet.
 
 ## Installation
 

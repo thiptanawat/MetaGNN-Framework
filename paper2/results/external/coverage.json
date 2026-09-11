@@ -1,0 +1,41 @@
+{
+ "gse39582": {
+  "cohort": "gse39582",
+  "n_samples_deposited": 585,
+  "n_tumor": 566,
+  "n_probe_sets": 54675,
+  "n_genes_with_entrez": 22836,
+  "panel_covered": 40,
+  "panel_size": 40,
+  "uncovered_panel_ids": [],
+  "value_range": [
+   -0.398697396,
+   16.11154945
+  ],
+  "processing": "RMA normalisation (Bioconductor R affy package) + ComBat (R sva package )",
+  "label_counts": {
+   "non-MSI-H": 444,
+   "MSI-H": 75,
+   "NA": 47
+  }
+ },
+ "gse13294": {
+  "cohort": "gse13294",
+  "n_samples_deposited": 155,
+  "n_tumor": 155,
+  "n_probe_sets": 54675,
+  "n_genes_with_entrez": 22836,
+  "panel_covered": 40,
+  "panel_size": 40,
+  "uncovered_panel_ids": [],
+  "value_range": [
+   -4.621366231,
+   13.38468533
+  ],
+  "processing": "ArrayAssist 3.3 (Stratagene) was used to calculate MAS5.0 calls. The MAS5.0 calls were subsequently quantile normalized and log-2 transformed.",
+  "label_counts": {
+   "MSI-H": 78,
+   "non-MSI-H": 77
+  }
+ }
+}

@@ -1,0 +1,57 @@
+{
+ "note": "ties in the stored reaction-level expression across the 624 patients at the reactions each design shows; an entry is tied when at least one other patient has the identical stored value (exact) or the identical value after rounding to three decimals (the precision the prompt prints)",
+ "convention_collected": "argsort rank over 624 patients, ties broken by patient order (no information)",
+ "convention_new": "midrank (scipy.stats.rankdata average) over the cohort; identical values print identical percentiles",
+ "designs": {
+  "msi_panel": {
+   "n_patients": 579,
+   "n_reactions": 40,
+   "n_entries": 23160,
+   "tied_exact": 141,
+   "tied_exact_share": 0.61,
+   "tied_after_rounding": 2252,
+   "tied_after_rounding_share": 9.72,
+   "extra_ties_from_rounding": 2111,
+   "tie_groups_exact": 12,
+   "printed_percentile_spread_within_tie_max": 5.0,
+   "printed_percentile_spread_within_tie_mean": 1.75,
+   "midrank_shift_of_tied_entries_mean": 0.86,
+   "midrank_shift_of_tied_entries_max": 3.0
+  },
+  "A_representative": {
+   "n_patients": 10,
+   "n_reactions": 161,
+   "n_entries": 1610,
+   "tied_exact": 22,
+   "tied_exact_share": 1.37,
+   "tied_after_rounding": 397,
+   "tied_after_rounding_share": 24.66,
+   "extra_ties_from_rounding": 375,
+   "tie_groups_exact": 13,
+   "printed_percentile_spread_within_tie_max": 46.0,
+   "printed_percentile_spread_within_tie_mean": 15.69,
+   "midrank_shift_of_tied_entries_mean": 6.27,
+   "midrank_shift_of_tied_entries_max": 23.0
+  },
+  "E_representative40": {
+   "n_patients": 40,
+   "n_reactions": 161,
+   "n_entries": 6440,
+   "tied_exact": 120,
+   "tied_exact_share": 1.86,
+   "tied_after_rounding": 1725,
+   "tied_after_rounding_share": 26.79,
+   "extra_ties_from_rounding": 1605,
+   "tie_groups_exact": 15,
+   "printed_percentile_spread_within_tie_max": 46.0,
+   "printed_percentile_spread_within_tie_mean": 13.87,
+   "midrank_shift_of_tied_entries_mean": 5.24,
+   "midrank_shift_of_tied_entries_max": 23.0
+  }
+ },
+ "cohort_expression_bearing": {
+  "n_entries": 3516240,
+  "tied_exact": 71692,
+  "tied_exact_share": 2.04
+ }
+}

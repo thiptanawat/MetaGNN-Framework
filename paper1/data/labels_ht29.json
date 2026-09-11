@@ -1,0 +1,79 @@
+{
+ "rule": "active in a model when either bound is nonzero; matched to Recon3D by reaction identifier",
+ "models": {
+  "HOP62": {
+   "model_id": "HOP-62",
+   "n_reactions": 6827,
+   "n_matched": 2345,
+   "n_active_matched": 2345
+  },
+  "HOP92": {
+   "model_id": "HOP-92",
+   "n_reactions": 6808,
+   "n_matched": 2347,
+   "n_active_matched": 2347
+  },
+  "HS_578T": {
+   "model_id": "HS-578T",
+   "n_reactions": 6555,
+   "n_matched": 2230,
+   "n_active_matched": 2230
+  },
+  "HT29": {
+   "model_id": "HT29",
+   "n_reactions": 6804,
+   "n_matched": 2368,
+   "n_active_matched": 2368
+  },
+  "MALME_3M": {
+   "model_id": "MALME-3M",
+   "n_reactions": 6777,
+   "n_matched": 2381,
+   "n_active_matched": 2381
+  },
+  "MDMAMB_231": {
+   "model_id": "MDA-MB-231/ATCC",
+   "n_reactions": 6808,
+   "n_matched": 2362,
+   "n_active_matched": 2362
+  },
+  "NCI_H226": {
+   "model_id": "NCI-H226",
+   "n_reactions": 6450,
+   "n_matched": 2140,
+   "n_active_matched": 2140
+  },
+  "O_786": {
+   "model_id": "786-O",
+   "n_reactions": 6728,
+   "n_matched": 2357,
+   "n_active_matched": 2357
+  },
+  "RPMI_8226": {
+   "model_id": "RPMI-8226",
+   "n_reactions": 7014,
+   "n_matched": 2690,
+   "n_active_matched": 2690
+  },
+  "SR": {
+   "model_id": "SR",
+   "n_reactions": 6485,
+   "n_matched": 2199,
+   "n_active_matched": 2199
+  },
+  "UO_31": {
+   "model_id": "UO-31",
+   "n_reactions": 6899,
+   "n_matched": 2450,
+   "n_active_matched": 2450
+  }
+ },
+ "union_active": 3379,
+ "union_reproduces_deposited": true,
+ "ht29_active": 2368,
+ "ht29_subset_of_union": true,
+ "union_active_not_ht29": 1011,
+ "ht29_prevalence": 0.22339622641509435,
+ "union_prevalence": 0.3187735849056604,
+ "out": "activity_labels_ht29.pt"
+}

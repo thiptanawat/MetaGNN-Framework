@@ -1,0 +1,8 @@
+{
+ "gnn_A": 873217,
+ "gnn_B": 9665793,
+ "mlp": 33793,
+ "mlp_emb": 728577,
+ "mlp_emb_embedding_only": 678400,
+ "mlp_emb_params_per_reaction": 64
+}

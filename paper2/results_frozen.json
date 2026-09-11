@@ -1,0 +1,7999 @@
+{
+ "runs": {
+  "A_representative": {
+   "tag": "A_representative",
+   "out": "repr_il",
+   "n_reactions": 300,
+   "n_expression_bearing": 161,
+   "n_patients": 10,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 40.0,
+   "n_calls": 9000,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 0,
+   "sampling": "random",
+   "label_base_rate": 0.29,
+   "model": "qwen3-8-27b",
+   "raw_expression_auroc": 0.6708,
+   "raw_expression_auroc_sd": 0.0076,
+   "raw_expression_auroc_expr": 0.6382,
+   "raw_percentile_auroc": 0.6181,
+   "raw_percentile_auroc_expr": 0.4858,
+   "indicator_floor": 0.6239,
+   "indicator_floor_closed_form": 0.6239,
+   "raw_expression_auprc": 0.4641,
+   "indicator_auprc": 0.3578,
+   "constant_auprc": 0.29,
+   "resent": {},
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 300,
+     "max": 300
+    },
+    "patient": {
+     "min": 300,
+     "max": 300
+    },
+    "shuffled": {
+     "min": 300,
+     "max": 300
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 1.0,
+     "auroc": 0.5188,
+     "auroc_sd": 0.0032,
+     "auroc_ci": [
+      0.5169,
+      0.5208
+     ],
+     "auroc_expr": 0.4927,
+     "auprc": 0.2983,
+     "median_inter_patient_r": 0.9881,
+     "median_inter_patient_r_all": 0.9929,
+     "mean_p": 0.3107,
+     "sd_p": 0.3853,
+     "n_distinct_values": 6
+    },
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.5498,
+     "auroc_sd": 0.0379,
+     "auroc_ci": [
+      0.5274,
+      0.5733
+     ],
+     "auroc_expr": 0.4768,
+     "auprc": 0.3114,
+     "median_inter_patient_r": 0.1785,
+     "median_inter_patient_r_all": 0.6631,
+     "mean_p": 0.3546,
+     "sd_p": 0.3376,
+     "n_distinct_values": 20
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.547,
+     "auroc_sd": 0.0199,
+     "auroc_ci": [
+      0.5344,
+      0.5592
+     ],
+     "auroc_expr": 0.4657,
+     "auprc": 0.3034,
+     "median_inter_patient_r": 0.0973,
+     "median_inter_patient_r_all": 0.6059,
+     "mean_p": 0.3604,
+     "sd_p": 0.3414,
+     "n_distinct_values": 22
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 45,
+    "n_cell_pairs": 13500,
+    "identical": 0.9893,
+    "mean_abs_diff": 0.001758,
+    "identical_expr": 0.9869,
+    "mean_abs_diff_expr": 0.003053,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 1610,
+    "identical": 0.1901,
+    "mean_abs_diff": 0.3142,
+    "arm_correlation": 0.1151,
+    "residual_correlation": 0.0014,
+    "residual_correlation_ci": [
+     -0.0443,
+     0.044
+    ],
+    "between_patient_sd_real": 0.2599,
+    "between_patient_sd_stranger": 0.2693,
+    "auroc_diff_mean": 0.0029,
+    "auroc_diff_sd": 0.0424,
+    "paired_t": 0.213,
+    "paired_p": 0.8359,
+    "wilcoxon_p": 0.9219,
+    "tost_margin": 0.05,
+    "tost_p_lower": 0.00171,
+    "tost_p_upper": 0.0033,
+    "tost_equivalent": true,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 0.0614,
+    "tost_narrow_p_upper": 0.117,
+    "tost_narrow_equivalent": false,
+    "auroc_diff_ci90": [
+     -0.0217,
+     0.0275
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.352913,
+     "shuffled": 0.367578
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 10,
+     "mean_diff": 0.031,
+     "sd": 0.0375,
+     "paired_p": 0.0282,
+     "ci90": [
+      0.0092,
+      0.0527
+     ]
+    },
+    "shuffled": {
+     "n": 10,
+     "mean_diff": 0.0281,
+     "sd": 0.0201,
+     "paired_p": 0.00166,
+     "ci90": [
+      0.0165,
+      0.0398
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": -0.0094,
+    "ci95": [
+     -0.0359,
+     0.0158
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 20,
+     "auroc": 0.6699
+    },
+    "shuffled": {
+     "levels": 22,
+     "auroc": 0.6691
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.001,
+    "p_own_ge_raw": 0.0,
+    "own_minus_stranger_ci95": [
+     -0.0168,
+     0.0195
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.458,
+      0.5849
+     ],
+     "patient": [
+      0.4963,
+      0.6001
+     ],
+     "shuffled": [
+      0.4949,
+      0.5973
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.0223,
+     0.0815
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.0252,
+     0.0815
+    ],
+    "p_own_minus_blind_le0": 0.126,
+    "p_stranger_minus_blind_le0": 0.145,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.0292,
+     0.0332
+    ],
+    "own_minus_stranger_ci95": [
+     -0.0364,
+     0.0389
+    ],
+    "own_minus_stranger_within_002": false,
+    "own_minus_stranger_within_005": true,
+    "own_minus_blind_ci90": [
+     -0.018,
+     0.0769
+    ],
+    "stranger_minus_blind_ci90": [
+     -0.0197,
+     0.0739
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.3654,
+    "spearman": 0.3671
+   },
+   "variance_decomposition": {
+    "n": 3000,
+    "r2_reaction_identity": 0.2362,
+    "r2_plus_presence": 0.3497,
+    "r2_plus_magnitude": 0.3877,
+    "r2_plus_magnitude_first": 0.3854,
+    "r2_presence_magnitude_corr": 0.8323,
+    "mean_p_shown": 0.5133,
+    "mean_p_not_shown": 0.1708,
+    "mean_p_blind_shown": 0.4568,
+    "mean_p_blind_not_shown": 0.1415,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction",
+    "expr_only_r2_reaction_identity": 0.0378,
+    "expr_only_r2_plus_magnitude": 0.1496,
+    "expr_only_r2_plus_percentile": 0.7967,
+    "expr_only_r2_plus_both": 0.8035,
+    "expr_only_spearman_percentile": 0.8766,
+    "expr_only_n": 1610
+   },
+   "strata": {
+    "reaction": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.4568,
+      "auroc": 0.491
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1415,
+      "auroc": 0.4063
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.277,
+      "auroc": 0.3404
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3417,
+      "auroc": 0.6486
+     },
+     "mean_p_label_active": 0.3447,
+     "mean_p_label_inactive": 0.2968
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5133,
+      "auroc": 0.421
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1708,
+      "auroc": 0.4554
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3312,
+      "auroc": 0.3998
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3762,
+      "auroc": 0.6293
+     },
+     "mean_p_label_active": 0.3795,
+     "mean_p_label_inactive": 0.3444
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5259,
+      "auroc": 0.426
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1687,
+      "auroc": 0.477
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3385,
+      "auroc": 0.4667
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3806,
+      "auroc": 0.5786
+     },
+     "mean_p_label_active": 0.3907,
+     "mean_p_label_inactive": 0.3481
+    }
+   }
+  },
+  "A_blocked": {
+   "tag": "A_blocked",
+   "out": "repr",
+   "n_reactions": 300,
+   "n_expression_bearing": 161,
+   "n_patients": 10,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 55.5,
+   "n_calls": 9000,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 0,
+   "sampling": "random",
+   "label_base_rate": 0.29,
+   "model": "qwen3-8-27b",
+   "raw_expression_auroc": 0.6708,
+   "raw_expression_auroc_sd": 0.0076,
+   "raw_expression_auroc_expr": 0.6382,
+   "raw_percentile_auroc": 0.6181,
+   "raw_percentile_auroc_expr": 0.4858,
+   "indicator_floor": 0.6239,
+   "indicator_floor_closed_form": 0.6239,
+   "raw_expression_auprc": 0.4641,
+   "indicator_auprc": 0.3578,
+   "constant_auprc": 0.29,
+   "resent": {},
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 300,
+     "max": 300
+    },
+    "patient": {
+     "min": 300,
+     "max": 300
+    },
+    "shuffled": {
+     "min": 300,
+     "max": 300
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 1.0,
+     "auroc": 0.5206,
+     "auroc_sd": 0.003,
+     "auroc_ci": [
+      0.5188,
+      0.5226
+     ],
+     "auroc_expr": 0.4929,
+     "auprc": 0.299,
+     "median_inter_patient_r": 1.0,
+     "median_inter_patient_r_all": 0.9999,
+     "mean_p": 0.3112,
+     "sd_p": 0.3853,
+     "n_distinct_values": 6
+    },
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.5499,
+     "auroc_sd": 0.0403,
+     "auroc_ci": [
+      0.5261,
+      0.5748
+     ],
+     "auroc_expr": 0.4745,
+     "auprc": 0.3116,
+     "median_inter_patient_r": 0.1672,
+     "median_inter_patient_r_all": 0.6664,
+     "mean_p": 0.3536,
+     "sd_p": 0.3378,
+     "n_distinct_values": 20
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.5438,
+     "auroc_sd": 0.0192,
+     "auroc_ci": [
+      0.5318,
+      0.5554
+     ],
+     "auroc_expr": 0.467,
+     "auprc": 0.3026,
+     "median_inter_patient_r": 0.0987,
+     "median_inter_patient_r_all": 0.6169,
+     "mean_p": 0.3633,
+     "sd_p": 0.3423,
+     "n_distinct_values": 22
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 45,
+    "n_cell_pairs": 13500,
+    "identical": 0.9902,
+    "mean_abs_diff": 0.001293,
+    "identical_expr": 0.9937,
+    "mean_abs_diff_expr": 0.000259,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 1610,
+    "identical": 0.1944,
+    "mean_abs_diff": 0.3144,
+    "arm_correlation": 0.1114,
+    "residual_correlation": -0.002,
+    "residual_correlation_ci": [
+     -0.0516,
+     0.0442
+    ],
+    "between_patient_sd_real": 0.2594,
+    "between_patient_sd_stranger": 0.2682,
+    "auroc_diff_mean": 0.0062,
+    "auroc_diff_sd": 0.0435,
+    "paired_t": 0.448,
+    "paired_p": 0.665,
+    "wilcoxon_p": 0.8457,
+    "tost_margin": 0.05,
+    "tost_p_lower": 0.00137,
+    "tost_p_upper": 0.00551,
+    "tost_equivalent": true,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 0.0448,
+    "tost_narrow_p_upper": 0.17,
+    "tost_narrow_equivalent": false,
+    "auroc_diff_ci90": [
+     -0.019,
+     0.0314
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.353062,
+     "shuffled": 0.368398
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 10,
+     "mean_diff": 0.0293,
+     "sd": 0.0438,
+     "paired_p": 0.0635,
+     "ci90": [
+      0.0039,
+      0.0547
+     ]
+    },
+    "shuffled": {
+     "n": 10,
+     "mean_diff": 0.0231,
+     "sd": 0.0208,
+     "paired_p": 0.00657,
+     "ci90": [
+      0.0111,
+      0.0352
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": -0.0088,
+    "ci95": [
+     -0.0359,
+     0.0158
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 20,
+     "auroc": 0.6699
+    },
+    "shuffled": {
+     "levels": 22,
+     "auroc": 0.6691
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.001,
+    "p_own_ge_raw": 0.0,
+    "own_minus_stranger_ci95": [
+     -0.0131,
+     0.0251
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.4598,
+      0.5849
+     ],
+     "patient": [
+      0.4961,
+      0.5999
+     ],
+     "shuffled": [
+      0.4897,
+      0.5936
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.0245,
+     0.0795
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.0305,
+     0.0773
+    ],
+    "p_own_minus_blind_le0": 0.143,
+    "p_stranger_minus_blind_le0": 0.197,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.026,
+     0.0368
+    ],
+    "own_minus_stranger_ci95": [
+     -0.0326,
+     0.0428
+    ],
+    "own_minus_stranger_within_002": false,
+    "own_minus_stranger_within_005": true,
+    "own_minus_blind_ci90": [
+     -0.0204,
+     0.0771
+    ],
+    "stranger_minus_blind_ci90": [
+     -0.0251,
+     0.068
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.3635,
+    "spearman": 0.3643
+   },
+   "variance_decomposition": {
+    "n": 3000,
+    "r2_reaction_identity": 0.2412,
+    "r2_plus_presence": 0.3545,
+    "r2_plus_magnitude": 0.3913,
+    "r2_plus_magnitude_first": 0.3888,
+    "r2_presence_magnitude_corr": 0.8323,
+    "mean_p_shown": 0.5127,
+    "mean_p_not_shown": 0.1694,
+    "mean_p_blind_shown": 0.4564,
+    "mean_p_blind_not_shown": 0.1431,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction",
+    "expr_only_r2_reaction_identity": 0.038,
+    "expr_only_r2_plus_magnitude": 0.1484,
+    "expr_only_r2_plus_percentile": 0.8001,
+    "expr_only_r2_plus_both": 0.8064,
+    "expr_only_spearman_percentile": 0.8785,
+    "expr_only_n": 1610
+   },
+   "strata": {
+    "reaction": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.4564,
+      "auroc": 0.4912
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1431,
+      "auroc": 0.4063
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.2779,
+      "auroc": 0.3413
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.342,
+      "auroc": 0.6481
+     },
+     "mean_p_label_active": 0.3451,
+     "mean_p_label_inactive": 0.2974
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5127,
+      "auroc": 0.4136
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1694,
+      "auroc": 0.4809
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3298,
+      "auroc": 0.4095
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3756,
+      "auroc": 0.6232
+     },
+     "mean_p_label_active": 0.3783,
+     "mean_p_label_inactive": 0.3435
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5258,
+      "auroc": 0.4252
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.175,
+      "auroc": 0.4618
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3449,
+      "auroc": 0.4564
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3803,
+      "auroc": 0.5763
+     },
+     "mean_p_label_active": 0.3912,
+     "mean_p_label_inactive": 0.3519
+    }
+   }
+  },
+  "B_balanced": {
+   "tag": "B_balanced",
+   "out": "pilot",
+   "n_reactions": 240,
+   "n_expression_bearing": 120,
+   "n_patients": 8,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 37.2,
+   "n_calls": 5760,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 0,
+   "sampling": "stratified",
+   "label_base_rate": 0.5,
+   "model": "qwen3-8-27b",
+   "raw_expression_auroc": 0.5115,
+   "raw_expression_auroc_sd": 0.0048,
+   "raw_expression_auroc_expr": 0.5406,
+   "raw_percentile_auroc": 0.4929,
+   "raw_percentile_auroc_expr": 0.4714,
+   "indicator_floor": 0.5,
+   "indicator_floor_closed_form": 0.5,
+   "raw_expression_auprc": 0.5296,
+   "indicator_auprc": 0.5,
+   "constant_auprc": 0.5,
+   "resent": {},
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 240,
+     "max": 240
+    },
+    "patient": {
+     "min": 240,
+     "max": 240
+    },
+    "shuffled": {
+     "min": 240,
+     "max": 240
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 1.0,
+     "auroc": 0.4358,
+     "auroc_sd": 0.0028,
+     "auroc_ci": [
+      0.434,
+      0.4376
+     ],
+     "auroc_expr": 0.43,
+     "auprc": 0.4673,
+     "median_inter_patient_r": 1.0,
+     "median_inter_patient_r_all": 0.9999,
+     "mean_p": 0.2963,
+     "sd_p": 0.3842,
+     "n_distinct_values": 5
+    },
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.4481,
+     "auroc_sd": 0.0209,
+     "auroc_ci": [
+      0.4329,
+      0.4617
+     ],
+     "auroc_expr": 0.4431,
+     "auprc": 0.4674,
+     "median_inter_patient_r": 0.1799,
+     "median_inter_patient_r_all": 0.6434,
+     "mean_p": 0.3361,
+     "sd_p": 0.3416,
+     "n_distinct_values": 17
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.4463,
+     "auroc_sd": 0.0212,
+     "auroc_ci": [
+      0.4318,
+      0.4614
+     ],
+     "auroc_expr": 0.4406,
+     "auprc": 0.4653,
+     "median_inter_patient_r": 0.168,
+     "median_inter_patient_r_all": 0.6364,
+     "mean_p": 0.3348,
+     "sd_p": 0.3417,
+     "n_distinct_values": 20
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 28,
+    "n_cell_pairs": 6720,
+    "identical": 0.9911,
+    "mean_abs_diff": 0.001729,
+    "identical_expr": 0.9943,
+    "mean_abs_diff_expr": 0.003065,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 960,
+    "identical": 0.2188,
+    "mean_abs_diff": 0.3101,
+    "arm_correlation": 0.1831,
+    "residual_correlation": 0.0244,
+    "residual_correlation_ci": [
+     -0.0214,
+     0.0723
+    ],
+    "between_patient_sd_real": 0.264,
+    "between_patient_sd_stranger": 0.2599,
+    "auroc_diff_mean": 0.0018,
+    "auroc_diff_sd": 0.032,
+    "paired_t": 0.156,
+    "paired_p": 0.8808,
+    "wilcoxon_p": 0.5469,
+    "tost_margin": 0.05,
+    "tost_p_lower": 0.00127,
+    "tost_p_upper": 0.00185,
+    "tost_equivalent": true,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 0.0478,
+    "tost_narrow_p_upper": 0.0753,
+    "tost_narrow_equivalent": false,
+    "auroc_diff_ci90": [
+     -0.0197,
+     0.0232
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.348687,
+     "shuffled": 0.334917
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 8,
+     "mean_diff": 0.0123,
+     "sd": 0.0236,
+     "paired_p": 0.184,
+     "ci90": [
+      -0.0035,
+      0.0281
+     ]
+    },
+    "shuffled": {
+     "n": 8,
+     "mean_diff": 0.0105,
+     "sd": 0.0241,
+     "paired_p": 0.256,
+     "ci90": [
+      -0.0056,
+      0.0266
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": 0.004,
+    "ci95": [
+     -0.0311,
+     0.0389
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 17,
+     "auroc": 0.5098
+    },
+    "shuffled": {
+     "levels": 20,
+     "auroc": 0.51
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.023,
+    "p_own_ge_raw": 0.011,
+    "own_minus_stranger_ci95": [
+     -0.0145,
+     0.0182
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.3725,
+      0.4966
+     ],
+     "patient": [
+      0.3902,
+      0.507
+     ],
+     "shuffled": [
+      0.3896,
+      0.5048
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.0352,
+     0.062
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.039,
+     0.0574
+    ],
+    "p_own_minus_blind_le0": 0.328,
+    "p_stranger_minus_blind_le0": 0.339,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.0254,
+     0.0261
+    ],
+    "own_minus_stranger_ci95": [
+     -0.0311,
+     0.0305
+    ],
+    "own_minus_stranger_within_002": false,
+    "own_minus_stranger_within_005": true,
+    "own_minus_blind_ci90": [
+     -0.0341,
+     0.0606
+    ],
+    "stranger_minus_blind_ci90": [
+     -0.0346,
+     0.0546
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.3971,
+    "spearman": 0.3979
+   },
+   "variance_decomposition": {
+    "n": 1920,
+    "r2_reaction_identity": 0.2908,
+    "r2_plus_presence": 0.3963,
+    "r2_plus_magnitude": 0.4251,
+    "r2_plus_magnitude_first": 0.4195,
+    "r2_presence_magnitude_corr": 0.823,
+    "mean_p_shown": 0.5181,
+    "mean_p_not_shown": 0.154,
+    "mean_p_blind_shown": 0.4694,
+    "mean_p_blind_not_shown": 0.1232,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction",
+    "expr_only_r2_reaction_identity": 0.0533,
+    "expr_only_r2_plus_magnitude": 0.1678,
+    "expr_only_r2_plus_percentile": 0.7739,
+    "expr_only_r2_plus_both": 0.779,
+    "expr_only_spearman_percentile": 0.8585,
+    "expr_only_n": 960
+   },
+   "strata": {
+    "reaction": {
+     "expression_bearing": {
+      "n": 120,
+      "label_active": 0.5,
+      "mean_p": 0.4694,
+      "auroc": 0.4315
+     },
+     "no_expression": {
+      "n": 120,
+      "label_active": 0.5,
+      "mean_p": 0.1232,
+      "auroc": 0.4432
+     },
+     "transport_exchange": {
+      "n": 127,
+      "label_active": 0.543,
+      "mean_p": 0.257,
+      "auroc": 0.3757
+     },
+     "metabolic": {
+      "n": 113,
+      "label_active": 0.451,
+      "mean_p": 0.3405,
+      "auroc": 0.5172
+     },
+     "mean_p_label_active": 0.2505,
+     "mean_p_label_inactive": 0.3421
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 120,
+      "label_active": 0.5,
+      "mean_p": 0.5181,
+      "auroc": 0.4281
+     },
+     "no_expression": {
+      "n": 120,
+      "label_active": 0.5,
+      "mean_p": 0.154,
+      "auroc": 0.4453
+     },
+     "transport_exchange": {
+      "n": 127,
+      "label_active": 0.543,
+      "mean_p": 0.3075,
+      "auroc": 0.3683
+     },
+     "metabolic": {
+      "n": 113,
+      "label_active": 0.451,
+      "mean_p": 0.3682,
+      "auroc": 0.5367
+     },
+     "mean_p_label_active": 0.309,
+     "mean_p_label_inactive": 0.3632
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 120,
+      "label_active": 0.5,
+      "mean_p": 0.5162,
+      "auroc": 0.4296
+     },
+     "no_expression": {
+      "n": 120,
+      "label_active": 0.5,
+      "mean_p": 0.1533,
+      "auroc": 0.4461
+     },
+     "transport_exchange": {
+      "n": 127,
+      "label_active": 0.543,
+      "mean_p": 0.2996,
+      "auroc": 0.3746
+     },
+     "metabolic": {
+      "n": 113,
+      "label_active": 0.451,
+      "mean_p": 0.3743,
+      "auroc": 0.5343
+     },
+     "mean_p_label_active": 0.3073,
+     "mean_p_label_inactive": 0.3622
+    }
+   }
+  },
+  "A_backbone2": {
+   "tag": "A_backbone2",
+   "out": "repr_b2il",
+   "n_reactions": 300,
+   "n_expression_bearing": 161,
+   "n_patients": 10,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 16.6,
+   "n_calls": 9000,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 0,
+   "sampling": "random",
+   "label_base_rate": 0.29,
+   "model": "gemma-4-31b-it",
+   "raw_expression_auroc": 0.6708,
+   "raw_expression_auroc_sd": 0.0076,
+   "raw_expression_auroc_expr": 0.6382,
+   "raw_percentile_auroc": 0.6181,
+   "raw_percentile_auroc_expr": 0.4858,
+   "indicator_floor": 0.6239,
+   "indicator_floor_closed_form": 0.6239,
+   "raw_expression_auprc": 0.4641,
+   "indicator_auprc": 0.3578,
+   "constant_auprc": 0.29,
+   "resent": {},
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 300,
+     "max": 300
+    },
+    "patient": {
+     "min": 300,
+     "max": 300
+    },
+    "shuffled": {
+     "min": 300,
+     "max": 300
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 1.0,
+     "auroc": 0.45,
+     "auroc_sd": 0.001,
+     "auroc_ci": [
+      0.4494,
+      0.4506
+     ],
+     "auroc_expr": 0.4766,
+     "auprc": 0.2706,
+     "median_inter_patient_r": 0.9997,
+     "median_inter_patient_r_all": 0.9987,
+     "mean_p": 0.4712,
+     "sd_p": 0.3457,
+     "n_distinct_values": 19
+    },
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.4687,
+     "auroc_sd": 0.0316,
+     "auroc_ci": [
+      0.45,
+      0.4885
+     ],
+     "auroc_expr": 0.4777,
+     "auprc": 0.2819,
+     "median_inter_patient_r": 0.4863,
+     "median_inter_patient_r_all": 0.781,
+     "mean_p": 0.508,
+     "sd_p": 0.3315,
+     "n_distinct_values": 34
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.4655,
+     "auroc_sd": 0.0227,
+     "auroc_ci": [
+      0.4513,
+      0.4794
+     ],
+     "auroc_expr": 0.463,
+     "auprc": 0.2734,
+     "median_inter_patient_r": 0.3693,
+     "median_inter_patient_r_all": 0.7254,
+     "mean_p": 0.5118,
+     "sd_p": 0.3295,
+     "n_distinct_values": 35
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 45,
+    "n_cell_pairs": 13500,
+    "identical": 0.9849,
+    "mean_abs_diff": 0.001291,
+    "identical_expr": 0.9852,
+    "mean_abs_diff_expr": 0.000736,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 1610,
+    "identical": 0.2335,
+    "mean_abs_diff": 0.2222,
+    "arm_correlation": 0.3881,
+    "residual_correlation": -0.0203,
+    "residual_correlation_ci": [
+     -0.0611,
+     0.0297
+    ],
+    "between_patient_sd_real": 0.1998,
+    "between_patient_sd_stranger": 0.2076,
+    "auroc_diff_mean": 0.0032,
+    "auroc_diff_sd": 0.0364,
+    "paired_t": 0.28,
+    "paired_p": 0.786,
+    "wilcoxon_p": 0.8457,
+    "tost_margin": 0.05,
+    "tost_p_lower": 0.000619,
+    "tost_p_upper": 0.0014,
+    "tost_equivalent": true,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 0.0371,
+    "tost_narrow_p_upper": 0.0892,
+    "tost_narrow_equivalent": false,
+    "auroc_diff_ci90": [
+     -0.0179,
+     0.0243
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.224311,
+     "shuffled": 0.239944
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 10,
+     "mean_diff": 0.0186,
+     "sd": 0.0333,
+     "paired_p": 0.111,
+     "ci90": [
+      -0.0007,
+      0.038
+     ]
+    },
+    "shuffled": {
+     "n": 10,
+     "mean_diff": 0.0154,
+     "sd": 0.0233,
+     "paired_p": 0.066,
+     "ci90": [
+      0.0019,
+      0.0289
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": -0.0078,
+    "ci95": [
+     -0.0438,
+     0.0217
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 34,
+     "auroc": 0.6697
+    },
+    "shuffled": {
+     "levels": 35,
+     "auroc": 0.6699
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.0,
+    "p_own_ge_raw": 0.0,
+    "own_minus_stranger_ci95": [
+     -0.0172,
+     0.0203
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.382,
+      0.5182
+     ],
+     "patient": [
+      0.4132,
+      0.5271
+     ],
+     "shuffled": [
+      0.4102,
+      0.5225
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.0178,
+     0.0564
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.0232,
+     0.0576
+    ],
+    "p_own_minus_blind_le0": 0.167,
+    "p_stranger_minus_blind_le0": 0.223,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.0254,
+     0.0308
+    ],
+    "own_minus_stranger_ci95": [
+     -0.032,
+     0.0348
+    ],
+    "own_minus_stranger_within_002": false,
+    "own_minus_stranger_within_005": true,
+    "own_minus_blind_ci90": [
+     -0.0197,
+     0.0536
+    ],
+    "stranger_minus_blind_ci90": [
+     -0.0223,
+     0.0528
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.4888,
+    "spearman": 0.4699
+   },
+   "variance_decomposition": {
+    "n": 3000,
+    "r2_reaction_identity": 0.5055,
+    "r2_plus_presence": 0.5565,
+    "r2_plus_magnitude": 0.5954,
+    "r2_plus_magnitude_first": 0.594,
+    "r2_presence_magnitude_corr": 0.8323,
+    "mean_p_shown": 0.6088,
+    "mean_p_not_shown": 0.3913,
+    "mean_p_blind_shown": 0.518,
+    "mean_p_blind_not_shown": 0.4169,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction",
+    "expr_only_r2_reaction_identity": 0.2524,
+    "expr_only_r2_plus_magnitude": 0.3866,
+    "expr_only_r2_plus_percentile": 0.6478,
+    "expr_only_r2_plus_both": 0.6843,
+    "expr_only_spearman_percentile": 0.6726,
+    "expr_only_n": 1610
+   },
+   "strata": {
+    "reaction": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.518,
+      "auroc": 0.4765
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.4169,
+      "auroc": 0.3293
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.4359,
+      "auroc": 0.3215
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.5038,
+      "auroc": 0.5454
+     },
+     "mean_p_label_active": 0.422,
+     "mean_p_label_inactive": 0.4913
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.6088,
+      "auroc": 0.4489
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.3913,
+      "auroc": 0.2946
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.4431,
+      "auroc": 0.3419
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.5679,
+      "auroc": 0.5303
+     },
+     "mean_p_label_active": 0.4794,
+     "mean_p_label_inactive": 0.5197
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.6157,
+      "auroc": 0.4412
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.3913,
+      "auroc": 0.2953
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.4531,
+      "auroc": 0.3616
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.5659,
+      "auroc": 0.4973
+     },
+     "mean_p_label_active": 0.486,
+     "mean_p_label_inactive": 0.5223
+    }
+   }
+  },
+  "A_backbone2_blocked": {
+   "tag": "A_backbone2_blocked",
+   "out": "repr_b2",
+   "n_reactions": 300,
+   "n_expression_bearing": 161,
+   "n_patients": 10,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 16.9,
+   "n_calls": 9000,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 0,
+   "sampling": "random",
+   "label_base_rate": 0.29,
+   "model": "gemma-4-31b-it",
+   "raw_expression_auroc": 0.6708,
+   "raw_expression_auroc_sd": 0.0076,
+   "raw_expression_auroc_expr": 0.6382,
+   "raw_percentile_auroc": 0.6181,
+   "raw_percentile_auroc_expr": 0.4858,
+   "indicator_floor": 0.6239,
+   "indicator_floor_closed_form": 0.6239,
+   "raw_expression_auprc": 0.4641,
+   "indicator_auprc": 0.3578,
+   "constant_auprc": 0.29,
+   "resent": {},
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 300,
+     "max": 300
+    },
+    "patient": {
+     "min": 300,
+     "max": 300
+    },
+    "shuffled": {
+     "min": 300,
+     "max": 300
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 1.0,
+     "auroc": 0.4501,
+     "auroc_sd": 0.0008,
+     "auroc_ci": [
+      0.4497,
+      0.4507
+     ],
+     "auroc_expr": 0.477,
+     "auprc": 0.271,
+     "median_inter_patient_r": 1.0,
+     "median_inter_patient_r_all": 0.9999,
+     "mean_p": 0.4714,
+     "sd_p": 0.3453,
+     "n_distinct_values": 19
+    },
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.4671,
+     "auroc_sd": 0.0315,
+     "auroc_ci": [
+      0.4488,
+      0.4868
+     ],
+     "auroc_expr": 0.4769,
+     "auprc": 0.2808,
+     "median_inter_patient_r": 0.4838,
+     "median_inter_patient_r_all": 0.7828,
+     "mean_p": 0.5092,
+     "sd_p": 0.3315,
+     "n_distinct_values": 34
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.4629,
+     "auroc_sd": 0.0236,
+     "auroc_ci": [
+      0.4481,
+      0.4774
+     ],
+     "auroc_expr": 0.4621,
+     "auprc": 0.2717,
+     "median_inter_patient_r": 0.3686,
+     "median_inter_patient_r_all": 0.7231,
+     "mean_p": 0.5127,
+     "sd_p": 0.3298,
+     "n_distinct_values": 36
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 45,
+    "n_cell_pairs": 13500,
+    "identical": 0.9944,
+    "mean_abs_diff": 0.000496,
+    "identical_expr": 0.9934,
+    "mean_abs_diff_expr": 0.000414,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 1610,
+    "identical": 0.2385,
+    "mean_abs_diff": 0.221,
+    "arm_correlation": 0.3899,
+    "residual_correlation": -0.0152,
+    "residual_correlation_ci": [
+     -0.0561,
+     0.0342
+    ],
+    "between_patient_sd_real": 0.1991,
+    "between_patient_sd_stranger": 0.2078,
+    "auroc_diff_mean": 0.0042,
+    "auroc_diff_sd": 0.0359,
+    "paired_t": 0.371,
+    "paired_p": 0.7192,
+    "wilcoxon_p": 0.5566,
+    "tost_margin": 0.05,
+    "tost_p_lower": 0.000503,
+    "tost_p_upper": 0.00148,
+    "tost_equivalent": true,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 0.0309,
+    "tost_narrow_p_upper": 0.0988,
+    "tost_narrow_equivalent": false,
+    "auroc_diff_ci90": [
+     -0.0166,
+     0.025
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.224056,
+     "shuffled": 0.239335
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 10,
+     "mean_diff": 0.017,
+     "sd": 0.0335,
+     "paired_p": 0.144,
+     "ci90": [
+      -0.0025,
+      0.0364
+     ]
+    },
+    "shuffled": {
+     "n": 10,
+     "mean_diff": 0.0128,
+     "sd": 0.0244,
+     "paired_p": 0.133,
+     "ci90": [
+      -0.0014,
+      0.0269
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": -0.0088,
+    "ci95": [
+     -0.0445,
+     0.0208
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 34,
+     "auroc": 0.6697
+    },
+    "shuffled": {
+     "levels": 36,
+     "auroc": 0.6693
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.0,
+    "p_own_ge_raw": 0.0,
+    "own_minus_stranger_ci95": [
+     -0.0167,
+     0.0212
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.3826,
+      0.5182
+     ],
+     "patient": [
+      0.4114,
+      0.5257
+     ],
+     "shuffled": [
+      0.4082,
+      0.5199
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.02,
+     0.0565
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.0272,
+     0.055
+    ],
+    "p_own_minus_blind_le0": 0.187,
+    "p_stranger_minus_blind_le0": 0.251,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.0245,
+     0.0316
+    ],
+    "own_minus_stranger_ci95": [
+     -0.0327,
+     0.0362
+    ],
+    "own_minus_stranger_within_002": false,
+    "own_minus_stranger_within_005": true,
+    "own_minus_blind_ci90": [
+     -0.02,
+     0.0517
+    ],
+    "stranger_minus_blind_ci90": [
+     -0.0259,
+     0.0497
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.4901,
+    "spearman": 0.473
+   },
+   "variance_decomposition": {
+    "n": 3000,
+    "r2_reaction_identity": 0.5067,
+    "r2_plus_presence": 0.5576,
+    "r2_plus_magnitude": 0.5957,
+    "r2_plus_magnitude_first": 0.5944,
+    "r2_presence_magnitude_corr": 0.8323,
+    "mean_p_shown": 0.6096,
+    "mean_p_not_shown": 0.3928,
+    "mean_p_blind_shown": 0.5178,
+    "mean_p_blind_not_shown": 0.4178,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction",
+    "expr_only_r2_reaction_identity": 0.2522,
+    "expr_only_r2_plus_magnitude": 0.3862,
+    "expr_only_r2_plus_percentile": 0.6491,
+    "expr_only_r2_plus_both": 0.6853,
+    "expr_only_spearman_percentile": 0.6734,
+    "expr_only_n": 1610
+   },
+   "strata": {
+    "reaction": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5178,
+      "auroc": 0.4768
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.4178,
+      "auroc": 0.3318
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.4353,
+      "auroc": 0.3245
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.5048,
+      "auroc": 0.5419
+     },
+     "mean_p_label_active": 0.4222,
+     "mean_p_label_inactive": 0.4915
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.6096,
+      "auroc": 0.4483
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.3928,
+      "auroc": 0.2925
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.4438,
+      "auroc": 0.3413
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.5695,
+      "auroc": 0.5273
+     },
+     "mean_p_label_active": 0.4799,
+     "mean_p_label_inactive": 0.5211
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.6156,
+      "auroc": 0.4414
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.3935,
+      "auroc": 0.2918
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.4542,
+      "auroc": 0.3606
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.5667,
+      "auroc": 0.4944
+     },
+     "mean_p_label_active": 0.4855,
+     "mean_p_label_inactive": 0.5238
+    }
+   }
+  },
+  "A_backbone3": {
+   "tag": "A_backbone3",
+   "out": "repr_b3il",
+   "n_reactions": 300,
+   "n_expression_bearing": 161,
+   "n_patients": 10,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 6.9,
+   "n_calls": 9000,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 0,
+   "sampling": "random",
+   "label_base_rate": 0.29,
+   "model": "mistral-small-3.2-24b-instruct",
+   "raw_expression_auroc": 0.6708,
+   "raw_expression_auroc_sd": 0.0076,
+   "raw_expression_auroc_expr": 0.6382,
+   "raw_percentile_auroc": 0.6181,
+   "raw_percentile_auroc_expr": 0.4858,
+   "indicator_floor": 0.6239,
+   "indicator_floor_closed_form": 0.6239,
+   "raw_expression_auprc": 0.4641,
+   "indicator_auprc": 0.3578,
+   "constant_auprc": 0.29,
+   "resent": {},
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 300,
+     "max": 300
+    },
+    "patient": {
+     "min": 300,
+     "max": 300
+    },
+    "shuffled": {
+     "min": 300,
+     "max": 300
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 1.0,
+     "auroc": 0.6191,
+     "auroc_sd": 0.0019,
+     "auroc_ci": [
+      0.6177,
+      0.6201
+     ],
+     "auroc_expr": 0.5878,
+     "auprc": 0.3874,
+     "median_inter_patient_r": 1.0,
+     "median_inter_patient_r_all": 0.9999,
+     "mean_p": 0.537,
+     "sd_p": 0.2826,
+     "n_distinct_values": 10
+    },
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.578,
+     "auroc_sd": 0.0572,
+     "auroc_ci": [
+      0.5416,
+      0.6126
+     ],
+     "auroc_expr": 0.5122,
+     "auprc": 0.3727,
+     "median_inter_patient_r": 0.0356,
+     "median_inter_patient_r_all": 0.4798,
+     "mean_p": 0.3974,
+     "sd_p": 0.2801,
+     "n_distinct_values": 76
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.5733,
+     "auroc_sd": 0.0202,
+     "auroc_ci": [
+      0.56,
+      0.5844
+     ],
+     "auroc_expr": 0.4858,
+     "auprc": 0.3397,
+     "median_inter_patient_r": 0.0274,
+     "median_inter_patient_r_all": 0.4295,
+     "mean_p": 0.3996,
+     "sd_p": 0.2846,
+     "n_distinct_values": 79
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 45,
+    "n_cell_pairs": 13500,
+    "identical": 0.9973,
+    "mean_abs_diff": 0.000467,
+    "identical_expr": 0.9963,
+    "mean_abs_diff_expr": 0.000807,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 1610,
+    "identical": 0.0634,
+    "mean_abs_diff": 0.3269,
+    "arm_correlation": 0.0226,
+    "residual_correlation": 0.0045,
+    "residual_correlation_ci": [
+     -0.0392,
+     0.0494
+    ],
+    "between_patient_sd_real": 0.2656,
+    "between_patient_sd_stranger": 0.2719,
+    "auroc_diff_mean": 0.0047,
+    "auroc_diff_sd": 0.0488,
+    "paired_t": 0.304,
+    "paired_p": 0.7682,
+    "wilcoxon_p": 0.9219,
+    "tost_margin": 0.05,
+    "tost_p_lower": 0.00313,
+    "tost_p_upper": 0.00826,
+    "tost_equivalent": true,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 0.0719,
+    "tost_narrow_p_upper": 0.173,
+    "tost_narrow_equivalent": false,
+    "auroc_diff_ci90": [
+     -0.0236,
+     0.0329
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.290031,
+     "shuffled": 0.291689
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 10,
+     "mean_diff": -0.0411,
+     "sd": 0.0609,
+     "paired_p": 0.0616,
+     "ci90": [
+      -0.0764,
+      -0.0058
+     ]
+    },
+    "shuffled": {
+     "n": 10,
+     "mean_diff": -0.0458,
+     "sd": 0.0212,
+     "paired_p": 7.75e-05,
+     "ci90": [
+      -0.0581,
+      -0.0335
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": -0.0063,
+    "ci95": [
+     -0.0309,
+     0.0203
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 76,
+     "auroc": 0.6698
+    },
+    "shuffled": {
+     "levels": 79,
+     "auroc": 0.6698
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.006,
+    "p_own_ge_raw": 0.0,
+    "own_minus_stranger_ci95": [
+     -0.0217,
+     0.029
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.5537,
+      0.6858
+     ],
+     "patient": [
+      0.531,
+      0.6238
+     ],
+     "shuffled": [
+      0.5268,
+      0.6187
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.0907,
+     0.0105
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.0979,
+     0.0054
+    ],
+    "p_own_minus_blind_le0": 0.934,
+    "p_stranger_minus_blind_le0": 0.956,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.0324,
+     0.0419
+    ],
+    "own_minus_stranger_ci95": [
+     -0.0431,
+     0.0492
+    ],
+    "own_minus_stranger_within_002": false,
+    "own_minus_stranger_within_005": true,
+    "own_minus_blind_ci90": [
+     -0.0957,
+     0.0127
+    ],
+    "stranger_minus_blind_ci90": [
+     -0.0903,
+     -0.0006
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.3052,
+    "spearman": 0.2969
+   },
+   "variance_decomposition": {
+    "n": 3000,
+    "r2_reaction_identity": 0.2138,
+    "r2_plus_presence": 0.3909,
+    "r2_plus_magnitude": 0.4347,
+    "r2_plus_magnitude_first": 0.4212,
+    "r2_presence_magnitude_corr": 0.8323,
+    "mean_p_shown": 0.5555,
+    "mean_p_not_shown": 0.2142,
+    "mean_p_blind_shown": 0.6843,
+    "mean_p_blind_not_shown": 0.3665,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction",
+    "expr_only_r2_reaction_identity": 0.0084,
+    "expr_only_r2_plus_magnitude": 0.0933,
+    "expr_only_r2_plus_percentile": 0.6596,
+    "expr_only_r2_plus_both": 0.6625,
+    "expr_only_spearman_percentile": 0.7916,
+    "expr_only_n": 1610
+   },
+   "strata": {
+    "reaction": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.6843,
+      "auroc": 0.5863
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.3665,
+      "auroc": 0.4968
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.4809,
+      "auroc": 0.4695
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.5888,
+      "auroc": 0.7146
+     },
+     "mean_p_label_active": 0.6121,
+     "mean_p_label_inactive": 0.5064
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5555,
+      "auroc": 0.4713
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.2142,
+      "auroc": 0.5051
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3566,
+      "auroc": 0.5093
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.435,
+      "auroc": 0.6776
+     },
+     "mean_p_label_active": 0.4559,
+     "mean_p_label_inactive": 0.3735
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5597,
+      "auroc": 0.4655
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.2141,
+      "auroc": 0.5025
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3594,
+      "auroc": 0.5376
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.4367,
+      "auroc": 0.6275
+     },
+     "mean_p_label_active": 0.4564,
+     "mean_p_label_inactive": 0.3764
+    }
+   }
+  },
+  "A_backbone3_blocked": {
+   "tag": "A_backbone3_blocked",
+   "out": "repr_b3",
+   "n_reactions": 300,
+   "n_expression_bearing": 161,
+   "n_patients": 10,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 6.8,
+   "n_calls": 9000,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 0,
+   "sampling": "random",
+   "label_base_rate": 0.29,
+   "model": "mistral-small-3.2-24b-instruct",
+   "raw_expression_auroc": 0.6708,
+   "raw_expression_auroc_sd": 0.0076,
+   "raw_expression_auroc_expr": 0.6382,
+   "raw_percentile_auroc": 0.6181,
+   "raw_percentile_auroc_expr": 0.4858,
+   "indicator_floor": 0.6239,
+   "indicator_floor_closed_form": 0.6239,
+   "raw_expression_auprc": 0.4641,
+   "indicator_auprc": 0.3578,
+   "constant_auprc": 0.29,
+   "resent": {},
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 300,
+     "max": 300
+    },
+    "patient": {
+     "min": 300,
+     "max": 300
+    },
+    "shuffled": {
+     "min": 300,
+     "max": 300
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 1.0,
+     "auroc": 0.6282,
+     "auroc_sd": 0.0006,
+     "auroc_ci": [
+      0.628,
+      0.6285
+     ],
+     "auroc_expr": 0.5959,
+     "auprc": 0.3986,
+     "median_inter_patient_r": 1.0,
+     "median_inter_patient_r_all": 1.0,
+     "mean_p": 0.5398,
+     "sd_p": 0.2824,
+     "n_distinct_values": 10
+    },
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.5718,
+     "auroc_sd": 0.0582,
+     "auroc_ci": [
+      0.5359,
+      0.6071
+     ],
+     "auroc_expr": 0.5085,
+     "auprc": 0.3699,
+     "median_inter_patient_r": 0.0313,
+     "median_inter_patient_r_all": 0.4822,
+     "mean_p": 0.3972,
+     "sd_p": 0.28,
+     "n_distinct_values": 76
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.5702,
+     "auroc_sd": 0.0198,
+     "auroc_ci": [
+      0.5567,
+      0.5808
+     ],
+     "auroc_expr": 0.4836,
+     "auprc": 0.3384,
+     "median_inter_patient_r": 0.0184,
+     "median_inter_patient_r_all": 0.4302,
+     "mean_p": 0.3997,
+     "sd_p": 0.2849,
+     "n_distinct_values": 79
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 45,
+    "n_cell_pairs": 13500,
+    "identical": 0.998,
+    "mean_abs_diff": 0.000133,
+    "identical_expr": 0.9963,
+    "mean_abs_diff_expr": 0.000248,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 1610,
+    "identical": 0.0634,
+    "mean_abs_diff": 0.3275,
+    "arm_correlation": 0.0189,
+    "residual_correlation": 0.0025,
+    "residual_correlation_ci": [
+     -0.0371,
+     0.0425
+    ],
+    "between_patient_sd_real": 0.2658,
+    "between_patient_sd_stranger": 0.2723,
+    "auroc_diff_mean": 0.0017,
+    "auroc_diff_sd": 0.0505,
+    "paired_t": 0.103,
+    "paired_p": 0.9198,
+    "wilcoxon_p": 1.0,
+    "tost_margin": 0.05,
+    "tost_p_lower": 0.00515,
+    "tost_p_upper": 0.00718,
+    "tost_equivalent": true,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 0.104,
+    "tost_narrow_p_upper": 0.14,
+    "tost_narrow_equivalent": false,
+    "auroc_diff_ci90": [
+     -0.0276,
+     0.031
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.29064,
+     "shuffled": 0.291571
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 10,
+     "mean_diff": -0.0563,
+     "sd": 0.0615,
+     "paired_p": 0.0177,
+     "ci90": [
+      -0.092,
+      -0.0207
+     ]
+    },
+    "shuffled": {
+     "n": 10,
+     "mean_diff": -0.058,
+     "sd": 0.0207,
+     "paired_p": 9.84e-06,
+     "ci90": [
+      -0.07,
+      -0.046
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": -0.0065,
+    "ci95": [
+     -0.0313,
+     0.0204
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 76,
+     "auroc": 0.6698
+    },
+    "shuffled": {
+     "levels": 79,
+     "auroc": 0.6698
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.004,
+    "p_own_ge_raw": 0.0,
+    "own_minus_stranger_ci95": [
+     -0.0256,
+     0.0264
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.563,
+      0.6951
+     ],
+     "patient": [
+      0.5227,
+      0.618
+     ],
+     "shuffled": [
+      0.5224,
+      0.6166
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.1072,
+     -0.0049
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.1115,
+     -0.0072
+    ],
+    "p_own_minus_blind_le0": 0.981,
+    "p_stranger_minus_blind_le0": 0.989,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.0355,
+     0.0391
+    ],
+    "own_minus_stranger_ci95": [
+     -0.0476,
+     0.0466
+    ],
+    "own_minus_stranger_within_002": false,
+    "own_minus_stranger_within_005": true,
+    "own_minus_blind_ci90": [
+     -0.1122,
+     -0.0021
+    ],
+    "stranger_minus_blind_ci90": [
+     -0.1033,
+     -0.0131
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.3047,
+    "spearman": 0.2987
+   },
+   "variance_decomposition": {
+    "n": 3000,
+    "r2_reaction_identity": 0.2105,
+    "r2_plus_presence": 0.3878,
+    "r2_plus_magnitude": 0.432,
+    "r2_plus_magnitude_first": 0.4186,
+    "r2_presence_magnitude_corr": 0.8323,
+    "mean_p_shown": 0.5549,
+    "mean_p_not_shown": 0.2145,
+    "mean_p_blind_shown": 0.6872,
+    "mean_p_blind_not_shown": 0.3691,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction",
+    "expr_only_r2_reaction_identity": 0.0085,
+    "expr_only_r2_plus_magnitude": 0.093,
+    "expr_only_r2_plus_percentile": 0.6647,
+    "expr_only_r2_plus_both": 0.6675,
+    "expr_only_spearman_percentile": 0.7952,
+    "expr_only_n": 1610
+   },
+   "strata": {
+    "reaction": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.6872,
+      "auroc": 0.5974
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.3691,
+      "auroc": 0.5102
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.4857,
+      "auroc": 0.4938
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.5897,
+      "auroc": 0.716
+     },
+     "mean_p_label_active": 0.6202,
+     "mean_p_label_inactive": 0.507
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5549,
+      "auroc": 0.4602
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.2145,
+      "auroc": 0.4909
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3593,
+      "auroc": 0.5018
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.4321,
+      "auroc": 0.6676
+     },
+     "mean_p_label_active": 0.4526,
+     "mean_p_label_inactive": 0.3746
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5602,
+      "auroc": 0.4624
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.2137,
+      "auroc": 0.4923
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3615,
+      "auroc": 0.5322
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.4349,
+      "auroc": 0.6256
+     },
+     "mean_p_label_active": 0.455,
+     "mean_p_label_inactive": 0.3771
+    }
+   }
+  },
+  "A_donor2": {
+   "tag": "A_donor2",
+   "out": "repr_il_d2",
+   "n_reactions": 300,
+   "n_expression_bearing": 161,
+   "n_patients": 10,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 42.5,
+   "n_calls": 9000,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 0,
+   "sampling": "random",
+   "label_base_rate": 0.29,
+   "model": "qwen3-8-27b",
+   "raw_expression_auroc": 0.6708,
+   "raw_expression_auroc_sd": 0.0076,
+   "raw_expression_auroc_expr": 0.6382,
+   "raw_percentile_auroc": 0.6181,
+   "raw_percentile_auroc_expr": 0.4858,
+   "indicator_floor": 0.6239,
+   "indicator_floor_closed_form": 0.6239,
+   "raw_expression_auprc": 0.4641,
+   "indicator_auprc": 0.3578,
+   "constant_auprc": 0.29,
+   "resent": {},
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 300,
+     "max": 300
+    },
+    "patient": {
+     "min": 300,
+     "max": 300
+    },
+    "shuffled": {
+     "min": 300,
+     "max": 300
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 1.0,
+     "auroc": 0.5187,
+     "auroc_sd": 0.0036,
+     "auroc_ci": [
+      0.5165,
+      0.5209
+     ],
+     "auroc_expr": 0.4926,
+     "auprc": 0.2982,
+     "median_inter_patient_r": 0.988,
+     "median_inter_patient_r_all": 0.9928,
+     "mean_p": 0.311,
+     "sd_p": 0.3854,
+     "n_distinct_values": 6
+    },
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.5504,
+     "auroc_sd": 0.0385,
+     "auroc_ci": [
+      0.5276,
+      0.5743
+     ],
+     "auroc_expr": 0.4747,
+     "auprc": 0.3119,
+     "median_inter_patient_r": 0.1746,
+     "median_inter_patient_r_all": 0.6637,
+     "mean_p": 0.3531,
+     "sd_p": 0.3374,
+     "n_distinct_values": 20
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.569,
+     "auroc_sd": 0.0133,
+     "auroc_ci": [
+      0.5613,
+      0.5778
+     ],
+     "auroc_expr": 0.5136,
+     "auprc": 0.3217,
+     "median_inter_patient_r": 0.118,
+     "median_inter_patient_r_all": 0.6011,
+     "mean_p": 0.3616,
+     "sd_p": 0.3447,
+     "n_distinct_values": 22
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 45,
+    "n_cell_pairs": 13500,
+    "identical": 0.9853,
+    "mean_abs_diff": 0.002159,
+    "identical_expr": 0.9863,
+    "mean_abs_diff_expr": 0.003607,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 1610,
+    "identical": 0.1957,
+    "mean_abs_diff": 0.3061,
+    "arm_correlation": 0.1668,
+    "residual_correlation": 0.0657,
+    "residual_correlation_ci": [
+     0.0094,
+     0.1088
+    ],
+    "between_patient_sd_real": 0.2593,
+    "between_patient_sd_stranger": 0.2712,
+    "auroc_diff_mean": -0.0185,
+    "auroc_diff_sd": 0.0386,
+    "paired_t": -1.519,
+    "paired_p": 0.1631,
+    "wilcoxon_p": 0.1602,
+    "tost_margin": 0.05,
+    "tost_p_lower": 0.0149,
+    "tost_p_upper": 0.000164,
+    "tost_equivalent": true,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 0.454,
+    "tost_narrow_p_upper": 0.0058,
+    "tost_narrow_equivalent": false,
+    "auroc_diff_ci90": [
+     -0.0409,
+     0.0038
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.352354,
+     "shuffled": 0.367839
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 10,
+     "mean_diff": 0.0317,
+     "sd": 0.0408,
+     "paired_p": 0.0362,
+     "ci90": [
+      0.0081,
+      0.0554
+     ]
+    },
+    "shuffled": {
+     "n": 10,
+     "mean_diff": 0.0503,
+     "sd": 0.0165,
+     "paired_p": 4.96e-06,
+     "ci90": [
+      0.0407,
+      0.0599
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": -0.0118,
+    "ci95": [
+     -0.0439,
+     0.0174
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 20,
+     "auroc": 0.6699
+    },
+    "shuffled": {
+     "levels": 22,
+     "auroc": 0.6691
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.001,
+    "p_own_ge_raw": 0.0,
+    "own_minus_stranger_ci95": [
+     -0.0374,
+     0.0004
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.458,
+      0.5853
+     ],
+     "patient": [
+      0.4968,
+      0.6006
+     ],
+     "shuffled": [
+      0.5142,
+      0.619
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.0223,
+     0.0836
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.005,
+     0.1026
+    ],
+    "p_own_minus_blind_le0": 0.121,
+    "p_stranger_minus_blind_le0": 0.037,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.0469,
+     0.01
+    ],
+    "own_minus_stranger_ci95": [
+     -0.0554,
+     0.0165
+    ],
+    "own_minus_stranger_within_002": false,
+    "own_minus_stranger_within_005": true,
+    "own_minus_blind_ci90": [
+     -0.0173,
+     0.08
+    ],
+    "stranger_minus_blind_ci90": [
+     0.0025,
+     0.0947
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.3613,
+    "spearman": 0.3635
+   },
+   "variance_decomposition": {
+    "n": 3000,
+    "r2_reaction_identity": 0.2361,
+    "r2_plus_presence": 0.3526,
+    "r2_plus_magnitude": 0.3895,
+    "r2_plus_magnitude_first": 0.3868,
+    "r2_presence_magnitude_corr": 0.8323,
+    "mean_p_shown": 0.513,
+    "mean_p_not_shown": 0.1679,
+    "mean_p_blind_shown": 0.4573,
+    "mean_p_blind_not_shown": 0.1416,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction",
+    "expr_only_r2_reaction_identity": 0.0387,
+    "expr_only_r2_plus_magnitude": 0.1474,
+    "expr_only_r2_plus_percentile": 0.7953,
+    "expr_only_r2_plus_both": 0.8014,
+    "expr_only_spearman_percentile": 0.8758,
+    "expr_only_n": 1610
+   },
+   "strata": {
+    "reaction": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.4573,
+      "auroc": 0.491
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1416,
+      "auroc": 0.4102
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.2776,
+      "auroc": 0.3443
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3419,
+      "auroc": 0.6484
+     },
+     "mean_p_label_active": 0.3447,
+     "mean_p_label_inactive": 0.2972
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.513,
+      "auroc": 0.4136
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1679,
+      "auroc": 0.4628
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3283,
+      "auroc": 0.4042
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.376,
+      "auroc": 0.6229
+     },
+     "mean_p_label_active": 0.3786,
+     "mean_p_label_inactive": 0.3427
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5275,
+      "auroc": 0.5554
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1694,
+      "auroc": 0.4732
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3355,
+      "auroc": 0.4655
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3857,
+      "auroc": 0.6765
+     },
+     "mean_p_label_active": 0.4136,
+     "mean_p_label_inactive": 0.3403
+    }
+   }
+  },
+  "E_donor2": {
+   "tag": "E_donor2",
+   "out": "repr40_il_d2",
+   "n_reactions": 300,
+   "n_expression_bearing": 161,
+   "n_patients": 40,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 162.4,
+   "n_calls": 36000,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 0,
+   "sampling": "random",
+   "label_base_rate": 0.29,
+   "model": "qwen3-8-27b",
+   "raw_expression_auroc": 0.6724,
+   "raw_expression_auroc_sd": 0.0063,
+   "raw_expression_auroc_expr": 0.6406,
+   "raw_percentile_auroc": 0.6232,
+   "raw_percentile_auroc_expr": 0.4987,
+   "indicator_floor": 0.6239,
+   "indicator_floor_closed_form": 0.6239,
+   "raw_expression_auprc": 0.465,
+   "indicator_auprc": 0.3578,
+   "constant_auprc": 0.29,
+   "resent": {},
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 300,
+     "max": 300
+    },
+    "patient": {
+     "min": 300,
+     "max": 300
+    },
+    "shuffled": {
+     "min": 300,
+     "max": 300
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 1.0,
+     "auroc": 0.5189,
+     "auroc_sd": 0.0032,
+     "auroc_ci": [
+      0.5179,
+      0.52
+     ],
+     "auroc_expr": 0.4928,
+     "auprc": 0.2984,
+     "median_inter_patient_r": 0.988,
+     "median_inter_patient_r_all": 0.9928,
+     "mean_p": 0.3108,
+     "sd_p": 0.3853,
+     "n_distinct_values": 6
+    },
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.5587,
+     "auroc_sd": 0.0288,
+     "auroc_ci": [
+      0.5498,
+      0.5673
+     ],
+     "auroc_expr": 0.4881,
+     "auprc": 0.3145,
+     "median_inter_patient_r": 0.158,
+     "median_inter_patient_r_all": 0.6321,
+     "mean_p": 0.3533,
+     "sd_p": 0.3384,
+     "n_distinct_values": 22
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.5591,
+     "auroc_sd": 0.0196,
+     "auroc_ci": [
+      0.5528,
+      0.5647
+     ],
+     "auroc_expr": 0.4887,
+     "auprc": 0.3125,
+     "median_inter_patient_r": 0.1111,
+     "median_inter_patient_r_all": 0.6054,
+     "mean_p": 0.3606,
+     "sd_p": 0.3425,
+     "n_distinct_values": 23
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 780,
+    "n_cell_pairs": 234000,
+    "identical": 0.9862,
+    "mean_abs_diff": 0.002693,
+    "identical_expr": 0.986,
+    "mean_abs_diff_expr": 0.004621,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 6440,
+    "identical": 0.1967,
+    "mean_abs_diff": 0.311,
+    "arm_correlation": 0.1335,
+    "residual_correlation": 0.0097,
+    "residual_correlation_ci": [
+     -0.0149,
+     0.0333
+    ],
+    "between_patient_sd_real": 0.2775,
+    "between_patient_sd_stranger": 0.2851,
+    "auroc_diff_mean": -0.0004,
+    "auroc_diff_sd": 0.0324,
+    "paired_t": -0.079,
+    "paired_p": 0.9372,
+    "wilcoxon_p": 0.9312,
+    "tost_margin": 0.05,
+    "tost_p_lower": 3.23e-12,
+    "tost_p_upper": 2.05e-12,
+    "tost_equivalent": true,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 0.000232,
+    "tost_narrow_p_upper": 0.000145,
+    "tost_narrow_equivalent": true,
+    "auroc_diff_ci90": [
+     -0.009,
+     0.0082
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.349898,
+     "shuffled": 0.359065
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 40,
+     "mean_diff": 0.0397,
+     "sd": 0.0287,
+     "paired_p": 9.28e-11,
+     "ci90": [
+      0.0321,
+      0.0473
+     ]
+    },
+    "shuffled": {
+     "n": 40,
+     "mean_diff": 0.0401,
+     "sd": 0.0188,
+     "paired_p": 2.98e-16,
+     "ci90": [
+      0.0351,
+      0.0451
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": -0.0076,
+    "ci95": [
+     -0.0205,
+     0.0044
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 22,
+     "auroc": 0.6704
+    },
+    "shuffled": {
+     "levels": 23,
+     "auroc": 0.6705
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.001,
+    "p_own_ge_raw": 0.0,
+    "own_minus_stranger_ci95": [
+     -0.0098,
+     0.0087
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.4579,
+      0.5854
+     ],
+     "patient": [
+      0.506,
+      0.6091
+     ],
+     "shuffled": [
+      0.5068,
+      0.6087
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.0122,
+     0.0924
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.0141,
+     0.0905
+    ],
+    "p_own_minus_blind_le0": 0.064,
+    "p_stranger_minus_blind_le0": 0.077,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.0139,
+     0.0125
+    ],
+    "own_minus_stranger_ci95": [
+     -0.0171,
+     0.0149
+    ],
+    "own_minus_stranger_within_002": true,
+    "own_minus_stranger_within_005": true,
+    "own_minus_blind_ci90": [
+     -0.0058,
+     0.0818
+    ],
+    "stranger_minus_blind_ci90": [
+     -0.006,
+     0.0819
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.3916,
+    "spearman": 0.3933
+   },
+   "variance_decomposition": {
+    "n": 12000,
+    "r2_reaction_identity": 0.2411,
+    "r2_plus_presence": 0.3526,
+    "r2_plus_magnitude": 0.3967,
+    "r2_plus_magnitude_first": 0.3955,
+    "r2_presence_magnitude_corr": 0.83,
+    "mean_p_shown": 0.5121,
+    "mean_p_not_shown": 0.1693,
+    "mean_p_blind_shown": 0.4569,
+    "mean_p_blind_not_shown": 0.1415,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction",
+    "expr_only_r2_reaction_identity": 0.0443,
+    "expr_only_r2_plus_magnitude": 0.1714,
+    "expr_only_r2_plus_percentile": 0.8088,
+    "expr_only_r2_plus_both": 0.8127,
+    "expr_only_spearman_percentile": 0.8847,
+    "expr_only_n": 6440
+   },
+   "strata": {
+    "reaction": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.4569,
+      "auroc": 0.4931
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1415,
+      "auroc": 0.4119
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.2772,
+      "auroc": 0.345
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3418,
+      "auroc": 0.6484
+     },
+     "mean_p_label_active": 0.3447,
+     "mean_p_label_inactive": 0.2969
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5121,
+      "auroc": 0.4897
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1693,
+      "auroc": 0.4693
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3279,
+      "auroc": 0.4236
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3767,
+      "auroc": 0.667
+     },
+     "mean_p_label_active": 0.3896,
+     "mean_p_label_inactive": 0.3384
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5262,
+      "auroc": 0.4919
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1688,
+      "auroc": 0.4554
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3358,
+      "auroc": 0.4259
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3835,
+      "auroc": 0.6598
+     },
+     "mean_p_label_active": 0.4005,
+     "mean_p_label_inactive": 0.3443
+    }
+   }
+  },
+  "F_replicate": {
+   "tag": "F_replicate",
+   "out": "det_patient",
+   "n_reactions": 48,
+   "n_expression_bearing": 24,
+   "n_patients": 4,
+   "arms": [
+    "patient",
+    "patient_r2",
+    "patient_r3"
+   ],
+   "minutes": 3.6,
+   "n_calls": 576,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 0,
+   "sampling": "stratified",
+   "label_base_rate": 0.5,
+   "model": "qwen3-8-27b",
+   "raw_expression_auroc": 0.5169,
+   "raw_expression_auroc_sd": 0.0033,
+   "raw_expression_auroc_expr": 0.5677,
+   "raw_percentile_auroc": 0.4983,
+   "raw_percentile_auroc_expr": 0.5035,
+   "indicator_floor": 0.5,
+   "indicator_floor_closed_form": 0.5,
+   "raw_expression_auprc": 0.5682,
+   "indicator_auprc": 0.5,
+   "constant_auprc": 0.5,
+   "resent": {},
+   "surviving_per_patient": {
+    "patient": {
+     "min": 48,
+     "max": 48
+    },
+    "patient_r2": {
+     "min": 48,
+     "max": 48
+    },
+    "patient_r3": {
+     "min": 48,
+     "max": 48
+    }
+   },
+   "per_arm": {
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.4607,
+     "auroc_sd": 0.0072,
+     "auroc_ci": [
+      0.4536,
+      0.4679
+     ],
+     "auroc_expr": 0.48,
+     "auprc": 0.5206,
+     "median_inter_patient_r": 0.0427,
+     "median_inter_patient_r_all": 0.5316,
+     "mean_p": 0.3153,
+     "sd_p": 0.3338,
+     "n_distinct_values": 16
+    },
+    "patient_r2": {
+     "parsed": 1.0,
+     "auroc": 0.4605,
+     "auroc_sd": 0.012,
+     "auroc_ci": [
+      0.4492,
+      0.4718
+     ],
+     "auroc_expr": 0.4783,
+     "auprc": 0.52,
+     "median_inter_patient_r": 0.0315,
+     "median_inter_patient_r_all": 0.5073,
+     "mean_p": 0.3152,
+     "sd_p": 0.3345,
+     "n_distinct_values": 16
+    },
+    "patient_r3": {
+     "parsed": 1.0,
+     "auroc": 0.4605,
+     "auroc_sd": 0.012,
+     "auroc_ci": [
+      0.4492,
+      0.4718
+     ],
+     "auroc_expr": 0.48,
+     "auprc": 0.5201,
+     "median_inter_patient_r": 0.0427,
+     "median_inter_patient_r_all": 0.5173,
+     "mean_p": 0.3154,
+     "sd_p": 0.3337,
+     "n_distinct_values": 16
+    }
+   },
+   "determinism_patient_prompt": {
+    "n_repeats": 2,
+    "n_pairs": 192,
+    "identical": 0.9896,
+    "mean_abs_diff": 0.001927,
+    "n_pairs_all": 384,
+    "identical_all": 0.9766,
+    "mean_abs_diff_all": 0.005208,
+    "n_distinct_values": 14,
+    "note": "the patient prompt re-sent verbatim; identical and mean_abs_diff are on the expression-bearing reactions only, the _all figures over all reactions"
+   },
+   "strata": {
+    "patient": {
+     "expression_bearing": {
+      "n": 24,
+      "label_active": 0.5,
+      "mean_p": 0.4897,
+      "auroc": 0.4931
+     },
+     "no_expression": {
+      "n": 24,
+      "label_active": 0.5,
+      "mean_p": 0.1409,
+      "auroc": 0.4479
+     },
+     "transport_exchange": {
+      "n": 26,
+      "label_active": 0.538,
+      "mean_p": 0.2783,
+      "auroc": 0.2798
+     },
+     "metabolic": {
+      "n": 22,
+      "label_active": 0.455,
+      "mean_p": 0.3591,
+      "auroc": 0.6792
+     },
+     "mean_p_label_active": 0.2988,
+     "mean_p_label_inactive": 0.3319
+    },
+    "patient_r2": {
+     "expression_bearing": {
+      "n": 24,
+      "label_active": 0.5,
+      "mean_p": 0.4894,
+      "auroc": 0.4792
+     },
+     "no_expression": {
+      "n": 24,
+      "label_active": 0.5,
+      "mean_p": 0.141,
+      "auroc": 0.4479
+     },
+     "transport_exchange": {
+      "n": 26,
+      "label_active": 0.538,
+      "mean_p": 0.2783,
+      "auroc": 0.2798
+     },
+     "metabolic": {
+      "n": 22,
+      "label_active": 0.455,
+      "mean_p": 0.3589,
+      "auroc": 0.6708
+     },
+     "mean_p_label_active": 0.2967,
+     "mean_p_label_inactive": 0.3337
+    },
+    "patient_r3": {
+     "expression_bearing": {
+      "n": 24,
+      "label_active": 0.5,
+      "mean_p": 0.4897,
+      "auroc": 0.4931
+     },
+     "no_expression": {
+      "n": 24,
+      "label_active": 0.5,
+      "mean_p": 0.1411,
+      "auroc": 0.4479
+     },
+     "transport_exchange": {
+      "n": 26,
+      "label_active": 0.538,
+      "mean_p": 0.2783,
+      "auroc": 0.2798
+     },
+     "metabolic": {
+      "n": 22,
+      "label_active": 0.455,
+      "mean_p": 0.3593,
+      "auroc": 0.6792
+     },
+     "mean_p_label_active": 0.2988,
+     "mean_p_label_inactive": 0.3321
+    }
+   }
+  },
+  "E_representative40": {
+   "tag": "E_representative40",
+   "out": "repr40_il",
+   "n_reactions": 300,
+   "n_expression_bearing": 161,
+   "n_patients": 40,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 163.2,
+   "n_calls": 36000,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 0,
+   "sampling": "random",
+   "label_base_rate": 0.29,
+   "model": "qwen3-8-27b",
+   "raw_expression_auroc": 0.6724,
+   "raw_expression_auroc_sd": 0.0063,
+   "raw_expression_auroc_expr": 0.6406,
+   "raw_percentile_auroc": 0.6232,
+   "raw_percentile_auroc_expr": 0.4987,
+   "indicator_floor": 0.6239,
+   "indicator_floor_closed_form": 0.6239,
+   "raw_expression_auprc": 0.465,
+   "indicator_auprc": 0.3578,
+   "constant_auprc": 0.29,
+   "resent": {},
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 300,
+     "max": 300
+    },
+    "patient": {
+     "min": 300,
+     "max": 300
+    },
+    "shuffled": {
+     "min": 300,
+     "max": 300
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 1.0,
+     "auroc": 0.5186,
+     "auroc_sd": 0.0035,
+     "auroc_ci": [
+      0.5176,
+      0.5197
+     ],
+     "auroc_expr": 0.4916,
+     "auprc": 0.2982,
+     "median_inter_patient_r": 0.9881,
+     "median_inter_patient_r_all": 0.9928,
+     "mean_p": 0.3113,
+     "sd_p": 0.3855,
+     "n_distinct_values": 6
+    },
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.559,
+     "auroc_sd": 0.0283,
+     "auroc_ci": [
+      0.5501,
+      0.5673
+     ],
+     "auroc_expr": 0.4881,
+     "auprc": 0.3145,
+     "median_inter_patient_r": 0.1587,
+     "median_inter_patient_r_all": 0.6269,
+     "mean_p": 0.3529,
+     "sd_p": 0.3383,
+     "n_distinct_values": 22
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.5531,
+     "auroc_sd": 0.0177,
+     "auroc_ci": [
+      0.5481,
+      0.5588
+     ],
+     "auroc_expr": 0.4785,
+     "auprc": 0.3077,
+     "median_inter_patient_r": 0.1125,
+     "median_inter_patient_r_all": 0.6064,
+     "mean_p": 0.3601,
+     "sd_p": 0.3419,
+     "n_distinct_values": 23
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 780,
+    "n_cell_pairs": 234000,
+    "identical": 0.9867,
+    "mean_abs_diff": 0.002223,
+    "identical_expr": 0.9867,
+    "mean_abs_diff_expr": 0.003739,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 6440,
+    "identical": 0.193,
+    "mean_abs_diff": 0.3108,
+    "arm_correlation": 0.1383,
+    "residual_correlation": 0.0156,
+    "residual_correlation_ci": [
+     -0.0089,
+     0.0403
+    ],
+    "between_patient_sd_real": 0.2777,
+    "between_patient_sd_stranger": 0.2832,
+    "auroc_diff_mean": 0.0059,
+    "auroc_diff_sd": 0.0327,
+    "paired_t": 1.134,
+    "paired_p": 0.2636,
+    "wilcoxon_p": 0.39,
+    "tost_margin": 0.05,
+    "tost_p_lower": 1.34e-13,
+    "tost_p_upper": 9.03e-11,
+    "tost_equivalent": true,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 6.15e-06,
+    "tost_narrow_p_upper": 0.00464,
+    "tost_narrow_equivalent": true,
+    "auroc_diff_ci90": [
+     -0.0028,
+     0.0146
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.350138,
+     "shuffled": 0.362665
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 40,
+     "mean_diff": 0.0404,
+     "sd": 0.0273,
+     "paired_p": 1.59e-11,
+     "ci90": [
+      0.0331,
+      0.0476
+     ]
+    },
+    "shuffled": {
+     "n": 40,
+     "mean_diff": 0.0345,
+     "sd": 0.0179,
+     "paired_p": 6.58e-15,
+     "ci90": [
+      0.0297,
+      0.0393
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": -0.0055,
+    "ci95": [
+     -0.0173,
+     0.0059
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 22,
+     "auroc": 0.6704
+    },
+    "shuffled": {
+     "levels": 23,
+     "auroc": 0.6705
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.001,
+    "p_own_ge_raw": 0.0,
+    "own_minus_stranger_ci95": [
+     -0.004,
+     0.0157
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.4582,
+      0.5847
+     ],
+     "patient": [
+      0.5065,
+      0.6096
+     ],
+     "shuffled": [
+      0.5011,
+      0.6036
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.0114,
+     0.0925
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.0178,
+     0.0865
+    ],
+    "p_own_minus_blind_le0": 0.063,
+    "p_stranger_minus_blind_le0": 0.095,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.0083,
+     0.0192
+    ],
+    "own_minus_stranger_ci95": [
+     -0.0109,
+     0.0227
+    ],
+    "own_minus_stranger_within_002": true,
+    "own_minus_stranger_within_005": true,
+    "own_minus_blind_ci90": [
+     -0.005,
+     0.0819
+    ],
+    "stranger_minus_blind_ci90": [
+     -0.0095,
+     0.0774
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.3931,
+    "spearman": 0.3948
+   },
+   "variance_decomposition": {
+    "n": 12000,
+    "r2_reaction_identity": 0.2432,
+    "r2_plus_presence": 0.3543,
+    "r2_plus_magnitude": 0.3988,
+    "r2_plus_magnitude_first": 0.3976,
+    "r2_presence_magnitude_corr": 0.83,
+    "mean_p_shown": 0.5119,
+    "mean_p_not_shown": 0.1687,
+    "mean_p_blind_shown": 0.4579,
+    "mean_p_blind_not_shown": 0.1416,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction",
+    "expr_only_r2_reaction_identity": 0.044,
+    "expr_only_r2_plus_magnitude": 0.1725,
+    "expr_only_r2_plus_percentile": 0.81,
+    "expr_only_r2_plus_both": 0.8142,
+    "expr_only_spearman_percentile": 0.8856,
+    "expr_only_n": 6440
+   },
+   "strata": {
+    "reaction": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.4579,
+      "auroc": 0.4931
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1416,
+      "auroc": 0.3967
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.2783,
+      "auroc": 0.3368
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3418,
+      "auroc": 0.6484
+     },
+     "mean_p_label_active": 0.3447,
+     "mean_p_label_inactive": 0.2977
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.5119,
+      "auroc": 0.4888
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1687,
+      "auroc": 0.4693
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3275,
+      "auroc": 0.4257
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3764,
+      "auroc": 0.6655
+     },
+     "mean_p_label_active": 0.3895,
+     "mean_p_label_inactive": 0.338
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.525,
+      "auroc": 0.4734
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1692,
+      "auroc": 0.4518
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3351,
+      "auroc": 0.4312
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3833,
+      "auroc": 0.6348
+     },
+     "mean_p_label_active": 0.3954,
+     "mean_p_label_inactive": 0.3457
+    }
+   }
+  },
+  "E_blocked": {
+   "tag": "E_blocked",
+   "out": "repr40",
+   "n_reactions": 300,
+   "n_expression_bearing": 161,
+   "n_patients": 40,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 202.8,
+   "n_calls": 36000,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 588,
+   "sampling": "random",
+   "label_base_rate": 0.29,
+   "model": "qwen3-8-27b",
+   "raw_expression_auroc": 0.6724,
+   "raw_expression_auroc_sd": 0.0063,
+   "raw_expression_auroc_expr": 0.6406,
+   "raw_percentile_auroc": 0.6232,
+   "raw_percentile_auroc_expr": 0.4987,
+   "indicator_floor": 0.6239,
+   "indicator_floor_closed_form": 0.6239,
+   "raw_expression_auprc": 0.465,
+   "indicator_auprc": 0.3578,
+   "constant_auprc": 0.29,
+   "resent": {
+    "shuffled": {
+     "n": 588,
+     "share_of_arm": 0.049,
+     "n_patients_affected": 2,
+     "cells_per_affected_patient": {
+      "16": 289,
+      "453": 299
+     },
+     "auroc_all": 0.5521,
+     "auroc_unaffected": 0.5525,
+     "auroc_affected": 0.5427
+    }
+   },
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 300,
+     "max": 300
+    },
+    "patient": {
+     "min": 300,
+     "max": 300
+    },
+    "shuffled": {
+     "min": 300,
+     "max": 300
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 1.0,
+     "auroc": 0.5222,
+     "auroc_sd": 0.0032,
+     "auroc_ci": [
+      0.5212,
+      0.5231
+     ],
+     "auroc_expr": 0.4933,
+     "auprc": 0.2995,
+     "median_inter_patient_r": 1.0,
+     "median_inter_patient_r_all": 0.9999,
+     "mean_p": 0.3113,
+     "sd_p": 0.3853,
+     "n_distinct_values": 6
+    },
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.5563,
+     "auroc_sd": 0.0283,
+     "auroc_ci": [
+      0.5475,
+      0.5646
+     ],
+     "auroc_expr": 0.4886,
+     "auprc": 0.3132,
+     "median_inter_patient_r": 0.1581,
+     "median_inter_patient_r_all": 0.6317,
+     "mean_p": 0.3551,
+     "sd_p": 0.3383,
+     "n_distinct_values": 22
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.5521,
+     "auroc_sd": 0.0163,
+     "auroc_ci": [
+      0.5474,
+      0.5573
+     ],
+     "auroc_expr": 0.4795,
+     "auprc": 0.3071,
+     "median_inter_patient_r": 0.1115,
+     "median_inter_patient_r_all": 0.6065,
+     "mean_p": 0.3617,
+     "sd_p": 0.3421,
+     "n_distinct_values": 23
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 780,
+    "n_cell_pairs": 234000,
+    "identical": 0.991,
+    "mean_abs_diff": 0.001499,
+    "identical_expr": 0.9922,
+    "mean_abs_diff_expr": 0.001761,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 6440,
+    "identical": 0.1927,
+    "mean_abs_diff": 0.3112,
+    "arm_correlation": 0.135,
+    "residual_correlation": 0.0133,
+    "residual_correlation_ci": [
+     -0.0114,
+     0.0384
+    ],
+    "between_patient_sd_real": 0.2774,
+    "between_patient_sd_stranger": 0.283,
+    "auroc_diff_mean": 0.0043,
+    "auroc_diff_sd": 0.0309,
+    "paired_t": 0.873,
+    "paired_p": 0.3881,
+    "wilcoxon_p": 0.5099,
+    "tost_margin": 0.05,
+    "tost_p_lower": 6.25e-14,
+    "tost_p_upper": 8.34e-12,
+    "tost_equivalent": true,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 7.08e-06,
+    "tost_narrow_p_upper": 0.00131,
+    "tost_narrow_equivalent": true,
+    "auroc_diff_ci90": [
+     -0.004,
+     0.0125
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.350148,
+     "shuffled": 0.363753
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 40,
+     "mean_diff": 0.0342,
+     "sd": 0.0278,
+     "paired_p": 1.97e-09,
+     "ci90": [
+      0.0267,
+      0.0416
+     ]
+    },
+    "shuffled": {
+     "n": 40,
+     "mean_diff": 0.0299,
+     "sd": 0.0166,
+     "paired_p": 5.91e-14,
+     "ci90": [
+      0.0255,
+      0.0343
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": -0.0056,
+    "ci95": [
+     -0.018,
+     0.0061
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 22,
+     "auroc": 0.6704
+    },
+    "shuffled": {
+     "levels": 23,
+     "auroc": 0.6705
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.001,
+    "p_own_ge_raw": 0.0,
+    "own_minus_stranger_ci95": [
+     -0.0053,
+     0.0138
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.4613,
+      0.5859
+     ],
+     "patient": [
+      0.5036,
+      0.6063
+     ],
+     "shuffled": [
+      0.4992,
+      0.6007
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.0177,
+     0.0867
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.0236,
+     0.0825
+    ],
+    "p_own_minus_blind_le0": 0.094,
+    "p_stranger_minus_blind_le0": 0.126,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.0095,
+     0.0171
+    ],
+    "own_minus_stranger_ci95": [
+     -0.0124,
+     0.0201
+    ],
+    "own_minus_stranger_within_002": true,
+    "own_minus_stranger_within_005": true,
+    "own_minus_blind_ci90": [
+     -0.0112,
+     0.076
+    ],
+    "stranger_minus_blind_ci90": [
+     -0.0155,
+     0.0725
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.3925,
+    "spearman": 0.3943
+   },
+   "variance_decomposition": {
+    "n": 12000,
+    "r2_reaction_identity": 0.2453,
+    "r2_plus_presence": 0.3514,
+    "r2_plus_magnitude": 0.3951,
+    "r2_plus_magnitude_first": 0.3941,
+    "r2_presence_magnitude_corr": 0.83,
+    "mean_p_shown": 0.512,
+    "mean_p_not_shown": 0.1733,
+    "mean_p_blind_shown": 0.4571,
+    "mean_p_blind_not_shown": 0.1425,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction",
+    "expr_only_r2_reaction_identity": 0.0439,
+    "expr_only_r2_plus_magnitude": 0.1718,
+    "expr_only_r2_plus_percentile": 0.8105,
+    "expr_only_r2_plus_both": 0.8146,
+    "expr_only_spearman_percentile": 0.8859,
+    "expr_only_n": 6440
+   },
+   "strata": {
+    "reaction": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.4571,
+      "auroc": 0.491
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1425,
+      "auroc": 0.4095
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.2779,
+      "auroc": 0.3417
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3421,
+      "auroc": 0.6482
+     },
+     "mean_p_label_active": 0.3453,
+     "mean_p_label_inactive": 0.2974
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.512,
+      "auroc": 0.4889
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1733,
+      "auroc": 0.4628
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3325,
+      "auroc": 0.4178
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3759,
+      "auroc": 0.6679
+     },
+     "mean_p_label_active": 0.3895,
+     "mean_p_label_inactive": 0.341
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 161,
+      "label_active": 0.385,
+      "mean_p": 0.525,
+      "auroc": 0.4745
+     },
+     "no_expression": {
+      "n": 139,
+      "label_active": 0.18,
+      "mean_p": 0.1725,
+      "auroc": 0.4591
+     },
+     "transport_exchange": {
+      "n": 144,
+      "label_active": 0.25,
+      "mean_p": 0.3394,
+      "auroc": 0.4354
+     },
+     "metabolic": {
+      "n": 156,
+      "label_active": 0.327,
+      "mean_p": 0.3823,
+      "auroc": 0.6364
+     },
+     "mean_p_label_active": 0.396,
+     "mean_p_label_inactive": 0.3477
+    }
+   }
+  },
+  "D_reasoning": {
+   "tag": "D_reasoning",
+   "out": "think",
+   "n_reactions": 80,
+   "n_expression_bearing": 40,
+   "n_patients": 4,
+   "arms": [
+    "reaction",
+    "patient",
+    "shuffled"
+   ],
+   "minutes": 153.2,
+   "n_calls": 960,
+   "n_calls_note": "cells in the design; runs interrupted by a restart were resumed, so the per-invocation counts in design.json are smaller",
+   "resent_calls": 357,
+   "sampling": "stratified",
+   "label_base_rate": 0.5,
+   "model": "qwen3-8-27b",
+   "raw_expression_auroc": 0.4949,
+   "raw_expression_auroc_sd": 0.008,
+   "raw_expression_auroc_expr": 0.4734,
+   "raw_percentile_auroc": 0.482,
+   "raw_percentile_auroc_expr": 0.4278,
+   "indicator_floor": 0.5,
+   "indicator_floor_closed_form": 0.5,
+   "raw_expression_auprc": 0.5217,
+   "indicator_auprc": 0.5,
+   "constant_auprc": 0.5,
+   "resent": {
+    "patient": {
+     "n": 37,
+     "share_of_arm": 0.1156,
+     "n_patients_affected": 1,
+     "cells_per_affected_patient": {
+      "91": 37
+     },
+     "auroc_all": 0.3634,
+     "auroc_unaffected": 0.3325,
+     "auroc_affected": 0.4563
+    },
+    "shuffled": {
+     "n": 320,
+     "share_of_arm": 1.0,
+     "n_patients_affected": 4,
+     "cells_per_affected_patient": {
+      "420": 80,
+      "366": 80,
+      "422": 80,
+      "91": 80
+     },
+     "auroc_all": 0.4685,
+     "auroc_unaffected": null,
+     "auroc_affected": 0.4685
+    }
+   },
+   "surviving_per_patient": {
+    "reaction": {
+     "min": 17,
+     "max": 21
+    },
+    "patient": {
+     "min": 25,
+     "max": 32
+    },
+    "shuffled": {
+     "min": 28,
+     "max": 35
+    }
+   },
+   "per_arm": {
+    "reaction": {
+     "parsed": 0.2375,
+     "auroc": 0.4517,
+     "auroc_sd": 0.1085,
+     "auroc_ci": [
+      0.3662,
+      0.5758
+     ],
+     "auroc_expr": 0.0,
+     "auprc": 0.6056,
+     "median_inter_patient_r": NaN,
+     "median_inter_patient_r_all": NaN,
+     "mean_p": 0.122,
+     "sd_p": 0.2164,
+     "n_distinct_values": 29
+    },
+    "patient": {
+     "parsed": 0.3531,
+     "auroc": 0.3634,
+     "auroc_sd": 0.0731,
+     "auroc_ci": [
+      0.292,
+      0.4349
+     ],
+     "auroc_expr": 0.2741,
+     "auprc": 0.4632,
+     "median_inter_patient_r": NaN,
+     "median_inter_patient_r_all": NaN,
+     "mean_p": 0.316,
+     "sd_p": 0.3186,
+     "n_distinct_values": 49
+    },
+    "shuffled": {
+     "parsed": 0.3875,
+     "auroc": 0.4685,
+     "auroc_sd": 0.0419,
+     "auroc_ci": [
+      0.4244,
+      0.5028
+     ],
+     "auroc_expr": 0.5895,
+     "auprc": 0.5512,
+     "median_inter_patient_r": NaN,
+     "median_inter_patient_r_all": NaN,
+     "mean_p": 0.3111,
+     "sd_p": 0.3163,
+     "n_distinct_values": 52
+    }
+   },
+   "determinism": {
+    "n_prompt_pairs": 6,
+    "n_cell_pairs": 82,
+    "identical": 0.2191,
+    "mean_abs_diff": 0.024126,
+    "identical_expr": 0.3333,
+    "mean_abs_diff_expr": 0.002167,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 22,
+    "identical": 0.0909,
+    "mean_abs_diff": 0.22,
+    "arm_correlation": 0.353,
+    "residual_correlation": 0.0465,
+    "residual_correlation_ci": [
+     -0.143,
+     0.2989
+    ],
+    "between_patient_sd_real": NaN,
+    "between_patient_sd_stranger": NaN,
+    "auroc_diff_mean": -0.1051,
+    "auroc_diff_sd": 0.0705,
+    "paired_t": -2.983,
+    "paired_p": 0.0585,
+    "wilcoxon_p": null,
+    "tost_margin": 0.05,
+    "tost_p_lower": 0.892,
+    "tost_p_upper": 0.0109,
+    "tost_equivalent": false,
+    "tost_margin_narrow": 0.02,
+    "tost_narrow_p_lower": 0.953,
+    "tost_narrow_p_upper": 0.019,
+    "tost_narrow_equivalent": false,
+    "auroc_diff_ci90": [
+     -0.188,
+     -0.0222
+    ],
+    "mean_move_from_reaction_arm": {
+     "patient": 0.0524,
+     "shuffled": 0.140667
+    }
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 4,
+     "mean_diff": -0.0882,
+     "sd": 0.171,
+     "paired_p": 0.378,
+     "ci90": [
+      -0.2894,
+      0.1129
+     ]
+    },
+    "shuffled": {
+     "n": 4,
+     "mean_diff": 0.0168,
+     "sd": 0.1692,
+     "paired_p": 0.855,
+     "ci90": [
+      -0.1822,
+      0.2159
+     ]
+    }
+   },
+   "between_patient_sd_diff": {
+    "diff": -0.0774,
+    "ci95": [
+     -0.0774,
+     0.0078
+    ],
+    "note": "own minus stranger, mean over expression-bearing reactions; patient bootstrap"
+   },
+   "raw_expression_binned": {
+    "patient": {
+     "levels": 49,
+     "auroc": 0.4938
+    },
+    "shuffled": {
+     "levels": 52,
+     "auroc": 0.4928
+    }
+   },
+   "reaction_bootstrap": {
+    "B": 1000,
+    "p_own_ge_indicator": 0.093,
+    "p_own_ge_raw": 0.102,
+    "own_minus_stranger_ci95": [
+     -0.2362,
+     0.0078
+    ],
+    "arm_ci95": {
+     "reaction": [
+      0.1911,
+      0.7048
+     ],
+     "patient": [
+      0.1869,
+      0.5744
+     ],
+     "shuffled": [
+      0.2943,
+      0.6553
+     ]
+    },
+    "own_minus_blind_ci95": [
+     -0.2735,
+     0.0969
+    ],
+    "stranger_minus_blind_ci95": [
+     -0.1812,
+     0.247
+    ],
+    "p_own_minus_blind_le0": 0.84,
+    "p_stranger_minus_blind_le0": 0.441,
+    "note": "reactions resampled with replacement, patients fixed"
+   },
+   "crossed_bootstrap": {
+    "B": 1000,
+    "own_minus_stranger_ci90": [
+     -0.245,
+     0.0312
+    ],
+    "own_minus_stranger_ci95": [
+     -0.2734,
+     0.0569
+    ],
+    "own_minus_stranger_within_002": false,
+    "own_minus_stranger_within_005": false,
+    "own_minus_blind_ci90": [
+     -0.3323,
+     0.1179
+    ],
+    "stranger_minus_blind_ci90": [
+     -0.2476,
+     0.2598
+    ],
+    "note": "patients and reactions resampled with replacement together; arms paired within cells"
+   },
+   "score_vs_shown_value": {
+    "pearson": 0.3824,
+    "spearman": 0.2395
+   },
+   "variance_decomposition": {
+    "n": 53,
+    "r2_reaction_identity": 0.7809,
+    "r2_plus_presence": 0.7821,
+    "r2_plus_magnitude": 0.7868,
+    "r2_plus_magnitude_first": 0.7849,
+    "r2_presence_magnitude_corr": 0.8888,
+    "mean_p_shown": 0.3118,
+    "mean_p_not_shown": 0.1059,
+    "mean_p_blind_shown": 0.3026,
+    "mean_p_blind_not_shown": 0.0912,
+    "note": "nested least squares; columns are the patient-blind score, an indicator that a value was shown, and the value itself; both entry orders are given because the two columns are collinear by construction"
+   },
+   "strata": {
+    "reaction": {
+     "no_expression": {
+      "n": 25,
+      "label_active": 0.56,
+      "mean_p": 0.1579,
+      "auroc": 0.4481
+     },
+     "transport_exchange": {
+      "n": 15,
+      "label_active": 0.8,
+      "mean_p": 0.1326,
+      "auroc": 0.2778
+     },
+     "metabolic": {
+      "n": 15,
+      "label_active": 0.4,
+      "mean_p": 0.2316,
+      "auroc": 0.3241
+     },
+     "mean_p_label_active": 0.1323,
+     "mean_p_label_inactive": 0.2568
+    },
+    "patient": {
+     "expression_bearing": {
+      "n": 26,
+      "label_active": 0.5,
+      "mean_p": 0.489,
+      "auroc": 0.4083
+     },
+     "no_expression": {
+      "n": 26,
+      "label_active": 0.615,
+      "mean_p": 0.1905,
+      "auroc": 0.4875
+     },
+     "transport_exchange": {
+      "n": 23,
+      "label_active": 0.783,
+      "mean_p": 0.2389,
+      "auroc": 0.4444
+     },
+     "metabolic": {
+      "n": 29,
+      "label_active": 0.379,
+      "mean_p": 0.4198,
+      "auroc": 0.452
+     },
+     "mean_p_label_active": 0.2778,
+     "mean_p_label_inactive": 0.4179
+    },
+    "shuffled": {
+     "expression_bearing": {
+      "n": 24,
+      "label_active": 0.542,
+      "mean_p": 0.5479,
+      "auroc": 0.5734
+     },
+     "no_expression": {
+      "n": 28,
+      "label_active": 0.536,
+      "mean_p": 0.1622,
+      "auroc": 0.4128
+     },
+     "transport_exchange": {
+      "n": 22,
+      "label_active": 0.727,
+      "mean_p": 0.2467,
+      "auroc": 0.2292
+     },
+     "metabolic": {
+      "n": 30,
+      "label_active": 0.4,
+      "mean_p": 0.4088,
+      "auroc": 0.5787
+     },
+     "mean_p_label_active": 0.3118,
+     "mean_p_label_inactive": 0.3734
+    }
+   }
+  }
+ },
+ "collections": {
+  "A_representative": "repr_il",
+  "A_blocked": "repr",
+  "B_balanced": "pilot",
+  "A_backbone2": "repr_b2il",
+  "A_backbone2_blocked": "repr_b2",
+  "A_backbone3": "repr_b3il",
+  "A_backbone3_blocked": "repr_b3",
+  "A_donor2": "repr_il_d2",
+  "E_donor2": "repr40_il_d2",
+  "F_replicate": "det_patient",
+  "E_representative40": "repr40_il",
+  "E_blocked": "repr40",
+  "D_reasoning": "think"
+ },
+ "collection_fallback": {},
+ "cross_session": {
+  "designs": [
+   "A_representative",
+   "E_representative40"
+  ],
+  "collections": [
+   "repr_il",
+   "repr40_il"
+  ],
+  "n_patients": 10,
+  "n_reactions": 300,
+  "arms": {
+   "patient": {
+    "n_cells": 3000,
+    "n_cells_expr": 1610,
+    "identical": 0.9737,
+    "mean_abs_diff": 0.006477,
+    "identical_expr": 0.9689,
+    "mean_abs_diff_expr": 0.004087
+   },
+   "reaction": {
+    "n_cells": 3000,
+    "n_cells_expr": 1610,
+    "identical": 0.987,
+    "mean_abs_diff": 0.00241,
+    "identical_expr": 0.987,
+    "mean_abs_diff_expr": 0.004143
+   }
+  },
+  "time_gap": {
+   "median_hours": 1.88,
+   "min_hours": 0.18,
+   "max_hours": 3.54,
+   "n": 6000,
+   "basis": "per-call timestamps in both archives"
+  },
+  "note": "byte-identical prompts answered in two sessions; the same patients and reactions"
+ },
+ "interleaved_vs_blocked": {
+  "A_representative": {
+   "blocked": "A_blocked",
+   "collections": [
+    "repr",
+    "repr_il"
+   ],
+   "arms": {
+    "patient": {
+     "n_cells": 3000,
+     "n_cells_expr": 1610,
+     "identical": 0.967,
+     "mean_abs_diff": 0.007247,
+     "identical_expr": 0.9571,
+     "mean_abs_diff_expr": 0.005988
+    },
+    "reaction": {
+     "n_cells": 3000,
+     "n_cells_expr": 1610,
+     "identical": 0.9863,
+     "mean_abs_diff": 0.001753,
+     "identical_expr": 0.9882,
+     "mean_abs_diff_expr": 0.001789
+    },
+    "shuffled": {
+     "n_cells": 3000,
+     "n_cells_expr": 1610,
+     "identical": 0.9663,
+     "mean_abs_diff": 0.009313,
+     "identical_expr": 0.964,
+     "mean_abs_diff_expr": 0.005242
+    }
+   },
+   "auroc_blocked": {
+    "reaction": 0.5206,
+    "patient": 0.5499,
+    "shuffled": 0.5438
+   },
+   "auroc_interleaved": {
+    "reaction": 0.5188,
+    "patient": 0.5498,
+    "shuffled": 0.547
+   },
+   "own_minus_stranger_blocked": 0.0062,
+   "own_minus_stranger_interleaved": 0.0029,
+   "time_gap": {
+    "median_hours": 28.22,
+    "min_hours": 27.89,
+    "max_hours": 28.56,
+    "n": 9000,
+    "basis": "from the completion of the first collection to each call of the second"
+   },
+   "note": "byte-identical prompts, blocked order then interleaved order, two sessions"
+  },
+  "A_backbone2": {
+   "blocked": "A_backbone2_blocked",
+   "collections": [
+    "repr_b2",
+    "repr_b2il"
+   ],
+   "arms": {
+    "patient": {
+     "n_cells": 3000,
+     "n_cells_expr": 1610,
+     "identical": 0.9657,
+     "mean_abs_diff": 0.003843,
+     "identical_expr": 0.9708,
+     "mean_abs_diff_expr": 0.002286
+    },
+    "reaction": {
+     "n_cells": 3000,
+     "n_cells_expr": 1610,
+     "identical": 0.9853,
+     "mean_abs_diff": 0.001147,
+     "identical_expr": 0.9814,
+     "mean_abs_diff_expr": 0.001137
+    },
+    "shuffled": {
+     "n_cells": 3000,
+     "n_cells_expr": 1610,
+     "identical": 0.9697,
+     "mean_abs_diff": 0.00319,
+     "identical_expr": 0.9764,
+     "mean_abs_diff_expr": 0.001683
+    }
+   },
+   "auroc_blocked": {
+    "reaction": 0.4501,
+    "patient": 0.4671,
+    "shuffled": 0.4629
+   },
+   "auroc_interleaved": {
+    "reaction": 0.45,
+    "patient": 0.4687,
+    "shuffled": 0.4655
+   },
+   "own_minus_stranger_blocked": 0.0042,
+   "own_minus_stranger_interleaved": 0.0032,
+   "time_gap": {
+    "median_hours": 11.16,
+    "min_hours": 11.02,
+    "max_hours": 11.3,
+    "n": 9000,
+    "basis": "from the completion of the first collection to each call of the second"
+   },
+   "note": "byte-identical prompts, blocked order then interleaved order, two sessions"
+  },
+  "A_backbone3": {
+   "blocked": "A_backbone3_blocked",
+   "collections": [
+    "repr_b3",
+    "repr_b3il"
+   ],
+   "arms": {
+    "patient": {
+     "n_cells": 3000,
+     "n_cells_expr": 1610,
+     "identical": 0.964,
+     "mean_abs_diff": 0.00457,
+     "identical_expr": 0.9696,
+     "mean_abs_diff_expr": 0.00423
+    },
+    "reaction": {
+     "n_cells": 3000,
+     "n_cells_expr": 1610,
+     "identical": 0.9697,
+     "mean_abs_diff": 0.003833,
+     "identical_expr": 0.9553,
+     "mean_abs_diff_expr": 0.004379
+    },
+    "shuffled": {
+     "n_cells": 3000,
+     "n_cells_expr": 1610,
+     "identical": 0.9643,
+     "mean_abs_diff": 0.003893,
+     "identical_expr": 0.9714,
+     "mean_abs_diff_expr": 0.002845
+    }
+   },
+   "auroc_blocked": {
+    "reaction": 0.6282,
+    "patient": 0.5718,
+    "shuffled": 0.5702
+   },
+   "auroc_interleaved": {
+    "reaction": 0.6191,
+    "patient": 0.578,
+    "shuffled": 0.5733
+   },
+   "own_minus_stranger_blocked": 0.0017,
+   "own_minus_stranger_interleaved": 0.0047,
+   "time_gap": {
+    "median_hours": 2.97,
+    "min_hours": 2.91,
+    "max_hours": 3.03,
+    "n": 9000,
+    "basis": "from the completion of the first collection to each call of the second"
+   },
+   "note": "byte-identical prompts, blocked order then interleaved order, two sessions"
+  },
+  "E_representative40": {
+   "blocked": "E_blocked",
+   "collections": [
+    "repr40",
+    "repr40_il"
+   ],
+   "arms": {
+    "patient": {
+     "n_cells": 12000,
+     "n_cells_expr": 6440,
+     "identical": 0.971,
+     "mean_abs_diff": 0.00675,
+     "identical_expr": 0.9649,
+     "mean_abs_diff_expr": 0.005016
+    },
+    "reaction": {
+     "n_cells": 12000,
+     "n_cells_expr": 6440,
+     "identical": 0.9852,
+     "mean_abs_diff": 0.0021,
+     "identical_expr": 0.9863,
+     "mean_abs_diff_expr": 0.003006
+    },
+    "shuffled": {
+     "n_cells": 12000,
+     "n_cells_expr": 6440,
+     "identical": 0.9708,
+     "mean_abs_diff": 0.007374,
+     "identical_expr": 0.9663,
+     "mean_abs_diff_expr": 0.005293
+    }
+   },
+   "auroc_blocked": {
+    "reaction": 0.5222,
+    "patient": 0.5563,
+    "shuffled": 0.5521
+   },
+   "auroc_interleaved": {
+    "reaction": 0.5186,
+    "patient": 0.559,
+    "shuffled": 0.5531
+   },
+   "own_minus_stranger_blocked": 0.0043,
+   "own_minus_stranger_interleaved": 0.0059,
+   "time_gap": {
+    "median_hours": 27.21,
+    "min_hours": 25.86,
+    "max_hours": 28.58,
+    "n": 36000,
+    "basis": "from the completion of the first collection to each call of the second"
+   },
+   "note": "byte-identical prompts, blocked order then interleaved order, two sessions"
+  }
+ },
+ "donor_schedules": {
+  "own_minus_stranger": [
+   0.0029,
+   -0.0185
+  ],
+  "own_minus_stranger_ci90": [
+   [
+    -0.0217,
+    0.0275
+   ],
+   [
+    -0.0409,
+    0.0038
+   ]
+  ],
+  "own_minus_stranger_p": [
+   0.8359,
+   0.1631
+  ],
+  "stranger_auroc": [
+   0.547,
+   0.569
+  ],
+  "own_auroc": [
+   0.5498,
+   0.5504
+  ],
+  "blind_auroc": [
+   0.5188,
+   0.5187
+  ],
+  "between_patient_sd_stranger": [
+   0.2693,
+   0.2712
+  ],
+  "equivalent_002": [
+   false,
+   false
+  ],
+  "equivalent_005": [
+   true,
+   true
+  ],
+  "note": "two independently drawn donor schedules on the same reactions and patients"
+ },
+ "donor_schedules_E": {
+  "own_minus_stranger": [
+   0.0059,
+   -0.0004
+  ],
+  "own_minus_stranger_ci90": [
+   [
+    -0.0028,
+    0.0146
+   ],
+   [
+    -0.009,
+    0.0082
+   ]
+  ],
+  "own_minus_stranger_p": [
+   0.2636,
+   0.9372
+  ],
+  "stranger_auroc": [
+   0.5531,
+   0.5591
+  ],
+  "own_auroc": [
+   0.559,
+   0.5587
+  ],
+  "blind_auroc": [
+   0.5186,
+   0.5189
+  ],
+  "between_patient_sd_stranger": [
+   0.2832,
+   0.2851
+  ],
+  "equivalent_002": [
+   true,
+   true
+  ],
+  "equivalent_005": [
+   true,
+   true
+  ],
+  "note": "two independently drawn donor schedules on the same reactions and patients"
+ },
+ "formats": {
+  "categorical": {
+   "tag": "categorical",
+   "out": "fmt_cat",
+   "format": "categorical",
+   "n_reactions": 240,
+   "n_patients": 8,
+   "n_calls": 3840,
+   "reference_run": "B_balanced",
+   "per_arm": {
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.4381,
+     "auroc_ci": [
+      0.4258,
+      0.4488
+     ],
+     "median_inter_patient_r": 0.1408,
+     "median_inter_patient_r_all": 0.6279,
+     "mean_p": 0.3477,
+     "n_distinct_values": 13,
+     "mean_p_expression_bearing": 0.5421,
+     "mean_p_no_expression": 0.1532
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.4392,
+     "auroc_ci": [
+      0.4294,
+      0.4498
+     ],
+     "median_inter_patient_r": 0.1767,
+     "median_inter_patient_r_all": 0.6726,
+     "mean_p": 0.3512,
+     "n_distinct_values": 13,
+     "mean_p_expression_bearing": 0.55,
+     "mean_p_no_expression": 0.1525
+    }
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 960,
+    "identical": 0.2802,
+    "mean_abs_diff": 0.2999,
+    "between_patient_sd_real": 0.2648,
+    "between_patient_sd_stranger": 0.2518
+   }
+  },
+  "percentile": {
+   "tag": "percentile",
+   "out": "fmt_pct",
+   "format": "percentile",
+   "n_reactions": 240,
+   "n_patients": 8,
+   "n_calls": 3840,
+   "reference_run": "B_balanced",
+   "per_arm": {
+    "patient": {
+     "parsed": 1.0,
+     "auroc": 0.4489,
+     "auroc_ci": [
+      0.4308,
+      0.4645
+     ],
+     "median_inter_patient_r": 0.144,
+     "median_inter_patient_r_all": 0.6192,
+     "mean_p": 0.3158,
+     "n_distinct_values": 30,
+     "mean_p_expression_bearing": 0.4791,
+     "mean_p_no_expression": 0.1524
+    },
+    "shuffled": {
+     "parsed": 1.0,
+     "auroc": 0.4452,
+     "auroc_ci": [
+      0.4302,
+      0.4591
+     ],
+     "median_inter_patient_r": 0.1439,
+     "median_inter_patient_r_all": 0.6108,
+     "mean_p": 0.3143,
+     "n_distinct_values": 31,
+     "mean_p_expression_bearing": 0.4762,
+     "mean_p_no_expression": 0.1525
+    }
+   },
+   "patient_vs_shuffled": {
+    "n_pairs": 960,
+    "identical": 0.1552,
+    "mean_abs_diff": 0.316,
+    "between_patient_sd_real": 0.26,
+    "between_patient_sd_stranger": 0.2542
+   }
+  }
+ },
+ "label_ht29": {
+  "source": "paper1/data/activity_labels_ht29.pt",
+  "n_active": 2368,
+  "prevalence": 0.2234,
+  "indicator_floor_network": 0.6469,
+  "runs": {
+   "A_representative": {
+    "tag": "A_representative",
+    "out": "repr_il",
+    "label": "HT29 only",
+    "n_reactions": 300,
+    "n_patients": 10,
+    "label_base_rate": 0.2133,
+    "model": "qwen3-8-27b",
+    "raw_expression_auroc": 0.7601,
+    "indicator_floor": 0.6753,
+    "per_arm": {
+     "reaction": {
+      "auroc": 0.6019,
+      "auroc_sd": 0.0014,
+      "auroc_ci": [
+       0.601,
+       0.6027
+      ]
+     },
+     "patient": {
+      "auroc": 0.6152,
+      "auroc_sd": 0.0445,
+      "auroc_ci": [
+       0.5888,
+       0.6434
+      ]
+     },
+     "shuffled": {
+      "auroc": 0.6049,
+      "auroc_sd": 0.0239,
+      "auroc_ci": [
+       0.5897,
+       0.6199
+      ]
+     }
+    },
+    "own_minus_stranger": {
+     "mean": 0.0103,
+     "sd": 0.0538,
+     "n": 10,
+     "ci95": [
+      -0.0211,
+      0.046
+     ],
+     "ci90": [
+      -0.0166,
+      0.0393
+     ],
+     "n_positive": 5,
+     "n_negative": 5
+    },
+    "own_minus_blind": {
+     "mean": 0.0134,
+     "sd": 0.0448,
+     "n": 10,
+     "ci95": [
+      -0.0135,
+      0.0412
+     ],
+     "ci90": [
+      -0.0096,
+      0.0376
+     ],
+     "n_positive": 4,
+     "n_negative": 6
+    },
+    "stranger_minus_blind": {
+     "mean": 0.003,
+     "sd": 0.0245,
+     "n": 10,
+     "ci95": [
+      -0.0123,
+      0.0172
+     ],
+     "ci90": [
+      -0.0099,
+      0.0153
+     ],
+     "n_positive": 5,
+     "n_negative": 5
+    }
+   },
+   "B_balanced": {
+    "tag": "B_balanced",
+    "out": "pilot",
+    "label": "HT29 only",
+    "n_reactions": 240,
+    "n_patients": 8,
+    "label_base_rate": 0.325,
+    "model": "qwen3-8-27b",
+    "raw_expression_auroc": 0.6361,
+    "indicator_floor": 0.595,
+    "per_arm": {
+     "reaction": {
+      "auroc": 0.5011,
+      "auroc_sd": 0.002,
+      "auroc_ci": [
+       0.4998,
+       0.5025
+      ]
+     },
+     "patient": {
+      "auroc": 0.4854,
+      "auroc_sd": 0.0272,
+      "auroc_ci": [
+       0.4672,
+       0.5038
+      ]
+     },
+     "shuffled": {
+      "auroc": 0.4923,
+      "auroc_sd": 0.0149,
+      "auroc_ci": [
+       0.4823,
+       0.5025
+      ]
+     }
+    },
+    "own_minus_stranger": {
+     "mean": -0.0069,
+     "sd": 0.0315,
+     "n": 8,
+     "ci95": [
+      -0.0274,
+      0.0155
+     ],
+     "ci90": [
+      -0.0251,
+      0.0116
+     ],
+     "n_positive": 3,
+     "n_negative": 5
+    },
+    "own_minus_blind": {
+     "mean": -0.0157,
+     "sd": 0.0286,
+     "n": 8,
+     "ci95": [
+      -0.0364,
+      0.004
+     ],
+     "ci90": [
+      -0.0326,
+      0.0009
+     ],
+     "n_positive": 2,
+     "n_negative": 6
+    },
+    "stranger_minus_blind": {
+     "mean": -0.0088,
+     "sd": 0.0152,
+     "n": 8,
+     "ci95": [
+      -0.0188,
+      0.0017
+     ],
+     "ci90": [
+      -0.0175,
+      0.0003
+     ],
+     "n_positive": 2,
+     "n_negative": 6
+    }
+   },
+   "A_backbone2": {
+    "tag": "A_backbone2",
+    "out": "repr_b2il",
+    "label": "HT29 only",
+    "n_reactions": 300,
+    "n_patients": 10,
+    "label_base_rate": 0.2133,
+    "model": "gemma-4-31b-it",
+    "raw_expression_auroc": 0.7601,
+    "indicator_floor": 0.6753,
+    "per_arm": {
+     "reaction": {
+      "auroc": 0.5351,
+      "auroc_sd": 0.0006,
+      "auroc_ci": [
+       0.5348,
+       0.5355
+      ]
+     },
+     "patient": {
+      "auroc": 0.5535,
+      "auroc_sd": 0.0404,
+      "auroc_ci": [
+       0.529,
+       0.5782
+      ]
+     },
+     "shuffled": {
+      "auroc": 0.5439,
+      "auroc_sd": 0.026,
+      "auroc_ci": [
+       0.5281,
+       0.5602
+      ]
+     }
+    },
+    "own_minus_stranger": {
+     "mean": 0.0096,
+     "sd": 0.0451,
+     "n": 10,
+     "ci95": [
+      -0.018,
+      0.0373
+     ],
+     "ci90": [
+      -0.0138,
+      0.0331
+     ],
+     "n_positive": 6,
+     "n_negative": 4
+    },
+    "own_minus_blind": {
+     "mean": 0.0184,
+     "sd": 0.0405,
+     "n": 10,
+     "ci95": [
+      -0.0062,
+      0.044
+     ],
+     "ci90": [
+      -0.0026,
+      0.04
+     ],
+     "n_positive": 6,
+     "n_negative": 4
+    },
+    "stranger_minus_blind": {
+     "mean": 0.0088,
+     "sd": 0.0258,
+     "n": 10,
+     "ci95": [
+      -0.0065,
+      0.025
+     ],
+     "ci90": [
+      -0.0042,
+      0.022
+     ],
+     "n_positive": 6,
+     "n_negative": 4
+    }
+   },
+   "A_backbone3": {
+    "tag": "A_backbone3",
+    "out": "repr_b3il",
+    "label": "HT29 only",
+    "n_reactions": 300,
+    "n_patients": 10,
+    "label_base_rate": 0.2133,
+    "model": "mistral-small-3.2-24b-instruct",
+    "raw_expression_auroc": 0.7601,
+    "indicator_floor": 0.6753,
+    "per_arm": {
+     "reaction": {
+      "auroc": 0.7107,
+      "auroc_sd": 0.0009,
+      "auroc_ci": [
+       0.7103,
+       0.7113
+      ]
+     },
+     "patient": {
+      "auroc": 0.6246,
+      "auroc_sd": 0.0711,
+      "auroc_ci": [
+       0.5816,
+       0.6673
+      ]
+     },
+     "shuffled": {
+      "auroc": 0.6095,
+      "auroc_sd": 0.0207,
+      "auroc_ci": [
+       0.5967,
+       0.6223
+      ]
+     }
+    },
+    "own_minus_stranger": {
+     "mean": 0.0151,
+     "sd": 0.0698,
+     "n": 10,
+     "ci95": [
+      -0.0288,
+      0.0584
+     ],
+     "ci90": [
+      -0.0217,
+      0.0528
+     ],
+     "n_positive": 6,
+     "n_negative": 4
+    },
+    "own_minus_blind": {
+     "mean": -0.0861,
+     "sd": 0.0714,
+     "n": 10,
+     "ci95": [
+      -0.1304,
+      -0.0423
+     ],
+     "ci90": [
+      -0.1247,
+      -0.0485
+     ],
+     "n_positive": 0,
+     "n_negative": 10
+    },
+    "stranger_minus_blind": {
+     "mean": -0.1012,
+     "sd": 0.0205,
+     "n": 10,
+     "ci95": [
+      -0.1141,
+      -0.0888
+     ],
+     "ci90": [
+      -0.112,
+      -0.0909
+     ],
+     "n_positive": 0,
+     "n_negative": 10
+    }
+   },
+   "E_representative40": {
+    "tag": "E_representative40",
+    "out": "repr40_il",
+    "label": "HT29 only",
+    "n_reactions": 300,
+    "n_patients": 40,
+    "label_base_rate": 0.2133,
+    "model": "qwen3-8-27b",
+    "raw_expression_auroc": 0.7622,
+    "indicator_floor": 0.6753,
+    "per_arm": {
+     "reaction": {
+      "auroc": 0.601,
+      "auroc_sd": 0.0015,
+      "auroc_ci": [
+       0.6005,
+       0.6014
+      ]
+     },
+     "patient": {
+      "auroc": 0.623,
+      "auroc_sd": 0.0354,
+      "auroc_ci": [
+       0.6123,
+       0.6338
+      ]
+     },
+     "shuffled": {
+      "auroc": 0.6149,
+      "auroc_sd": 0.0223,
+      "auroc_ci": [
+       0.6081,
+       0.6223
+      ]
+     }
+    },
+    "own_minus_stranger": {
+     "mean": 0.008,
+     "sd": 0.0409,
+     "n": 40,
+     "ci95": [
+      -0.0038,
+      0.0211
+     ],
+     "ci90": [
+      -0.002,
+      0.0186
+     ],
+     "n_positive": 22,
+     "n_negative": 18
+    },
+    "own_minus_blind": {
+     "mean": 0.022,
+     "sd": 0.0353,
+     "n": 40,
+     "ci95": [
+      0.011,
+      0.0331
+     ],
+     "ci90": [
+      0.0127,
+      0.0314
+     ],
+     "n_positive": 28,
+     "n_negative": 12
+    },
+    "stranger_minus_blind": {
+     "mean": 0.014,
+     "sd": 0.0225,
+     "n": 40,
+     "ci95": [
+      0.0072,
+      0.0205
+     ],
+     "ci90": [
+      0.0082,
+      0.0196
+     ],
+     "n_positive": 30,
+     "n_negative": 10
+    }
+   }
+  }
+ },
+ "positive_control": {
+  "backbone1": {
+   "read": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 600,
+    "n_tied": 0,
+    "accuracy": 1.0,
+    "n_hard": 126,
+    "accuracy_hard": 1.0,
+    "modal_answer_share": 0.5333
+   },
+   "compare": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 591,
+    "n_tied": 9,
+    "accuracy": 0.9831,
+    "n_hard": 115,
+    "accuracy_hard": 0.9739,
+    "n_errors": 10,
+    "errors_answering_first": 10,
+    "modal_answer_share": 0.5178
+   },
+   "echo_modal_share": 0.025,
+   "echo": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 600,
+    "n_tied": 0,
+    "accuracy": 1.0,
+    "n_hard": 0,
+    "accuracy_hard": null
+   },
+   "echoval_modal_share": 0.0433,
+   "echoval_median_abs_error_wrong": null,
+   "echoval_within_one_digit": 1.0,
+   "echoval": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 600,
+    "n_tied": 0,
+    "accuracy": 1.0,
+    "n_hard": 0,
+    "accuracy_hard": null
+   }
+  },
+  "backbone2": {
+   "read": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 600,
+    "n_tied": 0,
+    "accuracy": 1.0,
+    "n_hard": 126,
+    "accuracy_hard": 1.0,
+    "modal_answer_share": 0.5333
+   },
+   "compare": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 591,
+    "n_tied": 9,
+    "accuracy": 1.0,
+    "n_hard": 115,
+    "accuracy_hard": 1.0,
+    "n_errors": 0,
+    "errors_answering_first": 0,
+    "modal_answer_share": 0.5347
+   },
+   "echo_modal_share": 0.025,
+   "echo": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 600,
+    "n_tied": 0,
+    "accuracy": 1.0,
+    "n_hard": 0,
+    "accuracy_hard": null
+   },
+   "echoval_modal_share": 0.0433,
+   "echoval_median_abs_error_wrong": null,
+   "echoval_within_one_digit": 1.0,
+   "echoval": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 600,
+    "n_tied": 0,
+    "accuracy": 1.0,
+    "n_hard": 0,
+    "accuracy_hard": null
+   }
+  },
+  "backbone3": {
+   "read": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 600,
+    "n_tied": 0,
+    "accuracy": 0.9033,
+    "n_hard": 126,
+    "accuracy_hard": 0.7857,
+    "modal_answer_share": 0.5433
+   },
+   "compare": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 591,
+    "n_tied": 9,
+    "accuracy": 0.9865,
+    "n_hard": 115,
+    "accuracy_hard": 0.9565,
+    "n_errors": 8,
+    "errors_answering_first": 7,
+    "modal_answer_share": 0.5245
+   },
+   "echo_modal_share": 0.025,
+   "echo": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 600,
+    "n_tied": 0,
+    "accuracy": 1.0,
+    "n_hard": 0,
+    "accuracy_hard": null
+   },
+   "echoval_modal_share": 0.0433,
+   "echoval_median_abs_error_wrong": null,
+   "echoval_within_one_digit": 1.0,
+   "echoval": {
+    "n": 600,
+    "parsed": 600,
+    "n_scored": 600,
+    "n_tied": 0,
+    "accuracy": 1.0,
+    "n_hard": 0,
+    "accuracy_hard": null
+   }
+  }
+ },
+ "cohort": {
+  "n_gpr_rule": 5938,
+  "n_no_gpr_rule": 4662,
+  "n_gene_and_expression": 5635,
+  "n_gene_no_expression": 303,
+  "n_expression_no_gene": 0,
+  "n_aligned": 10311,
+  "n_unaligned": 289,
+  "msi_h": 92,
+  "msi_l": 44,
+  "mss": 487,
+  "not_evaluable": 1,
+  "n_annotated": 624
+ },
+ "network": {
+  "n_reactions": 10600,
+  "n_active": 3379,
+  "base_rate": 0.3188,
+  "n_expression_bearing": 5635,
+  "n_patients": 624,
+  "prevalence_expression_bearing": 0.4075,
+  "prevalence_no_expression": 0.2181,
+  "indicator_floor": 0.6085,
+  "raw_expression_auroc": 0.6342,
+  "raw_expression_auroc_sd": 0.0058
+ },
+ "msi_collections": {
+  "msi": "msi_int",
+  "msi_blocked": "msi_il",
+  "msi_first": "msi",
+  "msi_backbone2": "msi_b2int",
+  "msi_backbone2_blocked": "msi_b2il",
+  "msi_backbone2_first": "msi_b2",
+  "msi_backbone3": "msi_b3int",
+  "msi_backbone3_blocked": "msi_b3il",
+  "msi_backbone3_first": "msi_b3"
+ },
+ "msi": {
+  "k": 40,
+  "n_patients": 579,
+  "n_msi_high": 92,
+  "n_mss": 487,
+  "prevalence": 0.1589,
+  "panel_ids": [
+   "CBPSam",
+   "CKc",
+   "CORE3GTg",
+   "FBA5",
+   "FDH",
+   "H2O2syn",
+   "H2Otm",
+   "LPS2",
+   "O16G1e",
+   "O16G2e",
+   "OXAHCOtex",
+   "PLA2_2e",
+   "SO4HCOtex",
+   "UGT1A3r",
+   "UGT1A5r2",
+   "r0034",
+   "HPETFABP1tc",
+   "OCDEAFABP1tc",
+   "PEHSFABPe",
+   "PMTCOAFABP1tc",
+   "MAGLINL_HSe",
+   "MAGOLE_HSe",
+   "LPS5e",
+   "LPS6e",
+   "LPS7e",
+   "PE2LINL_HSPLA2",
+   "PCHOLN183_HSPLA2",
+   "PCHOLN201_HSPLA2",
+   "PEDH203_HSPLA2",
+   "PEDH14_HSPLA2",
+   "PEDH161_HSPLA2",
+   "PEDH17_HSPLA2",
+   "NNDPR",
+   "MMAt2e",
+   "HMR_1085",
+   "CDCA24GSc",
+   "CDCA24GSr",
+   "HDCA24GSc",
+   "HDCA24GSr",
+   "LSTNM7hr"
+  ],
+  "arms": {
+   "own": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.5178,
+    "auroc_ci": [
+     0.4795,
+     0.5566
+    ],
+    "n_distinct_values": 7,
+    "modal_share": 0.8653,
+    "modal_value": 0.12,
+    "mean_p": 0.2051,
+    "sd_p": 0.2249,
+    "mean_p_msih": 0.2286,
+    "mean_p_mss": 0.2007,
+    "auprc": 0.1692,
+    "brier": 0.1789,
+    "calibration_in_the_large": 0.0462,
+    "reliability": [
+     {
+      "p": 0.12,
+      "n": 501,
+      "observed": 0.1537
+     },
+     {
+      "p": 0.18,
+      "n": 5,
+      "observed": 0.0
+     },
+     {
+      "p": 0.38,
+      "n": 3,
+      "observed": 0.3333
+     },
+     {
+      "p": 0.68,
+      "n": 3,
+      "observed": 0.0
+     },
+     {
+      "p": 0.78,
+      "n": 12,
+      "observed": 0.25
+     },
+     {
+      "p": 0.82,
+      "n": 53,
+      "observed": 0.1887
+     },
+     {
+      "p": 0.87,
+      "n": 2,
+      "observed": 0.5
+     }
+    ]
+   },
+   "swap": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.4889,
+    "auroc_ci": [
+     0.4514,
+     0.5271
+    ],
+    "n_distinct_values": 7,
+    "modal_share": 0.8497,
+    "modal_value": 0.12,
+    "mean_p": 0.2201,
+    "sd_p": 0.243,
+    "mean_p_msih": 0.2099,
+    "mean_p_mss": 0.222,
+    "auprc": 0.1574,
+    "brier": 0.1997,
+    "calibration_in_the_large": 0.0612,
+    "reliability": [
+     {
+      "p": 0.12,
+      "n": 492,
+      "observed": 0.1626
+     },
+     {
+      "p": 0.18,
+      "n": 3,
+      "observed": 0.0
+     },
+     {
+      "p": 0.38,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.68,
+      "n": 3,
+      "observed": 0.3333
+     },
+     {
+      "p": 0.78,
+      "n": 12,
+      "observed": 0.0833
+     },
+     {
+      "p": 0.82,
+      "n": 62,
+      "observed": 0.1452
+     },
+     {
+      "p": 0.87,
+      "n": 6,
+      "observed": 0.1667
+     }
+    ]
+   },
+   "count": {
+    "n": 300,
+    "exact": 0.1567,
+    "within_two": 0.47,
+    "mae": 3.4067,
+    "spearman": 0.8789,
+    "truth_mean": 9.92,
+    "pred_mean": 6.79,
+    "truth_sd": 7.37,
+    "pred_sd": 7.38
+   }
+  },
+  "full_archive": true,
+  "own_finish_length_n": 0,
+  "own_finish_n": 579,
+  "reason_n": 501,
+  "reason_distinct": 418,
+  "reason_examples": [
+   "The profile shows high expression of glycerophospholipid metabolism and urea cycle enzymes, which are typically associated with the metabolic reprogramming of microsatellite stable (MSS) tumors, while lacking the distinct immune or specific metabolic signatures often elevated in MSI-H cases.",
+   "The profile shows high expression of fatty acid oxidation and lipid metabolism pathways, which are characteristic of microsatellite stable (MSS) tumors, while lacking the typical immune-inflamed or specific metabolic signatures associated with MSI-H.",
+   "The profile shows low expression of immune-associated and DNA repair-related metabolic pathways (e.g., NAD metabolism at 5th percentile, glutamate metabolism at 14th) and lacks the characteristic upregulation of oxidative stress and lipid metabolism often seen in MSI-H tumors, suggesting a microsatellite stable phenotype."
+  ],
+  "reason_complete_n": 501,
+  "reason_truncated_n": 0,
+  "reason_complete_distinct": 418,
+  "reason_complete_digit": 99,
+  "reason_complete_percentile": 60,
+  "reason_any_digit_all": 99,
+  "reason_any_percentile_all": 60,
+  "reason_mean_len_complete": 277.6,
+  "reason_mean_len_truncated": null,
+  "logistic_auroc": 0.9241,
+  "logistic_auroc_ci": [
+   0.8879,
+   0.9544
+  ],
+  "constant": {
+   "auprc": 0.1589,
+   "brier": 0.1336,
+   "auroc": 0.5
+  },
+  "logistic_auprc": 0.7889,
+  "logistic_brier": 0.067,
+  "logistic_calibration_in_the_large": 0.0045,
+  "logistic_auroc_inductive": 0.9151,
+  "logistic_auroc_inductive_ci": [
+   0.8787,
+   0.9471
+  ],
+  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_auroc_swapped": 0.531,
+  "logistic_auroc_swapped_ci": [
+   0.4677,
+   0.5998
+  ],
+  "logistic_auroc_frozen_swap": 0.4674,
+  "logistic_auroc_frozen_swap_ci": [
+   0.401,
+   0.5316
+  ],
+  "own_vs_swap": {
+   "n": 579,
+   "auroc_diff": 0.0289,
+   "ci95": [
+    -0.028,
+    0.0866
+   ],
+   "ci90": [
+    -0.018,
+    0.0771
+   ],
+   "boot_p": 0.3265,
+   "equivalent_005": false,
+   "equivalent_002": false,
+   "note": "patient-level paired bootstrap, 4000 resamples; equivalence read from the 90 % interval"
+  },
+  "best_univariate_auroc": 0.9084,
+  "best_univariate_id": "NNDPR",
+  "best_univariate_direction": "low expression predicts MSI-H",
+  "best_univariate_note": "computed in sample over the whole cohort, therefore optimistic",
+  "best_univariate_auroc_oof": 0.9084,
+  "best_univariate_folds_agree": true,
+  "best_univariate_fold_choices": [
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1"
+  ],
+  "run": "msi_int",
+  "model": "qwen3-8-27b",
+  "collection_kind": "interleaved"
+ },
+ "msi_blocked": {
+  "k": 40,
+  "n_patients": 579,
+  "n_msi_high": 92,
+  "n_mss": 487,
+  "prevalence": 0.1589,
+  "panel_ids": [
+   "CBPSam",
+   "CKc",
+   "CORE3GTg",
+   "FBA5",
+   "FDH",
+   "H2O2syn",
+   "H2Otm",
+   "LPS2",
+   "O16G1e",
+   "O16G2e",
+   "OXAHCOtex",
+   "PLA2_2e",
+   "SO4HCOtex",
+   "UGT1A3r",
+   "UGT1A5r2",
+   "r0034",
+   "HPETFABP1tc",
+   "OCDEAFABP1tc",
+   "PEHSFABPe",
+   "PMTCOAFABP1tc",
+   "MAGLINL_HSe",
+   "MAGOLE_HSe",
+   "LPS5e",
+   "LPS6e",
+   "LPS7e",
+   "PE2LINL_HSPLA2",
+   "PCHOLN183_HSPLA2",
+   "PCHOLN201_HSPLA2",
+   "PEDH203_HSPLA2",
+   "PEDH14_HSPLA2",
+   "PEDH161_HSPLA2",
+   "PEDH17_HSPLA2",
+   "NNDPR",
+   "MMAt2e",
+   "HMR_1085",
+   "CDCA24GSc",
+   "CDCA24GSr",
+   "HDCA24GSc",
+   "HDCA24GSr",
+   "LSTNM7hr"
+  ],
+  "arms": {
+   "own": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.5158,
+    "auroc_ci": [
+     0.4779,
+     0.5568
+    ],
+    "n_distinct_values": 7,
+    "modal_share": 0.8618,
+    "modal_value": 0.12,
+    "mean_p": 0.208,
+    "sd_p": 0.2281,
+    "mean_p_msih": 0.2286,
+    "mean_p_mss": 0.2041,
+    "auprc": 0.167,
+    "brier": 0.1816,
+    "calibration_in_the_large": 0.0491,
+    "reliability": [
+     {
+      "p": 0.12,
+      "n": 499,
+      "observed": 0.1543
+     },
+     {
+      "p": 0.18,
+      "n": 4,
+      "observed": 0.0
+     },
+     {
+      "p": 0.38,
+      "n": 4,
+      "observed": 0.25
+     },
+     {
+      "p": 0.68,
+      "n": 2,
+      "observed": 0.0
+     },
+     {
+      "p": 0.78,
+      "n": 15,
+      "observed": 0.2
+     },
+     {
+      "p": 0.82,
+      "n": 52,
+      "observed": 0.1923
+     },
+     {
+      "p": 0.87,
+      "n": 3,
+      "observed": 0.3333
+     }
+    ]
+   },
+   "swap": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.4883,
+    "auroc_ci": [
+     0.4508,
+     0.5266
+    ],
+    "n_distinct_values": 7,
+    "modal_share": 0.848,
+    "modal_value": 0.12,
+    "mean_p": 0.22,
+    "sd_p": 0.2425,
+    "mean_p_msih": 0.2099,
+    "mean_p_mss": 0.2219,
+    "auprc": 0.1581,
+    "brier": 0.1994,
+    "calibration_in_the_large": 0.0611,
+    "reliability": [
+     {
+      "p": 0.12,
+      "n": 491,
+      "observed": 0.1629
+     },
+     {
+      "p": 0.18,
+      "n": 4,
+      "observed": 0.0
+     },
+     {
+      "p": 0.38,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.68,
+      "n": 3,
+      "observed": 0.3333
+     },
+     {
+      "p": 0.78,
+      "n": 15,
+      "observed": 0.0667
+     },
+     {
+      "p": 0.82,
+      "n": 59,
+      "observed": 0.1525
+     },
+     {
+      "p": 0.87,
+      "n": 6,
+      "observed": 0.1667
+     }
+    ]
+   },
+   "count": {
+    "n": 300,
+    "exact": 0.1567,
+    "within_two": 0.4733,
+    "mae": 3.4433,
+    "spearman": 0.8764,
+    "truth_mean": 9.92,
+    "pred_mean": 6.78,
+    "truth_sd": 7.37,
+    "pred_sd": 7.36
+   }
+  },
+  "full_archive": true,
+  "own_finish_length_n": 0,
+  "own_finish_n": 579,
+  "reason_n": 499,
+  "reason_distinct": 415,
+  "reason_examples": [
+   "The profile shows high expression of glycerophospholipid metabolism and urea cycle enzymes, which are typically associated with the metabolic reprogramming of microsatellite stable (MSS) tumors, while lacking the distinct immune or specific metabolic signatures often elevated in MSI-H cases.",
+   "The profile shows high expression of fatty acid oxidation and lipid metabolism pathways, which are characteristic of microsatellite stable (MSS) tumors, while lacking the typical immune-inflamed or specific metabolic signatures associated with MSI-H.",
+   "The profile shows low expression of immune-associated and DNA repair-related metabolic pathways (e.g., NAD metabolism at 5th percentile, glutamate metabolism at 14th) and lacks the high inflammatory or lipid metabolism signatures typically associated with MSI-H tumors, suggesting an MSS phenotype."
+  ],
+  "reason_complete_n": 499,
+  "reason_truncated_n": 0,
+  "reason_complete_distinct": 415,
+  "reason_complete_digit": 95,
+  "reason_complete_percentile": 64,
+  "reason_any_digit_all": 95,
+  "reason_any_percentile_all": 64,
+  "reason_mean_len_complete": 278.2,
+  "reason_mean_len_truncated": null,
+  "logistic_auroc": 0.9241,
+  "logistic_auroc_ci": [
+   0.8879,
+   0.9544
+  ],
+  "constant": {
+   "auprc": 0.1589,
+   "brier": 0.1336,
+   "auroc": 0.5
+  },
+  "logistic_auprc": 0.7889,
+  "logistic_brier": 0.067,
+  "logistic_calibration_in_the_large": 0.0045,
+  "logistic_auroc_inductive": 0.9151,
+  "logistic_auroc_inductive_ci": [
+   0.8787,
+   0.9471
+  ],
+  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_auroc_swapped": 0.531,
+  "logistic_auroc_swapped_ci": [
+   0.4677,
+   0.5998
+  ],
+  "logistic_auroc_frozen_swap": 0.4674,
+  "logistic_auroc_frozen_swap_ci": [
+   0.401,
+   0.5316
+  ],
+  "own_vs_swap": {
+   "n": 579,
+   "auroc_diff": 0.0275,
+   "ci95": [
+    -0.0296,
+    0.087
+   ],
+   "ci90": [
+    -0.0202,
+    0.0762
+   ],
+   "boot_p": 0.367,
+   "equivalent_005": false,
+   "equivalent_002": false,
+   "note": "patient-level paired bootstrap, 4000 resamples; equivalence read from the 90 % interval"
+  },
+  "best_univariate_auroc": 0.9084,
+  "best_univariate_id": "NNDPR",
+  "best_univariate_direction": "low expression predicts MSI-H",
+  "best_univariate_note": "computed in sample over the whole cohort, therefore optimistic",
+  "best_univariate_auroc_oof": 0.9084,
+  "best_univariate_folds_agree": true,
+  "best_univariate_fold_choices": [
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1"
+  ],
+  "run": "msi_il",
+  "model": "qwen3-8-27b",
+  "collection_kind": "blocked"
+ },
+ "msi_first": {
+  "k": 40,
+  "n_patients": 579,
+  "n_msi_high": 92,
+  "n_mss": 487,
+  "prevalence": 0.1589,
+  "panel_ids": [
+   "CBPSam",
+   "CKc",
+   "CORE3GTg",
+   "FBA5",
+   "FDH",
+   "H2O2syn",
+   "H2Otm",
+   "LPS2",
+   "O16G1e",
+   "O16G2e",
+   "OXAHCOtex",
+   "PLA2_2e",
+   "SO4HCOtex",
+   "UGT1A3r",
+   "UGT1A5r2",
+   "r0034",
+   "HPETFABP1tc",
+   "OCDEAFABP1tc",
+   "PEHSFABPe",
+   "PMTCOAFABP1tc",
+   "MAGLINL_HSe",
+   "MAGOLE_HSe",
+   "LPS5e",
+   "LPS6e",
+   "LPS7e",
+   "PE2LINL_HSPLA2",
+   "PCHOLN183_HSPLA2",
+   "PCHOLN201_HSPLA2",
+   "PEDH203_HSPLA2",
+   "PEDH14_HSPLA2",
+   "PEDH161_HSPLA2",
+   "PEDH17_HSPLA2",
+   "NNDPR",
+   "MMAt2e",
+   "HMR_1085",
+   "CDCA24GSc",
+   "CDCA24GSr",
+   "HDCA24GSc",
+   "HDCA24GSr",
+   "LSTNM7hr"
+  ],
+  "arms": {
+   "own": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.525,
+    "auroc_ci": [
+     0.486,
+     0.5663
+    ],
+    "n_distinct_values": 7,
+    "modal_share": 0.867,
+    "modal_value": 0.12,
+    "mean_p": 0.2057,
+    "sd_p": 0.2258,
+    "mean_p_msih": 0.2362,
+    "mean_p_mss": 0.1999,
+    "auprc": 0.1714,
+    "brier": 0.1771,
+    "calibration_in_the_large": 0.0468,
+    "reliability": [
+     {
+      "p": 0.12,
+      "n": 502,
+      "observed": 0.1514
+     },
+     {
+      "p": 0.18,
+      "n": 3,
+      "observed": 0.0
+     },
+     {
+      "p": 0.38,
+      "n": 4,
+      "observed": 0.25
+     },
+     {
+      "p": 0.68,
+      "n": 2,
+      "observed": 0.0
+     },
+     {
+      "p": 0.78,
+      "n": 11,
+      "observed": 0.2727
+     },
+     {
+      "p": 0.82,
+      "n": 55,
+      "observed": 0.2
+     },
+     {
+      "p": 0.87,
+      "n": 2,
+      "observed": 0.5
+     }
+    ]
+   },
+   "swap": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.4892,
+    "auroc_ci": [
+     0.4521,
+     0.5293
+    ],
+    "n_distinct_values": 7,
+    "modal_share": 0.8497,
+    "modal_value": 0.12,
+    "mean_p": 0.2209,
+    "sd_p": 0.2437,
+    "mean_p_msih": 0.2099,
+    "mean_p_mss": 0.223,
+    "auprc": 0.1581,
+    "brier": 0.2004,
+    "calibration_in_the_large": 0.062,
+    "reliability": [
+     {
+      "p": 0.12,
+      "n": 492,
+      "observed": 0.1626
+     },
+     {
+      "p": 0.18,
+      "n": 2,
+      "observed": 0.0
+     },
+     {
+      "p": 0.38,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.68,
+      "n": 3,
+      "observed": 0.3333
+     },
+     {
+      "p": 0.78,
+      "n": 16,
+      "observed": 0.0625
+     },
+     {
+      "p": 0.82,
+      "n": 59,
+      "observed": 0.1525
+     },
+     {
+      "p": 0.87,
+      "n": 6,
+      "observed": 0.1667
+     }
+    ]
+   },
+   "count": {
+    "n": 300,
+    "exact": 0.1533,
+    "within_two": 0.4733,
+    "mae": 3.3967,
+    "spearman": 0.8816,
+    "truth_mean": 9.92,
+    "pred_mean": 6.8,
+    "truth_sd": 7.37,
+    "pred_sd": 7.37
+   }
+  },
+  "full_archive": false,
+  "reason_n": 502,
+  "reason_distinct": 413,
+  "reason_examples": [
+   "The profile shows high expression of glycerophospholipid metabolism and urea cycle enzymes, which are typically associated with the metabolic reprogramming of microsatellite stable (MSS) tumors, while lacking the distinct immune or specific metabolic signatures often",
+   "The profile shows high expression of fatty acid oxidation and lipid metabolism pathways, which are characteristic of microsatellite stable (MSS) tumors, while lacking the typical immune-inflamed or specific metabolic signatures associated with MSI-H.",
+   "The profile shows low expression of immune-associated and DNA repair-related metabolic pathways (e.g., NAD metabolism at 5th percentile, glutamate metabolism at 14th) and lacks the high inflammatory or lipid metabolism signatures typically associated with MSI-H tumor"
+  ],
+  "reason_complete_n": 190,
+  "reason_truncated_n": 312,
+  "reason_complete_distinct": 179,
+  "reason_complete_digit": 33,
+  "reason_complete_percentile": 23,
+  "reason_any_digit_all": 108,
+  "reason_any_percentile_all": 68,
+  "reason_mean_len_complete": 237.0,
+  "reason_mean_len_truncated": 266.9,
+  "logistic_auroc": 0.9241,
+  "logistic_auroc_ci": [
+   0.8879,
+   0.9544
+  ],
+  "constant": {
+   "auprc": 0.1589,
+   "brier": 0.1336,
+   "auroc": 0.5
+  },
+  "logistic_auprc": 0.7889,
+  "logistic_brier": 0.067,
+  "logistic_calibration_in_the_large": 0.0045,
+  "logistic_auroc_inductive": 0.9151,
+  "logistic_auroc_inductive_ci": [
+   0.8787,
+   0.9471
+  ],
+  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_auroc_swapped": 0.531,
+  "logistic_auroc_swapped_ci": [
+   0.4677,
+   0.5998
+  ],
+  "logistic_auroc_frozen_swap": 0.4674,
+  "logistic_auroc_frozen_swap_ci": [
+   0.401,
+   0.5316
+  ],
+  "own_vs_swap": {
+   "n": 579,
+   "auroc_diff": 0.0358,
+   "ci95": [
+    -0.0214,
+    0.0955
+   ],
+   "ci90": [
+    -0.0124,
+    0.0859
+   ],
+   "boot_p": 0.227,
+   "equivalent_005": false,
+   "equivalent_002": false,
+   "note": "patient-level paired bootstrap, 4000 resamples; equivalence read from the 90 % interval"
+  },
+  "best_univariate_auroc": 0.9084,
+  "best_univariate_id": "NNDPR",
+  "best_univariate_direction": "low expression predicts MSI-H",
+  "best_univariate_note": "computed in sample over the whole cohort, therefore optimistic",
+  "best_univariate_auroc_oof": 0.9084,
+  "best_univariate_folds_agree": true,
+  "best_univariate_fold_choices": [
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1"
+  ],
+  "run": "msi",
+  "model": "qwen3-8-27b",
+  "collection_kind": "first"
+ },
+ "msi_backbone2": {
+  "k": 40,
+  "n_patients": 579,
+  "n_msi_high": 92,
+  "n_mss": 487,
+  "prevalence": 0.1589,
+  "panel_ids": [
+   "CBPSam",
+   "CKc",
+   "CORE3GTg",
+   "FBA5",
+   "FDH",
+   "H2O2syn",
+   "H2Otm",
+   "LPS2",
+   "O16G1e",
+   "O16G2e",
+   "OXAHCOtex",
+   "PLA2_2e",
+   "SO4HCOtex",
+   "UGT1A3r",
+   "UGT1A5r2",
+   "r0034",
+   "HPETFABP1tc",
+   "OCDEAFABP1tc",
+   "PEHSFABPe",
+   "PMTCOAFABP1tc",
+   "MAGLINL_HSe",
+   "MAGOLE_HSe",
+   "LPS5e",
+   "LPS6e",
+   "LPS7e",
+   "PE2LINL_HSPLA2",
+   "PCHOLN183_HSPLA2",
+   "PCHOLN201_HSPLA2",
+   "PEDH203_HSPLA2",
+   "PEDH14_HSPLA2",
+   "PEDH161_HSPLA2",
+   "PEDH17_HSPLA2",
+   "NNDPR",
+   "MMAt2e",
+   "HMR_1085",
+   "CDCA24GSc",
+   "CDCA24GSr",
+   "HDCA24GSc",
+   "HDCA24GSr",
+   "LSTNM7hr"
+  ],
+  "arms": {
+   "own": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.3564,
+    "auroc_ci": [
+     0.2967,
+     0.4122
+    ],
+    "n_distinct_values": 17,
+    "modal_share": 0.3903,
+    "modal_value": 0.184,
+    "mean_p": 0.2908,
+    "sd_p": 0.1849,
+    "mean_p_msih": 0.2498,
+    "mean_p_mss": 0.2985,
+    "auprc": 0.1416,
+    "brier": 0.1983,
+    "calibration_in_the_large": 0.1319,
+    "reliability": [
+     {
+      "p": 0.124,
+      "n": 2,
+      "observed": 0.5
+     },
+     {
+      "p": 0.142,
+      "n": 12,
+      "observed": 0.3333
+     },
+     {
+      "p": 0.183,
+      "n": 11,
+      "observed": 0.1818
+     },
+     {
+      "p": 0.184,
+      "n": 226,
+      "observed": 0.2478
+     },
+     {
+      "p": 0.214,
+      "n": 120,
+      "observed": 0.0667
+     },
+     {
+      "p": 0.234,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.284,
+      "n": 46,
+      "observed": 0.1522
+     },
+     {
+      "p": 0.314,
+      "n": 80,
+      "observed": 0.0625
+     },
+     {
+      "p": 0.342,
+      "n": 1,
+      "observed": 1.0
+     },
+     {
+      "p": 0.382,
+      "n": 4,
+      "observed": 0.0
+     },
+     {
+      "p": 0.684,
+      "n": 8,
+      "observed": 0.25
+     },
+     {
+      "p": 0.724,
+      "n": 9,
+      "observed": 0.0
+     },
+     {
+      "p": 0.734,
+      "n": 11,
+      "observed": 0.0
+     },
+     {
+      "p": 0.742,
+      "n": 27,
+      "observed": 0.1111
+     },
+     {
+      "p": 0.784,
+      "n": 15,
+      "observed": 0.1333
+     },
+     {
+      "p": 0.824,
+      "n": 4,
+      "observed": 0.0
+     },
+     {
+      "p": 0.842,
+      "n": 2,
+      "observed": 0.5
+     }
+    ]
+   },
+   "swap": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.4459,
+    "auroc_ci": [
+     0.386,
+     0.5076
+    ],
+    "n_distinct_values": 16,
+    "modal_share": 0.3851,
+    "modal_value": 0.184,
+    "mean_p": 0.2963,
+    "sd_p": 0.1939,
+    "mean_p_msih": 0.2607,
+    "mean_p_mss": 0.303,
+    "auprc": 0.1436,
+    "brier": 0.2014,
+    "calibration_in_the_large": 0.1374,
+    "reliability": [
+     {
+      "p": 0.142,
+      "n": 14,
+      "observed": 0.2857
+     },
+     {
+      "p": 0.183,
+      "n": 14,
+      "observed": 0.2143
+     },
+     {
+      "p": 0.184,
+      "n": 223,
+      "observed": 0.1614
+     },
+     {
+      "p": 0.214,
+      "n": 122,
+      "observed": 0.2049
+     },
+     {
+      "p": 0.234,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.284,
+      "n": 43,
+      "observed": 0.1163
+     },
+     {
+      "p": 0.314,
+      "n": 77,
+      "observed": 0.1429
+     },
+     {
+      "p": 0.342,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.382,
+      "n": 2,
+      "observed": 0.0
+     },
+     {
+      "p": 0.684,
+      "n": 4,
+      "observed": 0.25
+     },
+     {
+      "p": 0.724,
+      "n": 6,
+      "observed": 0.0
+     },
+     {
+      "p": 0.734,
+      "n": 11,
+      "observed": 0.0
+     },
+     {
+      "p": 0.742,
+      "n": 33,
+      "observed": 0.1515
+     },
+     {
+      "p": 0.784,
+      "n": 17,
+      "observed": 0.0588
+     },
+     {
+      "p": 0.824,
+      "n": 6,
+      "observed": 0.0
+     },
+     {
+      "p": 0.842,
+      "n": 5,
+      "observed": 0.2
+     }
+    ]
+   },
+   "count": {
+    "n": 300,
+    "exact": 0.32,
+    "within_two": 0.7133,
+    "mae": 1.7933,
+    "spearman": 0.9396,
+    "truth_mean": 9.92,
+    "pred_mean": 9.36,
+    "truth_sd": 7.37,
+    "pred_sd": 6.23
+   }
+  },
+  "full_archive": true,
+  "own_finish_length_n": 0,
+  "own_finish_n": 579,
+  "reason_n": 226,
+  "reason_distinct": 200,
+  "reason_examples": [
+   "The profile shows extreme upregulation of lipid synthesis and glycerophospholipid metabolism (99th percentile) but lacks the characteristic inflammatory or specific metabolic shifts typically associated with MSI-H colorectal tumors.",
+   "The profile shows high expression of fatty acid oxidation and mitochondrial transport but lacks the characteristic upregulation of glycolysis and specific inflammatory metabolic markers typically associated with MSI-H colorectal tumors.",
+   "The profile shows low expression of several key metabolic pathways and a lack of the characteristic inflammatory or hypermutated metabolic signatures typically associated with MSI-H colorectal tumors."
+  ],
+  "reason_complete_n": 226,
+  "reason_truncated_n": 0,
+  "reason_complete_distinct": 200,
+  "reason_complete_digit": 3,
+  "reason_complete_percentile": 1,
+  "reason_any_digit_all": 3,
+  "reason_any_percentile_all": 1,
+  "reason_mean_len_complete": 201.9,
+  "reason_mean_len_truncated": null,
+  "logistic_auroc": 0.9241,
+  "logistic_auroc_ci": [
+   0.8879,
+   0.9544
+  ],
+  "constant": {
+   "auprc": 0.1589,
+   "brier": 0.1336,
+   "auroc": 0.5
+  },
+  "logistic_auprc": 0.7889,
+  "logistic_brier": 0.067,
+  "logistic_calibration_in_the_large": 0.0045,
+  "logistic_auroc_inductive": 0.9151,
+  "logistic_auroc_inductive_ci": [
+   0.8787,
+   0.9471
+  ],
+  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_auroc_swapped": 0.531,
+  "logistic_auroc_swapped_ci": [
+   0.4677,
+   0.5998
+  ],
+  "logistic_auroc_frozen_swap": 0.4674,
+  "logistic_auroc_frozen_swap_ci": [
+   0.401,
+   0.5316
+  ],
+  "own_vs_swap": {
+   "n": 579,
+   "auroc_diff": -0.0895,
+   "ci95": [
+    -0.1772,
+    0.0039
+   ],
+   "ci90": [
+    -0.1642,
+    -0.0099
+   ],
+   "boot_p": 0.0585,
+   "equivalent_005": false,
+   "equivalent_002": false,
+   "note": "patient-level paired bootstrap, 4000 resamples; equivalence read from the 90 % interval"
+  },
+  "best_univariate_auroc": 0.9084,
+  "best_univariate_id": "NNDPR",
+  "best_univariate_direction": "low expression predicts MSI-H",
+  "best_univariate_note": "computed in sample over the whole cohort, therefore optimistic",
+  "best_univariate_auroc_oof": 0.9084,
+  "best_univariate_folds_agree": true,
+  "best_univariate_fold_choices": [
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1"
+  ],
+  "run": "msi_b2int",
+  "model": "gemma-4-31b-it",
+  "collection_kind": "interleaved"
+ },
+ "msi_backbone2_blocked": {
+  "k": 40,
+  "n_patients": 579,
+  "n_msi_high": 92,
+  "n_mss": 487,
+  "prevalence": 0.1589,
+  "panel_ids": [
+   "CBPSam",
+   "CKc",
+   "CORE3GTg",
+   "FBA5",
+   "FDH",
+   "H2O2syn",
+   "H2Otm",
+   "LPS2",
+   "O16G1e",
+   "O16G2e",
+   "OXAHCOtex",
+   "PLA2_2e",
+   "SO4HCOtex",
+   "UGT1A3r",
+   "UGT1A5r2",
+   "r0034",
+   "HPETFABP1tc",
+   "OCDEAFABP1tc",
+   "PEHSFABPe",
+   "PMTCOAFABP1tc",
+   "MAGLINL_HSe",
+   "MAGOLE_HSe",
+   "LPS5e",
+   "LPS6e",
+   "LPS7e",
+   "PE2LINL_HSPLA2",
+   "PCHOLN183_HSPLA2",
+   "PCHOLN201_HSPLA2",
+   "PEDH203_HSPLA2",
+   "PEDH14_HSPLA2",
+   "PEDH161_HSPLA2",
+   "PEDH17_HSPLA2",
+   "NNDPR",
+   "MMAt2e",
+   "HMR_1085",
+   "CDCA24GSc",
+   "CDCA24GSr",
+   "HDCA24GSc",
+   "HDCA24GSr",
+   "LSTNM7hr"
+  ],
+  "arms": {
+   "own": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.3606,
+    "auroc_ci": [
+     0.3019,
+     0.416
+    ],
+    "n_distinct_values": 17,
+    "modal_share": 0.3955,
+    "modal_value": 0.184,
+    "mean_p": 0.2903,
+    "sd_p": 0.185,
+    "mean_p_msih": 0.2499,
+    "mean_p_mss": 0.298,
+    "auprc": 0.1427,
+    "brier": 0.198,
+    "calibration_in_the_large": 0.1314,
+    "reliability": [
+     {
+      "p": 0.124,
+      "n": 2,
+      "observed": 0.5
+     },
+     {
+      "p": 0.142,
+      "n": 12,
+      "observed": 0.25
+     },
+     {
+      "p": 0.183,
+      "n": 11,
+      "observed": 0.1818
+     },
+     {
+      "p": 0.184,
+      "n": 229,
+      "observed": 0.2489
+     },
+     {
+      "p": 0.214,
+      "n": 118,
+      "observed": 0.0678
+     },
+     {
+      "p": 0.234,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.284,
+      "n": 48,
+      "observed": 0.1667
+     },
+     {
+      "p": 0.314,
+      "n": 77,
+      "observed": 0.0519
+     },
+     {
+      "p": 0.342,
+      "n": 1,
+      "observed": 1.0
+     },
+     {
+      "p": 0.382,
+      "n": 4,
+      "observed": 0.0
+     },
+     {
+      "p": 0.684,
+      "n": 8,
+      "observed": 0.25
+     },
+     {
+      "p": 0.724,
+      "n": 9,
+      "observed": 0.0
+     },
+     {
+      "p": 0.734,
+      "n": 11,
+      "observed": 0.0
+     },
+     {
+      "p": 0.742,
+      "n": 27,
+      "observed": 0.1111
+     },
+     {
+      "p": 0.784,
+      "n": 15,
+      "observed": 0.1333
+     },
+     {
+      "p": 0.824,
+      "n": 4,
+      "observed": 0.0
+     },
+     {
+      "p": 0.842,
+      "n": 2,
+      "observed": 0.5
+     }
+    ]
+   },
+   "swap": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.444,
+    "auroc_ci": [
+     0.3838,
+     0.507
+    ],
+    "n_distinct_values": 16,
+    "modal_share": 0.3886,
+    "modal_value": 0.184,
+    "mean_p": 0.2967,
+    "sd_p": 0.1937,
+    "mean_p_msih": 0.2607,
+    "mean_p_mss": 0.3035,
+    "auprc": 0.1432,
+    "brier": 0.2016,
+    "calibration_in_the_large": 0.1378,
+    "reliability": [
+     {
+      "p": 0.142,
+      "n": 12,
+      "observed": 0.3333
+     },
+     {
+      "p": 0.183,
+      "n": 14,
+      "observed": 0.2143
+     },
+     {
+      "p": 0.184,
+      "n": 225,
+      "observed": 0.16
+     },
+     {
+      "p": 0.214,
+      "n": 120,
+      "observed": 0.2083
+     },
+     {
+      "p": 0.234,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.284,
+      "n": 44,
+      "observed": 0.1136
+     },
+     {
+      "p": 0.314,
+      "n": 78,
+      "observed": 0.141
+     },
+     {
+      "p": 0.342,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.382,
+      "n": 2,
+      "observed": 0.0
+     },
+     {
+      "p": 0.684,
+      "n": 4,
+      "observed": 0.25
+     },
+     {
+      "p": 0.724,
+      "n": 6,
+      "observed": 0.0
+     },
+     {
+      "p": 0.734,
+      "n": 11,
+      "observed": 0.0
+     },
+     {
+      "p": 0.742,
+      "n": 33,
+      "observed": 0.1515
+     },
+     {
+      "p": 0.784,
+      "n": 17,
+      "observed": 0.0588
+     },
+     {
+      "p": 0.824,
+      "n": 6,
+      "observed": 0.0
+     },
+     {
+      "p": 0.842,
+      "n": 5,
+      "observed": 0.2
+     }
+    ]
+   },
+   "count": {
+    "n": 300,
+    "exact": 0.3233,
+    "within_two": 0.71,
+    "mae": 1.8,
+    "spearman": 0.9388,
+    "truth_mean": 9.92,
+    "pred_mean": 9.35,
+    "truth_sd": 7.37,
+    "pred_sd": 6.23
+   }
+  },
+  "full_archive": true,
+  "own_finish_length_n": 0,
+  "own_finish_n": 579,
+  "reason_n": 229,
+  "reason_distinct": 203,
+  "reason_examples": [
+   "The profile shows extreme upregulation of lipid synthesis and glycerophospholipid metabolism (99th percentile) but lacks the characteristic inflammatory or specific metabolic shifts typically associated with MSI-H colorectal tumors.",
+   "The profile shows high expression of fatty acid oxidation and mitochondrial transport but lacks the characteristic upregulation of glycolysis and specific immune-related metabolic signatures typical of MSI-H tumors.",
+   "The profile shows low expression of several key metabolic pathways and a lack of the characteristic inflammatory or hypermutated metabolic signatures typically associated with MSI-H colorectal tumors."
+  ],
+  "reason_complete_n": 229,
+  "reason_truncated_n": 0,
+  "reason_complete_distinct": 203,
+  "reason_complete_digit": 3,
+  "reason_complete_percentile": 1,
+  "reason_any_digit_all": 3,
+  "reason_any_percentile_all": 1,
+  "reason_mean_len_complete": 201.3,
+  "reason_mean_len_truncated": null,
+  "logistic_auroc": 0.9241,
+  "logistic_auroc_ci": [
+   0.8879,
+   0.9544
+  ],
+  "constant": {
+   "auprc": 0.1589,
+   "brier": 0.1336,
+   "auroc": 0.5
+  },
+  "logistic_auprc": 0.7889,
+  "logistic_brier": 0.067,
+  "logistic_calibration_in_the_large": 0.0045,
+  "logistic_auroc_inductive": 0.9151,
+  "logistic_auroc_inductive_ci": [
+   0.8787,
+   0.9471
+  ],
+  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_auroc_swapped": 0.531,
+  "logistic_auroc_swapped_ci": [
+   0.4677,
+   0.5998
+  ],
+  "logistic_auroc_frozen_swap": 0.4674,
+  "logistic_auroc_frozen_swap_ci": [
+   0.401,
+   0.5316
+  ],
+  "own_vs_swap": {
+   "n": 579,
+   "auroc_diff": -0.0834,
+   "ci95": [
+    -0.17,
+    0.0082
+   ],
+   "ci90": [
+    -0.1575,
+    -0.0048
+   ],
+   "boot_p": 0.078,
+   "equivalent_005": false,
+   "equivalent_002": false,
+   "note": "patient-level paired bootstrap, 4000 resamples; equivalence read from the 90 % interval"
+  },
+  "best_univariate_auroc": 0.9084,
+  "best_univariate_id": "NNDPR",
+  "best_univariate_direction": "low expression predicts MSI-H",
+  "best_univariate_note": "computed in sample over the whole cohort, therefore optimistic",
+  "best_univariate_auroc_oof": 0.9084,
+  "best_univariate_folds_agree": true,
+  "best_univariate_fold_choices": [
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1"
+  ],
+  "run": "msi_b2il",
+  "model": "gemma-4-31b-it",
+  "collection_kind": "blocked"
+ },
+ "msi_backbone2_first": {
+  "k": 40,
+  "n_patients": 579,
+  "n_msi_high": 92,
+  "n_mss": 487,
+  "prevalence": 0.1589,
+  "panel_ids": [
+   "CBPSam",
+   "CKc",
+   "CORE3GTg",
+   "FBA5",
+   "FDH",
+   "H2O2syn",
+   "H2Otm",
+   "LPS2",
+   "O16G1e",
+   "O16G2e",
+   "OXAHCOtex",
+   "PLA2_2e",
+   "SO4HCOtex",
+   "UGT1A3r",
+   "UGT1A5r2",
+   "r0034",
+   "HPETFABP1tc",
+   "OCDEAFABP1tc",
+   "PEHSFABPe",
+   "PMTCOAFABP1tc",
+   "MAGLINL_HSe",
+   "MAGOLE_HSe",
+   "LPS5e",
+   "LPS6e",
+   "LPS7e",
+   "PE2LINL_HSPLA2",
+   "PCHOLN183_HSPLA2",
+   "PCHOLN201_HSPLA2",
+   "PEDH203_HSPLA2",
+   "PEDH14_HSPLA2",
+   "PEDH161_HSPLA2",
+   "PEDH17_HSPLA2",
+   "NNDPR",
+   "MMAt2e",
+   "HMR_1085",
+   "CDCA24GSc",
+   "CDCA24GSr",
+   "HDCA24GSc",
+   "HDCA24GSr",
+   "LSTNM7hr"
+  ],
+  "arms": {
+   "own": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.3628,
+    "auroc_ci": [
+     0.3011,
+     0.4194
+    ],
+    "n_distinct_values": 17,
+    "modal_share": 0.399,
+    "modal_value": 0.184,
+    "mean_p": 0.2871,
+    "sd_p": 0.181,
+    "mean_p_msih": 0.2498,
+    "mean_p_mss": 0.2941,
+    "auprc": 0.1427,
+    "brier": 0.1947,
+    "calibration_in_the_large": 0.1282,
+    "reliability": [
+     {
+      "p": 0.124,
+      "n": 2,
+      "observed": 0.5
+     },
+     {
+      "p": 0.142,
+      "n": 13,
+      "observed": 0.3077
+     },
+     {
+      "p": 0.183,
+      "n": 11,
+      "observed": 0.1818
+     },
+     {
+      "p": 0.184,
+      "n": 231,
+      "observed": 0.2424
+     },
+     {
+      "p": 0.214,
+      "n": 114,
+      "observed": 0.0702
+     },
+     {
+      "p": 0.234,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.284,
+      "n": 52,
+      "observed": 0.1346
+     },
+     {
+      "p": 0.314,
+      "n": 78,
+      "observed": 0.0641
+     },
+     {
+      "p": 0.342,
+      "n": 1,
+      "observed": 1.0
+     },
+     {
+      "p": 0.382,
+      "n": 4,
+      "observed": 0.0
+     },
+     {
+      "p": 0.684,
+      "n": 7,
+      "observed": 0.2857
+     },
+     {
+      "p": 0.724,
+      "n": 7,
+      "observed": 0.0
+     },
+     {
+      "p": 0.734,
+      "n": 11,
+      "observed": 0.0
+     },
+     {
+      "p": 0.742,
+      "n": 28,
+      "observed": 0.1071
+     },
+     {
+      "p": 0.784,
+      "n": 14,
+      "observed": 0.1429
+     },
+     {
+      "p": 0.824,
+      "n": 3,
+      "observed": 0.0
+     },
+     {
+      "p": 0.842,
+      "n": 2,
+      "observed": 0.5
+     }
+    ]
+   },
+   "swap": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.4469,
+    "auroc_ci": [
+     0.3872,
+     0.5096
+    ],
+    "n_distinct_values": 16,
+    "modal_share": 0.3869,
+    "modal_value": 0.184,
+    "mean_p": 0.2934,
+    "sd_p": 0.1907,
+    "mean_p_msih": 0.2602,
+    "mean_p_mss": 0.2997,
+    "auprc": 0.1439,
+    "brier": 0.1986,
+    "calibration_in_the_large": 0.1345,
+    "reliability": [
+     {
+      "p": 0.142,
+      "n": 16,
+      "observed": 0.3125
+     },
+     {
+      "p": 0.183,
+      "n": 14,
+      "observed": 0.2143
+     },
+     {
+      "p": 0.184,
+      "n": 224,
+      "observed": 0.1562
+     },
+     {
+      "p": 0.214,
+      "n": 120,
+      "observed": 0.2083
+     },
+     {
+      "p": 0.234,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.284,
+      "n": 41,
+      "observed": 0.122
+     },
+     {
+      "p": 0.314,
+      "n": 81,
+      "observed": 0.1358
+     },
+     {
+      "p": 0.342,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.382,
+      "n": 2,
+      "observed": 0.0
+     },
+     {
+      "p": 0.684,
+      "n": 4,
+      "observed": 0.25
+     },
+     {
+      "p": 0.724,
+      "n": 6,
+      "observed": 0.0
+     },
+     {
+      "p": 0.734,
+      "n": 11,
+      "observed": 0.0
+     },
+     {
+      "p": 0.742,
+      "n": 33,
+      "observed": 0.1515
+     },
+     {
+      "p": 0.784,
+      "n": 15,
+      "observed": 0.0667
+     },
+     {
+      "p": 0.824,
+      "n": 5,
+      "observed": 0.0
+     },
+     {
+      "p": 0.842,
+      "n": 5,
+      "observed": 0.2
+     }
+    ]
+   },
+   "count": {
+    "n": 300,
+    "exact": 0.32,
+    "within_two": 0.71,
+    "mae": 1.7933,
+    "spearman": 0.9395,
+    "truth_mean": 9.92,
+    "pred_mean": 9.37,
+    "truth_sd": 7.37,
+    "pred_sd": 6.24
+   }
+  },
+  "full_archive": false,
+  "reason_n": 231,
+  "reason_distinct": 202,
+  "reason_examples": [
+   "The profile shows extreme upregulation of lipid synthesis and glycerophospholipid metabolism (99th percentile) but lacks the characteristic inflammatory or specific metabolic shifts typically associated with MSI-H colorectal tumors.",
+   "The profile shows high expression of fatty acid oxidation and mitochondrial transport but very low expression of glycerophospholipid metabolism, which does not align with the typical hypermetabolic and inflammatory signature of MSI-H tumors.",
+   "The profile shows low expression of several key metabolic pathways and a lack of the characteristic hyper-metabolic or inflammatory signatures typically associated with MSI-H colorectal tumors."
+  ],
+  "reason_complete_n": 231,
+  "reason_truncated_n": 0,
+  "reason_complete_distinct": 202,
+  "reason_complete_digit": 5,
+  "reason_complete_percentile": 2,
+  "reason_any_digit_all": 5,
+  "reason_any_percentile_all": 2,
+  "reason_mean_len_complete": 200.6,
+  "reason_mean_len_truncated": null,
+  "logistic_auroc": 0.9241,
+  "logistic_auroc_ci": [
+   0.8879,
+   0.9544
+  ],
+  "constant": {
+   "auprc": 0.1589,
+   "brier": 0.1336,
+   "auroc": 0.5
+  },
+  "logistic_auprc": 0.7889,
+  "logistic_brier": 0.067,
+  "logistic_calibration_in_the_large": 0.0045,
+  "logistic_auroc_inductive": 0.9151,
+  "logistic_auroc_inductive_ci": [
+   0.8787,
+   0.9471
+  ],
+  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_auroc_swapped": 0.531,
+  "logistic_auroc_swapped_ci": [
+   0.4677,
+   0.5998
+  ],
+  "logistic_auroc_frozen_swap": 0.4674,
+  "logistic_auroc_frozen_swap_ci": [
+   0.401,
+   0.5316
+  ],
+  "own_vs_swap": {
+   "n": 579,
+   "auroc_diff": -0.0841,
+   "ci95": [
+    -0.1705,
+    0.0089
+   ],
+   "ci90": [
+    -0.1579,
+    -0.0053
+   ],
+   "boot_p": 0.079,
+   "equivalent_005": false,
+   "equivalent_002": false,
+   "note": "patient-level paired bootstrap, 4000 resamples; equivalence read from the 90 % interval"
+  },
+  "best_univariate_auroc": 0.9084,
+  "best_univariate_id": "NNDPR",
+  "best_univariate_direction": "low expression predicts MSI-H",
+  "best_univariate_note": "computed in sample over the whole cohort, therefore optimistic",
+  "best_univariate_auroc_oof": 0.9084,
+  "best_univariate_folds_agree": true,
+  "best_univariate_fold_choices": [
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1"
+  ],
+  "run": "msi_b2",
+  "model": "gemma-4-31b-it",
+  "collection_kind": "first"
+ },
+ "msi_backbone3": {
+  "k": 40,
+  "n_patients": 579,
+  "n_msi_high": 92,
+  "n_mss": 487,
+  "prevalence": 0.1589,
+  "panel_ids": [
+   "CBPSam",
+   "CKc",
+   "CORE3GTg",
+   "FBA5",
+   "FDH",
+   "H2O2syn",
+   "H2Otm",
+   "LPS2",
+   "O16G1e",
+   "O16G2e",
+   "OXAHCOtex",
+   "PLA2_2e",
+   "SO4HCOtex",
+   "UGT1A3r",
+   "UGT1A5r2",
+   "r0034",
+   "HPETFABP1tc",
+   "OCDEAFABP1tc",
+   "PEHSFABPe",
+   "PMTCOAFABP1tc",
+   "MAGLINL_HSe",
+   "MAGOLE_HSe",
+   "LPS5e",
+   "LPS6e",
+   "LPS7e",
+   "PE2LINL_HSPLA2",
+   "PCHOLN183_HSPLA2",
+   "PCHOLN201_HSPLA2",
+   "PEDH203_HSPLA2",
+   "PEDH14_HSPLA2",
+   "PEDH161_HSPLA2",
+   "PEDH17_HSPLA2",
+   "NNDPR",
+   "MMAt2e",
+   "HMR_1085",
+   "CDCA24GSc",
+   "CDCA24GSr",
+   "HDCA24GSc",
+   "HDCA24GSr",
+   "LSTNM7hr"
+  ],
+  "arms": {
+   "own": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.6009,
+    "auroc_ci": [
+     0.5425,
+     0.6604
+    ],
+    "n_distinct_values": 9,
+    "modal_share": 0.4508,
+    "modal_value": 0.75,
+    "mean_p": 0.7657,
+    "sd_p": 0.0735,
+    "mean_p_msih": 0.7851,
+    "mean_p_mss": 0.762,
+    "auprc": 0.2078,
+    "brier": 0.5011,
+    "calibration_in_the_large": 0.6068,
+    "reliability": [
+     {
+      "p": 0.35,
+      "n": 11,
+      "observed": 0.0909
+     },
+     {
+      "p": 0.65,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.72,
+      "n": 75,
+      "observed": 0.0667
+     },
+     {
+      "p": 0.75,
+      "n": 261,
+      "observed": 0.1533
+     },
+     {
+      "p": 0.78,
+      "n": 114,
+      "observed": 0.1228
+     },
+     {
+      "p": 0.82,
+      "n": 3,
+      "observed": 0.0
+     },
+     {
+      "p": 0.85,
+      "n": 75,
+      "observed": 0.32
+     },
+     {
+      "p": 0.87,
+      "n": 38,
+      "observed": 0.2105
+     },
+     {
+      "p": 0.89,
+      "n": 1,
+      "observed": 0.0
+     }
+    ]
+   },
+   "swap": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.4837,
+    "auroc_ci": [
+     0.4214,
+     0.5445
+    ],
+    "n_distinct_values": 9,
+    "modal_share": 0.4404,
+    "modal_value": 0.75,
+    "mean_p": 0.7626,
+    "sd_p": 0.0794,
+    "mean_p_msih": 0.7598,
+    "mean_p_mss": 0.7631,
+    "auprc": 0.1576,
+    "brier": 0.5053,
+    "calibration_in_the_large": 0.6037,
+    "reliability": [
+     {
+      "p": 0.35,
+      "n": 14,
+      "observed": 0.2143
+     },
+     {
+      "p": 0.65,
+      "n": 2,
+      "observed": 0.0
+     },
+     {
+      "p": 0.72,
+      "n": 83,
+      "observed": 0.1687
+     },
+     {
+      "p": 0.75,
+      "n": 255,
+      "observed": 0.1686
+     },
+     {
+      "p": 0.78,
+      "n": 107,
+      "observed": 0.0935
+     },
+     {
+      "p": 0.82,
+      "n": 4,
+      "observed": 0.5
+     },
+     {
+      "p": 0.85,
+      "n": 81,
+      "observed": 0.1975
+     },
+     {
+      "p": 0.87,
+      "n": 32,
+      "observed": 0.125
+     },
+     {
+      "p": 0.89,
+      "n": 1,
+      "observed": 0.0
+     }
+    ]
+   },
+   "count": {
+    "n": 300,
+    "exact": 0.1767,
+    "within_two": 0.4167,
+    "mae": 3.98,
+    "spearman": 0.8532,
+    "truth_mean": 9.92,
+    "pred_mean": 6.31,
+    "truth_sd": 7.37,
+    "pred_sd": 5.4
+   }
+  },
+  "full_archive": true,
+  "own_finish_length_n": 0,
+  "own_finish_n": 579,
+  "reason_n": 261,
+  "reason_distinct": 213,
+  "reason_examples": [
+   "Elevated expression in glycerophospholipid metabolism and O-glycan metabolism, common in MSI-H tumors.",
+   "Elevated fatty acid oxidation and transport reactions are associated with MSI-H tumors.",
+   "Low expression percentiles in galactose and vitamin A metabolism are indicative of MSI-H."
+  ],
+  "reason_complete_n": 261,
+  "reason_truncated_n": 0,
+  "reason_complete_distinct": 213,
+  "reason_complete_digit": 2,
+  "reason_complete_percentile": 0,
+  "reason_any_digit_all": 2,
+  "reason_any_percentile_all": 0,
+  "reason_mean_len_complete": 77.9,
+  "reason_mean_len_truncated": null,
+  "logistic_auroc": 0.9241,
+  "logistic_auroc_ci": [
+   0.8879,
+   0.9544
+  ],
+  "constant": {
+   "auprc": 0.1589,
+   "brier": 0.1336,
+   "auroc": 0.5
+  },
+  "logistic_auprc": 0.7889,
+  "logistic_brier": 0.067,
+  "logistic_calibration_in_the_large": 0.0045,
+  "logistic_auroc_inductive": 0.9151,
+  "logistic_auroc_inductive_ci": [
+   0.8787,
+   0.9471
+  ],
+  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_auroc_swapped": 0.531,
+  "logistic_auroc_swapped_ci": [
+   0.4677,
+   0.5998
+  ],
+  "logistic_auroc_frozen_swap": 0.4674,
+  "logistic_auroc_frozen_swap_ci": [
+   0.401,
+   0.5316
+  ],
+  "own_vs_swap": {
+   "n": 579,
+   "auroc_diff": 0.1172,
+   "ci95": [
+    0.0333,
+    0.1981
+   ],
+   "ci90": [
+    0.049,
+    0.1853
+   ],
+   "boot_p": 0.0075,
+   "equivalent_005": false,
+   "equivalent_002": false,
+   "note": "patient-level paired bootstrap, 4000 resamples; equivalence read from the 90 % interval"
+  },
+  "best_univariate_auroc": 0.9084,
+  "best_univariate_id": "NNDPR",
+  "best_univariate_direction": "low expression predicts MSI-H",
+  "best_univariate_note": "computed in sample over the whole cohort, therefore optimistic",
+  "best_univariate_auroc_oof": 0.9084,
+  "best_univariate_folds_agree": true,
+  "best_univariate_fold_choices": [
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1"
+  ],
+  "run": "msi_b3int",
+  "model": "mistral-small-3.2-24b-instruct",
+  "collection_kind": "interleaved"
+ },
+ "msi_backbone3_blocked": {
+  "k": 40,
+  "n_patients": 579,
+  "n_msi_high": 92,
+  "n_mss": 487,
+  "prevalence": 0.1589,
+  "panel_ids": [
+   "CBPSam",
+   "CKc",
+   "CORE3GTg",
+   "FBA5",
+   "FDH",
+   "H2O2syn",
+   "H2Otm",
+   "LPS2",
+   "O16G1e",
+   "O16G2e",
+   "OXAHCOtex",
+   "PLA2_2e",
+   "SO4HCOtex",
+   "UGT1A3r",
+   "UGT1A5r2",
+   "r0034",
+   "HPETFABP1tc",
+   "OCDEAFABP1tc",
+   "PEHSFABPe",
+   "PMTCOAFABP1tc",
+   "MAGLINL_HSe",
+   "MAGOLE_HSe",
+   "LPS5e",
+   "LPS6e",
+   "LPS7e",
+   "PE2LINL_HSPLA2",
+   "PCHOLN183_HSPLA2",
+   "PCHOLN201_HSPLA2",
+   "PEDH203_HSPLA2",
+   "PEDH14_HSPLA2",
+   "PEDH161_HSPLA2",
+   "PEDH17_HSPLA2",
+   "NNDPR",
+   "MMAt2e",
+   "HMR_1085",
+   "CDCA24GSc",
+   "CDCA24GSr",
+   "HDCA24GSc",
+   "HDCA24GSr",
+   "LSTNM7hr"
+  ],
+  "arms": {
+   "own": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.5964,
+    "auroc_ci": [
+     0.5361,
+     0.6557
+    ],
+    "n_distinct_values": 9,
+    "modal_share": 0.4439,
+    "modal_value": 0.75,
+    "mean_p": 0.7659,
+    "sd_p": 0.0735,
+    "mean_p_msih": 0.7848,
+    "mean_p_mss": 0.7623,
+    "auprc": 0.2074,
+    "brier": 0.5015,
+    "calibration_in_the_large": 0.607,
+    "reliability": [
+     {
+      "p": 0.35,
+      "n": 11,
+      "observed": 0.0909
+     },
+     {
+      "p": 0.65,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.72,
+      "n": 76,
+      "observed": 0.0789
+     },
+     {
+      "p": 0.75,
+      "n": 257,
+      "observed": 0.1518
+     },
+     {
+      "p": 0.78,
+      "n": 115,
+      "observed": 0.1217
+     },
+     {
+      "p": 0.82,
+      "n": 4,
+      "observed": 0.0
+     },
+     {
+      "p": 0.85,
+      "n": 79,
+      "observed": 0.3038
+     },
+     {
+      "p": 0.87,
+      "n": 35,
+      "observed": 0.2286
+     },
+     {
+      "p": 0.89,
+      "n": 1,
+      "observed": 0.0
+     }
+    ]
+   },
+   "swap": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.4844,
+    "auroc_ci": [
+     0.4234,
+     0.5447
+    ],
+    "n_distinct_values": 9,
+    "modal_share": 0.4387,
+    "modal_value": 0.75,
+    "mean_p": 0.7634,
+    "sd_p": 0.0797,
+    "mean_p_msih": 0.7602,
+    "mean_p_mss": 0.7639,
+    "auprc": 0.1568,
+    "brier": 0.5064,
+    "calibration_in_the_large": 0.6045,
+    "reliability": [
+     {
+      "p": 0.35,
+      "n": 14,
+      "observed": 0.2143
+     },
+     {
+      "p": 0.65,
+      "n": 2,
+      "observed": 0.0
+     },
+     {
+      "p": 0.72,
+      "n": 80,
+      "observed": 0.1625
+     },
+     {
+      "p": 0.75,
+      "n": 254,
+      "observed": 0.1693
+     },
+     {
+      "p": 0.78,
+      "n": 108,
+      "observed": 0.1019
+     },
+     {
+      "p": 0.82,
+      "n": 5,
+      "observed": 0.4
+     },
+     {
+      "p": 0.85,
+      "n": 80,
+      "observed": 0.2125
+     },
+     {
+      "p": 0.87,
+      "n": 35,
+      "observed": 0.0857
+     },
+     {
+      "p": 0.89,
+      "n": 1,
+      "observed": 0.0
+     }
+    ]
+   },
+   "count": {
+    "n": 300,
+    "exact": 0.1767,
+    "within_two": 0.4167,
+    "mae": 3.9733,
+    "spearman": 0.8516,
+    "truth_mean": 9.92,
+    "pred_mean": 6.32,
+    "truth_sd": 7.37,
+    "pred_sd": 5.4
+   }
+  },
+  "full_archive": true,
+  "own_finish_length_n": 0,
+  "own_finish_n": 579,
+  "reason_n": 257,
+  "reason_distinct": 209,
+  "reason_examples": [
+   "High expression in glycerophospholipid metabolism and O-glycan metabolism, typical of MSI-H tumors.",
+   "Elevated fatty acid oxidation and transport reactions are associated with MSI-H tumors.",
+   "Low expression percentiles in galactose and vitamin A metabolism are indicative of MSI-H."
+  ],
+  "reason_complete_n": 257,
+  "reason_truncated_n": 0,
+  "reason_complete_distinct": 209,
+  "reason_complete_digit": 2,
+  "reason_complete_percentile": 0,
+  "reason_any_digit_all": 2,
+  "reason_any_percentile_all": 0,
+  "reason_mean_len_complete": 78.1,
+  "reason_mean_len_truncated": null,
+  "logistic_auroc": 0.9241,
+  "logistic_auroc_ci": [
+   0.8879,
+   0.9544
+  ],
+  "constant": {
+   "auprc": 0.1589,
+   "brier": 0.1336,
+   "auroc": 0.5
+  },
+  "logistic_auprc": 0.7889,
+  "logistic_brier": 0.067,
+  "logistic_calibration_in_the_large": 0.0045,
+  "logistic_auroc_inductive": 0.9151,
+  "logistic_auroc_inductive_ci": [
+   0.8787,
+   0.9471
+  ],
+  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_auroc_swapped": 0.531,
+  "logistic_auroc_swapped_ci": [
+   0.4677,
+   0.5998
+  ],
+  "logistic_auroc_frozen_swap": 0.4674,
+  "logistic_auroc_frozen_swap_ci": [
+   0.401,
+   0.5316
+  ],
+  "own_vs_swap": {
+   "n": 579,
+   "auroc_diff": 0.112,
+   "ci95": [
+    0.0272,
+    0.1907
+   ],
+   "ci90": [
+    0.0437,
+    0.1795
+   ],
+   "boot_p": 0.0095,
+   "equivalent_005": false,
+   "equivalent_002": false,
+   "note": "patient-level paired bootstrap, 4000 resamples; equivalence read from the 90 % interval"
+  },
+  "best_univariate_auroc": 0.9084,
+  "best_univariate_id": "NNDPR",
+  "best_univariate_direction": "low expression predicts MSI-H",
+  "best_univariate_note": "computed in sample over the whole cohort, therefore optimistic",
+  "best_univariate_auroc_oof": 0.9084,
+  "best_univariate_folds_agree": true,
+  "best_univariate_fold_choices": [
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1"
+  ],
+  "run": "msi_b3il",
+  "model": "mistral-small-3.2-24b-instruct",
+  "collection_kind": "blocked"
+ },
+ "msi_backbone3_first": {
+  "k": 40,
+  "n_patients": 579,
+  "n_msi_high": 92,
+  "n_mss": 487,
+  "prevalence": 0.1589,
+  "panel_ids": [
+   "CBPSam",
+   "CKc",
+   "CORE3GTg",
+   "FBA5",
+   "FDH",
+   "H2O2syn",
+   "H2Otm",
+   "LPS2",
+   "O16G1e",
+   "O16G2e",
+   "OXAHCOtex",
+   "PLA2_2e",
+   "SO4HCOtex",
+   "UGT1A3r",
+   "UGT1A5r2",
+   "r0034",
+   "HPETFABP1tc",
+   "OCDEAFABP1tc",
+   "PEHSFABPe",
+   "PMTCOAFABP1tc",
+   "MAGLINL_HSe",
+   "MAGOLE_HSe",
+   "LPS5e",
+   "LPS6e",
+   "LPS7e",
+   "PE2LINL_HSPLA2",
+   "PCHOLN183_HSPLA2",
+   "PCHOLN201_HSPLA2",
+   "PEDH203_HSPLA2",
+   "PEDH14_HSPLA2",
+   "PEDH161_HSPLA2",
+   "PEDH17_HSPLA2",
+   "NNDPR",
+   "MMAt2e",
+   "HMR_1085",
+   "CDCA24GSc",
+   "CDCA24GSr",
+   "HDCA24GSc",
+   "HDCA24GSr",
+   "LSTNM7hr"
+  ],
+  "arms": {
+   "own": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.6067,
+    "auroc_ci": [
+     0.547,
+     0.6664
+    ],
+    "n_distinct_values": 9,
+    "modal_share": 0.4439,
+    "modal_value": 0.75,
+    "mean_p": 0.7644,
+    "sd_p": 0.0772,
+    "mean_p_msih": 0.7862,
+    "mean_p_mss": 0.7603,
+    "auprc": 0.2136,
+    "brier": 0.4993,
+    "calibration_in_the_large": 0.6055,
+    "reliability": [
+     {
+      "p": 0.35,
+      "n": 13,
+      "observed": 0.0769
+     },
+     {
+      "p": 0.65,
+      "n": 1,
+      "observed": 0.0
+     },
+     {
+      "p": 0.72,
+      "n": 73,
+      "observed": 0.0685
+     },
+     {
+      "p": 0.75,
+      "n": 257,
+      "observed": 0.1518
+     },
+     {
+      "p": 0.78,
+      "n": 119,
+      "observed": 0.1176
+     },
+     {
+      "p": 0.82,
+      "n": 2,
+      "observed": 0.0
+     },
+     {
+      "p": 0.85,
+      "n": 79,
+      "observed": 0.3165
+     },
+     {
+      "p": 0.87,
+      "n": 34,
+      "observed": 0.2353
+     },
+     {
+      "p": 0.89,
+      "n": 1,
+      "observed": 0.0
+     }
+    ]
+   },
+   "swap": {
+    "n": 579,
+    "parsed": 1.0,
+    "auroc": 0.4877,
+    "auroc_ci": [
+     0.4264,
+     0.5486
+    ],
+    "n_distinct_values": 9,
+    "modal_share": 0.4301,
+    "modal_value": 0.75,
+    "mean_p": 0.7622,
+    "sd_p": 0.0812,
+    "mean_p_msih": 0.7605,
+    "mean_p_mss": 0.7626,
+    "auprc": 0.1597,
+    "brier": 0.5048,
+    "calibration_in_the_large": 0.6034,
+    "reliability": [
+     {
+      "p": 0.35,
+      "n": 15,
+      "observed": 0.2
+     },
+     {
+      "p": 0.65,
+      "n": 2,
+      "observed": 0.0
+     },
+     {
+      "p": 0.72,
+      "n": 82,
+      "observed": 0.1585
+     },
+     {
+      "p": 0.75,
+      "n": 249,
+      "observed": 0.1727
+     },
+     {
+      "p": 0.78,
+      "n": 113,
+      "observed": 0.0973
+     },
+     {
+      "p": 0.82,
+      "n": 4,
+      "observed": 0.25
+     },
+     {
+      "p": 0.85,
+      "n": 81,
+      "observed": 0.2222
+     },
+     {
+      "p": 0.87,
+      "n": 32,
+      "observed": 0.0938
+     },
+     {
+      "p": 0.89,
+      "n": 1,
+      "observed": 0.0
+     }
+    ]
+   },
+   "count": {
+    "n": 300,
+    "exact": 0.1767,
+    "within_two": 0.4167,
+    "mae": 3.97,
+    "spearman": 0.8534,
+    "truth_mean": 9.92,
+    "pred_mean": 6.32,
+    "truth_sd": 7.37,
+    "pred_sd": 5.41
+   }
+  },
+  "full_archive": false,
+  "reason_n": 257,
+  "reason_distinct": 209,
+  "reason_examples": [
+   "High expression in glycerophospholipid metabolism and O-glycan metabolism, typical of MSI-H tumors.",
+   "Elevated fatty acid oxidation and transport reactions are associated with MSI-H tumors.",
+   "Low expression percentiles in galactose and vitamin A metabolism are indicative of MSI-H."
+  ],
+  "reason_complete_n": 257,
+  "reason_truncated_n": 0,
+  "reason_complete_distinct": 209,
+  "reason_complete_digit": 2,
+  "reason_complete_percentile": 0,
+  "reason_any_digit_all": 2,
+  "reason_any_percentile_all": 0,
+  "reason_mean_len_complete": 77.6,
+  "reason_mean_len_truncated": null,
+  "logistic_auroc": 0.9241,
+  "logistic_auroc_ci": [
+   0.8879,
+   0.9544
+  ],
+  "constant": {
+   "auprc": 0.1589,
+   "brier": 0.1336,
+   "auroc": 0.5
+  },
+  "logistic_auprc": 0.7889,
+  "logistic_brier": 0.067,
+  "logistic_calibration_in_the_large": 0.0045,
+  "logistic_auroc_inductive": 0.9151,
+  "logistic_auroc_inductive_ci": [
+   0.8787,
+   0.9471
+  ],
+  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_auroc_swapped": 0.531,
+  "logistic_auroc_swapped_ci": [
+   0.4677,
+   0.5998
+  ],
+  "logistic_auroc_frozen_swap": 0.4674,
+  "logistic_auroc_frozen_swap_ci": [
+   0.401,
+   0.5316
+  ],
+  "own_vs_swap": {
+   "n": 579,
+   "auroc_diff": 0.1189,
+   "ci95": [
+    0.0403,
+    0.1967
+   ],
+   "ci90": [
+    0.0519,
+    0.1844
+   ],
+   "boot_p": 0.003,
+   "equivalent_005": false,
+   "equivalent_002": false,
+   "note": "patient-level paired bootstrap, 4000 resamples; equivalence read from the 90 % interval"
+  },
+  "best_univariate_auroc": 0.9084,
+  "best_univariate_id": "NNDPR",
+  "best_univariate_direction": "low expression predicts MSI-H",
+  "best_univariate_note": "computed in sample over the whole cohort, therefore optimistic",
+  "best_univariate_auroc_oof": 0.9084,
+  "best_univariate_folds_agree": true,
+  "best_univariate_fold_choices": [
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1",
+   "NNDPR:-1"
+  ],
+  "run": "msi_b3",
+  "model": "mistral-small-3.2-24b-instruct",
+  "collection_kind": "first"
+ },
+ "msi_interleaved": true
+}

@@ -1,0 +1,411 @@
+{
+ "_generated_by": "code/split_audit.py",
+ "seed": 2024,
+ "n_reactions": 10600,
+ "rfolds": 3,
+ "split": "random",
+ "family_scheme": null,
+ "family_map": null,
+ "source": {
+  "labels": "paper2/rxn_context.npz",
+  "availability": "paper2/rxn_context.npz [has]"
+ },
+ "aligned": "data/recon3d_aligned.json.gz",
+ "checks": {
+  "n_active": 3379,
+  "n_expression_bearing": 5635,
+  "heldout_sizes": [
+   3534,
+   3533,
+   3533
+  ]
+ },
+ "criteria": {
+  "stoich": "identical metabolites, compartments and coefficients",
+  "stoich_comp": "identical metabolites and coefficients with the compartment suffix removed",
+  "gpr": "identical nonempty gene rule of the project's gene table, canonical form",
+  "any": "at least one of stoich, stoich_comp, gpr",
+  "stoich_reversed": "reference only: the exact stoichiometry with every coefficient negated",
+  "stoich_set": "reference only: the same metabolites in the same compartments, coefficients ignored",
+  "gpr_bigg": "reference only: identical nonempty raw gene rule string of the aligned BiGG record"
+ },
+ "folds": {
+  "r0": {
+   "n_train": 7066,
+   "n_heldout": 3534,
+   "prevalence_heldout": 0.3189020939445388,
+   "prevalence_train": 0.31870931219926407,
+   "stoich": {
+    "n_matched": 0,
+    "share_matched": 0.0,
+    "n_matched_active": 0,
+    "active_share_matched": null,
+    "active_share_unmatched": 0.3189020939445388,
+    "label_agreement": null,
+    "label_agreement_majority_share": null,
+    "partners_per_matched": null
+   },
+   "stoich_comp": {
+    "n_matched": 815,
+    "share_matched": 0.23061686474250143,
+    "n_matched_active": 207,
+    "active_share_matched": 0.25398773006134967,
+    "active_share_unmatched": 0.33835969106289077,
+    "label_agreement": 0.7708881098451651,
+    "label_agreement_majority_share": 0.7595092024539877,
+    "partners_per_matched": 1.2687116564417178
+   },
+   "gpr": {
+    "n_matched": 1654,
+    "share_matched": 0.4680249009620826,
+    "n_matched_active": 696,
+    "active_share_matched": 0.4207980652962515,
+    "active_share_unmatched": 0.22925531914893618,
+    "label_agreement": 0.8647984949444321,
+    "label_agreement_majority_share": 0.8827085852478839,
+    "partners_per_matched": 34.646916565900845
+   },
+   "any": {
+    "n_matched": 2147,
+    "share_matched": 0.6075268817204301,
+    "n_matched_active": 780,
+    "active_share_matched": 0.36329762459245457,
+    "active_share_unmatched": 0.2501802451333814,
+    "label_agreement": 0.8366438809327145,
+    "label_agreement_majority_share": 0.847694457382394,
+    "partners_per_matched": 27.090824406148112
+   },
+   "stoich_reversed": {
+    "n_matched": 0,
+    "share_matched": 0.0,
+    "n_matched_active": 0,
+    "active_share_matched": null,
+    "active_share_unmatched": 0.3189020939445388,
+    "label_agreement": null,
+    "label_agreement_majority_share": null,
+    "partners_per_matched": null
+   },
+   "stoich_set": {
+    "n_matched": 90,
+    "share_matched": 0.025466893039049237,
+    "n_matched_active": 12,
+    "active_share_matched": 0.13333333333333333,
+    "active_share_unmatched": 0.3237514518002323,
+    "label_agreement": 0.8351851851851853,
+    "label_agreement_majority_share": 0.8333333333333334,
+    "partners_per_matched": 1.1
+   },
+   "gpr_bigg": {
+    "n_matched": 1542,
+    "share_matched": 0.4363327674023769,
+    "n_matched_active": 671,
+    "active_share_matched": 0.4351491569390402,
+    "active_share_unmatched": 0.2289156626506024,
+    "label_agreement": 0.8872663766751141,
+    "label_agreement_majority_share": 0.9046692607003891,
+    "partners_per_matched": 35.27367055771725
+   },
+   "overlap": {
+    "stoich_and_stoich_comp": 0,
+    "stoich_comp_only": 493,
+    "gpr_only": 1332,
+    "stoich_only": 0,
+    "all_three": 0
+   }
+  },
+  "r1": {
+   "n_train": 7067,
+   "n_heldout": 3533,
+   "prevalence_heldout": 0.31870931219926407,
+   "prevalence_train": 0.3188057167114759,
+   "stoich": {
+    "n_matched": 0,
+    "share_matched": 0.0,
+    "n_matched_active": 0,
+    "active_share_matched": null,
+    "active_share_unmatched": 0.31870931219926407,
+    "label_agreement": null,
+    "label_agreement_majority_share": null,
+    "partners_per_matched": null
+   },
+   "stoich_comp": {
+    "n_matched": 818,
+    "share_matched": 0.23153127653552222,
+    "n_matched_active": 197,
+    "active_share_matched": 0.24083129584352078,
+    "active_share_unmatched": 0.3421731123388582,
+    "label_agreement": 0.7507742461287693,
+    "label_agreement_majority_share": 0.7383863080684596,
+    "partners_per_matched": 1.2518337408312958
+   },
+   "gpr": {
+    "n_matched": 1669,
+    "share_matched": 0.4724030568921596,
+    "n_matched_active": 702,
+    "active_share_matched": 0.42061114439784303,
+    "active_share_unmatched": 0.22746781115879827,
+    "label_agreement": 0.850880611152784,
+    "label_agreement_majority_share": 0.8603954463750749,
+    "partners_per_matched": 35.04553624925105
+   },
+   "any": {
+    "n_matched": 2123,
+    "share_matched": 0.6009057458250778,
+    "n_matched_active": 779,
+    "active_share_matched": 0.36693358455016484,
+    "active_share_unmatched": 0.24609929078014184,
+    "label_agreement": 0.8241486300257141,
+    "label_agreement_majority_share": 0.8304286387187941,
+    "partners_per_matched": 27.944418276024493
+   },
+   "stoich_reversed": {
+    "n_matched": 0,
+    "share_matched": 0.0,
+    "n_matched_active": 0,
+    "active_share_matched": null,
+    "active_share_unmatched": 0.31870931219926407,
+    "label_agreement": null,
+    "label_agreement_majority_share": null,
+    "partners_per_matched": null
+   },
+   "stoich_set": {
+    "n_matched": 98,
+    "share_matched": 0.027738465893008775,
+    "n_matched_active": 10,
+    "active_share_matched": 0.10204081632653061,
+    "active_share_unmatched": 0.32489082969432315,
+    "label_agreement": 0.869047619047619,
+    "label_agreement_majority_share": 0.8673469387755102,
+    "partners_per_matched": 1.0612244897959184
+   },
+   "gpr_bigg": {
+    "n_matched": 1577,
+    "share_matched": 0.4463628644211718,
+    "n_matched_active": 681,
+    "active_share_matched": 0.4318325935320228,
+    "active_share_unmatched": 0.22750511247443764,
+    "label_agreement": 0.8767701986812432,
+    "label_agreement_majority_share": 0.8909321496512366,
+    "partners_per_matched": 35.17628408370324
+   },
+   "overlap": {
+    "stoich_and_stoich_comp": 0,
+    "stoich_comp_only": 454,
+    "gpr_only": 1305,
+    "stoich_only": 0,
+    "all_three": 0
+   }
+  },
+  "r2": {
+   "n_train": 7067,
+   "n_heldout": 3533,
+   "prevalence_heldout": 0.31870931219926407,
+   "prevalence_train": 0.3188057167114759,
+   "stoich": {
+    "n_matched": 0,
+    "share_matched": 0.0,
+    "n_matched_active": 0,
+    "active_share_matched": null,
+    "active_share_unmatched": 0.31870931219926407,
+    "label_agreement": null,
+    "label_agreement_majority_share": null,
+    "partners_per_matched": null
+   },
+   "stoich_comp": {
+    "n_matched": 780,
+    "share_matched": 0.2207755448627229,
+    "n_matched_active": 206,
+    "active_share_matched": 0.2641025641025641,
+    "active_share_unmatched": 0.3341808935706502,
+    "label_agreement": 0.7506410256410256,
+    "label_agreement_majority_share": 0.7346153846153847,
+    "partners_per_matched": 1.2512820512820513
+   },
+   "gpr": {
+    "n_matched": 1630,
+    "share_matched": 0.4613642796490235,
+    "n_matched_active": 683,
+    "active_share_matched": 0.4190184049079755,
+    "active_share_unmatched": 0.232790331056227,
+    "label_agreement": 0.8682806600529477,
+    "label_agreement_majority_share": 0.8773006134969326,
+    "partners_per_matched": 36.550306748466255
+   },
+   "any": {
+    "n_matched": 2089,
+    "share_matched": 0.5912821964336258,
+    "n_matched_active": 772,
+    "active_share_matched": 0.3695548109143131,
+    "active_share_unmatched": 0.2451523545706371,
+    "label_agreement": 0.8376678943948602,
+    "label_agreement_majority_share": 0.8434657730971756,
+    "partners_per_matched": 28.901866921972236
+   },
+   "stoich_reversed": {
+    "n_matched": 0,
+    "share_matched": 0.0,
+    "n_matched_active": 0,
+    "active_share_matched": null,
+    "active_share_unmatched": 0.31870931219926407,
+    "label_agreement": null,
+    "label_agreement_majority_share": null,
+    "partners_per_matched": null
+   },
+   "stoich_set": {
+    "n_matched": 94,
+    "share_matched": 0.026606283611661476,
+    "n_matched_active": 14,
+    "active_share_matched": 0.14893617021276595,
+    "active_share_unmatched": 0.32334981099156734,
+    "label_agreement": 0.8138297872340425,
+    "label_agreement_majority_share": 0.7978723404255319,
+    "partners_per_matched": 1.0957446808510638
+   },
+   "gpr_bigg": {
+    "n_matched": 1530,
+    "share_matched": 0.4330597226153411,
+    "n_matched_active": 664,
+    "active_share_matched": 0.4339869281045752,
+    "active_share_unmatched": 0.2306540189715427,
+    "label_agreement": 0.8911466507130623,
+    "label_agreement_majority_share": 0.9019607843137255,
+    "partners_per_matched": 36.9718954248366
+   },
+   "overlap": {
+    "stoich_and_stoich_comp": 0,
+    "stoich_comp_only": 459,
+    "gpr_only": 1309,
+    "stoich_only": 0,
+    "all_three": 0
+   }
+  }
+ },
+ "all": {
+  "stoich": {
+   "n_matched": 0,
+   "share_matched": 0.0,
+   "n_matched_active": 0,
+   "active_share_matched": null,
+   "active_share_unmatched": 0.3187735849056604,
+   "label_agreement": null,
+   "label_agreement_majority_share": null,
+   "partners_per_matched": null,
+   "share_by_fold": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "share_min": 0.0,
+   "share_max": 0.0
+  },
+  "stoich_comp": {
+   "n_matched": 2413,
+   "share_matched": 0.22764150943396227,
+   "n_matched_active": 610,
+   "active_share_matched": 0.25279734769995854,
+   "active_share_unmatched": 0.33821912788567243,
+   "label_agreement": 0.7575247173050736,
+   "label_agreement_majority_share": 0.744301699129714,
+   "partners_per_matched": 1.2573559883961873,
+   "share_by_fold": [
+    0.23061686474250143,
+    0.23153127653552222,
+    0.2207755448627229
+   ],
+   "share_min": 0.2207755448627229,
+   "share_max": 0.23153127653552222
+  },
+  "gpr": {
+   "n_matched": 4953,
+   "share_matched": 0.46726415094339624,
+   "n_matched_active": 2081,
+   "active_share_matched": 0.4201494044013729,
+   "active_share_unmatched": 0.2298565610058438,
+   "label_agreement": 0.8612545783441131,
+   "label_agreement_majority_share": 0.8734100545124167,
+   "partners_per_matched": 35.4076317383404,
+   "share_by_fold": [
+    0.4680249009620826,
+    0.4724030568921596,
+    0.4613642796490235
+   ],
+   "share_min": 0.4613642796490235,
+   "share_max": 0.4724030568921596
+  },
+  "any": {
+   "n_matched": 6359,
+   "share_matched": 0.5999056603773585,
+   "n_matched_active": 2331,
+   "active_share_matched": 0.3665670702940714,
+   "active_share_unmatched": 0.24711153029945768,
+   "label_agreement": 0.8328086468466728,
+   "label_agreement_majority_share": 0.8405409655606227,
+   "partners_per_matched": 27.970750117943073,
+   "share_by_fold": [
+    0.6075268817204301,
+    0.6009057458250778,
+    0.5912821964336258
+   ],
+   "share_min": 0.5912821964336258,
+   "share_max": 0.6075268817204301
+  },
+  "stoich_reversed": {
+   "n_matched": 0,
+   "share_matched": 0.0,
+   "n_matched_active": 0,
+   "active_share_matched": null,
+   "active_share_unmatched": 0.3187735849056604,
+   "label_agreement": null,
+   "label_agreement_majority_share": null,
+   "partners_per_matched": null,
+   "share_by_fold": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "share_min": 0.0,
+   "share_max": 0.0
+  },
+  "stoich_set": {
+   "n_matched": 282,
+   "share_matched": 0.02660377358490566,
+   "n_matched_active": 36,
+   "active_share_matched": 0.1276595744680851,
+   "active_share_unmatched": 0.3239968986237643,
+   "label_agreement": 0.8398345153664303,
+   "label_agreement_majority_share": 0.8333333333333334,
+   "partners_per_matched": 1.0851063829787233,
+   "share_by_fold": [
+    0.025466893039049237,
+    0.027738465893008775,
+    0.026606283611661476
+   ],
+   "share_min": 0.025466893039049237,
+   "share_max": 0.027738465893008775
+  },
+  "gpr_bigg": {
+   "n_matched": 4649,
+   "share_matched": 0.43858490566037733,
+   "n_matched_active": 2016,
+   "active_share_matched": 0.43364164336416433,
+   "active_share_unmatched": 0.22903713661569483,
+   "label_agreement": 0.8849829493965006,
+   "label_agreement_majority_share": 0.899118089911809,
+   "partners_per_matched": 35.79952677995268,
+   "share_by_fold": [
+    0.4363327674023769,
+    0.4463628644211718,
+    0.4330597226153411
+   ],
+   "share_min": 0.4330597226153411,
+   "share_max": 0.4463628644211718
+  },
+  "n_heldout": 10600,
+  "prevalence_heldout": 0.3187735849056604,
+  "heldout_per_fold": [
+   3534,
+   3533,
+   3533
+  ]
+ }
+}

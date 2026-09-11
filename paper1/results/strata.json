@@ -1,0 +1,1217 @@
+{
+ "strata_sizes": {
+  "gpr_rule": 5938,
+  "no_gpr_rule": 4662,
+  "expression_bearing": 5635,
+  "no_expression": 4965,
+  "transport_exchange": 5221,
+  "metabolic": 5379,
+  "degree_low": 3541,
+  "degree_mid": 3530,
+  "degree_high": 3529
+ },
+ "strata_prevalence": {
+  "gpr_rule": 0.3923880094307848,
+  "no_gpr_rule": 0.225010725010725,
+  "expression_bearing": 0.4074534161490683,
+  "no_expression": 0.21812688821752266,
+  "transport_exchange": 0.31698908255123537,
+  "metabolic": 0.32050567019892173,
+  "degree_low": 0.30754024286924597,
+  "degree_mid": 0.2971671388101983,
+  "degree_high": 0.35165769339756303
+ },
+ "arms": {
+  "real": {
+   "p0r0": {
+    "gpr_rule": 0.8676347869066073,
+    "no_gpr_rule": 0.8203343996203132,
+    "expression_bearing": 0.8666890135333901,
+    "no_expression": 0.8150812143838814,
+    "transport_exchange": 0.8929390024883695,
+    "metabolic": 0.8207005822223599,
+    "degree_low": 0.8234967180219704,
+    "degree_mid": 0.857137334515949,
+    "degree_high": 0.8908678248701702
+   },
+   "p0r1": {
+    "gpr_rule": 0.8676028205128206,
+    "no_gpr_rule": 0.8109658016100683,
+    "expression_bearing": 0.869774879175989,
+    "no_expression": 0.8022211528169648,
+    "transport_exchange": 0.8795089837494902,
+    "metabolic": 0.8287145387100977,
+    "degree_low": 0.8092371503431738,
+    "degree_mid": 0.862921305547626,
+    "degree_high": 0.8914574091730229
+   },
+   "p0r2": {
+    "gpr_rule": 0.8679410176442485,
+    "no_gpr_rule": 0.7898938973288145,
+    "expression_bearing": 0.8647416380388634,
+    "no_expression": 0.7909072428896206,
+    "transport_exchange": 0.8773583456977768,
+    "metabolic": 0.818064233192594,
+    "degree_low": 0.793374896359892,
+    "degree_mid": 0.8568314045446412,
+    "degree_high": 0.8843346806390315
+   },
+   "p1r0": {
+    "gpr_rule": 0.8732116041941479,
+    "no_gpr_rule": 0.8194420313241576,
+    "expression_bearing": 0.8721045653198961,
+    "no_expression": 0.8164299579992036,
+    "transport_exchange": 0.8921413084805487,
+    "metabolic": 0.8275111360237059,
+    "degree_low": 0.819404795429038,
+    "degree_mid": 0.8572878683354686,
+    "degree_high": 0.8996146591905714
+   },
+   "p1r1": {
+    "gpr_rule": 0.8644858675213675,
+    "no_gpr_rule": 0.8109095402062152,
+    "expression_bearing": 0.866326139680191,
+    "no_expression": 0.8025064499693879,
+    "transport_exchange": 0.8772100389062414,
+    "metabolic": 0.8302133668915814,
+    "degree_low": 0.7990568947981708,
+    "degree_mid": 0.8577637087082325,
+    "degree_high": 0.8919181302689682
+   },
+   "p1r2": {
+    "gpr_rule": 0.8587844309770094,
+    "no_gpr_rule": 0.7895158776920431,
+    "expression_bearing": 0.8543821198080909,
+    "no_expression": 0.7926124238441219,
+    "transport_exchange": 0.874352676148084,
+    "metabolic": 0.8101104184162713,
+    "degree_low": 0.7976140843563615,
+    "degree_mid": 0.8545289962426195,
+    "degree_high": 0.8704701498542311
+   },
+   "p2r0": {
+    "gpr_rule": 0.873829972473364,
+    "no_gpr_rule": 0.8194241006169909,
+    "expression_bearing": 0.8730504387971257,
+    "no_expression": 0.8158677467279195,
+    "transport_exchange": 0.8937093027928472,
+    "metabolic": 0.8295091586647476,
+    "degree_low": 0.8203004183246608,
+    "degree_mid": 0.8580912453598766,
+    "degree_high": 0.8994198208496338
+   },
+   "p2r1": {
+    "gpr_rule": 0.8688615769230771,
+    "no_gpr_rule": 0.8155983161806607,
+    "expression_bearing": 0.8715882623070192,
+    "no_expression": 0.805408058501415,
+    "transport_exchange": 0.8794770124390378,
+    "metabolic": 0.8297711768436635,
+    "degree_low": 0.8020242882256663,
+    "degree_mid": 0.86161090846294,
+    "degree_high": 0.8938878964271376
+   },
+   "p2r2": {
+    "gpr_rule": 0.8706146468197945,
+    "no_gpr_rule": 0.783128968244616,
+    "expression_bearing": 0.8670915349787712,
+    "no_expression": 0.7853100138290083,
+    "transport_exchange": 0.8747946657981399,
+    "metabolic": 0.8162634199788097,
+    "degree_low": 0.7873725560993876,
+    "degree_mid": 0.8536272105922347,
+    "degree_high": 0.888077966290535
+   },
+   "p3r0": {
+    "gpr_rule": 0.8704030913706724,
+    "no_gpr_rule": 0.8133534219269103,
+    "expression_bearing": 0.8690615958093173,
+    "no_expression": 0.809453758450466,
+    "transport_exchange": 0.8891329716696804,
+    "metabolic": 0.8258504136398332,
+    "degree_low": 0.8172434785566098,
+    "degree_mid": 0.859196439013173,
+    "degree_high": 0.8954914941350756
+   },
+   "p3r1": {
+    "gpr_rule": 0.8616995982905983,
+    "no_gpr_rule": 0.8035674461594456,
+    "expression_bearing": 0.8620770572379893,
+    "no_expression": 0.7990178150166761,
+    "transport_exchange": 0.8758685833622544,
+    "metabolic": 0.8221155841125175,
+    "degree_low": 0.7966029622744447,
+    "degree_mid": 0.8554452585614448,
+    "degree_high": 0.8880628512645523
+   },
+   "p3r2": {
+    "gpr_rule": 0.8748457107889185,
+    "no_gpr_rule": 0.7859048234057495,
+    "expression_bearing": 0.8713627398129064,
+    "no_expression": 0.7905127779181135,
+    "transport_exchange": 0.8775687101171304,
+    "metabolic": 0.8231370278235908,
+    "degree_low": 0.7922324614191338,
+    "degree_mid": 0.8579297477187332,
+    "degree_high": 0.8906471152596298
+   },
+   "p4r0": {
+    "gpr_rule": 0.8677395577081843,
+    "no_gpr_rule": 0.8267321294609368,
+    "expression_bearing": 0.8660410030565323,
+    "no_expression": 0.8231480895790486,
+    "transport_exchange": 0.8927912067969233,
+    "metabolic": 0.8293507735024449,
+    "degree_low": 0.8240804921156828,
+    "degree_mid": 0.8596584906180227,
+    "degree_high": 0.8940998783900095
+   },
+   "p4r1": {
+    "gpr_rule": 0.8675865729252827,
+    "no_gpr_rule": 0.8136008952222731,
+    "expression_bearing": 0.8695701747257366,
+    "no_expression": 0.803532741589517,
+    "transport_exchange": 0.8748878332509408,
+    "metabolic": 0.8377263423333855,
+    "degree_low": 0.8060689792692066,
+    "degree_mid": 0.8596537069608539,
+    "degree_high": 0.8952495996676747
+   },
+   "p4r2": {
+    "gpr_rule": 0.875420838107435,
+    "no_gpr_rule": 0.7890577733537711,
+    "expression_bearing": 0.8723269777242066,
+    "no_expression": 0.7920224883320763,
+    "transport_exchange": 0.8768791266694917,
+    "metabolic": 0.8267099411452108,
+    "degree_low": 0.8028835109990087,
+    "degree_mid": 0.8574187488095857,
+    "degree_high": 0.8887724411458094
+   }
+  },
+  "indicator": {
+   "p0r0": {
+    "gpr_rule": 0.8583992057608019,
+    "no_gpr_rule": 0.8105811865211201,
+    "expression_bearing": 0.8571590014990181,
+    "no_expression": 0.8044398566578328,
+    "transport_exchange": 0.8839460595663128,
+    "metabolic": 0.810706908644326,
+    "degree_low": 0.8067488623609838,
+    "degree_mid": 0.8531684898656418,
+    "degree_high": 0.8828445425490331
+   },
+   "p0r1": {
+    "gpr_rule": 0.8378747692307692,
+    "no_gpr_rule": 0.8049519517649933,
+    "expression_bearing": 0.839599673496233,
+    "no_expression": 0.7936806398164123,
+    "transport_exchange": 0.8675161256933409,
+    "metabolic": 0.8004776724548918,
+    "degree_low": 0.7848691628442684,
+    "degree_mid": 0.8288409722883031,
+    "degree_high": 0.8806231558611001
+   },
+   "p0r2": {
+    "gpr_rule": 0.8492631972215808,
+    "no_gpr_rule": 0.7744908532992699,
+    "expression_bearing": 0.844573007064461,
+    "no_expression": 0.7767318413988278,
+    "transport_exchange": 0.8542853713555049,
+    "metabolic": 0.8047617728812136,
+    "degree_low": 0.7770307443365696,
+    "degree_mid": 0.8405621327607802,
+    "degree_high": 0.8687299343265845
+   }
+  },
+  "mean": {
+   "p0r0": {
+    "gpr_rule": 0.8940920243364134,
+    "no_gpr_rule": 0.8226294542002848,
+    "expression_bearing": 0.8938418875900526,
+    "no_expression": 0.8206886846172617,
+    "transport_exchange": 0.8950163243226534,
+    "metabolic": 0.8566715865911401,
+    "degree_low": 0.8224853654389007,
+    "degree_mid": 0.875802700305509,
+    "degree_high": 0.9195150523753685
+   },
+   "p0r1": {
+    "gpr_rule": 0.8799035427350428,
+    "no_gpr_rule": 0.8016188131851292,
+    "expression_bearing": 0.8816295215780232,
+    "no_expression": 0.7966975300449122,
+    "transport_exchange": 0.8724949373177221,
+    "metabolic": 0.848245135557283,
+    "degree_low": 0.7808166259168704,
+    "degree_mid": 0.8764842551181882,
+    "degree_high": 0.9076427388598955
+   },
+   "p0r2": {
+    "gpr_rule": 0.8969950776465032,
+    "no_gpr_rule": 0.7795433484324992,
+    "expression_bearing": 0.8947440551063193,
+    "no_expression": 0.783871916837567,
+    "transport_exchange": 0.8736654543480621,
+    "metabolic": 0.8516732227751896,
+    "degree_low": 0.7916555805183343,
+    "degree_mid": 0.8677471891214886,
+    "degree_high": 0.9121446424481763
+   },
+   "p1r0": {
+    "gpr_rule": 0.8820069132188834,
+    "no_gpr_rule": 0.8257246606549598,
+    "expression_bearing": 0.8809350918060707,
+    "no_expression": 0.8238811047793565,
+    "transport_exchange": 0.8966085593731162,
+    "metabolic": 0.8418248938789192,
+    "degree_low": 0.8259515287555691,
+    "degree_mid": 0.8631710916198547,
+    "degree_high": 0.9114631664350916
+   },
+   "p1r1": {
+    "gpr_rule": 0.8912926709401708,
+    "no_gpr_rule": 0.7993906451288485,
+    "expression_bearing": 0.8931652567106507,
+    "no_expression": 0.7954132732791875,
+    "transport_exchange": 0.8761756260617022,
+    "metabolic": 0.8591357262196719,
+    "degree_low": 0.7874282769908464,
+    "degree_mid": 0.8808679403544758,
+    "degree_high": 0.9142103321959054
+   },
+   "p1r2": {
+    "gpr_rule": 0.8947032899786894,
+    "no_gpr_rule": 0.7784365717194666,
+    "expression_bearing": 0.8934838163357588,
+    "no_expression": 0.7807890583858165,
+    "transport_exchange": 0.8709062956127334,
+    "metabolic": 0.8480629236090735,
+    "degree_low": 0.7867604776806013,
+    "degree_mid": 0.8678441510109142,
+    "degree_high": 0.9081882679178249
+   },
+   "p2r0": {
+    "gpr_rule": 0.8913245800128592,
+    "no_gpr_rule": 0.8222319031798767,
+    "expression_bearing": 0.8897964994756955,
+    "no_expression": 0.8217330444797424,
+    "transport_exchange": 0.8963080385156333,
+    "metabolic": 0.8539261222638789,
+    "degree_low": 0.8209269802401116,
+    "degree_mid": 0.8760888275680825,
+    "degree_high": 0.9174424922069261
+   },
+   "p2r1": {
+    "gpr_rule": 0.8816378846153846,
+    "no_gpr_rule": 0.8023988295635766,
+    "expression_bearing": 0.8830225557728333,
+    "no_expression": 0.7979043186751553,
+    "transport_exchange": 0.8802306488635601,
+    "metabolic": 0.8447272919896862,
+    "degree_low": 0.7904070264772644,
+    "degree_mid": 0.8730291566664199,
+    "degree_high": 0.9076373318948214
+   },
+   "p2r2": {
+    "gpr_rule": 0.8965899223266575,
+    "no_gpr_rule": 0.7934683930936635,
+    "expression_bearing": 0.8947003975594429,
+    "no_expression": 0.796458814815449,
+    "transport_exchange": 0.8834908080917743,
+    "metabolic": 0.8499084650264591,
+    "degree_low": 0.7978349247104763,
+    "degree_mid": 0.8733796099481124,
+    "degree_high": 0.9144732818757465
+   },
+   "p3r0": {
+    "gpr_rule": 0.8924744851727396,
+    "no_gpr_rule": 0.8220778168011391,
+    "expression_bearing": 0.8928431004107638,
+    "no_expression": 0.8188983888991165,
+    "transport_exchange": 0.8993823155747206,
+    "metabolic": 0.8510995749523265,
+    "degree_low": 0.8201573444886575,
+    "degree_mid": 0.8756017082224632,
+    "degree_high": 0.9161640010905376
+   },
+   "p3r1": {
+    "gpr_rule": 0.8782428974358975,
+    "no_gpr_rule": 0.8075036372604892,
+    "expression_bearing": 0.8800919941980984,
+    "no_expression": 0.801555074132904,
+    "transport_exchange": 0.8808357961775685,
+    "metabolic": 0.8433903852183362,
+    "degree_low": 0.7982226083910903,
+    "degree_mid": 0.8743154897213323,
+    "degree_high": 0.9030527022280208
+   },
+   "p3r2": {
+    "gpr_rule": 0.8956673240540438,
+    "no_gpr_rule": 0.7877351911120749,
+    "expression_bearing": 0.8944635954172026,
+    "no_expression": 0.790147032757196,
+    "transport_exchange": 0.8759132377953895,
+    "metabolic": 0.8518599641815897,
+    "degree_low": 0.7901357083634225,
+    "degree_mid": 0.8715917981749866,
+    "degree_high": 0.9155086316284653
+   },
+   "p4r0": {
+    "gpr_rule": 0.8876322654980849,
+    "no_gpr_rule": 0.8330357142857142,
+    "expression_bearing": 0.8874161451431666,
+    "no_expression": 0.8288534532537944,
+    "transport_exchange": 0.9013237069178271,
+    "metabolic": 0.8498657818313948,
+    "degree_low": 0.8284674429754261,
+    "degree_mid": 0.8703308409392679,
+    "degree_high": 0.9168800563324347
+   },
+   "p4r1": {
+    "gpr_rule": 0.8861217044044666,
+    "no_gpr_rule": 0.8045283000941894,
+    "expression_bearing": 0.8874584885012368,
+    "no_expression": 0.8007256017027373,
+    "transport_exchange": 0.8808975220520749,
+    "metabolic": 0.8555933534588608,
+    "degree_low": 0.7915215817482629,
+    "degree_mid": 0.884585457444282,
+    "degree_high": 0.9100367674434415
+   },
+   "p4r2": {
+    "gpr_rule": 0.8903394591904567,
+    "no_gpr_rule": 0.7862548186845677,
+    "expression_bearing": 0.888541211439604,
+    "no_expression": 0.7880377143976232,
+    "transport_exchange": 0.8763409122215959,
+    "metabolic": 0.8466857584260901,
+    "degree_low": 0.7918047770864123,
+    "degree_mid": 0.8618512025349331,
+    "degree_high": 0.9135089542949687
+   }
+  },
+  "zero": {
+   "p0r0": {
+    "gpr_rule": 0.7858461525294442,
+    "no_gpr_rule": 0.740808134788799,
+    "expression_bearing": 0.7858735194555678,
+    "no_expression": 0.7422154756451042,
+    "transport_exchange": 0.8179766618753962,
+    "metabolic": 0.7058629594472408,
+    "degree_low": 0.7602371730775771,
+    "degree_mid": 0.7904819026970206,
+    "degree_high": 0.7626337665921028
+   },
+   "p0r1": {
+    "gpr_rule": 0.77995005982906,
+    "no_gpr_rule": 0.7241295334058071,
+    "expression_bearing": 0.7844641051389107,
+    "no_expression": 0.7196053552085697,
+    "transport_exchange": 0.8007306092875713,
+    "metabolic": 0.7039191566915348,
+    "degree_low": 0.7488757366956967,
+    "degree_mid": 0.7944425624596906,
+    "degree_high": 0.7529115691489361
+   },
+   "p0r2": {
+    "gpr_rule": 0.7863936658919014,
+    "no_gpr_rule": 0.7162062850867064,
+    "expression_bearing": 0.7860051935239505,
+    "no_expression": 0.720395997722281,
+    "transport_exchange": 0.8146950445723109,
+    "metabolic": 0.6979123793224565,
+    "degree_low": 0.7582568135012971,
+    "degree_mid": 0.7836606620146717,
+    "degree_high": 0.7602581875127664
+   },
+   "p1r0": {
+    "gpr_rule": 0.7975293084320516,
+    "no_gpr_rule": 0.7367033317513051,
+    "expression_bearing": 0.7959191796921734,
+    "no_expression": 0.7410591735990102,
+    "transport_exchange": 0.820852456685368,
+    "metabolic": 0.7208190716553199,
+    "degree_low": 0.7573287079549704,
+    "degree_mid": 0.7952288558194541,
+    "degree_high": 0.7783772931673876
+   },
+   "p1r1": {
+    "gpr_rule": 0.7962570256410256,
+    "no_gpr_rule": 0.7212016033638075,
+    "expression_bearing": 0.8020532858845845,
+    "no_expression": 0.7141641242127528,
+    "transport_exchange": 0.8060020335969704,
+    "metabolic": 0.7260817681646186,
+    "degree_low": 0.7498924878929325,
+    "degree_mid": 0.8025786715443199,
+    "degree_high": 0.7682485322159776
+   },
+   "p1r2": {
+    "gpr_rule": 0.7991395446957212,
+    "no_gpr_rule": 0.7198510603196749,
+    "expression_bearing": 0.799552769703269,
+    "no_expression": 0.7224444292215938,
+    "transport_exchange": 0.8188494372670356,
+    "metabolic": 0.7126986642537181,
+    "degree_low": 0.7576140843563616,
+    "degree_mid": 0.8002596958310968,
+    "degree_high": 0.7618588609592899
+   },
+   "p2r0": {
+    "gpr_rule": 0.7947873773310182,
+    "no_gpr_rule": 0.7341604556241101,
+    "expression_bearing": 0.7938473722608901,
+    "no_expression": 0.7372481900268446,
+    "transport_exchange": 0.8203132130878967,
+    "metabolic": 0.7141995048152352,
+    "degree_low": 0.7633076216712581,
+    "degree_mid": 0.7901388127853881,
+    "degree_high": 0.7727837549312339
+   },
+   "p2r1": {
+    "gpr_rule": 0.7901897435897438,
+    "no_gpr_rule": 0.7230615915828189,
+    "expression_bearing": 0.7946705095455374,
+    "no_expression": 0.719414514892943,
+    "transport_exchange": 0.8038322526044045,
+    "metabolic": 0.7172756486520149,
+    "degree_low": 0.746565054860676,
+    "degree_mid": 0.7982660083244344,
+    "degree_high": 0.760528502609394
+   },
+   "p2r2": {
+    "gpr_rule": 0.7858686606582106,
+    "no_gpr_rule": 0.7172756831154874,
+    "expression_bearing": 0.7845542812512845,
+    "no_expression": 0.7239924304375189,
+    "transport_exchange": 0.8054643904027794,
+    "metabolic": 0.7031406877192578,
+    "degree_low": 0.7480937842680999,
+    "degree_mid": 0.7830083521202362,
+    "degree_high": 0.7613121560811354
+   },
+   "p3r0": {
+    "gpr_rule": 0.7985439746836255,
+    "no_gpr_rule": 0.741813488372093,
+    "expression_bearing": 0.7958578395839346,
+    "no_expression": 0.7470090637804142,
+    "transport_exchange": 0.8310523546776711,
+    "metabolic": 0.7173277880902149,
+    "degree_low": 0.7638702989490868,
+    "degree_mid": 0.8063922210177064,
+    "degree_high": 0.7725531653511234
+   },
+   "p3r1": {
+    "gpr_rule": 0.7879773846153847,
+    "no_gpr_rule": 0.7317119404629067,
+    "expression_bearing": 0.7932529758234532,
+    "no_expression": 0.7245846288217086,
+    "transport_exchange": 0.8041060514731401,
+    "metabolic": 0.7146807828921655,
+    "degree_low": 0.7510998807815877,
+    "degree_mid": 0.80558291129649,
+    "degree_high": 0.7593726916900843
+   },
+   "p3r2": {
+    "gpr_rule": 0.7800480705125795,
+    "no_gpr_rule": 0.725064920128398,
+    "expression_bearing": 0.7795207394488195,
+    "no_expression": 0.7258356788416171,
+    "transport_exchange": 0.8067824461091206,
+    "metabolic": 0.6931358512220612,
+    "degree_low": 0.7536115836208511,
+    "degree_mid": 0.773895380211129,
+    "degree_high": 0.7581900134317917
+   },
+   "p4r0": {
+    "gpr_rule": 0.8019856911740105,
+    "no_gpr_rule": 0.7394037922745994,
+    "expression_bearing": 0.8003260529280801,
+    "no_expression": 0.7444687937163019,
+    "transport_exchange": 0.8306086658679553,
+    "metabolic": 0.7227296569497552,
+    "degree_low": 0.7654849790398829,
+    "degree_mid": 0.7965948010482466,
+    "degree_high": 0.7856646170874697
+   },
+   "p4r1": {
+    "gpr_rule": 0.7912518825820238,
+    "no_gpr_rule": 0.7344005309787011,
+    "expression_bearing": 0.7942672030603004,
+    "no_expression": 0.73365386660483,
+    "transport_exchange": 0.809836716392964,
+    "metabolic": 0.718647256325504,
+    "degree_low": 0.7553570338319997,
+    "degree_mid": 0.798380133407867,
+    "degree_high": 0.7704928013024308
+   },
+   "p4r2": {
+    "gpr_rule": 0.7840108661641746,
+    "no_gpr_rule": 0.7133191440656872,
+    "expression_bearing": 0.7848201937162235,
+    "no_expression": 0.7153844921475181,
+    "transport_exchange": 0.8136350955535087,
+    "metabolic": 0.690615293730967,
+    "degree_low": 0.7552219893465303,
+    "degree_mid": 0.7706795173699489,
+    "degree_high": 0.7627989007974215
+   }
+  },
+  "rewire7": {
+   "p0r0": {
+    "gpr_rule": 0.5643939700298802,
+    "no_gpr_rule": 0.6605267489321308,
+    "expression_bearing": 0.5466191813342904,
+    "no_expression": 0.6563966056848785,
+    "transport_exchange": 0.6231556668366797,
+    "metabolic": 0.6404944411425869,
+    "degree_low": 0.6292201612080398,
+    "degree_mid": 0.6080311159291744,
+    "degree_high": 0.65142497134054
+   },
+   "p0r1": {
+    "gpr_rule": 0.5721059188034189,
+    "no_gpr_rule": 0.6394058167433709,
+    "expression_bearing": 0.5564512798830225,
+    "no_expression": 0.6346642976105359,
+    "transport_exchange": 0.6435136293617306,
+    "metabolic": 0.6213645493760084,
+    "degree_low": 0.6134319949887855,
+    "degree_mid": 0.607221238938053,
+    "degree_high": 0.6679843060016057
+   },
+   "p0r2": {
+    "gpr_rule": 0.5765310301514283,
+    "no_gpr_rule": 0.6179159474530174,
+    "expression_bearing": 0.5549056157473472,
+    "no_expression": 0.6197511549148638,
+    "transport_exchange": 0.6109316095489692,
+    "metabolic": 0.6352433035617493,
+    "degree_low": 0.5868883361416458,
+    "degree_mid": 0.6141559778135622,
+    "degree_high": 0.6628732893034658
+   },
+   "p1r0": {
+    "gpr_rule": 0.5619360992627825,
+    "no_gpr_rule": 0.6555525581395348,
+    "expression_bearing": 0.5440158722339125,
+    "no_expression": 0.6513020418124136,
+    "transport_exchange": 0.6272860635847978,
+    "metabolic": 0.6306946276114801,
+    "degree_low": 0.6222121008060402,
+    "degree_mid": 0.6061753818862718,
+    "degree_high": 0.6542173388911333
+   },
+   "p1r1": {
+    "gpr_rule": 0.5689530128205127,
+    "no_gpr_rule": 0.6299917533080152,
+    "expression_bearing": 0.5564884496356195,
+    "no_expression": 0.6212797783933519,
+    "transport_exchange": 0.6357254948520771,
+    "metabolic": 0.6134702005907053,
+    "degree_low": 0.6104984542019437,
+    "degree_mid": 0.6015173167267562,
+    "degree_high": 0.6568701073865918
+   },
+   "p1r2": {
+    "gpr_rule": 0.5667332342063308,
+    "no_gpr_rule": 0.6349857508496226,
+    "expression_bearing": 0.5438941423110124,
+    "no_expression": 0.6366206527463211,
+    "transport_exchange": 0.6237067455578476,
+    "metabolic": 0.6259547890139531,
+    "degree_low": 0.597714809168472,
+    "degree_mid": 0.6191070746108426,
+    "degree_high": 0.651645512110277
+   },
+   "p2r0": {
+    "gpr_rule": 0.5654535090844317,
+    "no_gpr_rule": 0.658137161841481,
+    "expression_bearing": 0.5473314097105417,
+    "no_expression": 0.6540307663325727,
+    "transport_exchange": 0.6230162624998069,
+    "metabolic": 0.6362552201431473,
+    "degree_low": 0.6268705098119237,
+    "degree_mid": 0.6112333234782037,
+    "degree_high": 0.6487053281959814
+   },
+   "p2r1": {
+    "gpr_rule": 0.566154264957265,
+    "no_gpr_rule": 0.643820660788943,
+    "expression_bearing": 0.5502365789921838,
+    "no_expression": 0.6369651020906207,
+    "transport_exchange": 0.6421423578765351,
+    "metabolic": 0.6218533601913849,
+    "degree_low": 0.6145709282197392,
+    "degree_mid": 0.5988269525591821,
+    "degree_high": 0.6739879190084302
+   },
+   "p2r2": {
+    "gpr_rule": 0.5842264604681873,
+    "no_gpr_rule": 0.628178408978426,
+    "expression_bearing": 0.56231426339928,
+    "no_expression": 0.6295642363861335,
+    "transport_exchange": 0.6314198301547665,
+    "metabolic": 0.6340693038537314,
+    "degree_low": 0.5939640937174034,
+    "degree_mid": 0.6192279119699411,
+    "degree_high": 0.6783913541350731
+   }
+  }
+ },
+ "basis": [
+  "p0r0",
+  "p0r1",
+  "p0r2",
+  "p1r0",
+  "p1r1",
+  "p1r2",
+  "p2r0",
+  "p2r1",
+  "p2r2",
+  "p3r0",
+  "p3r1",
+  "p3r2",
+  "p4r0",
+  "p4r1",
+  "p4r2"
+ ],
+ "rollup": {
+  "real": {
+   "gpr_rule": {
+    "mean": 0.8687108062109019,
+    "sd": 0.004677920134713488,
+    "n": 15
+   },
+   "no_gpr_rule": {
+    "mean": 0.806095294823531,
+    "sd": 0.014637966650210702,
+    "n": 15
+   },
+   "expression_bearing": {
+    "mean": 0.8677458760004017,
+    "sd": 0.004865057785881716,
+    "n": 15
+   },
+   "no_expression": {
+    "mean": 0.8029354621231614,
+    "sd": 0.011356972704074172,
+    "n": 15
+   },
+   "transport_exchange": {
+    "mean": 0.8819079845577971,
+    "sd": 0.007691891296865136,
+    "n": 15
+   },
+   "metabolic": {
+    "mean": 0.8250498742333876,
+    "sd": 0.006820589057982843,
+    "n": 15
+   },
+   "degree_low": {
+    "mean": 0.8060662457728272,
+    "sd": 0.012195834031275016,
+    "n": 15
+   },
+   "degree_mid": {
+    "mean": 0.8579401582660934,
+    "sd": 0.002461717478103121,
+    "n": 15
+   },
+   "degree_high": {
+    "mean": 0.8908247944950702,
+    "sd": 0.007020631055599604,
+    "n": 15
+   }
+  },
+  "indicator": {
+   "gpr_rule": {
+    "mean": 0.8485123907377173,
+    "sd": 0.01028279662839801,
+    "n": 3
+   },
+   "no_gpr_rule": {
+    "mean": 0.7966746638617944,
+    "sd": 0.019416826704958194,
+    "n": 3
+   },
+   "expression_bearing": {
+    "mean": 0.8471105606865708,
+    "sd": 0.009050518425270463,
+    "n": 3
+   },
+   "no_expression": {
+    "mean": 0.791617445957691,
+    "sd": 0.013968754564108886,
+    "n": 3
+   },
+   "transport_exchange": {
+    "mean": 0.8685825188717196,
+    "sd": 0.014859071373839593,
+    "n": 3
+   },
+   "metabolic": {
+    "mean": 0.8053154513268105,
+    "sd": 0.0051370456607516025,
+    "n": 3
+   },
+   "degree_low": {
+    "mean": 0.789549589847274,
+    "sd": 0.015401994430141168,
+    "n": 3
+   },
+   "degree_mid": {
+    "mean": 0.8408571983049083,
+    "sd": 0.012166442603548044,
+    "n": 3
+   },
+   "degree_high": {
+    "mean": 0.8773992109122393,
+    "sd": 0.007589526144184979,
+    "n": 3
+   }
+  },
+  "mean": {
+   "gpr_rule": {
+    "mean": 0.889268269437753,
+    "sd": 0.006322320935865167,
+    "n": 15
+   },
+   "no_gpr_rule": {
+    "mean": 0.804438539826432,
+    "sd": 0.017530415513088246,
+    "n": 15
+   },
+   "expression_bearing": {
+    "mean": 0.8890755744696612,
+    "sd": 0.005418882514238009,
+    "n": 15
+   },
+   "no_expression": {
+    "mean": 0.8030436674038547,
+    "sd": 0.01568106191319429,
+    "n": 15
+   },
+   "transport_exchange": {
+    "mean": 0.8839726788830756,
+    "sd": 0.01068555651255948,
+    "n": 15
+   },
+   "metabolic": {
+    "mean": 0.85017801239866,
+    "sd": 0.004912285634562032,
+    "n": 15
+   },
+   "degree_low": {
+    "mean": 0.8016384166521497,
+    "sd": 0.01669184013780361,
+    "n": 15
+   },
+   "degree_mid": {
+    "mean": 0.872846094583354,
+    "sd": 0.006083571236743105,
+    "n": 15
+   },
+   "degree_high": {
+    "mean": 0.9125245612818417,
+    "sd": 0.004515676514523295,
+    "n": 15
+   }
+  },
+  "zero": {
+   "gpr_rule": {
+    "mean": 0.7906519605553317,
+    "sd": 0.0070786691095406145,
+    "n": 15
+   },
+   "no_gpr_rule": {
+    "mean": 0.7279407663547268,
+    "sd": 0.00957502642862835,
+    "n": 15
+   },
+   "expression_bearing": {
+    "mean": 0.7916656814011319,
+    "sd": 0.00689843895312735,
+    "n": 15
+   },
+   "no_expression": {
+    "mean": 0.7287650809919338,
+    "sd": 0.01111549888998561,
+    "n": 15
+   },
+   "transport_exchange": {
+    "mean": 0.8136491619636061,
+    "sd": 0.009543675409965462,
+    "n": 15
+   },
+   "metabolic": {
+    "mean": 0.710603097995471,
+    "sd": 0.010914988476140305,
+    "n": 15
+   },
+   "degree_low": {
+    "mean": 0.7556544819899206,
+    "sd": 0.00598362216493196,
+    "n": 15
+   },
+   "degree_mid": {
+    "mean": 0.7926393658631801,
+    "sd": 0.010762389823939952,
+    "n": 15
+   },
+   "degree_high": {
+    "mean": 0.765865654191903,
+    "sd": 0.00867534102208346,
+    "n": 15
+   }
+  },
+  "rewire7": {
+   "gpr_rule": {
+    "mean": 0.5696097221982486,
+    "sd": 0.00699815012280062,
+    "n": 9
+   },
+   "no_gpr_rule": {
+    "mean": 0.6409460896705046,
+    "sd": 0.014797989497159136,
+    "n": 9
+   },
+   "expression_bearing": {
+    "mean": 0.5513618659163567,
+    "sd": 0.006465597348711259,
+    "n": 9
+   },
+   "no_expression": {
+    "mean": 0.6378416262190768,
+    "sd": 0.01355538608012142,
+    "n": 9
+   },
+   "transport_exchange": {
+    "mean": 0.6289886289192456,
+    "sd": 0.010379293700592509,
+    "n": 9
+   },
+   "metabolic": {
+    "mean": 0.6288221994983052,
+    "sd": 0.008745333537346231,
+    "n": 9
+   },
+   "degree_low": {
+    "mean": 0.6105968209182215,
+    "sd": 0.014895905430501812,
+    "n": 9
+   },
+   "degree_mid": {
+    "mean": 0.609499588212443,
+    "sd": 0.007138376250376822,
+    "n": 9
+   },
+   "degree_high": {
+    "mean": 0.6606777918192331,
+    "sd": 0.010699928130289228,
+    "n": 9
+   }
+  }
+ },
+ "paired": {
+  "aggregate_expression": {
+   "gpr_rule": {
+    "mean": 0.0986163088824212,
+    "n": 15,
+    "n_positive": 15
+   },
+   "no_gpr_rule": {
+    "mean": 0.07649777347170517,
+    "n": 15,
+    "n_positive": 15
+   },
+   "expression_bearing": {
+    "mean": 0.0974098930685293,
+    "n": 15,
+    "n_positive": 15
+   },
+   "no_expression": {
+    "mean": 0.07427858641192077,
+    "n": 15,
+    "n_positive": 15
+   },
+   "transport_exchange": {
+    "mean": 0.07032351691946939,
+    "n": 15,
+    "n_positive": 15
+   },
+   "metabolic": {
+    "mean": 0.13957491440318903,
+    "n": 15,
+    "n_positive": 15
+   },
+   "degree_low": {
+    "mean": 0.0459839346622292,
+    "n": 15,
+    "n_positive": 15
+   },
+   "degree_mid": {
+    "mean": 0.08020672872017401,
+    "n": 15,
+    "n_positive": 15
+   },
+   "degree_high": {
+    "mean": 0.14665890708993867,
+    "n": 15,
+    "n_positive": 15
+   }
+  },
+  "patient_identity": {
+   "gpr_rule": {
+    "mean": -0.02055746322685103,
+    "n": 15,
+    "n_positive": 0
+   },
+   "no_gpr_rule": {
+    "mean": 0.0016567549970991117,
+    "n": 15,
+    "n_positive": 7
+   },
+   "expression_bearing": {
+    "mean": -0.021329698469259577,
+    "n": 15,
+    "n_positive": 0
+   },
+   "no_expression": {
+    "mean": -0.00010820528069327059,
+    "n": 15,
+    "n_positive": 8
+   },
+   "transport_exchange": {
+    "mean": -0.0020646943252784784,
+    "n": 15,
+    "n_positive": 6
+   },
+   "metabolic": {
+    "mean": -0.025128138165272394,
+    "n": 15,
+    "n_positive": 0
+   },
+   "degree_low": {
+    "mean": 0.004427829120677444,
+    "n": 15,
+    "n_positive": 9
+   },
+   "degree_mid": {
+    "mean": -0.014905936317260605,
+    "n": 15,
+    "n_positive": 0
+   },
+   "degree_high": {
+    "mean": -0.021699766786771466,
+    "n": 15,
+    "n_positive": 0
+   }
+  },
+  "expression_total": {
+   "gpr_rule": {
+    "mean": 0.07805884565557017,
+    "n": 15,
+    "n_positive": 15
+   },
+   "no_gpr_rule": {
+    "mean": 0.07815452846880427,
+    "n": 15,
+    "n_positive": 15
+   },
+   "expression_bearing": {
+    "mean": 0.07608019459926972,
+    "n": 15,
+    "n_positive": 15
+   },
+   "no_expression": {
+    "mean": 0.0741703811312275,
+    "n": 15,
+    "n_positive": 15
+   },
+   "transport_exchange": {
+    "mean": 0.0682588225941909,
+    "n": 15,
+    "n_positive": 15
+   },
+   "metabolic": {
+    "mean": 0.11444677623791663,
+    "n": 15,
+    "n_positive": 15
+   },
+   "degree_low": {
+    "mean": 0.05041176378290665,
+    "n": 15,
+    "n_positive": 15
+   },
+   "degree_mid": {
+    "mean": 0.0653007924029134,
+    "n": 15,
+    "n_positive": 15
+   },
+   "degree_high": {
+    "mean": 0.1249591403031672,
+    "n": 15,
+    "n_positive": 15
+   }
+  },
+  "presence_over_zero": {
+   "gpr_rule": {
+    "mean": 0.0644490979875821,
+    "n": 3,
+    "n_positive": 3
+   },
+   "no_gpr_rule": {
+    "mean": 0.0696266794346903,
+    "n": 3,
+    "n_positive": 3
+   },
+   "expression_bearing": {
+    "mean": 0.06166295464709437,
+    "n": 3,
+    "n_positive": 3
+   },
+   "no_expression": {
+    "mean": 0.06421183643237267,
+    "n": 3,
+    "n_positive": 3
+   },
+   "transport_exchange": {
+    "mean": 0.057448413626626706,
+    "n": 3,
+    "n_positive": 3
+   },
+   "metabolic": {
+    "mean": 0.10275061950639978,
+    "n": 3,
+    "n_positive": 3
+   },
+   "degree_low": {
+    "mean": 0.03375968208908361,
+    "n": 3,
+    "n_positive": 3
+   },
+   "degree_mid": {
+    "mean": 0.05132882258111408,
+    "n": 3,
+    "n_positive": 3
+   },
+   "degree_high": {
+    "mean": 0.11879803649430414,
+    "n": 3,
+    "n_positive": 3
+   }
+  },
+  "magnitude_over_presence": {
+   "gpr_rule": {
+    "mean": 0.04181782416826918,
+    "n": 3,
+    "n_positive": 3
+   },
+   "no_gpr_rule": {
+    "mean": 0.004589208077509917,
+    "n": 3,
+    "n_positive": 2
+   },
+   "expression_bearing": {
+    "mean": 0.042961260738227626,
+    "n": 3,
+    "n_positive": 3
+   },
+   "no_expression": {
+    "mean": 0.008801931208889316,
+    "n": 3,
+    "n_positive": 3
+   },
+   "transport_exchange": {
+    "mean": 0.01180971979109302,
+    "n": 3,
+    "n_positive": 3
+   },
+   "metabolic": {
+    "mean": 0.04688119698106041,
+    "n": 3,
+    "n_positive": 3
+   },
+   "degree_low": {
+    "mean": 0.00876960077742787,
+    "n": 3,
+    "n_positive": 2
+   },
+   "degree_mid": {
+    "mean": 0.032487516543486916,
+    "n": 3,
+    "n_positive": 3
+   },
+   "degree_high": {
+    "mean": 0.0357016003155742,
+    "n": 3,
+    "n_positive": 3
+   }
+  },
+  "own_over_presence": {
+   "gpr_rule": {
+    "mean": 0.01921381761684149,
+    "n": 3,
+    "n_positive": 3
+   },
+   "no_gpr_rule": {
+    "mean": 0.010390035657937538,
+    "n": 3,
+    "n_positive": 3
+   },
+   "expression_bearing": {
+    "mean": 0.01995794956284343,
+    "n": 3,
+    "n_positive": 3
+   },
+   "no_expression": {
+    "mean": 0.011119090739131273,
+    "n": 3,
+    "n_positive": 3
+   },
+   "transport_exchange": {
+    "mean": 0.014686258440159325,
+    "n": 3,
+    "n_positive": 3
+   },
+   "metabolic": {
+    "mean": 0.01717766671487338,
+    "n": 3,
+    "n_positive": 3
+   },
+   "degree_low": {
+    "mean": 0.019153331727738143,
+    "n": 3,
+    "n_positive": 3
+   },
+   "degree_mid": {
+    "mean": 0.0181061498978304,
+    "n": 3,
+    "n_positive": 3
+   },
+   "degree_high": {
+    "mean": 0.011487427315168977,
+    "n": 3,
+    "n_positive": 3
+   }
+  }
+ },
+ "indicator_basis": [
+  "p0r0",
+  "p0r1",
+  "p0r2"
+ ],
+ "strata_heldout_mean": {
+  "gpr_rule": 1979.3333333333333,
+  "no_gpr_rule": 1554.0,
+  "expression_bearing": 1878.3333333333333,
+  "no_expression": 1655.0,
+  "transport_exchange": 1740.3333333333333,
+  "metabolic": 1793.0,
+  "degree_low": 1180.3333333333333,
+  "degree_mid": 1176.6666666666667,
+  "degree_high": 1176.3333333333333
+ }
+}
