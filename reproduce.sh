@@ -16,11 +16,13 @@ python3 paper1/code/build_families.py >/dev/null
 python3 paper1/code/split_audit.py --family_map paper1/data/families/families_union.json \
     --out paper1/results/split_audit_fam.json --matched_out paper1/results/fam_matched.json >/dev/null
 python3 paper1/code/inference_p1.py
+# the ledger indexes the result files and is itself quoted, so it is rebuilt before the numbers that
+# quote it rather than after them
+python3 paper1/code/make_ledger.py >/dev/null
 python3 paper1/code/build_results_p1.py
 python3 paper1/code/make_numbers_p1.py
 python3 paper1/code/make_figures_p1.py
 python3 paper1/code/check_macros_p1.py
-python3 paper1/code/make_ledger.py >/dev/null
 echo "== paper 2 =="
 # Every generator whose output make_numbers.py reads runs here, so that deleting a derived file and
 # rerunning this driver puts it back. msi2_stats.py resamples the external-cohort contrasts with

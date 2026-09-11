@@ -1,7 +1,7 @@
 {
- "_note": "Release identifiers quoted by both manuscripts. 'tag' is the Git tag the submitted manuscripts correspond to; create it on the final commit (git tag journal-2026-09 && git push --tags). The three DOI fields are filled after the Zenodo versions are minted (the concept identifiers in the manuscripts resolve to the current version regardless); an empty field leaves its macro undefined and the manuscripts print the concept identifiers only. Rebuild with 'bash reproduce.sh paper' after filling them.",
+ "_note": "Release identifiers quoted by both manuscripts. 'tag' is the Git tag the submitted manuscripts correspond to and 'commit' is the commit that tag points at. The copy of this file inside that tag names the preceding commit, because a file cannot carry the hash of the commit that adds it; 'git rev-parse journal-2026-09^{}' settles it. The DOI fields are filled if and when Zenodo versions are minted for that tag; an empty field leaves its macro undefined and the manuscripts print the concept identifiers only.",
  "tag": "journal-2026-09",
  "version_doi_code": "",
  "version_doi_data": "",
- "commit": "a5a16c22ca68dd6faee050aa892005ba774bc451"
+ "commit": "b28247dda27b20648ed3329fdbf105445caa6e7c"
 }
