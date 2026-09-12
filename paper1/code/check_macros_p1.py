@@ -75,8 +75,10 @@ for f in sorted(glob.glob(os.path.join(MS, "*.tex"))):
 
 # Generated macro names are camel case; LaTeX and package commands are not. Anything
 # undefined that carries an internal capital is a macro the pipeline stopped emitting.
+# package commands that happen to carry an internal capital are not pipeline macros
+PACKAGE_CMDS = {"FloatBarrier"}
 missing = sorted({m for _, m in (u for u in used if isinstance(u, tuple))
-                  if re.search(r"[a-z][A-Z]", m)})
+                  if re.search(r"[a-z][A-Z]", m) and m not in PACKAGE_CMDS})
 real_used = sorted(u for u in used if isinstance(u, str))
 unused = sorted(d for d in defs if d not in real_used)
 

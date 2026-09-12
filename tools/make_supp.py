@@ -80,7 +80,9 @@ with open(os.path.join(D, P + "_supp.tex"), "w") as f:
         f.write("\\renewcommand{\\thesubsection}{S\\arabic{section}.\\arabic{subsection}}\n")
     # the reference list follows the last section on the same page rather than opening a new one,
     # so a short final page of prose is not left nearly empty
-    f.write("\\input{body_supp}\n\\vspace{1em}\n\\input{body_supp_bib}\n\\end{document}\n")
+    # pending floats are placed before the reference list (FloatBarrier, from placeins, which the
+    # preamble loads), and the list follows the last section without opening a new page
+    f.write("\\input{body_supp}\n\\FloatBarrier\n\\vspace{1em}\n\\input{body_supp_bib}\n\\end{document}\n")
 # the article alone, which is what a journal takes as the manuscript file: the same bodies as the
 # combined document without the supplement, with the supplement's labels supplied through xr so a
 # pointer to "Supplementary Section S16" still prints its number.
