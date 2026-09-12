@@ -15447,6 +15447,30 @@
      "hi": 0.002442652825266123
     }
    }
+  },
+  "range_extremes": {
+   "max_point": {
+    "value": 0.013868479058146477,
+    "seed": 11,
+    "domain": "secondary_explicit_only",
+    "arm": "cross"
+   },
+   "max_lower_lines": {
+    "value": 0.00325361043214798,
+    "seed": 11,
+    "domain": "tertiary_zero_fill_all",
+    "arm": "cross"
+   },
+   "max_lower_families": {
+    "value": 0.005078797216992825,
+    "seed": 33,
+    "domain": "primary_template_domain",
+    "arm": "cross"
+   },
+   "n_seeds": 3,
+   "threshold": 0.01,
+   "any_lower_endpoint_above_threshold": false,
+   "n_point_estimates_above_threshold": 2
   }
  },
  "diagnostic_sim": {

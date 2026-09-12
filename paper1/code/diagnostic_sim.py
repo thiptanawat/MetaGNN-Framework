@@ -26,11 +26,12 @@ column).
 
 Five predictors run through the whole audit: a sample-blind reference (reaction-level features of
 the unsubstituted training patients, so it is the same in every arm by construction), an oracle
-handed the true sample-specific signal, an expression-sensitive but label-irrelevant scorer (each
-patient's own column read through a fixed random permutation of the reactions, so its output moves
-with the patient and carries nothing about the label), a learned gradient-boosted model whose
-number of boosting rounds is selected on an inner partition of the training reactions withheld
-from the loss, which is the paper's matched selection rule, and the restricted nonlinear scorer
+handed the true sample-specific signal, a reaction-permuted expression control (each patient's own
+column read through a fixed random permutation of the reactions, so its output moves with the
+patient while each reaction receives another reaction's value; the output key is label_irrelevant),
+a learned gradient-boosted model whose number of boosting rounds is selected on an inner partition
+of the training reactions withheld from the loss, the reaction-holdout step of the paper's matched
+selection rule (these worlds have no separate validation patients), and the restricted nonlinear scorer
 (x-1)^2, the case in which averaging the column across patients destroys distributional information
 the per-patient scorer keeps.
 

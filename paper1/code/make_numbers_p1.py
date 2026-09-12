@@ -996,6 +996,22 @@ if EA:
         _max_lo = max(v["ci_lines"][0] for _, dv in _DOMS if dv for v in dv.values())
         cmd("dmDomainsMaxLower", _max_lo, "{:+.4f}")
         cmd("dmDomainsAnyAdvantage", "yes" if _any_adv else "no")
+    # the extremes over every domain, both resampling blocks and every schedule present, so that the
+    # sentence about the smallest effect of interest says which quantity it is about
+    _rx = EA.get("range_extremes")
+    if _rx:
+        _nice = {"mean": "the lineage-conditioned mean", "within": "the same-lineage donor",
+                 "cross": "the cross-lineage donor", "within_expr": "the expression branch only",
+                 "within_graph": "the sample-derived graph only"}
+        _DN = {"primary_template_domain": "the template domain", "secondary_explicit_only": "the explicit-pairs domain",
+               "tertiary_zero_fill_all": "the whole grid"}
+        cmd("dmExtMaxPoint", _rx["max_point"]["value"], "{:+.4f}")
+        cmd("dmExtMaxPointWhere", f"{_nice.get(_rx['max_point']['arm'], _rx['max_point']['arm'])} on {_DN[_rx['max_point']['domain']]} under schedule {_rx['max_point']['seed']}")
+        cmd("dmExtMaxLowerLines", _rx["max_lower_lines"]["value"], "{:+.4f}")
+        cmd("dmExtMaxLowerFam", _rx["max_lower_families"]["value"], "{:+.4f}")
+        cmd("dmExtNSeeds", _rx["n_seeds"], "int")
+        cmd("dmExtNPointsAbove", _rx["n_point_estimates_above_threshold"], "int")
+        cmd("dmExtAnyLowerAbove", "yes" if _rx["any_lower_endpoint_above_threshold"] else "no")
     cmd("dmSecOwn", _sec["explicit_only"]["own"]); cmd("dmSecRidge", _sec["explicit_only"]["baseline_ridge_expression"])
     cmd("dmTerOwn", _sec["zero_fill"]["own"]); cmd("dmTerLineOwn", _sec["zero_fill_per_line"]["own"])
     cmd("dmSecLineOwn", _sec["explicit_only_per_line"]["own"])
@@ -1079,13 +1095,13 @@ if EA:
 # and the decision rule fixed on the development worlds and read on the disjoint test worlds
 DS = R.get("diagnostic_sim")
 def _bound(k, n, upper):
-    """one-sided 95% bound on a proportion k/n: the rule of three at the boundary, Wilson otherwise"""
+    """exact one-sided 95% Clopper-Pearson bound on a proportion k/n (the beta quantile), so that
+    0 of n gives 1 - 0.05^(1/n) rather than the rule-of-three approximation"""
+    from scipy.stats import beta as _beta
     if n == 0: return None
-    if upper and k == 0: return 3.0 / n
-    if (not upper) and k == n: return 1.0 - 3.0 / n
-    ph = k / n; z = 1.645
-    c = (ph + z*z/(2*n) + (1 if upper else -1) * z*((ph*(1-ph)/n + z*z/(4*n*n))**0.5)) / (1 + z*z/n)
-    return min(max(c, 0.0), 1.0)
+    if upper:
+        return 1.0 if k >= n else float(_beta.ppf(0.95, k + 1, n - k))
+    return 0.0 if k <= 0 else float(_beta.ppf(0.05, k, n - k + 1))
 if DS:
     pr = DS["params"]
     cmd("dsimNDev", pr["n_dev"], "int"); cmd("dsimNTest", pr["n_test"], "int")

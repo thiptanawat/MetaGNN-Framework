@@ -149,10 +149,19 @@ checkpoint (level 3).
   `structure_floor.py` and the alignment and label builders `build_aligned_recon3d.py` and
   `build_labels_ht29.py`, are the experiment tier of `paper1/code/README.md`; every per-cell
   result file is their output, and they need the GPU host and the deposited cohort.
-- **The deposited-only data files** named in the manuscript's methods: `activity_pseudolabels.pt`
-  (the label input before alignment), `clinical_metadata.tsv` and `11models.mat` (the eleven raw
-  reconstruction files the label union is built from). These are part of the Zenodo data deposit
+- **The two cohort files** named in the manuscript's methods, `activity_pseudolabels.pt` (the
+  label input before alignment) and `clinical_metadata.tsv`, are part of the Zenodo data deposit
   referenced in `STUDIES.md`, not this repository.
+- **The eleven reconstructions** the label union is built from are not in that deposit and not in
+  this repository; they are upstream data. `11models.mat` (6,332,503 bytes, SHA-256
+  `ea9fb64c1046c38724e67fb2f48f38289ae227a66c7dc8af21044fe6d7cc6818`) is the file of eleven
+  NCI-60 cell-line tINIT models distributed with the Human1 publication data and scripts
+  (Robinson et al. 2020): it is a member of `Human1_Publication_Data_Scripts.zip` at Zenodo record
+  3583004 (<https://zenodo.org/records/3583004>), from which the copy used here was extracted on
+  9 March 2026, and the byte-identical file is also at
+  `models/humanGEM_cellLines/11models.mat` in <https://github.com/SysBioChalmers/EnzymeConstrained_humanModels>.
+  `build_labels_ht29.py --mat 11models.mat --deposited activity_pseudolabels.pt` rebuilds the
+  union from it and checks that the rebuilt vector equals the deposited one.
 - **The prediction arrays**, released as tagged-release assets as described above, are needed
   for level 2 and not for level 1.
 

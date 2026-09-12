@@ -46,11 +46,12 @@ PATH_EXTENSIONS = (
     ".png", ".pdf", ".bib", ".ipynb", ".toml", ".cfg", ".lock",
 )
 
-# Files the manuscripts name that live in the data deposit (Zenodo record 10.5281/zenodo.21217578)
-# and not in this repository: reported as deposited, not as missing. Keep this list in step with
-# the deposit's manifest.
+# Files the manuscripts name that live outside this repository: in the data deposit (Zenodo record
+# 10.5281/zenodo.21217578) or, for the eleven reconstructions, in the upstream Human1 publication
+# data (Zenodo record 3583004). Reported with their location, not as missing. Keep this list in step
+# with the deposit's manifest.
 DEPOSITED = {
-    "11models.mat": "the eleven NCI-60 reconstructions distributed with the Human1 publication data",
+    "11models.mat": "upstream: the eleven NCI-60 tINIT models in Human1_Publication_Data_Scripts.zip, Zenodo record 3583004 (Robinson et al. 2020), not in the data deposit",
     "activity_pseudolabels.pt": "the label vector, in the deposit's crc_624/ directory",
     "clinical_metadata.tsv": "the clinical annotation, in the deposit's crc_624/ directory",
     "recon3d_stoich.h5": "the stoichiometric matrix, in the deposit's crc_624/ directory",
@@ -213,7 +214,8 @@ def main():
             print(f"{path.ljust(name_w)}  found     {how}: {where}")
         elif os.path.basename(path) in DEPOSITED:
             deposited_n += 1
-            print(f"{path.ljust(name_w)}  deposit   {DEPOSITED[os.path.basename(path)]}")
+            _where = "upstream " if DEPOSITED[os.path.basename(path)].startswith("upstream") else "deposit  "
+            print(f"{path.ljust(name_w)}  {_where} {DEPOSITED[os.path.basename(path)]}")
         elif MODEL_ID_RE.match(path) and path.split("/")[0] in MODEL_ID_OWNERS:
             model_n += 1
             print(f"{path.ljust(name_w)}  model id  a Hugging Face model identifier, not a file")
@@ -224,7 +226,7 @@ def main():
 
     n_refs = sum(len(v) for v in by_path.values())
     print(rule)
-    print(f"{found_n} found in the repository, {deposited_n} in the data deposit, {model_n} model identifiers, "
+    print(f"{found_n} found in the repository, {deposited_n} in the data deposit or upstream, {model_n} model identifiers, "
           f"{len(missing)} missing, {len(by_path)} distinct paths "
           f"({n_refs} references) checked across {sum(1 for d in MANUSCRIPT_DIRS if os.path.isdir(d))} manuscript directories.")
 

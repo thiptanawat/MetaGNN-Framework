@@ -986,9 +986,11 @@ if _m2:
         cmd(pre + 'Word', 'higher' if r['own_minus_donor'] > 0 else 'lower')
         # the reading the interval and the null support, generated so it follows the numbers
         _lo, _hi = _ci
+        # the readings name what was computed: a descriptive resampling range and the conditional
+        # permutation test, not a confidence interval
         cmd(pre + 'Reading', 'a correctly directed advantage for the patient\'s own panel' if (_lo > 0 and _np_ < 0.05)
-            else ('a reversal, the donor panel reading the phenotype better' if _hi < 0
-                  else 'an inconclusive comparison, the interval spanning zero'))
+            else ('a reversal, the donor panel reading the phenotype better, with a descriptive range below zero' if _hi < 0
+                  else 'an inconclusive comparison, its descriptive range spanning zero'))
         if r.get('serving_repeat_median_abs') is not None:
             cmd(pre + 'ServMed', r['serving_repeat_median_abs']); cmd(pre + 'ServMax', r['serving_repeat_max_abs'])
             if r.get('serving_repeat_n_changed') is not None:

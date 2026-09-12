@@ -1,7 +1,7 @@
 {
  "_note": "The artifacts a public checkout must carry for the two studies' numbers to be regenerable and their central results traceable. tools/check_release.py reads this file and fails on any entry that is absent or short. Bump 'version' when the required set changes; 'release' names the tag the set was fixed for.",
  "version": 2,
- "release": "journal-2026-09b",
+ "release": "journal-2026-09c",
  "required_files": [
   "reproduce.sh",
   "requirements.txt",

@@ -1356,6 +1356,30 @@ if DMA and DMN and DMM:
             spread={a: dict(lo=min(_sens[k][a] for k in _sens if a in _sens[k]),
                             hi=max(_sens[k][a] for k in _sens if a in _sens[k]))
                     for a in _arms})
+    # the extremes of the donor-effect readings over every domain, both resampling blocks and every
+    # schedule whose file is present: the largest point estimate, and the largest lower endpoint of
+    # the recipient-resampling and of the family-resampling ranges. A statement that "no substitution
+    # clears the threshold" has to say which of these it is about.
+    _ext = dict(max_point=None, max_lower_lines=None, max_lower_families=None)
+    _files = {str(DMA["seed"]): DMA}
+    for _sd in ("22", "33"):
+        _f = _optsub("deepmeta", f"audit_results_seed{_sd}.json")
+        if _f: _files[_sd] = _f
+    for _sd, _f in _files.items():
+        for _dom, _a in _f["analyses"].items():
+            for _arm, _v in (_a.get("verdicts_vs_sesi_0.01") or {}).items():
+                _pt, _ll, _lf = _v["donor_effect"], _v["ci_lines"][0], _v["ci_families"][0]
+                if _ext["max_point"] is None or _pt > _ext["max_point"]["value"]:
+                    _ext["max_point"] = dict(value=_pt, seed=int(_sd), domain=_dom, arm=_arm)
+                if _ext["max_lower_lines"] is None or _ll > _ext["max_lower_lines"]["value"]:
+                    _ext["max_lower_lines"] = dict(value=_ll, seed=int(_sd), domain=_dom, arm=_arm)
+                if _ext["max_lower_families"] is None or _lf > _ext["max_lower_families"]["value"]:
+                    _ext["max_lower_families"] = dict(value=_lf, seed=int(_sd), domain=_dom, arm=_arm)
+    _ext["n_seeds"] = len(_files); _ext["threshold"] = 0.01
+    _ext["any_lower_endpoint_above_threshold"] = bool(max(_ext["max_lower_lines"]["value"], _ext["max_lower_families"]["value"]) > 0.01)
+    _ext["n_point_estimates_above_threshold"] = sum(1 for _f in _files.values() for _a in _f["analyses"].values()
+                                                   for _v in (_a.get("verdicts_vs_sesi_0.01") or {}).values() if _v["donor_effect"] > 0.01)
+    R["external_audit"]["range_extremes"] = _ext
 
 # the diagnostic calibration simulation (diagnostic_sim.py), folded in as its own block
 DSIM = opt("diagnostic_sim.json")
