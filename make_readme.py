@@ -35,7 +35,7 @@ L = []
 S, LB, INF = P1["substitution"], P1["ladder_basis"], P1["inference"]
 cols = P1["naive_allfolds"]["columns"]
 RW = S.get("rewired", {})
-L += [f"## What we found (Paper 1)", "",
+L += ["## What we found: the Reaction-Scoring Audit", "",
       f"Held-out-reaction AUROC on the {LB['n_basis']} cells of the substitution basis "
       f"({len(S['patient_folds'])} patient folds x 3 reaction folds), every row on the same cells, linear rows "
       f"with the regularization tuned by inner cross-validation; the rewiring row is {RW.get('n', 0)} cells over "
@@ -192,12 +192,12 @@ for k, lab in (("cin_vs_gs", "chromosomal instability vs genomically stable"), (
              f"{pfmt(PN.get(k, {}).get('output', {}).get('perm_p'))} | {f3(v['cohort_mean']) if v.get('cohort_mean') is not None else ''} |")
 L += ["", "The output follows its input in rank order and on no attribute adds to it.", ""]
 
-# ---- Paper 2 in brief
+# ---- Language-Model Evidence in brief
 R2 = P2["runs"]; A, E, B = R2["A_representative"], R2["E_representative40"], R2["B_balanced"]
 XS = P2.get("cross_session", {}).get("arms", {}).get("patient", {})
 pc = P2["positive_control"]["backbone1"]; M = P2["msi"]
 def arm(r, a): return r["per_arm"][a]["auroc"]
-L += ["## Paper 2 in brief", "",
+L += ["## Language-Model Evidence in brief", "",
       f"A language model ({A.get('model', 'the served backbone')}) asked to score the same reactions "
       "from each patient's transcriptome. Three prompt arms: patient-blind, the patient's own value, and a stranger's "
       "value in the same slot (a new donor for every reaction).", "",

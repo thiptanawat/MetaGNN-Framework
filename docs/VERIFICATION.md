@@ -40,20 +40,19 @@ two manuscripts share 13 keys, so 90 raw entries reduce to 78 distinct checks.
 The metadata error and the unresolved entry are recorded here rather than quietly
 fixed, because both matter to a reader.
 
-**Metadata error, corrected.** Paper 2's entry for Gopalakrishnan et al. carried the
+**Metadata error, corrected.** the Language-Model Evidence's entry for Gopalakrishnan et al. carried the
 DOI `10.1016/j.ymben.2023.12.003`. That identifier resolves, but to a different
 paper: Thalen et al., "Tuning of CHO secretional machinery improve activity of
 secreted therapeutic sulfatase 150-fold," *Metabolic Engineering*, 2024. The correct
-identifier is `10.1016/j.ymben.2022.12.003`, which Paper 1's bibliography already
-used for the same reference. Paper 2 has been corrected. A DOI that resolves to the
+identifier is `10.1016/j.ymben.2022.12.003`, which the Reaction-Scoring Audit's bibliography already
+used for the same reference. The Language-Model Evidence has been corrected. A DOI that resolves to the
 wrong paper is the failure mode a title-overlap check cannot catch, which is why the
 second pass checked identifiers by resolution rather than by string comparison.
 
 **Unresolved: the authors' own companion manuscript.** The companion is cited by
 both papers. It could not be located as a public preprint under the title given, and
 the repository it points to suggests a different title for the same work. It is now
-cited as a manuscript in preparation by the same authors, with no DOI claimed, and
-Paper 1 states the graph model's hyperparameters inline so that the architecture is
+cited as a manuscript in preparation by the same authors, with no DOI claimed, and Reaction-Scoring Audit states the graph model's hyperparameters inline so that the architecture is
 reproducible without it.
 
 Two further items were noted and left as they are. Cite keys `Gopalakrishnan2022`
@@ -68,7 +67,7 @@ is not a Crossref member; the entry names the journal and gives the author's own
 After the reviewer revision every reference of both manuscripts was re-resolved with
 `tools/verify_refs.py` (Crossref for DOIs, the arXiv API for preprints), which compares the
 resolved title, year and first author with the entry as written and writes
-`docs/verify_refs_report.json`. Of 161 entries (75 in Paper 1, 86 in Paper 2), 150 carry a
+`docs/verify_refs_report.json`. Of 161 entries (75 in Reaction-Scoring Audit, 86 in Language-Model Evidence), 150 carry a
 resolvable identifier and every one of them resolved to the cited work with full title
 agreement. Eleven entries carry no identifier by nature: the two companion manuscripts, cited
 in both papers, two model cards, two classical statistics papers (Stein 1956; James and Stein
@@ -80,7 +79,7 @@ consortium-authored TCGA 2012 paper. Three details were corrected as a result: t
 al. 2017 entry now carries the arXiv URL rather than an arXiv DOI that Crossref does not index;
 the Schuh et al. 2026 entry no longer states a volume, since the article is an advance article;
 and the Sclar et al. 2024 entry carries the paper's full title. Two references that had been
-staged for a calibration analysis Paper 1 does not report (Sisk et al. 2023; Van Calster et al.
-2019) were removed from Paper 1; the second remains in Paper 2, where it is cited. The
+staged for a calibration analysis the Reaction-Scoring Audit does not report (Sisk et al. 2023; Van Calster et al.
+2019) were removed from the Reaction-Scoring Audit; the second remains in Language-Model Evidence, where it is cited. The
 reviewer's concern that the Rahimi et al. 2026 DOI carries a non-bioRxiv prefix is unfounded:
 `10.64898` is the prefix bioRxiv adopted in 2025, and the DOI resolves to the cited preprint.

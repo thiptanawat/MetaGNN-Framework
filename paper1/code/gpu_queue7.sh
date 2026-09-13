@@ -1,5 +1,5 @@
 #!/bin/bash
-# Second queue for the Paper 1 robustness runs on GPU 0. Order: the synthetic patient-varying
+# Second queue for the Reaction-Scoring Audit robustness runs on GPU 0. Order: the synthetic patient-varying
 # positive control for the audit (a cohort-median label on all or half of the expression-bearing
 # reactions, unsubstituted and cohort-mean arms, patient fold 0, first under inner-validation-reaction
 # early stopping and then under the main grid's selection rule); then the inner-validation-reaction

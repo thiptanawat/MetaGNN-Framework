@@ -1,6 +1,6 @@
 {
  "_generated_by": "code/make_ledger.py",
- "note": "One row per result family behind Paper 1: what produced it, the settings its own output records, the checkpoint policy and endpoint, and a SHA-256 of every file. Fields a result file does not carry are absent rather than guessed. The prediction arrays the mask and clean-subset rescorings read are not committed; they are attached to the tagged release, and prediction_arrays below records their checksums.",
+ "note": "One row per result family behind Reaction-Scoring Audit: what produced it, the settings its own output records, the checkpoint policy and endpoint, and a SHA-256 of every file. Fields a result file does not carry are absent rather than guessed. The prediction arrays the mask and clean-subset rescorings read are not committed; they are attached to the tagged release, and prediction_arrays below records their checksums.",
  "n_families": 18,
  "n_result_files": 342,
  "data_records": [

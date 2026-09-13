@@ -1,5 +1,5 @@
 #!/bin/bash
-# Paper 2, main backbone (Qwen3.8-27B endpoint), after run_endpoint_il.sh: Design E re-collected with
+# Language-Model Evidence, main backbone (Qwen3.8-27B endpoint), after run_endpoint_il.sh: Design E re-collected with
 # the arms interleaved and the complete reply archived (the 40 patients of the original Design E, the
 # 10 of Design A extended by the same seed; same reactions; same donors), then Design A interleaved once
 # more with an independently chosen donor schedule (donor seed 4048) as a sensitivity run for the swap.

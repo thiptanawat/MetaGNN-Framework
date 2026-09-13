@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Frozen statistics for the Paper 2 manuscript.
+"""Frozen statistics for the Language-Model Evidence manuscript.
 
 Every number quoted in the manuscript is produced here and written to results_frozen.json,
 so each claim in the text maps to one key in one file.

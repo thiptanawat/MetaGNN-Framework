@@ -1,5 +1,5 @@
 #!/bin/bash
-# Prioritized queue for the Paper 1 robustness runs on GPU 0 (the driver skips a cell whose result
+# Prioritized queue for the Reaction-Scoring Audit robustness runs on GPU 0 (the driver skips a cell whose result
 # file already exists, so finished cells are never rerun). Order: the inner-validation-reaction early
 # stopping check on the remaining patient folds (unsubstituted and cohort-mean arms, so that the check
 # covers the full 15-cell grid), then the remaining second-seed and rank-normalized cells, the remaining

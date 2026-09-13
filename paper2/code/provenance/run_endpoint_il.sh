@@ -1,5 +1,5 @@
 #!/bin/bash
-# Paper 2, main backbone (Qwen3.8-27B endpoint): Design A re-collected with the arms interleaved and the
+# Language-Model Evidence, main backbone (Qwen3.8-27B endpoint): Design A re-collected with the arms interleaved and the
 # complete reply archived, then the MSI probe with the complete archive. Same seeds as the original runs.
 set -u
 cd ~/metagnn/llm_v3

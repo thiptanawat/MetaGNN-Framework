@@ -1,6 +1,6 @@
-# Reproducing Paper 2
+# Reproducing the Language-Model Evidence
 
-Paper 2 is "Testing when language models use sample-specific molecular evidence: controlled
+The Language-Model Evidence study is "Testing when language models use sample-specific molecular evidence: controlled
 interventions and external cohort evaluation". Its manuscript sources are withheld from
 this repository until publication; every model response the paper reads is archived here, so
 its statistics regenerate offline, and the map at the end of this guide gives, for every
@@ -15,7 +15,7 @@ collected and scored them.
    every reply with its serving metadata), recomputes every statistic, and writes
    `paper2/results_frozen.json`, `paper2/results/msi2_frozen.json`,
    `paper2/manuscript/numbers.tex` and the figures. It contacts no model and needs no GPU.
-   The external-cohort block resamples 21 collections with 10,000-draw nulls, so the Paper 2
+   The external-cohort block resamples 21 collections with 10,000-draw nulls, so the Language-Model Evidence
    chain takes about fifteen minutes.
 2. **Re-collecting the responses.** `paper2/collect.sh` re-issues every collection the
    manuscript reports, with the seeds and donor seeds the archives record, against endpoints
@@ -70,7 +70,7 @@ python3 code/make_results_md.py
 python3 code/make_figures.py
 ```
 
-after the Paper 1 chain, and then `tools/check_release.py`. `msi_stats.py` appends to the
+after the Reaction-Scoring Audit chain, and then `tools/check_release.py`. `msi_stats.py` appends to the
 `results_frozen.json` that `stats.py` writes, so the order matters. `stats.py` prefers each
 design's interleaved, complete-archive collection where one exists and falls back to the
 blocked one under the design's own tag, so a checkout missing a collection degrades to the
@@ -113,7 +113,7 @@ archives, and that this guide names so a reader can find each without the manusc
   constant fallback flagged where the plan's rule replaced a nonpositive slope) and the
   frozen reference's transfer to each cohort.
 
-## What is shared with Paper 1
+## What is shared with the Reaction-Scoring Audit
 
 `paper1/data/activity_labels_ht29.pt` and `recon3d_aligned.json.gz` (copied into `paper2/`
 as well) are inputs of this paper's methods and are committed; `stats.py` stops with an error

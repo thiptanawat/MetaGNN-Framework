@@ -1,6 +1,6 @@
-# Reproducing Paper 1
+# Reproducing the Reaction-Scoring Audit
 
-Paper 1 is "Auditing patient-specific metabolic reaction scoring with joint holdouts and
+The Reaction-Scoring Audit is "Auditing patient-specific metabolic reaction scoring with joint holdouts and
 input-substitution controls". Its manuscript sources are withheld from this repository until
 publication; everything the manuscript's numbers rest on is here, and the map at the end of
 this guide gives, for every table and figure of the last built documents, the result files
@@ -38,7 +38,7 @@ are absent; a public checkout runs the analysis mode only.
 
 ## Environment
 
-One `requirements.txt` at the repository root covers both papers. For Paper 1:
+One `requirements.txt` at the repository root covers both papers. For the Reaction-Scoring Audit:
 
 - Python 3.10.12
 - NumPy 2.2.6, SciPy 1.15.3, scikit-learn 1.7.2, h5py 3.16.0 (pinned; a scikit-learn minor
@@ -63,7 +63,7 @@ in the manuscript's reference list.
 bash reproduce.sh analysis
 ```
 
-runs, for Paper 1 and in this order,
+runs, for Reaction-Scoring Audit and in this order,
 
 ```
 python3 paper1/code/split_audit.py
@@ -79,7 +79,7 @@ python3 paper1/code/check_macros_p1.py
 python3 paper1/code/verify_ledger.py
 ```
 
-and then the Paper 2 chain, and finally `tools/check_release.py`. The ledger runs after the
+and then the Language-Model Evidence chain, and finally `tools/check_release.py`. The ledger runs after the
 last script that writes a hashed file (`build_results_p1.py` writes `data/results_p1.json`)
 and before the macros that quote its counts, so nothing it hashes changes after it is written;
 `verify_ledger.py` then checks every hash against the file it names and fails the run on a

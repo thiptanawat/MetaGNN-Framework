@@ -1,4 +1,4 @@
-# Paper 1 code
+# Reaction-Scoring Audit code
 
 Two kinds of script live here. The first kind runs experiments and needs the deposited
 cohort and a GPU. The second kind turns their outputs into the numbers and figures in the

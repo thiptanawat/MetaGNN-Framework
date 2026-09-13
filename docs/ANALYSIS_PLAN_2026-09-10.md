@@ -8,7 +8,7 @@ already explored. Any departure from this plan is recorded in the progress log o
 `docs/ROADMAP_RESPONSE_2026-09-10.md` with its reason, and the departed-from rule is
 still reported.
 
-## 1. Paper 1
+## 1. The Reaction-Scoring Audit
 
 ### Units and populations
 
@@ -134,7 +134,7 @@ under the gene-table rule, rescored away) covers the same question.
   own-minus-mean contrast; own-minus-donor; target variation) to permitted claims,
   preserving "inconclusive" and "unidentifiable" rows.
 
-## 2. Paper 2
+## 2. The Language-Model Evidence
 
 ### Units and populations
 

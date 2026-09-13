@@ -1,5 +1,5 @@
 #!/bin/bash
-# Paper 2: the microsatellite instability probe re-collected with its arms interleaved, so that the
+# Language-Model Evidence: the microsatellite instability probe re-collected with its arms interleaved, so that the
 # own-versus-stranger comparison on the patient-level target is read under the same protocol as the
 # reaction-activity designs (the earlier collections sent the own arm first and the stranger's arm
 # second). Same seed, panel, donors and prompts as before; only the dispatch order changes, and every
@@ -7,7 +7,7 @@
 # (positive_control.py --tasks echoval: copy the printed three-decimal expression value), which the
 # main backbone answers through its endpoint separately. Runs on the main backbone's endpoint (no
 # GPU), then serves the second and third backbones on GPU 0 in turn. Meant to run between the first
-# and second Paper 1 GPU queues (run_queue7_after6.sh waits for this script before starting the
+# and second the Reaction-Scoring Audit GPU queues (run_queue7_after6.sh waits for this script before starting the
 # second queue).
 set -u
 export CUDA_HOME=/usr/local/cuda-12.4 PATH=$HOME/.local/bin:/usr/local/cuda-12.4/bin:$PATH LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64:${LD_LIBRARY_PATH:-}

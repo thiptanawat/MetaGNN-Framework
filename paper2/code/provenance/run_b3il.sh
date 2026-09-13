@@ -1,11 +1,11 @@
 #!/bin/bash
-# Paper 2, third backbone (mistralai/Mistral-Small-3.2-24B-Instruct-2506) collected under the clean
+# Language-Model Evidence, third backbone (mistralai/Mistral-Small-3.2-24B-Instruct-2506) collected under the clean
 # protocol: Design A with the three arms interleaved and the complete reply archived (repr_b3il), the
 # three positive controls (pc_b3il) and the MSI probe (msi_b3il) with the complete archive, all with
 # --plain_chat because the Mistral chat template has no thinking switch. The first collection of this
 # backbone (repr_b3, pc_b3, msi_b3) was made in blocked order without the complete archive by an
 # earlier version of run_backbone3.sh and is kept as it was.
-# Pauses the Paper 1 robustness queue (the running cells finish; no new cell starts), waits for GPU 0
+# Pauses the Reaction-Scoring Audit robustness queue (the running cells finish; no new cell starts), waits for GPU 0
 # to be free of training cells, serves the model, runs the three drivers, and restarts the queue.
 # GPU 1 is left alone for the Ray service.
 set -u

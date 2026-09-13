@@ -59,6 +59,6 @@ molecular data; external-cohort transcriptome MSI prediction; sample-specific me
 
 Conclusion for the novelty statement: no work was found that combines target-provenance auditing,
 entity-similarity splitting, input-substitution controls and an external measured endpoint for
-either the conventional-model case (Paper 1) or the language-model case (Paper 2). The manuscripts
+either the conventional-model case (Reaction-Scoring Audit) or the language-model case (Language-Model Evidence). The manuscripts
 therefore say "we provide and evaluate", not "the first", and cite the neighbouring frameworks above
 as the closest prior art.

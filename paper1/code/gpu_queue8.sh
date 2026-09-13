@@ -1,5 +1,5 @@
 #!/bin/bash
-# Third queue for the Paper 1 runs on GPU 0: the reaction-family-disjoint evaluation. The reaction
+# Third queue for the Reaction-Scoring Audit runs on GPU 0: the reaction-family-disjoint evaluation. The reaction
 # folds and the inner-validation partition are drawn family by family from the union family map
 # (build_families.py, family_folds.py), under the matched selection rule (inner-validation reactions
 # withheld from the loss). Order: the paired pilot on cell (p0, f0), unsubstituted and cohort-mean arms

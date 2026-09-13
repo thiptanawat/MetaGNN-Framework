@@ -1,4 +1,4 @@
-# Paper 2 results, final
+# Language-Model Evidence results, final
 
 Title: *Language-model annotation of metabolic reaction activity responds to a patient's transcriptome without gaining patient-specific information from it*
 

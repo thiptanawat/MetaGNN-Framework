@@ -1,8 +1,8 @@
 #!/bin/bash
-# Paper 2, third backbone: mistralai/Mistral-Small-3.2-24B-Instruct-2506 served locally on GPU 0 with
+# Language-Model Evidence, third backbone: mistralai/Mistral-Small-3.2-24B-Instruct-2506 served locally on GPU 0 with
 # vLLM, then Design A (same seed, same 300 reactions and 10 patients as the main run), the three
 # positive controls and the MSI probe, all through the released drivers with --plain_chat (the Mistral
-# chat template has no thinking switch). Waits for the Paper 1 robustness cells on GPU 0 to finish,
+# chat template has no thinking switch). Waits for the Reaction-Scoring Audit robustness cells on GPU 0 to finish,
 # and restarts their queue when done. GPU 1 is left alone for the Ray service.
 set -u
 export CUDA_HOME=/usr/local/cuda-12.4 PATH=$HOME/.local/bin:/usr/local/cuda-12.4/bin:$PATH LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64:${LD_LIBRARY_PATH:-}

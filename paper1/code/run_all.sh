@@ -1,5 +1,5 @@
 #!/bin/bash
-# Paper 1 full-scale double hold-out. GPU 0 only: GPU 1 runs a vLLM/Ray service.
+# Reaction-Scoring Audit full-scale double hold-out. GPU 0 only: GPU 1 runs a vLLM/Ray service.
 # Restart-safe at cell granularity, so re-running resumes rather than repeats.
 source $HOME/metagnn/env.sh
 echo $$ > $BASE/.pipeline.pid

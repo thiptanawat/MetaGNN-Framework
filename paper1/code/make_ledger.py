@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""A ledger of every result family behind Paper 1: what produced it, from what, under which seed.
+"""A ledger of every result family behind Reaction-Scoring Audit: what produced it, from what, under which seed.
 
 A reader who wants to know where a number came from should not have to read the analysis code. This
 walks results/ and data/, groups the files into the families the manuscript draws on, and records for
@@ -210,7 +210,7 @@ if os.path.exists(PA_LIST):
 
 L = dict(
     _generated_by="code/make_ledger.py",
-    note=("One row per result family behind Paper 1: what produced it, the settings its own output "
+    note=("One row per result family behind Reaction-Scoring Audit: what produced it, the settings its own output "
           "records, the checkpoint policy and endpoint, and a SHA-256 of every file. Fields a result "
           "file does not carry are absent rather than guessed. The prediction arrays the mask and "
           "clean-subset rescorings read are not committed; they are attached to the tagged release, "

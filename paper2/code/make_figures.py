@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Figures for the Paper 2 manuscript. Every panel is drawn from results_frozen.json or from the
+"""Figures for the Language-Model Evidence manuscript. Every panel is drawn from results_frozen.json or from the
 raw response files, so no figure can drift from the text."""
 import json, collections
 import _paths as PATHS

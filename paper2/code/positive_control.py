@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Positive control for Paper 2: can the model USE the expression value it is shown?
+"""Positive control for Language-Model Evidence: can the model USE the expression value it is shown?
 
 Identical prompt format to the `patient` arm of llm_probe.py, but the question has a numerically
 determined answer that does not depend on any biology:

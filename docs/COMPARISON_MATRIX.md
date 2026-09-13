@@ -30,28 +30,28 @@ Capabilities:
 | TRIPOD-LLM (Gallifant 2025), reporting guideline for language models | partial | | | | | |
 | FlowGAT (Hasibi 2024), graph model on a genome-scale model, essentiality | | partial | | yes (E. coli growth) | | own model only |
 | DeepMeta (Wu 2025), metabolic dependency predictor | partial | | | yes (CRISPR) | | is the audited model |
-| **Paper 1 (this work)** | yes | yes | yes | yes (DepMap gene effect) | yes (simulation) | yes (DeepMeta) |
-| **Paper 2 (this work)** | yes | partial | yes | yes (MSI, external cohort) | partial (tool arm) | partial (published workflow arm) |
+| **Reaction-Scoring Audit (this work)** | yes | yes | yes | yes (DepMap gene effect) | yes (simulation) | yes (DeepMeta) |
+| **Language-Model Evidence (this work)** | yes | partial | yes | yes (MSI, external cohort) | partial (tool arm) | partial (published workflow arm) |
 
 Notes on the marks entered from the implementations:
 
 - **DataSAIL** implements identity/similarity-aware splitting for arbitrary user-defined
-  similarities; it does not itself distinguish label provenance or run input substitutions. Paper 1
+  similarities; it does not itself distinguish label provenance or run input substitutions. The Reaction-Scoring Audit
   adds biologically justified reaction/GPR grouping and reports what the grouped split changes: all
   five substitution arms lose 0.050 to 0.078 AUROC, the no-patient linear floor loses 0.021, and the
   graph model's shortfall against that floor widens from 0.0083 to 0.0363. The grouped split is run
   and reported, not proposed.
 - **Systema** separates systematic variation from perturbation-specific prediction, the neighbouring
-  problem; it does not implement metabolic input substitutions or a reaction-family split. Paper 1
+  problem; it does not implement metabolic input substitutions or a reaction-family split. The Reaction-Scoring Audit
   positions its target-provenance and input-intervention axes against it.
-- **GeneAgent / GeneGPT** are realistic tool-augmented biological LLM workflows; Paper 2's tool arm
+- **GeneAgent / GeneGPT** are realistic tool-augmented biological LLM workflows; the Language-Model Evidence's tool arm
   tests one transparent stronger configuration in that spirit and adopts GeneAgent's practice of
   masking answer-exposing databases, rather than generalizing from zero-shot prompting alone.
 - **FlowGAT** and **DeepMeta** are the external conventional models; DeepMeta is the audited model
-  in Paper 1-E2 and FlowGAT is the documented fallback. Neither ships a provenance/substitution
-  audit; that is what Paper 1 supplies as a reusable wrapper.
-- The two "this work" rows record capabilities whose experiments have produced results. For Paper 1,
+  in Reaction-Scoring Audit-E2 and FlowGAT is the documented fallback. Neither ships a provenance/substitution
+  audit; that is what the Reaction-Scoring Audit supplies as a reusable wrapper.
+- The two "this work" rows record capabilities whose experiments have produced results. For the Reaction-Scoring Audit,
   ES rests on the family-disjoint split of Section 4.6, II on the five-arm substitution ladder, ME on
   the DepMap gene-effect audit, PC on the calibration simulation and XA on the DeepMeta wrapper. For
-  Paper 2, ES is marked partial because its entity grouping is at the level of reaction families
-  inherited from Paper 1 rather than rebuilt for its own units.
+  the Language-Model Evidence, ES is marked partial because its entity grouping is at the level of reaction families
+  inherited from the Reaction-Scoring Audit rather than rebuilt for its own units.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Figures for Paper 1, drawn from data/results_p1.json so they cannot drift from the text.
+"""Figures for Reaction-Scoring Audit, drawn from data/results_p1.json so they cannot drift from the text.
 
 Every number in every figure is read from the results file; nothing is typed in. Wherever a bar or a
 summary rests on the 15 cells of the substitution basis (5 patient folds x 3 reaction folds), the

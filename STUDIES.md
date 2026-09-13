@@ -27,7 +27,7 @@ Holding out reactions as well collapses it to 0.5189, which is 5.04 standard err
 chance and far below every naive baseline in the table.
 
 <!-- generated:start -->
-## What we found (Paper 1)
+## What we found: the Reaction-Scoring Audit
 
 Held-out-reaction AUROC on the 15 cells of the substitution basis (5 patient folds x 3 reaction folds), every row on the same cells, linear rows with the regularization tuned by inner cross-validation; the rewiring row is 9 cells over patient folds 0, 1, 2.
 
@@ -100,7 +100,7 @@ The same probe on three further attributes the model never saw. Output is the me
 
 The output follows its input in rank order and on no attribute adds to it.
 
-## Paper 2 in brief
+## Language-Model Evidence in brief
 
 A language model (qwen3-8-27b) asked to score the same reactions from each patient's transcriptome. Three prompt arms: patient-blind, the patient's own value, and a stranger's value in the same slot (a new donor for every reaction).
 
@@ -208,7 +208,7 @@ committed JSON files, so `reproduce.sh` regenerates every number and figure with
 What the arrays are needed for is recomputing those committed JSON files from scratch, which
 is more than one table: ten scripts read them, and between them they produce `per_patient.json`
 (the per-patient AUROC vectors that are the unit of every sign-flip and block-level test, so
-every p-value in Paper 1 traces back to them), `strata.json`, the phenotype probes and their
+every p-value in the Reaction-Scoring Audit traces back to them), `strata.json`, the phenotype probes and their
 permutation nulls, `mask_scores.json`, `arm_noise.json`, `collapse_noise.json` and
 `fam_clean_scores.json`. A reader who wants to re-derive those rollups rather than take them
 from the repository needs the arrays; a reader who wants to check that the reported numbers

@@ -9,7 +9,7 @@ def arm(t, a):
     return f"{v['auroc']:.4f} [{v['auroc_ci'][0]:.4f}, {v['auroc_ci'][1]:.4f}]"
 L = []
 w = L.append
-w("# Paper 2 results, final\n")
+w("# Language-Model Evidence results, final\n")
 w("Title: *Language-model annotation of metabolic reaction activity responds to a patient's transcriptome "
   "without gaining patient-specific information from it*\n")
 w("Every number below is emitted by `stats.py` into `results_frozen.json` and substituted into the "

@@ -1,9 +1,9 @@
 #!/bin/bash
-# Paper 2, second backbone (google/gemma-4-31B-it) re-collected the way the third backbone and the
+# Language-Model Evidence, second backbone (google/gemma-4-31B-it) re-collected the way the third backbone and the
 # endpoint runs were: Design A with the three arms interleaved and the complete reply archived
 # (repr_b2il), then the MSI probe with the complete archive (msi_b2il). Same seeds, same reactions,
 # patients and donors as the original second-backbone run. Serves the model locally on GPU 0 with vLLM
-# in bfloat16, waits for the Paper 1 robustness cells on that GPU to finish first, and restarts their
+# in bfloat16, waits for the Reaction-Scoring Audit robustness cells on that GPU to finish first, and restarts their
 # queue when done. GPU 1 is left alone for the Ray service.
 set -u
 export CUDA_HOME=/usr/local/cuda-12.4 PATH=$HOME/.local/bin:/usr/local/cuda-12.4/bin:$PATH LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64:${LD_LIBRARY_PATH:-}

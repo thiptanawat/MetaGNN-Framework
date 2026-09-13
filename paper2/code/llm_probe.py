@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Paper 2 pilot: does a language model add PATIENT-SPECIFIC information to metabolic reaction
+"""the Language-Model Evidence pilot: does a language model add PATIENT-SPECIFIC information to metabolic reaction
 activity annotation, or does it reproduce reaction-level textbook knowledge?
 
 Three arms, identical reactions and identical scoring against the input-independent HMA labels:
@@ -8,7 +8,7 @@ Three arms, identical reactions and identical scoring against the input-independ
   shuffled   : the same, plus a DIFFERENT random patient's expression, presented as if it were this one.
 
 If patient ~ shuffled, the model is not using the patient data it was given. That is the same
-input-invariance test Paper 1 applies to the graph model, transferred to a language model.
+input-invariance test the Reaction-Scoring Audit applies to the graph model, transferred to a language model.
 
 Usage: python3 llm_probe.py --n 120 --patients 4 --arms reaction patient shuffled --out pilot
 """

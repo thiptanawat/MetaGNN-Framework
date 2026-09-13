@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Analysis for the Paper 2 pilot: apply Paper 1's diagnostics to a language model's annotations.
+"""Analysis for the Language-Model Evidence pilot: apply the Reaction-Scoring Audit's diagnostics to a language model's annotations.
 
 Reports, per arm: AUROC against the input-independent HMA labels (per patient and pooled), against the
 raw-expression baseline and the information-free indicator floor computed on the identical reaction set;
