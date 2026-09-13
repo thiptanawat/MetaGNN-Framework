@@ -14,6 +14,15 @@ authors:
     given-names: Jonathan H.
     affiliation: School of Information Technology, King Mongkut's University of Technology Thonburi
 license: MIT
+version: journal-2026-09d
+date-released: '2026-09-12'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21217568
+    description: Concept identifier of the archived code record; it resolves to the latest version.
+  - type: doi
+    value: 10.5281/zenodo.21217578
+    description: Concept identifier of the data record (the curated cohort, features, labels and splits).
 repository-code: https://github.com/thiptanawat/MetaGNN-Framework
 keywords:
   - benchmark validity

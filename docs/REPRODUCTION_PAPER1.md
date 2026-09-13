@@ -21,7 +21,7 @@ The word "reproduce" covers three different things here, and this guide keeps th
    `fam_clean_scores.py`, `probe_preds.py`, `collapse_noise.py`, `arm_noise.py`,
    `strata_eval.py`, `phenotype_probe.py`, `phenotype_probe_multi.py`, `phenotype_null.py`)
    read the per-cell prediction arrays, which are released as assets of the tagged release
-   rather than committed (2.7 GB; see "The prediction arrays" below), and the cohort files of
+   rather than committed (2.9 GB; see "The prediction arrays" below), and the cohort files of
    the data deposit. For the external audit of a published predictor, the same level is
    `paper1/code/deepmeta_audit/metrics.py` run on the committed per-arm prediction CSVs
    under `paper1/results/deepmeta/preds/`, which needs the DepMap inputs that
@@ -101,7 +101,7 @@ and an explicit note that the path check was skipped, not a pass.
 
 Each training cell wrote one array beside its result file (`<cell>_preds.npz`: scores and
 uncertainties for the cell's test patients over all reactions, the held-out and fit masks and,
-for the synthetic cells, the per-patient labels). There are 299 of them, 2.7 GB in all, too
+for the synthetic cells, the per-patient labels). There are 299 of them, 2.9 GB in all, too
 large to commit. They are attached to the tagged release named in `release.json` as one
 tarball per result family (`preds_dh.tar`, `preds_ctrl.tar`, `preds_rewire.tar`,
 `preds_fam.tar`, `preds_ivr.tar`, `preds_synth.tar`, `preds_ht29.tar`, `preds_seedrep.tar`,

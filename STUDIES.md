@@ -152,6 +152,10 @@ paper2/manuscript/    numbers.tex, the generated macro file, once reproduce.sh h
 docs/PROTOCOL.md      how to apply the checks to your own benchmark
 docs/VERIFICATION.md  how every citation in both papers was verified
 reproduce.sh          regenerates every number and figure from the committed results
+tools/                release machinery: the required-artifact manifest and its checker
+                      (check_release.py), the split-document builder, the table-and-figure
+                      map generator, and zenodo_deposit.py, which mints the version DOIs of a
+                      tag under the two concept records and writes them to release.json
 framework/, pipelines/,  the scorer these studies audit, and its per-cancer pipelines,
   tests/, validators/    unchanged; see README.md
 ```
@@ -193,7 +197,7 @@ parsed Recon3D network. That is the record's concept identifier, so it always re
 the current version. The archived framework is at
 <https://doi.org/10.5281/zenodo.21217568> under MIT, likewise a concept identifier.
 
-The per-cell prediction arrays of the first study (`*_preds.npz`, 299 files, 2.7 GB) are too
+The per-cell prediction arrays of the first study (`*_preds.npz`, 299 files, 2.9 GB) are too
 large to commit and are not in the data record above, which predates these studies. They are
 attached to the tagged release named in `release.json` as ten tarballs, one per result
 family, and their checksums are committed (`paper1/results/prediction_arrays.sha256` for

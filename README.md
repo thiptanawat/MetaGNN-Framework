@@ -1,7 +1,7 @@
 # MetaGNN
 
-[![Code DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21217569.svg)](https://doi.org/10.5281/zenodo.21217569)
-[![Data DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21217579.svg)](https://doi.org/10.5281/zenodo.21217579)
+[![Code DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21217568.svg)](https://doi.org/10.5281/zenodo.21217568)
+[![Data DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21217578.svg)](https://doi.org/10.5281/zenodo.21217578)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A heterogeneous graph attention network that scores per-reaction metabolic activity across the full Recon3D network (10,600 reactions, 5,835 metabolites) from patient transcriptomes, with Monte Carlo dropout uncertainty and an optional LLM-based boundary-reaction reasoning module.
@@ -85,6 +85,11 @@ If you use this code, please cite the MetaGNN manuscript and the archived releas
 > for Hub-Connectivity-Aware Reaction Activity Scoring Toward Metabolic Network
 > Reconstruction. Code: https://doi.org/10.5281/zenodo.21217569 ·
 > Data: https://doi.org/10.5281/zenodo.21217579
+
+The badges above carry the concept identifiers of the two records, which resolve to their
+current versions. The two benchmark-validity studies correspond to the tag named in
+`release.json`; the version identifiers minted for that tag are recorded there and in
+`CITATION.cff` once they exist.
 
 ## License
 

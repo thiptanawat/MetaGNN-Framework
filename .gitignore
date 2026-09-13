@@ -5,3 +5,7 @@ venv/
 .DS_Store
 .pytest_cache/
 .ipynb_checkpoints/
+
+# Zenodo deposit tool: the working archive and the open-draft state, never committed
+.zenodo_work/
+tools/.zenodo_state.json
