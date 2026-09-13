@@ -1,7 +1,7 @@
 {
  "_note": "Release identifiers quoted by both manuscripts. 'tag' is the Git tag the submitted manuscripts correspond to and 'commit' is the commit that tag points at, filled in after the tag is cut: the copy of this file inside the tag cannot carry the hash of the commit that adds it, so there it is empty and 'git rev-parse <tag>^{}' resolves it. The manuscripts are built after tagging and print the resolved hash. The DOI fields are filled if and when Zenodo versions are minted for that tag; an empty field leaves its macro undefined and the manuscripts print the concept identifiers only. Earlier tags are kept as history: journal-2026-09 (commit 008c3eec218bbfebb9373ae049b46a0e39de922a), journal-2026-09b (commit 8af6a891c5f8547a7173d7690f94123b8225b6d5) and journal-2026-09c (commit fa65f91d3f3cbf42699e13c79d54f52996428375).",
  "tag": "journal-2026-09d",
- "version_doi_code": "",
- "version_doi_data": "",
+ "version_doi_code": "10.5281/zenodo.22734332",
+ "version_doi_data": "10.5281/zenodo.22734335",
  "commit": "17fddbdb1efc06d997c9e289c6cf86758873e606"
 }

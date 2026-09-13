@@ -1,0 +1,124 @@
+{
+ "generated": "2026-09-13T09:29:27Z",
+ "site": "https://zenodo.org",
+ "code": {
+  "concept": "21217568",
+  "previous_record": 21217569,
+  "snapshot": "MetaGNN-Framework-journal-2026-09d.zip",
+  "snapshot_sha256": "d2fb8b6ac6195a2218ba706a3d8333d56acc80c3cbb7ce023041870cf09c9d4a",
+  "snapshot_size": 35938556,
+  "snapshot_route": "git archive of journal-2026-09d (17fddbdb1efc06d997c9e289c6cf86758873e606) in this checkout",
+  "tag": "journal-2026-09d",
+  "commit": "17fddbdb1efc06d997c9e289c6cf86758873e606",
+  "record_id": 22734332,
+  "doi": "10.5281/zenodo.22734332",
+  "conceptdoi": "10.5281/zenodo.21217568",
+  "url": "https://zenodo.org/record/22734332",
+  "published": true,
+  "published_at": "2026-09-13T09:29:39Z"
+ },
+ "data": {
+  "concept": "21217578",
+  "previous_record": 21217579,
+  "tag": "journal-2026-09d",
+  "commit": "17fddbdb1efc06d997c9e289c6cf86758873e606",
+  "files_added": [
+   {
+    "name": "preds_dh.tar",
+    "size": 492677120,
+    "sha256": "204401fab0acbe860ac139e4fe0f8cbd6200ceb238e3f93d72fe8767b75fd286",
+    "md5": "9df18f7d8146673eae9f5fae77421ff7"
+   },
+   {
+    "name": "preds_ctrl.tar",
+    "size": 323348480,
+    "sha256": "5875410ccd905838cb73d04228fd117495de7ddace2313bfa9bb5eccb734774e",
+    "md5": "c1567008e4725ebc0fad04feecce586c"
+   },
+   {
+    "name": "preds_rewire.tar",
+    "size": 118497280,
+    "sha256": "a1ffedee4b523a4c9f2919c10d64fec658952d350a9bda7a02be240ac3f8a659",
+    "md5": "7b4b572e33617d024c8137d3995fe6e1"
+   },
+   {
+    "name": "preds_fam.tar",
+    "size": 757442560,
+    "sha256": "3d737f7ea274e680c78d0b93308260196e460da7b47fdc8c9e9ae9390e828514",
+    "md5": "33e59c190dd9ed6b82bdc872d8cc37eb"
+   },
+   {
+    "name": "preds_ivr.tar",
+    "size": 724275200,
+    "sha256": "9b4fc2e3e08c986bff32dfe0b642a4e63eed2bd25e56bb73d604754283a88273",
+    "md5": "c09b990397e618e4b68a93a369ab2c2f"
+   },
+   {
+    "name": "preds_synth.tar",
+    "size": 235438080,
+    "sha256": "92d615e18a216f9f4706a46fee0c0468a898cb133300e108b612373fcfa40448",
+    "md5": "513d2de49739c6168f641dc0c96b2c75"
+   },
+   {
+    "name": "preds_ht29.tar",
+    "size": 89384960,
+    "sha256": "55ef6accf88c096bfec35aaa976205151a86a674785cf862c85bda814a4c0ad2",
+    "md5": "6adab3de6a9ce705ddf41f364b251660"
+   },
+   {
+    "name": "preds_seedrep.tar",
+    "size": 59228160,
+    "sha256": "5bda55b9e1c8ca4b7c652a41e367611cebfa00a46ecba6c24ad21f5c908b7bfe",
+    "md5": "2d350e6afc3ef58ec9f2da0b12a8062b"
+   },
+   {
+    "name": "preds_rankgnn.tar",
+    "size": 59248640,
+    "sha256": "647fdb56ad2fbdb436de9a97dcded2ad8955b64994617869121a0f202c5907ee",
+    "md5": "7c6c031f7322b5895ef6d3bc1362d741"
+   },
+   {
+    "name": "preds_permute.tar",
+    "size": 29644800,
+    "sha256": "c8111820d399b527a07ea26ae390d1eee6898afe7a7b612c4db0073dbdd0217f",
+    "md5": "4aa2ebaa7ab529f066d5770f3afa6595"
+   },
+   {
+    "name": "prediction_arrays.sha256",
+    "size": 31963,
+    "sha256": "55534ed07502d361d0864cf44afa136053d919045cced8b0e3f7ae70e6a2032e",
+    "md5": "82bb4ab5567431df530da1bff3283de1"
+   },
+   {
+    "name": "prediction_array_tarballs.sha256",
+    "size": 818,
+    "sha256": "accfce2005a48eb42c3537ce5fc3e179edd458f4e1a302dcc11ee8eb9841f6aa",
+    "md5": "eaf8b48bf7a4163e09dde368c5866c50"
+   }
+  ],
+  "files_kept": [
+   "metagnn-data.zip"
+  ],
+  "files_in_version": [
+   "metagnn-data.zip",
+   "prediction_array_tarballs.sha256",
+   "prediction_arrays.sha256",
+   "preds_ctrl.tar",
+   "preds_dh.tar",
+   "preds_fam.tar",
+   "preds_ht29.tar",
+   "preds_ivr.tar",
+   "preds_permute.tar",
+   "preds_rankgnn.tar",
+   "preds_rewire.tar",
+   "preds_seedrep.tar",
+   "preds_synth.tar"
+  ],
+  "record_id": 22734335,
+  "doi": "10.5281/zenodo.22734335",
+  "conceptdoi": "10.5281/zenodo.21217578",
+  "url": "https://zenodo.org/record/22734335",
+  "published": true,
+  "published_at": "2026-09-13T09:29:55Z"
+ }
+}
