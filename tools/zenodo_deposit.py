@@ -446,7 +446,10 @@ def code_metadata(inherited, rel, commit, snapshot_sha, snapshot_name, today, da
         "<p>File: <code>%s</code>, SHA-256 <code>%s</code>. Earlier versions of this record hold the "
         "archives of the earlier tags; the first version held the scorer alone, as it stood in July 2026.</p>"
         % (tag, commit, GITHUB, GITHUB, arrays_total_gb(), tag, data_concept_doi, data_concept_doi, snapshot_name, snapshot_sha))
-    md["related_identifiers"] = merge_related(md.get("related_identifiers"), [
+    # the tree link of an earlier tag belongs to the version it was minted for
+    inherited_related = [r for r in (md.get("related_identifiers") or [])
+                         if not str(r.get("identifier", "")).startswith(GITHUB + "/tree/")]
+    md["related_identifiers"] = merge_related(inherited_related, [
         {"identifier": "%s/tree/%s" % (GITHUB, tag), "relation": "isSupplementTo", "resource_type": "software"},
         {"identifier": data_concept_doi, "relation": "requires", "resource_type": "dataset"},
     ])

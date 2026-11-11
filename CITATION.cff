@@ -23,6 +23,12 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.21217578
     description: Concept identifier of the data record (the curated cohort, features, labels and splits, and the prediction arrays); it resolves to the latest version.
+  - type: doi
+    value: 10.5281/zenodo.24136503
+    description: Version of the code record archived for the tag journal-2026-11.
+  - type: doi
+    value: 10.5281/zenodo.24136562
+    description: Version of the data record that matches the tag journal-2026-11.
 repository-code: https://github.com/thiptanawat/MetaGNN-Framework
 keywords:
   - benchmark validity
