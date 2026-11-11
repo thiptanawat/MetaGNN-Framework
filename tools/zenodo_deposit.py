@@ -7,8 +7,9 @@ What it does, per record:
   code  a new version of the code record (concept 10.5281/zenodo.21217568) holding one file, the
         archive of the tagged tree (`git archive` of the tag named in release.json, or the same
         archive downloaded from the repository host when this checkout does not have the tag).
-        The inherited file of the previous version is removed; the description names the tag, the
-        commit and the SHA-256 of the archive.
+        The inherited file of the previous version is removed; the description names the commit,
+        the tag and the SHA-256 of the archive, and the title carries no version (the version
+        field does).
   data  a new version of the data record (concept 10.5281/zenodo.21217578) that carries the
         per-cell prediction arrays of the first study, the ten tarballs, one per result family, and
         the two committed checksum lists, beside the files of the previous version. Each tarball is
@@ -42,6 +43,8 @@ Usage:
     python3 tools/zenodo_deposit.py all  --assets DIR --publish
     python3 tools/zenodo_deposit.py data --assets DIR --cohort-archive metagnn-data-v2.zip \
                                          --retire metagnn-data.zip --publish
+    python3 tools/zenodo_deposit.py describe                  # title and description of the open code draft; no file is touched
+    python3 tools/zenodo_deposit.py describe --record ID --publish   # the same for a published version of the code record, edited in place
 
 DIR is the directory holding preds_<family>.tar (the release assets); the checksum lists are read
 from the checkout. --sandbox targets sandbox.zenodo.org (with a sandbox token and the sandbox
@@ -54,6 +57,7 @@ import datetime as _dt
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -409,12 +413,49 @@ def merge_related(existing, additions):
     return out
 
 
+def code_description(tag, commit, snapshot_sha, snapshot_name, data_concept_doi):
+    """The description of a version of the code record. It names the studies by what they do and the
+    version by its commit, so that it reads the same whatever the tag is called."""
+    return (
+        "<p>This record archives the MetaGNN-Framework repository: a graph neural network scorer of "
+        "metabolic reaction activity, the <code>metabench</code> library of benchmark-validity checks, "
+        "and the code and committed results of two studies of transcriptome-based reaction scoring on "
+        "the Recon3D human metabolic reconstruction. The first study audits patient-specific reaction "
+        "scoring with joint holdouts of patients and reactions and with input-substitution controls. "
+        "The second tests when language models use sample-specific molecular evidence, with controlled "
+        "interventions and external cohorts.</p>"
+        "<p><strong>Reproduction.</strong> One driver, <code>reproduce.sh</code>, regenerates every "
+        "reported number, table and figure from the committed result files on a CPU in about half an "
+        "hour, with no GPU and no network access. The software versions are pinned in "
+        "<code>requirements.txt</code>, and the guides in <code>docs/</code> describe each level of "
+        "reproduction.</p>"
+        "<p><strong>Contents.</strong> For the reaction-scoring audit: the joint-holdout driver, the "
+        "input-substitution arms, the family-disjoint reaction split, a synthetic check with known "
+        "answers, the audit of an independently published predictor, and the per-cell result files. "
+        "For the language-model study: the prompt builders, the archived model responses, the "
+        "external-cohort panels, the analysis plan with its departure log, and the deployment and model "
+        "records. Shared by both: the scorer, the <code>metabench</code> checks, the reproduction guides "
+        "and the release tools.</p>"
+        "<p><strong>Related data.</strong> The per-cell prediction arrays of the reaction-scoring audit "
+        "(ten tarballs, %s GB) are not part of this archive. They are deposited with the curated cohort "
+        "in the data record <a href=\"https://doi.org/%s\">%s</a> and attached to the matching release "
+        "on GitHub. Their SHA-256 lists are committed in this archive, and a script in the repository "
+        "checks a downloaded copy against them.</p>"
+        "<p><strong>This version.</strong> Source: <a href=\"%s\">%s</a>, commit <code>%s</code> "
+        "(Git tag <code>%s</code>). File: <code>%s</code>, SHA-256 <code>%s</code>. Earlier versions of "
+        "this record hold earlier states of the repository; the first version held the scorer alone, as "
+        "it stood in July 2026.</p>"
+        % (arrays_total_gb(), data_concept_doi, data_concept_doi, GITHUB, GITHUB, commit, tag, snapshot_name, snapshot_sha))
+
+
+CODE_TITLE = "MetaGNN-Framework: metabench and the benchmark-validity studies for metabolic reaction activity scoring"
+
+
 def code_metadata(inherited, rel, commit, snapshot_sha, snapshot_name, today, data_concept_doi):
     md = clean_metadata(inherited)
     tag = rel["tag"]
     md["upload_type"] = "software"
-    md["title"] = ("MetaGNN-Framework: metabench and the benchmark-validity studies for metabolic "
-                   "reaction activity scoring (%s)" % tag)
+    md["title"] = CODE_TITLE          # the version is in the version field, not in the title
     md["version"] = tag
     md["publication_date"] = today
     md["access_right"] = "open"
@@ -425,27 +466,7 @@ def code_metadata(inherited, rel, commit, snapshot_sha, snapshot_name, today, da
         if k not in keywords:
             keywords.append(k)
     md["keywords"] = keywords
-    md["description"] = (
-        "<p>The tagged tree <code>%s</code> (commit <code>%s</code>) of "
-        "<a href=\"%s\">%s</a>: the code and committed results of two benchmark-validity studies of "
-        "transcriptome-based metabolic reaction activity scoring on Recon3D, the <code>metabench</code> "
-        "checks they share, the scorer they audit, the reproduction guides, and a single driver "
-        "(<code>reproduce.sh</code>) that regenerates every reported number from the committed result "
-        "files with no GPU and no network.</p>"
-        "<p>Contents: <code>paper1/</code>, the double hold-out study with its input-substitution arms, "
-        "the family-disjoint split, the synthetic-world check, the external audit of a published "
-        "predictor and the per-cell result files; <code>paper2/</code>, the language-model study with "
-        "its prompt builders, archived model responses, external-cohort panels, analysis plan, "
-        "departure log, deployment and model records; <code>metabench/</code>, <code>docs/</code>, "
-        "<code>tools/</code>. The manuscripts are not part of this archive.</p>"
-        "<p>The per-cell prediction arrays of the first study (ten tarballs, %s GB) are not in this "
-        "archive: they are attached to the release <code>%s</code> on the repository host and "
-        "deposited with the curated cohort in the data record "
-        "<a href=\"https://doi.org/%s\">%s</a>; their SHA-256 lists are committed under "
-        "<code>paper1/results/</code> and <code>paper1/code/verify_ledger.py</code> checks a copy.</p>"
-        "<p>File: <code>%s</code>, SHA-256 <code>%s</code>. Earlier versions of this record hold the "
-        "archives of the earlier tags; the first version held the scorer alone, as it stood in July 2026.</p>"
-        % (tag, commit, GITHUB, GITHUB, arrays_total_gb(), tag, data_concept_doi, data_concept_doi, snapshot_name, snapshot_sha))
+    md["description"] = code_description(tag, commit, snapshot_sha, snapshot_name, data_concept_doi)
     # the tree link of an earlier tag belongs to the version it was minted for
     inherited_related = [r for r in (md.get("related_identifiers") or [])
                          if not str(r.get("identifier", "")).startswith(GITHUB + "/tree/")]
@@ -670,6 +691,47 @@ def deposit_code(z, rel, args, record, state, today):
     finish(z, z.deposition(draft["id"]), args.publish, record, "code", "version_doi_code")
 
 
+def describe_code(z, rel, args, state, today):
+    """Set the title and description of a version of the code record without touching its files.
+
+    Without --record: the open draft of the next version (the one `code` works on), from this
+    release. With --record ID: a published version, edited in place and published again when
+    --publish is given; its tag, commit, file name and SHA-256 are read from the description it
+    carries, so the text changes and the facts do not. Its DOI and its publication date stay."""
+    data_doi = "10.5281/zenodo.%s" % args.data_concept
+    if not args.record:
+        dep_id = (state.get("code") or {}).get("draft_id")
+        d = z.deposition(dep_id) if dep_id else None
+        if not is_open_draft(d):
+            die("no open draft of the code record is recorded; run `code` first")
+        path, sha, route, commit = make_snapshot(rel["tag"], rel.get("commit", ""), args.workdir)
+        md = code_metadata(d.get("metadata") or {}, rel, commit, sha, os.path.basename(path), today, data_doi)
+        z.set_metadata(d["id"], md)
+        log("draft %s: metadata set: %s (version %s)" % (d["id"], md["title"], md["version"]))
+        return
+    d = z.deposition(args.record)
+    old = d.get("metadata") or {}
+    text = old.get("description") or ""
+    tag = old.get("version")
+    m_commit = re.search(r"commit <code>([0-9a-f]{40})</code>", text)
+    m_file = re.search(r"File: <code>([^<]+)</code>, SHA-256 <code>([0-9a-f]{64})</code>", text)
+    if not (tag and m_commit and m_file):
+        die("record %s: tag, commit or file are not in its metadata; nothing was changed" % args.record)
+    md = clean_metadata(old)
+    md["title"] = CODE_TITLE
+    md["description"] = code_description(tag, m_commit.group(1), m_file.group(2), m_file.group(1), data_doi)
+    log("record %s (%s, version %s): title and description rebuilt for commit %s, file %s" % (
+        args.record, d.get("doi"), tag, m_commit.group(1)[:12], m_file.group(1)))
+    if not args.publish:
+        log("nothing was sent; rerun with --publish to edit the published record")
+        return
+    if d.get("submitted") and d.get("state") == "done":
+        z.request("POST", "/deposit/depositions/%s/actions/edit" % args.record)
+    z.set_metadata(args.record, md)
+    pub = z.publish(args.record)
+    log("record %s published again with the new title and description (DOI %s)" % (args.record, pub.get("doi")))
+
+
 def deposit_data(z, rel, args, record, state, today):
     log("== data record: new version of concept %s" % args.data_concept)
     items = verify_assets(data_assets(args.assets, args.cohort_archive))
@@ -773,7 +835,8 @@ def cmd_status(z, rel, args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("command", choices=["plan", "status", "code", "data", "all"])
+    ap.add_argument("command", choices=["plan", "status", "code", "data", "all", "describe"])
+    ap.add_argument("--record", help="describe: a published version of the code record to edit in place")
     ap.add_argument("--assets", help="directory holding preds_<family>.tar")
     ap.add_argument("--cohort-archive", help="a cohort archive this version of the data record carries")
     ap.add_argument("--retire", action="append", default=[],
@@ -803,6 +866,8 @@ def main():
 
     today = _dt.date.today().isoformat()
     state = load_json(STATE_FILE, {})
+    if args.command == "describe":
+        return describe_code(z, rel, args, state, today)
     record = load_json(RECORD_FILE, {})
     record["generated"] = _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     record["site"] = z.site
