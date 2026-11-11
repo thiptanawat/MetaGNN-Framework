@@ -19,14 +19,14 @@ import os, json, sys, numpy as np
 from sklearn.metrics import roc_auc_score
 from scipy import stats as st
 import _paths as PATHS
+import cohort_order as CO
 
 D = np.load(PATHS.data('rxn_context.npz'), allow_pickle=True)
 LAB, HAS, X, PIDS = D['labels'], D['has'], D['X'], D['pids']
 # the cohort percentile printed in every patient prompt: the argsort rank within the cohort at each
-# reaction, scaled to 0..100, exactly as the prompt builder computes it (no tie correction)
-_order = np.argsort(X, axis=0); _ranks = np.empty_like(_order)
-for _j in range(X.shape[1]): _ranks[_order[:, _j], _j] = np.arange(X.shape[0])
-PCT = 100.0 * _ranks / (X.shape[0] - 1)
+# reaction, scaled to 0..100, exactly as the prompt builder computed it (no tie correction; the order
+# the collection host gave tied values is archived, see cohort_order.py)
+PCT = CO.percentile_as_collected(X)
 
 def load(out):
     raw = json.load(open(PATHS.run(out, 'raw.json'))); des = json.load(open(PATHS.run(out, 'design.json')))

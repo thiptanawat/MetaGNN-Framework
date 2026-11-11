@@ -41,10 +41,10 @@ The repository-root `requirements.txt` covers the packages the analysis scripts 
 SciPy, scikit-learn, pandas, matplotlib); none of level 1 needs PyTorch or a GPU.
 
 The committed result files of this study were written by `bash reproduce.sh analysis` with the
-pinned NumPy, SciPy and scikit-learn on an Intel x86-64 processor with AVX-512. A fresh clone
-regenerates them byte for byte in a clean installation of those versions on such a processor; this
-was checked on two machines, one of them the host the collections ran on. The files hold ten
-decimals, so two dependences show in them:
+pinned NumPy, SciPy and scikit-learn. A fresh clone regenerates them byte for byte in a clean
+installation of those versions; this was checked on Intel x86-64 with AVX-512 (two machines, one
+of them the host the collections ran on) and with AVX-512 disabled in NumPy. The files hold ten
+decimals, so one dependence shows in them, and a second one is removed by an archived file:
 
 - **Library versions.** With other versions every value is the same except seven quantities of
   the supervised reference on the patient-level target (`msi_stats.py`: its Brier score, its
@@ -53,31 +53,37 @@ decimals, so two dependences show in them:
   slightly different points. One printed value is among them: the reference fitted on swapped
   panels is 0.5309 with scikit-learn 1.7.2 and SciPy 1.15.3, and 0.5310 with scikit-learn 1.9.1
   and SciPy 1.18.1.
-- **Processor.** The percentile printed in a prompt is the rank of the patient's value within the
-  cohort, taken from NumPy's default `argsort`, which leaves the order of tied values to an
-  implementation that differs with the processor's vector instruction set; 938 of the 5,635
-  expression-bearing reactions have tied values, and within a tie group the order is not the order
-  of the patients. The inductively selected panel of `msi_stats.py` is a top-k selection of the
-  same kind. The statistics rebuild both as the collection scripts did, so they reproduce the
-  prompts on processors of the kind the collections ran on, Intel x86-64 with AVX-512: the 11,400
-  percentiles that the positive-control records stored at collection time equal the rebuilt ranks
-  there, the 522 on tied values included, and those 522 differ when AVX-512 is disabled. An AMD
-  processor with AVX-512 was not tested. Elsewhere three groups of stored values differ:
-  - the five quantities computed from the percentile (its AUROC as a ranking over all reactions
-    and over expression-bearing reactions, the two variance-decomposition terms that use it, and
-    the Spearman correlation with it), by at most 0.002;
-  - the overlap of the inductive panel, by one percentage point (0.75 where 0.76 is stored);
-  - the two summaries of `tie_audit.py` of how far the midrank convention would move the printed
-    percentile of a tied entry, its mean by up to one point and its maximum by up to two.
+- **Order of tied values (archived).** The percentile printed in a prompt is the rank of the
+  patient's value within the cohort, taken at collection time from NumPy's default `argsort`.
+  That sort is not stable: it leaves the order of tied values to an implementation that differs
+  with the processor's vector instruction set, and 938 of the 5,635 expression-bearing reactions
+  have tied values. Up to release `journal-2026-11` the statistics recomputed the ranks with the
+  same call, so they matched the prompts only on processors of the kind the collections ran on
+  (Intel x86-64 with AVX-512), and on other processors five quantities moved by up to 0.002.
+  From this release the order the collection host produced is data: `paper2/cohort_order.npz`
+  stores it for the 5,794 reactions (of 10,600) in which it differs from a stable sort, together
+  with the 40-reaction probe panel and the five panels selected inside the folds of the
+  fold-inductive reference. `code/cohort_order.py` applies it, and every collection and analysis
+  script takes its ranks and panels from there, so the result files no longer depend on the
+  processor. The file is tied to the collections by a check, not by trust:
+  `python3 code/export_cohort_order.py --check` (run by `reproduce.sh`) confirms that each
+  archived column is a valid sort of the cohort matrix, that the 11,400 percentiles the
+  positive-control records stored at collection time equal the ranks rebuilt from the archive
+  (522 of them fall on tied values), that the probe panel equals the one in
+  `results/msi/design.json`, and that each fold panel is a valid top-k selection.
+  `export_cohort_order.py` without `--check` rewrites the archive and refuses to do so on a
+  machine whose `argsort` does not reproduce the stored percentiles.
 
-  That is 71 of the 5,383 generated values on x86-64 without AVX-512 (checked by disabling
-  it in NumPy, the whole analysis) and 61 on aarch64 (checked on Apple Silicon for every
-  script of the chain except `msi2_stats.py`), for example a raw-percentile AUROC of 0.6183 and
-  0.6182 where the reported value is 0.6181. The values among them that the manuscript prints
-  differ by at most 0.001. The reported values are those of the collection host.
+One correction came with this change. The fold-inductive reference of `msi_stats.py` selects its
+panel inside each training fold from the candidate pool of the collection, the 5,500 reactions
+that carry expression and are aligned to the reference network. Up to release `journal-2026-11`
+a silent fallback made it select from all 5,635 expression-bearing reactions when the script ran
+in a repository checkout. With the intended pool its AUROC is 0.9194 (it was 0.9151) and the
+mean overlap of the fold panels with the probe panel is 76.5% (it was 76.0%). The pool is now
+taken explicitly from `paths.py`, and no other stored value changes.
 
 `tools/check_environment.py`, which `reproduce.sh` runs first, names any installed version that
-differs from the pins and says when NumPy runs without AVX-512 or on another architecture.
+differs from the pins.
 
 Producing new responses needs served models:
 

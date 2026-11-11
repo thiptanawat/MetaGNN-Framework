@@ -5575,12 +5575,12 @@
   "logistic_auprc": 0.7889199061,
   "logistic_brier": 0.0669873091,
   "logistic_calibration_in_the_large": 0.0045009838,
-  "logistic_auroc_inductive": 0.9150968664,
+  "logistic_auroc_inductive": 0.9193598786,
   "logistic_auroc_inductive_ci": [
-   0.8786944188,
-   0.9470749686
+   0.8839786445,
+   0.9504852558
   ],
-  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_inductive_panel_overlap": 0.765,
   "logistic_auroc_swapped": 0.530934738,
   "logistic_auroc_swapped_ci": [
    0.467652088,
@@ -5829,12 +5829,12 @@
   "logistic_auprc": 0.7889199061,
   "logistic_brier": 0.0669873091,
   "logistic_calibration_in_the_large": 0.0045009838,
-  "logistic_auroc_inductive": 0.9150968664,
+  "logistic_auroc_inductive": 0.9193598786,
   "logistic_auroc_inductive_ci": [
-   0.8786944188,
-   0.9470749686
+   0.8839786445,
+   0.9504852558
   ],
-  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_inductive_panel_overlap": 0.765,
   "logistic_auroc_swapped": 0.530934738,
   "logistic_auroc_swapped_ci": [
    0.467652088,
@@ -6081,12 +6081,12 @@
   "logistic_auprc": 0.7889199061,
   "logistic_brier": 0.0669873091,
   "logistic_calibration_in_the_large": 0.0045009838,
-  "logistic_auroc_inductive": 0.9150968664,
+  "logistic_auroc_inductive": 0.9193598786,
   "logistic_auroc_inductive_ci": [
-   0.8786944188,
-   0.9470749686
+   0.8839786445,
+   0.9504852558
   ],
-  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_inductive_panel_overlap": 0.765,
   "logistic_auroc_swapped": 0.530934738,
   "logistic_auroc_swapped_ci": [
    0.467652088,
@@ -6430,12 +6430,12 @@
   "logistic_auprc": 0.7889199061,
   "logistic_brier": 0.0669873091,
   "logistic_calibration_in_the_large": 0.0045009838,
-  "logistic_auroc_inductive": 0.9150968664,
+  "logistic_auroc_inductive": 0.9193598786,
   "logistic_auroc_inductive_ci": [
-   0.8786944188,
-   0.9470749686
+   0.8839786445,
+   0.9504852558
   ],
-  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_inductive_panel_overlap": 0.765,
   "logistic_auroc_swapped": 0.530934738,
   "logistic_auroc_swapped_ci": [
    0.467652088,
@@ -6779,12 +6779,12 @@
   "logistic_auprc": 0.7889199061,
   "logistic_brier": 0.0669873091,
   "logistic_calibration_in_the_large": 0.0045009838,
-  "logistic_auroc_inductive": 0.9150968664,
+  "logistic_auroc_inductive": 0.9193598786,
   "logistic_auroc_inductive_ci": [
-   0.8786944188,
-   0.9470749686
+   0.8839786445,
+   0.9504852558
   ],
-  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_inductive_panel_overlap": 0.765,
   "logistic_auroc_swapped": 0.530934738,
   "logistic_auroc_swapped_ci": [
    0.467652088,
@@ -7126,12 +7126,12 @@
   "logistic_auprc": 0.7889199061,
   "logistic_brier": 0.0669873091,
   "logistic_calibration_in_the_large": 0.0045009838,
-  "logistic_auroc_inductive": 0.9150968664,
+  "logistic_auroc_inductive": 0.9193598786,
   "logistic_auroc_inductive_ci": [
-   0.8786944188,
-   0.9470749686
+   0.8839786445,
+   0.9504852558
   ],
-  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_inductive_panel_overlap": 0.765,
   "logistic_auroc_swapped": 0.530934738,
   "logistic_auroc_swapped_ci": [
    0.467652088,
@@ -7400,12 +7400,12 @@
   "logistic_auprc": 0.7889199061,
   "logistic_brier": 0.0669873091,
   "logistic_calibration_in_the_large": 0.0045009838,
-  "logistic_auroc_inductive": 0.9150968664,
+  "logistic_auroc_inductive": 0.9193598786,
   "logistic_auroc_inductive_ci": [
-   0.8786944188,
-   0.9470749686
+   0.8839786445,
+   0.9504852558
   ],
-  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_inductive_panel_overlap": 0.765,
   "logistic_auroc_swapped": 0.530934738,
   "logistic_auroc_swapped_ci": [
    0.467652088,
@@ -7674,12 +7674,12 @@
   "logistic_auprc": 0.7889199061,
   "logistic_brier": 0.0669873091,
   "logistic_calibration_in_the_large": 0.0045009838,
-  "logistic_auroc_inductive": 0.9150968664,
+  "logistic_auroc_inductive": 0.9193598786,
   "logistic_auroc_inductive_ci": [
-   0.8786944188,
-   0.9470749686
+   0.8839786445,
+   0.9504852558
   ],
-  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_inductive_panel_overlap": 0.765,
   "logistic_auroc_swapped": 0.530934738,
   "logistic_auroc_swapped_ci": [
    0.467652088,
@@ -7946,12 +7946,12 @@
   "logistic_auprc": 0.7889199061,
   "logistic_brier": 0.0669873091,
   "logistic_calibration_in_the_large": 0.0045009838,
-  "logistic_auroc_inductive": 0.9150968664,
+  "logistic_auroc_inductive": 0.9193598786,
   "logistic_auroc_inductive_ci": [
-   0.8786944188,
-   0.9470749686
+   0.8839786445,
+   0.9504852558
   ],
-  "logistic_inductive_panel_overlap": 0.76,
+  "logistic_inductive_panel_overlap": 0.765,
   "logistic_auroc_swapped": 0.530934738,
   "logistic_auroc_swapped_ci": [
    0.467652088,

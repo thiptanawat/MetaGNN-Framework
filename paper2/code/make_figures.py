@@ -223,9 +223,8 @@ ptitle(ax, 'B', 'Presence of a value')
 raw = json.load(open(PATHS.run(RUN_A, 'raw.json'))); des = json.load(open(PATHS.run(RUN_A, 'design.json')))
 IDX = np.array(des['reactions']); PSEL = np.array(des['patients']); hx = HASD[IDX]
 # the cohort percentile printed beside the value: the argsort rank within the cohort, as the prompt builder computes it
-_order = np.argsort(XD, axis=0); _ranks = np.empty_like(_order)
-for _j in range(XD.shape[1]): _ranks[_order[:, _j], _j] = np.arange(XD.shape[0])
-PCTF = 100.0 * _ranks / (XD.shape[0] - 1)
+import cohort_order as _CO
+PCTF = _CO.percentile_as_collected(XD)
 xs, ps, ys = [], [], []
 for a, pj in enumerate(PSEL):
     for b, ri in enumerate(IDX):

@@ -59,11 +59,10 @@ LAB, HAS, X, PIDS = D['labels'], D['has'], D['X'], D['pids']
 from aligned_rxn import RXN, ALIGNED            # the network in the order of LAB, HAS and X
 assert len(RXN) == len(LAB)
 # per-reaction percentile of each patient's value, across the cohort
-order = np.argsort(X, axis=0)
-ranks = np.empty_like(order)
-for j in range(X.shape[1]):
-    ranks[order[:, j], j] = np.arange(X.shape[0])
-PCT = 100.0 * ranks / max(X.shape[0] - 1, 1)
+# (the order the collection host gave tied values is archived, so a rerun on any machine prints
+# the same percentiles: cohort_order.py)
+import cohort_order as CO
+PCT = CO.percentile_as_collected(X)
 
 # Only reactions whose annotation is aligned to the canonical order enter a prompt.
 if A.sampling == 'stratified':

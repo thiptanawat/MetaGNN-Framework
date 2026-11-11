@@ -30,9 +30,8 @@ D = np.load('rxn_context.npz', allow_pickle=True)
 LAB, HAS, X, PIDS = D['labels'], D['has'], D['X'], D['pids']
 from aligned_rxn import RXN, ALIGNED
 assert len(RXN) == len(LAB)
-order = np.argsort(X, axis=0); ranks = np.empty_like(order)
-for j in range(X.shape[1]): ranks[order[:, j], j] = np.arange(X.shape[0])
-PCT = 100.0 * ranks / max(X.shape[0] - 1, 1)
+import cohort_order as CO                 # ties as the collection host ordered them, on any machine
+PCT = CO.percentile_as_collected(X)
 
 expr = np.where(HAS & ALIGNED)[0]
 IDX = np.array(sorted(rng.choice(expr, size=min(A.n, len(expr)), replace=False).tolist()))

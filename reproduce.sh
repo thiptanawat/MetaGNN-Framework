@@ -38,7 +38,11 @@ echo "== paper 2 =="
 # rerunning this driver puts it back. msi2_stats.py resamples the external-cohort contrasts with
 # 10,000-draw nulls over 21 runs and crossed_boot_10k.py draws 10,000 crossed bootstrap replicates,
 # so the paper 2 block takes roughly fifteen minutes; nothing in it needs a GPU or the network.
-( cd paper2 && python3 code/stats.py && python3 code/msi_stats.py >/dev/null \
+# the order the collection host gave tied expression values is archived (paper2/cohort_order.npz),
+# so the ranks do not depend on the processor; the check ties the archive to the cohort matrix, to
+# the percentiles stored in the positive-control records and to the probe panel
+( cd paper2 && python3 code/export_cohort_order.py --check >/dev/null \
+  && python3 code/stats.py && python3 code/msi_stats.py >/dev/null \
   && python3 code/collection_manifest.py >/dev/null \
   && python3 code/tie_audit.py >/dev/null \
   && python3 code/crossed_boot_10k.py >/dev/null \

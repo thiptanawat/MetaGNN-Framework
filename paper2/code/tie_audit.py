@@ -14,13 +14,12 @@ Writes results/tie_audit.json. Reads only the released rxn_context.npz and the d
 import json, numpy as np
 from scipy import stats as st
 import _paths as PATHS
+import cohort_order as CO
 
 D = np.load(PATHS.data('rxn_context.npz'), allow_pickle=True)
 X, HAS = D['X'], D['has']
 N = X.shape[0]
-_order = np.argsort(X, axis=0); _ranks = np.empty_like(_order)
-for j in range(X.shape[1]): _ranks[_order[:, j], j] = np.arange(N)
-PCT = 100.0 * _ranks / (N - 1)                                   # the convention the collections printed
+PCT = CO.percentile_as_collected(X)                              # the convention the collections printed
 PCT_MID = 100.0 * (st.rankdata(X, axis=0) - 1.0) / (N - 1)       # the midrank convention of every later collection
 
 def audit(pats, rxns, expr_only):

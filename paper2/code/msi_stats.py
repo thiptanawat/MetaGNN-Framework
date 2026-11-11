@@ -10,13 +10,13 @@ from sklearn.pipeline import make_pipeline
 from sklearn.metrics import average_precision_score, brier_score_loss
 from scipy import stats as st
 import _paths as PATHS
+import cohort_order as CO
 
 D = np.load(PATHS.data('rxn_context.npz'), allow_pickle=True); X = D['X']; HAS = D['has']
-try:
-    from aligned_rxn import ALIGNED
-    EXPR = np.where(HAS & ALIGNED)[0]           # the pool the panel is chosen from (msi_probe.py)
-except Exception:
-    EXPR = np.where(HAS)[0]
+# the pool the panel is chosen from, as in msi_probe.py: reactions that carry expression and can
+# enter a prompt (aligned to the annotated network)
+ALIGNED = np.array([r['aligned'] for r in PATHS.reactions()])
+EXPR = np.where(HAS & ALIGNED)[0]
 def analyze(run):
     """Every MSI statistic for one run directory (msi = the main backbone, msi_b2 = the second)."""
     raw = json.load(open(PATHS.run(run, 'raw.json'))); des = json.load(open(PATHS.run(run, 'design.json')))
@@ -116,8 +116,10 @@ def analyze(run):
     # the selection. The run as archived used a panel chosen over the whole cohort (transductive).
     oofi = np.zeros(len(Y)); _panels = []
     Xk = X[keep]
-    for tr, te in StratifiedKFold(5, shuffle=True, random_state=2024).split(F, Y):
-        sel = EXPR[np.argsort(-Xk[np.ix_(tr, EXPR)].std(axis=0))[:int(des['k'])]]
+    for _fold, (tr, te) in enumerate(StratifiedKFold(5, shuffle=True, random_state=2024).split(F, Y)):
+        # the k highest-variance candidates over the training patients; where candidates tie at the
+        # cut, the selection archived from the collection host is used (cohort_order.py)
+        sel = CO.top_k_as_collected('inductive_fold_%d' % _fold, Xk[np.ix_(tr, EXPR)].std(axis=0), int(des['k']), EXPR)
         _panels.append(sorted(int(v) for v in sel))
         oofi[te] = pipe.fit(Xk[np.ix_(tr, sel)], Y[tr]).predict_proba(Xk[np.ix_(te, sel)])[:, 1]
     M['logistic_auroc_inductive'] = round(float(roc_auc_score(Y, oofi)), 10)
@@ -192,9 +194,7 @@ def analyze(run):
     # The answer key is what the table printed: the cohort percentile of each value, rounded to the
     # integer the prompt shows, at or above 75. (The collection script also recorded the 75th-percentile
     # expression values, whose criterion differs from the printed one on a few patients; it is not used.)
-    _order = np.argsort(X, axis=0); _ranks = np.empty_like(_order)
-    for _j in range(X.shape[1]): _ranks[_order[:, _j], _j] = np.arange(X.shape[0])
-    _PCT = 100.0 * _ranks / (X.shape[0] - 1)
+    _PCT = CO.percentile_as_collected(X)
     truth = {p: int((np.round(_PCT[p, PANEL]) >= 75).sum()) for p in cp}
     pred = [(raw[f'count|{p}']['val'], truth[p]) for p in cp
             if f'count|{p}' in raw and raw[f'count|{p}']['val'] is not None]
