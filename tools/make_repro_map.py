@@ -116,9 +116,10 @@ def captions(text):
                 raw = re.sub(r"\\textbf\{([^{}]*)\}", r"\1", raw)
                 raw = re.sub(r"\\[a-zA-Z]+\{([^{}]*)\}", r"\1", raw)
                 raw = re.sub(r"\\[a-zA-Z]+\*?", "", raw)
-                raw = re.sub(r"[{}$~]", "", raw)
+                raw = raw.replace("~", " ")          # a tie is a space in the printed caption
+                raw = re.sub(r"[{}$]", "", raw)
                 raw = re.sub(r"\s+", " ", raw).strip()
-                lead = re.split(r"(?<=[.!?])\s", raw, 1)[0][:140]
+                lead = re.split(r"(?<=[.!?])\s", raw, maxsplit=1)[0][:140]
             out[lab.group(1)] = ("Table" if env == "table" else "Figure", lead)
     return out
 

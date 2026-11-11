@@ -141,7 +141,7 @@ ho = [G['mlp']['heldout_rxn'], G['mlp_emb']['heldout_rxn'], G['gnn_B']['heldout_
 fam = ['mlp', 'memo', 'gnn_real']
 x = np.arange(3) * 1.25; w = 0.36
 ax.bar(x-w/2, tr, w, color=PAL['input'], edgecolor='#5b6470', lw=0.8, label='train reactions')
-ax.bar(x+w/2, ho, w, color=[PAL[f] for f in fam], label='held-out reactions')
+ax.bar(x+w/2, ho, w, color=[PAL[f] for f in fam], label='held-out reactions (color: model)')
 for i,(a,b) in enumerate(zip(tr,ho)):
     # when the two bars are of a height, stagger the labels so they do not run together; the
     # held-out label starts at its bar's left edge so that it never runs into the train bar
@@ -477,13 +477,13 @@ HEADERS = {INPUT_SUB: ('Input substitution',
            POSTHOC:   ('Post-hoc output averaging',
                        "the unsubstituted model's saved per-patient predictions\n"
                        "collapsed to their cohort mean; nothing is retrained")}
-fig, ax = plt.subplots(figsize=(W, 4.6), layout='constrained')
+fig, ax = plt.subplots(figsize=(W, 4.9), layout='constrained')
 order = [e for e in eff if e[3] == INPUT_SUB] + [e for e in eff if e[3] == POSTHOC]
 ys, y_hdr, y = {}, {}, 0.0
 for kind in (INPUT_SUB, POSTHOC):
     y -= 0.55
     y_hdr[kind] = y          # the bold group name sits here, its description just below
-    y -= 1.35
+    y -= 1.62                # the first row starts clear of the description
     for e in order:
         if e[3] == kind:
             ys[e[0]] = y; y -= 1.0
@@ -513,9 +513,9 @@ span = hi - lo
 ax.set_xlim(lo - 0.05 * span, hi + 0.16 * span)
 for kind, yh in y_hdr.items():
     name, desc = HEADERS[kind]
-    ax.text(lo - 0.035 * span, yh, name, fontsize=7.4, fontweight='bold', color=INK, ha='left', va='center', zorder=6,
+    ax.text(lo - 0.035 * span, yh, name, fontsize=7.4, fontweight='bold', color=INK, ha='left', va='center', zorder=7,
             bbox=dict(facecolor='white' if kind == INPUT_SUB else '#f1f1f1', edgecolor='none', pad=1.5))
-    ax.text(lo - 0.035 * span, yh - 0.62, desc, fontsize=6.5, color='#444', ha='left', va='center',
+    ax.text(lo - 0.035 * span, yh - 0.70, desc, fontsize=6.5, color='#444', ha='left', va='center',
             linespacing=1.2, zorder=6, bbox=dict(facecolor='white' if kind == INPUT_SUB else '#f1f1f1', edgecolor='none', pad=1.5))
 ax.axvline(0, color='#333', lw=1.0, zorder=1)
 ax.set_yticks([ys[e[0]] for e in order]); ax.set_yticklabels([e[0] for e in order])
@@ -578,7 +578,7 @@ if FAMB.get('versus_random_split') and FAMB.get('patient_identity'):
     ax.set_xlabel('family-disjoint minus random split (AUROC)')
     _lo = min(min(b['per_cell'].values()) for _, b, _ in rows)
     ax.set_xlim(_lo - 0.012, 0.010)
-    ax.set_ylim(-1.30, len(rows) - 0.42)         # the same vertical framing as panel b
+    ax.set_ylim(-1.48, len(rows) - 0.42)         # a strip under the last row deep enough for the three-line key
     ax.legend(handles=fold_handles(), loc='lower left', frameon=False, handletextpad=0.4,
               borderpad=0.1, labelspacing=0.25, fontsize=6.8)
     ptitle(ax, 'a', 'the cost of withholding relatives')
@@ -606,7 +606,7 @@ if FAMB.get('versus_random_split') and FAMB.get('patient_identity'):
     ptitle(ax, 'b', 'the contrasts on both splits')
     ax.legend(handles=[Line2D([], [], marker='s', ms=5, mfc='white', mec=INK, ls='none', label='random split'),
                        Line2D([], [], marker='s', ms=5, mfc='#9a9a9a', mec=INK, ls='none', label='family-disjoint split')],
-              loc='lower left', frameon=False, handletextpad=0.4, borderpad=0.1, labelspacing=0.25,
+              loc='lower right', frameon=False, handletextpad=0.4, borderpad=0.1, labelspacing=0.25,
               fontsize=6.8)
     fig.tight_layout(w_pad=1.2); fig.savefig(os.path.join(FIG, 'fig_family.png')); plt.close(fig)
     print('wrote fig_family.png')

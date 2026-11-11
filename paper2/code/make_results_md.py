@@ -99,7 +99,7 @@ if M:
     c = M['arms']['count']
     w(f"Aggregation control (how many of the {M['k']} reactions sit at or above the 75th percentile): Spearman "
       f"{c['spearman']:.3f} with the true count over {c['n']} patients, exact on {c['exact']:.1%}, mean absolute "
-      f"error {c['mae']:.2f}, predicted mean {c['pred_mean']} against a true mean of {c['truth_mean']}.\n")
+      f"error {c['mae']:.2f}, predicted mean {c['pred_mean']:.2f} against a true mean of {c['truth_mean']:.2f}.\n")
 D = R['runs'].get('D_reasoning')
 if D:
     w("## Reasoning-enabled arm\n")

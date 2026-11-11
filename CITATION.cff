@@ -14,15 +14,15 @@ authors:
     given-names: Jonathan H.
     affiliation: School of Information Technology, King Mongkut's University of Technology Thonburi
 license: MIT
-version: journal-2026-09d
-date-released: '2026-09-12'
+version: journal-2026-11
+date-released: '2026-11-11'
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21217568
     description: Concept identifier of the archived code record; it resolves to the latest version.
   - type: doi
     value: 10.5281/zenodo.21217578
-    description: Concept identifier of the data record (the curated cohort, features, labels and splits).
+    description: Concept identifier of the data record (the curated cohort, features, labels and splits, and the prediction arrays); it resolves to the latest version.
 repository-code: https://github.com/thiptanawat/MetaGNN-Framework
 keywords:
   - benchmark validity
@@ -30,3 +30,16 @@ keywords:
   - graph neural networks
   - data leakage
   - cross-validation
+references:
+  - type: article
+    title: >-
+      Benchmark validity in graph neural network scoring of metabolic reaction activity on
+      Recon3D: detecting label leakage, memorized noise and input-invariant models
+    authors:
+      - family-names: Phongwattana
+        given-names: Thiptanawat
+      - family-names: Chan
+        given-names: Jonathan H.
+    year: 2026
+    journal: bioRxiv
+    doi: 10.64898/2026.09.02.748315

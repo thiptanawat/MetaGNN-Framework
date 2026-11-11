@@ -9,12 +9,16 @@ What it does, per record:
         archive downloaded from the repository host when this checkout does not have the tag).
         The inherited file of the previous version is removed; the description names the tag, the
         commit and the SHA-256 of the archive.
-  data  a new version of the data record (concept 10.5281/zenodo.21217578) that keeps every file of
-        the previous version (the curated cohort, the reaction features, the labels, the splits)
-        and adds the per-cell prediction arrays of the first study: the ten tarballs, one per
-        result family, and the two committed checksum lists. Each tarball is checked against
-        paper1/results/prediction_array_tarballs.sha256 before it is sent, and the version is not
-        published unless every file of the previous version is present with an unchanged MD5.
+  data  a new version of the data record (concept 10.5281/zenodo.21217578) that carries the
+        per-cell prediction arrays of the first study, the ten tarballs, one per result family, and
+        the two committed checksum lists, beside the files of the previous version. Each tarball is
+        checked against paper1/results/prediction_array_tarballs.sha256 before it is sent; a file
+        the previous version already holds with the same MD5 is kept and not sent again. With
+        --cohort-archive FILE the version also carries that cohort archive, and --retire NAME drops
+        a file of the previous version that the archive replaces; the description of the record
+        is then written from tools/zenodo_data_description.html. The version is not published
+        unless every file of the previous version, other than the retired ones, is present with an
+        unchanged MD5.
 
 Both drafts are populated, checked and, with --publish, published; the minted DOIs are written to
 release.json (version_doi_code, version_doi_data) and a record of the deposit to
@@ -32,10 +36,12 @@ environment variable ZENODO_TOKEN or, failing that, from the file named by --tok
 
 Usage:
     python3 tools/zenodo_deposit.py plan --assets DIR         # no token needed: what would be sent
-    python3 tools/zenodo_deposit.py status                    # the records and any open drafts
+    python3 tools/zenodo_deposit.py status                    # the records and, with a token, what any open draft holds
     python3 tools/zenodo_deposit.py code --publish
     python3 tools/zenodo_deposit.py data --assets DIR --publish
     python3 tools/zenodo_deposit.py all  --assets DIR --publish
+    python3 tools/zenodo_deposit.py data --assets DIR --cohort-archive metagnn-data-v2.zip \
+                                         --retire metagnn-data.zip --publish
 
 DIR is the directory holding preds_<family>.tar (the release assets); the checksum lists are read
 from the checkout. --sandbox targets sandbox.zenodo.org (with a sandbox token and the sandbox
@@ -70,6 +76,9 @@ DATA_CONCEPT = "21217578"   # concept record id of 10.5281/zenodo.21217578
 FAMILIES = ["dh", "ctrl", "rewire", "fam", "ivr", "synth", "ht29", "seedrep", "rankgnn", "permute"]
 ARRAY_LIST = os.path.join("paper1", "results", "prediction_arrays.sha256")
 TARBALL_LIST = os.path.join("paper1", "results", "prediction_array_tarballs.sha256")
+
+PREPRINT_DOI = "10.64898/2026.09.02.748315"
+DATA_DESCRIPTION = os.path.join(HERE, "zenodo_data_description.html")
 
 RECORD_FILE = os.path.join(HERE, "zenodo_deposit_record.json")
 STATE_FILE = os.path.join(HERE, ".zenodo_state.json")
@@ -331,8 +340,9 @@ def resolve_commit(rel, workdir):
     return commit
 
 
-def data_assets(assets_dir):
-    """The tarballs and the two checksum lists, each verified before it is offered."""
+def data_assets(assets_dir, cohort_archive=None):
+    """The tarballs and the two checksum lists, each verified before it is offered, and the cohort
+    archive when this version carries one."""
     if not assets_dir:
         die("--assets DIR is required for the data record")
     tarball_list = os.path.join(REPO, TARBALL_LIST)
@@ -352,6 +362,11 @@ def data_assets(assets_dir):
         items.append({"name": name, "path": path, "sha256_expected": expected[name]})
     items.append({"name": os.path.basename(array_list), "path": array_list, "sha256_expected": None})
     items.append({"name": os.path.basename(tarball_list), "path": tarball_list, "sha256_expected": None})
+    if cohort_archive:
+        if not os.path.isfile(cohort_archive):
+            die("the cohort archive %s is not a file" % cohort_archive)
+        items.insert(0, {"name": os.path.basename(cohort_archive), "path": cohort_archive,
+                         "sha256_expected": None, "role": "cohort"})
     return items
 
 
@@ -422,14 +437,14 @@ def code_metadata(inherited, rel, commit, snapshot_sha, snapshot_name, today, da
         "predictor and the per-cell result files; <code>paper2/</code>, the language-model study with "
         "its prompt builders, archived model responses, external-cohort panels, analysis plan, "
         "departure log, deployment and model records; <code>metabench/</code>, <code>docs/</code>, "
-        "<code>tools/</code>. The manuscripts under review are not part of this archive.</p>"
+        "<code>tools/</code>. The manuscripts are not part of this archive.</p>"
         "<p>The per-cell prediction arrays of the first study (ten tarballs, %s GB) are not in this "
         "archive: they are attached to the release <code>%s</code> on the repository host and "
         "deposited with the curated cohort in the data record "
         "<a href=\"https://doi.org/%s\">%s</a>; their SHA-256 lists are committed under "
         "<code>paper1/results/</code> and <code>paper1/code/verify_ledger.py</code> checks a copy.</p>"
-        "<p>File: <code>%s</code>, SHA-256 <code>%s</code>. The previous version of this record held "
-        "the scorer alone, as it stood in July 2026.</p>"
+        "<p>File: <code>%s</code>, SHA-256 <code>%s</code>. Earlier versions of this record hold the "
+        "archives of the earlier tags; the first version held the scorer alone, as it stood in July 2026.</p>"
         % (tag, commit, GITHUB, GITHUB, arrays_total_gb(), tag, data_concept_doi, data_concept_doi, snapshot_name, snapshot_sha))
     md["related_identifiers"] = merge_related(md.get("related_identifiers"), [
         {"identifier": "%s/tree/%s" % (GITHUB, tag), "relation": "isSupplementTo", "resource_type": "software"},
@@ -438,9 +453,46 @@ def code_metadata(inherited, rel, commit, snapshot_sha, snapshot_name, today, da
     return md
 
 
-def data_metadata(inherited, rel, commit, items, today, code_concept_doi):
+def data_description(rel, commit, items, retired, previous_doi):
+    """The description of a version that carries a cohort archive, written from the committed
+    template so that what the record says can be read in the repository."""
+    cohort = [it for it in items if it.get("role") == "cohort"][0]
+    rows = "".join("<li><code>%s</code> (%s, SHA-256 <code>%s</code>)</li>" % (it["name"], human(it["size"]), it["sha256"])
+                   for it in items if it.get("role") != "cohort")
+    template = open(DATA_DESCRIPTION).read()
+    return template.format(tag=rel["tag"], commit=commit, github=GITHUB, preprint=PREPRINT_DOI,
+                           cohort_name=cohort["name"], cohort_size=human(cohort["size"]),
+                           cohort_sha256=cohort["sha256"], array_rows=rows,
+                           retired=", ".join("<code>%s</code>" % n for n in retired) or "none",
+                           previous_doi=previous_doi or "")
+
+
+def data_metadata(inherited, rel, commit, items, today, code_concept_doi, retired=(), previous_doi=None):
     md = clean_metadata(inherited)
     tag = rel["tag"]
+    if any(it.get("role") == "cohort" for it in items):
+        md["upload_type"] = "dataset"
+        md["version"] = tag
+        md["publication_date"] = today
+        md["access_right"] = "open"
+        md.setdefault("license", "cc-by-4.0")
+        md["title"] = ("MetaGNN-Framework data: the curated TCGA-COAD/READ cohort, its fixed splits and "
+                       "the prediction arrays of the benchmark-validity studies")
+        keywords = list(md.get("keywords") or [])
+        for k in ("benchmark validity", "prediction arrays", "double hold-out", "TCGA-COAD", "TCGA-READ", "Recon3D"):
+            if k not in keywords:
+                keywords.append(k)
+        md["keywords"] = keywords
+        md["description"] = data_description(rel, commit, items, list(retired), previous_doi)
+        # the tree link of an earlier tag belongs to the version it was minted for
+        inherited_related = [r for r in (md.get("related_identifiers") or [])
+                             if not str(r.get("identifier", "")).startswith(GITHUB + "/tree/")]
+        md["related_identifiers"] = merge_related(inherited_related, [
+            {"identifier": "%s/tree/%s" % (GITHUB, tag), "relation": "isSupplementTo", "resource_type": "software"},
+            {"identifier": code_concept_doi, "relation": "isRequiredBy", "resource_type": "software"},
+            {"identifier": PREPRINT_DOI, "relation": "isSupplementTo", "resource_type": "publication-preprint"},
+        ])
+        return md
     md["upload_type"] = "dataset"
     md["version"] = tag
     md["publication_date"] = today
@@ -540,21 +592,37 @@ def sync_files(z, draft, wanted, keep_others):
     return final
 
 
-def ensure_inherited_files(z, draft, previous):
-    """A new version must carry the previous version's files. When the draft opened empty, import
-    them; when they are present, they are checked by name and MD5 before anything is published."""
-    prev_files = {f["key"]: md5_of_entry(f) for f in (previous.get("files") or [])}
+def previous_files(previous):
+    return {f["key"]: md5_of_entry(f) for f in (previous.get("files") or [])}
+
+
+def import_inherited_files(z, draft, previous):
+    """A draft that opened without any file of the previous version gets them imported."""
+    prev_files = previous_files(previous)
     if not prev_files:
-        return {}
-    present = {f["filename"]: md5_of_entry(f) for f in z.files(draft["id"])}
+        return
+    present = {f["filename"] for f in z.files(draft["id"])}
     if not any(k in present for k in prev_files):
         log("draft has none of the previous version's %d files; importing them" % len(prev_files))
         z.import_previous_files(draft["id"])
-        present = {f["filename"]: md5_of_entry(f) for f in z.files(draft["id"])}
-    missing = [k for k, m in prev_files.items() if present.get(k) != m]
+
+
+def ensure_inherited_files(z, draft, previous, retired=()):
+    """A new version must carry the previous version's files, other than those it retires: they
+    are checked by name and MD5 before anything is published, and a retired file must be gone."""
+    prev_files = previous_files(previous)
+    if not prev_files:
+        return {}
+    present = {f["filename"]: md5_of_entry(f) for f in z.files(draft["id"])}
+    missing = [k for k, m in prev_files.items() if k not in retired and present.get(k) != m]
     if missing:
         die("the draft lacks these files of the previous version, or they differ: %s" % ", ".join(missing))
-    log("all %d files of the previous version are present and unchanged" % len(prev_files))
+    still = [k for k in retired if k in present]
+    if still:
+        die("these retired files are still in the draft: %s" % ", ".join(still))
+    log("all %d files kept from the previous version are present and unchanged%s" % (
+        len(prev_files) - len([k for k in retired if k in prev_files]),
+        (", %d retired" % len(retired)) if retired else ""))
     return prev_files
 
 
@@ -601,25 +669,41 @@ def deposit_code(z, rel, args, record, state, today):
 
 def deposit_data(z, rel, args, record, state, today):
     log("== data record: new version of concept %s" % args.data_concept)
-    items = verify_assets(data_assets(args.assets))
+    items = verify_assets(data_assets(args.assets, args.cohort_archive))
     log("assets verified against %s: %d files, %s" % (
         TARBALL_LIST, len(items), human(sum(it["size"] for it in items))))
     commit = resolve_commit(rel, args.workdir)
     draft, previous = open_draft(z, args.data_concept, state, "data")
-    prev_files = ensure_inherited_files(z, draft, previous)
-    clash = [it["name"] for it in items if it["name"] in prev_files]
+    prev_files = previous_files(previous)
+    retired = list(args.retire or [])
+    unknown = [n for n in retired if n not in prev_files]
+    if unknown:
+        die("--retire names files the previous version does not hold: %s" % ", ".join(unknown))
+    # a file the previous version already holds under the same name must be the same file
+    clash = [it["name"] for it in items if it["name"] in prev_files and prev_files[it["name"]] != it["md5"]]
     if clash:
-        die("these names already exist in the previous version and would be replaced: %s" % ", ".join(clash))
-    md = data_metadata(draft.get("metadata") or {}, rel, commit, items, today, "10.5281/zenodo.%s" % args.code_concept)
+        die("these names exist in the previous version with a different MD5 and would be replaced: %s" % ", ".join(clash))
+    if any(it["name"] in retired for it in items):
+        die("a file cannot be both retired and deposited")
+    import_inherited_files(z, draft, previous)
+    for entry in z.files(draft["id"]):
+        if entry["filename"] in retired:
+            log("  retiring %s" % entry["filename"])
+            z.delete_file(draft["id"], entry["id"])
+    ensure_inherited_files(z, draft, previous, retired=retired)
+    md = data_metadata(draft.get("metadata") or {}, rel, commit, items, today, "10.5281/zenodo.%s" % args.code_concept,
+                       retired=retired, previous_doi=previous.get("doi"))
     wanted = {it["name"]: {"path": it["path"], "md5": it["md5"]} for it in items}
     final = sync_files(z, draft, wanted, keep_others=True)
-    ensure_inherited_files(z, draft, previous)
+    ensure_inherited_files(z, draft, previous, retired=retired)
     z.set_metadata(draft["id"], md)
     log("metadata set: %s" % md.get("title"))
     record["data"] = {"concept": args.data_concept, "previous_record": previous.get("id"),
                       "tag": rel["tag"], "commit": commit,
-                      "files_added": [{"name": it["name"], "size": it["size"], "sha256": it["sha256"], "md5": it["md5"]} for it in items],
-                      "files_kept": sorted(prev_files), "files_in_version": sorted(final)}
+                      "files_added": [{"name": it["name"], "size": it["size"], "sha256": it["sha256"], "md5": it["md5"]}
+                                      for it in items if it["name"] not in prev_files],
+                      "files_kept": sorted(k for k in prev_files if k not in retired),
+                      "files_retired": sorted(retired), "files_in_version": sorted(final)}
     finish(z, z.deposition(draft["id"]), args.publish, record, "data", "version_doi_data")
 
 
@@ -631,8 +715,12 @@ def cmd_plan(z, rel, args):
     print("code concept %s -> new version with one file:" % args.code_concept)
     print("  %s  %s  sha256 %s\n  (%s)" % (os.path.basename(path), human(os.path.getsize(path)), sha, route))
     if args.assets:
-        items = verify_assets(data_assets(args.assets))
-        print("data concept %s -> new version keeping the previous files and adding:" % args.data_concept)
+        items = verify_assets(data_assets(args.assets, args.cohort_archive))
+        if args.retire:
+            print("data concept %s -> new version retiring %s, keeping the other previous files, and carrying:" % (
+                args.data_concept, ", ".join(args.retire)))
+        else:
+            print("data concept %s -> new version keeping the previous files and carrying:" % args.data_concept)
         for it in items:
             print("  %-36s %10s  sha256 %s" % (it["name"], human(it["size"]), it["sha256"]))
         print("  total %s; every tarball matches %s" % (human(sum(it["size"] for it in items)), TARBALL_LIST))
@@ -662,6 +750,21 @@ def cmd_status(z, rel, args):
                 print("  draft %s: %s, %d file(s), %s" % (
                     dep_id, "open" if is_open_draft(d) else "published", len(d.get("files") or []),
                     (d.get("links") or {}).get("html", "")))
+                if is_open_draft(d):
+                    dm = d.get("metadata") or {}
+                    print("    title:   %s" % dm.get("title"))
+                    print("    version: %s, publication date %s, license %s" % (
+                        dm.get("version"), dm.get("publication_date"), dm.get("license")))
+                    for rid in dm.get("related_identifiers") or []:
+                        print("    related: %s %s" % (rid.get("relation"), rid.get("identifier")))
+                    prev = previous_files(r)
+                    for f in sorted(z.files(dep_id), key=lambda e: e["filename"]):
+                        name, md5 = f["filename"], md5_of_entry(f)
+                        mark = "kept" if prev.get(name) == md5 else ("replaces a file of that name" if name in prev else "new")
+                        print("    file:    %-36s %12d bytes  md5 %s  (%s)" % (name, int(f.get("filesize") or 0), md5, mark))
+                    gone = sorted(k for k in prev if k not in {f["filename"] for f in z.files(dep_id)})
+                    if gone:
+                        print("    not carried from the previous version: %s" % ", ".join(gone))
     print("release.json: version_doi_code=%r version_doi_data=%r" % (rel.get("version_doi_code"), rel.get("version_doi_data")))
 
 
@@ -669,6 +772,9 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("command", choices=["plan", "status", "code", "data", "all"])
     ap.add_argument("--assets", help="directory holding preds_<family>.tar")
+    ap.add_argument("--cohort-archive", help="a cohort archive this version of the data record carries")
+    ap.add_argument("--retire", action="append", default=[],
+                    help="a file of the previous data version that this version drops (repeatable)")
     ap.add_argument("--publish", action="store_true", help="publish the populated drafts and write the DOIs to release.json")
     ap.add_argument("--sandbox", action="store_true", help="use sandbox.zenodo.org")
     ap.add_argument("--code-concept", default=CODE_CONCEPT)

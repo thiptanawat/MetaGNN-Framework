@@ -1,0 +1,62 @@
+{
+ "_generated_by": "code/export_splits.py --arrays",
+ "arrays_found": 299,
+ "arrays_checked": 299,
+ "test_patients_match": 299,
+ "heldout_reactions_match": 299,
+ "by_family": {
+  "ctrl": {
+   "arrays": 33,
+   "test_patients_match": 33,
+   "heldout_reactions_match": 33
+  },
+  "dh": {
+   "arrays": 52,
+   "test_patients_match": 52,
+   "heldout_reactions_match": 52
+  },
+  "fam": {
+   "arrays": 79,
+   "test_patients_match": 79,
+   "heldout_reactions_match": 79
+  },
+  "ht29": {
+   "arrays": 9,
+   "test_patients_match": 9,
+   "heldout_reactions_match": 9
+  },
+  "ivr": {
+   "arrays": 75,
+   "test_patients_match": 75,
+   "heldout_reactions_match": 75
+  },
+  "permute": {
+   "arrays": 3,
+   "test_patients_match": 3,
+   "heldout_reactions_match": 3
+  },
+  "rankgnn": {
+   "arrays": 6,
+   "test_patients_match": 6,
+   "heldout_reactions_match": 6
+  },
+  "rewire": {
+   "arrays": 12,
+   "test_patients_match": 12,
+   "heldout_reactions_match": 12
+  },
+  "seedrep": {
+   "arrays": 6,
+   "test_patients_match": 6,
+   "heldout_reactions_match": 6
+  },
+  "synth": {
+   "arrays": 24,
+   "test_patients_match": 24,
+   "heldout_reactions_match": 24
+  }
+ },
+ "mismatched": [],
+ "not_checked": [],
+ "note": "family-disjoint folds for names carrying _fam_, tissue-matched-label folds for the ht29 family, random folds otherwise"
+}

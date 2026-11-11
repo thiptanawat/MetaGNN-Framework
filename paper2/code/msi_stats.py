@@ -28,10 +28,10 @@ def analyze(run):
         for _ in range(B):
             ix = rng.integers(0, len(y), len(y))
             if len(set(y[ix])) > 1: v.append(roc_auc_score(y[ix], s[ix]))
-        return round(float(np.percentile(v, 2.5)), 4), round(float(np.percentile(v, 97.5)), 4)
+        return round(float(np.percentile(v, 2.5)), 10), round(float(np.percentile(v, 97.5)), 10)
 
     M = dict(k=int(des['k']), n_patients=int(len(keep)), n_msi_high=int(Y.sum()),
-             n_mss=int((1 - Y).sum()), prevalence=round(float(Y.mean()), 4),
+             n_mss=int((1 - Y).sum()), prevalence=round(float(Y.mean()), 10),
              panel_ids=des['panel_ids'], arms={})
 
     for arm in ('own', 'swap'):
@@ -40,12 +40,12 @@ def analyze(run):
         sv = np.array([float(v) for v in s[ok]]); yv = Y[ok]
         cnt = collections.Counter(sv.tolist())
         M['arms'][arm] = dict(
-            n=int(ok.sum()), parsed=round(float(ok.mean()), 4),
-            auroc=round(float(roc_auc_score(yv, sv)), 4), auroc_ci=list(boot_auc(yv, sv)),
-            n_distinct_values=int(len(cnt)), modal_share=round(float(cnt.most_common(1)[0][1] / len(sv)), 4),
+            n=int(ok.sum()), parsed=round(float(ok.mean()), 10),
+            auroc=round(float(roc_auc_score(yv, sv)), 10), auroc_ci=list(boot_auc(yv, sv)),
+            n_distinct_values=int(len(cnt)), modal_share=round(float(cnt.most_common(1)[0][1] / len(sv)), 10),
             modal_value=float(cnt.most_common(1)[0][0]),
-            mean_p=round(float(sv.mean()), 4), sd_p=round(float(sv.std()), 4),
-            mean_p_msih=round(float(sv[yv == 1].mean()), 4), mean_p_mss=round(float(sv[yv == 0].mean()), 4))
+            mean_p=round(float(sv.mean()), 10), sd_p=round(float(sv.std()), 10),
+            mean_p_msih=round(float(sv[yv == 1].mean()), 10), mean_p_mss=round(float(sv[yv == 0].mean()), 10))
 
     # how many distinct free-text rationales accompany the modal probability?
     mv = M['arms']['own']['modal_value']
@@ -80,36 +80,36 @@ def analyze(run):
     M['reason_any_digit_all'] = int(sum(1 for r in _ad if re.search(r'[0-9]', r)))
     M['reason_any_percentile_all'] = int(sum(1 for r in _ad if re.search(r'[0-9]', r) and re.search(r'percentile', r, re.I)))
     # completeness is not random: the complete rationales are the short ones
-    M['reason_mean_len_complete'] = round(float(np.mean([len(r) for r, c in zip(reasons, complete) if c])), 1) if any(complete) else None
-    M['reason_mean_len_truncated'] = round(float(np.mean([len(r) for r, c in zip(reasons, complete) if not c])), 1) if not all(complete) else None
+    M['reason_mean_len_complete'] = round(float(np.mean([len(r) for r, c in zip(reasons, complete) if c])), 10) if any(complete) else None
+    M['reason_mean_len_truncated'] = round(float(np.mean([len(r) for r, c in zip(reasons, complete) if not c])), 10) if not all(complete) else None
 
     # supervised reference on the identical features
     pipe = make_pipeline(StandardScaler(), LogisticRegression(max_iter=4000, C=1.0))
     oof = np.zeros(len(Y))
     for tr, te in StratifiedKFold(5, shuffle=True, random_state=2024).split(F, Y):
         oof[te] = pipe.fit(F[tr], Y[tr]).predict_proba(F[te])[:, 1]
-    M['logistic_auroc'] = round(float(roc_auc_score(Y, oof)), 4)
+    M['logistic_auroc'] = round(float(roc_auc_score(Y, oof)), 10)
     M['logistic_auroc_ci'] = list(boot_auc(Y, oof))
     # Discrimination and calibration against the assay call beside the constant-prevalence predictor:
     # area under the precision-recall curve (a constant predictor scores the prevalence), the Brier
     # score (mean squared error of the probability; the constant predictor scores p(1-p)), and
     # calibration in the large (mean returned probability minus the observed prevalence).
     prev = float(Y.mean())
-    M['constant'] = dict(auprc=round(prev, 4), brier=round(prev * (1 - prev), 4), auroc=0.5)
+    M['constant'] = dict(auprc=round(prev, 10), brier=round(prev * (1 - prev), 10), auroc=0.5)
     for arm in ('own', 'swap'):
         s_ = np.array([raw.get(f'{arm}|{int(p)}', {}).get('val') for p in keep], dtype=object)
         ok_ = np.array([v is not None for v in s_])
         sv_ = np.clip(np.array([float(v) for v in s_[ok_]]), 0, 1); yv_ = Y[ok_]
-        M['arms'][arm]['auprc'] = round(float(average_precision_score(yv_, sv_)), 4)
-        M['arms'][arm]['brier'] = round(float(brier_score_loss(yv_, sv_)), 4)
-        M['arms'][arm]['calibration_in_the_large'] = round(float(sv_.mean() - yv_.mean()), 4)
+        M['arms'][arm]['auprc'] = round(float(average_precision_score(yv_, sv_)), 10)
+        M['arms'][arm]['brier'] = round(float(brier_score_loss(yv_, sv_)), 10)
+        M['arms'][arm]['calibration_in_the_large'] = round(float(sv_.mean() - yv_.mean()), 10)
         # reliability by returned value: observed positive rate at each distinct probability
         _vals = sorted(set(sv_.tolist()))
-        M['arms'][arm]['reliability'] = [dict(p=round(float(v), 4), n=int((sv_ == v).sum()),
-                                              observed=round(float(yv_[sv_ == v].mean()), 4)) for v in _vals]
-    M['logistic_auprc'] = round(float(average_precision_score(Y, oof)), 4)
-    M['logistic_brier'] = round(float(brier_score_loss(Y, oof)), 4)
-    M['logistic_calibration_in_the_large'] = round(float(oof.mean() - Y.mean()), 4)
+        M['arms'][arm]['reliability'] = [dict(p=round(float(v), 10), n=int((sv_ == v).sum()),
+                                              observed=round(float(yv_[sv_ == v].mean()), 10)) for v in _vals]
+    M['logistic_auprc'] = round(float(average_precision_score(Y, oof)), 10)
+    M['logistic_brier'] = round(float(brier_score_loss(Y, oof)), 10)
+    M['logistic_calibration_in_the_large'] = round(float(oof.mean() - Y.mean()), 10)
     # A fold-inductive version of the reference: the panel is chosen from the training patients of
     # each fold alone (the K highest-variance expression-bearing reactions over those patients) and
     # frozen for the held-out patients, so no covariate information of the scored patients enters
@@ -120,9 +120,9 @@ def analyze(run):
         sel = EXPR[np.argsort(-Xk[np.ix_(tr, EXPR)].std(axis=0))[:int(des['k'])]]
         _panels.append(sorted(int(v) for v in sel))
         oofi[te] = pipe.fit(Xk[np.ix_(tr, sel)], Y[tr]).predict_proba(Xk[np.ix_(te, sel)])[:, 1]
-    M['logistic_auroc_inductive'] = round(float(roc_auc_score(Y, oofi)), 4)
+    M['logistic_auroc_inductive'] = round(float(roc_auc_score(Y, oofi)), 10)
     M['logistic_auroc_inductive_ci'] = list(boot_auc(Y, oofi))
-    M['logistic_inductive_panel_overlap'] = round(float(np.mean([len(set(pn) & set(PANEL.tolist())) / len(PANEL) for pn in _panels])), 4)
+    M['logistic_inductive_panel_overlap'] = round(float(np.mean([len(set(pn) & set(PANEL.tolist())) / len(PANEL) for pn in _panels])), 10)
     # The same reference fitted on the swapped panels: each patient's features are the donor's panel
     # that the swap arm showed the model (the archived 'src' of every swap record). A supervised
     # learner given a stranger's panel should fall to chance against this patient's label, which is
@@ -133,7 +133,7 @@ def analyze(run):
         oofs = np.zeros(len(Y))
         for tr, te in StratifiedKFold(5, shuffle=True, random_state=2024).split(Fs, Y):
             oofs[te] = pipe.fit(Fs[tr], Y[tr]).predict_proba(Fs[te])[:, 1]
-        M['logistic_auroc_swapped'] = round(float(roc_auc_score(Y, oofs)), 4)
+        M['logistic_auroc_swapped'] = round(float(roc_auc_score(Y, oofs)), 10)
         M['logistic_auroc_swapped_ci'] = list(boot_auc(Y, oofs))
         # The swap diagnostic that matches the model's: the reference fitted on the patients' own
         # training panels and applied, frozen, to the held-out patients' own panels (oof above) and to
@@ -141,7 +141,7 @@ def analyze(run):
         ooff = np.zeros(len(Y))
         for tr, te in StratifiedKFold(5, shuffle=True, random_state=2024).split(F, Y):
             ooff[te] = pipe.fit(F[tr], Y[tr]).predict_proba(Fs[te])[:, 1]
-        M['logistic_auroc_frozen_swap'] = round(float(roc_auc_score(Y, ooff)), 4)
+        M['logistic_auroc_frozen_swap'] = round(float(roc_auc_score(Y, ooff)), 10)
         M['logistic_auroc_frozen_swap_ci'] = list(boot_auc(Y, ooff))
 
     # The own-versus-swap comparison itself: a patient-level paired bootstrap of the AUROC difference,
@@ -158,15 +158,15 @@ def analyze(run):
     _d = np.array(_d); _obs = float(roc_auc_score(_y, _o) - roc_auc_score(_y, _s))
     _p_two = float(2 * min((_d <= 0).mean(), (_d >= 0).mean()))
     _lo90, _hi90 = float(np.percentile(_d, 5)), float(np.percentile(_d, 95))
-    M['own_vs_swap'] = dict(n=int(_ok.sum()), auroc_diff=round(_obs, 4),
-                            ci95=[round(float(np.percentile(_d, 2.5)), 4), round(float(np.percentile(_d, 97.5)), 4)],
-                            ci90=[round(_lo90, 4), round(_hi90, 4)], boot_p=round(_p_two, 4),
+    M['own_vs_swap'] = dict(n=int(_ok.sum()), auroc_diff=round(_obs, 10),
+                            ci95=[round(float(np.percentile(_d, 2.5)), 10), round(float(np.percentile(_d, 97.5)), 10)],
+                            ci90=[round(_lo90, 10), round(_hi90, 10)], boot_p=round(_p_two, 10),
                             equivalent_005=bool(_lo90 > -0.05 and _hi90 < 0.05),
                             equivalent_002=bool(_lo90 > -0.02 and _hi90 < 0.02),
                             note='patient-level paired bootstrap, 4000 resamples; equivalence read from the 90 % interval')
     uni = [roc_auc_score(Y, F[:, j]) for j in range(F.shape[1])]
     jb = int(np.argmax([max(u, 1 - u) for u in uni]))
-    M['best_univariate_auroc'] = round(float(max(max(uni), 1 - min(uni))), 4)
+    M['best_univariate_auroc'] = round(float(max(max(uni), 1 - min(uni))), 10)
     M['best_univariate_id'] = des['panel_ids'][jb]
     M['best_univariate_direction'] = 'high expression predicts MSI-H' if uni[jb] >= 0.5 else 'low expression predicts MSI-H'
     M['best_univariate_note'] = 'computed in sample over the whole cohort, therefore optimistic'
@@ -176,7 +176,7 @@ def analyze(run):
         u = [roc_auc_score(Y[tr], F[tr, j]) for j in range(F.shape[1])]
         j = int(np.argmax([max(x, 1 - x) for x in u])); sign = 1.0 if u[j] >= 0.5 else -1.0
         oof1[te] = sign * F[te, j]
-    M['best_univariate_auroc_oof'] = round(float(roc_auc_score(Y, oof1)), 4)
+    M['best_univariate_auroc_oof'] = round(float(roc_auc_score(Y, oof1)), 10)
     # When the same reaction with the same sign is chosen in every training fold, the out-of-fold score
     # vector is the feature itself and its AUROC coincides with the in-sample value by construction; the
     # out-of-fold value then certifies the stability of the choice, not a different accuracy.
@@ -200,12 +200,12 @@ def analyze(run):
             if f'count|{p}' in raw and raw[f'count|{p}']['val'] is not None]
     if pred:
         a = np.array([x for x, _ in pred]); b = np.array([t for _, t in pred])
-        M['arms']['count'] = dict(n=len(pred), exact=round(float((a == b).mean()), 4),
-                                  within_two=round(float((np.abs(a - b) <= 2).mean()), 4),
-                                  mae=round(float(np.abs(a - b).mean()), 4),
-                                  spearman=round(float(st.spearmanr(a, b).statistic), 4),
-                                  truth_mean=round(float(b.mean()), 2), pred_mean=round(float(a.mean()), 2),
-                                  truth_sd=round(float(b.std()), 2), pred_sd=round(float(a.std()), 2))
+        M['arms']['count'] = dict(n=len(pred), exact=round(float((a == b).mean()), 10),
+                                  within_two=round(float((np.abs(a - b) <= 2).mean()), 10),
+                                  mae=round(float(np.abs(a - b).mean()), 10),
+                                  spearman=round(float(st.spearmanr(a, b).statistic), 10),
+                                  truth_mean=round(float(b.mean()), 10), pred_mean=round(float(a.mean()), 10),
+                                  truth_sd=round(float(b.std()), 10), pred_sd=round(float(a.std()), 10))
 
 
     M['run'] = run; M['model'] = des.get('model')

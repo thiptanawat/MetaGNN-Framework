@@ -7,6 +7,8 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 MODE=${1:-analysis}
+# the committed results were written with the versions of requirements.txt; say so when others are installed
+python3 tools/check_environment.py
 echo "== paper 1 =="
 python3 paper1/code/split_audit.py
 # the label-blind reaction families the family-disjoint split rests on, rebuilt from the reference
@@ -16,6 +18,10 @@ python3 paper1/code/build_families.py >/dev/null
 # rescoring drops; both are inputs to build_results_p1.py
 python3 paper1/code/split_audit.py --family_map paper1/data/families/families_union.json \
     --out paper1/results/split_audit_fam.json --matched_out paper1/results/fam_matched.json >/dev/null
+# the fixed splits as one file (patient folds, random and family-disjoint reaction folds): the folds
+# are rebuilt with the drivers' own construction and must equal the committed file, which is the
+# one in the data record
+python3 paper1/code/export_splits.py --check >/dev/null
 python3 paper1/code/inference_p1.py
 python3 paper1/code/build_results_p1.py
 # the ledger hashes every result and data file, so it runs after the last script that writes one

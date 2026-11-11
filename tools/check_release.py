@@ -20,8 +20,13 @@ reachable from a committed script, whether the file is current, or
 whether it is tracked by git; a path can pass this check and still be,
 for instance, an output that only a GPU run regenerates.
 
+A third check reads CHECKSUMS.sha256, the checksum list of the scorer's code, pipelines, tests and
+validators: every listed file must be present and unchanged, and every file of that scope must be
+listed.
+
 Usage:
     python3 tools/check_release.py
+    python3 tools/check_release.py --write-checksums    # rewrite CHECKSUMS.sha256 for its scope
 """
 import glob
 import os
@@ -181,8 +186,78 @@ def check_manifest():
     return problems
 
 
+# The checksum list covers the scorer's own code, its pipelines, tests and validators, and three
+# files at the root. It is written with --write-checksums and checked on every run, so a file that
+# was removed or changed without the list being rewritten fails the release check.
+CHECKSUM_FILE = os.path.join(REPO, "CHECKSUMS.sha256")
+CHECKSUM_DIRS = ("framework", "pipelines", "tests", "validators")
+CHECKSUM_FILES = ("requirements-test.txt", "requirements-verified.txt", "TEST_REPORT.md")
+CHECKSUM_SKIP_DIRS = {"__pycache__", ".pytest_cache", ".ipynb_checkpoints"}
+
+
+def _sha256(path):
+    import hashlib
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for block in iter(lambda: f.read(1 << 20), b""):
+            h.update(block)
+    return h.hexdigest()
+
+
+def checksum_scope():
+    out = []
+    for d in CHECKSUM_DIRS:
+        for root, dirs, files in os.walk(os.path.join(REPO, d)):
+            dirs[:] = sorted(x for x in dirs if x not in CHECKSUM_SKIP_DIRS)
+            for f in sorted(files):
+                if f == ".DS_Store" or f.endswith(".pyc"):
+                    continue
+                out.append(os.path.relpath(os.path.join(root, f), REPO))
+    out += [f for f in CHECKSUM_FILES if os.path.exists(os.path.join(REPO, f))]
+    return out
+
+
+def write_checksums():
+    scope = checksum_scope()
+    with open(CHECKSUM_FILE, "w") as f:
+        for rel in scope:
+            f.write("%s  ./%s\n" % (_sha256(os.path.join(REPO, rel)), rel))
+    print(f"wrote CHECKSUMS.sha256 with {len(scope)} files")
+
+
+def check_checksums():
+    """Every file the checksum list names must be present and unchanged, and the list must name
+    every file of its scope."""
+    if not os.path.exists(CHECKSUM_FILE):
+        print("checksum list: CHECKSUMS.sha256 is missing")
+        return ["CHECKSUMS.sha256 is missing"]
+    problems = []; listed = set()
+    for line in open(CHECKSUM_FILE):
+        line = line.rstrip("\n")
+        if not line.strip():
+            continue
+        digest, _, rel = line.partition("  ")
+        rel = rel[2:] if rel.startswith("./") else rel
+        listed.add(rel)
+        path = os.path.join(REPO, rel)
+        if not os.path.isfile(path):
+            problems.append(f"CHECKSUMS.sha256 lists a file that is absent: {rel}")
+        elif _sha256(path) != digest:
+            problems.append(f"CHECKSUMS.sha256 does not match the file: {rel}")
+    for rel in checksum_scope():
+        if rel not in listed:
+            problems.append(f"CHECKSUMS.sha256 does not list: {rel}")
+    print(f"checksum list: {len(listed)} files listed, {len(problems)} problem{'s' if len(problems) != 1 else ''}")
+    for p in problems:
+        print("  " + p)
+    return problems
+
+
 def main():
-    manifest_problems = check_manifest()
+    if "--write-checksums" in sys.argv[1:]:
+        write_checksums()
+        return 0
+    manifest_problems = check_manifest() + check_checksums()
 
     present = [d for d in MANUSCRIPT_DIRS if os.path.isdir(d)]
     for d in MANUSCRIPT_DIRS:

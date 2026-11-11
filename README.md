@@ -34,8 +34,8 @@ against measured CRISPR gene effect.
 
 `STUDIES.md` is the entry point: what was found, how the repository is laid out, and the one
 command that regenerates every number from the committed outputs. `metabench/` packages the
-five checks so they can be pointed at another benchmark. The manuscripts themselves are under
-review and are not in this repository yet.
+five checks so they can be pointed at another benchmark. The manuscripts themselves are not
+part of this repository until they are published.
 
 ## Installation
 
@@ -62,12 +62,27 @@ on a minimal install. See `TEST_REPORT.md` for the full pass/skip breakdown.
 
 ## Reproducing the results
 
-The processed tensors, trained checkpoints, and per-reaction score outputs are
-archived on Zenodo (see the Data DOI badge above). Each `pipelines/<cancer>/`
-directory is numbered in execution order, starting from `00_build_recon3d_graph.py`,
-which rebuilds the heterogeneous graph from `Recon3D.json` in the data archive.
-`verify_reproducibility.py` in the data archive recomputes the BRCA headline metrics
-(AUROC 0.9864, AUPRC 0.9937) directly from the shipped files.
+`bash reproduce.sh analysis` regenerates every number of the two studies from the committed
+result files, with no GPU and no network. `docs/REPRODUCTION_PAPER1.md` and
+`docs/REPRODUCTION_PAPER2.md` separate what a checkout regenerates from what needs the
+prediction arrays, the served models or the accelerator.
+
+The curated cohort is archived on Zenodo (see the Data DOI badge above): 624 colorectal tumors
+with their reaction features, the reconstruction-derived labels, the clinical annotation and the
+fixed splits, together with the per-cell prediction arrays of the first study.
+`paper1/data/splits/splits.json` is the same split file as the one in the archive. Each
+`pipelines/<cancer>/` directory is numbered in execution order, starting from
+`00_build_recon3d_graph.py`, which rebuilds the heterogeneous graph from `Recon3D.json` in the
+data archive.
+
+Two earlier results of the scorer should not be read as accuracy. The near-ceiling score on the
+breast cohort (AUROC 0.9864) is label leakage: those labels are thresholds of the model's own
+input where a reaction carries expression and seeded random draws elsewhere, as the preprint
+cited below shows and `diagnostics/05_label_replay.py` in the data archive replays. The
+versions of the data record deposited in July and September 2026 also held a 220-patient
+colorectal set that was later found to be synthetic, and colorectal feature tensors that were
+all zero; the current version replaces both, and `VERSION_NOTE.md` in its cohort archive lists
+what changed. Use the current version of the record.
 
 ## Data availability
 
@@ -79,15 +94,16 @@ cBioPortal and the NIH Proteomic Data Commons by users with appropriate access.
 
 ## Citation
 
-If you use this code, please cite the MetaGNN manuscript and the archived releases:
+If you use this code or these checks, please cite the preprint and the archived records:
 
-> Phongwattana, T. and Chan, J. H. MetaGNN: A Heterogeneous Graph Attention Network
-> for Hub-Connectivity-Aware Reaction Activity Scoring Toward Metabolic Network
-> Reconstruction. Code: https://doi.org/10.5281/zenodo.21217569 ·
-> Data: https://doi.org/10.5281/zenodo.21217579
+> Phongwattana, T. and Chan, J. H. Benchmark validity in graph neural network scoring of
+> metabolic reaction activity on Recon3D: detecting label leakage, memorized noise and
+> input-invariant models. bioRxiv (2026). https://doi.org/10.64898/2026.09.02.748315
+>
+> Code: https://doi.org/10.5281/zenodo.21217568 · Data: https://doi.org/10.5281/zenodo.21217578
 
-The badges above carry the concept identifiers of the two records, which resolve to their
-current versions. The two benchmark-validity studies correspond to the tag named in
+The two identifiers above and the badges are the concept identifiers of the records, which
+resolve to their current versions. The two benchmark-validity studies correspond to the tag named in
 `release.json`; the version identifiers minted for that tag are recorded there and in
 `CITATION.cff` once they exist.
 

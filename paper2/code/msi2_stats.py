@@ -117,49 +117,49 @@ def analyze(run):
     # serving determinism from the repeat subset
     rep_delta = [abs(rep[a] - own[a]) for a in rep if np.isfinite(own[a])]
     R = dict(run=run, cohort=d["cohort"], backbone=d.get("model"), config=d["config"], endpoint=d["endpoint"],
-             donor_seed=d["donor_seed"], n=n, n_eval=n_eval, n_pos=int(y[okc].sum()), prevalence=round(float(y[okc].mean()), 4),
+             donor_seed=d["donor_seed"], n=n, n_eval=n_eval, n_pos=int(y[okc].sum()), prevalence=round(float(y[okc].mean()), 10),
              failed_calls=d.get("failed_calls"),
-             own_auroc=round(a_own, 4), own_auprc=round(aup(y, own), 4),
-             donor_auroc_cached=round(a_don0, 4), own_minus_donor_cached=round(a_own - a_don0, 4),
-             donor_auroc=round(a_don_direct, 4) if _two else None,
-             own_minus_donor=round(a_own_paired - a_don_direct, 4) if _two else round(a_own - a_don0, 4),
+             own_auroc=round(a_own, 10), own_auprc=round(aup(y, own), 10),
+             donor_auroc_cached=round(a_don0, 10), own_minus_donor_cached=round(a_own - a_don0, 10),
+             donor_auroc=round(a_don_direct, 10) if _two else None,
+             own_minus_donor=round(a_own_paired - a_don_direct, 10) if _two else round(a_own - a_don0, 10),
              own_minus_donor_direct_n=n_direct,
-             own_minus_donor_direct_ci95=([round(float(np.percentile(ddiffs, 2.5)), 4),
-                                           round(float(np.percentile(ddiffs, 97.5)), 4)] if len(ddiffs) else None),
-             own_minus_donor_direct_null_p=(round(float((dnull >= (a_own_paired - a_don_direct)).mean()), 4)
+             own_minus_donor_direct_ci95=([round(float(np.percentile(ddiffs, 2.5)), 10),
+                                           round(float(np.percentile(ddiffs, 97.5)), 10)] if len(ddiffs) else None),
+             own_minus_donor_direct_null_p=(round(float((dnull >= (a_own_paired - a_don_direct)).mean()), 10)
                                             if len(dnull) else None),
              own_minus_donor_direct_null_exceedances=(int((dnull >= (a_own_paired - a_don_direct)).sum()) if len(dnull) else None),
              own_minus_donor_direct_null_draws=int(len(dnull)),
-             own_minus_donor_direct_null_p_mc=(round(float(((dnull >= (a_own_paired - a_don_direct)).sum() + 1) / (len(dnull) + 1)), 4)
+             own_minus_donor_direct_null_p_mc=(round(float(((dnull >= (a_own_paired - a_don_direct)).sum() + 1) / (len(dnull) + 1)), 10)
                                                if len(dnull) else None),
              donor_served_vs_cached_n=int(len(_dd)),
              donor_served_vs_cached_n_changed=int((_dd > 0).sum()) if len(_dd) else None,
-             donor_served_vs_cached_median_abs=round(float(np.median(_dd)), 4) if len(_dd) else None,
-             donor_served_vs_cached_max_abs=round(float(np.max(_dd)), 4) if len(_dd) else None,
-             own_minus_donor_schedule_mean=round(float(np.mean(sched)), 4), own_minus_donor_schedule_sd=round(float(np.std(sched)), 4),
-             own_minus_donor_ci95=[round(float(np.percentile(diffs, 2.5)), 4), round(float(np.percentile(diffs, 97.5)), 4)],
-             own_minus_donor_boot_mean=round(float(np.mean(diffs)), 4),
-             exch_null_mean=round(float(null.mean()), 4), exch_null_p=round(float((null >= (a_own - a_don0)).mean()), 4),
+             donor_served_vs_cached_median_abs=round(float(np.median(_dd)), 10) if len(_dd) else None,
+             donor_served_vs_cached_max_abs=round(float(np.max(_dd)), 10) if len(_dd) else None,
+             own_minus_donor_schedule_mean=round(float(np.mean(sched)), 10), own_minus_donor_schedule_sd=round(float(np.std(sched)), 10),
+             own_minus_donor_ci95=[round(float(np.percentile(diffs, 2.5)), 10), round(float(np.percentile(diffs, 97.5)), 10)],
+             own_minus_donor_boot_mean=round(float(np.mean(diffs)), 10),
+             exch_null_mean=round(float(null.mean()), 10), exch_null_p=round(float((null >= (a_own - a_don0)).mean()), 10),
              # the count behind the proportion, and the Monte Carlo estimator (b + 1) / (B + 1) that
              # never reports zero exceedances as a probability of zero
              exch_null_exceedances=int((null >= (a_own - a_don0)).sum()), exch_null_draws=int(len(null)),
-             exch_null_p_mc=round(float(((null >= (a_own - a_don0)).sum() + 1) / (len(null) + 1)), 4),
-             serving_repeat_n=len(rep_delta), serving_repeat_median_abs=round(float(np.median(rep_delta)), 4) if rep_delta else None,
-             serving_repeat_max_abs=round(float(np.max(rep_delta)), 4) if rep_delta else None,
+             exch_null_p_mc=round(float(((null >= (a_own - a_don0)).sum() + 1) / (len(null) + 1)), 10),
+             serving_repeat_n=len(rep_delta), serving_repeat_median_abs=round(float(np.median(rep_delta)), 10) if rep_delta else None,
+             serving_repeat_max_abs=round(float(np.max(rep_delta)), 10) if rep_delta else None,
              # a median of zero says the typical repeat is identical, not that every repeat is: the
              # count of repeats that moved at all is the quantity that settles the stronger claim
              serving_repeat_n_changed=int(sum(1 for x in rep_delta if x > 0)) if rep_delta else None,
-             serving_repeat_p90_abs=round(float(np.quantile(rep_delta, 0.90)), 4) if rep_delta else None)
+             serving_repeat_p90_abs=round(float(np.quantile(rep_delta, 0.90)), 10) if rep_delta else None)
     # calibration of the own scores: developed on the development cohort, applied unchanged here
     ok = np.isfinite(own)
-    R["brier_own"] = round(float(brier_score_loss(y[ok], np.clip(own[ok], 0, 1))), 4)
-    R["logloss_own"] = round(float(log_loss(y[ok], np.clip(own[ok], 0.005, 0.995), labels=[0, 1])), 4)
-    R["mean_prob_own"] = round(float(np.nanmean(own)), 4)
+    R["brier_own"] = round(float(brier_score_loss(y[ok], np.clip(own[ok], 0, 1))), 10)
+    R["logloss_own"] = round(float(log_loss(y[ok], np.clip(own[ok], 0.005, 0.995), labels=[0, 1])), 10)
+    R["mean_prob_own"] = round(float(np.nanmean(own)), 10)
     if d["config"] == "tool":
         okt = np.isfinite(tool) & np.isfinite(own)
-        R["tool_only_auroc"] = round(auc(y, tool), 4); R["tool_only_auprc"] = round(aup(y, tool), 4)
-        R["tool_fidelity_median_abs"] = round(float(np.median(np.abs(own[okt] - tool[okt]))), 4)
-        R["tool_fidelity_within_0.05"] = round(float((np.abs(own[okt] - tool[okt]) < 0.05).mean()), 4)
+        R["tool_only_auroc"] = round(auc(y, tool), 10); R["tool_only_auprc"] = round(aup(y, tool), 10)
+        R["tool_fidelity_median_abs"] = round(float(np.median(np.abs(own[okt] - tool[okt]))), 10)
+        R["tool_fidelity_within_0.05"] = round(float((np.abs(own[okt] - tool[okt]) < 0.05).mean()), 10)
         R["n_tool_pairs"] = int(okt.sum())
     return R, (d, y, own)
 
@@ -174,13 +174,13 @@ def calibration_map(dev_scores, dev_y):
     ok = np.isfinite(dev_scores); p = np.clip(dev_scores[ok], 1e-4, 1 - 1e-4); z = np.log(p / (1 - p)).reshape(-1, 1)
     m = LogisticRegression(C=1e6, max_iter=5000).fit(z, dev_y[ok])
     a, b = float(m.coef_[0, 0]), float(m.intercept_[0])
-    rec = dict(fitted_a=round(a, 4), fitted_b=round(b, 4), n_fit=int(ok.sum()))
+    rec = dict(fitted_a=round(a, 10), fitted_b=round(b, 10), n_fit=int(ok.sum()))
     if a <= 0:
         prev = float(np.mean(dev_y[ok])); prev = min(max(prev, 1e-4), 1 - 1e-4)
-        rec.update(a=0.0, b=round(float(np.log(prev / (1 - prev))), 4), constant_fallback=True,
+        rec.update(a=0.0, b=round(float(np.log(prev / (1 - prev))), 10), constant_fallback=True,
                    note="fitted slope at or below zero; the constant map at the development prevalence is applied, as the plan specifies")
     else:
-        rec.update(a=round(a, 4), b=round(b, 4), constant_fallback=False)
+        rec.update(a=round(a, 10), b=round(b, 10), constant_fallback=False)
     return rec
 
 def apply_map(scores, ab):
@@ -202,10 +202,10 @@ def calibrate(OUT, store):
         if not rec or run not in OUT["runs"]: continue
         ab = (rec["a"], rec["b"]); ok = np.isfinite(own); pc = apply_map(own[ok], ab)
         OUT["runs"][run]["calibrated"] = dict(
-            brier=round(float(brier_score_loss(y[ok], pc)), 4),
-            logloss=round(float(log_loss(y[ok], np.clip(pc, 0.005, 0.995), labels=[0, 1])), 4),
+            brier=round(float(brier_score_loss(y[ok], pc)), 10),
+            logloss=round(float(log_loss(y[ok], np.clip(pc, 0.005, 0.995), labels=[0, 1])), 10),
             # a constant map carries no ranking, so its AUROC is not reported as a discrimination
-            auroc=(None if rec["constant_fallback"] else round(float(roc_auc_score(y[ok], pc)), 4)),
+            auroc=(None if rec["constant_fallback"] else round(float(roc_auc_score(y[ok], pc)), 10)),
             constant_fallback=bool(rec["constant_fallback"]), map=dict(a=rec["a"], b=rec["b"]),
             fitted=dict(a=rec["fitted_a"], b=rec["fitted_b"]))
 
@@ -232,9 +232,9 @@ def reference_on_cohort(cohort):
     ok = np.isfinite(P).all(1); P = P[ok]/100.0; y = y[ok]
     s = 1.0/(1.0+np.exp(-(P@coef + b)))
     D0 = derangement(len(y), 11)
-    return dict(cohort=cohort, n=int(len(y)), n_pos=int(y.sum()), auroc=round(float(roc_auc_score(y, s)), 4),
-                auprc=round(float(average_precision_score(y, s)), 4),
-                own_minus_donor=round(float(roc_auc_score(y, s) - roc_auc_score(y, s[D0])), 4))
+    return dict(cohort=cohort, n=int(len(y)), n_pos=int(y.sum()), auroc=round(float(roc_auc_score(y, s)), 10),
+                auprc=round(float(average_precision_score(y, s)), 10),
+                own_minus_donor=round(float(roc_auc_score(y, s) - roc_auc_score(y, s[D0])), 10))
 
 # Every collection directory is enumerated, not only the analyzable ones. A collection whose
 # design.json is missing was interrupted before the collector wrote it, and its responses are

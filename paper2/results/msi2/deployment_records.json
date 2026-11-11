@@ -59,7 +59,7 @@
    "prompt_tokens_median": 931.0,
    "prompt_tokens_min": 819,
    "prompt_tokens_max": 2588,
-   "latency_s_median": 5.31,
+   "latency_s_median": 5.311999917,
    "not_recorded": [
     "weight revision or artifact digest",
     "tokenizer file identity",
@@ -126,7 +126,7 @@
    "prompt_tokens_median": 870.0,
    "prompt_tokens_min": 759,
    "prompt_tokens_max": 2417,
-   "latency_s_median": 2.49,
+   "latency_s_median": 2.492000103,
    "not_recorded": [
     "weight revision or artifact digest",
     "tokenizer file identity",
@@ -195,7 +195,7 @@
    "prompt_tokens_median": 938,
    "prompt_tokens_min": 776,
    "prompt_tokens_max": 2447,
-   "latency_s_median": 1.17,
+   "latency_s_median": 1.1660001278,
    "not_recorded": [
     "weight revision or artifact digest",
     "tokenizer file identity",

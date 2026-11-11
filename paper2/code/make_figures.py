@@ -89,7 +89,8 @@ for k, (tag, ax) in enumerate(zip(tags, axes)):
     ax.text(0.0, 1.03, f"{r['n_patients']} patients, {MODEL_NAME.get(r['model'], r['model'])}",
             transform=ax.transAxes, fontsize=6.6, color=GREY, ha='left', va='bottom')
     for i, v in enumerate(vals):
-        ax.text(i, v + his[i] + 0.010, f'{v:.3f}', ha='center', fontsize=7)
+        ax.text(i, v + his[i] + 0.010, f'{v:.3f}', ha='center', fontsize=7, zorder=6,
+                bbox=dict(facecolor='white', edgecolor='none', pad=0.6))
 for _r in range(_nrow): axes[_r * _ncol].set_ylabel('AUROC vs activity labels')
 from matplotlib.lines import Line2D
 fig.legend(handles=[Line2D([], [], color=AQUA, lw=1.4, label='raw expression, no model'),
@@ -211,10 +212,8 @@ gp = [r['reaction']['expression_bearing']['mean_p'], r['patient']['expression_be
 np_ = [r['reaction']['no_expression']['mean_p'], r['patient']['no_expression']['mean_p']]
 ax.plot([0, 1], gp, 'o-', color=BLUE, lw=1.6, ms=6, label='reaction receives a value')
 ax.plot([0, 1], np_, 'o-', color=ORANGE, lw=1.6, ms=6, label='reaction receives none')
-ax.text(-0.06, gp[0] - 0.045, f'{gp[0]:.3f}', ha='center', fontsize=7, color=BLUE)
-ax.text(1.0, gp[1] + 0.025, f'{gp[1]:.3f}', ha='center', fontsize=7, color=BLUE)
-ax.text(-0.06, np_[0] + 0.025, f'{np_[0]:.3f}', ha='center', fontsize=7, color=ORANGE)
-ax.text(1.0, np_[1] - 0.048, f'{np_[1]:.3f}', ha='center', fontsize=7, color=ORANGE)
+for _x, _v, _c in ((0, gp[0], BLUE), (1, gp[1], BLUE), (0, np_[0], ORANGE), (1, np_[1], ORANGE)):
+    ax.text(_x, _v + 0.034, f'{_v:.3f}', ha='center', va='bottom', fontsize=7, color=_c)
 ax.set_xticks([0, 1]); ax.set_xticklabels(['reaction\nonly', '+ patient\ncontext'])
 ax.set_xlim(-0.35, 1.35); ax.set_ylim(0, 0.75)
 ax.set_ylabel('mean returned $p$(active)')
@@ -376,4 +375,45 @@ for i, (k, nm) in enumerate(_bb):
 axes[0, 0].legend(frameon=False, loc='upper left', fontsize=6.0, handlelength=1.4, labelspacing=0.3, borderpad=0.2,
                   scatterpoints=1, markerscale=0.9)
 fig.tight_layout(w_pad=1.2); fig.savefig(FIGDIR + '/fig_reliability.png'); plt.close(fig)
+# ---------------------------------------------------------------- Graphical abstract
+# The design and the patient-level result in one landscape image of fixed size (5:2, 2656 x 1062
+# pixels), drawn from the same results file as the figures: the three prompt arms on the left, the
+# own-panel and stranger's-panel AUROC of each backbone on the right.
+fig = plt.figure(figsize=(13.28, 5.31))
+ax = fig.add_axes([0.015, 0.03, 0.56, 0.94]); ax.axis('off'); ax.set_xlim(0, 10); ax.set_ylim(0, 4.6)
+ax.text(0.15, 4.28, 'Three prompts that differ in one line', fontsize=19, fontweight='bold', va='center')
+for i, (nm, txt, note, fc, ec) in enumerate(
+        [('reaction', 'the reaction, with no patient data', 'patient-blind', LGREY, GREY),
+         ('patient', 'plus this patient\'s own expression', 'own input', '#cfe0f6', BLUE),
+         ('shuffled', 'plus a stranger\'s expression,\npresented as this patient\'s', 'donor input', '#fbd9c9', ORANGE)]):
+    y = 3.35 - i * 1.06
+    ax.add_patch(FancyBboxPatch((0.15, y - 0.41), 7.1, 0.82, boxstyle='round,pad=0.04', fc=fc, ec=ec, lw=2.0))
+    ax.text(0.42, y, nm, fontsize=17, fontweight='bold', family='monospace', va='center')
+    ax.text(2.55, y, txt, fontsize=14.5, va='center', linespacing=1.15)
+    ax.text(7.5, y, note, fontsize=15, va='center', color=ec, style='italic', fontweight='bold')
+ax.text(0.15, 0.30, 'Does the answer depend on whose values the model is shown?', fontsize=15.5, color='black', va='center')
+
+ax = fig.add_axes([0.665, 0.17, 0.315, 0.60])
+for i, (k, nm) in enumerate(_bb):
+    for j, (arm, col) in enumerate((('own', BLUE), ('swap', ORANGE))):
+        v = R[k]['arms'][arm]
+        ax.errorbar(i + (-0.17 if j == 0 else 0.17), v['auroc'],
+                    yerr=[[v['auroc'] - v['auroc_ci'][0]], [v['auroc_ci'][1] - v['auroc']]],
+                    fmt='o', color=col, ms=11, capsize=6, lw=2.4, capthick=2.4,
+                    label=('own panel' if j == 0 else "stranger's panel") if i == 0 else None)
+ax.axhline(0.5, color='#999', lw=1.6, ls=':')
+ax.axhline(M['logistic_auroc'], color=AQUA, lw=2.6)
+ax.text(len(_bb) - 0.45, M['logistic_auroc'] - 0.04, 'supervised reference', color=AQUA, fontsize=13.5, ha='right', va='top')
+ax.set_xticks(range(len(_bb))); ax.set_xticklabels([nm for _, nm in _bb], fontsize=15)
+ax.set_xlim(-0.6, len(_bb) - 0.4); ax.set_ylim(0.2, 1.0); ax.set_yticks([0.2, 0.4, 0.6, 0.8, 1.0])
+ax.tick_params(axis='y', labelsize=13.5, width=1.4, length=5); ax.tick_params(axis='x', width=1.4, length=5)
+for sp in ('left', 'bottom'): ax.spines[sp].set_linewidth(1.4)
+ax.set_ylabel('AUROC, MSI-H against MSS', fontsize=14.5)
+ax.legend(frameon=False, loc='lower left', fontsize=13.5, handlelength=1.0, ncol=2, columnspacing=1.0,
+          handletextpad=0.3, borderpad=0.0, bbox_to_anchor=(-0.02, 1.01))
+fig.text(0.612, 0.93, 'Patient-level target: MSI status', fontsize=19, fontweight='bold', va='center')
+fig.text(0.612, 0.045, 'Three language models, the same 40-reaction panel', fontsize=13, color=GREY, va='center')
+with plt.rc_context({'savefig.bbox': 'standard'}):      # the canvas is the image: no tight cropping here
+    fig.savefig(FIGDIR + '/graphical_abstract.png', dpi=200)
+plt.close(fig)
 print('figures written')

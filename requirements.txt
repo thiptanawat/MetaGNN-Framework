@@ -1,5 +1,7 @@
 # Exact versions of the environment the reported runs used, as stated in the manuscripts.
 # Python 3.10.12.
+# The committed result files were written with these versions of NumPy, SciPy and scikit-learn;
+# tools/check_environment.py compares an installation with them.
 numpy==2.2.6
 scipy==1.15.3
 scikit-learn==1.7.2      # four-decimal logistic-regression AUROCs move across minor versions

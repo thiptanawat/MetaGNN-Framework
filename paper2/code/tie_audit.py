@@ -40,14 +40,14 @@ def audit(pats, rxns, expr_only):
             p = np.round(PCT[members, j]); spread.append(float(p.max() - p.min()))
         shift.extend(np.abs(np.round(PCT[pats, j]) - np.round(PCT_MID[pats, j]))[te[pats]].tolist())
     return dict(n_patients=int(len(pats)), n_reactions=int(len(rxns)), n_entries=int(n_entries),
-                tied_exact=int(tied_exact), tied_exact_share=round(100.0 * tied_exact / n_entries, 2),
-                tied_after_rounding=int(tied_round), tied_after_rounding_share=round(100.0 * tied_round / n_entries, 2),
+                tied_exact=int(tied_exact), tied_exact_share=round(100.0 * tied_exact / n_entries, 10),
+                tied_after_rounding=int(tied_round), tied_after_rounding_share=round(100.0 * tied_round / n_entries, 10),
                 extra_ties_from_rounding=int(tied_round - tied_exact),
                 tie_groups_exact=int(groups_exact),
-                printed_percentile_spread_within_tie_max=(round(max(spread), 1) if spread else 0.0),
-                printed_percentile_spread_within_tie_mean=(round(float(np.mean(spread)), 2) if spread else 0.0),
-                midrank_shift_of_tied_entries_mean=(round(float(np.mean(shift)), 2) if shift else 0.0),
-                midrank_shift_of_tied_entries_max=(round(float(np.max(shift)), 1) if shift else 0.0))
+                printed_percentile_spread_within_tie_max=(round(max(spread), 10) if spread else 0.0),
+                printed_percentile_spread_within_tie_mean=(round(float(np.mean(spread)), 10) if spread else 0.0),
+                midrank_shift_of_tied_entries_mean=(round(float(np.mean(shift)), 10) if shift else 0.0),
+                midrank_shift_of_tied_entries_max=(round(float(np.max(shift)), 10) if shift else 0.0))
 
 R = dict(note='ties in the stored reaction-level expression across the 624 patients at the reactions each design shows; '
               'an entry is tied when at least one other patient has the identical stored value (exact) or the identical '
@@ -65,7 +65,7 @@ te_all = 0; n_all = 0
 for j in np.where(HAS)[0]:
     _, inv, cnt = np.unique(X[:, j], return_inverse=True, return_counts=True)
     te_all += int((cnt[inv] > 1).sum()); n_all += N
-R['cohort_expression_bearing'] = dict(n_entries=int(n_all), tied_exact=int(te_all), tied_exact_share=round(100.0 * te_all / n_all, 2))
+R['cohort_expression_bearing'] = dict(n_entries=int(n_all), tied_exact=int(te_all), tied_exact_share=round(100.0 * te_all / n_all, 10))
 import os
 os.makedirs(os.path.join(PATHS.ROOT, 'results'), exist_ok=True)
 json.dump(R, open(os.path.join(PATHS.ROOT, 'results', 'tie_audit.json'), 'w'), indent=1)

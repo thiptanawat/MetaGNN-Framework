@@ -8,14 +8,14 @@
    "n_reactions": 40,
    "n_entries": 23160,
    "tied_exact": 141,
-   "tied_exact_share": 0.61,
+   "tied_exact_share": 0.6088082902,
    "tied_after_rounding": 2252,
-   "tied_after_rounding_share": 9.72,
+   "tied_after_rounding_share": 9.7236614853,
    "extra_ties_from_rounding": 2111,
    "tie_groups_exact": 12,
    "printed_percentile_spread_within_tie_max": 5.0,
    "printed_percentile_spread_within_tie_mean": 1.75,
-   "midrank_shift_of_tied_entries_mean": 0.86,
+   "midrank_shift_of_tied_entries_mean": 0.8581560284,
    "midrank_shift_of_tied_entries_max": 3.0
   },
   "A_representative": {
@@ -23,14 +23,14 @@
    "n_reactions": 161,
    "n_entries": 1610,
    "tied_exact": 22,
-   "tied_exact_share": 1.37,
+   "tied_exact_share": 1.3664596273,
    "tied_after_rounding": 397,
-   "tied_after_rounding_share": 24.66,
+   "tied_after_rounding_share": 24.6583850932,
    "extra_ties_from_rounding": 375,
    "tie_groups_exact": 13,
    "printed_percentile_spread_within_tie_max": 46.0,
-   "printed_percentile_spread_within_tie_mean": 15.69,
-   "midrank_shift_of_tied_entries_mean": 6.27,
+   "printed_percentile_spread_within_tie_mean": 15.6923076923,
+   "midrank_shift_of_tied_entries_mean": 6.2727272727,
    "midrank_shift_of_tied_entries_max": 23.0
   },
   "E_representative40": {
@@ -38,20 +38,20 @@
    "n_reactions": 161,
    "n_entries": 6440,
    "tied_exact": 120,
-   "tied_exact_share": 1.86,
+   "tied_exact_share": 1.8633540373,
    "tied_after_rounding": 1725,
-   "tied_after_rounding_share": 26.79,
+   "tied_after_rounding_share": 26.7857142857,
    "extra_ties_from_rounding": 1605,
    "tie_groups_exact": 15,
    "printed_percentile_spread_within_tie_max": 46.0,
-   "printed_percentile_spread_within_tie_mean": 13.87,
-   "midrank_shift_of_tied_entries_mean": 5.24,
+   "printed_percentile_spread_within_tie_mean": 13.8666666667,
+   "midrank_shift_of_tied_entries_mean": 5.2416666667,
    "midrank_shift_of_tied_entries_max": 23.0
   }
  },
  "cohort_expression_bearing": {
   "n_entries": 3516240,
   "tied_exact": 71692,
-  "tied_exact_share": 2.04
+  "tied_exact_share": 2.0388824426
  }
 }

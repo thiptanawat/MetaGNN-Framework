@@ -61,12 +61,12 @@ it:
   quantities, computed the same way over the same network, `\netRawExpr` and
   `\netIndicator`. Both manuscripts also state the two reference points are baselines rather
   than a ceiling for their respective benchmarks, in nearly identical language.
-- **One genuine minor inconsistency**: the share of expression-bearing reactions that are
-  labeled active is quoted as 40.7% in Reaction-Scoring Audit (`\prevExpr`) and 40.8% in Language-Model Evidence
-  (`\netPrevExpr`), a one-tenth-of-a-point difference in the same underlying quantity. It is
-  small enough to be a rounding or fold-boundary artifact of the two papers' separate
-  pipelines rather than a data mismatch, but the two figures are not identical and an editor
-  comparing the manuscripts side by side would notice it.
+- **The share of expression-bearing reactions that are labeled active, 40.7%** (2,296 of
+  5,635), in Reaction-Scoring Audit (`\prevExpr`) and in Language-Model Evidence
+  (`\netPrevExpr`). Releases up to `journal-2026-09d` printed 40.8% in the second manuscript:
+  its statistics script stored the fraction with four decimals and the generator rounded it
+  again. Since `journal-2026-11` that study's results are stored with ten decimals and rounded
+  once, when they are printed.
 - **The companion preprint's own numbers**, quoted rather than recomputed: an AUROC of
   0.9864 on its breast cancer cohort, splitting into 0.9291 on the partition of that cohort's
   labels it shows to be memorized noise, and 0.5800 on the colorectal cohort used by both

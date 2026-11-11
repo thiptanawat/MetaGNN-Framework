@@ -13,7 +13,7 @@ Every number below is emitted by `stats.py` into `results_frozen.json` and subst
 | expression-bearing reactions | 5,635 |
 | reactions carrying a GPR rule | 5,938 |
 | patients | 624 |
-| prevalence, expression-bearing vs rest | 40.8% vs 21.8% |
+| prevalence, expression-bearing vs rest | 40.7% vs 21.8% |
 | raw-expression baseline, whole network | 0.6342 +/- 0.0058 |
 | information-free indicator floor | 0.6085 |
 

@@ -67,6 +67,7 @@ guards in the manuscript switch on.
 | `make_ledger.py` | writes `../results/LEDGER.json`: every result family with the script that produced it, the settings its files carry and a SHA-256 of every result and data file, plus the checksums of the external audit's prediction CSVs and of the released prediction arrays |
 | `verify_ledger.py` | checks every hash the ledger records against the file it names, that every result file is listed, and any released prediction arrays present locally against their checksum list; exits nonzero on a mismatch |
 | `build_families.py` | rebuilds the label-blind reaction families behind the family-disjoint split from the reference network alone |
+| `export_splits.py` | writes the fixed splits to `data/splits/splits.json` (five patient folds, three random and three family-disjoint reaction folds, and the random folds of the tissue-matched-label runs) with the drivers' own fold construction; with `--check` it rebuilds the folds and stops if they differ from that file, which is what `reproduce.sh` runs; with `--arrays DIR` it compares them with the folds stored in the unpacked prediction arrays and writes `data/splits/array_check.json` |
 | `diagnostic_sim.py` | the synthetic worlds in which the substitution audit's decision rule is fixed on development worlds and read on test worlds |
 
 Run them in the order `reproduce.sh` gives, or run `bash ../../reproduce.sh analysis` from

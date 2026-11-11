@@ -37,12 +37,12 @@ for run, tag in RUNS:
             cd.append(float(np.nanmean(ap - asx)))
         cd = np.array(cd)
         per_seed[str(seed)] = dict(n_draws=int(len(cd)),
-                                   ci90=[round(float(np.percentile(cd, 5)), 4), round(float(np.percentile(cd, 95)), 4)],
-                                   ci95=[round(float(np.percentile(cd, 2.5)), 4), round(float(np.percentile(cd, 97.5)), 4)],
+                                   ci90=[round(float(np.percentile(cd, 5)), 10), round(float(np.percentile(cd, 95)), 10)],
+                                   ci95=[round(float(np.percentile(cd, 2.5)), 10), round(float(np.percentile(cd, 97.5)), 10)],
                                    within_002_90=bool(np.percentile(cd, 5) > -0.02 and np.percentile(cd, 95) < 0.02),
                                    within_002_95=bool(np.percentile(cd, 2.5) > -0.02 and np.percentile(cd, 97.5) < 0.02),
                                    within_005_90=bool(np.percentile(cd, 5) > -0.05 and np.percentile(cd, 95) < 0.05),
-                                   mean=round(float(cd.mean()), 4))
+                                   mean=round(float(cd.mean()), 10))
     hi90 = [v['ci90'][1] for v in per_seed.values()]; lo90 = [v['ci90'][0] for v in per_seed.values()]
     hi95 = [v['ci95'][1] for v in per_seed.values()]; lo95 = [v['ci95'][0] for v in per_seed.values()]
     OUT['designs'][tag] = dict(run=run, n_patients=int(len(PSEL)), n_reactions=int(len(IDX)), per_seed=per_seed,

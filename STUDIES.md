@@ -192,14 +192,21 @@ reported quantities to within that noise rather than exactly.
 
 Processed inputs are deposited under CC-BY-4.0 at
 <https://doi.org/10.5281/zenodo.21217578>: the curated 624-patient TCGA-COAD/READ cohort,
-GPR-mapped reaction features, reconstruction-derived activity labels, fixed splits and the
-parsed Recon3D network. That is the record's concept identifier, so it always resolves to
-the current version. The archived framework is at
+GPR-mapped reaction features, reconstruction-derived activity labels, the clinical annotation,
+the fixed splits and the parsed Recon3D network. That is the record's concept identifier, so it
+always resolves to the current version; `release.json` names the version that matches the
+tagged release. The split file of the archive, `crc_624/splits/splits.json`, is also committed
+here as `paper1/data/splits/splits.json`; `paper1/code/export_splits.py` writes it, and
+`reproduce.sh` checks that the folds rebuilt in the running environment equal it.
+The versions of the record deposited in July and September 2026 should not be used: their
+cohort archive held a 220-patient set later found to be synthetic and colorectal feature tensors
+that were all zero, and `VERSION_NOTE.md` in the current archive lists what replaced them. The
+archived framework is at
 <https://doi.org/10.5281/zenodo.21217568> under MIT, likewise a concept identifier.
 
 The per-cell prediction arrays of the first study (`*_preds.npz`, 299 files, 2.9 GB) are too
-large to commit and are not in the data record above, which predates these studies. They are
-attached to the tagged release named in `release.json` as ten tarballs, one per result
+large to commit. They are deposited with the cohort in the data record above and attached to
+the tagged release named in `release.json` as ten tarballs, one per result
 family, and their checksums are committed (`paper1/results/prediction_arrays.sha256` for
 every array, `paper1/results/prediction_array_tarballs.sha256` for every tarball), so a
 downloaded copy can be verified with `paper1/code/verify_ledger.py`;

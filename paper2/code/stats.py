@@ -4,6 +4,11 @@
 Every number quoted in the manuscript is produced here and written to results_frozen.json,
 so each claim in the text maps to one key in one file.
 
+Rounding. Results are stored with ten decimals, here and in the other statistics scripts of this
+study, and make_numbers.py applies the manuscript's rounding once, when it prints a value. Storing
+four decimals and printing three, or a percentage with one, rounds twice and can leave the last
+printed digit one unit off.
+
 Design note. Within an arm, the `reaction` prompts are identical for every patient by
 construction (the arm shows no patient data). The spread of the model's answers across
 those repeated identical prompts is therefore a direct measurement of serving
@@ -72,7 +77,7 @@ def analyze(out, tag):
              # calls the serving endpoint answered with a transport error (HTTP 502/503) and that were
              # re-sent with the identical prompt once it returned; zero for a run with no outage
              resent_calls=int(des.get('resent_calls', 0) or 0),
-             sampling=des.get('sampling'), label_base_rate=round(float(y.mean()), 4),
+             sampling=des.get('sampling'), label_base_rate=round(float(y.mean()), 10),
              model=des.get('model'))
 
     def auc_rows(S, mask=None):
@@ -83,19 +88,19 @@ def analyze(out, tag):
             v.append(roc_auc_score(y[ok], S[i][ok]) if len(set(y[ok])) > 1 else np.nan)
         return np.array(v)
 
-    R['raw_expression_auroc'] = round(float(np.mean(auc_rows(Xs))), 4)
-    R['raw_expression_auroc_sd'] = round(float(np.std(auc_rows(Xs))), 4)
-    R['raw_expression_auroc_expr'] = round(float(np.mean(auc_rows(Xs, hx))), 4)
+    R['raw_expression_auroc'] = round(float(np.mean(auc_rows(Xs))), 10)
+    R['raw_expression_auroc_sd'] = round(float(np.std(auc_rows(Xs))), 10)
+    R['raw_expression_auroc_expr'] = round(float(np.mean(auc_rows(Xs, hx))), 10)
     # the second number the prompt prints, the cohort percentile of the value, ranked with no model:
     # a within-reaction rank across patients carries none of the between-reaction magnitude that the
     # raw value carries, so it is a different baseline from the raw ranking (reactions shown no value
     # keep percentile zero, as in the prompt builder's arrays)
     Pz = PCTS.copy(); Pz[:, ~hx] = 0.0
-    R['raw_percentile_auroc'] = round(float(np.mean(auc_rows(Pz))), 4)
-    R['raw_percentile_auroc_expr'] = round(float(np.mean(auc_rows(Pz, hx))), 4)
-    R['indicator_floor'] = round(float(roc_auc_score(y, hx.astype(float))), 4)
+    R['raw_percentile_auroc'] = round(float(np.mean(auc_rows(Pz))), 10)
+    R['raw_percentile_auroc_expr'] = round(float(np.mean(auc_rows(Pz, hx))), 10)
+    R['indicator_floor'] = round(float(roc_auc_score(y, hx.astype(float))), 10)
     tpr, fpr = hx[y == 1].mean(), hx[y == 0].mean()
-    R['indicator_floor_closed_form'] = round(float(0.5 + 0.5 * (tpr - fpr)), 4)
+    R['indicator_floor_closed_form'] = round(float(0.5 + 0.5 * (tpr - fpr)), 10)
     # the same references as the area under the precision-recall curve, for which a constant
     # predictor scores the prevalence (label_base_rate)
     from sklearn.metrics import average_precision_score as _aps
@@ -106,9 +111,9 @@ def analyze(out, tag):
             ok = m & np.isfinite(S[i])
             v.append(_aps(y[ok], S[i][ok]) if len(set(y[ok])) > 1 else np.nan)
         return np.array(v)
-    R['raw_expression_auprc'] = round(float(np.mean(ap_rows(Xs))), 4)
-    R['indicator_auprc'] = round(float(_aps(y, hx.astype(float))), 4)
-    R['constant_auprc'] = round(float(y.mean()), 4)
+    R['raw_expression_auprc'] = round(float(np.mean(ap_rows(Xs))), 10)
+    R['indicator_auprc'] = round(float(_aps(y, hx.astype(float))), 10)
+    R['constant_auprc'] = round(float(y.mean()), 10)
 
     # calls the endpoint answered with a transport error and that were re-sent (see llm_probe.py
     # --repair): their share per arm, and the arm's accuracy with those cells excluded, so that the
@@ -132,11 +137,11 @@ def analyze(out, tag):
             for i in range(len(PSEL)):
                 ok = np.isfinite(M[a][i]); v.append(roc_auc_score(y[ok], M[a][i][ok]) if len(set(y[ok])) > 1 else np.nan)
             v = np.array(v); aff = np.array([int(pj) in per_pat for pj in PSEL])
-            R['resent'][a] = dict(n=nb, share_of_arm=round(nb / len(keys), 4),
+            R['resent'][a] = dict(n=nb, share_of_arm=round(nb / len(keys), 10),
                                   n_patients_affected=int(aff.sum()), cells_per_affected_patient=per_pat,
-                                  auroc_all=round(float(np.nanmean(v)), 4),
-                                  auroc_unaffected=(round(float(np.nanmean(v[~aff])), 4) if (~aff).sum() else None),
-                                  auroc_affected=(round(float(np.nanmean(v[aff])), 4) if aff.sum() else None))
+                                  auroc_all=round(float(np.nanmean(v)), 10),
+                                  auroc_unaffected=(round(float(np.nanmean(v[~aff])), 10) if (~aff).sum() else None),
+                                  auroc_affected=(round(float(np.nanmean(v[aff])), 10) if aff.sum() else None))
     R['surviving_per_patient'] = {a: dict(min=int(np.isfinite(M[a]).sum(1).min()), max=int(np.isfinite(M[a]).sum(1).max()))
                                   for a in ARMS}
     R['per_arm'] = {}
@@ -149,17 +154,17 @@ def analyze(out, tag):
     for a in ARMS:
         S = M[a]; v = auc_rows(S); per_patient_auc[a] = v
         R['per_arm'][a] = dict(
-            parsed=round(float(np.isfinite(S).mean()), 4),
-            auroc=round(float(np.nanmean(v)), 4), auroc_sd=round(float(np.nanstd(v)), 4),
-            auroc_ci=[round(x, 4) for x in boot_patients(lambda ix: np.nanmean(v[ix]), len(PSEL))],
-            auroc_expr=round(float(np.nanmean(auc_rows(S, hx))), 4),
-            auprc=round(float(np.nanmean(ap_rows(S))), 4),
+            parsed=round(float(np.isfinite(S).mean()), 10),
+            auroc=round(float(np.nanmean(v)), 10), auroc_sd=round(float(np.nanstd(v)), 10),
+            auroc_ci=[round(x, 10) for x in boot_patients(lambda ix: np.nanmean(v[ix]), len(PSEL))],
+            auroc_expr=round(float(np.nanmean(auc_rows(S, hx))), 10),
+            auprc=round(float(np.nanmean(ap_rows(S))), 10),
             # agreement between patients is read on the reactions where their prompts can differ;
             # on the rest the prompts are byte-identical and agree by construction
-            median_inter_patient_r=round(median_r(S, hx), 4),
-            median_inter_patient_r_all=round(median_r(S, np.ones(len(IDX), bool)), 4),
-            mean_p=round(float(np.nanmean(S)), 4),
-            sd_p=round(float(np.nanstd(S)), 4),
+            median_inter_patient_r=round(median_r(S, hx), 10),
+            median_inter_patient_r_all=round(median_r(S, np.ones(len(IDX), bool)), 10),
+            mean_p=round(float(np.nanmean(S)), 10),
+            sd_p=round(float(np.nanstd(S)), 10),
             n_distinct_values=int(len(np.unique(S[np.isfinite(S)]))))
 
     # ---- test-retest floor: the reaction arm repeats one identical prompt across patients ----
@@ -181,10 +186,10 @@ def analyze(out, tag):
                 pe.append((float((Rn[i][m] == Rn[j][m]).mean()), float(np.abs(Rn[i][m] - Rn[j][m]).mean())))
         pe = np.array(pe)
         R['determinism'] = dict(n_prompt_pairs=len(pr), n_cell_pairs=n_cells_both,
-                                identical=round(float(pr[:, 0].mean()), 4),
-                                mean_abs_diff=round(float(pr[:, 1].mean()), 6),
-                                identical_expr=round(float(pe[:, 0].mean()), 4),
-                                mean_abs_diff_expr=round(float(pe[:, 1].mean()), 6),
+                                identical=round(float(pr[:, 0].mean()), 10),
+                                mean_abs_diff=round(float(pr[:, 1].mean()), 10),
+                                identical_expr=round(float(pe[:, 0].mean()), 10),
+                                mean_abs_diff_expr=round(float(pe[:, 1].mean()), 10),
                                 note='identical prompts, temperature 0, repeated across the patient axis; '
                                      'the _expr figures are on the expression-bearing reactions only')
 
@@ -199,11 +204,11 @@ def analyze(out, tag):
             pa.append((float((P0[ma] == M[a][ma]).mean()), float(np.abs(P0[ma] - M[a][ma]).mean()), int(ma.sum())))
         R['determinism_patient_prompt'] = dict(
             n_repeats=len(reps), n_pairs=int(sum(x[2] for x in pr)),
-            identical=round(float(np.mean([x[0] for x in pr])), 4),
-            mean_abs_diff=round(float(np.mean([x[1] for x in pr])), 6),
+            identical=round(float(np.mean([x[0] for x in pr])), 10),
+            mean_abs_diff=round(float(np.mean([x[1] for x in pr])), 10),
             n_pairs_all=int(sum(x[2] for x in pa)),
-            identical_all=round(float(np.mean([x[0] for x in pa])), 4),
-            mean_abs_diff_all=round(float(np.mean([x[1] for x in pa])), 6),
+            identical_all=round(float(np.mean([x[0] for x in pa])), 10),
+            mean_abs_diff_all=round(float(np.mean([x[1] for x in pa])), 10),
             n_distinct_values=int(len(np.unique(P0[np.isfinite(P0) & hx[None, :]]))),
             note='the patient prompt re-sent verbatim; identical and mean_abs_diff are on the expression-bearing '
                  'reactions only, the _all figures over all reactions')
@@ -245,26 +250,26 @@ def analyze(out, tag):
             Rn = M['reaction']
             for a in ('patient', 'shuffled'):
                 mm = np.isfinite(M[a]) & np.isfinite(Rn) & hx[None, :]
-                mv[a] = round(float(np.abs(M[a][mm] - Rn[mm]).mean()), 6)
+                mv[a] = round(float(np.abs(M[a][mm] - Rn[mm]).mean()), 10)
 
         R['patient_vs_shuffled'] = dict(
             n_pairs=int(ex.sum()),
-            identical=round(float((P[ex] == S[ex]).mean()), 4),
-            mean_abs_diff=round(float(d.mean()), 4),
-            arm_correlation=round(float(np.corrcoef(P[ex], S[ex])[0, 1]), 4),
-            residual_correlation=round(rres, 4),
-            residual_correlation_ci=[round(lo, 4), round(hi, 4)],
-            between_patient_sd_real=round(float(np.nanstd(P[:, hx], axis=0).mean()), 4),
-            between_patient_sd_stranger=round(float(np.nanstd(S[:, hx], axis=0).mean()), 4),
-            auroc_diff_mean=round(float(np.nanmean(dv)), 4),
-            auroc_diff_sd=round(float(np.nanstd(dv, ddof=1)), 4),
-            paired_t=round(float(t), 3), paired_p=round(float(p), 4),
-            wilcoxon_p=(round(float(w.pvalue), 4) if w is not None else None),
+            identical=round(float((P[ex] == S[ex]).mean()), 10),
+            mean_abs_diff=round(float(d.mean()), 10),
+            arm_correlation=round(float(np.corrcoef(P[ex], S[ex])[0, 1]), 10),
+            residual_correlation=round(rres, 10),
+            residual_correlation_ci=[round(lo, 10), round(hi, 10)],
+            between_patient_sd_real=round(float(np.nanstd(P[:, hx], axis=0).mean()), 10),
+            between_patient_sd_stranger=round(float(np.nanstd(S[:, hx], axis=0).mean()), 10),
+            auroc_diff_mean=round(float(np.nanmean(dv)), 10),
+            auroc_diff_sd=round(float(np.nanstd(dv, ddof=1)), 10),
+            paired_t=round(float(t), 10), paired_p=round(float(p), 10),
+            wilcoxon_p=(round(float(w.pvalue), 10) if w is not None else None),
             tost_margin=marg, tost_p_lower=float(f'{p_low:.3g}'), tost_p_upper=float(f'{p_high:.3g}'),
             tost_equivalent=bool(max(p_low, p_high) < 0.05),
             tost_margin_narrow=0.02, tost_narrow_p_lower=float(f'{p_low2:.3g}'), tost_narrow_p_upper=float(f'{p_high2:.3g}'),
             tost_narrow_equivalent=bool(max(p_low2, p_high2) < 0.05),
-            auroc_diff_ci90=[round(ci90[0], 4), round(ci90[1], 4)],
+            auroc_diff_ci90=[round(ci90[0], 10), round(ci90[1], 10)],
             mean_move_from_reaction_arm=mv)
 
         # each data-bearing arm against the patient-blind arm, per patient, paired: what adding a
@@ -277,10 +282,10 @@ def analyze(out, tag):
                 if ok.sum() > 2:
                     tt = st.ttest_rel(per_patient_auc[a][ok], per_patient_auc['reaction'][ok])
                     se_ = np.std(dd[ok], ddof=1) / np.sqrt(ok.sum()); q = st.t.ppf(0.95, ok.sum() - 1)
-                    R['arms_vs_blind'][a] = dict(n=int(ok.sum()), mean_diff=round(float(dd[ok].mean()), 4),
-                                                 sd=round(float(np.std(dd[ok], ddof=1)), 4),
+                    R['arms_vs_blind'][a] = dict(n=int(ok.sum()), mean_diff=round(float(dd[ok].mean()), 10),
+                                                 sd=round(float(np.std(dd[ok], ddof=1)), 10),
                                                  paired_p=float(f'{tt.pvalue:.3g}'),
-                                                 ci90=[round(float(dd[ok].mean() - q * se_), 4), round(float(dd[ok].mean() + q * se_), 4)])
+                                                 ci90=[round(float(dd[ok].mean() - q * se_), 10), round(float(dd[ok].mean() + q * se_), 10)])
         # the between-patient standard deviation of the scores, own against stranger's, with a
         # patient-level bootstrap interval on the difference
         def sd_diff(ix):
@@ -288,8 +293,8 @@ def analyze(out, tag):
                 return float(np.nanmean(np.nanstd(P[ix][:, hx], axis=0)) - np.nanmean(np.nanstd(S[ix][:, hx], axis=0)))
         try:
             sdlo, sdhi = boot_patients(sd_diff, len(PSEL))
-            R['between_patient_sd_diff'] = dict(diff=round(sd_diff(np.arange(len(PSEL))), 4),
-                                                ci95=[round(sdlo, 4), round(sdhi, 4)],
+            R['between_patient_sd_diff'] = dict(diff=round(sd_diff(np.arange(len(PSEL))), 10),
+                                                ci95=[round(sdlo, 10), round(sdhi, 10)],
                                                 note='own minus stranger, mean over expression-bearing reactions; patient bootstrap')
         except (IndexError, ValueError):
             R['between_patient_sd_diff'] = None      # too few finite cells (the reasoning run)
@@ -302,7 +307,7 @@ def analyze(out, tag):
             qs = np.quantile(Xs[:, hx], np.linspace(0, 1, k + 1)[1:-1])
             # bin codes start at 1: code 0 is what the reactions without a value carry
             Xb = Xs.copy(); Xb[:, hx] = np.digitize(Xs[:, hx], qs) + 1
-            R['raw_expression_binned'][a] = dict(levels=int(k), auroc=round(float(np.mean(auc_rows(Xb))), 4))
+            R['raw_expression_binned'][a] = dict(levels=int(k), auroc=round(float(np.mean(auc_rows(Xb))), 10))
         # a reaction-level bootstrap: the intervals above resample patients only, so this says how
         # the headline comparisons behave when the reaction sample is resampled instead
         rng_r = np.random.default_rng(23); B_r = 1000
@@ -325,13 +330,13 @@ def analyze(out, tag):
                 rsb.append(float(np.nanmean(ab['shuffled'] - ab['reaction'])))
         rd = np.array(rd); rob = np.array(rob); rsb = np.array(rsb)
         if len(rd) > 10: R['reaction_bootstrap'] = dict(
-            B=int(len(rd)), p_own_ge_indicator=round(own_ge_ind / len(rd), 4), p_own_ge_raw=round(own_ge_raw / len(rd), 4),
-            own_minus_stranger_ci95=[round(float(np.percentile(rd, 2.5)), 4), round(float(np.percentile(rd, 97.5)), 4)],
-            arm_ci95={a: [round(float(np.percentile(ra[a], 2.5)), 4), round(float(np.percentile(ra[a], 97.5)), 4)] for a in ARMS},
-            own_minus_blind_ci95=([round(float(np.percentile(rob, 2.5)), 4), round(float(np.percentile(rob, 97.5)), 4)] if len(rob) else None),
-            stranger_minus_blind_ci95=([round(float(np.percentile(rsb, 2.5)), 4), round(float(np.percentile(rsb, 97.5)), 4)] if len(rsb) else None),
-            p_own_minus_blind_le0=(round(float((rob <= 0).mean()), 4) if len(rob) else None),
-            p_stranger_minus_blind_le0=(round(float((rsb <= 0).mean()), 4) if len(rsb) else None),
+            B=int(len(rd)), p_own_ge_indicator=round(own_ge_ind / len(rd), 10), p_own_ge_raw=round(own_ge_raw / len(rd), 10),
+            own_minus_stranger_ci95=[round(float(np.percentile(rd, 2.5)), 10), round(float(np.percentile(rd, 97.5)), 10)],
+            arm_ci95={a: [round(float(np.percentile(ra[a], 2.5)), 10), round(float(np.percentile(ra[a], 97.5)), 10)] for a in ARMS},
+            own_minus_blind_ci95=([round(float(np.percentile(rob, 2.5)), 10), round(float(np.percentile(rob, 97.5)), 10)] if len(rob) else None),
+            stranger_minus_blind_ci95=([round(float(np.percentile(rsb, 2.5)), 10), round(float(np.percentile(rsb, 97.5)), 10)] if len(rsb) else None),
+            p_own_minus_blind_le0=(round(float((rob <= 0).mean()), 10) if len(rob) else None),
+            p_stranger_minus_blind_le0=(round(float((rsb <= 0).mean()), 10) if len(rsb) else None),
             note='reactions resampled with replacement, patients fixed')
         # a crossed bootstrap: patients and reactions resampled together, arms kept paired within
         # every cell, as a sensitivity analysis on the paired differences; neither one-way bootstrap
@@ -352,19 +357,19 @@ def analyze(out, tag):
         cd = np.array(cd); cob = np.array(cob); csb = np.array(csb)
         if len(cd) > 10: R['crossed_bootstrap'] = dict(
             B=int(len(cd)),
-            own_minus_stranger_ci90=[round(float(np.percentile(cd, 5)), 4), round(float(np.percentile(cd, 95)), 4)],
-            own_minus_stranger_ci95=[round(float(np.percentile(cd, 2.5)), 4), round(float(np.percentile(cd, 97.5)), 4)],
+            own_minus_stranger_ci90=[round(float(np.percentile(cd, 5)), 10), round(float(np.percentile(cd, 95)), 10)],
+            own_minus_stranger_ci95=[round(float(np.percentile(cd, 2.5)), 10), round(float(np.percentile(cd, 97.5)), 10)],
             own_minus_stranger_within_002=bool(np.percentile(cd, 5) > -0.02 and np.percentile(cd, 95) < 0.02),
             own_minus_stranger_within_005=bool(np.percentile(cd, 5) > -0.05 and np.percentile(cd, 95) < 0.05),
-            own_minus_blind_ci90=([round(float(np.percentile(cob, 5)), 4), round(float(np.percentile(cob, 95)), 4)] if len(cob) else None),
-            stranger_minus_blind_ci90=([round(float(np.percentile(csb, 5)), 4), round(float(np.percentile(csb, 95)), 4)] if len(csb) else None),
+            own_minus_blind_ci90=([round(float(np.percentile(cob, 5)), 10), round(float(np.percentile(cob, 95)), 10)] if len(cob) else None),
+            stranger_minus_blind_ci90=([round(float(np.percentile(csb, 5)), 10), round(float(np.percentile(csb, 95)), 10)] if len(csb) else None),
             note='patients and reactions resampled with replacement together; arms paired within cells')
 
         # does the score track the number shown?
         m3 = np.isfinite(P) & hx[None, :]
         R['score_vs_shown_value'] = dict(
-            pearson=round(float(np.corrcoef(P[m3], Xs[m3])[0, 1]), 4),
-            spearman=round(float(st.spearmanr(P[m3], Xs[m3]).statistic), 4))
+            pearson=round(float(np.corrcoef(P[m3], Xs[m3])[0, 1]), 10),
+            spearman=round(float(st.spearmanr(P[m3], Xs[m3]).statistic), 10))
 
     # ---- presence versus magnitude: what part of the response does the number drive? ----
     if 'patient' in ARMS and 'reaction' in ARMS:
@@ -387,15 +392,15 @@ def analyze(out, tag):
         # orders are reported and no ratio between them is formed.
         R['variance_decomposition'] = dict(
             n=len(Ar),
-            r2_reaction_identity=round(r2([1]), 4),
-            r2_plus_presence=round(r2([1, 2]), 4),
-            r2_plus_magnitude=round(r2([1, 2, 3]), 4),
-            r2_plus_magnitude_first=round(r2([1, 3]), 4),
-            r2_presence_magnitude_corr=round(float(np.corrcoef(Ar[:, 2], Ar[:, 3])[0, 1]), 4),
-            mean_p_shown=round(float(yv[Ar[:, 2] == 1].mean()), 4),
-            mean_p_not_shown=round(float(yv[Ar[:, 2] == 0].mean()), 4),
-            mean_p_blind_shown=round(float(Ar[Ar[:, 2] == 1, 1].mean()), 4),
-            mean_p_blind_not_shown=round(float(Ar[Ar[:, 2] == 0, 1].mean()), 4),
+            r2_reaction_identity=round(r2([1]), 10),
+            r2_plus_presence=round(r2([1, 2]), 10),
+            r2_plus_magnitude=round(r2([1, 2, 3]), 10),
+            r2_plus_magnitude_first=round(r2([1, 3]), 10),
+            r2_presence_magnitude_corr=round(float(np.corrcoef(Ar[:, 2], Ar[:, 3])[0, 1]), 10),
+            mean_p_shown=round(float(yv[Ar[:, 2] == 1].mean()), 10),
+            mean_p_not_shown=round(float(yv[Ar[:, 2] == 0].mean()), 10),
+            mean_p_blind_shown=round(float(Ar[Ar[:, 2] == 1, 1].mean()), 10),
+            mean_p_blind_not_shown=round(float(Ar[Ar[:, 2] == 0, 1].mean()), 10),
             note='nested least squares; columns are the patient-blind score, an indicator that a '
                  'value was shown, and the value itself; both entry orders are given because the '
                  'two columns are collinear by construction')
@@ -407,13 +412,13 @@ def analyze(out, tag):
                 Z = np.column_stack([np.ones(len(e))] + [e[:, c] for c in cols])
                 b, *_ = np.linalg.lstsq(Z, ye, rcond=None)
                 return float(1 - ((ye - Z @ b) ** 2).sum() / ((ye - ye.mean()) ** 2).sum())
-            R['variance_decomposition']['expr_only_r2_reaction_identity'] = round(r2e([1]), 4)
-            R['variance_decomposition']['expr_only_r2_plus_magnitude'] = round(r2e([1, 3]), 4)
+            R['variance_decomposition']['expr_only_r2_reaction_identity'] = round(r2e([1]), 10)
+            R['variance_decomposition']['expr_only_r2_plus_magnitude'] = round(r2e([1, 3]), 10)
             # the prompt line carries the value and its cohort percentile; the same restricted fit
             # with the percentile in place of the value, and with both, says which the score follows
-            R['variance_decomposition']['expr_only_r2_plus_percentile'] = round(r2e([1, 4]), 4)
-            R['variance_decomposition']['expr_only_r2_plus_both'] = round(r2e([1, 3, 4]), 4)
-            R['variance_decomposition']['expr_only_spearman_percentile'] = round(float(st.spearmanr(e[:, 0], e[:, 4]).statistic), 4)
+            R['variance_decomposition']['expr_only_r2_plus_percentile'] = round(r2e([1, 4]), 10)
+            R['variance_decomposition']['expr_only_r2_plus_both'] = round(r2e([1, 3, 4]), 10)
+            R['variance_decomposition']['expr_only_spearman_percentile'] = round(float(st.spearmanr(e[:, 0], e[:, 4]).statistic), 10)
             R['variance_decomposition']['expr_only_n'] = int(len(e))
 
     # ---- strata: does the model reproduce the indicator floor internally? ----
@@ -427,13 +432,33 @@ def analyze(out, tag):
                       ('transport_exchange', istr), ('metabolic', ~istr)]:
             mm = m & ok
             if mm.sum() > 5 and len(set(y[mm])) > 1:
-                e[nm] = dict(n=int(mm.sum()), label_active=round(float(y[mm].mean()), 3),
-                             mean_p=round(float(s_[mm].mean()), 4),
-                             auroc=round(float(roc_auc_score(y[mm], s_[mm])), 4))
-        e['mean_p_label_active'] = round(float(np.nanmean(s_[ok & (y == 1)])), 4)
-        e['mean_p_label_inactive'] = round(float(np.nanmean(s_[ok & (y == 0)])), 4)
+                e[nm] = dict(n=int(mm.sum()), label_active=round(float(y[mm].mean()), 10),
+                             mean_p=round(float(s_[mm].mean()), 10),
+                             auroc=round(float(roc_auc_score(y[mm], s_[mm])), 10))
+        e['mean_p_label_active'] = round(float(np.nanmean(s_[ok & (y == 1)])), 10)
+        e['mean_p_label_inactive'] = round(float(np.nanmean(s_[ok & (y == 0)])), 10)
         R['strata'][a] = e
     return R
+
+def read_label_vector(path, n):
+    """The companion study's label vector, a one-dimensional float tensor saved by PyTorch, read
+    without PyTorch so that the statistics need only the packages of requirements.txt: the file is
+    a zip archive whose one storage holds the n values as little-endian float32. The vector is
+    checked for its length, for holding zeros and ones only and, when the companion's label record
+    is beside it, for the number of active reactions that record gives."""
+    import zipfile
+    with zipfile.ZipFile(path) as z:
+        member = [m for m in z.namelist() if m.endswith('/data/0')]
+        if len(member) != 1: raise ValueError(f'{path}: expected one tensor storage, found {len(member)}')
+        raw = z.read(member[0])
+    if len(raw) != 4 * n: raise ValueError(f'{path}: {len(raw)} bytes, expected {4 * n} for {n} float32 values')
+    y = np.frombuffer(raw, dtype='<f4')
+    if not set(np.unique(y).tolist()) <= {0.0, 1.0}: raise ValueError(f'{path}: values other than 0 and 1')
+    rec = os.path.join(os.path.dirname(path), 'labels_ht29.json')
+    if os.path.exists(rec):
+        want = json.load(open(rec))['models']['HT29']['n_active_matched']
+        if int(y.sum()) != want: raise ValueError(f'{path}: {int(y.sum())} active reactions, {rec} records {want}')
+    return y.astype(int)
 
 def rescore_label(out, tag, y_alt, label_name):
     """Every arm of a run scored against an alternative label vector (the tissue-matched HT29-only
@@ -448,25 +473,25 @@ def rescore_label(out, tag, y_alt, label_name):
             v.append(roc_auc_score(y[ok], S[i][ok]) if len(set(y[ok])) > 1 else np.nan)
         return np.array(v)
     R = dict(tag=tag, out=out, label=label_name, n_reactions=len(IDX), n_patients=len(PSEL),
-             label_base_rate=round(float(y.mean()), 4), model=des.get('model'),
-             raw_expression_auroc=round(float(np.nanmean(auc_rows(Xs))), 4),
-             indicator_floor=round(float(roc_auc_score(y, hx.astype(float))), 4), per_arm={})
+             label_base_rate=round(float(y.mean()), 10), model=des.get('model'),
+             raw_expression_auroc=round(float(np.nanmean(auc_rows(Xs))), 10),
+             indicator_floor=round(float(roc_auc_score(y, hx.astype(float))), 10), per_arm={})
     rows = {}
     for a in ARMS:
         if a not in M: continue
         v = auc_rows(M[a]); rows[a] = v
         lo, hi = boot_patients(lambda ix: float(np.nanmean(v[ix])), len(PSEL))
-        R['per_arm'][a] = dict(auroc=round(float(np.nanmean(v)), 4), auroc_sd=round(float(np.nanstd(v)), 4),
-                               auroc_ci=[round(lo, 4), round(hi, 4)])
+        R['per_arm'][a] = dict(auroc=round(float(np.nanmean(v)), 10), auroc_sd=round(float(np.nanstd(v)), 10),
+                               auroc_ci=[round(lo, 10), round(hi, 10)])
     for a, b_, nm in (('patient', 'shuffled', 'own_minus_stranger'), ('patient', 'reaction', 'own_minus_blind'),
                       ('shuffled', 'reaction', 'stranger_minus_blind')):
         if a in rows and b_ in rows:
             d = rows[a] - rows[b_]; d = d[np.isfinite(d)]
             rng = np.random.default_rng(11)
             bs = np.array([float(np.mean(d[rng.integers(0, len(d), len(d))])) for _ in range(2000)])
-            R[nm] = dict(mean=round(float(d.mean()), 4), sd=round(float(d.std()), 4), n=int(len(d)),
-                         ci95=[round(float(np.percentile(bs, 2.5)), 4), round(float(np.percentile(bs, 97.5)), 4)],
-                         ci90=[round(float(np.percentile(bs, 5)), 4), round(float(np.percentile(bs, 95)), 4)],
+            R[nm] = dict(mean=round(float(d.mean()), 10), sd=round(float(d.std()), 10), n=int(len(d)),
+                         ci95=[round(float(np.percentile(bs, 2.5)), 10), round(float(np.percentile(bs, 97.5)), 10)],
+                         ci90=[round(float(np.percentile(bs, 5)), 10), round(float(np.percentile(bs, 95)), 10)],
                          n_positive=int((d > 0).sum()), n_negative=int((d < 0).sum()))
     return R
 
@@ -491,28 +516,28 @@ def format_arm(out, tag, ref_tag='B_balanced'):
             Sm = S[full][:, mask]
             C = np.corrcoef(Sm) if full.sum() > 1 and mask.sum() > 1 else np.array([[1.0]])
             offd = C[np.triu_indices(len(C), 1)] if len(C) > 1 else np.array([np.nan])
-            return round(float(np.median(offd)), 4)
-        e = dict(parsed=round(float(np.isfinite(S).mean()), 4),
-                 auroc=round(float(np.nanmean(v)), 4),
-                 auroc_ci=[round(x, 4) for x in boot_patients(lambda ix: np.nanmean(v[ix]), len(PSEL))],
+            return round(float(np.median(offd)), 10)
+        e = dict(parsed=round(float(np.isfinite(S).mean()), 10),
+                 auroc=round(float(np.nanmean(v)), 10),
+                 auroc_ci=[round(x, 10) for x in boot_patients(lambda ix: np.nanmean(v[ix]), len(PSEL))],
                  median_inter_patient_r=_med_r(hx),
                  median_inter_patient_r_all=_med_r(np.ones(len(IDX), bool)),
-                 mean_p=round(float(np.nanmean(S)), 4),
+                 mean_p=round(float(np.nanmean(S)), 10),
                  n_distinct_values=int(len(np.unique(S[np.isfinite(S)]))))
         s_ = np.nanmean(S, axis=0); ok = np.isfinite(s_)
         for nm, m in (('mean_p_expression_bearing', hx), ('mean_p_no_expression', ~hx)):
             mm = m & ok
-            if mm.sum() > 5: e[nm] = round(float(s_[mm].mean()), 4)
+            if mm.sum() > 5: e[nm] = round(float(s_[mm].mean()), 10)
         R['per_arm'][a] = e
     if 'patient' in ARMS and 'shuffled' in ARMS:
         P, S = M['patient'], M['shuffled']
         ex = np.isfinite(P) & np.isfinite(S) & hx[None, :]
         R['patient_vs_shuffled'] = dict(
             n_pairs=int(ex.sum()),
-            identical=round(float((P[ex] == S[ex]).mean()), 4),
-            mean_abs_diff=round(float(np.abs(P[ex] - S[ex]).mean()), 4),
-            between_patient_sd_real=round(float(np.nanstd(P[:, hx], axis=0).mean()), 4),
-            between_patient_sd_stranger=round(float(np.nanstd(S[:, hx], axis=0).mean()), 4))
+            identical=round(float((P[ex] == S[ex]).mean()), 10),
+            mean_abs_diff=round(float(np.abs(P[ex] - S[ex]).mean()), 10),
+            between_patient_sd_real=round(float(np.nanstd(P[:, hx], axis=0).mean()), 10),
+            between_patient_sd_stranger=round(float(np.nanstd(S[:, hx], axis=0).mean()), 10))
     return R
 
 
@@ -573,10 +598,10 @@ if __name__ == '__main__':
             A_ = MA[a]; E_ = ME[a]
             m_all = np.isfinite(A_) & np.isfinite(E_); m_hx = m_all & hxA[None, :]
             XS[a] = dict(n_cells=int(m_all.sum()), n_cells_expr=int(m_hx.sum()),
-                         identical=round(float((A_[m_all] == E_[m_all]).mean()), 4),
-                         mean_abs_diff=round(float(np.abs(A_[m_all] - E_[m_all]).mean()), 6),
-                         identical_expr=round(float((A_[m_hx] == E_[m_hx]).mean()), 4),
-                         mean_abs_diff_expr=round(float(np.abs(A_[m_hx] - E_[m_hx]).mean()), 6))
+                         identical=round(float((A_[m_all] == E_[m_all]).mean()), 10),
+                         mean_abs_diff=round(float(np.abs(A_[m_all] - E_[m_all]).mean()), 10),
+                         identical_expr=round(float((A_[m_hx] == E_[m_hx]).mean()), 10),
+                         mean_abs_diff_expr=round(float(np.abs(A_[m_hx] - E_[m_hx]).mean()), 10))
         return XS
     def time_gap_hours(outA, outE, PA, PE, IA):
         """Median hours between the answers to the same (patient, reaction, arm) cell in two collections,
@@ -592,7 +617,7 @@ if __name__ == '__main__':
                     k = f'{a}|{pj}|{ri}'; va = ra.get(k, {}).get('meta') or {}; ve = re_.get(k, {}).get('meta') or {}
                     if va.get('sent_at') and ve.get('sent_at'): gaps.append((float(ve['sent_at']) - float(va['sent_at'])) / 3600.0)
         if gaps:
-            return dict(median_hours=round(float(np.median(gaps)), 2), min_hours=round(float(np.min(gaps)), 2), max_hours=round(float(np.max(gaps)), 2), n=len(gaps), basis='per-call timestamps in both archives')
+            return dict(median_hours=round(float(np.median(gaps)), 10), min_hours=round(float(np.min(gaps)), 10), max_hours=round(float(np.max(gaps)), 10), n=len(gaps), basis='per-call timestamps in both archives')
         # The first collections carry no per-call timestamps. Their completion time (the archive's last
         # write on the collection host, results/collection_times.json) stands in for the send time of
         # every call, so the gap is measured from the end of the first collection to each call of the second.
@@ -604,7 +629,7 @@ if __name__ == '__main__':
         sent = [float(v['meta']['sent_at']) for v in re_.values() if isinstance(v, dict) and (v.get('meta') or {}).get('sent_at')]
         if not sent: return None
         gaps = [(t - float(done)) / 3600.0 for t in sent]
-        return dict(median_hours=round(float(np.median(gaps)), 2), min_hours=round(float(np.min(gaps)), 2), max_hours=round(float(np.max(gaps)), 2), n=len(gaps), basis='from the completion of the first collection to each call of the second')
+        return dict(median_hours=round(float(np.median(gaps)), 10), min_hours=round(float(np.min(gaps)), 10), max_hours=round(float(np.max(gaps)), 10), n=len(gaps), basis='from the completion of the first collection to each call of the second')
     if 'A_representative' in OUT['runs'] and 'E_representative40' in OUT['runs']:
         MA, IA, PA, ARA, _ = load(BY_TAG['A_representative']); ME, IE, PE, ARE, _ = load(BY_TAG['E_representative40'])
         if list(IA) == list(IE) and set(PA.tolist()) <= set(PE.tolist()):
@@ -664,16 +689,15 @@ if __name__ == '__main__':
     # companion's label file is present; the runs themselves are untouched
     _lab = os.path.join(PATHS.ROOT, '..', 'paper1', 'data', 'activity_labels_ht29.pt')
     if not os.path.exists(_lab) and not os.environ.get('METABENCH_ALLOW_MISSING_HT29'):
-        raise FileNotFoundError(f'{_lab} is missing: the tissue-matched label (Table 5) is built by '
+        raise FileNotFoundError(f'{_lab} is missing: the tissue-matched label is built by '
                                 'paper1/code/build_labels_ht29.py in the shared repository; set '
                                 'METABENCH_ALLOW_MISSING_HT29=1 to write results without it')
     if os.path.exists(_lab):
         try:
-            import torch
-            y_ht = np.asarray(torch.load(_lab, map_location='cpu', weights_only=True)).astype(int)
+            y_ht = read_label_vector(_lab, len(HAS))
             OUT['label_ht29'] = dict(source='paper1/data/activity_labels_ht29.pt', n_active=int(y_ht.sum()),
-                                     prevalence=round(float(y_ht.mean()), 4),
-                                     indicator_floor_network=round(float(roc_auc_score(y_ht, HAS.astype(float))), 4), runs={})
+                                     prevalence=round(float(y_ht.mean()), 10),
+                                     indicator_floor_network=round(float(roc_auc_score(y_ht, HAS.astype(float))), 10), runs={})
             for out, tag in runs:
                 if tag in ('F_replicate', 'D_reasoning', 'A_donor2', 'E_donor2') or tag.endswith('_blocked'): continue
                 try:
@@ -681,6 +705,12 @@ if __name__ == '__main__':
                 except Exception as e:
                     print(f'skip ht29 {out}: {type(e).__name__}: {e}', flush=True)
         except Exception as e:
+            # a failure here used to be skipped with a printed note, which left the results file
+            # silently short of the tissue-matched label
+            if not os.environ.get('METABENCH_ALLOW_MISSING_HT29'):
+                raise RuntimeError('the tissue-matched label could not be scored '
+                                   f'({type(e).__name__}: {e}). Set METABENCH_ALLOW_MISSING_HT29=1 '
+                                   'to write results without it') from e
             print(f'skip ht29 rescoring: {type(e).__name__}: {e}', flush=True)
     # positive controls
     OUT['positive_control'] = {}
@@ -716,25 +746,25 @@ if __name__ == '__main__':
                 # degenerate-answer check: share taken by the single most common answer
                 import collections as _c
                 modal = _c.Counter(a for a, _ in v).most_common(1)[0][1] / len(v)
-                e[f'{task}_modal_share'] = round(float(modal), 4)
+                e[f'{task}_modal_share'] = round(float(modal), 10)
                 if task == 'echoval':
                     # how far the wrong copies are from the printed value, in units of the last printed digit
                     _wrong = [abs(a - t) for a, t in v if abs(a - t) >= 0.0005]
-                    e['echoval_median_abs_error_wrong'] = (round(float(np.median(_wrong)), 4) if _wrong else None)
-                    e['echoval_within_one_digit'] = round(float(np.mean([abs(a - t) < 0.0015 for a, t in v])), 4)
+                    e['echoval_median_abs_error_wrong'] = (round(float(np.median(_wrong)), 10) if _wrong else None)
+                    e['echoval_within_one_digit'] = round(float(np.mean([abs(a - t) < 0.0015 for a, t in v])), 10)
             elif task == 'read':
                 hard = [(a, t) for a, t, x in rows if t is not None and abs(round(x['pct']) - 50) < 10]
             else:
                 hard = [(a, t) for a, t, x in rows if t is not None and abs(round(x['pct']) - round(x['pct2'])) < 10]
             e[task] = dict(n=tot, parsed=len(v) + n_tied, n_scored=len(v), n_tied=n_tied,
-                           accuracy=round(acc, 4), n_hard=len(hard),
-                           accuracy_hard=(round(float(np.mean([a == t for a, t in hard])), 4) if hard else None))
+                           accuracy=round(acc, 10), n_hard=len(hard),
+                           accuracy_hard=(round(float(np.mean([a == t for a, t in hard])), 10) if hard else None))
             if task == 'compare':
                 errs = [a for a, t in v if a != t]
                 e[task]['n_errors'] = len(errs); e[task]['errors_answering_first'] = int(sum(1 for a in errs if a == 1))
             if task in ('read', 'compare'):
                 import collections as _c
-                e[task]['modal_answer_share'] = round(float(_c.Counter(a for a, _ in v).most_common(1)[0][1] / len(v)), 4)
+                e[task]['modal_answer_share'] = round(float(_c.Counter(a for a, _ in v).most_common(1)[0][1] / len(v)), 10)
         OUT['positive_control'][tag] = e
     # cohort composition, computed from the released files rather than quoted
     import csv as _csv, collections as _co
@@ -752,12 +782,12 @@ if __name__ == '__main__':
         not_evaluable=int(_msi['NOT EVALUABLE']), n_annotated=int(sum(_msi.values())))
     # network-level reference values
     OUT['network'] = dict(
-        n_reactions=int(len(LAB)), n_active=int(LAB.sum()), base_rate=round(float(LAB.mean()), 4),
+        n_reactions=int(len(LAB)), n_active=int(LAB.sum()), base_rate=round(float(LAB.mean()), 10),
         n_expression_bearing=int(HAS.sum()), n_patients=int(len(PIDS)),
-        prevalence_expression_bearing=round(float(LAB[HAS].mean()), 4),
-        prevalence_no_expression=round(float(LAB[~HAS].mean()), 4),
-        indicator_floor=round(float(roc_auc_score(LAB, HAS.astype(float))), 4),
-        raw_expression_auroc=round(float(np.mean([roc_auc_score(LAB, X[i]) for i in range(len(PIDS))])), 4),
-        raw_expression_auroc_sd=round(float(np.std([roc_auc_score(LAB, X[i]) for i in range(len(PIDS))])), 4))
+        prevalence_expression_bearing=round(float(LAB[HAS].mean()), 10),
+        prevalence_no_expression=round(float(LAB[~HAS].mean()), 10),
+        indicator_floor=round(float(roc_auc_score(LAB, HAS.astype(float))), 10),
+        raw_expression_auroc=round(float(np.mean([roc_auc_score(LAB, X[i]) for i in range(len(PIDS))])), 10),
+        raw_expression_auroc_sd=round(float(np.std([roc_auc_score(LAB, X[i]) for i in range(len(PIDS))])), 10))
     json.dump(OUT, open(PATHS.out('results_frozen.json'), 'w'), indent=1)
     print('\nwrote results_frozen.json')

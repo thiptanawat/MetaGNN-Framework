@@ -94,12 +94,12 @@ for i, m in enumerate(ORDER):
         'temperature': sorted(r['temperature']), 'max_tokens': sorted(r['max_tokens']),
         'plain_chat': sorted(r['plain_chat']), 'retries': sorted(r['retries']),
         'seed': sorted(r['seed']), 'donor_seed': sorted(r['donor_seed']),
-        'minutes_total': round(r['minutes'], 1), 'calls_archived': r['calls'],
+        'minutes_total': round(r['minutes'], 10), 'calls_archived': r['calls'],
         'failed_calls': r['failed_calls'], 'calls_needing_retry': r['attempts_gt1'],
         'echoed_names': r['echoed_names'], 'finish_reasons': r['finish_reasons'],
         'prompt_tokens_median': statistics.median(pt) if pt else None,
         'prompt_tokens_min': pt[0] if pt else None, 'prompt_tokens_max': pt[-1] if pt else None,
-        'latency_s_median': round(statistics.median(r['latency_s']), 2) if r['latency_s'] else None,
+        'latency_s_median': round(statistics.median(r['latency_s']), 10) if r['latency_s'] else None,
         'not_recorded': ['weight revision or artifact digest', 'tokenizer file identity',
                          'serving software version (known for the local backbones only from the '
                          'serving environment, not from the archives)'] +
