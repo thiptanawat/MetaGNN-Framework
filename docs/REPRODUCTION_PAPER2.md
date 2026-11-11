@@ -41,7 +41,7 @@ The repository-root `requirements.txt` covers the packages the analysis scripts 
 SciPy, scikit-learn, pandas, matplotlib); none of level 1 needs PyTorch or a GPU.
 
 The committed result files of this study were written by `bash reproduce.sh analysis` with the
-pinned NumPy, SciPy and scikit-learn on an x86-64 processor with AVX-512. A fresh clone
+pinned NumPy, SciPy and scikit-learn on an Intel x86-64 processor with AVX-512. A fresh clone
 regenerates them byte for byte in a clean installation of those versions on such a processor; this
 was checked on two machines, one of them the host the collections ran on. The files hold ten
 decimals, so two dependences show in them:
@@ -56,16 +56,25 @@ decimals, so two dependences show in them:
 - **Processor.** The percentile printed in a prompt is the rank of the patient's value within the
   cohort, taken from NumPy's default `argsort`, which leaves the order of tied values to an
   implementation that differs with the processor's vector instruction set; 938 of the 5,635
-  expression-bearing reactions have tied values. The inductively selected panel of `msi_stats.py`
-  is a top-k selection of the same kind. The statistics rebuild both as the collection scripts
-  did, so they reproduce the prompts on processors of the kind the collections ran on. Elsewhere
-  the five quantities computed from the percentile (its AUROC as a ranking over all reactions and
-  over expression-bearing reactions, the two variance-decomposition terms that use it, and the
-  Spearman correlation with it) and the overlap of the inductive panel differ in the fourth
-  decimal: 66 of the 5,383 generated values on x86-64 without AVX-512 (checked by disabling it in
-  NumPy) and 56 on aarch64 (checked on Apple Silicon), for example a raw-percentile AUROC of
-  0.6183 and 0.6182 where the reported value is 0.6181. The reported values are those of the
-  collection host.
+  expression-bearing reactions have tied values, and within a tie group the order is not the order
+  of the patients. The inductively selected panel of `msi_stats.py` is a top-k selection of the
+  same kind. The statistics rebuild both as the collection scripts did, so they reproduce the
+  prompts on processors of the kind the collections ran on, Intel x86-64 with AVX-512: the 11,400
+  percentiles that the positive-control records stored at collection time equal the rebuilt ranks
+  there, the 522 on tied values included, and those 522 differ when AVX-512 is disabled. An AMD
+  processor with AVX-512 was not tested. Elsewhere three groups of stored values differ:
+  - the five quantities computed from the percentile (its AUROC as a ranking over all reactions
+    and over expression-bearing reactions, the two variance-decomposition terms that use it, and
+    the Spearman correlation with it), by at most 0.002;
+  - the overlap of the inductive panel, by one percentage point (0.75 where 0.76 is stored);
+  - the two summaries of `tie_audit.py` of how far the midrank convention would move the printed
+    percentile of a tied entry, its mean by up to one point and its maximum by up to two.
+
+  That is 71 of the 5,383 generated values on x86-64 without AVX-512 (checked by disabling
+  it in NumPy, the whole analysis) and 61 on aarch64 (checked on Apple Silicon for every
+  script of the chain except `msi2_stats.py`), for example a raw-percentile AUROC of 0.6183 and
+  0.6182 where the reported value is 0.6181. The values among them that the manuscript prints
+  differ by at most 0.001. The reported values are those of the collection host.
 
 `tools/check_environment.py`, which `reproduce.sh` runs first, names any installed version that
 differs from the pins and says when NumPy runs without AVX-512 or on another architecture.

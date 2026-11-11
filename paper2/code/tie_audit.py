@@ -52,7 +52,7 @@ def audit(pats, rxns, expr_only):
 R = dict(note='ties in the stored reaction-level expression across the 624 patients at the reactions each design shows; '
               'an entry is tied when at least one other patient has the identical stored value (exact) or the identical '
               'value after rounding to three decimals (the precision the prompt prints)',
-         convention_collected='argsort rank over 624 patients, ties broken by patient order (no information)',
+         convention_collected='argsort rank over 624 patients, ties broken in an order set by the sorting implementation (no information)',
          convention_new='midrank (scipy.stats.rankdata average) over the cohort; identical values print identical percentiles',
          designs={})
 des = json.load(open(PATHS.run('msi_int', 'design.json')))
