@@ -20,6 +20,7 @@ REQUIRED = [
     ('results/msi2_frozen.json',      'code/msi2_stats.py'),
     ('results/crossed_boot_10k.json', 'code/crossed_boot_10k.py'),
     ('results/tie_audit.json',        'code/tie_audit.py'),
+    ('results/replication_frozen.json', 'code/replication_stats.py'),
 ]
 _absent = [(q, g) for q, g in REQUIRED
            if not (os.path.exists(q) or os.path.exists(os.path.basename(q)))]
@@ -1123,6 +1124,262 @@ for _cm in ('results/collection_manifest.json', 'collection_manifest.json'):
     _all = [f for f in ('url', 'model', 'max_tokens', 'temperature', 'seed', 'donor_seed', 'started_at')
             if _man['n_recording_field'][f] == _man['n_collections']]
     cmd('cmUniversal', ', '.join(_all) if _all else 'the model name alone')
+    break
+
+# the prespecified replication of the own-versus-donor contrast (REPLICATION_PLAN_2026-11-13.md):
+# replication_stats.py writes results/replication_frozen.json, and the record of the plan's commit
+# and of the serving configuration sits beside the collections
+for _rp in ('results/replication_frozen.json', 'replication_frozen.json'):
+    if not os.path.exists(_rp): continue
+    G = json.load(open(_rp)); W1 = G['wording1']; D1 = W1['donor']['d1']
+    def _within(ci, m): return ci[0] > -m and ci[1] < m
+    cmd('rpRxn', W1['n_reactions'], 'int'); cmd('rpPat', W1['n_patients'], 'int'); cmd('rpBlocks', W1['blocks_completed'], 'int')
+    cmd('rpExprRxn', W1['n_expression_bearing'], 'int'); cmd('rpBase', 100 * W1['label_base_rate'], '{:.1f}')
+    cmd('rpCallsOne', W1['n_calls'], 'int'); cmd('rpResentOne', W1['resent_calls'], 'int')
+    cmd('rpUnparsedOne', W1['unparsed'], 'int'); cmd('rpErrLeftOne', W1['transport_errors_left'], 'int')
+    cmd('rpErrLeftOneText', 'none' if W1['transport_errors_left'] == 0 else f"{W1['transport_errors_left']:,}".replace(',', '{,}'))
+    cmd('rpRaw', W1['raw_expression_auroc']); cmd('rpInd', W1['indicator_floor'])
+    cmd('rpOwn', D1['own_auroc']); cmd('rpDonor', D1['donor_auroc'])
+    cmd('rpDiff', D1['diff_mean'], '{:+.4f}'); cmd('rpDiffSD', D1['diff_sd'])
+    cmd('rpDiffLo', D1['diff_ci90'][0], '{:+.4f}'); cmd('rpDiffHi', D1['diff_ci90'][1], '{:+.4f}')
+    cmd('rpPairedP', D1['paired_p'], 'p'); cmd('rpWilcoxonP', D1['wilcoxon_p'], 'p')
+    cmd('rpTostNarrowP', max(D1['tost_002_p']), 'p'); cmd('rpTostWideP', max(D1['tost_005_p']), 'p')
+    cmd('rpNarrowVerdict', 'lies inside' if D1['equivalent_002'] else 'does not lie inside')
+    cmd('rpWideVerdict', 'lies inside' if D1['equivalent_005'] else 'does not lie inside')
+    cmd('rpZeroVerdict', 'excludes zero' if (D1['diff_ci90'][0] > 0 or D1['diff_ci90'][1] < 0) else 'includes zero')
+    cmd('rpIdentical', D1['identical'], 'pct'); cmd('rpSwapMove', D1['mean_abs_diff'])
+    # the sentence that reads the primary interval against the two margins and against zero
+    _z = 'excludes zero' if (D1['diff_ci90'][0] > 0 or D1['diff_ci90'][1] < 0) else 'includes zero'
+    if D1['equivalent_002'] and D1['equivalent_005']:
+        cmd('rpMarginSentence', f'The interval lies inside the narrower margin of $\\pm 0.02$, and therefore inside the wider one of $\\pm 0.05$, and it {_z}.')
+    elif D1['equivalent_005']:
+        cmd('rpMarginSentence', f'The interval does not lie inside the narrower margin of $\\pm 0.02$, lies inside the wider one of $\\pm 0.05$, and {_z}.')
+    else:
+        cmd('rpMarginSentence', f'The interval lies inside neither margin ($\\pm 0.02$ and $\\pm 0.05$), and it {_z}.')
+    # the sentence that closes the replication's results, one wording per outcome of the plan's decision rules
+    _excl = (D1['diff_ci90'][0] > 0 or D1['diff_ci90'][1] < 0)
+    # how the interval stands against zero, said with the two facts a reader needs beside it: whether the
+    # exclusion is narrow (the end nearest zero within a tenth of the half-width) and whether the interval
+    # that resamples patients and reactions together agrees
+    _half = (D1['diff_ci90'][1] - D1['diff_ci90'][0]) / 2.0
+    _near = min(abs(D1['diff_ci90'][0]), abs(D1['diff_ci90'][1]))
+    _cbx = W1['crossed_bootstrap_d1']
+    _cross_incl = (min(_cbx['ci90_lower_range']) < 0 < max(_cbx['ci90_upper_range']))
+    if not _excl:
+        _zero_long = 'includes zero'
+    else:
+        _zero_long = 'excludes zero' + (' narrowly' if _near < 0.1 * _half else '')
+        if _cross_incl: _zero_long += ', while the interval that resamples patients and reactions together includes it'
+    cmd('rpZeroVerdictLong', _zero_long)
+    _where = 'On patients and reactions that no earlier collection had used, '
+    if D1['equivalent_002'] and not _excl:
+        cmd('rpClosing', _where + 'the difference between the own and donor arms is again not resolved from zero, and its interval lies inside the narrower margin.')
+    elif D1['equivalent_002']:
+        _side = 'ahead of' if D1['diff_mean'] > 0 else 'behind'
+        _side = 'above' if D1['diff_mean'] > 0 else 'below'
+        _pp = ('< 0.0001' if D1['paired_p'] < 1e-4 else f"= {D1['paired_p']:.4f}")
+        _txt = (_where + f"the own arm scored {_side} the donor arm by {abs(D1['diff_mean']):.4f} AUROC. The 90\\% Student interval of that difference lies inside "
+                f"the narrower margin and excludes zero{' narrowly' if _near < 0.1 * _half else ''} (paired $t$-test $p {_pp}$)")
+        _txt += (', and the 90\\% interval that resamples patients and reactions together includes zero.' if _cross_incl else '.')
+        cmd('rpClosing', _txt)
+    else:
+        cmd('rpClosing', _where + 'the interval of the difference does not lie inside the narrower margin, so equivalence at that margin is not confirmed.')
+    cmd('rpResid', D1['residual_correlation'], '{:+.4f}')
+    cmd('rpResidLo', D1['residual_correlation_ci'][0], '{:+.4f}'); cmd('rpResidHi', D1['residual_correlation_ci'][1], '{:+.4f}')
+    cmd('rpSdOwn', D1['between_patient_sd_own']); cmd('rpSdDonor', D1['between_patient_sd_donor'])
+    _names = {'d2': 'Two', 'd3': 'Three'}
+    for _s, _nm in _names.items():
+        if _s in W1['donor']:
+            _d = W1['donor'][_s]
+            cmd('rpDonor' + _nm, _d['donor_auroc']); cmd('rpDiff' + _nm, _d['diff_mean'], '{:+.4f}')
+            cmd('rpDiff' + _nm + 'Lo', _d['diff_ci90'][0], '{:+.4f}'); cmd('rpDiff' + _nm + 'Hi', _d['diff_ci90'][1], '{:+.4f}')
+            cmd('rpNarrow' + _nm, 'inside' if _d['equivalent_002'] else 'not inside')
+    if 'schedule_spread' in W1:
+        cmd('rpSchedules', len(W1['schedule_spread']['schedules']), 'int')
+        cmd('rpSpreadMin', W1['schedule_spread']['min'], '{:+.4f}'); cmd('rpSpreadMax', W1['schedule_spread']['max'], '{:+.4f}')
+        _pd = W1['pooled_donor']
+        cmd('rpPooled', _pd['mean'], '{:+.4f}'); cmd('rpPooledLo', _pd['ci90'][0], '{:+.4f}'); cmd('rpPooledHi', _pd['ci90'][1], '{:+.4f}')
+        cmd('rpPooledNarrow', 'inside' if _pd['equivalent_002'] else 'not inside')
+        cmd('rpPooledTiny', 'inside' if _pd['equivalent_001'] else 'not inside')
+    _cb = W1['crossed_bootstrap_d1']
+    cmd('rpCrossLo', min(_cb['ci90_lower_range']), '{:+.4f}'); cmd('rpCrossHi', max(_cb['ci90_upper_range']), '{:+.4f}')
+    cmd('rpCrossDraws', _cb['B'], 'int'); cmd('rpCrossSeeds', len(_cb['seeds']), 'int')
+    cmd('rpCrossNarrow', 'inside' if _cb['within_002_90_all_seeds'] else 'not inside')
+    if 'blind_subset' in W1:
+        _b = W1['blind_subset']
+        cmd('rpBlindPat', _b['n_patients'], 'int'); cmd('rpBlind', _b['blind_auroc'])
+        cmd('rpBlindOwn', _b['own_auroc']); cmd('rpBlindDonor', _b['donor_auroc'])
+        if _b.get('determinism'):
+            cmd('rpFloor', _b['determinism']['mean_abs_diff_expr']); cmd('rpFloorIdentical', _b['determinism']['identical_expr'], 'pct')
+            if _b['determinism']['mean_abs_diff_expr'] > 0:
+                cmd('rpSwapOverFloor', D1['mean_abs_diff'] / _b['determinism']['mean_abs_diff_expr'], '{:.0f}')
+            # the sentence that introduces the size of the swap's effect on the answers, worded by its
+            # ratio to the within-session floor (three times the floor or more counts as a movement)
+            _ratio = (D1['mean_abs_diff'] / _b['determinism']['mean_abs_diff_expr']
+                      if _b['determinism']['mean_abs_diff_expr'] > 0 else float('inf'))
+            cmd('rpSwapSentence', 'The swap still moves the answers.' if _ratio >= 3
+                else 'The swap moves the answers by little more than a repeated identical prompt does.')
+        if _b.get('arms_vs_blind'):
+            cmd('rpOwnVsBlind', _b['arms_vs_blind']['patient']['mean_diff'], '{:+.4f}')
+            cmd('rpDonorVsBlind', _b['arms_vs_blind']['shuffled']['mean_diff'], '{:+.4f}')
+    # the earlier primary design, for the comparison the replication is read against
+    _E = R['runs']['E_representative40']['patient_vs_shuffled'] if 'runs' in R and 'E_representative40' in R['runs'] else None
+    if _E:
+        cmd('rpEarlierDiff', _E['auroc_diff_mean'], '{:+.4f}')
+        cmd('rpEarlierLo', _E['auroc_diff_ci90'][0], '{:+.4f}'); cmd('rpEarlierHi', _E['auroc_diff_ci90'][1], '{:+.4f}')
+    if 'wording2' in G:
+        W2 = G['wording2']; E1 = W2['donor']['d1']; P = G['paraphrase']
+        cmd('rpTwoPat', W2['n_patients'], 'int'); cmd('rpCallsTwo', W2['n_calls'], 'int')
+        cmd('rpTwoBlocks', W2['blocks_completed'], 'int'); cmd('rpResentTwo', W2['resent_calls'], 'int')
+        cmd('rpUnparsedTwo', W2['unparsed'], 'int'); cmd('rpErrLeftTwo', W2['transport_errors_left'], 'int')
+        # the sentence on answers that could not be parsed, worded for the case that there are none
+        if W1['unparsed'] == 0 and W2['unparsed'] == 0:
+            cmd('rpUnparsedSentence', 'Every answer of both wordings could be parsed, so no cell is missing.')
+        else:
+            cmd('rpUnparsedSentence', f"Of the answers of the first wording, {W1['unparsed']:,} could not be parsed, and of the second, {W2['unparsed']:,}. "
+                'A cell without a parsed answer is left out of the AUROC of its patient and arm, as in the earlier designs, and nothing is imputed.')
+        cmd('rpCallsAll', W1['n_calls'] + W2['n_calls'], 'int')
+        cmd('rpTwoOwn', E1['own_auroc']); cmd('rpTwoDonor', E1['donor_auroc'])
+        cmd('rpTwoDiff', E1['diff_mean'], '{:+.4f}'); cmd('rpTwoLo', E1['diff_ci90'][0], '{:+.4f}'); cmd('rpTwoHi', E1['diff_ci90'][1], '{:+.4f}')
+        cmd('rpTwoNarrow', 'inside' if E1['equivalent_002'] else 'not inside')
+        cmd('rpTwoSwapMove', E1['mean_abs_diff'])
+        cmd('rpParaPat', P['n_patients'], 'int')
+        cmd('rpParaMove', P['own_between_wordings']['mean_abs_diff']); cmd('rpParaCorr', P['own_between_wordings']['correlation'], '{:.3f}')
+        cmd('rpParaIdentical', P['own_between_wordings']['identical'], 'pct')
+        cmd('rpParaSwapOne', P['own_vs_donor_wording1']['mean_abs_diff']); cmd('rpParaSwapTwo', P['own_vs_donor_wording2']['mean_abs_diff'])
+        cmd('rpParaSwapCorr', P['own_vs_donor_wording1']['correlation'], '{:.3f}')
+        cmd('rpParaOverSwap', P['paraphrase_over_swap'], '{:.2f}')
+        cmd('rpParaOwnOne', P['own_auroc_wording1']); cmd('rpParaOwnTwo', P['own_auroc_wording2'])
+        _pa = P['own_auroc_wording2_minus_wording1']
+        cmd('rpParaAurocDiff', _pa['mean'], '{:+.4f}'); cmd('rpParaAurocLo', _pa['ci90'][0], '{:+.4f}'); cmd('rpParaAurocHi', _pa['ci90'][1], '{:+.4f}')
+        if 'blind_between_wordings' in P:
+            cmd('rpParaBlindMove', P['blind_between_wordings']['mean_abs_diff'])
+        if 'own_minus_donor_wording1_same_patients' in P:
+            _sm = P['own_minus_donor_wording1_same_patients']
+            cmd('rpSameDiff', _sm['mean'], '{:+.4f}'); cmd('rpSameLo', _sm['ci90'][0], '{:+.4f}'); cmd('rpSameHi', _sm['ci90'][1], '{:+.4f}')
+            # the size of the wording's effect on accuracy beside the size of the swap's, on the same patients
+            _q = abs(_pa['mean']) / abs(_sm['mean']) if _sm['mean'] != 0 else float('inf')
+            cmd('rpParaSizeSentence', f"In absolute value, the change in own-arm AUROC between the wordings ({abs(_pa['mean']):.4f}) is "
+                + ('about as large as' if 0.5 <= _q <= 2 else ('larger than' if _q > 2 else 'smaller than'))
+                + f" the own-minus-donor difference under the first wording on the same patients ({abs(_sm['mean']):.4f}).")
+    else:
+        cmd('rpCallsAll', W1['n_calls'], 'int')
+    for _mp in ('results/replication/design_master.json', 'replication/design_master.json'):
+        if os.path.exists(_mp):
+            _m = json.load(open(_mp))
+            cmd('rpPoolRxn', _m['pool_reactions'], 'int'); cmd('rpPoolPat', _m['pool_patients'], 'int')
+            cmd('rpExclRxn', _m['excluded_reactions'], 'int'); cmd('rpExclPat', _m['excluded_patients'], 'int')
+            cmd('rpExclDesigns', len(_m['excluded_from']), 'int'); cmd('rpPatMax', _m['n_patients_max'], 'int')
+            break
+    for _sp in ('results/replication/serving_config.json', 'replication/serving_config.json'):
+        if os.path.exists(_sp):
+            _sc = json.load(open(_sp))
+            cmd('rpModelSource', '\\texttt{' + _sc['model_source'].replace('_', '\\_') + '}')
+            cmd('rpRayVersion', _sc['ray_version']); cmd('rpReplicas', _sc['replicas'], 'int')
+            import datetime as _dt2
+            _dd = _dt2.datetime.strptime(_sc['application_deployed_at'][:10], '%Y-%m-%d')
+            cmd('rpDeployedOn', f"{_dd.day} {_dd.strftime('%B %Y')}")
+            break
+    for _pp in ('results/replication/plan_record.json', 'replication/plan_record.json'):
+        if os.path.exists(_pp):
+            _pr = json.load(open(_pp))
+            cmd('rpPlanCommit', '\\texttt{' + _pr['plan_commit'][:12] + '}')
+            def _when(iso):
+                import datetime as _dt
+                t = _dt.datetime.strptime(iso[:19], '%Y-%m-%dT%H:%M:%S')
+                return f"{t.day} {t.strftime('%B %Y')}, {t.strftime('%H:%M:%S')} UTC"
+            cmd('rpPlanCommitted', _when(_pr['plan_committed_utc'])); cmd('rpFirstCall', _when(_pr['first_call_utc']))
+            cmd('rpPlanLeadSeconds', _pr['seconds_between_commit_and_first_call'], 'int')
+            # the push of the commit, as the public activity record of the repository gives it
+            cmd('rpPlanPushed', _when(_pr['plan_pushed_utc']).split(', ')[1])
+            cmd('rpPushLeadSeconds', _pr['seconds_between_push_and_first_call'], 'int')
+            break
+    # what happened during the collection, read from the collector's logs (the plan's section on deviations)
+    for _cp in ('results/replication/collection_record.json', 'replication/collection_record.json'):
+        if os.path.exists(_cp):
+            _cr = json.load(open(_cp))
+            cmd('rpBenchCalls', _cr['rate_measurement_calls_before_plan'], 'int')
+            cmd('rpWorkersPlanned', _cr['concurrent_requests_planned'], 'int')
+            cmd('rpWorkersAfter', _cr['concurrent_requests_after_pause'], 'int')
+            cmd('rpPauseSeconds', _cr['pause_seconds'], 'int')
+            cmd('rpStallSeconds', _cr['stall_seconds'], 'int'); cmd('rpStallCalls', _cr['stall_calls'], 'int')
+            cmd('rpErrCalls', _cr['server_error_calls'], 'int')
+            break
+    break
+
+# the exploratory reference of the replication (replication_posthoc.py): the own-minus-donor contrast of the
+# printed numbers with no model, beside that of the language model. Not in the plan; the text says so.
+for _xp in ('results/replication_posthoc.json', 'replication_posthoc.json'):
+    if not os.path.exists(_xp): continue
+    _X = json.load(open(_xp)); _XR = _X['replication']
+    def _d(v): return v['diff'] if 'diff' in v else v
+    for _kind, _nm in (('printed_percentile', 'Pct'), ('printed_value', 'Val'), ('language_model', 'Llm')):
+        _k = _XR[_kind]
+        cmd('rx' + _nm + 'Own', _k['d1']['own_auroc']); cmd('rx' + _nm + 'Donor', _k['d1']['donor_auroc'])
+        for _s, _suf in (('d1', ''), ('d2', 'Two'), ('d3', 'Three'), ('mean_of_schedules', 'Mean')):
+            if _s not in _k: continue
+            _v = _d(_k[_s])
+            cmd('rx' + _nm + 'Diff' + _suf, _v['mean'], '{:+.4f}')
+            cmd('rx' + _nm + 'Lo' + _suf, _v['ci90'][0], '{:+.4f}'); cmd('rx' + _nm + 'Hi' + _suf, _v['ci90'][1], '{:+.4f}')
+    for _s, _suf in (('d1', ''), ('d2', 'Two'), ('d3', 'Three')):
+        _a = _XR['association'][_s]
+        cmd('rxAssocPct' + _suf, _a['model_with_printed_percentile']['pearson'], '{:.3f}')
+        cmd('rxAssocVal' + _suf, _a['model_with_printed_value']['pearson'], '{:.3f}')
+        _e = _XR['model_minus_printed_percentile'][_s]
+        cmd('rxExcess' + _suf, _e['mean'], '{:+.4f}'); cmd('rxExcessLo' + _suf, _e['ci90'][0], '{:+.4f}'); cmd('rxExcessHi' + _suf, _e['ci90'][1], '{:+.4f}')
+        _ev = _XR['model_minus_printed_value'][_s]
+        cmd('rxExcessVal' + _suf, _ev['mean'], '{:+.4f}'); cmd('rxExcessValLo' + _suf, _ev['ci90'][0], '{:+.4f}'); cmd('rxExcessValHi' + _suf, _ev['ci90'][1], '{:+.4f}')
+    _a1 = _XR['association']['d1']['model_with_printed_percentile']
+    cmd('rxAssocPctLo', _a1['pearson_ci90'][0], '{:.3f}'); cmd('rxAssocPctHi', _a1['pearson_ci90'][1], '{:.3f}')
+    cmd('rxAssocSpearman', _a1['spearman'], '{:.3f}')
+    _rs = [_XR['association'][_s]['model_with_printed_percentile']['pearson'] for _s in ('d1', 'd2', 'd3')]
+    cmd('rxAssocPctMin', min(_rs), '{:.3f}'); cmd('rxAssocPctMax', max(_rs), '{:.3f}')
+    # the words that read the excess of the model's contrast over that of the printed percentile
+    _e1 = _XR['model_minus_printed_percentile']['d1']
+    _all_incl = all(not _XR['model_minus_printed_percentile'][_s]['excludes_zero'] for _s in ('d1', 'd2', 'd3'))
+    cmd('rxExcessReading', 'an interval that excludes zero' if _e1['excludes_zero'] else 'an interval that includes zero')
+    cmd('rxExcessSchedules', 'and the intervals of the other two schedules include zero as well' if _all_incl
+        else 'and the other two schedules do not all agree')
+    # the sentences of the main text that read the primary result together with this reference, one wording per outcome
+    _G1 = json.load(open(_xp.replace('replication_posthoc', 'replication_frozen')))['wording1']['donor']['d1']
+    _excl = (_G1['diff_ci90'][0] > 0 or _G1['diff_ci90'][1] < 0)
+    if _excl:
+        cmd('rpRuleSentence', 'By the rule of the plan, an interval that excludes zero is reported as a difference, here in favor of the '
+            + ('own' if _G1['diff_mean'] > 0 else 'donor') + ' arm.')
+    else:
+        cmd('rpRuleSentence', 'By the rule of the plan, no difference is reported, because the interval includes zero.')
+    # the size of the printed percentile's difference beside the model's, in words, and how many of the three
+    # schedules leave zero inside the interval of the printed percentile's difference
+    _pd = _d(_XR['printed_percentile']['d1'])['mean']; _ld = _d(_XR['language_model']['d1'])['mean']
+    _same = (_pd > 0) == (_ld > 0); _q = abs(_pd) / abs(_ld) if _ld else float('inf')
+    _share = ('less than half the size' if _q < 0.4 else 'about half the size' if _q < 0.65 else 'about three quarters of the size'
+              if _q < 0.85 else 'about the same size' if _q <= 1.2 else 'a larger size')
+    cmd('rxShareWords', ('of the same sign and ' if _same else 'of the opposite sign and ') + _share)
+    _words = ['none', 'one', 'two', 'all three']
+    _incl = sum(1 for _s in ('d1', 'd2', 'd3') if not _d(_XR['printed_percentile'][_s])['excludes_zero'])
+    cmd('rxPctInclWord', _words[_incl]); cmd('rxPctExclWord', _words[3 - _incl])
+    _signs = {(_d(_XR['printed_percentile'][_s])['mean'] > 0) for _s in ('d1', 'd2', 'd3')}
+    cmd('rxPctSignWord', 'the same in all three schedules' if len(_signs) == 1 else 'not the same in the three schedules')
+    # the printed percentile's difference as a share of the model's, schedule by schedule
+    _shares = [100.0 * _d(_XR['printed_percentile'][_s])['mean'] / _d(_XR['language_model'][_s])['mean'] for _s in ('d1', 'd2', 'd3')]
+    for _v, _suf in zip(_shares, ('', 'Two', 'Three')): cmd('rxSharePct' + _suf, _v, '{:.0f}')
+    cmd('rxShareMin', min(_shares), '{:.0f}'); cmd('rxShareMax', max(_shares), '{:.0f}')
+    _allsame = all(((_d(_XR['printed_percentile'][_s])['mean'] > 0) == (_d(_XR['language_model'][_s])['mean'] > 0)) for _s in ('d1', 'd2', 'd3'))
+    cmd('rxClosing', 'In an exploratory analysis, ranking the printed percentile with no model gives a difference '
+        + ('of the same sign under every donor schedule' if _allsame else 'whose sign is not the same under every donor schedule')
+        + f', between {min(_shares):.0f}\\% and {max(_shares):.0f}\\% of the size of the model\'s, and what the model adds to it is '
+        + ('not resolved from zero.' if _all_incl else 'resolved from zero under at least one schedule.'))
+    if 'design_E' in _X:
+        _XE = _X['design_E']
+        cmd('rxEPctDiff', _d(_XE['printed_percentile']['d1'])['mean'], '{:+.4f}')
+        cmd('rxEPctLo', _d(_XE['printed_percentile']['d1'])['ci90'][0], '{:+.4f}'); cmd('rxEPctHi', _d(_XE['printed_percentile']['d1'])['ci90'][1], '{:+.4f}')
+        cmd('rxEValDiff', _d(_XE['printed_value']['d1'])['mean'], '{:+.4f}')
+        cmd('rxEValLo', _d(_XE['printed_value']['d1'])['ci90'][0], '{:+.4f}'); cmd('rxEValHi', _d(_XE['printed_value']['d1'])['ci90'][1], '{:+.4f}')
+        cmd('rxEAssocPct', _XE['association']['d1']['model_with_printed_percentile']['pearson'], '{:.3f}')
+        cmd('rxEAssocVal', _XE['association']['d1']['model_with_printed_value']['pearson'], '{:.3f}')
+        _ee = _XE['model_minus_printed_percentile']['d1']
+        cmd('rxEExcess', _ee['mean'], '{:+.4f}'); cmd('rxEExcessLo', _ee['ci90'][0], '{:+.4f}'); cmd('rxEExcessHi', _ee['ci90'][1], '{:+.4f}')
+        cmd('rxEPat', _XE['n_patients'], 'int')
     break
 
 # a negative number is set with a minus sign and not a hyphen, in prose as in a formula; a hyphen

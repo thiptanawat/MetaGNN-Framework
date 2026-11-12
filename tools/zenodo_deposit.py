@@ -416,7 +416,13 @@ def merge_related(existing, additions):
 
 def code_description(tag, commit, snapshot_sha, snapshot_name, data_concept_doi):
     """The description of a version of the code record. It names the studies by what they do and the
-    version by its commit, so that it reads the same whatever the tag is called."""
+    version by its commit, so that it reads the same whatever the tag is called. The two analyses
+    added in benchmark-validity-2026-11c are named from that release on, so that the text of an
+    earlier version, when it is set again, does not list what that version does not hold."""
+    since_11c = not (tag.startswith("journal-") or tag == "benchmark-validity-2026-11b")
+    cohort2 = "the linear rows repeated on a second cohort with their plan, " if since_11c else ""
+    replication = ("a replication of the own-versus-donor contrast with its plan and the record of its "
+                   "collection, " if since_11c else "")
     return (
         "<p>This record archives the MetaGNN-Framework repository: a graph neural network scorer of "
         "metabolic reaction activity, the <code>metabench</code> library of benchmark-validity checks, "
@@ -432,10 +438,11 @@ def code_description(tag, commit, snapshot_sha, snapshot_name, data_concept_doi)
         "reproduction.</p>"
         "<p><strong>Contents.</strong> For the reaction-scoring audit: the joint-holdout driver, the "
         "input-substitution arms, the family-disjoint reaction split, a synthetic check with known "
-        "answers, the audit of an independently published predictor, and the per-cell result files. "
+        "answers, the audit of an independently published predictor, " + cohort2 + "and the per-cell "
+        "result files. "
         "For the language-model study: the prompt builders, the archived model responses, the "
-        "external-cohort panels, the analysis plan with its departure log, and the deployment and model "
-        "records. Shared by both: the scorer, the <code>metabench</code> checks, the reproduction guides "
+        "external-cohort panels, the analysis plan with its departure log, " + replication + "and the "
+        "deployment and model records. Shared by both: the scorer, the <code>metabench</code> checks, the reproduction guides "
         "and the release tools.</p>"
         "<p><strong>Related data.</strong> The per-cell prediction arrays of the reaction-scoring audit "
         "(ten tarballs, %s GB) are not part of this archive. They are deposited with the curated cohort "

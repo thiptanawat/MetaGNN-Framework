@@ -1,0 +1,8 @@
+{
+ "plan": "paper1/SECOND_COHORT_PLAN_2026-11-13.md",
+ "plan_commit": "7b0798d5684497c971d8b4e2fc2573b9aee863d6",
+ "plan_committed_utc": "2026-11-12T16:38:12Z",
+ "plan_pushed_utc": "2026-11-12T16:38:15Z",
+ "first_analysis_started_utc": "2026-11-12T16:38:36Z",
+ "note": "the commit that added the plan, the cohort builder and the summary script; the push of that commit as the public activity record of the repository gives it; and the start of the first analysis script on the second cohort (birth time of its log on the analysis host)"
+}

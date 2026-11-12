@@ -90,6 +90,48 @@ Aggregation control (how many of the 40 reactions sit at or above the 75th perce
 
 With reasoning enabled most calls returned an empty message because the whole token budget went to reasoning tokens the API does not return, and the attrition differs between arms in a way that is confounded with an endpoint outage. No accuracy is reported for this run, in the manuscript or here; it is a cost, attrition and answer-form report.
 
+## Prespecified replication of the own-versus-donor contrast
+
+Plan: `REPLICATION_PLAN_2026-11-13.md`, committed before the first call. Statistics: `code/replication_stats.py`, written to `results/replication_frozen.json`.
+
+First wording: 100 patients and 300 reactions that no earlier collection used, 10 blocks of ten patients completed, 126,000 calls.
+
+| quantity | value |
+|---|---|
+| own arm, AUROC | 0.5578 |
+| donor arm, schedule 1, AUROC | 0.5517 |
+| donor arm, schedule 2, AUROC | 0.5526 |
+| donor arm, schedule 3, AUROC | 0.5522 |
+| raw expression ranking | 0.6468 |
+| availability indicator | 0.6262 |
+| own minus donor, schedule 1 (primary) | +0.0061 [+0.0002, +0.0120] (90% interval) |
+| own minus donor, schedule 2 | +0.0052 [-0.0003, +0.0107] (90% interval) |
+| own minus donor, schedule 3 | +0.0057 [-0.0001, +0.0114] (90% interval) |
+| own minus the mean of the donor arms | +0.0056 [+0.0005, +0.0108] |
+| primary contrast inside the 0.02 margin | yes |
+| primary contrast inside the 0.05 margin | yes |
+| 90% interval of the primary contrast excludes zero | yes |
+
+One analysis outside the plan (`code/replication_posthoc.py`, `results/replication_posthoc.json`), added after the numbers above had been read: the own-minus-donor contrast of the printed numbers with no model.
+
+| quantity (first wording) | schedule 1 | schedule 2 | schedule 3 |
+|---|---|---|---|
+| language model | +0.0061 [+0.0002, +0.0120] | +0.0052 [-0.0003, +0.0107] | +0.0057 [-0.0001, +0.0114] |
+| printed percentile, no model | +0.0035 [-0.0002, +0.0073] | +0.0050 [+0.0015, +0.0086] | +0.0035 [-0.0004, +0.0074] |
+| printed value, no model | +0.0012 [-0.0001, +0.0024] | +0.0012 [+0.0001, +0.0024] | +0.0011 [-0.0002, +0.0024] |
+| model minus printed percentile | +0.0026 [-0.0007, +0.0058] | +0.0001 [-0.0030, +0.0033] | +0.0022 [-0.0010, +0.0053] |
+| correlation across patients, model with printed percentile | 0.868 | 0.834 | 0.858 |
+
+Second wording: 40 patients, 30,000 calls.
+
+| quantity | value |
+|---|---|
+| own arm, AUROC | 0.5493 |
+| donor arm, AUROC | 0.5464 |
+| own minus donor | +0.0029 [-0.0042, +0.0100] |
+| mean absolute change of the own-arm answer between the wordings | 0.0754 |
+| mean absolute change between the own and donor answers, first wording, same patients | 0.3310 |
+
 ## References
 
 Every reference in the manuscript was resolved against PubMed E-utilities, the Crossref API or the arXiv API before use; the procedure and its outcome are in `docs/VERIFICATION.md` at the repository root.

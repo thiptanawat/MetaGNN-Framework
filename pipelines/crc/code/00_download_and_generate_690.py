@@ -636,6 +636,10 @@ def qc_filter_patients(
 def compute_tpm(counts_df: pd.DataFrame) -> pd.DataFrame:
     """
     Compute log2(TPM + 1) normalisation.
+    Note (13 November 2026): what this function computes is counts per million (CPM). The counts
+    are divided by the library size and no gene length enters, so the stored values are
+    log2(CPM + 1). The function name and the log message are kept as they were when the cohort
+    was built; the analyses and the manuscripts describe the values as log2(CPM + 1).
     This is the normalisation used in the data_processing manuscript for 690 patients.
     (Different from cohort-220 pipeline which uses DESeq2 VST on 220 patients.)
     """

@@ -1,0 +1,10 @@
+{
+ "plan": "paper2/REPLICATION_PLAN_2026-11-13.md",
+ "plan_commit": "2662cde6690c0c72d1d6713c9fcfbc3a49de4cfd",
+ "plan_committed_utc": "2026-11-12T16:19:14Z",
+ "plan_pushed_utc": "2026-11-12T16:19:16Z",
+ "first_call_utc": "2026-11-12T16:19:44Z",
+ "seconds_between_commit_and_first_call": 30,
+ "seconds_between_push_and_first_call": 28,
+ "note": "the commit that added the plan, the sample, the collector and the analysis script; the push of that commit as the public activity record of the repository gives it; and the time the collector sent its first call (its own clock, stored with each reply)"
+}

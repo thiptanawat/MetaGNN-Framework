@@ -24,6 +24,9 @@ python3 paper1/code/split_audit.py --family_map paper1/data/families/families_un
 python3 paper1/code/export_splits.py --check >/dev/null
 python3 paper1/code/inference_p1.py
 python3 paper1/code/build_results_p1.py
+# the linear rungs on the second cohort, summarized beside the first cohort's (results/cohort2/ holds the
+# rows the two baseline scripts computed there; SECOND_COHORT_PLAN_2026-11-13.md)
+python3 paper1/code/second_cohort_stats.py >/dev/null
 # the ledger hashes every result and data file, so it runs after the last script that writes one
 # (build_results_p1.py writes data/results_p1.json) and before the macros that quote its counts; the
 # macro file, the figures and the ledger itself are not hashed, so nothing hashed changes after this
@@ -37,7 +40,10 @@ echo "== paper 2 =="
 # Every generator whose output make_numbers.py reads runs here, so that deleting a derived file and
 # rerunning this driver puts it back. msi2_stats.py resamples the external-cohort contrasts with
 # 10,000-draw nulls over 21 runs and crossed_boot_10k.py draws 10,000 crossed bootstrap replicates,
-# so the paper 2 block takes roughly fifteen minutes; nothing in it needs a GPU or the network.
+# so the paper 2 block takes roughly twenty minutes; nothing in it needs a GPU or the network.
+# replication_design.py --check rebuilds the sample of the prespecified replication from its seed and
+# compares it with the committed file; replication_stats.py computes the replication's statistics and
+# replication_posthoc.py the one analysis added outside its plan (the contrast of the printed numbers).
 # the order the collection host gave tied expression values is archived (paper2/cohort_order.npz),
 # so the ranks do not depend on the processor; the check ties the archive to the cohort matrix, to
 # the percentiles stored in the positive-control records and to the probe panel
@@ -48,6 +54,9 @@ echo "== paper 2 =="
   && python3 code/crossed_boot_10k.py >/dev/null \
   && python3 code/msi2_stats.py >/dev/null \
   && python3 code/deployment_records.py >/dev/null \
+  && python3 code/replication_design.py --check >/dev/null \
+  && python3 code/replication_stats.py >/dev/null \
+  && python3 code/replication_posthoc.py >/dev/null \
   && python3 code/make_numbers.py && python3 code/check_macros.py \
   && python3 code/make_results_md.py && python3 code/make_figures.py )
 echo "== README tables =="

@@ -36,12 +36,20 @@ for d in sorted(glob.glob(os.path.join(RES, "*", "design.json")) +
     rows[run] = dict(records=present,
                      absent=[k for k in FIELDS if k not in j],
                      defaults_not_recorded={k: v for k, v in DEFAULTS.items() if k not in j})
+    if "donor_schedules" in j:
+        # the collector of the replication reads its donors from the archived sample file and records a start
+        # time for each block, so the default of the earlier collectors does not describe it
+        rows[run]["defaults_not_recorded"].pop("donor_seed", None)
+        rows[run]["recorded_elsewhere"] = dict(
+            donor_seed="the donors are read from results/replication/design_master.json, one schedule per donor arm",
+            started_at="the start of each block is recorded under blocks")
 
 have = {k: sum(1 for r in rows.values() if k in (r.get("records") or {})) for k in FIELDS}
 M = dict(_generated_by="code/collection_manifest.py",
          note=("Per collection, the provenance fields its own design.json carries. `absent` names "
                "the fields it does not carry; `defaults_not_recorded` gives the collector's default "
-               "for an absent field, which is a property of the code and not a record of the run."),
+               "for an absent field, which is a property of the code and not a record of the run. "
+               "`recorded_elsewhere` says where a collection keeps what a field would hold."),
          n_collections=len(rows), fields=list(FIELDS), n_recording_field=have, collections=rows)
 json.dump(M, open(os.path.join(RES, "collection_manifest.json"), "w"), indent=1)
 print(f"wrote results/collection_manifest.json: {len(rows)} collections")

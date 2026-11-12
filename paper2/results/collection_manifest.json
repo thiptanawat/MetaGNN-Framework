@@ -1,7 +1,7 @@
 {
  "_generated_by": "code/collection_manifest.py",
- "note": "Per collection, the provenance fields its own design.json carries. `absent` names the fields it does not carry; `defaults_not_recorded` gives the collector's default for an absent field, which is a property of the code and not a record of the run.",
- "n_collections": 45,
+ "note": "Per collection, the provenance fields its own design.json carries. `absent` names the fields it does not carry; `defaults_not_recorded` gives the collector's default for an absent field, which is a property of the code and not a record of the run. `recorded_elsewhere` says where a collection keeps what a field would hold.",
+ "n_collections": 47,
  "fields": [
   "url",
   "model",
@@ -16,17 +16,17 @@
   "minutes"
  ],
  "n_recording_field": {
-  "url": 35,
-  "model": 45,
-  "max_tokens": 35,
-  "temperature": 28,
-  "seed": 25,
+  "url": 37,
+  "model": 47,
+  "max_tokens": 37,
+  "temperature": 30,
+  "seed": 27,
   "donor_seed": 25,
   "started_at": 35,
-  "interleave": 31,
-  "full_archive": 35,
-  "plain_chat": 35,
-  "minutes": 45
+  "interleave": 33,
+  "full_archive": 37,
+  "plain_chat": 37,
+  "minutes": 47
  },
  "collections": {
   "det_patient": {
@@ -670,6 +670,50 @@
     "seed": 2024,
     "donor_seed": "seed + 1 unless --donor_seed was passed",
     "temperature": 0.0
+   }
+  },
+  "replication/w1": {
+   "records": {
+    "url": "http://10.42.0.32:8000/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 20261113,
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 123.8
+   },
+   "absent": [
+    "donor_seed",
+    "started_at"
+   ],
+   "defaults_not_recorded": {},
+   "recorded_elsewhere": {
+    "donor_seed": "the donors are read from results/replication/design_master.json, one schedule per donor arm",
+    "started_at": "the start of each block is recorded under blocks"
+   }
+  },
+  "replication/w2": {
+   "records": {
+    "url": "http://10.42.0.32:8000/qwen3-8-27b/v1/chat/completions",
+    "model": "qwen3-8-27b",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 20261113,
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 31.3
+   },
+   "absent": [
+    "donor_seed",
+    "started_at"
+   ],
+   "defaults_not_recorded": {},
+   "recorded_elsewhere": {
+    "donor_seed": "the donors are read from results/replication/design_master.json, one schedule per donor arm",
+    "started_at": "the start of each block is recorded under blocks"
    }
   },
   "repr": {

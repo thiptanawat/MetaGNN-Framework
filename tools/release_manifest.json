@@ -1,7 +1,7 @@
 {
  "_note": "The artifacts a public checkout must carry for the two studies' numbers to be regenerable and their central results traceable. tools/check_release.py reads this file and fails on any entry that is absent or short. Bump 'version' when the required set changes; 'release' names the tag the set was fixed for.",
- "version": 4,
- "release": "benchmark-validity-2026-11b",
+ "version": 5,
+ "release": "benchmark-validity-2026-11c",
  "required_files": [
   "reproduce.sh",
   "requirements.txt",
@@ -51,7 +51,30 @@
   "CHECKSUMS.sha256",
   "paper2/cohort_order.npz",
   "paper2/code/cohort_order.py",
-  "paper2/code/export_cohort_order.py"
+  "paper2/code/export_cohort_order.py",
+  "paper1/SECOND_COHORT_PLAN_2026-11-13.md",
+  "paper1/code/build_second_cohort.py",
+  "paper1/code/second_cohort_stats.py",
+  "paper1/data/gpr_resolved_cohort1.json",
+  "paper1/data/cohort2_expression_qc.json",
+  "paper1/data/cohort2_plan_record.json",
+  "paper1/data/results_cohort2.json",
+  "paper2/REPLICATION_PLAN_2026-11-13.md",
+  "paper2/code/replication_design.py",
+  "paper2/code/replication_probe.py",
+  "paper2/code/replication_stats.py",
+  "paper2/results/replication/design_master.json",
+  "paper2/results/replication/serving_config.json",
+  "paper2/results/replication/plan_record.json",
+  "paper2/results/replication/w1/raw.json",
+  "paper2/results/replication/w1/design.json",
+  "paper2/results/replication/w2/raw.json",
+  "paper2/results/replication/w2/design.json",
+  "paper2/results/replication_frozen.json",
+  "paper1/data/cohort2_patients.tsv",
+  "paper2/results/replication/collection_record.json",
+  "paper2/code/replication_posthoc.py",
+  "paper2/results/replication_posthoc.json"
  ],
  "required_globs": {
   "paper1/results/deepmeta/preds/seed*/preds_*.csv": 18,
@@ -59,7 +82,8 @@
   "paper2/results/msi2/*/raw.json": 21,
   "paper1/results/fam/*.json": 79,
   "paper1/results/ivr/*.json": 75,
-  "paper1/results/synth/*.json": 24
+  "paper1/results/synth/*.json": 24,
+  "paper1/results/cohort2/naive_*.json": 4
  },
  "ledger_counts": {
   "prediction_arrays_listed": 299,

@@ -71,6 +71,16 @@ msi2 () {   # url model served_name extra_flags
 }
 msi2 "$ENDPOINT" "$MODEL" qwen
 
+# ---- the prespecified replication of the own-versus-donor contrast ------------------------------
+# REPLICATION_PLAN_2026-11-13.md. The sample (reactions, the ordered patient list, three donor
+# schedules) is results/replication/design_master.json, written by code/replication_design.py before
+# the first call. Blocks of ten patients are collected in the order of the draw; the patient-blind
+# arm is collected in the first two blocks of each wording. Resumable like the collections above.
+PR="python3 code/replication_probe.py --url $ENDPOINT --model $MODEL --workers 24 --block_size 10 --blind_blocks 2"
+$PR --wording 1 --blocks 1-4 --arms reaction patient shuffled shuffled_d2 shuffled_d3 --out results/replication/w1
+$PR --wording 2 --blocks 1-4 --arms reaction patient shuffled --out results/replication/w2
+$PR --wording 1 --blocks 5-10 --arms reaction patient shuffled shuffled_d2 shuffled_d3 --out results/replication/w1
+
 # ---- the second backbone -----------------------------------------------------------------------
 if [ -n "${ENDPOINT2:-}" ]; then
   M2=${MODEL2:-gemma-4-31b-it}; P2="python3 code/llm_probe.py --url $ENDPOINT2 --model $M2"

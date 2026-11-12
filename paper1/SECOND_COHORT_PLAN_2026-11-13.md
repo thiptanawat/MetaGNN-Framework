@@ -36,3 +36,29 @@ The graph attention scorer is not retrained on the second cohort: its cells need
 ## 5. Deviations
 
 None at the time of the commit.
+
+### Record after the analysis (13 November 2026)
+
+No deviation. The first analysis script started 24 seconds after the plan was committed and 21 seconds after the commit was pushed (`data/cohort2_plan_record.json`; the push is in the public activity record of the repository). The builder kept all 1,095 patients, since the patient filter removed none, and found every one of the 21,263 genes in the count files. The patients are listed in `data/cohort2_patients.tsv`, in the order the analysis read them; their count files are the STAR gene-count files of the Genomic Data Commons, as `pipelines/brca/01_download_tcga_brca.py` retrieves them. The four result files are `results/cohort2/naive_allfolds.json`, `results/cohort2/naive_pooled.json` and their `_fam` counterparts, and the summary is `data/results_cohort2.json`.
+
+| Quantity (second cohort) | Value |
+|---|---|
+| Primary: network + own minus network + cohort mean, family-disjoint split | +0.0014 (standard deviation over 15 cells 0.0052, range -0.0041 to +0.0093, negative in 10 cells) |
+| The same contrast, random split | -0.0003 (0.0005) |
+| Fitted own-expression row minus fitted cohort-mean row | -0.0015 (random), -0.0091 (family-disjoint) |
+| Ranked own-expression row minus ranked cohort-mean row | +0.0007 (random), +0.0007 (family-disjoint) |
+| Rows without patient input, largest difference from the first cohort | 0 |
+
+All six contrasts lie within 0.02 AUROC of zero, which Section 3 reads as agreement with the first cohort.
+
+## 6. Planned extension: the graph scorer on the second cohort (fixed on 13 November 2026, not run)
+
+The graph attention scorer has not been trained on the second cohort. This section fixes the analysis before any such run. It was written after the linear results of Section 5 were known and before any graph-model result on the second cohort existed.
+
+| Item | Rule |
+|---|---|
+| Driver | `code/double_holdout_ctrl.py`, unchanged, launched by `code/gpu_queue_cohort2.sh`: the family-disjoint reaction split, the matched selection rule (20% of each cell's training reactions withheld from the loss and used for stopping), the default training seed, every cell of the 5 x 3 grid |
+| Arms | own expression and cohort-mean expression (feature modes `real` and `mean`), 30 runs |
+| Primary quantity | the paired difference over the 15 cells between the own-expression arm and the cohort-mean arm, AUROC on held-out reactions of held-out patients, as on the first cohort, where it is -0.0062 (standard deviation over cells 0.0245) |
+| Reading | descriptive, as for the first cohort: the mean, the standard deviation over cells, the range and the number of negative cells. A mean within 0.02 AUROC of zero is read as agreement with the first cohort |
+| Reporting | the result is reported whatever it is, with any deviation listed under a dated heading below |

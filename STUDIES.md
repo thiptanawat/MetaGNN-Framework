@@ -76,7 +76,7 @@ A second permutation seed (11) on 3 of those cells gives 0.6341, against 0.6294 
 
 The linear rows are patient-invariant in their fitted part, so no cell-level p is given for them.
 
-**Under the upstream choices tried, no estimate makes individual expression worth more than a few thousandths of AUROC over a cohort average.** Three choices upstream of every result were varied once each: the label (rebuilt from the HT29 reconstruction alone instead of the union of eleven), the expression normalization (within-patient percentiles instead of log2(TPM + 1)) and, for the graph model, the training seed, the early-stopping criterion and a wrong-patient consistency check. Linear rows are rerun on every cell; graph arms on the fold-0 cells.
+**Under the upstream choices tried, no estimate makes individual expression worth more than a few thousandths of AUROC over a cohort average.** Three choices upstream of every result were varied once each: the label (rebuilt from the HT29 reconstruction alone instead of the union of eleven), the expression normalization (within-patient percentiles instead of log2(CPM + 1)) and, for the graph model, the training seed, the early-stopping criterion and a wrong-patient consistency check. Linear rows are rerun on every cell; graph arms on the fold-0 cells.
 
 | check | expression only, linear | network features + expression, linear | graph model, input substitution |
 |---|---|---|---|
@@ -100,6 +100,8 @@ The same probe on three further attributes the model never saw. Output is the me
 
 The output follows its input in rank order and on no attribute adds to it.
 
+**The linear rungs on a second cohort.** The rows that need no graph training were repeated on 1,095 breast tumors (TCGA-BRCA), built as the first cohort was, under a plan committed before the analysis ran (`paper1/SECOND_COHORT_PLAN_2026-11-13.md`). On the family-disjoint split, the network features with each patient's own expression against the same with the cohort-mean expression: +0.0014 (first cohort +0.0037). Over the three linear contrasts and both splits the second cohort's values run from -0.0091 to +0.0014 and the first cohort's from -0.0194 to +0.0037. The graph scorer was not run on the second cohort.
+
 ## Language-Model Evidence in brief
 
 A language model (qwen3-8-27b) asked to score the same reactions from each patient's transcriptome. Three prompt arms: patient-blind, the patient's own value, and a stranger's value in the same slot (a new donor for every reaction).
@@ -115,6 +117,8 @@ No arm reaches the raw-expression ranking or the availability baseline in any de
 Three determinism floors (mean absolute change in the returned probability when nothing but the session changes): repeating the patient-blind prompt 0.0018; re-sending the patient prompt within a session 0.0019; answering Design A's patient prompts again in Design E, hours later, 0.0065 over 3,000 cells (0.0041 on the reactions where a value is shown). One expression value moves the answer by 0.353 on those reactions in Design A, about 86 times the largest floor.
 
 Positive controls on a record matched in the placement of the number: echo 100.0 %, compare 98.3 %, threshold 100.0 %, scored against the printed percentiles. On microsatellite instability, a target that varies between patients, logistic regression on the same 40-reaction panel reaches 0.9241; the model reaches 0.5178 with the patient's own panel and 0.4889 with a stranger's (paired difference +0.0289, 95 % interval -0.0280 to +0.0866), returning one probability for 86.5 % of patients under 418 distinct rationales.
+
+**A prespecified replication.** The contrast was repeated on 100 patients and 300 reactions that no earlier collection used, under a plan committed before the first call (`paper2/REPLICATION_PLAN_2026-11-13.md`): own 0.5578, donor 0.5517, paired difference +0.0061 (90 % interval +0.0002 to +0.0120). Over 3 donor schedules the difference runs from +0.0052 to +0.0061. Under a second wording of the prompt, on 40 of the patients, it is +0.0029 (-0.0042 to +0.0100); rewording moves the own-arm answer by 0.075 on average and swapping the patient by 0.331. One analysis outside the plan, added after these numbers were read (`paper2/code/replication_posthoc.py`): ranking the printed percentile with no model gives an own-minus-donor difference of +0.0035 (-0.0002 to +0.0073) on the same patients and reactions, it correlates with the model's difference across patients at 0.87, and the model's difference exceeds it by +0.0026 (-0.0007 to +0.0058).
 <!-- generated:end -->
 
 ## metabench: the five checks

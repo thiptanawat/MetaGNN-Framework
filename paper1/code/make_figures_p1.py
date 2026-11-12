@@ -645,7 +645,7 @@ if _LB:
     arrow(xa, 86, xa, 80.3); arrow(xa, 64, xa, 58.3); arrow(xa, 44, xa, 38.3)
     # middle column: the cohort, feeding the expression column
     box(X1, 44, BW, 14, 'TCGA-COAD and TCGA-READ', f"{n(_C['n_patients'])} patients, one primary\ntumor sample each")
-    arrow(X1 + 2, 44, X0 + BW + 0.3, 32, label='$\\log_2(\\mathrm{TPM}+1)$ through the\ngene rules: min over AND,\nmax over OR', lx=X1 + BW / 2 + 1, ly=33)
+    arrow(X1 + 2, 44, X0 + BW + 0.3, 32, label='$\\log_2(\\mathrm{CPM}+1)$ through the\ngene rules: min over AND,\nmax over OR', lx=X1 + BW / 2 + 1, ly=33)
     # right column: the label
     box(X2, 86, BW, 12, 'Human1 NCI-60 models', f"{len(ms)} cell-line models, {n(ms[0]['n_reactions'])} to\n{n(ms[-1]['n_reactions'])} reactions each")
     box(X2, 64, BW, 16, 'matched to Recon3D', f"{n(mm[0])} to {n(mm[-1])} reactions per\nmodel, every matched reaction\nwith a nonzero bound")

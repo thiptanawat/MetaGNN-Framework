@@ -1838,6 +1838,56 @@ out = os.path.join(HERE, MS, "numbers.tex")
 # a checkout that carries the analysis without the manuscript sources has no such directory;
 # the macro file is a result and is written either way
 os.makedirs(os.path.dirname(out), exist_ok=True)
+# ---- the linear rungs on a second cohort (SECOND_COHORT_PLAN_2026-11-13.md) -------------------------
+# data/results_cohort2.json is written by code/second_cohort_stats.py from results/cohort2/ and from
+# the first cohort's released linear rows; the manuscript's passage on the second cohort depends on it
+_C2P = os.path.join(HERE, "data", "results_cohort2.json")
+if not os.path.exists(_C2P):
+    raise SystemExit("data/results_cohort2.json is missing: run code/second_cohort_stats.py")
+C2 = json.load(open(_C2P))
+_qc = C2.get("second_cohort_expression_qc", {})
+cmd("ctPat", _qc["patients_kept"], "int"); cmd("ctFiles", _qc["count_files"], "int"); cmd("ctDropped", len(_qc["patients_dropped"]), "int")
+cmd("ctGenes", _qc["genes_first_cohort"], "int"); cmd("ctGenesMissing", _qc["genes_missing_in_second"], "int")
+cmd("ctRxnResolved", _qc["reactions_with_resolved_group"], "int")
+# a count that may be zero, worded for a sentence ("removed none of the 1,095 patients")
+cmd("ctDroppedText", "none" if not _qc["patients_dropped"] else f"{len(_qc['patients_dropped']):,}".replace(",", "{,}"))
+cmd("ctGenesMissingText", "none" if not _qc["genes_missing_in_second"] else f"{_qc['genes_missing_in_second']:,}".replace(",", "{,}"))
+_ROWN = dict(indicator="Ind", expr_perpat_rank="ExprPer", expr_cohortmean_rank="ExprCoh", expr_perpat_lr="ExprPerLr",
+             expr_cohortmean_lr="ExprCohLr", topology_only="Topo", structure_only="Struct",
+             structure_plus_cohortmean="StructCoh", structure_plus_perpat="StructPer",
+             expr_pooled_lr="ExprPooled", structure_plus_pooled="StructPooled")
+_CONN = dict(ranked="Rank", fitted="Fit", network="Net")
+for _ck, _cp in (("cohort1", "co"), ("cohort2", "ct")):
+    for _sk, _sp in (("random", "Rnd"), ("family", "Fam")):
+        _blk = C2["cohorts"][_ck][_sk]
+        for _rk, _rn in _ROWN.items():
+            if _rk in _blk["rows"]: cmd(f"{_cp}{_sp}{_rn}", _blk["rows"][_rk]["mean"])
+        for _kk, _kn in _CONN.items():
+            _c = _blk["contrasts"][_kk]; _pre = f"{_cp}{_sp}{_kn}"
+            cmd(_pre, _c["mean"], "{:+.4f}"); cmd(_pre + "SD", _c["sd"]); cmd(_pre + "Min", _c["min"], "{:+.4f}")
+            cmd(_pre + "Max", _c["max"], "{:+.4f}"); cmd(_pre + "Neg", _c["n_negative"], "int"); cmd(_pre + "N", _c["n_cells"], "int")
+            cmd(_pre + "P", pfmt(_c["signflip_p"]))
+_c2c = [C2["cohorts"]["cohort2"][s]["contrasts"][k]["mean"] for s in ("random", "family") for k in _CONN]
+_c1c = [C2["cohorts"]["cohort1"][s]["contrasts"][k]["mean"] for s in ("random", "family") for k in _CONN]
+cmd("ctConMin", min(_c2c), "{:+.4f}"); cmd("ctConMax", max(_c2c), "{:+.4f}")
+cmd("coConMin", min(_c1c), "{:+.4f}"); cmd("coConMax", max(_c1c), "{:+.4f}")
+cmd("ctConWithin", "all six lie" if max(abs(x) for x in _c2c) < 0.02 else "not all six lie")
+# the second cohort's six contrast means beside the first cohort's: inside its range or not, and how many change sign
+cmd("ctConInside", "within the range of the first cohort's" if (min(_c2c) >= min(_c1c) and max(_c2c) <= max(_c1c))
+    else "partly outside the range of the first cohort's")
+_nsd = sum(1 for x, y in zip(_c1c, _c2c) if (x > 0) != (y > 0))
+cmd("ctSignDiffN", _nsd, "int")
+cmd("ctSignDiffWord", ["none", "one", "two", "three", "four", "five", "six"][_nsd])
+_fr = max(C2["patient_free_rows_abs_difference"].values())
+cmd("ctFreeRowsDiff", _fr, "{:.4f}")
+cmd("ctFreeRowsAgree", "are identical in the two cohorts to four decimals" if round(_fr, 4) == 0
+    else "agree between the cohorts to within %.4f" % _fr)
+_prp = os.path.join(HERE, "data", "cohort2_plan_record.json")
+if not os.path.exists(_prp):
+    raise SystemExit("data/cohort2_plan_record.json is missing (the commit that fixed the second cohort's plan)")
+_pr = json.load(open(_prp))
+cmd("ctPlanCommit", "\\texttt{" + _pr["plan_commit"][:12] + "}")
+
 _byname = {}
 for _line in L:                      # the last definition of a name wins, so an explicit word macro overrides an automatic one
     _byname[_line.split("}")[0]] = _line

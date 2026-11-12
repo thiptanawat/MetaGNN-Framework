@@ -234,7 +234,7 @@ for a, pj in enumerate(PSEL):
             xs.append(XD[pj, ri]); ps.append(PCTF[pj, ri]); ys.append(v['prob'])
 xs, ps, ys = np.array(xs), np.array(ps), np.array(ys)
 for ax, xv, xlabel, sp, letter, title in (
-        (axes[2], xs, 'expression value shown, $\\log_2(\\mathrm{TPM}+1)$',
+        (axes[2], xs, 'expression value shown, $\\log_2(\\mathrm{CPM}+1)$',
          RUNS['A_representative']['score_vs_shown_value']['spearman'], 'C', 'Level of the value'),
         (axes[3], ps, 'cohort percentile shown',
          RUNS['A_representative']['variance_decomposition'].get('expr_only_spearman_percentile'), 'D', 'Percentile of the value')):
@@ -374,6 +374,61 @@ for i, (k, nm) in enumerate(_bb):
 axes[0, 0].legend(frameon=False, loc='upper left', fontsize=6.0, handlelength=1.4, labelspacing=0.3, borderpad=0.2,
                   scatterpoints=1, markerscale=0.9)
 fig.tight_layout(w_pad=1.2); fig.savefig(FIGDIR + '/fig_reliability.png'); plt.close(fig)
+# ---------------------------------------------------------------- Figure: the own-minus-donor contrast across designs
+# The own-minus-donor contrast of every collection of the main backbone that has both arms, one row
+# each: the mean paired difference in per-patient AUROC with its 90% Student interval, as
+# stats.analyze computes it. The rows of the prespecified replication are read from
+# results/replication_frozen.json, so the figure is drawn only where that file exists. The shaded
+# band is the narrower equivalence margin (0.02) and the dotted lines mark the wider one (0.05).
+_gp = _os.path.join(PATHS.ROOT, 'results', 'replication_frozen.json')
+if _os.path.exists(_gp):
+    _G = json.load(open(_gp)); _W1 = _G['wording1']; _rows = []
+    for _k, _lab in (('A_representative', 'Design A, schedule 1'), ('A_donor2', 'Design A, schedule 2'),
+                     ('B_balanced', 'Design B'), ('E_representative40', 'Design E, schedule 1'),
+                     ('E_donor2', 'Design E, schedule 2')):
+        _v = RUNS.get(_k)
+        if _v and _v.get('patient_vs_shuffled'):
+            _pv = _v['patient_vs_shuffled']
+            _rows.append((f"{_lab} (n = {_v['n_patients']})", _pv['auroc_diff_mean'], _pv['auroc_diff_ci90'], 'earlier'))
+    _n1 = _W1['n_patients']
+    for _s, _lab in (('d1', 'Replication, schedule 1, primary'), ('d2', 'Replication, schedule 2'),
+                     ('d3', 'Replication, schedule 3')):
+        if _s in _W1['donor']:
+            _d = _W1['donor'][_s]
+            _rows.append((f"{_lab} (n = {_n1})", _d['diff_mean'], _d['diff_ci90'], 'primary' if _s == 'd1' else 'replication'))
+    if 'pooled_donor' in _W1:
+        _rows.append((f"Replication, mean of three donor arms (n = {_n1})", _W1['pooled_donor']['mean'],
+                      _W1['pooled_donor']['ci90'], 'replication'))
+    if 'wording2' in _G:
+        _d = _G['wording2']['donor']['d1']
+        _rows.append((f"Replication, second wording (n = {_G['wording2']['n_patients']})", _d['diff_mean'], _d['diff_ci90'], 'replication'))
+    # the printed numbers of the replication ranked with no model (replication_posthoc.py; exploratory)
+    _xp = _os.path.join(PATHS.ROOT, 'results', 'replication_posthoc.json')
+    if _os.path.exists(_xp):
+        _XR = json.load(open(_xp))['replication']
+        for _k, _lab in (('printed_percentile', 'Printed percentile, no model, schedule 1'), ('printed_value', 'Printed value, no model, schedule 1')):
+            _d = _XR[_k]['d1']['diff']
+            _rows.append((f"{_lab} (n = {_d['n']})", _d['mean'], _d['ci90'], 'reference'))
+    fig, ax = plt.subplots(figsize=(W, 0.27 * len(_rows) + 0.85))
+    ax.axvspan(-0.02, 0.02, color=LGREY, alpha=0.6, lw=0, zorder=0)
+    for _m in (-0.05, 0.05): ax.axvline(_m, color=GREY, lw=0.8, ls=':', zorder=1)
+    ax.axvline(0, color='black', lw=0.8, zorder=1)
+    for _i, (_lab, _mu, _ci, _kind) in enumerate(_rows):
+        _y = len(_rows) - 1 - _i; _col = {'earlier': GREY, 'reference': ORANGE}.get(_kind, BLUE)
+        ax.plot(_ci, [_y, _y], color=_col, lw=1.2 if _kind == 'earlier' else 1.7, solid_capstyle='butt', zorder=2)
+        ax.plot([_mu], [_y], marker='D' if _kind == 'primary' else 'o', ms=5.2 if _kind == 'primary' else 4.2,
+                color=_col, mec='white', mew=0.5, zorder=3)
+    ax.set_yticks(range(len(_rows))); ax.set_yticklabels([_r[0] for _r in _rows][::-1])
+    for _t, _r in zip(ax.get_yticklabels(), _rows[::-1]):
+        if _r[3] == 'primary': _t.set_fontweight('bold')
+    ax.axhline(len(_rows) - sum(1 for _r in _rows if _r[3] == 'earlier') - 0.5, color=LGREY, lw=0.8)
+    if any(_r[3] == 'reference' for _r in _rows):
+        ax.axhline(sum(1 for _r in _rows if _r[3] == 'reference') - 0.5, color=LGREY, lw=0.8)
+    _lim = max(0.06, max(max(abs(_r[2][0]), abs(_r[2][1])) for _r in _rows) + 0.006)
+    ax.set_xlim(-_lim, _lim); ax.set_ylim(-0.6, len(_rows) - 0.4); ax.tick_params(axis='y', length=0)
+    ax.set_xlabel('own minus donor, AUROC (mean and 90% interval)')
+    fig.tight_layout(); fig.savefig(FIGDIR + '/fig_replication.png'); plt.close(fig)
+
 # ---------------------------------------------------------------- Graphical abstract
 # The design and the patient-level result in one landscape image of fixed size (5:2, 2656 x 1062
 # pixels), drawn from the same results file as the figures: the three prompt arms on the left, the

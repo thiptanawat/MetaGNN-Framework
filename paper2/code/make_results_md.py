@@ -112,6 +112,55 @@ if D:
       "went to reasoning tokens the API does not return, and the attrition differs between arms in a "
       "way that is confounded with an endpoint outage. No accuracy is reported for this run, in the "
       "manuscript or here; it is a cost, attrition and answer-form report.\n")
+# the prespecified replication (REPLICATION_PLAN_2026-11-13.md), from results/replication_frozen.json
+import os as _os
+_gp = _os.path.join(PATHS.ROOT, 'results', 'replication_frozen.json')
+if _os.path.exists(_gp):
+    G = json.load(open(_gp)); W1 = G['wording1']; d1 = W1['donor']['d1']
+    w("## Prespecified replication of the own-versus-donor contrast\n")
+    w("Plan: `REPLICATION_PLAN_2026-11-13.md`, committed before the first call. Statistics: `code/replication_stats.py`, "
+      "written to `results/replication_frozen.json`.\n")
+    w(f"First wording: {W1['n_patients']} patients and {W1['n_reactions']} reactions that no earlier collection used, "
+      f"{W1['blocks_completed']} blocks of ten patients completed, {W1['n_calls']:,} calls.\n")
+    w("| quantity | value |\n|---|---|")
+    w(f"| own arm, AUROC | {d1['own_auroc']:.4f} |")
+    for s_ in sorted(W1['donor']):
+        w(f"| donor arm, schedule {s_[1:]}, AUROC | {W1['donor'][s_]['donor_auroc']:.4f} |")
+    w(f"| raw expression ranking | {W1['raw_expression_auroc']:.4f} |")
+    w(f"| availability indicator | {W1['indicator_floor']:.4f} |")
+    for s_ in sorted(W1['donor']):
+        v = W1['donor'][s_]
+        w(f"| own minus donor, schedule {s_[1:]}{' (primary)' if s_ == 'd1' else ''} | {v['diff_mean']:+.4f} "
+          f"[{v['diff_ci90'][0]:+.4f}, {v['diff_ci90'][1]:+.4f}] (90% interval) |")
+    if 'pooled_donor' in W1:
+        v = W1['pooled_donor']
+        w(f"| own minus the mean of the donor arms | {v['mean']:+.4f} [{v['ci90'][0]:+.4f}, {v['ci90'][1]:+.4f}] |")
+    w(f"| primary contrast inside the 0.02 margin | {'yes' if d1['equivalent_002'] else 'no'} |")
+    w(f"| primary contrast inside the 0.05 margin | {'yes' if d1['equivalent_005'] else 'no'} |")
+    w(f"| 90% interval of the primary contrast excludes zero | {'yes' if G['decision']['interval_excludes_zero'] else 'no'} |")
+    _xq = _os.path.join(PATHS.ROOT, 'results', 'replication_posthoc.json')
+    if _os.path.exists(_xq):
+        XR = json.load(open(_xq))['replication']
+        w("\nOne analysis outside the plan (`code/replication_posthoc.py`, `results/replication_posthoc.json`), added after the "
+          "numbers above had been read: the own-minus-donor contrast of the printed numbers with no model.\n")
+        w("| quantity (first wording) | schedule 1 | schedule 2 | schedule 3 |\n|---|---|---|---|")
+        def _c(v): return f"{v['mean']:+.4f} [{v['ci90'][0]:+.4f}, {v['ci90'][1]:+.4f}]"
+        w("| language model | " + " | ".join(_c(XR['language_model'][s_]['diff']) for s_ in ('d1', 'd2', 'd3')) + " |")
+        w("| printed percentile, no model | " + " | ".join(_c(XR['printed_percentile'][s_]['diff']) for s_ in ('d1', 'd2', 'd3')) + " |")
+        w("| printed value, no model | " + " | ".join(_c(XR['printed_value'][s_]['diff']) for s_ in ('d1', 'd2', 'd3')) + " |")
+        w("| model minus printed percentile | " + " | ".join(_c(XR['model_minus_printed_percentile'][s_]) for s_ in ('d1', 'd2', 'd3')) + " |")
+        w("| correlation across patients, model with printed percentile | "
+          + " | ".join(f"{XR['association'][s_]['model_with_printed_percentile']['pearson']:.3f}" for s_ in ('d1', 'd2', 'd3')) + " |")
+    if 'wording2' in G:
+        W2 = G['wording2']; e1 = W2['donor']['d1']; P = G['paraphrase']
+        w(f"\nSecond wording: {W2['n_patients']} patients, {W2['n_calls']:,} calls.\n")
+        w("| quantity | value |\n|---|---|")
+        w(f"| own arm, AUROC | {e1['own_auroc']:.4f} |")
+        w(f"| donor arm, AUROC | {e1['donor_auroc']:.4f} |")
+        w(f"| own minus donor | {e1['diff_mean']:+.4f} [{e1['diff_ci90'][0]:+.4f}, {e1['diff_ci90'][1]:+.4f}] |")
+        w(f"| mean absolute change of the own-arm answer between the wordings | {P['own_between_wordings']['mean_abs_diff']:.4f} |")
+        w(f"| mean absolute change between the own and donor answers, first wording, same patients | {P['own_vs_donor_wording1']['mean_abs_diff']:.4f} |")
+    w("")
 w("## References\n")
 w("Every reference in the manuscript was resolved against PubMed E-utilities, the Crossref API or the "
   "arXiv API before use; the procedure and its outcome are in `docs/VERIFICATION.md` at the repository root.")

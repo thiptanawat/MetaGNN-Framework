@@ -112,6 +112,12 @@ SCRIPTS = [
          policy=dict(selection="validation patients over all training reactions",
                      checkpoint="the epoch with the best validation AUROC is restored before scoring",
                      endpoint="local GPU, one CUDA device per run", target="reconstruction-membership proxy label")),
+    dict(family="linear reference rows, second cohort", pattern=r"^naive_(allfolds|pooled)(_fam)?\.json$", where="cohort2",
+         runner="code/naive_baselines_allfolds.py and code/pooled_baselines.py, with P1_DATA set to the second cohort's "
+                "directory as code/build_second_cohort.py writes it (P1_FAMILY_MAP set for the _fam files); summarized by "
+                "code/second_cohort_stats.py",
+         policy=dict(selection="inner cross-validation over the training reactions for the tuned regime",
+                     checkpoint="not applicable", endpoint="CPU", target="reconstruction-membership proxy label")),
     dict(family="cohort and label construction", pattern=r"^(cohort|strata|param_counts|per_patient|inference|results_p1)\.json$",
          where=".", runner="code/cohort_stats.py, code/count_params.py, code/per_patient_auc.py, code/inference_p1.py",
          policy=dict(selection="not applicable", checkpoint="not applicable", endpoint="CPU", target="not applicable")),

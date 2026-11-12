@@ -140,7 +140,7 @@ if RB:
     L += ["**Under the upstream choices tried, no estimate makes individual expression worth more than a few thousandths of AUROC over a cohort average.** Three choices "
           "upstream of every result were varied once each: the label (rebuilt from the HT29 reconstruction "
           "alone instead of the union of eleven), the expression normalization (within-patient percentiles "
-          "instead of log2(TPM + 1)) and, for the graph model, the training seed, the early-stopping criterion and a "
+          "instead of log2(CPM + 1)) and, for the graph model, the training seed, the early-stopping criterion and a "
           "wrong-patient consistency check. Linear rows are rerun on every cell; graph arms on the fold-0 cells.", "",
           "| check | expression only, linear | network features + expression, linear | graph model, input substitution |",
           "|---|---|---|---|"]
@@ -193,6 +193,20 @@ for k, lab in (("cin_vs_gs", "chromosomal instability vs genomically stable"), (
 L += ["", "The output follows its input in rank order and on no attribute adds to it.", ""]
 
 # ---- Language-Model Evidence in brief
+# the linear rungs on a second cohort (paper1/SECOND_COHORT_PLAN_2026-11-13.md)
+C2 = json.load(open(os.path.join(HERE, "paper1", "data", "results_cohort2.json")))
+_c2 = C2["cohorts"]["cohort2"]; _c1 = C2["cohorts"]["cohort1"]
+_all2 = [_c2[sp]["contrasts"][k]["mean"] for sp in ("random", "family") for k in ("ranked", "fitted", "network")]
+_all1 = [_c1[sp]["contrasts"][k]["mean"] for sp in ("random", "family") for k in ("ranked", "fitted", "network")]
+_n2 = C2["second_cohort_expression_qc"]["patients_kept"]
+L += [f"**The linear rungs on a second cohort.** The rows that need no graph training were repeated on {_n2:,} breast tumors "
+      f"(TCGA-BRCA), built as the first cohort was, under a plan committed before the analysis ran "
+      f"(`paper1/SECOND_COHORT_PLAN_2026-11-13.md`). On the family-disjoint split, the network features with each patient's own "
+      f"expression against the same with the cohort-mean expression: {s4(_c2['family']['contrasts']['network']['mean'])} "
+      f"(first cohort {s4(_c1['family']['contrasts']['network']['mean'])}). Over the three linear contrasts and both splits the "
+      f"second cohort's values run from {s4(min(_all2))} to {s4(max(_all2))} and the first cohort's from {s4(min(_all1))} to "
+      f"{s4(max(_all1))}. The graph scorer was not run on the second cohort.", ""]
+
 R2 = P2["runs"]; A, E, B = R2["A_representative"], R2["E_representative40"], R2["B_balanced"]
 XS = P2.get("cross_session", {}).get("arms", {}).get("patient", {})
 pc = P2["positive_control"]["backbone1"]; M = P2["msi"]
@@ -228,6 +242,33 @@ L += ["",
       f"(paired difference {s4(M['own_vs_swap']['auroc_diff'])}, 95 % interval {s4(M['own_vs_swap']['ci95'][0])} to {s4(M['own_vs_swap']['ci95'][1])}), "
       f"returning one probability for {100 * M['arms']['own']['modal_share']:.1f} % of patients under {M['reason_distinct']} distinct rationales.",
       ""]
+
+# the prespecified replication of the own-versus-donor contrast (paper2/REPLICATION_PLAN_2026-11-13.md)
+G = json.load(open(os.path.join(HERE, "paper2", "results", "replication_frozen.json")))
+_g1 = G["wording1"]; _gd = _g1["donor"]["d1"]
+_line = (f"**A prespecified replication.** The contrast was repeated on {_g1['n_patients']} patients and {_g1['n_reactions']} reactions "
+         f"that no earlier collection used, under a plan committed before the first call (`paper2/REPLICATION_PLAN_2026-11-13.md`): "
+         f"own {f4(_gd['own_auroc'])}, donor {f4(_gd['donor_auroc'])}, paired difference {s4(_gd['diff_mean'])} "
+         f"(90 % interval {s4(_gd['diff_ci90'][0])} to {s4(_gd['diff_ci90'][1])}).")
+if "schedule_spread" in _g1:
+    _line += (f" Over {len(_g1['schedule_spread']['schedules'])} donor schedules the difference runs from "
+              f"{s4(_g1['schedule_spread']['min'])} to {s4(_g1['schedule_spread']['max'])}.")
+if "wording2" in G:
+    _gw = G["wording2"]["donor"]["d1"]; _gp = G["paraphrase"]
+    _line += (f" Under a second wording of the prompt, on {G['wording2']['n_patients']} of the patients, it is {s4(_gw['diff_mean'])} "
+              f"({s4(_gw['diff_ci90'][0])} to {s4(_gw['diff_ci90'][1])}); rewording moves the own-arm answer by "
+              f"{_gp['own_between_wordings']['mean_abs_diff']:.3f} on average and swapping the patient by "
+              f"{_gp['own_vs_donor_wording1']['mean_abs_diff']:.3f}.")
+# the one analysis outside the plan: the contrast of the printed numbers with no model
+_xq = os.path.join(HERE, "paper2", "results", "replication_posthoc.json")
+if os.path.exists(_xq):
+    _xr = json.load(open(_xq))["replication"]; _xp = _xr["printed_percentile"]["d1"]["diff"]
+    _xa = _xr["association"]["d1"]["model_with_printed_percentile"]["pearson"]; _xe = _xr["model_minus_printed_percentile"]["d1"]
+    _line += (f" One analysis outside the plan, added after these numbers were read (`paper2/code/replication_posthoc.py`): ranking the "
+              f"printed percentile with no model gives an own-minus-donor difference of {s4(_xp['mean'])} ({s4(_xp['ci90'][0])} to "
+              f"{s4(_xp['ci90'][1])}) on the same patients and reactions, it correlates with the model's difference across patients at "
+              f"{_xa:.2f}, and the model's difference exceeds it by {s4(_xe['mean'])} ({s4(_xe['ci90'][0])} to {s4(_xe['ci90'][1])}).")
+L += [_line, ""]
 
 # the generated tables live in whichever front-page file carries the markers: README.md in a
 # checkout of the studies alone, STUDIES.md where the studies share a repository with the scorer

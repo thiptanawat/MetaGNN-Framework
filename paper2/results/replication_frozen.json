@@ -1,0 +1,743 @@
+{
+ "note": "prespecified replication of the own-versus-donor contrast on reactions and patients that no earlier collection used; see REPLICATION_PLAN_2026-11-13.md",
+ "margins": {
+  "narrow": 0.02,
+  "wide": 0.05
+ },
+ "primary": "wording 1, donor schedule d1, all completed blocks",
+ "design_master_sha256": "2f39d5fc87a1cce2fe210e457f35ad8120d464c04968c42d9be48bda32bc6869",
+ "wording1": {
+  "run": "replication/w1",
+  "wording": 1,
+  "model": "qwen3-8-27b",
+  "n_patients": 100,
+  "n_reactions": 300,
+  "n_expression_bearing": 137,
+  "label_base_rate": 0.3,
+  "blocks_completed": 10,
+  "n_calls": 126000,
+  "resent_calls": 97,
+  "transport_errors_left": 0,
+  "unparsed": 0,
+  "minutes": 123.8,
+  "first_call": "2026-11-12T23:31:38+0700",
+  "last_block_finished": "2026-11-13T02:06:55+0700",
+  "patients": [
+   247,
+   618,
+   204,
+   564,
+   273,
+   83,
+   388,
+   277,
+   47,
+   22,
+   262,
+   582,
+   433,
+   30,
+   302,
+   63,
+   400,
+   156,
+   335,
+   413,
+   491,
+   534,
+   269,
+   585,
+   44,
+   405,
+   143,
+   403,
+   128,
+   202,
+   80,
+   84,
+   375,
+   387,
+   297,
+   554,
+   290,
+   27,
+   289,
+   475,
+   101,
+   385,
+   383,
+   603,
+   95,
+   34,
+   200,
+   596,
+   29,
+   620,
+   332,
+   323,
+   372,
+   340,
+   467,
+   350,
+   499,
+   110,
+   320,
+   432,
+   103,
+   524,
+   523,
+   25,
+   274,
+   105,
+   458,
+   24,
+   429,
+   512,
+   613,
+   9,
+   241,
+   409,
+   129,
+   52,
+   145,
+   482,
+   452,
+   113,
+   5,
+   162,
+   485,
+   487,
+   265,
+   374,
+   501,
+   507,
+   250,
+   438,
+   229,
+   428,
+   610,
+   210,
+   447,
+   102,
+   87,
+   99,
+   401,
+   578
+  ],
+  "design_master_sha256": "2f39d5fc87a1cce2fe210e457f35ad8120d464c04968c42d9be48bda32bc6869",
+  "code_sha256": {
+   "replication_probe": "1790bd6c577463fe7158539f37bff1462191a5bba29860e8c684cadf6b63378f",
+   "llm_probe": "42c96654256a741077e42d155c2e75449879cce4095921ffe4caa88c182cb86a"
+  },
+  "donor": {
+   "d1": {
+    "schedule": "d1",
+    "n_patients": 100,
+    "own_auroc": 0.5578293651,
+    "own_auroc_ci": [
+     0.5520406151,
+     0.5633186706
+    ],
+    "donor_auroc": 0.5517415344,
+    "donor_auroc_ci": [
+     0.548223373,
+     0.5555771958
+    ],
+    "parsed_own": 1.0,
+    "parsed_donor": 1.0,
+    "diff_mean": 0.0060878307,
+    "diff_sd": 0.0357360841,
+    "diff_ci90": [
+     0.0001542429,
+     0.0120214185
+    ],
+    "paired_p": 0.091601887,
+    "wilcoxon_p": 0.0397709725,
+    "tost_005_p": [
+     6.53e-29,
+     6.24e-22
+    ],
+    "equivalent_005": true,
+    "tost_002_p": [
+     3.66e-11,
+     8.99e-05
+    ],
+    "equivalent_002": true,
+    "n_pairs": 13700,
+    "identical": 0.213649635,
+    "mean_abs_diff": 0.3348167883,
+    "arm_correlation": 0.1275868191,
+    "residual_correlation": -0.0152468539,
+    "residual_correlation_ci": [
+     -0.0309129208,
+     0.0005340289
+    ],
+    "between_patient_sd_own": 0.3042968757,
+    "between_patient_sd_donor": 0.3038300379
+   },
+   "d2": {
+    "schedule": "d2",
+    "n_patients": 100,
+    "own_auroc": 0.5578293651,
+    "own_auroc_ci": [
+     0.5520406151,
+     0.5633186706
+    ],
+    "donor_auroc": 0.5526402116,
+    "donor_auroc_ci": [
+     0.5489641997,
+     0.5564843783
+    ],
+    "parsed_own": 1.0,
+    "parsed_donor": 1.0,
+    "diff_mean": 0.0051891534,
+    "diff_sd": 0.0329283146,
+    "diff_ci90": [
+     -0.0002782348,
+     0.0106565417
+    ],
+    "paired_p": 0.1182405292,
+    "wilcoxon_p": 0.0981611949,
+    "tost_005_p": [
+     5.7e-31,
+     1.05e-24
+    ],
+    "equivalent_005": true,
+    "tost_002_p": [
+     6.7e-12,
+     9.35e-06
+    ],
+    "equivalent_002": true,
+    "n_pairs": 13700,
+    "identical": 0.2116058394,
+    "mean_abs_diff": 0.3368087591,
+    "arm_correlation": 0.1212157066,
+    "residual_correlation": -0.0196023341,
+    "residual_correlation_ci": [
+     -0.0363761695,
+     -0.0017532359
+    ],
+    "between_patient_sd_own": 0.3042968757,
+    "between_patient_sd_donor": 0.3039659967
+   },
+   "d3": {
+    "schedule": "d3",
+    "n_patients": 100,
+    "own_auroc": 0.5578293651,
+    "own_auroc_ci": [
+     0.5520406151,
+     0.5633186706
+    ],
+    "donor_auroc": 0.5521746032,
+    "donor_auroc_ci": [
+     0.5486106481,
+     0.5556355159
+    ],
+    "parsed_own": 1.0,
+    "parsed_donor": 1.0,
+    "diff_mean": 0.0056547619,
+    "diff_sd": 0.0346632649,
+    "diff_ci90": [
+     -0.0001006959,
+     0.0114102198
+    ],
+    "paired_p": 0.1059955455,
+    "wilcoxon_p": 0.0702522676,
+    "tost_005_p": [
+     1.29e-29,
+     5.32e-23
+    ],
+    "equivalent_005": true,
+    "tost_002_p": [
+     2.25e-11,
+     3.68e-05
+    ],
+    "equivalent_002": true,
+    "n_pairs": 13700,
+    "identical": 0.2140145985,
+    "mean_abs_diff": 0.3323131387,
+    "arm_correlation": 0.1364087538,
+    "residual_correlation": -0.0027173085,
+    "residual_correlation_ci": [
+     -0.0189357164,
+     0.0131692733
+    ],
+    "between_patient_sd_own": 0.3042968757,
+    "between_patient_sd_donor": 0.3038367924
+   }
+  },
+  "raw_expression_auroc": 0.6467592593,
+  "indicator_floor": 0.6261904762,
+  "raw_percentile_auroc": 0.628707672,
+  "schedule_spread": {
+   "schedules": [
+    "d1",
+    "d2",
+    "d3"
+   ],
+   "diff_means": [
+    0.0060878307,
+    0.0051891534,
+    0.0056547619
+   ],
+   "min": 0.0051891534,
+   "max": 0.0060878307
+  },
+  "pooled_donor": {
+   "n": 100,
+   "mean": 0.0056439153,
+   "sd": 0.0310570519,
+   "ci90": [
+    0.0004872299,
+    0.0108006008
+   ],
+   "paired_p": 0.0722,
+   "tost_005_p": [
+    3.91e-33,
+    4.36e-26
+   ],
+   "equivalent_005": true,
+   "tost_002_p": [
+    3.37e-13,
+    5.73e-06
+   ],
+   "equivalent_002": true,
+   "tost_001_p": [
+    1.06e-06,
+    0.0819
+   ],
+   "equivalent_001": false
+  },
+  "crossed_bootstrap_d1": {
+   "B": 10000,
+   "seeds": [
+    29,
+    1029,
+    2029
+   ],
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "mean": 0.0059560445,
+     "ci90": [
+      -0.002675331,
+      0.0146678788
+     ],
+     "ci95": [
+      -0.0043023034,
+      0.0162488494
+     ]
+    },
+    "1029": {
+     "n_draws": 10000,
+     "mean": 0.0061010229,
+     "ci90": [
+      -0.0025252871,
+      0.0148019919
+     ],
+     "ci95": [
+      -0.0041384478,
+      0.0164684387
+     ]
+    },
+    "2029": {
+     "n_draws": 10000,
+     "mean": 0.0060044901,
+     "ci90": [
+      -0.0025124701,
+      0.0147738099
+     ],
+     "ci95": [
+      -0.0043419959,
+      0.0164693121
+     ]
+    }
+   },
+   "ci90_lower_range": [
+    -0.002675331,
+    -0.0025124701
+   ],
+   "ci90_upper_range": [
+    0.0146678788,
+    0.0148019919
+   ],
+   "within_002_90_all_seeds": true,
+   "within_005_90_all_seeds": true
+  },
+  "blind_subset": {
+   "n_patients": 20,
+   "blind_auroc": 0.5073055556,
+   "own_auroc": 0.5558068783,
+   "donor_auroc": 0.5476283069,
+   "determinism": {
+    "n_prompt_pairs": 190,
+    "n_cell_pairs": 57000,
+    "identical": 0.9124385965,
+    "mean_abs_diff": 0.0294959649,
+    "identical_expr": 0.8928159816,
+    "mean_abs_diff_expr": 0.0448912793,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 20,
+     "mean_diff": 0.0485013228,
+     "sd": 0.0413030451,
+     "paired_p": 4.55e-05,
+     "ci90": [
+      0.0325316717,
+      0.0644709738
+     ]
+    },
+    "shuffled": {
+     "n": 20,
+     "mean_diff": 0.0403227513,
+     "sd": 0.0219781128,
+     "paired_p": 1.15e-07,
+     "ci90": [
+      0.0318250052,
+      0.0488204975
+     ]
+    }
+   },
+   "mean_move_from_blind": {
+    "patient": 0.3702883212,
+    "shuffled": 0.3656751825
+   }
+  }
+ },
+ "wording2": {
+  "run": "replication/w2",
+  "wording": 2,
+  "model": "qwen3-8-27b",
+  "n_patients": 40,
+  "n_reactions": 300,
+  "n_expression_bearing": 137,
+  "label_base_rate": 0.3,
+  "blocks_completed": 4,
+  "n_calls": 30000,
+  "resent_calls": 0,
+  "transport_errors_left": 0,
+  "unparsed": 0,
+  "minutes": 31.3,
+  "first_call": "2026-11-13T00:23:08+0700",
+  "last_block_finished": "2026-11-13T00:54:25+0700",
+  "patients": [
+   247,
+   618,
+   204,
+   564,
+   273,
+   83,
+   388,
+   277,
+   47,
+   22,
+   262,
+   582,
+   433,
+   30,
+   302,
+   63,
+   400,
+   156,
+   335,
+   413,
+   491,
+   534,
+   269,
+   585,
+   44,
+   405,
+   143,
+   403,
+   128,
+   202,
+   80,
+   84,
+   375,
+   387,
+   297,
+   554,
+   290,
+   27,
+   289,
+   475
+  ],
+  "design_master_sha256": "2f39d5fc87a1cce2fe210e457f35ad8120d464c04968c42d9be48bda32bc6869",
+  "code_sha256": {
+   "replication_probe": "1790bd6c577463fe7158539f37bff1462191a5bba29860e8c684cadf6b63378f",
+   "llm_probe": "42c96654256a741077e42d155c2e75449879cce4095921ffe4caa88c182cb86a"
+  },
+  "donor": {
+   "d1": {
+    "schedule": "d1",
+    "n_patients": 40,
+    "own_auroc": 0.5493498677,
+    "own_auroc_ci": [
+     0.5425459491,
+     0.5557263393
+    ],
+    "donor_auroc": 0.5464490741,
+    "donor_auroc_ci": [
+     0.542617047,
+     0.5504840443
+    ],
+    "parsed_own": 1.0,
+    "parsed_donor": 1.0,
+    "diff_mean": 0.0029007937,
+    "diff_sd": 0.026698318,
+    "diff_ci90": [
+     -0.0042116956,
+     0.0100132829
+    ],
+    "paired_p": 0.4960431023,
+    "wilcoxon_p": 0.2706923435,
+    "tost_005_p": [
+     1.49e-15,
+     5.27e-14
+    ],
+    "equivalent_005": true,
+    "tost_002_p": [
+     1.63e-06,
+     0.000118
+    ],
+    "equivalent_002": true,
+    "n_pairs": 5480,
+    "identical": 0.2947080292,
+    "mean_abs_diff": 0.2965784672,
+    "arm_correlation": 0.2423238015,
+    "residual_correlation": -0.0166908305,
+    "residual_correlation_ci": [
+     -0.0439139861,
+     0.0116924137
+    ],
+    "between_patient_sd_own": 0.2719707832,
+    "between_patient_sd_donor": 0.2706862298
+   }
+  },
+  "raw_expression_auroc": 0.6466865079,
+  "indicator_floor": 0.6261904762,
+  "raw_percentile_auroc": 0.6286375661,
+  "crossed_bootstrap_d1": {
+   "B": 10000,
+   "seeds": [
+    29,
+    1029,
+    2029
+   ],
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "mean": 0.0029401465,
+     "ci90": [
+      -0.0069432523,
+      0.0129996666
+     ],
+     "ci95": [
+      -0.0090543045,
+      0.015011116
+     ]
+    },
+    "1029": {
+     "n_draws": 10000,
+     "mean": 0.0029317145,
+     "ci90": [
+      -0.0072481173,
+      0.013033605
+     ],
+     "ci95": [
+      -0.009399169,
+      0.0149156966
+     ]
+    },
+    "2029": {
+     "n_draws": 10000,
+     "mean": 0.0029807115,
+     "ci90": [
+      -0.0070280145,
+      0.0127674653
+     ],
+     "ci95": [
+      -0.0090419957,
+      0.0147609024
+     ]
+    }
+   },
+   "ci90_lower_range": [
+    -0.0072481173,
+    -0.0069432523
+   ],
+   "ci90_upper_range": [
+    0.0127674653,
+    0.013033605
+   ],
+   "within_002_90_all_seeds": true,
+   "within_005_90_all_seeds": true
+  },
+  "blind_subset": {
+   "n_patients": 20,
+   "blind_auroc": 0.4934457672,
+   "own_auroc": 0.5471349206,
+   "donor_auroc": 0.544218254,
+   "determinism": {
+    "n_prompt_pairs": 190,
+    "n_cell_pairs": 57000,
+    "identical": 0.949754386,
+    "mean_abs_diff": 0.0193357895,
+    "identical_expr": 0.9206300423,
+    "mean_abs_diff_expr": 0.0312570111,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 20,
+     "mean_diff": 0.0536891534,
+     "sd": 0.0273489522,
+     "paired_p": 4.1e-08,
+     "ci90": [
+      0.0431147945,
+      0.0642635123
+     ]
+    },
+    "shuffled": {
+     "n": 20,
+     "mean_diff": 0.0507724868,
+     "sd": 0.0165808495,
+     "paired_p": 2.7e-11,
+     "ci90": [
+      0.0443615701,
+      0.0571834034
+     ]
+    }
+   },
+   "mean_move_from_blind": {
+    "patient": 0.330770073,
+    "shuffled": 0.3281532847
+   }
+  }
+ },
+ "paraphrase": {
+  "n_patients": 40,
+  "own_between_wordings": {
+   "n_pairs": 5480,
+   "mean_abs_diff": 0.0754270073,
+   "identical": 0.6512773723,
+   "correlation": 0.8676273946
+  },
+  "donor_between_wordings": {
+   "n_pairs": 5480,
+   "mean_abs_diff": 0.0728777372,
+   "identical": 0.6496350365,
+   "correlation": 0.8746572148
+  },
+  "own_vs_donor_wording1": {
+   "n_pairs": 5480,
+   "mean_abs_diff": 0.3309890511,
+   "identical": 0.2156934307,
+   "correlation": 0.1378133442
+  },
+  "own_vs_donor_wording2": {
+   "n_pairs": 5480,
+   "mean_abs_diff": 0.2965784672,
+   "identical": 0.2947080292,
+   "correlation": 0.2423238015
+  },
+  "own_auroc_wording1": 0.5572083333,
+  "own_auroc_wording2": 0.5493498677,
+  "own_auroc_wording2_minus_wording1": {
+   "n": 40,
+   "mean": -0.0078584656,
+   "sd": 0.0157952658,
+   "ci90": [
+    -0.0120663583,
+    -0.0036505729
+   ],
+   "paired_p": 0.00316,
+   "tost_005_p": [
+    8.06e-20,
+    1.04e-24
+   ],
+   "equivalent_005": true,
+   "tost_002_p": [
+    9.68e-06,
+    5.3e-14
+   ],
+   "equivalent_002": true,
+   "tost_001_p": [
+    0.198,
+    6.66e-09
+   ],
+   "equivalent_001": false
+  },
+  "own_minus_donor_wording1_same_patients": {
+   "n": 40,
+   "mean": 0.0089927249,
+   "sd": 0.0359256219,
+   "ci90": [
+    -0.000577938,
+    0.0185633877
+   ],
+   "paired_p": 0.121,
+   "tost_005_p": [
+    4.34e-13,
+    5.37e-09
+   ],
+   "equivalent_005": true,
+   "tost_002_p": [
+    4.51e-06,
+    0.03
+   ],
+   "equivalent_002": true,
+   "tost_001_p": [
+    0.000918,
+    0.43
+   ],
+   "equivalent_001": false
+  },
+  "own_minus_donor_wording2": {
+   "n": 40,
+   "mean": 0.0029007937,
+   "sd": 0.026698318,
+   "ci90": [
+    -0.0042116956,
+    0.0100132829
+   ],
+   "paired_p": 0.496,
+   "tost_005_p": [
+    1.49e-15,
+    5.27e-14
+   ],
+   "equivalent_005": true,
+   "tost_002_p": [
+    1.63e-06,
+    0.000118
+   ],
+   "equivalent_002": true,
+   "tost_001_p": [
+    0.00202,
+    0.0503
+   ],
+   "equivalent_001": false
+  },
+  "blind_between_wordings": {
+   "n_pairs": 6000,
+   "mean_abs_diff": 0.0758016667,
+   "identical": 0.7401666667,
+   "correlation": 0.7952881466,
+   "n_patients": 20
+  },
+  "paraphrase_over_swap": 0.227883693
+ },
+ "decision": {
+  "diff_mean": 0.0060878307,
+  "ci90": [
+   0.0001542429,
+   0.0120214185
+  ],
+  "equivalent_002": true,
+  "equivalent_005": true,
+  "interval_excludes_zero": true,
+  "n_patients": 100
+ }
+}

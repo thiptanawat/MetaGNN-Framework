@@ -1,8 +1,8 @@
 {
  "_generated_by": "code/make_ledger.py",
  "note": "One row per result family behind Reaction-Scoring Audit: what produced it, the settings its own output records, the checkpoint policy and endpoint, and a SHA-256 of every file. Fields a result file does not carry are absent rather than guessed. The prediction arrays the mask and clean-subset rescorings read are not committed; they are attached to the tagged release, and prediction_arrays below records their checksums.",
- "n_families": 18,
- "n_result_files": 342,
+ "n_families": 19,
+ "n_result_files": 346,
  "data_records": [
   {
    "file": "data/activity_labels_ht29.pt",
@@ -13,6 +13,21 @@
    "file": "data/clinical_metadata_msi.tsv",
    "bytes": 57582,
    "sha256": "8f93dfefc5de32b36e34e61f0306387d11646d352281f37721c419691bdd99ab"
+  },
+  {
+   "file": "data/cohort2_expression_qc.json",
+   "bytes": 534,
+   "sha256": "66c4010ba81fb3280db778e169f0cfc11506b86506d32f9a3222d1b7af2faaa1"
+  },
+  {
+   "file": "data/cohort2_patients.tsv",
+   "bytes": 25206,
+   "sha256": "92d35437540d59a2a71491436bdc170a7adf816e2a9a4c8b26864bfa73febac8"
+  },
+  {
+   "file": "data/cohort2_plan_record.json",
+   "bytes": 538,
+   "sha256": "e20c07e3dca2e9bcd81552ca47ed7703f03778080c13e68ff04c9228e32e6163"
   },
   {
    "file": "data/families/audit.json",
@@ -45,6 +60,11 @@
    "sha256": "d1774c10059e653f7cc9815282ba21d3a4952c8ea8cec847b1c25e886056076a"
   },
   {
+   "file": "data/gpr_resolved_cohort1.json",
+   "bytes": 169624,
+   "sha256": "99ac6b8160cce92c86fc2ba408791f3fc399c10cafd82167ea20e35cd7a8148f"
+  },
+  {
    "file": "data/labels_ht29.json",
    "bytes": 1691,
    "sha256": "53bb52b517e9422a14418683c20697cdd576e672d053e1b8b8cf7e689a6969ef"
@@ -53,6 +73,11 @@
    "file": "data/recon3d_aligned.json.gz",
    "bytes": 422693,
    "sha256": "7f6e2b94d7c89db849ab8bbccc3fd55f533512e49800c60468863cb5043cb2b3"
+  },
+  {
+   "file": "data/results_cohort2.json",
+   "bytes": 12856,
+   "sha256": "7bd505c098731e9873fece3b9a6c9d95fd4e4b47dd4838d810df6100e225807c"
   },
   {
    "file": "data/results_p1.json",
@@ -2292,6 +2317,46 @@
      "file": "results/seedrep/gnn_B_mb0.0_p0_r2_ts1.json",
      "bytes": 615,
      "sha256": "2b6cad429f69d74233e26cf8dfc18f49ecb893620f0489bd94532d0a46445d3e"
+    }
+   ]
+  },
+  {
+   "family": "linear reference rows, second cohort",
+   "directory": "results/cohort2",
+   "runner": "code/naive_baselines_allfolds.py and code/pooled_baselines.py, with P1_DATA set to the second cohort's directory as code/build_second_cohort.py writes it (P1_FAMILY_MAP set for the _fam files); summarized by code/second_cohort_stats.py",
+   "policy": {
+    "selection": "inner cross-validation over the training reactions for the tuned regime",
+    "checkpoint": "not applicable",
+    "endpoint": "CPU",
+    "target": "reconstruction-membership proxy label"
+   },
+   "n_files": 4,
+   "settings": {
+    "_data": "/home/aiadmin/metagnn/repl/cohort2/brca",
+    "_expr_transform": "none",
+    "_family_map": "families_union.json",
+    "_n_active_labels": 3379
+   },
+   "files": [
+    {
+     "file": "results/cohort2/naive_allfolds.json",
+     "bytes": 27272,
+     "sha256": "17b135ff228a9ea9e7ce36fbbcfa26850feed7e62f7092f6c79e482da4e5fea0"
+    },
+    {
+     "file": "results/cohort2/naive_allfolds_fam.json",
+     "bytes": 27299,
+     "sha256": "8c4f0813a5c0a2e1ac96ee4357b64d8c1004e1a81a67653d7ce8aed5e852f26d"
+    },
+    {
+     "file": "results/cohort2/naive_pooled.json",
+     "bytes": 13511,
+     "sha256": "4da61a0ec718738d3d88b6d09a694700a4118b57dcd6e224938348f3b502cfab"
+    },
+    {
+     "file": "results/cohort2/naive_pooled_fam.json",
+     "bytes": 13521,
+     "sha256": "7312fd9e2fe9a9c1f9bb8e5f55ff2fcb752bd0bd52dae188f9c893cb96b577c3"
     }
    ]
   },

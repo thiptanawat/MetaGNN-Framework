@@ -1,0 +1,182 @@
+{
+ "note": "course of the collection of the replication, written after the collector ended from its append logs, the copy of the first log taken when the collector was stopped, and the block records; times are those of the collector's clock, recorded to the whole second, and intervals are differences of the recorded times",
+ "rate_measurement_calls_before_plan": 1920,
+ "concurrent_requests_planned": 48,
+ "concurrent_requests_after_pause": 24,
+ "first_call_utc": "2026-11-12T16:19:44Z",
+ "last_reply_utc": "2026-11-12T19:06:55Z",
+ "service_replica_failure": {
+  "observed": "one of the two replicas failed its health check during the first block (about 16:23 UTC on 12 November 2026) and the service restarted it; the service reported two healthy replicas again at 16:31:21 UTC",
+  "source": "the status the service reports; no log of the service was available to us",
+  "our_activity_before_the_failure": "a memory test of ours on one graphics processor of the host ended with an out-of-memory error in its own process at 16:21:47 UTC; whether this is connected with the failure is not known to us"
+ },
+ "service_stall": {
+  "note": "while the collector was running, the requests in flight were not answered and few calls could be sent",
+  "started_utc": "2026-11-12T16:23:43Z",
+  "ended_utc": "2026-11-12T16:28:17Z",
+  "seconds": 274,
+  "calls_sent_within": 10,
+  "intervals_without_a_call": [
+   {
+    "from_utc": "2026-11-12T16:23:43Z",
+    "to_utc": "2026-11-12T16:26:15Z",
+    "seconds": 152
+   },
+   {
+    "from_utc": "2026-11-12T16:26:15Z",
+    "to_utc": "2026-11-12T16:28:17Z",
+    "seconds": 122
+   }
+  ]
+ },
+ "server_errors": {
+  "calls": 97,
+  "kinds": {
+   "HTTPError: HTTP Error 500: Internal Server Error": 97
+  },
+  "sent_from_utc": "2026-11-12T16:28:21Z",
+  "sent_to_utc": "2026-11-12T16:28:39Z",
+  "note": "each of these calls was sent again at the end of its block"
+ },
+ "collector_stop": {
+  "note": "we stopped the collector after the failure and restarted it with half the concurrent requests once the service reported two healthy replicas",
+  "last_call_before_stop_utc": "2026-11-12T16:29:49Z",
+  "first_call_after_restart_utc": "2026-11-12T16:31:38Z",
+  "seconds": 109,
+  "log_lines_before_stop": 6439
+ },
+ "pause_started_utc": "2026-11-12T16:29:49Z",
+ "pause_ended_utc": "2026-11-12T16:31:38Z",
+ "pause_seconds": 109,
+ "stall_seconds": 274,
+ "stall_calls": 10,
+ "server_error_calls": 97,
+ "another_client_used_the_service": true,
+ "block_times_note": "the first block of the first wording was resumed after the stop, so its started_at in the block records below and in w1/design.json, and the field first_call that the statistics file takes from the block records, give the time of the restart; the first call of the collection is first_call_utc above and in plan_record.json",
+ "append_log_lines": {
+  "w1": 126097,
+  "w2": 30000
+ },
+ "error_lines_in_append_log": {
+  "w1": 97,
+  "w2": 0
+ },
+ "blocks": {
+  "w1": [
+   {
+    "block": 1,
+    "started_at": "2026-11-12T23:31:38+0700",
+    "finished_at": "2026-11-12T23:41:05+0700",
+    "resent_calls": 97,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 2,
+    "started_at": "2026-11-12T23:41:05+0700",
+    "finished_at": "2026-11-12T23:57:57+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 3,
+    "started_at": "2026-11-12T23:57:58+0700",
+    "finished_at": "2026-11-13T00:11:03+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 4,
+    "started_at": "2026-11-13T00:11:04+0700",
+    "finished_at": "2026-11-13T00:23:06+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 5,
+    "started_at": "2026-11-13T00:54:27+0700",
+    "finished_at": "2026-11-13T01:06:32+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 6,
+    "started_at": "2026-11-13T01:06:33+0700",
+    "finished_at": "2026-11-13T01:18:35+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 7,
+    "started_at": "2026-11-13T01:18:36+0700",
+    "finished_at": "2026-11-13T01:30:41+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 8,
+    "started_at": "2026-11-13T01:30:42+0700",
+    "finished_at": "2026-11-13T01:42:42+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 9,
+    "started_at": "2026-11-13T01:42:44+0700",
+    "finished_at": "2026-11-13T01:54:50+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 10,
+    "started_at": "2026-11-13T01:54:51+0700",
+    "finished_at": "2026-11-13T02:06:55+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   }
+  ],
+  "w2": [
+   {
+    "block": 1,
+    "started_at": "2026-11-13T00:23:08+0700",
+    "finished_at": "2026-11-13T00:32:31+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 2,
+    "started_at": "2026-11-13T00:32:31+0700",
+    "finished_at": "2026-11-13T00:41:53+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 3,
+    "started_at": "2026-11-13T00:41:53+0700",
+    "finished_at": "2026-11-13T00:48:08+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   },
+   {
+    "block": 4,
+    "started_at": "2026-11-13T00:48:08+0700",
+    "finished_at": "2026-11-13T00:54:25+0700",
+    "resent_calls": 0,
+    "transport_errors_left": 0,
+    "unparsed": 0
+   }
+  ]
+ }
+}

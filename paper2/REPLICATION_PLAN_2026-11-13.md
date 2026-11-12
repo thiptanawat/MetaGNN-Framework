@@ -71,3 +71,49 @@ Before this plan was fixed, 1,920 patient-blind prompts of an earlier design (`r
 ## 7. Deviations
 
 None at the time of the commit.
+
+### Record after the collection (13 November 2026)
+
+The collection ended at 02:06:55 on 13 November local time (UTC+7) with 10 of the 10 blocks of wording 1 and 4 of the 4 blocks of wording 2 complete: 100 patients under wording 1, 40 under wording 2, 156,000 calls. Four departures from the plan are recorded. None depends on an answer of the model.
+
+| Departure | What happened |
+|---|---|
+| Dates | The plan is dated 13 November 2026, the day on which most of the collection was to run. Its commit (2026-11-12T16:19:14Z), the push of that commit (2026-11-12T16:19:16Z, from the public activity record of the repository) and the first call (2026-11-12T16:19:44Z, 28 seconds after the push) fall late on 12 November local time. The stopping times of Section 5 were kept as written. |
+| A replica of the service failed | During block 1 of wording 1 one of the two replicas of the service failed its health check, and the service restarted it. For 274 seconds (23:23:43 to 23:28:17 on 12 November, local time) the requests in flight went unanswered and the collector could send 10 calls; 97 calls sent shortly afterwards returned a server error. The cause is not known to us; no log of the service was available. About two minutes before the failure a memory test of ours on one graphics processor of the host had ended with an out-of-memory error in its own process, and whether the two are connected is not known to us either. The calls that received a server error were sent again at the end of the block, as Section 5 provides. Over the whole collection 97 calls of wording 1 and 0 of wording 2 were sent a second time, and 0 remained without an answer. |
+| Pause and concurrency | We stopped the collector after the failure and started it again once the service reported two healthy replicas, 109 seconds after its last call (23:29:49 to 23:31:38 on 12 November, local time), with 24 concurrent requests in place of 48, which it kept to the end. The answers already received were kept, and the block went on with the calls still to be sent, in the order of its seeded permutation. A watchdog, added at the restart, was to pause the collector whenever the service did not report two healthy replicas; it never had to act. The block record of block 1 gives the time of the restart as its start (see `block_times_note` in `results/replication/collection_record.json`). |
+| Another client | Another client used the service during the collection. |
+
+The course of the collection, block by block, is in `results/replication/collection_record.json`. Of the answers, 0 of wording 1 and 0 of wording 2 could not be parsed.
+
+### Outcome
+
+| Quantity | Value |
+|---|---|
+| Primary: own minus donor, wording 1, donor schedule d1 (100 patients) | +0.0061, 90% interval +0.0002 to +0.0120 |
+| Own arm, donor arm (AUROC) | 0.5578, 0.5517 |
+| Own minus donor, donor schedule d2 | +0.0052 (-0.0003 to +0.0107) |
+| Own minus donor, donor schedule d3 | +0.0057 (-0.0001 to +0.0114) |
+| Own minus the mean of the three donor arms | +0.0056 (+0.0005 to +0.0108) |
+| Own minus donor, wording 2 (40 patients) | +0.0029 (-0.0042 to +0.0100) |
+
+Decision rules of Section 6:
+
+1. The 90% interval lies inside the margin 0.02 and lies inside the margin 0.05, so equivalence is declared at 0.02 and declared at 0.05.
+2. The 90% interval excludes zero, so a difference is reported with its sign (own above donor).
+3. The result is reported in the main text of the manuscript.
+
+Every quantity of Section 6 is in `results/replication_frozen.json`.
+
+### An analysis outside the plan (13 November 2026)
+
+After the outcome above had been read, one analysis was added that this plan does not contain. It is exploratory, it changes nothing in `results/replication_frozen.json`, and the manuscript reports it as outside the plan. Script: `code/replication_posthoc.py`; output: `results/replication_posthoc.json`.
+
+The donor of this design is redrawn at every reaction, so the donor arm prints a mosaic of patients and the own arm one patient's profile. The analysis ranks each patient's reactions by the printed percentile, or by the printed value, with no model, and computes the same paired own-minus-donor difference in per-patient AUROC.
+
+| Quantity (wording 1, 90% interval) | Schedule d1 | Schedule d2 | Schedule d3 |
+|---|---|---|---|
+| Language model | +0.0061 (+0.0002 to +0.0120) | +0.0052 (-0.0003 to +0.0107) | +0.0057 (-0.0001 to +0.0114) |
+| Printed percentile, no model | +0.0035 (-0.0002 to +0.0073) | +0.0050 (+0.0015 to +0.0086) | +0.0035 (-0.0004 to +0.0074) |
+| Printed value, no model | +0.0012 (-0.0001 to +0.0024) | +0.0012 (+0.0001 to +0.0024) | +0.0011 (-0.0002 to +0.0024) |
+| Model minus printed percentile | +0.0026 (-0.0007 to +0.0058) | +0.0001 (-0.0030 to +0.0033) | +0.0022 (-0.0010 to +0.0053) |
+| Correlation across patients, model with printed percentile | 0.868 | 0.834 | 0.858 |

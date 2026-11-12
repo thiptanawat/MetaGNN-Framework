@@ -73,7 +73,7 @@ which is what `collect.sh` passes.
 
 | file | contents |
 |---|---|
-| `rxn_context.npz` | `labels` (10,600 activity labels), `has` (5,635 expression-bearing), `X` (624 x 10,600 GPR-mapped log2(TPM+1)), `pids` |
+| `rxn_context.npz` | `labels` (10,600 activity labels), `has` (5,635 expression-bearing), `X` (624 x 10,600 GPR-mapped log2(CPM+1), counts per million of the unstranded gene counts), `pids` |
 | `recon3d_aligned.json.gz` | the reference network in the canonical order: names, subsystems, equations, gene rules and bounds attached by alignment |
 | `clinical_metadata_msi.tsv` | microsatellite instability status and molecular subtype for all 624 patients |
 
