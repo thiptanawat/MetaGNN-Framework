@@ -1,0 +1,50 @@
+{
+ "note": "serving configuration of the backbone as the service reported it before the first call of the replication; reduced to the fields that describe the model and the engine (host addresses and identifiers are left out)",
+ "read_at": "2026-11-12T23:18:25+0700",
+ "application": "qwen3-8-27b",
+ "route_prefix": "/qwen3-8-27b",
+ "import_path": "ray.serve.llm:build_openai_app",
+ "model_id": "qwen3-8-27b",
+ "model_source": "Qwen/Qwen3.8-27B-FP8",
+ "accelerator_type": "H100",
+ "engine_kwargs": {
+  "tensor_parallel_size": 1,
+  "pipeline_parallel_size": 1,
+  "dtype": "auto",
+  "max_model_len": 262144,
+  "trust_remote_code": true,
+  "limit_mm_per_prompt": {
+   "image": 4,
+   "video": 0
+  },
+  "mm_processor_kwargs": {
+   "max_pixels": 1310720
+  },
+  "enable_prefix_caching": true,
+  "enable_chunked_prefill": true,
+  "reasoning_parser": "qwen3",
+  "enable_auto_tool_choice": true,
+  "tool_call_parser": "qwen3_coder",
+  "gpu_memory_utilization": 0.92,
+  "kv_cache_dtype": "fp8",
+  "max_num_batched_tokens": 8192,
+  "max_num_seqs": 48,
+  "enforce_eager": false
+ },
+ "replicas": 2,
+ "autoscaling": {
+  "min_replicas": 2,
+  "max_replicas": 2
+ },
+ "max_ongoing_requests": 64,
+ "application_status": "RUNNING",
+ "deployment_status": "HEALTHY",
+ "application_deployed_at": "2026-10-25T18:37:16+0700",
+ "replica_started_at": [
+  "2026-10-25T18:37:21+0700",
+  "2026-10-25T18:42:20+0700"
+ ],
+ "ray_version": "2.55.0",
+ "ray_commit": "58af3fc5cad7e74001b3f89bffd9052a9e7aa2bb",
+ "full_record_sha256": "f3e4afbb36f70946bbfcd263855d8ba24bc0deb576aa2f397fb1409bf9021889"
+}
