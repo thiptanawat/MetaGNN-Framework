@@ -24,6 +24,9 @@ identifiers:
     value: 10.5281/zenodo.21217578
     description: Concept identifier of the data record (the curated cohort, features, labels and splits, and the prediction arrays); it resolves to the latest version.
   - type: doi
+    value: 10.5281/zenodo.24141224
+    description: Version of the code record archived for the tag benchmark-validity-2026-11b.
+  - type: doi
     value: 10.5281/zenodo.24136503
     description: Version of the code record archived for the earlier tag journal-2026-11.
   - type: doi

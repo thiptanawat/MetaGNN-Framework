@@ -797,6 +797,13 @@ def describe_data(z, rel, args, today):
     pub = z.publish(args.record)
     log("record %s published again with the rewritten text (DOI %s, version %s)" % (
         args.record, pub.get("doi"), (pub.get("metadata") or {}).get("version")))
+    record = load_json(RECORD_FILE, {})
+    if str((record.get("data") or {}).get("record_id")) == str(args.record):
+        # the record of the deposit keeps the tag the version was deposited for and gains what it says now
+        record["data"]["version_label"] = tag
+        record["data"]["text_revised_at"] = _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        save_json(RECORD_FILE, record)
+        log("record of the deposit updated: %s" % os.path.relpath(RECORD_FILE, REPO))
 
 
 def deposit_data(z, rel, args, record, state, today):
