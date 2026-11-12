@@ -11,7 +11,7 @@ What it does, per record:
         the tag and the SHA-256 of the archive, and the title carries no version (the version
         field does).
   data  a new version of the data record (concept 10.5281/zenodo.21217578) that carries the
-        per-cell prediction arrays of the first study, the ten tarballs, one per result family, and
+        per-cell prediction arrays of the reaction-scoring audit, the ten tarballs, one per result family, and
         the two committed checksum lists, beside the files of the previous version. Each tarball is
         checked against paper1/results/prediction_array_tarballs.sha256 before it is sent; a file
         the previous version already holds with the same MD5 is kept and not sent again. With
@@ -45,6 +45,7 @@ Usage:
                                          --retire metagnn-data.zip --publish
     python3 tools/zenodo_deposit.py describe                  # title and description of the open code draft; no file is touched
     python3 tools/zenodo_deposit.py describe --record ID --publish   # the same for a published version of the code record, edited in place
+    python3 tools/zenodo_deposit.py describe-data --record ID --publish   # the text of a published version of the data record, for this release
 
 DIR is the directory holding preds_<family>.tar (the release assets); the checksum lists are read
 from the checkout. --sandbox targets sandbox.zenodo.org (with a sandbox token and the sandbox
@@ -477,7 +478,7 @@ def code_metadata(inherited, rel, commit, snapshot_sha, snapshot_name, today, da
     return md
 
 
-def data_description(rel, commit, items, retired, previous_doi):
+def data_description(rel, commit, items, retired, previous_doi, revision_note=""):
     """The description of a version that carries a cohort archive, written from the committed
     template so that what the record says can be read in the repository."""
     cohort = [it for it in items if it.get("role") == "cohort"][0]
@@ -488,7 +489,7 @@ def data_description(rel, commit, items, retired, previous_doi):
                            cohort_name=cohort["name"], cohort_size=human(cohort["size"]),
                            cohort_sha256=cohort["sha256"], array_rows=rows,
                            retired=", ".join("<code>%s</code>" % n for n in retired) or "none",
-                           previous_doi=previous_doi or "")
+                           previous_doi=previous_doi or "", revision_note=revision_note)
 
 
 def data_metadata(inherited, rel, commit, items, today, code_concept_doi, retired=(), previous_doi=None):
@@ -537,12 +538,12 @@ def data_metadata(inherited, rel, commit, items, today, code_concept_doi, retire
             "%s adds the per-cell prediction arrays of the benchmark-validity study built on this "
             "cohort, as ten tarballs, one per result family, together with the two committed checksum "
             "lists (<code>prediction_arrays.sha256</code> for every array, "
-            "<code>prediction_array_tarballs.sha256</code> for every tarball). Unpack the tarballs under "
-            "<code>paper1/results/prediction_arrays/</code> of the tagged tree <code>%s</code> (commit "
-            "<code>%s</code>) of <a href=\"%s\">%s</a> and run "
-            "<code>python3 paper1/code/verify_ledger.py</code> to check every array. Every file of the "
+            "<code>prediction_array_tarballs.sha256</code> for every tarball). Unpack the tarballs into the "
+            "directory <code>results/prediction_arrays/</code> of the reaction-scoring audit at commit "
+            "<code>%s</code> of <a href=\"%s\">%s</a> (Git tag <code>%s</code>) and run that study's "
+            "<code>verify_ledger.py</code> to check every array. Every file of the "
             "previous version is kept unchanged.</p><ul>%s</ul>"
-            % (marker, tag, commit, GITHUB, GITHUB, rows))
+            % (marker, commit, GITHUB, GITHUB, tag, rows))
     md["related_identifiers"] = merge_related(md.get("related_identifiers"), [
         {"identifier": "%s/tree/%s" % (GITHUB, tag), "relation": "isSupplementTo", "resource_type": "software"},
         {"identifier": code_concept_doi, "relation": "isRequiredBy", "resource_type": "software"},
@@ -732,6 +733,72 @@ def describe_code(z, rel, args, state, today):
     log("record %s published again with the new title and description (DOI %s)" % (args.record, pub.get("doi")))
 
 
+def long_date(iso):
+    """2026-11-11 as 11 November 2026."""
+    d = _dt.date.fromisoformat(iso)
+    return "%d %s %d" % (d.day, d.strftime("%B"), d.year)
+
+
+def describe_data(z, rel, args, today):
+    """Rewrite the text of a published version of the data record for this release, in place.
+
+    The version keeps its files, its DOI and its publication date. What its description says about
+    its own files (the cohort archive, the tarballs with their sizes and SHA-256, the files it
+    retired) is read back from that description, and the committed template is applied to those
+    facts with the tag and the commit of this release, so the record names the release its files
+    accompany now and says that it was revised. The version field and the tree link follow. Nothing
+    is sent without --publish, and nothing is sent at all if any checksum would change."""
+    if not args.record:
+        die("describe-data needs --record ID, a published version of the data record")
+    d = z.deposition(args.record)
+    old = d.get("metadata") or {}
+    text = old.get("description") or ""
+    m_cohort = re.search(r"<li>\s*<code>([^<]+)</code>\s*\(([^()]+?),\s*SHA-256\s*<code>([0-9a-f]{64})</code>\)\.\s*<code>crc_624/</code>", text)
+    # the list of the other files: every entry is a name, a size and a checksum and nothing more
+    m_rows = re.search(r"<ul>\s*((?:<li>\s*<code>[^<]+</code>\s*\([^()]+?,\s*SHA-256\s*<code>[0-9a-f]{64}</code>\)\s*</li>\s*)+)</ul>", text)
+    m_retired = re.search(r"earlier versions of this record \((.+?); July 2026", text)
+    published = old.get("publication_date")
+    if not (m_cohort and m_rows and m_retired and published):
+        die("record %s: its description does not carry the file facts in the form of the template; nothing was changed" % args.record)
+    commit = resolve_commit(rel, args.workdir)
+    tag = rel["tag"]
+    note = (" The files of this version have not changed since it was published on %s with an earlier "
+            "release of the repository; the release named here uses the same files, and this text was "
+            "revised on %s to name it." % (long_date(published), long_date(today)))
+    new = open(DATA_DESCRIPTION).read().format(
+        tag=tag, commit=commit, github=GITHUB, preprint=PREPRINT_DOI,
+        cohort_name=m_cohort.group(1), cohort_size=m_cohort.group(2).strip(), cohort_sha256=m_cohort.group(3),
+        array_rows=m_rows.group(1).strip(), retired=m_retired.group(1), previous_doi="", revision_note=note)
+    sums = lambda s: sorted(re.findall(r"\b[0-9a-f]{64}\b", s))
+    names = lambda s: sorted(set(re.findall(r"<code>([^<]+\.(?:zip|tar|sha256))</code>", s)))
+    if sums(text) != sums(new) or names(text) != names(new):
+        die("record %s: the rewritten text would not carry the same files and checksums; nothing was changed" % args.record)
+    md = clean_metadata(old)
+    md["version"] = tag
+    md["description"] = new
+    kept = [r for r in (md.get("related_identifiers") or [])
+            if not str(r.get("identifier", "")).startswith(GITHUB + "/tree/")]
+    md["related_identifiers"] = merge_related(kept, [
+        {"identifier": "%s/tree/%s" % (GITHUB, tag), "relation": "isSupplementTo", "resource_type": "software"}])
+    log("record %s (%s): version %s -> %s; %d checksums and %d file names carried over unchanged" % (
+        args.record, d.get("doi"), old.get("version"), tag, len(sums(new)), len(names(new))))
+    split = lambda s: [x for x in re.split(r"(?<=[.;:>])\s+|(?=<li>)|(?=<p>)", s) if x.strip()]
+    import difflib
+    for line in difflib.unified_diff(split(text), split(new), "published", "rewritten", lineterm="", n=0):
+        print("    " + line)
+    for r in md["related_identifiers"]:
+        print("    related: %s %s" % (r.get("relation"), r.get("identifier")))
+    if not args.publish:
+        log("nothing was sent; rerun with --publish to edit the published record")
+        return
+    if d.get("submitted") and d.get("state") == "done":
+        z.request("POST", "/deposit/depositions/%s/actions/edit" % args.record)
+    z.set_metadata(args.record, md)
+    pub = z.publish(args.record)
+    log("record %s published again with the rewritten text (DOI %s, version %s)" % (
+        args.record, pub.get("doi"), (pub.get("metadata") or {}).get("version")))
+
+
 def deposit_data(z, rel, args, record, state, today):
     log("== data record: new version of concept %s" % args.data_concept)
     items = verify_assets(data_assets(args.assets, args.cohort_archive))
@@ -835,8 +902,8 @@ def cmd_status(z, rel, args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("command", choices=["plan", "status", "code", "data", "all", "describe"])
-    ap.add_argument("--record", help="describe: a published version of the code record to edit in place")
+    ap.add_argument("command", choices=["plan", "status", "code", "data", "all", "describe", "describe-data"])
+    ap.add_argument("--record", help="describe, describe-data: a published version of the record to edit in place")
     ap.add_argument("--assets", help="directory holding preds_<family>.tar")
     ap.add_argument("--cohort-archive", help="a cohort archive this version of the data record carries")
     ap.add_argument("--retire", action="append", default=[],
@@ -868,6 +935,8 @@ def main():
     state = load_json(STATE_FILE, {})
     if args.command == "describe":
         return describe_code(z, rel, args, state, today)
+    if args.command == "describe-data":
+        return describe_data(z, rel, args, today)
     record = load_json(RECORD_FILE, {})
     record["generated"] = _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     record["site"] = z.site
