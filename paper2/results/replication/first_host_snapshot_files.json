@@ -1,0 +1,17 @@
+{
+ "note": "Files of the two model snapshots on the first collection host whose types results/model_records.json does not record, with size and SHA-256 as read on that host on 13 November 2026. The chat template of the second backbone is the file the server formats every request with; the third backbone is served with its own tokenizer file (tekken.json), which results/model_records.json records.",
+ "models": {
+  "gemma-4-31b-it": {
+   "revision": "439edf5652646a0d1bd8b46bfdc1d3645761a445",
+   "files": [
+    {"name": "chat_template.jinja", "bytes": 16448, "sha256": "85a08664d16d8f3be4416c92427b3ac10df1024ac566cc0b4bc3bab409393f98"}
+   ]
+  },
+  "mistral-small-3.2-24b-instruct": {
+   "revision": "95a6d26c4bfb886c58daf9d3f7332c857cb27b43",
+   "files": [
+    {"name": "README.md", "bytes": 25365, "sha256": "48d492d5ded3dfb80ab53033391c7ada71f42037e442758d9eb29fdb08929edb"}
+   ]
+  }
+ }
+}
