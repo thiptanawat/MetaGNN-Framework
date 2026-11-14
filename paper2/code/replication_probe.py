@@ -3,6 +3,8 @@
 
 The sample (reactions, the ordered patient list, three donor schedules) is read from
 results/replication/design_master.json, which replication_design.py wrote before the first call.
+The second replication (plan of 14 November 2026) reads its own sample, written by replication2_design.py,
+through --master results/replication2/design_master.json; nothing else differs.
 
 Arms, stored under the keys the earlier archives use:
   reaction       patient-blind prompt
@@ -54,6 +56,9 @@ AP.add_argument('--bench', type=int, default=0,
                 help='send this many patient-blind prompts of the EARLIER design results/repr (not of the '
                      'replication sample), print the rate, store nothing; used to size the replication')
 AP.add_argument('--print_prompts', type=int, default=0, help='print the first N prompts of block 1 and exit (no call)')
+AP.add_argument('--master', default=os.path.join('results', 'replication', 'design_master.json'),
+                help='the sample file; the default is the sample of the first replication, and the second '
+                     'replication passes results/replication2/design_master.json')
 A = AP.parse_args()
 
 # ---- data, exactly as the earlier collectors load it -------------------------------------------
@@ -62,7 +67,7 @@ LAB, HAS, X, PIDS = D['labels'], D['has'], D['X'], D['pids']
 from aligned_rxn import RXN, ALIGNED
 import cohort_order as CO
 PCT = CO.percentile_as_collected(X)
-MASTER = json.load(open(os.path.join('results', 'replication', 'design_master.json')))
+MASTER = json.load(open(A.master))
 IDX = [int(x) for x in MASTER['reactions']]
 PALL = [int(x) for x in MASTER['patients']]
 SCHED = {'shuffled': 'd1', 'shuffled_d2': 'd2', 'shuffled_d3': 'd3'}
@@ -230,7 +235,7 @@ def write_design():
                donor_schedules={a: SCHED[a] for a in arms if a in SCHED},
                swap_source={f'{pj}|{ri}': DONOR['d1'][(pj, ri)] for pj in pats for ri in IDX},
                code_sha256=dict(replication_probe=_sha(os.path.abspath(__file__)), llm_probe=_sha(os.path.join(HERE, 'llm_probe.py'))),
-               design_master_sha256=_sha(os.path.join('results', 'replication', 'design_master.json')))
+               design_master_sha256=_sha(A.master))
     json.dump(out, open(DESF, 'w'), indent=1)
 
 

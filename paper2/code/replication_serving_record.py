@@ -78,6 +78,7 @@ def main():
     ap.add_argument("--snapshot", required=True); ap.add_argument("--out", required=True)
     ap.add_argument("--command", default=None); ap.add_argument("--models-json", default=None)
     ap.add_argument("--host-label", default="second host", help="how the record names the machine; its network name is not stored")
+    ap.add_argument("--plan", default="REPLICATION_BACKBONES_PLAN_2026-11-13.md", help="the plan under which the backbone is served")
     ap.add_argument("--records", default=os.path.join(ROOT, "results", "model_records.json"))
     ap.add_argument("--other-reference", default=os.path.join(ROOT, "results", "replication", "first_host_snapshot_files.json"))
     a = ap.parse_args()
@@ -120,7 +121,7 @@ def main():
     agg = hashlib.sha256("\n".join(f"snapshots/{rev}/{f['name']} {f['sha256']}" for f in files).encode()).hexdigest()
     gpu = os.environ.get("CUDA_VISIBLE_DEVICES", "")
     rec = dict(
-        tag=a.tag, served_name=a.served_name, plan="REPLICATION_BACKBONES_PLAN_2026-11-13.md",
+        tag=a.tag, served_name=a.served_name, plan=a.plan,
         written_utc=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), snapshot=snap, revision=rev,
         weights=dict(identical_to_record=(not diffs and rev == want["revision"]), recorded_revision=want["revision"],
                      n_files=len(files), total_bytes=sum(f["bytes"] for f in files), artifact_digest=agg,

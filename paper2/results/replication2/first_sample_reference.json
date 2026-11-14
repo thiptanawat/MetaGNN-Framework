@@ -1,0 +1,257 @@
+{
+ "note": "the printed-number reference pooled over the three donor schedules, computed on the FIRST replication sample (results/replication, results/replication_b2, results/replication_b3) by the code that the plan of the second replication fixes; these numbers were known when that plan was written",
+ "plan": "REPLICATION2_PLAN_2026-11-14.md",
+ "margin": 0.01,
+ "margin_exploratory": 0.005,
+ "backbones": {
+  "b1": {
+   "backbone": "qwen3-8-27b",
+   "archive": "results/replication",
+   "pooled": {
+    "schedules": [
+     "d1",
+     "d2",
+     "d3"
+    ],
+    "n_patients": 100,
+    "language_model": {
+     "n": 100,
+     "mean": 0.0056439153,
+     "sd": 0.0310570519,
+     "ci90": [
+      0.0004872299,
+      0.0108006008
+     ],
+     "paired_p": 0.0722003538,
+     "excludes_zero": true,
+     "tost_001_p": [
+      1.06e-06,
+      0.0819
+     ],
+     "equivalent_001": false,
+     "tost_0005_p": [
+      0.000445,
+      0.582
+     ],
+     "equivalent_0005": false
+    },
+    "printed_percentile": {
+     "n": 100,
+     "mean": 0.0040233686,
+     "sd": 0.0199687732,
+     "ci90": [
+      0.0007077712,
+      0.007338966
+     ],
+     "paired_p": 0.0466341022,
+     "excludes_zero": true,
+     "tost_001_p": [
+      1.39e-10,
+      0.00174
+     ],
+     "equivalent_001": true,
+     "tost_0005_p": [
+      8.62e-06,
+      0.313
+     ],
+     "equivalent_0005": false
+    },
+    "model_minus_printed_percentile": {
+     "n": 100,
+     "mean": 0.0016205467,
+     "sd": 0.0170029259,
+     "ci90": [
+      -0.001202604,
+      0.0044436975
+     ],
+     "paired_p": 0.3428613449,
+     "excludes_zero": false,
+     "tost_001_p": [
+      3.4e-10,
+      1.67e-06
+     ],
+     "equivalent_001": true,
+     "tost_0005_p": [
+      8.96e-05,
+      0.0248
+     ],
+     "equivalent_0005": true
+    },
+    "correlation_across_patients": 0.8660454089,
+    "reading": {
+     "equivalent_within_margin": true,
+     "margin": 0.01,
+     "excludes_zero": false,
+     "sign": 0,
+     "sentence": "equivalent within 0.01 AUROC to what ranking the printed percentile gives; the 90% interval includes zero, so the two are described as not distinguishable"
+    }
+   }
+  },
+  "b2": {
+   "backbone": "gemma-4-31b-it",
+   "archive": "results/replication_b2",
+   "pooled": {
+    "schedules": [
+     "d1",
+     "d2",
+     "d3"
+    ],
+    "n_patients": 100,
+    "language_model": {
+     "n": 100,
+     "mean": 0.0034593474,
+     "sd": 0.0292800112,
+     "ci90": [
+      -0.0014022797,
+      0.0083209746
+     ],
+     "paired_p": 0.2402461451,
+     "excludes_zero": false,
+     "tost_001_p": [
+      6.34e-06,
+      0.0139
+     ],
+     "equivalent_001": true,
+     "tost_0005_p": [
+      0.00237,
+      0.3
+     ],
+     "equivalent_0005": false
+    },
+    "printed_percentile": {
+     "n": 100,
+     "mean": 0.0040233686,
+     "sd": 0.0199687732,
+     "ci90": [
+      0.0007077712,
+      0.007338966
+     ],
+     "paired_p": 0.0466341022,
+     "excludes_zero": true,
+     "tost_001_p": [
+      1.39e-10,
+      0.00174
+     ],
+     "equivalent_001": true,
+     "tost_0005_p": [
+      8.62e-06,
+      0.313
+     ],
+     "equivalent_0005": false
+    },
+    "model_minus_printed_percentile": {
+     "n": 100,
+     "mean": -0.0005640212,
+     "sd": 0.0168960454,
+     "ci90": [
+      -0.0033694256,
+      0.0022413833
+     ],
+     "paired_p": 0.7392226128,
+     "excludes_zero": false,
+     "tost_001_p": [
+      1.03e-07,
+      5.14e-09
+     ],
+     "equivalent_001": true,
+     "tost_0005_p": [
+      0.00501,
+      0.000687
+     ],
+     "equivalent_0005": true
+    },
+    "correlation_across_patients": 0.8300136929,
+    "reading": {
+     "equivalent_within_margin": true,
+     "margin": 0.01,
+     "excludes_zero": false,
+     "sign": 0,
+     "sentence": "equivalent within 0.01 AUROC to what ranking the printed percentile gives; the 90% interval includes zero, so the two are described as not distinguishable"
+    }
+   }
+  },
+  "b3": {
+   "backbone": "mistral-small-3.2-24b-instruct",
+   "archive": "results/replication_b3",
+   "pooled": {
+    "schedules": [
+     "d1",
+     "d2",
+     "d3"
+    ],
+    "n_patients": 100,
+    "language_model": {
+     "n": 100,
+     "mean": 0.0060220459,
+     "sd": 0.0441560089,
+     "ci90": [
+      -0.0013095788,
+      0.0133536705
+     ],
+     "paired_p": 0.1757199164,
+     "excludes_zero": false,
+     "tost_001_p": [
+      0.000227,
+      0.185
+     ],
+     "equivalent_001": false,
+     "tost_0005_p": [
+      0.0071,
+      0.591
+     ],
+     "equivalent_0005": false
+    },
+    "printed_percentile": {
+     "n": 100,
+     "mean": 0.0040233686,
+     "sd": 0.0199687732,
+     "ci90": [
+      0.0007077712,
+      0.007338966
+     ],
+     "paired_p": 0.0466341022,
+     "excludes_zero": true,
+     "tost_001_p": [
+      1.39e-10,
+      0.00174
+     ],
+     "equivalent_001": true,
+     "tost_0005_p": [
+      8.62e-06,
+      0.313
+     ],
+     "equivalent_0005": false
+    },
+    "model_minus_printed_percentile": {
+     "n": 100,
+     "mean": 0.0019986772,
+     "sd": 0.0297525077,
+     "ci90": [
+      -0.0029414028,
+      0.0069387573
+     ],
+     "paired_p": 0.5032962373,
+     "excludes_zero": false,
+     "tost_001_p": [
+      5.42e-05,
+      0.0042
+     ],
+     "equivalent_001": true,
+     "tost_0005_p": [
+      0.0103,
+      0.158
+     ],
+     "equivalent_0005": false
+    },
+    "correlation_across_patients": 0.8297747126,
+    "reading": {
+     "equivalent_within_margin": true,
+     "margin": 0.01,
+     "excludes_zero": false,
+     "sign": 0,
+     "sentence": "equivalent within 0.01 AUROC to what ranking the printed percentile gives; the 90% interval includes zero, so the two are described as not distinguishable"
+    }
+   }
+  }
+ }
+}
