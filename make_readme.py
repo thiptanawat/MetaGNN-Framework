@@ -205,7 +205,29 @@ L += [f"**The linear rungs on a second cohort.** The rows that need no graph tra
       f"expression against the same with the cohort-mean expression: {s4(_c2['family']['contrasts']['network']['mean'])} "
       f"(first cohort {s4(_c1['family']['contrasts']['network']['mean'])}). Over the three linear contrasts and both splits the "
       f"second cohort's values run from {s4(min(_all2))} to {s4(max(_all2))} and the first cohort's from {s4(min(_all1))} to "
-      f"{s4(max(_all1))}. The graph scorer was not run on the second cohort.", ""]
+      f"{s4(max(_all1))}.", ""]
+# the graph scorer on the second cohort (Section 6 of the same plan)
+CG = json.load(open(os.path.join(HERE, "paper1", "data", "results_cohort2_graph.json")))
+_g2 = CG["cohorts"]["cohort2"]; _g1 = CG["cohorts"]["cohort1"]; _gc = _g2["contrast"]
+L += [f"**The graph scorer on the second cohort.** Section 6 of that plan, fixed before any such run, names the driver of the first "
+      f"cohort unchanged, the family-disjoint split, the matched selection rule and the default training seed, with the "
+      f"own-expression arm and the cohort-mean arm on each of the {_gc['n_cells']} cells ({2 * _gc['n_cells']} runs). Own expression "
+      f"scores {f4(_g2['arms']['own']['mean'])} and cohort-mean expression {f4(_g2['arms']['cohort_mean']['mean'])}, a paired "
+      f"difference of {s4(_gc['mean'])} over cells (standard deviation {f4(_gc['sd'])}, range {s4(_gc['min'])} to {s4(_gc['max'])}, "
+      f"negative in {_gc['n_negative']} of {_gc['n_cells']}), against {s4(_g1['contrast']['mean'])} on the first cohort "
+      f"(standard deviation {f4(_g1['contrast']['sd'])}, negative in {_g1['contrast']['n_negative']} of {_g1['contrast']['n_cells']}). "
+      f"The plan reads a mean within {CG['margin']:.2f} AUROC of zero as agreement with the first cohort, and this mean "
+      f"{'lies' if _gc['within_margin'] else 'does not lie'} within that range. The cells share patients, reactions and one label "
+      f"vector and the plan fixed no test, so these are descriptions. The runs were made on a second workstation "
+      f"(`paper1/data/cohort2_graph_run_record.json`).", ""]
+# outside that plan: one cell at two further training seeds
+_sp = os.path.join(HERE, "paper1", "data", "results_cohort2_seed.json")
+if os.path.exists(_sp):
+    _SD = json.load(open(_sp)); _s2 = _SD["cohorts"]["cohort2"]; _s1 = _SD["cohorts"]["cohort1"]
+    L[-2] += (f" Outside the plan, cell {_SD['cell']} was retrained at two further training seeds "
+              f"({', '.join(str(x) for x in _SD['further_seeds'])}), both arms: the difference at that cell is "
+              f"{', '.join(s4(v) for v in _s2['differences'])} across the three seeds, against {', '.join(s4(v) for v in _s1['differences'])} "
+              f"for the same cell of the first cohort (`paper1/data/results_cohort2_seed.json`).")
 
 R2 = P2["runs"]; A, E, B = R2["A_representative"], R2["E_representative40"], R2["B_balanced"]
 XS = P2.get("cross_session", {}).get("arms", {}).get("patient", {})
@@ -269,6 +291,25 @@ if os.path.exists(_xq):
               f"{s4(_xp['ci90'][1])}) on the same patients and reactions, it correlates with the model's difference across patients at "
               f"{_xa:.2f}, and the model's difference exceeds it by {s4(_xe['mean'])} ({s4(_xe['ci90'][0])} to {s4(_xe['ci90'][1])}).")
 L += [_line, ""]
+# the same sample on the second and third backbones (paper2/REPLICATION_BACKBONES_PLAN_2026-11-13.md)
+_bf = {t: os.path.join(HERE, "paper2", "results", f"replication_frozen_{t}.json") for t in ("b2", "b3")}
+if all(os.path.exists(v) for v in _bf.values()):
+    _B = {t: json.load(open(v)) for t, v in _bf.items()}
+    _RF = {t: json.load(open(os.path.join(HERE, "paper2", "results", f"replication_reference_{t}.json")))["replication"]["model_minus_printed_percentile"]["d1"] for t in _B}
+    _BRC = json.load(open(os.path.join(HERE, "paper2", "results", "replication", "backbones_record.json")))
+    def _one(t):
+        d = _B[t]["decision"]; m = _RF[t]
+        return (f"{s4(d['diff_mean'])} ({s4(d['ci90'][0])} to {s4(d['ci90'][1])}; model minus printed percentile "
+                f"{s4(m['mean'])}, {s4(m['ci90'][0])} to {s4(m['ci90'][1])})")
+    _nz = sum(1 for t in _B if _B[t]["decision"]["interval_excludes_zero"]); _nd = sum(1 for t in _B if _RF[t]["excludes_zero"])
+    L += [f"**The same sample on the second and third backbones.** After that outcome was known, the sample was put to the two other "
+          f"backbones, each served locally on a second host from weights whose files match the record of their earlier collections, under a "
+          f"second plan (`paper2/REPLICATION_BACKBONES_PLAN_2026-11-13.md`) that was pushed {_BRC['hours_between_push_and_first_call']:.1f} hours "
+          f"before the first call and names the comparison with the printed percentile in advance. Own minus donor, primary contrast with its "
+          f"90% interval: {_B['b2']['backbone']} {_one('b2')}; {_B['b3']['backbone']} {_one('b3')}. "
+          f"{['Neither interval excludes zero', 'One of the two intervals excludes zero', 'Both intervals exclude zero'][_nz]}, and "
+          f"{['neither difference is', 'one of the two differences is', 'both differences are'][_nd]} "
+          f"distinguishable from what ranking the printed percentile gives. Each backbone is read separately and nothing is pooled.", ""]
 
 # the generated tables live in whichever front-page file carries the markers: README.md in a
 # checkout of the studies alone, STUDIES.md where the studies share a repository with the scorer

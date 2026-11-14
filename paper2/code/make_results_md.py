@@ -161,6 +161,33 @@ if _os.path.exists(_gp):
         w(f"| mean absolute change of the own-arm answer between the wordings | {P['own_between_wordings']['mean_abs_diff']:.4f} |")
         w(f"| mean absolute change between the own and donor answers, first wording, same patients | {P['own_vs_donor_wording1']['mean_abs_diff']:.4f} |")
     w("")
+# the same sample on the second and third backbones (REPLICATION_BACKBONES_PLAN_2026-11-13.md)
+_bb = {}
+for _t in ('b2', 'b3'):
+    _f = _os.path.join(PATHS.ROOT, 'results', f'replication_frozen_{_t}.json'); _r = _os.path.join(PATHS.ROOT, 'results', f'replication_reference_{_t}.json')
+    if _os.path.exists(_f) and _os.path.exists(_r): _bb[_t] = (json.load(open(_f)), json.load(open(_r))['replication'])
+if len(_bb) == 2 and _os.path.exists(_gp):
+    _M = json.load(open(_gp)); _XM = json.load(open(_os.path.join(PATHS.ROOT, 'results', 'replication_posthoc.json')))['replication']
+    w("## The replication sample on the second and third backbones\n")
+    w("Plan: `REPLICATION_BACKBONES_PLAN_2026-11-13.md`, committed before the first call to either backbone on the sample. Statistics: "
+      "`code/replication_backbones.py` (`replication_stats.py` unchanged on each archive), written to `results/replication_frozen_b2.json` "
+      "and `results/replication_frozen_b3.json`; the comparison with the printed percentile, which that plan names in advance, is in "
+      "`results/replication_reference_b2.json` and `results/replication_reference_b3.json`. Each backbone is read separately and nothing "
+      "is pooled. The first column repeats the main backbone, where the comparison with the printed percentile was added outside its plan.\n")
+    w("| quantity (first wording, 100 patients) | main backbone | second backbone (" + _bb['b2'][0]['backbone'] + ") | third backbone (" + _bb['b3'][0]['backbone'] + ") |\n|---|---|---|---|")
+    _cols = [(_M, _XM), _bb['b2'], _bb['b3']]
+    def _c2(m, c): return f"{m:+.4f} [{c[0]:+.4f}, {c[1]:+.4f}]"
+    def _row(lab, fn): w(f"| {lab} | " + " | ".join(fn(f_, r_) for f_, r_ in _cols) + " |")
+    _row("own arm, AUROC", lambda f_, r_: f"{f_['wording1']['donor']['d1']['own_auroc']:.4f}")
+    _row("donor arm, schedule 1, AUROC", lambda f_, r_: f"{f_['wording1']['donor']['d1']['donor_auroc']:.4f}")
+    for _s in ('d1', 'd2', 'd3'):
+        _row(f"own minus donor, schedule {_s[1:]}{' (primary)' if _s == 'd1' else ''}, 90% interval",
+             lambda f_, r_, _s=_s: _c2(f_['wording1']['donor'][_s]['diff_mean'], f_['wording1']['donor'][_s]['diff_ci90']))
+    _row("primary contrast inside the 0.02 margin", lambda f_, r_: 'yes' if f_['decision']['equivalent_002'] else 'no')
+    _row("90% interval of the primary contrast excludes zero", lambda f_, r_: 'yes' if f_['decision']['interval_excludes_zero'] else 'no')
+    _row("model minus printed percentile, schedule 1", lambda f_, r_: _c2(r_['model_minus_printed_percentile']['d1']['mean'], r_['model_minus_printed_percentile']['d1']['ci90']))
+    _row("own minus donor, second wording (40 patients)", lambda f_, r_: _c2(f_['wording2']['donor']['d1']['diff_mean'], f_['wording2']['donor']['d1']['diff_ci90']))
+    w("")
 w("## References\n")
 w("Every reference in the manuscript was resolved against PubMed E-utilities, the Crossref API or the "
   "arXiv API before use; the procedure and its outcome are in `docs/VERIFICATION.md` at the repository root.")

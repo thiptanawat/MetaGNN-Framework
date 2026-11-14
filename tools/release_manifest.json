@@ -1,7 +1,7 @@
 {
  "_note": "The artifacts a public checkout must carry for the two studies' numbers to be regenerable and their central results traceable. tools/check_release.py reads this file and fails on any entry that is absent or short. Bump 'version' when the required set changes; 'release' names the tag the set was fixed for.",
- "version": 5,
- "release": "benchmark-validity-2026-11c",
+ "version": 6,
+ "release": "benchmark-validity-2026-11d",
  "required_files": [
   "reproduce.sh",
   "requirements.txt",
@@ -74,7 +74,37 @@
   "paper1/data/cohort2_patients.tsv",
   "paper2/results/replication/collection_record.json",
   "paper2/code/replication_posthoc.py",
-  "paper2/results/replication_posthoc.json"
+  "paper2/results/replication_posthoc.json",
+  "paper1/code/second_cohort_graph.py",
+  "paper1/data/cohort2_graph_run_record.json",
+  "paper1/data/results_cohort2_graph.json",
+  "paper2/REPLICATION_BACKBONES_PLAN_2026-11-13.md",
+  "paper2/code/replication_backbones.py",
+  "paper2/code/replication_serving_record.py",
+  "paper2/code/replication_backbones_record.py",
+  "paper2/code/provenance/run_replication_backbones.sh",
+  "paper2/code/provenance/tokenization_check.py",
+  "paper2/results/replication/first_host_snapshot_files.json",
+  "paper2/results/replication/backbones_course.json",
+  "paper2/results/replication/backbones_record.json",
+  "paper2/results/replication_b2/w1/raw.json",
+  "paper2/results/replication_b2/w1/design.json",
+  "paper2/results/replication_b2/w2/raw.json",
+  "paper2/results/replication_b2/w2/design.json",
+  "paper2/results/replication_b2/serving_record.json",
+  "paper2/results/replication_frozen_b2.json",
+  "paper2/results/replication_reference_b2.json",
+  "paper2/results/replication_b3/w1/raw.json",
+  "paper2/results/replication_b3/w1/design.json",
+  "paper2/results/replication_b3/w2/raw.json",
+  "paper2/results/replication_b3/w2/design.json",
+  "paper2/results/replication_b3/serving_record.json",
+  "paper2/results/replication_frozen_b3.json",
+  "paper2/results/replication_reference_b3.json",
+  "paper1/code/second_cohort_seed.py",
+  "paper1/code/gpu_queue_cohort2_seed.sh",
+  "paper1/data/results_cohort2_seed.json",
+  "paper1/data/cohort2_seed_run_record.json"
  ],
  "required_globs": {
   "paper1/results/deepmeta/preds/seed*/preds_*.csv": 18,
@@ -83,7 +113,8 @@
   "paper1/results/fam/*.json": 79,
   "paper1/results/ivr/*.json": 75,
   "paper1/results/synth/*.json": 24,
-  "paper1/results/cohort2/naive_*.json": 4
+  "paper1/results/cohort2/naive_*.json": 4,
+  "paper1/results/cohort2/fam/*.json": 34
  },
  "ledger_counts": {
   "prediction_arrays_listed": 299,

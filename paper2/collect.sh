@@ -91,6 +91,11 @@ if [ -n "${ENDPOINT2:-}" ]; then
   python3 code/msi_probe.py --url $ENDPOINT2 --model $M2 --out results/msi_b2
   python3 code/msi_probe.py --url $ENDPOINT2 --model $M2 --interleave --full_archive --out results/msi_b2int
   msi2 "$ENDPOINT2" "$M2" "$M2"
+  # the replication sample on the second backbone (REPLICATION_BACKBONES_PLAN_2026-11-13.md), in the order of the first plan
+  PR2="python3 code/replication_probe.py --url $ENDPOINT2 --model $M2 --workers 24 --block_size 10 --blind_blocks 2"
+  $PR2 --wording 1 --blocks 1-4 --arms reaction patient shuffled shuffled_d2 shuffled_d3 --out results/replication_b2/w1
+  $PR2 --wording 2 --blocks 1-4 --arms reaction patient shuffled --out results/replication_b2/w2
+  $PR2 --wording 1 --blocks 5-10 --arms reaction patient shuffled shuffled_d2 shuffled_d3 --out results/replication_b2/w1
 fi
 
 # ---- the third backbone ------------------------------------------------------------------------
@@ -102,5 +107,10 @@ if [ -n "${ENDPOINT3:-}" ]; then
     --tasks read compare --interleave --full_archive --out results/pc_b3il
   python3 code/msi_probe.py --url $ENDPOINT3 --model $M3 $PLAIN3 --interleave --full_archive --out results/msi_b3int
   msi2 "$ENDPOINT3" "$M3" "$M3" "$PLAIN3"
+  # the replication sample on the third backbone (the same plan)
+  PR3="python3 code/replication_probe.py --url $ENDPOINT3 --model $M3 $PLAIN3 --workers 24 --block_size 10 --blind_blocks 2"
+  $PR3 --wording 1 --blocks 1-4 --arms reaction patient shuffled shuffled_d2 shuffled_d3 --out results/replication_b3/w1
+  $PR3 --wording 2 --blocks 1-4 --arms reaction patient shuffled --out results/replication_b3/w2
+  $PR3 --wording 1 --blocks 5-10 --arms reaction patient shuffled shuffled_d2 shuffled_d3 --out results/replication_b3/w1
 fi
 echo "collection complete; now: bash ../reproduce.sh analysis"

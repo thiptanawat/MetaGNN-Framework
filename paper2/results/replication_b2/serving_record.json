@@ -1,0 +1,130 @@
+{
+ "tag": "b2",
+ "served_name": "gemma-4-31b-it",
+ "plan": "REPLICATION_BACKBONES_PLAN_2026-11-13.md",
+ "written_utc": "2026-11-14T02:21:04Z",
+ "snapshot": "$HF_HOME/hub/models--google--gemma-4-31B-it/snapshots/439edf5652646a0d1bd8b46bfdc1d3645761a445",
+ "revision": "439edf5652646a0d1bd8b46bfdc1d3645761a445",
+ "weights": {
+  "identical_to_record": true,
+  "recorded_revision": "439edf5652646a0d1bd8b46bfdc1d3645761a445",
+  "n_files": 8,
+  "total_bytes": 62578636733,
+  "artifact_digest": "91824b237f5988e840b56c7f64b07e3fcb0a9da97bf2bcb5ce7c08cf5e800485",
+  "recorded_artifact_digest": "91824b237f5988e840b56c7f64b07e3fcb0a9da97bf2bcb5ce7c08cf5e800485",
+  "differences": [],
+  "files": [
+   {
+    "name": "config.json",
+    "bytes": 4621,
+    "sha256": "e967dd38bc5cfd38bd09a995a7bf4a754075df2b46aba68f7fbb5a791e6d8dd1"
+   },
+   {
+    "name": "generation_config.json",
+    "bytes": 208,
+    "sha256": "d4226bbe3117d2d253ba4609720ba82c6c4ce4627a9a6ae05387c78983ac03de"
+   },
+   {
+    "name": "model-00001-of-00002.safetensors",
+    "bytes": 49784788364,
+    "sha256": "eeef8791537bc04f110967c513149e037d2a9ae97d49add7291ebfa62806bbfa"
+   },
+   {
+    "name": "model-00002-of-00002.safetensors",
+    "bytes": 12761549884,
+    "sha256": "018912220f559f7025d60333e0996183cd538aa77ad6f4988a89ce47be681f10"
+   },
+   {
+    "name": "model.safetensors.index.json",
+    "bytes": 120246,
+    "sha256": "d4aff3b976d69c123a29d1c085d7ba4de1ac3f4ca1726a7f81e1b11462a64ea2"
+   },
+   {
+    "name": "processor_config.json",
+    "bytes": 1689,
+    "sha256": "32bdf45d2ad4cc29a0822ddd157a182de76644f0419a6228d151495256e9813c"
+   },
+   {
+    "name": "tokenizer.json",
+    "bytes": 32169626,
+    "sha256": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f"
+   },
+   {
+    "name": "tokenizer_config.json",
+    "bytes": 2095,
+    "sha256": "90c3a3ba5bf53818383a58e1a776cbcacd2a038d4812eaa373e1522f2d06f3df"
+   }
+  ],
+  "other_files": [
+   {
+    "name": ".gitattributes",
+    "bytes": 1708,
+    "sha256": "aa4fc74fe06acc698271341dee76eca26c6672a1f4b2840dedbf37f1b4fe27a4",
+    "first_host": "not on record"
+   },
+   {
+    "name": "README.md",
+    "bytes": 26683,
+    "sha256": "45dca05f3d9d3e24200cb1850cef46da90228c5ee8b7b1d75b60f861d7550398",
+    "first_host": "not on record"
+   },
+   {
+    "name": "chat_template.jinja",
+    "bytes": 16448,
+    "sha256": "85a08664d16d8f3be4416c92427b3ac10df1024ac566cc0b4bc3bab409393f98",
+    "first_host": "identical"
+   }
+  ]
+ },
+ "host": {
+  "label": "second host",
+  "system": "Linux-6.8.0-111-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "cuda_visible_devices": "1",
+  "accelerator": "1, NVIDIA H100 80GB HBM3, 81559 MiB, 580.178.04"
+ },
+ "libraries": {
+  "vllm": "0.19.0",
+  "torch": "2.10.0",
+  "transformers": "5.5.4",
+  "tokenizers": "0.22.2",
+  "mistral_common": "1.11.0",
+  "huggingface_hub": "1.11.0",
+  "safetensors": "0.7.0",
+  "numpy": "2.2.6",
+  "torch_cuda": "12.8",
+  "torch_cudnn": 91002
+ },
+ "study_commit": "b041137acece3841153118609b46a03895cd40e2",
+ "command": "vllm serve $HF_HOME/hub/models--google--gemma-4-31B-it/snapshots/439edf5652646a0d1bd8b46bfdc1d3645761a445 --served-model-name gemma-4-31b-it --host 127.0.0.1 --port 18001 --default-chat-template-kwargs {\"enable_thinking\":false} --tensor-parallel-size 1 --dtype bfloat16 --max-model-len 8192 --max-num-seqs 32 --gpu-memory-utilization 0.90 --enable-prefix-caching --max-logprobs 0 --uvicorn-log-level warning",
+ "models": {
+  "object": "list",
+  "data": [
+   {
+    "id": "gemma-4-31b-it",
+    "object": "model",
+    "created": 1794622864,
+    "owned_by": "vllm",
+    "root": "$HF_HOME/hub/models--google--gemma-4-31B-it/snapshots/439edf5652646a0d1bd8b46bfdc1d3645761a445",
+    "parent": null,
+    "max_model_len": 8192,
+    "permission": [
+     {
+      "id": "modelperm-86761207a5ead252",
+      "object": "model_permission",
+      "created": 1794622864,
+      "allow_create_engine": false,
+      "allow_sampling": true,
+      "allow_logprobs": true,
+      "allow_search_indices": false,
+      "allow_view": true,
+      "allow_fine_tuning": false,
+      "organization": "*",
+      "group": null,
+      "is_blocking": false
+     }
+    ]
+   }
+  ]
+ }
+}

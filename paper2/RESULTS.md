@@ -132,6 +132,22 @@ Second wording: 40 patients, 30,000 calls.
 | mean absolute change of the own-arm answer between the wordings | 0.0754 |
 | mean absolute change between the own and donor answers, first wording, same patients | 0.3310 |
 
+## The replication sample on the second and third backbones
+
+Plan: `REPLICATION_BACKBONES_PLAN_2026-11-13.md`, committed before the first call to either backbone on the sample. Statistics: `code/replication_backbones.py` (`replication_stats.py` unchanged on each archive), written to `results/replication_frozen_b2.json` and `results/replication_frozen_b3.json`; the comparison with the printed percentile, which that plan names in advance, is in `results/replication_reference_b2.json` and `results/replication_reference_b3.json`. Each backbone is read separately and nothing is pooled. The first column repeats the main backbone, where the comparison with the printed percentile was added outside its plan.
+
+| quantity (first wording, 100 patients) | main backbone | second backbone (gemma-4-31b-it) | third backbone (mistral-small-3.2-24b-instruct) |
+|---|---|---|---|
+| own arm, AUROC | 0.5578 | 0.5375 | 0.6256 |
+| donor arm, schedule 1, AUROC | 0.5517 | 0.5360 | 0.6213 |
+| own minus donor, schedule 1 (primary), 90% interval | +0.0061 [+0.0002, +0.0120] | +0.0015 [-0.0042, +0.0071] | +0.0042 [-0.0041, +0.0125] |
+| own minus donor, schedule 2, 90% interval | +0.0052 [-0.0003, +0.0107] | +0.0047 [-0.0005, +0.0098] | +0.0062 [-0.0014, +0.0139] |
+| own minus donor, schedule 3, 90% interval | +0.0057 [-0.0001, +0.0114] | +0.0042 [-0.0012, +0.0097] | +0.0076 [-0.0006, +0.0159] |
+| primary contrast inside the 0.02 margin | yes | yes | yes |
+| 90% interval of the primary contrast excludes zero | yes | no | no |
+| model minus printed percentile, schedule 1 | +0.0026 [-0.0007, +0.0058] | -0.0020 [-0.0054, +0.0013] | +0.0007 [-0.0050, +0.0064] |
+| own minus donor, second wording (40 patients) | +0.0029 [-0.0042, +0.0100] | +0.0073 [-0.0023, +0.0169] | +0.0064 [-0.0049, +0.0177] |
+
 ## References
 
 Every reference in the manuscript was resolved against PubMed E-utilities, the Crossref API or the arXiv API before use; the procedure and its outcome are in `docs/VERIFICATION.md` at the repository root.

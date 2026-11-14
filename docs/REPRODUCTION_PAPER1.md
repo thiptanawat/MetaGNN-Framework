@@ -81,6 +81,8 @@ python3 paper1/code/split_audit.py --family_map paper1/data/families/families_un
 python3 paper1/code/inference_p1.py
 python3 paper1/code/build_results_p1.py
 python3 paper1/code/second_cohort_stats.py
+python3 paper1/code/second_cohort_graph.py
+python3 paper1/code/second_cohort_seed.py
 python3 paper1/code/make_ledger.py
 python3 paper1/code/make_numbers_p1.py
 python3 paper1/code/make_figures_p1.py
@@ -89,8 +91,10 @@ python3 paper1/code/verify_ledger.py
 ```
 
 and then the Language-Model Evidence chain, and finally `tools/check_release.py`. The ledger runs after the
-last scripts that write a hashed file (`build_results_p1.py` writes `data/results_p1.json` and
-`second_cohort_stats.py` writes `data/results_cohort2.json`)
+last scripts that write a hashed file (`build_results_p1.py` writes `data/results_p1.json`,
+`second_cohort_stats.py` writes `data/results_cohort2.json`, `second_cohort_graph.py` writes
+`data/results_cohort2_graph.json` and `second_cohort_seed.py` writes
+`data/results_cohort2_seed.json`)
 and before the macros that quote its counts, so nothing it hashes changes after it is written;
 `verify_ledger.py` then checks every hash against the file it names and fails the run on a
 mismatch, which is what catches a ledger committed beside newer results.
@@ -152,13 +156,15 @@ prediction). `metrics.py` recomputes the audit_results files from those CSVs and
 gene-effect and expression files (level 2); `run_arms.py` recomputes the CSVs from the
 checkpoint (level 3).
 
-## The linear rows on a second cohort
+## The decomposition on a second cohort
 
 The rows of the decomposition that need no graph training were repeated on the 1,095 primary
-tumors of TCGA-BRCA. The plan, `paper1/SECOND_COHORT_PLAN_2026-11-13.md`, was committed before
-any analysis script ran on that cohort; `paper1/data/cohort2_plan_record.json` holds the commit,
-its push and the start of the first analysis script, and the plan's last sections record the outcome and
-fix a planned extension to the graph scorer that has not been run.
+tumors of TCGA-BRCA, and the graph scorer was then trained on them. The plan,
+`paper1/SECOND_COHORT_PLAN_2026-11-13.md`, was committed before any analysis script ran on that
+cohort; `paper1/data/cohort2_plan_record.json` holds the commit, its push and the start of the
+first analysis script. Section 6 of the plan fixes the runs of the graph scorer and was committed
+before any of them. The plan's last sections record the outcomes, the course of the runs and the
+departures.
 
 - **What a public checkout regenerates.** `second_cohort_stats.py` reads the four committed
   result files of the second cohort (`results/cohort2/naive_allfolds.json`, `naive_pooled.json`
@@ -173,8 +179,30 @@ fix a planned extension to the graph scorer that has not been run.
   `data/gpr_resolved_cohort1.json`, and `data/cohort2_expression_qc.json` records what the
   builder read. `naive_baselines_allfolds.py` and `pooled_baselines.py` then run on the built
   directory without change (CPU, about half an hour for both splits).
-- **The graph scorer** was not run on the second cohort. `code/gpu_queue_cohort2.sh` launches
-  the 30 runs that Section 6 of the plan fixes.
+- **The graph scorer.** The 30 runs that Section 6 of the plan fixes (the own-expression and
+  cohort-mean arms on the 15 cells of the family-disjoint split, matched selection rule, default
+  training seed) were made on 13 and 14 November 2026 on a second workstation, with the driver
+  that ran the first cohort; `code/gpu_queue_cohort2.sh` is the queue as it was committed with
+  the plan. The 30 cell files are under `results/cohort2/fam/`, and
+  `data/cohort2_graph_run_record.json` records the host, the library versions, the hashes of the
+  code that ran, the times and the departures, with one cell of the first cohort rerun twice
+  there as a check of the environment. A public checkout regenerates the summary:
+  `second_cohort_graph.py` reads those cells and the first cohort's under `results/fam/`, checks
+  the first cohort's contrast against `results/inference.json`, and writes
+  `data/results_cohort2_graph.json`, from which the macros and the README paragraph are taken.
+  Retraining the cells needs the built cohort and a GPU; the 30 runs took about 16 hours on one
+  H100 with up to four runs sharing it.
+- **The training seed, outside the plan.** After the outcome of Section 6 was known, cell p0r0
+  was retrained at the training seeds 2025 and 2026, both arms, as on the first cohort
+  (`code/gpu_queue_cohort2_seed.sh`; four more cell files under `results/cohort2/fam/`, tagged
+  `_ts2025` and `_ts2026`; `data/cohort2_seed_run_record.json`). `second_cohort_seed.py` reads
+  them beside the first cohort's replicates and writes `data/results_cohort2_seed.json`. The
+  check enters none of the plan's quantities: `second_cohort_graph.py` reads the default-seed
+  files only.
+- **A second training seed on the full grid.** Section 7 of the plan fixes it, with its launcher
+  (`code/gpu_queue_cohort2_seed2025.sh`) and its analysis script (`code/second_cohort_graph_seed.py`).
+  Its runs had not started when this release was cut, except the two of cell p0r0, which the check
+  above had made; the script is not part of `reproduce.sh` until the cells exist.
 
 ## What needs the GPU host or the deposited cohort
 
@@ -209,7 +237,7 @@ fix a planned extension to the graph scorer that has not been run.
 ## Table and figure map
 
 <!-- map:start -->
-_Generated by `tools/make_repro_map.py` from the documents built on 2026-11-12; the manuscript sources are not in the public checkout, so this is the last built numbering._
+_Generated by `tools/make_repro_map.py` from the documents built on 2026-11-14; the manuscript sources are not in the public checkout, so this is the last built numbering._
 
 ### Main text
 
@@ -243,5 +271,5 @@ _Generated by `tools/make_repro_map.py` from the documents built on 2026-11-12; 
 | `tab:collapse` (Table S12) | Collapsing predictions to their cohort mean. | results/collapse.json, results/collapse_noise.json, results/arm_noise.json | compare_ctrl.py, collapse_noise.py, arm_noise.py |
 | `tab:naive` (Table S13) | Naive predictors on held-out reactions. | results/naive_baselines.json, results/naive_baselines2.json | naive_baselines.py, naive_baselines2.py |
 | `tab:synth` (Table S14) | The audit on a synthetic patient-varying target. | results/synth/*.json | double_holdout_ctrl.py with the synthetic target options |
-| `tab:cohort2` (Table S15) | The linear rungs on two cohorts. | data/results_cohort2.json, computed from results/cohort2/naive_allfolds*.json and results/cohort2/naive_pooled*.json beside the first cohort's results/naive_allfolds*.json and results/naive_pooled*.json | build_second_cohort.py (features of the second cohort), naive_baselines_allfolds.py, pooled_baselines.py, second_cohort_stats.py |
+| `tab:cohort2` (Table S15) | The decomposition on two cohorts. | data/results_cohort2.json, computed from results/cohort2/naive_allfolds*.json and results/cohort2/naive_pooled*.json beside the first cohort's results/naive_allfolds*.json and results/naive_pooled*.json; for the graph scorer's rows, data/results_cohort2_graph.json, computed from results/cohort2/fam/*.json beside the first cohort's results/fam/*.json | build_second_cohort.py (features of the second cohort), naive_baselines_allfolds.py, pooled_baselines.py, second_cohort_stats.py; double_holdout_ctrl.py (the cells), second_cohort_graph.py |
 <!-- map:end -->

@@ -77,3 +77,58 @@ The same quantity under d2 and d3 is reported beside it.
 ## 7. Deviations
 
 None at the time of the commit.
+
+### Record after the collection (14 November 2026)
+
+The commit that holds this plan, the wrapper, the serving-record script and the launcher is `b041137`. It was pushed at 14:59:22 UTC on 13 November 2026 (21:59:22 local time, UTC+7; the push is in the public activity record of the repository). The first call to either backbone on the sample was sent at 01:18:09 UTC on 14 November (08:18:09 local time), 10.3 hours after the push. Both collections are complete: for each backbone 10 of the 10 blocks of wording 1 and 4 of the 4 blocks of wording 2, 100 patients under wording 1 and 40 under wording 2, 156,000 calls, in the order of Section 5.
+
+| | Mistral Small 3.2 24B Instruct (b3) | Gemma 4 31B-it (b2) |
+|---|---|---|
+| Files of the snapshot compared with `results/model_records.json` | 17, all identical | 8, all identical; the chat template is identical to the file the first host held |
+| Serving record written (UTC) | 01:17:48 | 02:21:04 |
+| Check calls before the collection (600 patient-blind prompts of an earlier design) | 600 of 600 parsed | 600 of 600 parsed |
+| First call on the sample, last reply (local time, 14 November) | 08:18:09, 09:19:00 | 09:21:45, 12:12:22 |
+| Calls answered per second over that time | 42.7 | 15.2 |
+| Calls sent a second time; calls left without an answer; answers that could not be parsed | 0; 0; 0 | 0; 0; 0 |
+| Checkout that issued the calls | the public commit `b041137` | the public commit `b041137` |
+
+One departure from the plan is recorded. It does not depend on an answer of a model.
+
+| Departure | What happened |
+|---|---|
+| First start of the launcher | The launcher was first started at 07:40:27 on 14 November 2026 (local time, UTC+7), when the accelerator was free. Neither server came up: the second host does not allow files in its temporary directory to be executed, and the serving library compiles a module there when it starts and could not load it. The launcher ended at 07:46:22. It had sent no call: no check call and no call of the sample. It was started again, unchanged, at 08:16:54 with the environment variable TMPDIR of the calling shell set to a directory on the home file system. The prompts, the parser, the sample, the serving flags and the launcher are those of the commit of the plan. |
+
+Two further remarks belong to the record.
+
+| Remark | What happened |
+|---|---|
+| A launcher that waited before the push | Before the plan was pushed, a launcher from a local commit with the same tree as the plan's commit (tree 037b84f54e9b) was started on the second host at 17:34 on 13 November 2026 (local time, UTC+7) and waited for the training jobs of the other study to end. The flag file that lets the launcher start dates from that minute, although the header of the launcher says that it is created once the plan is public. After the push (21:59 local time) that launcher was stopped, the checkout was replaced by a clone of the public commit (22:00), and the launcher of the clone was started. The first launcher had started no server and sent no call, and its checkout holds no result. |
+| A check outside the plan | The token identifiers that each backbone's own tokenizer and chat template produce for the first 500 prompts of the sample were computed on the first host, where the earlier collections of the two backbones ran, and on the second host (`code/provenance/tokenization_check.py`; no model is loaded and no call is made). They are identical on the two hosts for both backbones. The check was first made on 13 November, before the push, and its outputs were not stored then; it was repeated on 14 November, after the collection, with the script as published, and those outputs are in `results/replication/backbones_course.json`. |
+
+The course of the collection is in `results/replication/backbones_record.json`, which `code/replication_backbones_record.py` writes from the archives, the serving records and `results/replication/backbones_course.json`.
+
+### Outcome
+
+| Quantity | Second backbone (Gemma 4 31B-it) | Third backbone (Mistral Small 3.2 24B Instruct) | Main backbone, for comparison |
+|---|---|---|---|
+| Primary: own minus donor, wording 1, donor schedule d1 (100 patients), with its 90% interval | +0.0015 (-0.0042 to +0.0071) | +0.0042 (-0.0041 to +0.0125) | +0.0061 (+0.0002 to +0.0120) |
+| Own arm, donor arm (AUROC) | 0.5375, 0.5360 | 0.6256, 0.6213 | 0.5578, 0.5517 |
+| Own minus donor, donor schedule d2 | +0.0047 (-0.0005 to +0.0098) | +0.0062 (-0.0014 to +0.0139) | +0.0052 (-0.0003 to +0.0107) |
+| Own minus donor, donor schedule d3 | +0.0042 (-0.0012 to +0.0097) | +0.0076 (-0.0006 to +0.0159) | +0.0057 (-0.0001 to +0.0114) |
+| Own minus the mean of the three donor arms | +0.0035 (-0.0014 to +0.0083) | +0.0060 (-0.0013 to +0.0134) | +0.0056 (+0.0005 to +0.0108) |
+| Own minus donor, wording 2 (40 patients) | +0.0073 (-0.0023 to +0.0169) | +0.0064 (-0.0049 to +0.0177) | +0.0029 (-0.0042 to +0.0100) |
+| Raw-expression ranking, availability indicator (AUROC) | 0.6468, 0.6262 | 0.6468, 0.6262 | 0.6468, 0.6262 |
+| Printed percentile ranked with no model: own minus donor, d1 | +0.0035 (-0.0002 to +0.0073) | +0.0035 (-0.0002 to +0.0073) | +0.0035 (-0.0002 to +0.0073) |
+| Model minus printed percentile, donor schedule d1 (the reference of Section 6) | -0.0020 (-0.0054 to +0.0013) | +0.0007 (-0.0050 to +0.0064) | +0.0026 (-0.0007 to +0.0058) |
+| Model minus printed percentile, donor schedule d2 | -0.0004 (-0.0036 to +0.0028) | +0.0012 (-0.0040 to +0.0064) | +0.0001 (-0.0030 to +0.0033) |
+| Model minus printed percentile, donor schedule d3 | +0.0007 (-0.0023 to +0.0037) | +0.0041 (-0.0014 to +0.0096) | +0.0022 (-0.0010 to +0.0053) |
+| Correlation across patients, model with printed percentile, d1 | 0.83 | 0.82 | 0.87 |
+
+The last column repeats `results/replication_frozen.json` and `results/replication_posthoc.json`; for the main backbone the comparison with the printed percentile was added after its outcome had been read. The contrast of the printed percentile depends on the sample only and is the same in every column.
+
+Decision rules of Section 6, for each backbone separately:
+
+- **Second backbone (Gemma 4 31B-it).** (1) The 90% interval lies inside the margin 0.02 and inside the margin 0.05, so equivalence is declared at 0.02 and at 0.05. (2) The interval includes zero, so no difference is reported. (3) The result is reported in the main text of the manuscript. Printed-number reference: the 90% interval of model minus printed percentile on donor schedule d1 includes zero, so the difference of this backbone is described as not distinguishable from what ranking the printed percentile gives.
+- **Third backbone (Mistral Small 3.2 24B Instruct).** (1) The 90% interval lies inside the margin 0.02 and inside the margin 0.05, so equivalence is declared at 0.02 and at 0.05. (2) The interval includes zero, so no difference is reported. (3) The result is reported in the main text of the manuscript. Printed-number reference: the 90% interval of model minus printed percentile on donor schedule d1 includes zero, so the difference of this backbone is described as not distinguishable from what ranking the printed percentile gives.
+
+No estimate is pooled over backbones and no test is adjusted for the other backbone. Every quantity of Section 6 is in `results/replication_frozen_b2.json`, `results/replication_frozen_b3.json`, `results/replication_reference_b2.json` and `results/replication_reference_b3.json`.

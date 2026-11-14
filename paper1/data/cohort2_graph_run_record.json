@@ -1,0 +1,48 @@
+{
+ "plan": "paper1/SECOND_COHORT_PLAN_2026-11-13.md, Section 6",
+ "host": "a second workstation; one NVIDIA H100 (80 GB), driver 580.178.04; up to four runs at a time on that accelerator",
+ "python": "3.12.3",
+ "first_host_python": "3.10.12",
+ "libraries": {
+  "torch": "2.10.0+cu128",
+  "cuda": "12.8",
+  "cudnn": "9.10.2 (91002)",
+  "torch_geometric": "2.7.0",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "scikit_learn": "1.7.2"
+ },
+ "repository_commit": "36cb74db9ac92da92523b9612f35001e8a01742f",
+ "code_sha256": {
+  "code/double_holdout_ctrl.py": "dece7d5fc7e2dce5551aea5eae5483b621812b3adcbd0018163c5ed74b272101",
+  "code/trainer.py": "3ada4f074503483900d7710699f9f893268535771d2a4e72cc43fdc547c646f9",
+  "code/gpu_queue_cohort2.sh": "7e46f9bbd027b28713cbd23119e4ca9dd1d9172957ebdc4c8e1df03a946c24d4",
+  "data/families/families_union.json": "3f8041ec6fab8aa9b5024be097cf78413385fd2528ed5c4a4aae8484390d343a"
+ },
+ "first_cell_started_local": "2026-11-13T15:44:51+07:00",
+ "last_cell_finished_local": "2026-11-14T07:40:08+07:00",
+ "runs": 30,
+ "check_cell": {
+  "what": "one cell of the first cohort (patient fold 0, reaction fold 0, own-expression arm, training seed 2024) rerun twice on the second workstation, outside the plan",
+  "cohort": "first",
+  "cell": "p0r0",
+  "arm": "own",
+  "train_seed": 2024,
+  "here": 0.7745,
+  "here_epochs": 16,
+  "here_repeat": 0.7724,
+  "here_repeat_epochs": 25,
+  "released": 0.7903,
+  "released_epochs": 17,
+  "released_seed_replicates": [
+   0.7776,
+   0.7854
+  ]
+ },
+ "deviations": [
+  "The runs were made on a second workstation, because both accelerators of the first were in use by another service. The accelerator model and the versions of PyTorch, CUDA, cuDNN and PyTorch Geometric are the same; the Python interpreter is 3.12.3 in place of 3.10.12.",
+  "The driver is the released code/double_holdout_ctrl.py, byte-identical to the file that ran the first cohort. The released code/trainer.py differs from the file that ran the first cohort in comments, docstrings and log messages only.",
+  "The jobs ran at a lowered scheduling priority (nice 5), which does not enter any computation.",
+  "One cell of the first cohort was rerun twice on the second workstation as a check of the environment, outside the plan; its results are in this record and in no analysis."
+ ]
+}

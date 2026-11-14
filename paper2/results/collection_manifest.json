@@ -1,7 +1,7 @@
 {
  "_generated_by": "code/collection_manifest.py",
  "note": "Per collection, the provenance fields its own design.json carries. `absent` names the fields it does not carry; `defaults_not_recorded` gives the collector's default for an absent field, which is a property of the code and not a record of the run. `recorded_elsewhere` says where a collection keeps what a field would hold.",
- "n_collections": 47,
+ "n_collections": 51,
  "fields": [
   "url",
   "model",
@@ -16,17 +16,17 @@
   "minutes"
  ],
  "n_recording_field": {
-  "url": 37,
-  "model": 47,
-  "max_tokens": 37,
-  "temperature": 30,
-  "seed": 27,
+  "url": 41,
+  "model": 51,
+  "max_tokens": 41,
+  "temperature": 34,
+  "seed": 31,
   "donor_seed": 25,
   "started_at": 35,
-  "interleave": 33,
-  "full_archive": 37,
-  "plain_chat": 37,
-  "minutes": 47
+  "interleave": 37,
+  "full_archive": 41,
+  "plain_chat": 41,
+  "minutes": 51
  },
  "collections": {
   "det_patient": {
@@ -705,6 +705,94 @@
     "full_archive": true,
     "plain_chat": false,
     "minutes": 31.3
+   },
+   "absent": [
+    "donor_seed",
+    "started_at"
+   ],
+   "defaults_not_recorded": {},
+   "recorded_elsewhere": {
+    "donor_seed": "the donors are read from results/replication/design_master.json, one schedule per donor arm",
+    "started_at": "the start of each block is recorded under blocks"
+   }
+  },
+  "replication_b2/w1": {
+   "records": {
+    "url": "http://127.0.0.1:18001/v1/chat/completions",
+    "model": "gemma-4-31b-it",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 20261113,
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 136.7
+   },
+   "absent": [
+    "donor_seed",
+    "started_at"
+   ],
+   "defaults_not_recorded": {},
+   "recorded_elsewhere": {
+    "donor_seed": "the donors are read from results/replication/design_master.json, one schedule per donor arm",
+    "started_at": "the start of each block is recorded under blocks"
+   }
+  },
+  "replication_b2/w2": {
+   "records": {
+    "url": "http://127.0.0.1:18001/v1/chat/completions",
+    "model": "gemma-4-31b-it",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 20261113,
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": false,
+    "minutes": 33.6
+   },
+   "absent": [
+    "donor_seed",
+    "started_at"
+   ],
+   "defaults_not_recorded": {},
+   "recorded_elsewhere": {
+    "donor_seed": "the donors are read from results/replication/design_master.json, one schedule per donor arm",
+    "started_at": "the start of each block is recorded under blocks"
+   }
+  },
+  "replication_b3/w1": {
+   "records": {
+    "url": "http://127.0.0.1:18002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 20261113,
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 47.8
+   },
+   "absent": [
+    "donor_seed",
+    "started_at"
+   ],
+   "defaults_not_recorded": {},
+   "recorded_elsewhere": {
+    "donor_seed": "the donors are read from results/replication/design_master.json, one schedule per donor arm",
+    "started_at": "the start of each block is recorded under blocks"
+   }
+  },
+  "replication_b3/w2": {
+   "records": {
+    "url": "http://127.0.0.1:18002/v1/chat/completions",
+    "model": "mistral-small-3.2-24b-instruct",
+    "max_tokens": 160,
+    "temperature": 0.0,
+    "seed": 20261113,
+    "interleave": true,
+    "full_archive": true,
+    "plain_chat": true,
+    "minutes": 12.9
    },
    "absent": [
     "donor_seed",

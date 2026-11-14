@@ -1,0 +1,335 @@
+{
+ "backbone": "mistral-small-3.2-24b-instruct",
+ "archive": "results/replication_b3",
+ "plan": "REPLICATION_BACKBONES_PLAN_2026-11-13.md",
+ "note": "the own-versus-donor contrast of the printed percentile and of the printed value with no model, beside the contrast of the language model; replication_posthoc.one_design, unchanged; named in the plan before the first call to this backbone",
+ "replication": {
+  "n_patients": 100,
+  "n_reactions": 300,
+  "n_expression_bearing": 137,
+  "printed_value": {
+   "d1": {
+    "own_auroc": 0.6467579365,
+    "donor_auroc": 0.6456026455,
+    "diff": {
+     "n": 100,
+     "mean": 0.001155291,
+     "sd": 0.0077899297,
+     "ci90": [
+      -0.000138142,
+      0.002448724
+     ],
+     "paired_p": 0.1412357961,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "d2": {
+    "own_auroc": 0.6467579365,
+    "donor_auroc": 0.6455087302,
+    "diff": {
+     "n": 100,
+     "mean": 0.0012492063,
+     "sd": 0.0070783898,
+     "ci90": [
+      7.39168e-05,
+      0.0024244959
+     ],
+     "paired_p": 0.0806784151,
+     "within_002": true,
+     "excludes_zero": true
+    }
+   },
+   "d3": {
+    "own_auroc": 0.6467579365,
+    "donor_auroc": 0.6456708995,
+    "diff": {
+     "n": 100,
+     "mean": 0.001087037,
+     "sd": 0.0077122697,
+     "ci90": [
+      -0.0001935014,
+      0.0023675755
+     ],
+     "paired_p": 0.1618238224,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "mean_of_schedules": {
+    "n": 100,
+    "mean": 0.0011638448,
+    "sd": 0.0067402055,
+    "ci90": [
+     4.4707e-05,
+     0.0022829826
+    ],
+    "paired_p": 0.0873370371,
+    "within_002": true,
+    "excludes_zero": true
+   }
+  },
+  "printed_percentile": {
+   "d1": {
+    "own_auroc": 0.6284044974,
+    "donor_auroc": 0.6248714286,
+    "diff": {
+     "n": 100,
+     "mean": 0.0035330688,
+     "sd": 0.0224788073,
+     "ci90": [
+      -0.0001992925,
+      0.0072654301
+     ],
+     "paired_p": 0.1192030848,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "d2": {
+    "own_auroc": 0.6284044974,
+    "donor_auroc": 0.623360582,
+    "diff": {
+     "n": 100,
+     "mean": 0.0050439153,
+     "sd": 0.0215322646,
+     "ci90": [
+      0.0014687172,
+      0.0086191135
+     ],
+     "paired_p": 0.0211570488,
+     "within_002": true,
+     "excludes_zero": true
+    }
+   },
+   "d3": {
+    "own_auroc": 0.6284044974,
+    "donor_auroc": 0.6249113757,
+    "diff": {
+     "n": 100,
+     "mean": 0.0034931217,
+     "sd": 0.0232442661,
+     "ci90": [
+      -0.0003663357,
+      0.0073525791
+     ],
+     "paired_p": 0.1360768175,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "mean_of_schedules": {
+    "n": 100,
+    "mean": 0.0040233686,
+    "sd": 0.0199687732,
+    "ci90": [
+     0.0007077712,
+     0.007338966
+    ],
+    "paired_p": 0.0466341022,
+    "within_002": true,
+    "excludes_zero": true
+   }
+  },
+  "language_model": {
+   "d1": {
+    "own_auroc": 0.6255584656,
+    "donor_auroc": 0.6213478836,
+    "diff": {
+     "n": 100,
+     "mean": 0.004210582,
+     "sd": 0.0502252363,
+     "ci90": [
+      -0.0041287718,
+      0.0125499358
+     ],
+     "paired_p": 0.4038593797,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "d2": {
+    "own_auroc": 0.6255584656,
+    "donor_auroc": 0.6193277778,
+    "diff": {
+     "n": 100,
+     "mean": 0.0062306878,
+     "sd": 0.0462259673,
+     "ci90": [
+      -0.0014446309,
+      0.0139060066
+     ],
+     "paired_p": 0.1807744579,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "d3": {
+    "own_auroc": 0.6255584656,
+    "donor_auroc": 0.6179335979,
+    "diff": {
+     "n": 100,
+     "mean": 0.0076248677,
+     "sd": 0.0496578591,
+     "ci90": [
+      -0.0006202793,
+      0.0158700147
+     ],
+     "paired_p": 0.1278556737,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "mean_of_schedules": {
+    "n": 100,
+    "mean": 0.0060220459,
+    "sd": 0.0441560089,
+    "ci90": [
+     -0.0013095788,
+     0.0133536705
+    ],
+    "paired_p": 0.1757199164,
+    "within_002": true,
+    "excludes_zero": false
+   }
+  },
+  "association": {
+   "d1": {
+    "model_with_printed_value": {
+     "n": 100,
+     "pearson": 0.6533676084,
+     "pearson_ci90": [
+      0.5470367007,
+      0.7389497721
+     ],
+     "spearman": 0.6490047945
+    },
+    "model_with_printed_percentile": {
+     "n": 100,
+     "pearson": 0.8200032542,
+     "pearson_ci90": [
+      0.7572846298,
+      0.867734963
+     ],
+     "spearman": 0.8424362436
+    }
+   },
+   "d2": {
+    "model_with_printed_value": {
+     "n": 100,
+     "pearson": 0.6859679337,
+     "pearson_ci90": [
+      0.5871401544,
+      0.7646469473
+     ],
+     "spearman": 0.6484405707
+    },
+    "model_with_printed_percentile": {
+     "n": 100,
+     "pearson": 0.8204229361,
+     "pearson_ci90": [
+      0.7578310889,
+      0.8680514218
+     ],
+     "spearman": 0.8097438328
+    }
+   },
+   "d3": {
+    "model_with_printed_value": {
+     "n": 100,
+     "pearson": 0.658062145,
+     "pearson_ci90": [
+      0.5527817827,
+      0.7426656457
+     ],
+     "spearman": 0.6487227646
+    },
+    "model_with_printed_percentile": {
+     "n": 100,
+     "pearson": 0.8291883759,
+     "pearson_ci90": [
+      0.7692644933,
+      0.8746521191
+     ],
+     "spearman": 0.8258710647
+    }
+   }
+  },
+  "model_minus_printed_value": {
+   "d1": {
+    "n": 100,
+    "mean": 0.003055291,
+    "sd": 0.0455191809,
+    "ci90": [
+     -0.0045026735,
+     0.0106132555
+    ],
+    "paired_p": 0.5036501271,
+    "within_002": true,
+    "excludes_zero": false
+   },
+   "d2": {
+    "n": 100,
+    "mean": 0.0049814815,
+    "sd": 0.0416897926,
+    "ci90": [
+     -0.0019406548,
+     0.0119036178
+    ],
+    "paired_p": 0.2349837958,
+    "within_002": true,
+    "excludes_zero": false
+   },
+   "d3": {
+    "n": 100,
+    "mean": 0.0065378307,
+    "sd": 0.0449593109,
+    "ci90": [
+     -0.0009271735,
+     0.0140028349
+    ],
+    "paired_p": 0.149063304,
+    "within_002": true,
+    "excludes_zero": false
+   }
+  },
+  "model_minus_printed_percentile": {
+   "d1": {
+    "n": 100,
+    "mean": 0.0006775132,
+    "sd": 0.0342972039,
+    "ci90": [
+     -0.0050171642,
+     0.0063721906
+    ],
+    "paired_p": 0.8438085815,
+    "within_002": true,
+    "excludes_zero": false
+   },
+   "d2": {
+    "n": 100,
+    "mean": 0.0011867725,
+    "sd": 0.0311008509,
+    "ci90": [
+     -0.0039771853,
+     0.0063507303
+    ],
+    "paired_p": 0.7035844436,
+    "within_002": true,
+    "excludes_zero": false
+   },
+   "d3": {
+    "n": 100,
+    "mean": 0.004131746,
+    "sd": 0.033045425,
+    "ci90": [
+     -0.0013550871,
+     0.0096185792
+    ],
+    "paired_p": 0.2141288113,
+    "within_002": true,
+    "excludes_zero": false
+   }
+  }
+ }
+}

@@ -1,8 +1,8 @@
 {
  "_generated_by": "code/make_ledger.py",
  "note": "One row per result family behind Reaction-Scoring Audit: what produced it, the settings its own output records, the checkpoint policy and endpoint, and a SHA-256 of every file. Fields a result file does not carry are absent rather than guessed. The prediction arrays the mask and clean-subset rescorings read are not committed; they are attached to the tagged release, and prediction_arrays below records their checksums.",
- "n_families": 19,
- "n_result_files": 346,
+ "n_families": 20,
+ "n_result_files": 380,
  "data_records": [
   {
    "file": "data/activity_labels_ht29.pt",
@@ -20,6 +20,11 @@
    "sha256": "66c4010ba81fb3280db778e169f0cfc11506b86506d32f9a3222d1b7af2faaa1"
   },
   {
+   "file": "data/cohort2_graph_run_record.json",
+   "bytes": 2319,
+   "sha256": "8c63495442231e07d43ab4c07f3bf1f776312aa3813c9833cdb6b9e1680ea9ec"
+  },
+  {
    "file": "data/cohort2_patients.tsv",
    "bytes": 25206,
    "sha256": "92d35437540d59a2a71491436bdc170a7adf816e2a9a4c8b26864bfa73febac8"
@@ -28,6 +33,11 @@
    "file": "data/cohort2_plan_record.json",
    "bytes": 538,
    "sha256": "e20c07e3dca2e9bcd81552ca47ed7703f03778080c13e68ff04c9228e32e6163"
+  },
+  {
+   "file": "data/cohort2_seed_run_record.json",
+   "bytes": 1528,
+   "sha256": "6268d5812df66ba113619d9794ed47ab3488b6e85bc3945d83fa419cccdc5524"
   },
   {
    "file": "data/families/audit.json",
@@ -78,6 +88,16 @@
    "file": "data/results_cohort2.json",
    "bytes": 12856,
    "sha256": "7bd505c098731e9873fece3b9a6c9d95fd4e4b47dd4838d810df6100e225807c"
+  },
+  {
+   "file": "data/results_cohort2_graph.json",
+   "bytes": 8959,
+   "sha256": "bf321e02aa028034aa6448a9e68f6b1308f2444a6b22f08fdaa41268f618753c"
+  },
+  {
+   "file": "data/results_cohort2_seed.json",
+   "bytes": 3979,
+   "sha256": "fa25b5690865e9a9d8ed50ba75fd7af1a07efcd77f2b8d57424c62236a72dc03"
   },
   {
    "file": "data/results_p1.json",
@@ -2317,6 +2337,235 @@
      "file": "results/seedrep/gnn_B_mb0.0_p0_r2_ts1.json",
      "bytes": 615,
      "sha256": "2b6cad429f69d74233e26cf8dfc18f49ecb893620f0489bd94532d0a46445d3e"
+    }
+   ]
+  },
+  {
+   "family": "graph model cells, family-disjoint reaction split, second cohort",
+   "directory": "results/cohort2/fam",
+   "runner": "code/double_holdout_ctrl.py --inner_val_rxn 0.2 --family_map data/families/families_union.json --family_tag fam, launched by code/gpu_queue_cohort2.sh on the second cohort's directory as code/build_second_cohort.py writes it (the 30 cells of Section 6 of the plan) and, outside the plan, by code/gpu_queue_cohort2_seed.sh (cell p0r0 at two further training seeds, files tagged _ts<seed>); summarized by code/second_cohort_graph.py and code/second_cohort_seed.py",
+   "policy": {
+    "selection": "an inner partition of the training reactions drawn family by family",
+    "checkpoint": "the epoch with the best inner-validation AUROC is restored before scoring",
+    "endpoint": "local GPU, one CUDA device per run",
+    "target": "reconstruction-membership proxy label"
+   },
+   "n_files": 34,
+   "settings": {
+    "data": "brca",
+    "epochs": {
+     "min": 16,
+     "max": 67,
+     "n_distinct": 15
+    },
+    "expr_transform": "none",
+    "family_map": "families_union.json",
+    "family_scheme": "union",
+    "feature_mode": {
+     "min": "mean",
+     "max": "real",
+     "n_distinct": 2
+    },
+    "inner_val_rxn": 0.2,
+    "n_active_labels": 3379,
+    "n_fit_rxn": {
+     "min": 5543,
+     "max": 5647,
+     "n_distinct": 12
+    },
+    "n_heldout_families": {
+     "min": 1572,
+     "max": 1749,
+     "n_distinct": 3
+    },
+    "n_heldout_rxn": {
+     "min": 3500,
+     "max": 3600,
+     "n_distinct": 2
+    },
+    "n_inner_val_rxn": {
+     "min": 1411,
+     "max": 1475,
+     "n_distinct": 10
+    },
+    "n_test": 219,
+    "n_train": 744,
+    "train_seed": {
+     "min": 2024,
+     "max": 2026,
+     "n_distinct": 3
+    }
+   },
+   "files": [
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p0_r0_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "630bb90458bf4d6991c19e660a51e04cea8384aa4d49478c3f835f3870686b34"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p0_r0_mean_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "971fc5b67cef30f450a2c35d2034edfd7cd36b86fde0292ef02cee86f5f39ac4"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p0_r0_mean_ts2025_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "aa8ce27bb428a520b6c620433bbfc322b8a9b411a52b05c5d49890c56ba07527"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p0_r0_mean_ts2026_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "fbd7238792bcb1e0ccbbf4eeb8ba47a72b1e099108ec22de048506806e744a8f"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p0_r0_ts2025_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "463542d50b6fbacfe4298d8f67c42331b9390feb3c2b6484dfece10313d77392"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p0_r0_ts2026_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "21fc59abb71601dbc73b06fab77d9cee4bb4e1dd5638a3cb0c17e33ded185de4"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p0_r1_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "6f2afb9273ae624a8ea723cf8fe3881aac326565ba8947b5a9f7f3c624d15f0e"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p0_r1_mean_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "5864f6508a710da80d3e43dd65e762d7caf70c470c2e83bad03ae66b561f1925"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p0_r2_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "a3c74ea72221f35faef7a411fe1d71a35cc667b93d1cee0dd28e4d26602f2f05"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p0_r2_mean_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "4d89828f18fea735ccd1aa74818371aa2b43c6f3353c7f969bba1205cd4eff57"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p1_r0_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "57fe60f043280c0c878de7635cf3df46ea44c8164b693de00a14ce88a3eaf54b"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p1_r0_mean_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "475603f62cede53b09ed9f9c98f1e8d380210f215f0d04a8b807c463541a8cfb"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p1_r1_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "a1082b6148ac8b067cc7045701af9f6621c2f3caaea74bffe8a77b2e086501a0"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p1_r1_mean_ivr_fam.json",
+     "bytes": 735,
+     "sha256": "1265fdfda9eabcaf63856c1057395906d57eebc740198bdc182be36277688a56"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p1_r2_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "bab579d73d5bc5f3c16da5eec9cdc0186903211c613cc1b27174f8a22c9e2185"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p1_r2_mean_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "cee6f8fcbd87697fa900884729d1c1c824bccf03a551350772f52a601217be50"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p2_r0_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "8cd69bd6a545f30d773fdcd163d9bcf6e9d84b60e8ce54528f819dc3ba5a14c8"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p2_r0_mean_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "07baf8939370649cc98dd7914d2f34d3e6df0d15259fc8d32b56ecf3597f4689"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p2_r1_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "f903a217f6d55989541d82caad4ee68a766479687d7638ea230044f34e5e7ba2"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p2_r1_mean_ivr_fam.json",
+     "bytes": 731,
+     "sha256": "b497eecc6c0d02ede9c410eb46930a9004864700be82efd7facd7c12340e9452"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p2_r2_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "48f436376fb11c8439e2764cec44722839d3bc3add748242af3714444433e7d4"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p2_r2_mean_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "2c35b5b20d9e849701fa3c7bf6621a11029e271e190ebd9206775609a276c1a9"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p3_r0_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "f57728d1836cb2c26e487e028b2ad4b83096d53c5b38dd1d11cbc35e0cc88c6d"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p3_r0_mean_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "89e98e686cc9c85afc609cf6463f2eb5be89f342d7c8e5eaddb6a965093ecf98"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p3_r1_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "675571f4222888376e9a1cf55fe27f472a2293dd8d96d846ceabed0be0f55106"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p3_r1_mean_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "f9025b403e3f4ca4fccdfe555ddbdf2d7f9d927294387e74d21aba7cd145755f"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p3_r2_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "85d81b3e31f0f3f42d4b4bcd1b7e24b126da222cb19a483f3bffab751f377da9"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p3_r2_mean_ivr_fam.json",
+     "bytes": 735,
+     "sha256": "23a2be61b7daba081f2ecbd0df8dfb150cb5dd64dee7e8bb7efdba99bbf7a903"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p4_r0_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "49377f2097d916bcc1619a1fe424c626cc5a6d582455ae3f41d621f4ae6cb792"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p4_r0_mean_ivr_fam.json",
+     "bytes": 735,
+     "sha256": "2c33640edcf5e3285a5e32deb7f630c6f9fc9b0c27c6d40c8e536e21137e2307"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p4_r1_ivr_fam.json",
+     "bytes": 733,
+     "sha256": "59f5dc3ca888c06275cc781e47b38315110b5e9200528d586331c64dccfefce0"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p4_r1_mean_ivr_fam.json",
+     "bytes": 731,
+     "sha256": "4f58b093b9c901bfc6a7b72f7a2c1a4b19685743323694c413b3e0e89afb3c55"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p4_r2_ivr_fam.json",
+     "bytes": 732,
+     "sha256": "f97fd0bd8b7ebecc051cc73f5e5e1043705a89461d7ed95bddfb7bca858e2cab"
+    },
+    {
+     "file": "results/cohort2/fam/gnn_B_mb0.0_p4_r2_mean_ivr_fam.json",
+     "bytes": 734,
+     "sha256": "4c362e39344a5d60e8ff29dc8b308adca38db3ed9914f0de6a50d64538105366"
     }
    ]
   },

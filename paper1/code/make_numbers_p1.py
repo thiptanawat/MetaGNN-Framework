@@ -1888,6 +1888,117 @@ if not os.path.exists(_prp):
 _pr = json.load(open(_prp))
 cmd("ctPlanCommit", "\\texttt{" + _pr["plan_commit"][:12] + "}")
 
+# ---- the graph scorer on the second cohort (Section 6 of SECOND_COHORT_PLAN_2026-11-13.md) ------------
+# data/results_cohort2_graph.json is written by code/second_cohort_graph.py from the cells under
+# results/cohort2/fam/ and, for the first cohort, results/fam/
+_CGP = os.path.join(HERE, "data", "results_cohort2_graph.json")
+if not os.path.exists(_CGP):
+    raise SystemExit("data/results_cohort2_graph.json is missing: run code/second_cohort_graph.py")
+CG = json.load(open(_CGP))
+_g1 = CG["cohorts"]["cohort1"]; _g2 = CG["cohorts"]["cohort2"]; _gc = _g2["contrast"]
+cmd("cgReal", _g2["arms"]["own"]["mean"]); cmd("cgRealSD", _g2["arms"]["own"]["sd"])
+cmd("cgMean", _g2["arms"]["cohort_mean"]["mean"]); cmd("cgMeanSD", _g2["arms"]["cohort_mean"]["sd"])
+cmd("cgPat", _gc["mean"], "{:+.4f}"); cmd("cgPatAbs", abs(_gc["mean"])); cmd("cgPatSD", _gc["sd"])
+cmd("cgPatMin", _gc["min"], "{:+.4f}"); cmd("cgPatMax", _gc["max"], "{:+.4f}")
+cmd("cgPatNeg", _gc["n_negative"], "int"); cmd("cgPatPos", _gc["n_positive"], "int"); cmd("cgPatN", _gc["n_cells"], "int")
+cmd("cgPatP", pfmt(_gc["signflip_p"]))
+# the same test with whole patient folds and whole reaction folds flipped, as the first cohort's is reported
+cmd("cgPatFlipPfold", "{:.4g}".format(_gc["signflip_p_patient_folds"])); cmd("cgPatFlipRfold", "{:.4g}".format(_gc["signflip_p_reaction_folds"]))
+_atfloor = (abs(_gc["signflip_p_patient_folds"] - _gc["signflip_floor_patient_folds"]) < 1e-12,
+            abs(_gc["signflip_p_reaction_folds"] - _gc["signflip_floor_reaction_folds"]) < 1e-12)
+cmd("cgPatFlipFloorPhrase", "the smallest values that five and three folds allow" if all(_atfloor) else
+    "against smallest attainable values of {:.4g} and {:.4g}".format(_gc["signflip_floor_patient_folds"], _gc["signflip_floor_reaction_folds"]))
+cmd("cgPatCells", ", ".join("{:+.4f}".format(_gc["per_cell"][c]) for c in _g2["cells"]))
+# the reading the plan fixed in advance: a mean within 0.02 AUROC of zero is read as agreement with the first cohort
+cmd("cgWithin", "lies within" if CG["reading"]["within_margin"] else "does not lie within")
+cmd("cgAgreeWord", "agrees with" if CG["reading"]["within_margin"] else "differs from")
+cmd("cgSecondMinusFirst", CG["reading"]["second_minus_first"], "{:+.4f}")
+cmd("cgTrainMin", min(_g2["arms"]["own"]["n_train"]), "int"); cmd("cgTrainMax", max(_g2["arms"]["own"]["n_train"]), "int")
+cmd("cgTestMin", min(_g2["arms"]["own"]["n_test"]), "int"); cmd("cgTestMax", max(_g2["arms"]["own"]["n_test"]), "int")
+cmd("cgEpochMin", min(_g2["arms"][k]["epochs"]["min"] for k in ("own", "cohort_mean")), "int")
+cmd("cgEpochMax", max(_g2["arms"][k]["epochs"]["max"] for k in ("own", "cohort_mean")), "int")
+cmd("cgRuns", 2 * _gc["n_cells"], "int")
+# how long each arm trained under the same stopping rule (epochs), on both cohorts
+for _pre, _g in (("cg", _g2), ("cgo", _g1)):
+    for _arm, _nm in (("own", "Own"), ("cohort_mean", "Mean")):
+        _e = _g["arms"][_arm]["epochs"]
+        cmd(_pre + "Epoch" + _nm + "Med", int(round(_e["median"])), "int")
+        cmd(_pre + "Epoch" + _nm + "Min", _e["min"], "int"); cmd(_pre + "Epoch" + _nm + "Max", _e["max"], "int")
+# counts that may be one number or a range, and the first cohort's medians, worded for a sentence
+def _rng(lo, hi): return f"{lo:,}".replace(",", "{,}") if lo == hi else f"{lo:,} to {hi:,}".replace(",", "{,}")
+cmd("cgTrainText", _rng(min(_g2["arms"]["own"]["n_train"]), max(_g2["arms"]["own"]["n_train"])))
+cmd("cgTestText", _rng(min(_g2["arms"]["own"]["n_test"]), max(_g2["arms"]["own"]["n_test"])))
+_m1o = int(round(_g1["arms"]["own"]["epochs"]["median"])); _m1m = int(round(_g1["arms"]["cohort_mean"]["epochs"]["median"]))
+cmd("cgoEpochText", f"a median of {_m1o} epochs in both arms" if _m1o == _m1m
+    else f"a median of {_m1m} epochs in the cohort-mean arm and {_m1o} in the own-expression arm")
+# the sign of the second cohort's contrast across cells, in words for a sentence
+cmd("cgPatSignWord", "negative" if _gc["mean"] < 0 else "positive")
+cmd("cgPatSignCount", (_gc["n_negative"] if _gc["mean"] < 0 else _gc["n_positive"]), "int")
+cmd("cgPatDir", "below" if _gc["mean"] < 0 else "above")
+# the first cohort's contrast in that file is the one the manuscript prints as \famPat
+if abs(_g1["contrast"]["mean"] - INF["fam_real_vs_mean"]["mean"]) > 1e-9:
+    raise SystemExit("results_cohort2_graph.json: the first cohort's contrast differs from results/inference.json")
+# all seven own-minus-cohort-mean contrasts of the second cohort (six linear, one graph) and of the first
+_c2all = _c2c + [_gc["mean"]]; _c1all = _c1c + [_g1["contrast"]["mean"]]
+cmd("ctAllMin", min(_c2all), "{:+.4f}"); cmd("ctAllMax", max(_c2all), "{:+.4f}")
+cmd("coAllMin", min(_c1all), "{:+.4f}"); cmd("coAllMax", max(_c1all), "{:+.4f}")
+cmd("ctAllWithin", "all seven lie" if max(abs(x) for x in _c2all) < 0.02 else "not all seven lie")
+# where the cells were computed, and the cell of the first cohort that was rerun there as a check
+# (data/cohort2_graph_run_record.json, carried into the results file by code/second_cohort_graph.py)
+_rr = CG.get("run_record")
+if not _rr:
+    raise SystemExit("data/cohort2_graph_run_record.json is missing (where and when the second cohort's graph cells were computed)")
+_ck = _rr["check_cell"]
+cmd("cgCheckHere", _ck["here"]); cmd("cgCheckReleased", _ck["released"])
+# the check cell of the first cohort on the second workstation: one rerun, or two with the same seed
+_rel3 = [_ck["released"]] + list(_ck["released_seed_replicates"])
+if _ck.get("here_repeat") is not None:
+    cmd("cgCheckRepeat", _ck["here_repeat"])
+    _two = [_ck["here"], _ck["here_repeat"]]
+    _gap = sum(_rel3) / len(_rel3) - sum(_two) / len(_two)
+    _chk = ("One cell of the first cohort was rerun there twice with the released seed, as a check outside the plan. It scored "
+            "%.4f and %.4f, against %.4f in the released run, whose two training-seed replicates of that cell scored %.4f and %.4f. "
+            "On this cell the second workstation thus scores %s than the first by about %.2f, and its two runs with one seed differ "
+            "by %.4f. The contrast of the plan is taken between two arms trained on the same workstation."
+            % (_ck["here"], _ck["here_repeat"], _ck["released"], _ck["released_seed_replicates"][0], _ck["released_seed_replicates"][1],
+               "lower" if _gap > 0 else "higher", abs(_gap), abs(_two[0] - _two[1])))
+else:
+    _chk = ("One cell of the first cohort, rerun there as a check outside the plan, scored %.4f against %.4f in the released run, "
+            "whose two training-seed replicates of that cell scored %.4f and %.4f. The contrast of the plan is taken between two arms "
+            "trained on the same workstation."
+            % (_ck["here"], _ck["released"], _ck["released_seed_replicates"][0], _ck["released_seed_replicates"][1]))
+cmd("cgHostSentence",
+    "The runs were made on a second workstation with the same accelerator model and the same versions of PyTorch, CUDA and "
+    "PyTorch Geometric as the first, under Python %s in place of %s. " % (_rr["python"], _rr["first_host_python"]) + _chk)
+
+# the training seed on the second cohort at one cell, outside the plan (code/second_cohort_seed.py);
+# present only when that check was made
+_csp = os.path.join(HERE, "data", "results_cohort2_seed.json")
+if os.path.exists(_csp):
+    _cs = json.load(open(_csp)); _c2s = _cs["cohorts"]["cohort2"]; _c1s = _cs["cohorts"]["cohort1"]
+    _order = [str(_cs["default_seed"])] + [str(x) for x in _cs["further_seeds"]]
+    if list(_c2s["by_seed"]) != _order:
+        raise SystemExit("results_cohort2_seed.json: the second cohort lacks a seed of the check")
+    _sv = [_c2s["by_seed"][k]["difference"] for k in _order]
+    cmd("cgSeedCell", _cs["cell"]); cmd("cgSeedN", len(_cs["further_seeds"]), "int")
+    cmd("cgSeedList", ", ".join(str(x) for x in _cs["further_seeds"]))
+    cmd("cgSeedDefault", _sv[0], "{:+.4f}")
+    cmd("cgSeedValues", ", ".join(f"{v:+.4f}" for v in _sv))
+    cmd("cgSeedMin", min(_sv), "{:+.4f}"); cmd("cgSeedMax", max(_sv), "{:+.4f}")
+    cmd("cgSeedSpreadAbs", max(_sv) - min(_sv))
+    cmd("cgSeedSignPhrase", ("all %s carry the same sign" % _word(len(_sv))) if _c2s["one_sign"] else "the sign is not the same at every seed")
+    # the spread beside the cell-to-cell standard deviation of the contrast on the second cohort
+    cmd("cgSeedSpreadRatio", (max(_sv) - min(_sv)) / _gc["sd"], "{:.1f}")
+    # one sentence for the Results
+    cmd("cgSeedMainSentence",
+        "Outside the plan, one cell was retrained at two further training seeds, and its difference took the values \\cgSeedValues{} across the three seeds"
+        + (", all of one sign" if _c2s["one_sign"] else ", so the sign of a single cell depends on the seed") + " (Supplementary Section~\\ref{supp:cohort2}).")
+    # the first cohort's values in that file are the ones the manuscript prints as \famSeedValues
+    _fsr = R["robustness"]["fam"]["seed_replicates"]
+    _want = [_fsr["default_seed"]["delta"]] + [_fsr["by_seed"][k]["delta"] for k in _order[1:]]
+    if any(abs(a - _c1s["by_seed"][k]["difference"]) > 1e-9 for a, k in zip(_want, _order)):
+        raise SystemExit("results_cohort2_seed.json: the first cohort's seed replicates differ from data/results_p1.json")
+
 _byname = {}
 for _line in L:                      # the last definition of a name wins, so an explicit word macro overrides an automatic one
     _byname[_line.split("}")[0]] = _line

@@ -1,0 +1,305 @@
+{
+ "note": "the plan of the replication on the two further backbones and the course of its collection; written by code/replication_backbones_record.py from the archives, the serving records and results/replication/backbones_course.json; times of calls are those of the collector's clock",
+ "plan": "REPLICATION_BACKBONES_PLAN_2026-11-13.md",
+ "plan_commit": "b041137acece3841153118609b46a03895cd40e2",
+ "plan_pushed_utc": "2026-11-13T14:59:22Z",
+ "plan_pushed_source": "the public activity record of the repository",
+ "first_call_utc": "2026-11-14T01:18:09Z",
+ "first_call_backbone": "b3",
+ "plan_public_before_first_call": true,
+ "hours_between_push_and_first_call": 10.31,
+ "collection_order": [
+  "b3",
+  "b2"
+ ],
+ "collection_order_as_planned": true,
+ "backbones": {
+  "b3": {
+   "served_name": "mistral-small-3.2-24b-instruct",
+   "wordings": {
+    "w1": {
+     "calls": 126000,
+     "blocks_complete": 10,
+     "patients": 100,
+     "first_call_utc": "2026-11-14T01:18:09Z",
+     "last_reply_utc": "2026-11-14T02:19:00Z",
+     "calls_sent_again": 0,
+     "transport_errors_left": 0,
+     "unparsed": 0,
+     "answers_without_a_probability": 0,
+     "answers_cut_at_the_token_limit": 0,
+     "calls_with_more_than_one_attempt": 0,
+     "concurrent_requests": [
+      24
+     ],
+     "temperature": 0.0,
+     "max_tokens": 160,
+     "plain_chat": true,
+     "design_master_sha256": "2f39d5fc87a1cce2fe210e457f35ad8120d464c04968c42d9be48bda32bc6869",
+     "collector_sha256": {
+      "replication_probe": "1790bd6c577463fe7158539f37bff1462191a5bba29860e8c684cadf6b63378f",
+      "llm_probe": "42c96654256a741077e42d155c2e75449879cce4095921ffe4caa88c182cb86a"
+     }
+    },
+    "w2": {
+     "calls": 30000,
+     "blocks_complete": 4,
+     "patients": 40,
+     "first_call_utc": "2026-11-14T01:39:00Z",
+     "last_reply_utc": "2026-11-14T01:51:52Z",
+     "calls_sent_again": 0,
+     "transport_errors_left": 0,
+     "unparsed": 0,
+     "answers_without_a_probability": 0,
+     "answers_cut_at_the_token_limit": 0,
+     "calls_with_more_than_one_attempt": 0,
+     "concurrent_requests": [
+      24
+     ],
+     "temperature": 0.0,
+     "max_tokens": 160,
+     "plain_chat": true,
+     "design_master_sha256": "2f39d5fc87a1cce2fe210e457f35ad8120d464c04968c42d9be48bda32bc6869",
+     "collector_sha256": {
+      "replication_probe": "1790bd6c577463fe7158539f37bff1462191a5bba29860e8c684cadf6b63378f",
+      "llm_probe": "42c96654256a741077e42d155c2e75449879cce4095921ffe4caa88c182cb86a"
+     }
+    }
+   },
+   "block_order": [
+    "w1 block 1",
+    "w1 block 2",
+    "w1 block 3",
+    "w1 block 4",
+    "w2 block 1",
+    "w2 block 2",
+    "w2 block 3",
+    "w2 block 4",
+    "w1 block 5",
+    "w1 block 6",
+    "w1 block 7",
+    "w1 block 8",
+    "w1 block 9",
+    "w1 block 10"
+   ],
+   "block_order_as_planned": true,
+   "first_call_utc": "2026-11-14T01:18:09Z",
+   "last_reply_utc": "2026-11-14T02:19:00Z",
+   "calls": 156000,
+   "hours": 1.0143,
+   "calls_per_second": 42.72,
+   "rate_note": "calls answered, divided by the time from the first call sent to the last reply received, the gaps between the three collection steps included",
+   "weights_identical_to_record": true,
+   "weight_files": 17,
+   "weight_bytes": 96065055110,
+   "artifact_digest": "3d7cf83bb69dfb553766f52aa7d39de437d6782fece29fca1e2f51e762519fd2",
+   "revision": "95a6d26c4bfb886c58daf9d3f7332c857cb27b43",
+   "other_files": {
+    ".gitattributes": "not on record",
+    "README.md": "identical"
+   },
+   "serving_record_written_utc": "2026-11-14T01:17:48Z",
+   "serving_record_before_first_call": true,
+   "study_commit": "b041137acece3841153118609b46a03895cd40e2",
+   "libraries": {
+    "vllm": "0.19.0",
+    "torch": "2.10.0",
+    "transformers": "5.5.4",
+    "tokenizers": "0.22.2",
+    "mistral_common": "1.11.0",
+    "huggingface_hub": "1.11.0",
+    "safetensors": "0.7.0",
+    "numpy": "2.2.6",
+    "torch_cuda": "12.8",
+    "torch_cudnn": 91002
+   },
+   "python": "3.12.3",
+   "accelerator": "1, NVIDIA H100 80GB HBM3, 81559 MiB, 580.178.04",
+   "host_label": "second host",
+   "check_calls_before_the_collection": {
+    "calls": 600,
+    "parsed": 600,
+    "concurrent_requests": 24,
+    "seconds": 18.1,
+    "calls_per_second": 33.24,
+    "ended_local": "2026-11-14T08:18:08+07:00"
+   }
+  },
+  "b2": {
+   "served_name": "gemma-4-31b-it",
+   "wordings": {
+    "w1": {
+     "calls": 126000,
+     "blocks_complete": 10,
+     "patients": 100,
+     "first_call_utc": "2026-11-14T02:21:45Z",
+     "last_reply_utc": "2026-11-14T05:12:22Z",
+     "calls_sent_again": 0,
+     "transport_errors_left": 0,
+     "unparsed": 0,
+     "answers_without_a_probability": 0,
+     "answers_cut_at_the_token_limit": 0,
+     "calls_with_more_than_one_attempt": 0,
+     "concurrent_requests": [
+      24
+     ],
+     "temperature": 0.0,
+     "max_tokens": 160,
+     "plain_chat": false,
+     "design_master_sha256": "2f39d5fc87a1cce2fe210e457f35ad8120d464c04968c42d9be48bda32bc6869",
+     "collector_sha256": {
+      "replication_probe": "1790bd6c577463fe7158539f37bff1462191a5bba29860e8c684cadf6b63378f",
+      "llm_probe": "42c96654256a741077e42d155c2e75449879cce4095921ffe4caa88c182cb86a"
+     }
+    },
+    "w2": {
+     "calls": 30000,
+     "blocks_complete": 4,
+     "patients": 40,
+     "first_call_utc": "2026-11-14T03:20:16Z",
+     "last_reply_utc": "2026-11-14T03:53:50Z",
+     "calls_sent_again": 0,
+     "transport_errors_left": 0,
+     "unparsed": 0,
+     "answers_without_a_probability": 0,
+     "answers_cut_at_the_token_limit": 0,
+     "calls_with_more_than_one_attempt": 0,
+     "concurrent_requests": [
+      24
+     ],
+     "temperature": 0.0,
+     "max_tokens": 160,
+     "plain_chat": false,
+     "design_master_sha256": "2f39d5fc87a1cce2fe210e457f35ad8120d464c04968c42d9be48bda32bc6869",
+     "collector_sha256": {
+      "replication_probe": "1790bd6c577463fe7158539f37bff1462191a5bba29860e8c684cadf6b63378f",
+      "llm_probe": "42c96654256a741077e42d155c2e75449879cce4095921ffe4caa88c182cb86a"
+     }
+    }
+   },
+   "block_order": [
+    "w1 block 1",
+    "w1 block 2",
+    "w1 block 3",
+    "w1 block 4",
+    "w2 block 1",
+    "w2 block 2",
+    "w2 block 3",
+    "w2 block 4",
+    "w1 block 5",
+    "w1 block 6",
+    "w1 block 7",
+    "w1 block 8",
+    "w1 block 9",
+    "w1 block 10"
+   ],
+   "block_order_as_planned": true,
+   "first_call_utc": "2026-11-14T02:21:45Z",
+   "last_reply_utc": "2026-11-14T05:12:22Z",
+   "calls": 156000,
+   "hours": 2.8436,
+   "calls_per_second": 15.239,
+   "rate_note": "calls answered, divided by the time from the first call sent to the last reply received, the gaps between the three collection steps included",
+   "weights_identical_to_record": true,
+   "weight_files": 8,
+   "weight_bytes": 62578636733,
+   "artifact_digest": "91824b237f5988e840b56c7f64b07e3fcb0a9da97bf2bcb5ce7c08cf5e800485",
+   "revision": "439edf5652646a0d1bd8b46bfdc1d3645761a445",
+   "other_files": {
+    ".gitattributes": "not on record",
+    "README.md": "not on record",
+    "chat_template.jinja": "identical"
+   },
+   "serving_record_written_utc": "2026-11-14T02:21:04Z",
+   "serving_record_before_first_call": true,
+   "study_commit": "b041137acece3841153118609b46a03895cd40e2",
+   "libraries": {
+    "vllm": "0.19.0",
+    "torch": "2.10.0",
+    "transformers": "5.5.4",
+    "tokenizers": "0.22.2",
+    "mistral_common": "1.11.0",
+    "huggingface_hub": "1.11.0",
+    "safetensors": "0.7.0",
+    "numpy": "2.2.6",
+    "torch_cuda": "12.8",
+    "torch_cudnn": 91002
+   },
+   "python": "3.12.3",
+   "accelerator": "1, NVIDIA H100 80GB HBM3, 81559 MiB, 580.178.04",
+   "host_label": "second host",
+   "check_calls_before_the_collection": {
+    "calls": 600,
+    "parsed": 600,
+    "concurrent_requests": 24,
+    "seconds": 37.6,
+    "calls_per_second": 15.97,
+    "ended_local": "2026-11-14T09:21:44+07:00"
+   }
+  }
+ },
+ "tokenization_check": {
+  "note": "not part of the plan: the token identifiers that each backbone's own tokenizer and chat template produce for the first prompts of the sample (wording 1, block 1, in the order of the collector's seeded permutation), computed on the first host, where the earlier collections of the two backbones ran, and on the second host; code/provenance/tokenization_check.py; no model is loaded and no call is made. The check was first made on 13 November 2026, before the plan was pushed, and its outputs were not stored then. It was repeated on 14 November 2026, after the collection, with the script as it is published here, and the lines below are of that run",
+  "prompts": 500,
+  "wording": 1,
+  "block": 1,
+  "prompts_file_sha256": "f3a759596a8b95b21a171fe799b2f9ab40a64e712c284de0030e97f2ac57e8c2",
+  "backbones": {
+   "mistral-small-3.2-24b-instruct": {
+    "first host": {
+     "prompts": 500,
+     "tokens": 121683,
+     "ids_sha256": "7f17308b8d22e1565f112c2e0d25551006a204ad65626186a5c5fbbe317a45b6",
+     "libraries": {
+      "mistral_common": "1.11.0"
+     }
+    },
+    "second host": {
+     "prompts": 500,
+     "tokens": 121683,
+     "ids_sha256": "7f17308b8d22e1565f112c2e0d25551006a204ad65626186a5c5fbbe317a45b6",
+     "libraries": {
+      "mistral_common": "1.11.0"
+     }
+    }
+   },
+   "gemma-4-31b-it": {
+    "first host": {
+     "prompts": 500,
+     "tokens": 132464,
+     "ids_sha256": "5849c9a0d71c08b74a5def7c699bb3d9c9ae7bc5eb88c94a4bd5ecfdcec68f50",
+     "rendered_first_sha256": "cb89f0a060e794099ecb011028383a9be65cf20e46031a88955aa08bc2638fbf",
+     "libraries": {
+      "transformers": "5.5.4",
+      "tokenizers": "0.22.2"
+     }
+    },
+    "second host": {
+     "prompts": 500,
+     "tokens": 132464,
+     "ids_sha256": "5849c9a0d71c08b74a5def7c699bb3d9c9ae7bc5eb88c94a4bd5ecfdcec68f50",
+     "rendered_first_sha256": "cb89f0a060e794099ecb011028383a9be65cf20e46031a88955aa08bc2638fbf",
+     "libraries": {
+      "transformers": "5.5.4",
+      "tokenizers": "0.22.2"
+     }
+    }
+   }
+  },
+  "python": {
+   "first host": "3.10.12",
+   "second host": "3.12.3"
+  },
+  "chat_template_sha256": {
+   "gemma-4-31b-it": "85a08664d16d8f3be4416c92427b3ac10df1024ac566cc0b4bc3bab409393f98"
+  }
+ },
+ "departures": [
+  {
+   "departure": "First start of the launcher",
+   "what_happened": "The launcher was first started at 07:40:27 on 14 November 2026 (local time, UTC+7), when the accelerator was free. Neither server came up: the second host does not allow files in its temporary directory to be executed, and the serving library compiles a module there when it starts and could not load it. The launcher ended at 07:46:22. It had sent no call: no check call and no call of the sample. It was started again, unchanged, at 08:16:54 with the environment variable TMPDIR of the calling shell set to a directory on the home file system. The prompts, the parser, the sample, the serving flags and the launcher are those of the commit of the plan.",
+   "release_note": "One departure from the plan is recorded: the first start of the launcher ended before any call, because the second host does not allow files in its temporary directory to be executed, and the launcher was started again unchanged with that directory moved."
+  }
+ ],
+ "departures_sentence": "One departure from the plan is recorded, and it does not depend on an answer. The first start of the launcher ended before any call had been sent, because the second host does not allow files in its temporary directory to be executed and the serving library compiles a module there. The launcher was started again unchanged, with the temporary directory moved to another file system."
+}

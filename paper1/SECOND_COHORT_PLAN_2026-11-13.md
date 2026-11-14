@@ -62,3 +62,61 @@ The graph attention scorer has not been trained on the second cohort. This secti
 | Primary quantity | the paired difference over the 15 cells between the own-expression arm and the cohort-mean arm, AUROC on held-out reactions of held-out patients, as on the first cohort, where it is -0.0062 (standard deviation over cells 0.0245) |
 | Reading | descriptive, as for the first cohort: the mean, the standard deviation over cells, the range and the number of negative cells. A mean within 0.02 AUROC of zero is read as agreement with the first cohort |
 | Reporting | the result is reported whatever it is, with any deviation listed under a dated heading below |
+
+### Clarification (13 November 2026)
+
+The 1,095 tumors of the second cohort are the breast cohort of the preprint that accompanies this repository (https://doi.org/10.64898/2026.09.02.748315) and of its data record (`brca/` in the cohort archive), where an earlier run of the scorer was evaluated against labels thresholded from that cohort's own input. "Before any analysis script was run on the second cohort" at the head of this plan and "has not been trained on the second cohort" in Section 6 refer to the analyses of this plan: rows scored against the shared label vector, on features rebuilt by `code/build_second_cohort.py`. None of them had been computed on this cohort before the plan was committed.
+
+### Record of the graph-scorer runs of Section 6 (13 and 14 November 2026)
+
+The 30 runs of Section 6 started at 15:44 on 13 November 2026 and ended at 07:40 on 14 November, local time (UTC+7). Section 6 had been public since 03:05 on 13 November local time (20:05 UTC on 12 November; commit `36cb74db`, tag `benchmark-validity-2026-11c`), 12 hours and 40 minutes before the first run started. Four departures from it are recorded. None depends on a result.
+
+| Departure | What happened |
+|---|---|
+| Workstation | The runs were made on a second workstation, because both accelerators of the first were in use by another service. The accelerator model (NVIDIA H100, 80 GB) and the versions of PyTorch (2.10.0, CUDA 12.8, cuDNN 9.10.2) and PyTorch Geometric (2.7.0) are the same; the Python interpreter is 3.12.3 in place of 3.10.12. Up to four runs shared one accelerator. |
+| Code | The driver is the released `code/double_holdout_ctrl.py`, byte-identical to the file that ran the first cohort. The released `code/trainer.py` differs from the file that ran the first cohort in comments, docstrings and log messages only. |
+| Priority | The jobs ran at a lowered scheduling priority, which enters no computation. |
+| Check outside the plan | One cell of the first cohort (patient fold 0, reaction fold 0, own-expression arm, the released training seed) was rerun twice on the second workstation as a check of the environment. It scored 0.7745 and 0.7724, against 0.7903 in the released run, whose two training-seed replicates of that cell scored 0.7776 and 0.7854. These reruns enter no analysis. The contrast of Section 6 is taken between two arms trained on the same workstation. |
+
+The record of the runs is `data/cohort2_graph_run_record.json`; the cells are in `results/cohort2/fam/`, and `code/second_cohort_graph.py` writes `data/results_cohort2_graph.json`.
+
+### Outcome of Section 6
+
+| Quantity | Second cohort | First cohort |
+|---|---|---|
+| Own-expression arm, AUROC, mean over cells | 0.7924 | 0.7952 |
+| Cohort-mean arm, AUROC, mean over cells | 0.8062 | 0.8014 |
+| Primary quantity: own minus cohort mean, mean over the 15 cells | -0.0138 | -0.0062 |
+| Standard deviation over cells | 0.0153 | 0.0245 |
+| Range over cells | -0.0477 to +0.0075 | -0.0515 to +0.0258 |
+| Negative cells | 13 of 15 | 8 of 15 |
+
+Reading fixed in Section 6: the mean of the second cohort lies within 0.02 AUROC of zero, which is read as agreement with the first cohort. Two things were not part of the reading and are reported as descriptions. The difference is negative in 13 of the 15 cells. An exact sign-flip test gives p = 0.0019 with the cells flipped singly (rounded up, as in the manuscript), and 0.0625 and 0.25 with whole patient folds and whole reaction folds flipped, the smallest values that five and three folds allow; the cells share patients, reactions and one label vector. The two fold-level values were added on 14 November, after the outcome had been read, so that the second cohort is described as the first is. Under the same stopping rule the cohort-mean arm trained for a median of 28 epochs (16 to 67) and the own-expression arm for a median of 16 (16 to 30); whether the longer training accounts for the difference between the arms was not tested.
+
+### A check outside the plan: the training seed at one cell (14 November 2026)
+
+Section 6 fixes one training seed. After its outcome was known, cell p0r0 of the second cohort was retrained at the two further training seeds of the first cohort's check (2025, 2026), own-expression arm and cohort-mean arm, with the folds and everything else as in Section 6 (`code/gpu_queue_cohort2_seed.sh`; four runs on the second workstation, 13:12 to 14:50 on 14 November, local time). The check is no part of the plan and enters none of its quantities: `code/second_cohort_graph.py` reads the default-seed files only. `code/second_cohort_seed.py`, written before any of the four runs had finished, reads the check and writes `data/results_cohort2_seed.json`.
+
+| Training seed | Own-expression arm | Cohort-mean arm | Own minus cohort mean, second cohort | The same cell on the first cohort |
+|---|---|---|---|---|
+| 2024 (the seed of Section 6) | 0.7744 | 0.7994 | -0.0250 | +0.0258 |
+| 2025 | 0.7902 | 0.7844 | +0.0058 | +0.0225 |
+| 2026 | 0.7704 | 0.7884 | -0.0180 | +0.0138 |
+
+At this cell the difference spans 0.0308 AUROC over the three seeds and changes sign; on the first cohort it spans 0.0120 and keeps one sign. One cell shows how far a single cell moves with the seed. It does not show how far the mean over the 15 cells would move, and the reading of Section 6 rests on that mean.
+
+## 7. Planned extension: a second training seed on the full grid (fixed on 14 November 2026, not run)
+
+Section 6 was run at one training seed, and the check above shows that the difference at a single cell can change sign with the seed. This section fixes a repetition of the whole grid at a second training seed before it is run. It was written after the outcome of Section 6 and the three values of the check were known. Of the 30 runs it names, the two of cell p0r0 already exist from that check (own minus cohort mean +0.0058 at that cell); the other 28 had not been started when this section was committed.
+
+| Item | Rule |
+|---|---|
+| Driver | `code/double_holdout_ctrl.py`, unchanged, launched by `code/gpu_queue_cohort2_seed2025.sh`: everything as in Section 6, with the training seed 2025 (the seed of parameter initialization and dropout; the patient folds, the reaction folds and the inner-validation reactions stay as they are) |
+| Arms | own expression and cohort-mean expression, every cell of the 5 x 3 grid: 30 runs, of which the two of cell p0r0 are reused from the check and 28 are new |
+| Primary quantity | the paired difference over the 15 cells between the own-expression arm and the cohort-mean arm at the second seed, AUROC on held-out reactions of held-out patients |
+| Reading | as in Section 6: the mean, the standard deviation over cells, the range and the number of negative cells; a mean within 0.02 AUROC of zero is read as agreement with the first cohort. No test is fixed; sign-flip p values with single cells, whole patient folds and whole reaction folds flipped are given as descriptions |
+| Beside it | the same summary for the per-cell mean of the two seeds' differences; the difference between the two seeds' grid means; the mean absolute change of a cell's difference between the seeds; the number of cells whose difference keeps its sign; and the Pearson and Spearman correlations of the two seeds' differences across the 15 cells. Training length, which Section 6 left open: at each seed, the epochs of the cohort-mean arm minus those of the own-expression arm cell by cell, the correlation of the difference in AUROC with that gap across the cells, and the mean difference over the cells whose two arms stopped within two epochs of each other; for the seed of Section 6 these figures are computed after its outcome was known. All descriptive |
+| Analysis | `code/second_cohort_graph_seed.py`, committed with this section; it writes `data/results_cohort2_graph_seed.json` |
+| Reporting | the result is reported whatever it is, beside that of Section 6, with any deviation listed under a dated heading below |
+
+The seed 2025 is the first of the two further seeds of the first cohort's check. A third seed is not part of this section.

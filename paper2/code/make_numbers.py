@@ -1171,7 +1171,10 @@ for _rp in ('results/replication_frozen.json', 'replication_frozen.json'):
         _zero_long = 'excludes zero' + (' narrowly' if _near < 0.1 * _half else '')
         if _cross_incl: _zero_long += ', while the interval that resamples patients and reactions together includes it'
     cmd('rpZeroVerdictLong', _zero_long)
-    _where = 'On patients and reactions that no earlier collection had used, '
+    # once the same sample has also been put to the two further backbones, the closing names the backbone it speaks of
+    _ext = all(os.path.exists(os.path.join('results', f'replication_frozen_{_t}.json')) for _t in ('b2', 'b3'))
+    _where = ('On the main backbone, with patients and reactions that no earlier collection had used, ' if _ext
+              else 'On patients and reactions that no earlier collection had used, ')
     if D1['equivalent_002'] and not _excl:
         cmd('rpClosing', _where + 'the difference between the own and donor arms is again not resolved from zero, and its interval lies inside the narrower margin.')
     elif D1['equivalent_002']:
@@ -1306,6 +1309,174 @@ for _rp in ('results/replication_frozen.json', 'replication_frozen.json'):
             cmd('rpErrCalls', _cr['server_error_calls'], 'int')
             break
     break
+
+# the replication on the two further backbones (REPLICATION_BACKBONES_PLAN_2026-11-13.md):
+# replication_backbones.py writes results/replication_frozen_<tag>.json (replication_stats.py, unchanged, on
+# the backbone's archive) and results/replication_reference_<tag>.json (the printed-number reference, which
+# that plan names in advance). The second backbone carries the macro prefix rpS and rxS, the third rpT and rxT.
+_BB = {}
+for _tag, _pre, _ord in (('b2', 'S', 'second'), ('b3', 'T', 'third')):
+    _fp = os.path.join('results', f'replication_frozen_{_tag}.json'); _rp2 = os.path.join('results', f'replication_reference_{_tag}.json')
+    if not (os.path.exists(_fp) and os.path.exists(_rp2)): continue
+    _G = json.load(open(_fp)); _W = _G['wording1']; _D = _W['donor']['d1']; _Rf = json.load(open(_rp2))['replication']
+    _BB[_tag] = (_G, _Rf); _p = 'rp' + _pre; _x = 'rx' + _pre
+    _excl = (_D['diff_ci90'][0] > 0 or _D['diff_ci90'][1] < 0)
+    cmd(_p + 'Pat', _W['n_patients'], 'int'); cmd(_p + 'Blocks', _W['blocks_completed'], 'int')
+    _calls = _W['n_calls'] + (_G['wording2']['n_calls'] if 'wording2' in _G else 0)
+    _unp = _W['unparsed'] + (_G['wording2']['unparsed'] if 'wording2' in _G else 0)
+    _err = _W['transport_errors_left'] + (_G['wording2']['transport_errors_left'] if 'wording2' in _G else 0)
+    _res = _W['resent_calls'] + (_G['wording2']['resent_calls'] if 'wording2' in _G else 0)
+    cmd(_p + 'Calls', _calls, 'int'); cmd(_p + 'Unparsed', _unp, 'int'); cmd(_p + 'ErrLeft', _err, 'int'); cmd(_p + 'Resent', _res, 'int')
+    cmd(_p + 'UnparsedText', 'none' if _unp == 0 else f'{_unp:,}'.replace(',', '{,}'))
+    cmd(_p + 'Own', _D['own_auroc']); cmd(_p + 'Donor', _D['donor_auroc'])
+    cmd(_p + 'Raw', _W['raw_expression_auroc']); cmd(_p + 'Ind', _W['indicator_floor'])
+    cmd(_p + 'Diff', _D['diff_mean'], '{:+.4f}'); cmd(_p + 'DiffSD', _D['diff_sd'])
+    cmd(_p + 'DiffLo', _D['diff_ci90'][0], '{:+.4f}'); cmd(_p + 'DiffHi', _D['diff_ci90'][1], '{:+.4f}')
+    cmd(_p + 'PairedP', _D['paired_p'], 'p')
+    cmd(_p + 'NarrowVerdict', 'lies inside' if _D['equivalent_002'] else 'does not lie inside')
+    cmd(_p + 'WideVerdict', 'lies inside' if _D['equivalent_005'] else 'does not lie inside')
+    cmd(_p + 'ZeroVerdict', 'excludes zero' if _excl else 'includes zero')
+    # the primary interval read against the two margins and against zero, as the end of "That interval lies ..."
+    if _D['equivalent_002']: _m = 'inside the narrower margin and '
+    elif _D['equivalent_005']: _m = 'outside the narrower margin, inside the wider one, and '
+    else: _m = 'inside neither margin and '
+    cmd(_p + 'Reading', _m + ('excludes zero' if _excl else 'includes zero'))
+    cmd(_p + 'Identical', _D['identical'], 'pct'); cmd(_p + 'SwapMove', _D['mean_abs_diff'])
+    for _s, _nm in (('d2', 'Two'), ('d3', 'Three')):
+        if _s in _W['donor']:
+            _d2 = _W['donor'][_s]
+            cmd(_p + 'Diff' + _nm, _d2['diff_mean'], '{:+.4f}')
+            cmd(_p + 'Diff' + _nm + 'Lo', _d2['diff_ci90'][0], '{:+.4f}'); cmd(_p + 'Diff' + _nm + 'Hi', _d2['diff_ci90'][1], '{:+.4f}')
+    if 'pooled_donor' in _W:
+        _pd2 = _W['pooled_donor']
+        cmd(_p + 'Pooled', _pd2['mean'], '{:+.4f}'); cmd(_p + 'PooledLo', _pd2['ci90'][0], '{:+.4f}'); cmd(_p + 'PooledHi', _pd2['ci90'][1], '{:+.4f}')
+    _cb2 = _W['crossed_bootstrap_d1']
+    cmd(_p + 'CrossLo', min(_cb2['ci90_lower_range']), '{:+.4f}'); cmd(_p + 'CrossHi', max(_cb2['ci90_upper_range']), '{:+.4f}')
+    if 'blind_subset' in _W and _W['blind_subset'].get('determinism'):
+        _b2 = _W['blind_subset']
+        cmd(_p + 'Blind', _b2['blind_auroc']); cmd(_p + 'Floor', _b2['determinism']['mean_abs_diff_expr'])
+        cmd(_p + 'FloorIdentical', _b2['determinism']['identical_expr'], 'pct')
+    if 'wording2' in _G:
+        _E2 = _G['wording2']['donor']['d1']
+        cmd(_p + 'TwoPat', _G['wording2']['n_patients'], 'int'); cmd(_p + 'TwoDiff', _E2['diff_mean'], '{:+.4f}')
+        cmd(_p + 'TwoLo', _E2['diff_ci90'][0], '{:+.4f}'); cmd(_p + 'TwoHi', _E2['diff_ci90'][1], '{:+.4f}')
+        if 'paraphrase' in _G:
+            cmd(_p + 'ParaMove', _G['paraphrase']['own_between_wordings']['mean_abs_diff'])
+            cmd(_p + 'ParaOverSwap', _G['paraphrase']['paraphrase_over_swap'], '{:.2f}')
+    # the printed-number reference: the model's own-minus-donor difference minus that of the printed percentile
+    for _s, _suf in (('d1', ''), ('d2', 'Two'), ('d3', 'Three')):
+        if _s not in _Rf['model_minus_printed_percentile']: continue
+        _e2 = _Rf['model_minus_printed_percentile'][_s]
+        cmd(_x + 'Excess' + _suf, _e2['mean'], '{:+.4f}'); cmd(_x + 'ExcessLo' + _suf, _e2['ci90'][0], '{:+.4f}'); cmd(_x + 'ExcessHi' + _suf, _e2['ci90'][1], '{:+.4f}')
+        cmd(_x + 'AssocPct' + _suf, _Rf['association'][_s]['model_with_printed_percentile']['pearson'], '{:.3f}')
+    _e1b = _Rf['model_minus_printed_percentile']['d1']
+    # the reading the plan fixed, on donor schedule d1
+    cmd(_x + 'Reading', 'not distinguishable from' if not _e1b['excludes_zero'] else ('larger than' if _e1b['mean'] > 0 else 'smaller than'))
+    cmd(_x + 'PctDiff', _Rf['printed_percentile']['d1']['diff']['mean'], '{:+.4f}')
+# the three backbones side by side (descriptive; the plan pools nothing)
+if len(_BB) == 2 and os.path.exists(os.path.join('results', 'replication_frozen.json')):
+    _main = json.load(open(os.path.join('results', 'replication_frozen.json')))['wording1']['donor']['d1']
+    _trio = [_main] + [_BB[t][0]['wording1']['donor']['d1'] for t in ('b2', 'b3')]
+    _means = [d['diff_mean'] for d in _trio]
+    cmd('rpBackboneMin', min(_means), '{:+.4f}'); cmd('rpBackboneMax', max(_means), '{:+.4f}')
+    _n002 = sum(1 for d in _trio if d['equivalent_002']); _n005 = sum(1 for d in _trio if d['equivalent_005'])
+    _nz = sum(1 for d in _trio if (d['diff_ci90'][0] > 0 or d['diff_ci90'][1] < 0))
+    _w3 = ['none', 'one', 'two', 'all three']
+    cmd('rpBackboneNarrowWord', _w3[_n002]); cmd('rpBackboneWideWord', _w3[_n005]); cmd('rpBackboneZeroWord', _w3[_nz])
+    _two = [_BB[t][0]['wording1']['donor']['d1'] for t in ('b2', 'b3')]
+    _w2 = ['neither', 'one', 'both']
+    cmd('rpFurtherNarrowWord', _w2[sum(1 for d in _two if d['equivalent_002'])])
+    cmd('rpFurtherZeroWord', _w2[sum(1 for d in _two if (d['diff_ci90'][0] > 0 or d['diff_ci90'][1] < 0))])
+    cmd('rpFurtherCalls', sum(_BB[t][0]['wording1']['n_calls'] + (_BB[t][0]['wording2']['n_calls'] if 'wording2' in _BB[t][0] else 0) for t in ('b2', 'b3')), 'int')
+    _rd = [(not _BB[t][1]['model_minus_printed_percentile']['d1']['excludes_zero']) for t in ('b2', 'b3')]
+    cmd('rxFurtherInclWord', _w2[sum(_rd)])
+    # one closing sentence for the two further backbones, worded by their outcomes: whether each primary interval
+    # excludes zero, and the reading of the printed-number reference that the plan fixed
+    _nm = {'b2': 'second', 'b3': 'third'}
+    _ex = {t: (_BB[t][0]['wording1']['donor']['d1']['diff_ci90'][0] > 0 or _BB[t][0]['wording1']['donor']['d1']['diff_ci90'][1] < 0) for t in ('b2', 'b3')}
+    _rg = {t: _BB[t][1]['model_minus_printed_percentile']['d1'] for t in ('b2', 'b3')}
+    _dir = lambda t: 'larger' if _rg[t]['mean'] > 0 else 'smaller'
+    if not any(_ex.values()): _a = 'neither interval excludes zero'
+    elif all(_ex.values()): _a = 'both intervals exclude zero'
+    else:
+        _t1 = [t for t in ('b2', 'b3') if _ex[t]][0]; _t0 = 'b3' if _t1 == 'b2' else 'b2'
+        _a = f'the interval of the {_nm[_t1]} backbone excludes zero and that of the {_nm[_t0]} does not'
+    _ds = {t: bool(_rg[t]['excludes_zero']) for t in ('b2', 'b3')}
+    if not any(_ds.values()): _b = 'neither difference is distinguishable from what ranking the printed percentile gives'
+    elif all(_ds.values()):
+        _b = (f"both differences are {_dir('b2')} than what ranking the printed percentile gives" if _dir('b2') == _dir('b3') else
+              f"the difference of the second backbone is {_dir('b2')} than what ranking the printed percentile gives and that of the third is {_dir('b3')}")
+    else:
+        _t1 = [t for t in ('b2', 'b3') if _ds[t]][0]; _t0 = 'b3' if _t1 == 'b2' else 'b2'
+        _b = (f'the difference of the {_nm[_t1]} backbone is {_dir(_t1)} than what ranking the printed percentile gives, while that of the '
+              f'{_nm[_t0]} is not distinguishable from it')
+    cmd('rbClosing', 'On the second and third backbones the same sample gave differences of \\rpSDiff{} and \\rpTDiff{}: ' + _a + ', and ' + _b + '.')
+    # the primary result of the two backbones in one sentence when both are read alike, in two when they are not
+    def _marg(d, plural):
+        if d['equivalent_002']: return 'inside the narrower margin'
+        if d['equivalent_005']: return 'outside the narrower margin and inside the wider one'
+        return 'inside neither margin'
+    _dd = {t: _BB[t][0]['wording1']['donor']['d1'] for t in ('b2', 'b3')}
+    if _marg(_dd['b2'], 0) == _marg(_dd['b3'], 0) and _ex['b2'] == _ex['b3']:
+        cmd('rbPrimarySentence', 'On the second backbone the own-minus-donor difference is \\rpSDiff{} (90\\% interval \\rpSDiffLo{} to \\rpSDiffHi{}) and on the '
+            'third \\rpTDiff{} (\\rpTDiffLo{} to \\rpTDiffHi{}); both intervals lie ' + _marg(_dd['b2'], 1) + ' and ' + ('exclude' if _ex['b2'] else 'include') + ' zero.')
+    else:
+        cmd('rbPrimarySentence', 'On the second backbone the own-minus-donor difference is \\rpSDiff{} (90\\% interval \\rpSDiffLo{} to \\rpSDiffHi{}), and that '
+            'interval lies \\rpSReading{}. On the third backbone the difference is \\rpTDiff{} (\\rpTDiffLo{} to \\rpTDiffHi{}), and its interval lies \\rpTReading{}.')
+    # one sentence each for the Introduction, the opening of the Discussion and the Conclusion
+    cmd('rbIntroSentence', 'Put to the second and third backbones under a second public plan, the same sample gave \\rpSDiff{} and \\rpTDiff{}; ' + _a + '.')
+    cmd('rbDiscSentence', 'On the second and third backbones, where a second plan named that comparison in advance, the same sample gave \\rpSDiff{} and '
+        '\\rpTDiff{}, and ' + _b + '.')
+    cmd('rbConcSentence', 'The other two backbones gave \\rpSDiff{} and \\rpTDiff{} on that sample, and ' + _a + '.')
+    # the abstract's parenthesis on the two intervals
+    cmd('rbAbstractClause', 'intervals including zero' if not any(_ex.values()) else ('intervals excluding zero' if all(_ex.values()) else
+        ('the former interval excluding zero' if _ex['b2'] else 'the latter interval excluding zero')))
+    # the reading of the printed-number reference for the two backbones
+    if not any(_ds.values()):
+        cmd('rbReadingSentence', "By that reading neither backbone's difference is distinguishable from that of the printed percentile.")
+    elif all(_ds.values()) and _dir('b2') == _dir('b3'):
+        cmd('rbReadingSentence', "By that reading the differences of both backbones are " + _dir('b2') + " than that of the printed percentile.")
+    else:
+        cmd('rbReadingSentence', "By that reading the second backbone's difference is \\rxSReading{} that of the printed percentile, and the third's is \\rxTReading{} it.")
+    # the answers that could not be parsed
+    _ut = {t: _BB[t][0]['wording1']['unparsed'] + (_BB[t][0]['wording2']['unparsed'] if 'wording2' in _BB[t][0] else 0) for t in ('b2', 'b3')}
+    if _ut['b2'] == 0 and _ut['b3'] == 0:
+        cmd('rbUnparsedSentence', 'Every one of the \\rpTCalls{} answers of the third backbone and of the \\rpSCalls{} answers of the second could be parsed, so no cell is missing.')
+    else:
+        cmd('rbUnparsedSentence', 'Of the \\rpTCalls{} answers of the third backbone, \\rpTUnparsedText{} could not be parsed, and of the \\rpSCalls{} answers of the second, \\rpSUnparsedText{}.')
+# the plan of the extension and the course of its collection (results/replication/backbones_record.json).
+# The sentences on the plan have two wordings: one for a plan that was public before the first call, one
+# for a plan that was fixed before the first call and published with the results.
+if _BB:
+    _brp = os.path.join('results', 'replication', 'backbones_record.json')
+    if not os.path.exists(_brp):
+        raise SystemExit('results/replication/backbones_record.json is missing (the record of the plan and of the collection on the two further backbones)')
+    _br = json.load(open(_brp))
+    if _br['plan_public_before_first_call']:
+        cmd('rbPlanCommit', '\\texttt{' + _br['plan_commit'][:12] + '}')
+        cmd('rbPushLeadHours', _br['hours_between_push_and_first_call'], '{:.1f}')
+        cmd('rbPlanSentence', 'The extension followed a second plan, committed to the public repository before the first call to either backbone on this '
+            'sample (commit \\rbPlanCommit{}, pushed \\rbPushLeadHours{} hours before that call); like the first, it was lodged with no registry.')
+        cmd('rbPlanShort', 'The plan of this extension was public before its first call.')
+        cmd('rbReferenceClause', 'which that plan names in advance')
+        cmd('rbLimitSentence', 'The plan of the extension to the second and third backbones was likewise published by the authors before its first '
+            'call and lodged with no registry.')
+    else:
+        cmd('rbPlanSentence', 'The extension followed a second plan that was fixed before the first call to either backbone on this sample and was '
+            'published with the results. It was not public before the collection, so a reader cannot verify that order, and we report the '
+            'extension as planned but not prespecified in public.')
+        cmd('rbPlanShort', 'The plan of this extension was fixed before its first call but was not public until the results were released.')
+        cmd('rbReferenceClause', 'which that plan names')
+        cmd('rbLimitSentence', 'The plan of the extension to the second and third backbones was fixed before its first call but was not public '
+            'until the results were released, so a reader cannot verify that its analyses were fixed in advance.')
+    for _tag, _pre in (('b2', 'S'), ('b3', 'T')):
+        _bb = _br['backbones'][_tag]
+        if not _bb['weights_identical_to_record']:
+            raise SystemExit(f'backbones_record.json: the weight files of {_tag} are not recorded as identical to results/model_records.json')
+        cmd('rb' + _pre + 'Rate', _bb['calls_per_second'], '{:.1f}'); cmd('rb' + _pre + 'Hours', _bb['hours'], '{:.1f}')
+        cmd('rb' + _pre + 'Files', _bb['weight_files'], 'int')
+    cmd('rbTokenPrompts', _br['tokenization_check']['prompts'], 'int')
+    cmd('rbDepartures', _br.get('departures_sentence', 'No departure from the plan is recorded.'))
 
 # the exploratory reference of the replication (replication_posthoc.py): the own-minus-donor contrast of the
 # printed numbers with no model, beside that of the language model. Not in the plan; the text says so.

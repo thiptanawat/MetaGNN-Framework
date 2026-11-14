@@ -1,0 +1,371 @@
+{
+ "note": "the graph scorer under the family-disjoint split and the matched selection rule, default training seed, own-expression arm against cohort-mean arm on the 15 cells of the 5 x 3 grid; AUROC on held-out reactions of held-out patients; Section 6 of SECOND_COHORT_PLAN_2026-11-13.md",
+ "margin": 0.02,
+ "primary": "paired difference over cells, own minus cohort mean, on the second cohort",
+ "cohorts": {
+  "cohort1": {
+   "directory": "results/fam",
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "arms": {
+    "own": {
+     "feature_mode": "real",
+     "per_cell": {
+      "p0r0": 0.7903,
+      "p0r1": 0.8015,
+      "p0r2": 0.7957,
+      "p1r0": 0.7827,
+      "p1r1": 0.8104,
+      "p1r2": 0.8084,
+      "p2r0": 0.7876,
+      "p2r1": 0.8091,
+      "p2r2": 0.7813,
+      "p3r0": 0.7806,
+      "p3r1": 0.8135,
+      "p3r2": 0.7857,
+      "p4r0": 0.7903,
+      "p4r1": 0.8116,
+      "p4r2": 0.7795
+     },
+     "mean": 0.7952133333,
+     "sd": 0.0126700359,
+     "min": 0.7795,
+     "max": 0.8135,
+     "epochs": {
+      "min": 16,
+      "max": 17,
+      "median": 16.0
+     },
+     "n_train": [
+      424,
+      425
+     ],
+     "n_test": [
+      124,
+      125
+     ],
+     "n_heldout_rxn": [
+      3500,
+      3600
+     ],
+     "data": [
+      "crc_624"
+     ],
+     "expr_transform": [
+      "none"
+     ],
+     "baseline_rawexpr_mean": 0.6349333333,
+     "baseline_indicator_mean": 0.6083
+    },
+    "cohort_mean": {
+     "feature_mode": "mean",
+     "per_cell": {
+      "p0r0": 0.7645,
+      "p0r1": 0.7956,
+      "p0r2": 0.7967,
+      "p1r0": 0.7739,
+      "p1r1": 0.8178,
+      "p1r2": 0.8048,
+      "p2r0": 0.7653,
+      "p2r1": 0.8197,
+      "p2r2": 0.8245,
+      "p3r0": 0.7747,
+      "p3r1": 0.825,
+      "p3r2": 0.8372,
+      "p4r0": 0.7711,
+      "p4r1": 0.823,
+      "p4r2": 0.8278
+     },
+     "mean": 0.80144,
+     "sd": 0.0257167205,
+     "min": 0.7645,
+     "max": 0.8372,
+     "epochs": {
+      "min": 16,
+      "max": 23,
+      "median": 16.0
+     },
+     "n_train": [
+      424,
+      425
+     ],
+     "n_test": [
+      124,
+      125
+     ],
+     "n_heldout_rxn": [
+      3500,
+      3600
+     ],
+     "data": [
+      "crc_624"
+     ],
+     "expr_transform": [
+      "none"
+     ],
+     "baseline_rawexpr_mean": 0.6349333333,
+     "baseline_indicator_mean": 0.6083
+    }
+   },
+   "contrast": {
+    "own": "own expression",
+    "cohort_mean": "cohort-mean expression",
+    "n_cells": 15,
+    "per_cell": {
+     "p0r0": 0.0258,
+     "p0r1": 0.0059,
+     "p0r2": -0.001,
+     "p1r0": 0.0088,
+     "p1r1": -0.0074,
+     "p1r2": 0.0036,
+     "p2r0": 0.0223,
+     "p2r1": -0.0106,
+     "p2r2": -0.0432,
+     "p3r0": 0.0059,
+     "p3r1": -0.0115,
+     "p3r2": -0.0515,
+     "p4r0": 0.0192,
+     "p4r1": -0.0114,
+     "p4r2": -0.0483
+    },
+    "mean": -0.0062266667,
+    "sd": 0.0244828356,
+    "min": -0.0515,
+    "max": 0.0258,
+    "n_negative": 8,
+    "n_positive": 7,
+    "signflip_p": 0.3423461914,
+    "within_margin": true,
+    "signflip_p_patient_folds": 0.3125,
+    "signflip_floor_patient_folds": 0.0625,
+    "signflip_p_reaction_folds": 0.75,
+    "signflip_floor_reaction_folds": 0.25
+   }
+  },
+  "cohort2": {
+   "directory": "results/cohort2/fam",
+   "cells": [
+    "p0r0",
+    "p0r1",
+    "p0r2",
+    "p1r0",
+    "p1r1",
+    "p1r2",
+    "p2r0",
+    "p2r1",
+    "p2r2",
+    "p3r0",
+    "p3r1",
+    "p3r2",
+    "p4r0",
+    "p4r1",
+    "p4r2"
+   ],
+   "arms": {
+    "own": {
+     "feature_mode": "real",
+     "per_cell": {
+      "p0r0": 0.7744,
+      "p0r1": 0.7794,
+      "p0r2": 0.8024,
+      "p1r0": 0.7676,
+      "p1r1": 0.8047,
+      "p1r2": 0.7856,
+      "p2r0": 0.7776,
+      "p2r1": 0.8168,
+      "p2r2": 0.7865,
+      "p3r0": 0.7763,
+      "p3r1": 0.8215,
+      "p3r2": 0.8149,
+      "p4r0": 0.7692,
+      "p4r1": 0.8057,
+      "p4r2": 0.804
+     },
+     "mean": 0.79244,
+     "sd": 0.0183550616,
+     "min": 0.7676,
+     "max": 0.8215,
+     "epochs": {
+      "min": 16,
+      "max": 30,
+      "median": 16.0
+     },
+     "n_train": [
+      744
+     ],
+     "n_test": [
+      219
+     ],
+     "n_heldout_rxn": [
+      3500,
+      3600
+     ],
+     "data": [
+      "brca"
+     ],
+     "expr_transform": [
+      "none"
+     ],
+     "baseline_rawexpr_mean": 0.63706,
+     "baseline_indicator_mean": 0.6083
+    },
+    "cohort_mean": {
+     "feature_mode": "mean",
+     "per_cell": {
+      "p0r0": 0.7994,
+      "p0r1": 0.7909,
+      "p0r2": 0.8179,
+      "p1r0": 0.7693,
+      "p1r1": 0.8114,
+      "p1r2": 0.8333,
+      "p2r0": 0.7701,
+      "p2r1": 0.82,
+      "p2r2": 0.8253,
+      "p3r0": 0.7893,
+      "p3r1": 0.8187,
+      "p3r2": 0.8152,
+      "p4r0": 0.7947,
+      "p4r1": 0.8159,
+      "p4r2": 0.8219
+     },
+     "mean": 0.80622,
+     "sd": 0.0196294676,
+     "min": 0.7693,
+     "max": 0.8333,
+     "epochs": {
+      "min": 16,
+      "max": 67,
+      "median": 28.0
+     },
+     "n_train": [
+      744
+     ],
+     "n_test": [
+      219
+     ],
+     "n_heldout_rxn": [
+      3500,
+      3600
+     ],
+     "data": [
+      "brca"
+     ],
+     "expr_transform": [
+      "none"
+     ],
+     "baseline_rawexpr_mean": 0.63706,
+     "baseline_indicator_mean": 0.6083
+    }
+   },
+   "contrast": {
+    "own": "own expression",
+    "cohort_mean": "cohort-mean expression",
+    "n_cells": 15,
+    "per_cell": {
+     "p0r0": -0.025,
+     "p0r1": -0.0115,
+     "p0r2": -0.0155,
+     "p1r0": -0.0017,
+     "p1r1": -0.0067,
+     "p1r2": -0.0477,
+     "p2r0": 0.0075,
+     "p2r1": -0.0032,
+     "p2r2": -0.0388,
+     "p3r0": -0.013,
+     "p3r1": 0.0028,
+     "p3r2": -0.0003,
+     "p4r0": -0.0255,
+     "p4r1": -0.0102,
+     "p4r2": -0.0179
+    },
+    "mean": -0.01378,
+    "sd": 0.0153432256,
+    "min": -0.0477,
+    "max": 0.0075,
+    "n_negative": 13,
+    "n_positive": 2,
+    "signflip_p": 0.0018310547,
+    "within_margin": true,
+    "signflip_p_patient_folds": 0.0625,
+    "signflip_floor_patient_folds": 0.0625,
+    "signflip_p_reaction_folds": 0.25,
+    "signflip_floor_reaction_folds": 0.25
+   }
+  }
+ },
+ "first_cohort_check": "equal to results/inference.json, comparisons.fam_real_vs_mean (mean, standard deviation, negative cells, and the three sign-flip p values)",
+ "reading": {
+  "mean": -0.01378,
+  "sd": 0.0153432256,
+  "min": -0.0477,
+  "max": 0.0075,
+  "n_negative": 13,
+  "n_cells": 15,
+  "within_margin": true,
+  "agreement": "the mean lies within 0.02 AUROC of zero, which the plan reads as agreement with the first cohort",
+  "second_minus_first": -0.0075533333
+ },
+ "run_record": {
+  "plan": "paper1/SECOND_COHORT_PLAN_2026-11-13.md, Section 6",
+  "host": "a second workstation; one NVIDIA H100 (80 GB), driver 580.178.04; up to four runs at a time on that accelerator",
+  "python": "3.12.3",
+  "first_host_python": "3.10.12",
+  "libraries": {
+   "torch": "2.10.0+cu128",
+   "cuda": "12.8",
+   "cudnn": "9.10.2 (91002)",
+   "torch_geometric": "2.7.0",
+   "numpy": "2.2.6",
+   "scipy": "1.15.3",
+   "scikit_learn": "1.7.2"
+  },
+  "repository_commit": "36cb74db9ac92da92523b9612f35001e8a01742f",
+  "code_sha256": {
+   "code/double_holdout_ctrl.py": "dece7d5fc7e2dce5551aea5eae5483b621812b3adcbd0018163c5ed74b272101",
+   "code/trainer.py": "3ada4f074503483900d7710699f9f893268535771d2a4e72cc43fdc547c646f9",
+   "code/gpu_queue_cohort2.sh": "7e46f9bbd027b28713cbd23119e4ca9dd1d9172957ebdc4c8e1df03a946c24d4",
+   "data/families/families_union.json": "3f8041ec6fab8aa9b5024be097cf78413385fd2528ed5c4a4aae8484390d343a"
+  },
+  "first_cell_started_local": "2026-11-13T15:44:51+07:00",
+  "last_cell_finished_local": "2026-11-14T07:40:08+07:00",
+  "runs": 30,
+  "check_cell": {
+   "what": "one cell of the first cohort (patient fold 0, reaction fold 0, own-expression arm, training seed 2024) rerun twice on the second workstation, outside the plan",
+   "cohort": "first",
+   "cell": "p0r0",
+   "arm": "own",
+   "train_seed": 2024,
+   "here": 0.7745,
+   "here_epochs": 16,
+   "here_repeat": 0.7724,
+   "here_repeat_epochs": 25,
+   "released": 0.7903,
+   "released_epochs": 17,
+   "released_seed_replicates": [
+    0.7776,
+    0.7854
+   ]
+  },
+  "deviations": [
+   "The runs were made on a second workstation, because both accelerators of the first were in use by another service. The accelerator model and the versions of PyTorch, CUDA, cuDNN and PyTorch Geometric are the same; the Python interpreter is 3.12.3 in place of 3.10.12.",
+   "The driver is the released code/double_holdout_ctrl.py, byte-identical to the file that ran the first cohort. The released code/trainer.py differs from the file that ran the first cohort in comments, docstrings and log messages only.",
+   "The jobs ran at a lowered scheduling priority (nice 5), which does not enter any computation.",
+   "One cell of the first cohort was rerun twice on the second workstation as a check of the environment, outside the plan; its results are in this record and in no analysis."
+  ]
+ }
+}

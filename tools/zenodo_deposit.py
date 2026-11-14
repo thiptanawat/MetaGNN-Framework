@@ -417,11 +417,16 @@ def merge_related(existing, additions):
 def code_description(tag, commit, snapshot_sha, snapshot_name, data_concept_doi):
     """The description of a version of the code record. It names the studies by what they do and the
     version by its commit, so that it reads the same whatever the tag is called. The two analyses
-    added in benchmark-validity-2026-11c are named from that release on, so that the text of an
-    earlier version, when it is set again, does not list what that version does not hold."""
+    added in benchmark-validity-2026-11c and their extensions in benchmark-validity-2026-11d are named
+    from those releases on, so that the text of an earlier version, when it is set again, does not list
+    what that version does not hold."""
     since_11c = not (tag.startswith("journal-") or tag == "benchmark-validity-2026-11b")
-    cohort2 = "the linear rows repeated on a second cohort with their plan, " if since_11c else ""
-    replication = ("a replication of the own-versus-donor contrast with its plan and the record of its "
+    since_11d = since_11c and tag != "benchmark-validity-2026-11c"
+    cohort2 = ("the linear rows and the graph scorer repeated on a second cohort with their plan, " if since_11d else
+               "the linear rows repeated on a second cohort with their plan, " if since_11c else "")
+    replication = ("a replication of the own-versus-donor contrast on the three language models with its plans "
+                   "and the records of its collections, " if since_11d else
+                   "a replication of the own-versus-donor contrast with its plan and the record of its "
                    "collection, " if since_11c else "")
     return (
         "<p>This record archives the MetaGNN-Framework repository: a graph neural network scorer of "

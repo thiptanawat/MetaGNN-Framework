@@ -1,0 +1,747 @@
+{
+ "backbone": "mistral-small-3.2-24b-instruct",
+ "archive": "results/replication_b3",
+ "plan": "REPLICATION_BACKBONES_PLAN_2026-11-13.md",
+ "route": "replication_stats.main(), unchanged, on a copy of the archive placed under the directory names it reads; \"replication/w1\" and \"replication/w2\" below stand for this archive",
+ "note": "prespecified replication of the own-versus-donor contrast on reactions and patients that no earlier collection used; see REPLICATION_PLAN_2026-11-13.md",
+ "margins": {
+  "narrow": 0.02,
+  "wide": 0.05
+ },
+ "primary": "wording 1, donor schedule d1, all completed blocks",
+ "design_master_sha256": "2f39d5fc87a1cce2fe210e457f35ad8120d464c04968c42d9be48bda32bc6869",
+ "wording1": {
+  "run": "replication/w1",
+  "wording": 1,
+  "model": "mistral-small-3.2-24b-instruct",
+  "n_patients": 100,
+  "n_reactions": 300,
+  "n_expression_bearing": 137,
+  "label_base_rate": 0.3,
+  "blocks_completed": 10,
+  "n_calls": 126000,
+  "resent_calls": 0,
+  "transport_errors_left": 0,
+  "unparsed": 0,
+  "minutes": 47.8,
+  "first_call": "2026-11-14T08:18:09+0700",
+  "last_block_finished": "2026-11-14T09:19:00+0700",
+  "patients": [
+   247,
+   618,
+   204,
+   564,
+   273,
+   83,
+   388,
+   277,
+   47,
+   22,
+   262,
+   582,
+   433,
+   30,
+   302,
+   63,
+   400,
+   156,
+   335,
+   413,
+   491,
+   534,
+   269,
+   585,
+   44,
+   405,
+   143,
+   403,
+   128,
+   202,
+   80,
+   84,
+   375,
+   387,
+   297,
+   554,
+   290,
+   27,
+   289,
+   475,
+   101,
+   385,
+   383,
+   603,
+   95,
+   34,
+   200,
+   596,
+   29,
+   620,
+   332,
+   323,
+   372,
+   340,
+   467,
+   350,
+   499,
+   110,
+   320,
+   432,
+   103,
+   524,
+   523,
+   25,
+   274,
+   105,
+   458,
+   24,
+   429,
+   512,
+   613,
+   9,
+   241,
+   409,
+   129,
+   52,
+   145,
+   482,
+   452,
+   113,
+   5,
+   162,
+   485,
+   487,
+   265,
+   374,
+   501,
+   507,
+   250,
+   438,
+   229,
+   428,
+   610,
+   210,
+   447,
+   102,
+   87,
+   99,
+   401,
+   578
+  ],
+  "design_master_sha256": "2f39d5fc87a1cce2fe210e457f35ad8120d464c04968c42d9be48bda32bc6869",
+  "code_sha256": {
+   "replication_probe": "1790bd6c577463fe7158539f37bff1462191a5bba29860e8c684cadf6b63378f",
+   "llm_probe": "42c96654256a741077e42d155c2e75449879cce4095921ffe4caa88c182cb86a"
+  },
+  "donor": {
+   "d1": {
+    "schedule": "d1",
+    "n_patients": 100,
+    "own_auroc": 0.6255584656,
+    "own_auroc_ci": [
+     0.6174126653,
+     0.6340569775
+    ],
+    "donor_auroc": 0.6213478836,
+    "donor_auroc_ci": [
+     0.6164132937,
+     0.6260173347
+    ],
+    "parsed_own": 1.0,
+    "parsed_donor": 1.0,
+    "diff_mean": 0.004210582,
+    "diff_sd": 0.0502252363,
+    "diff_ci90": [
+     -0.0041287718,
+     0.0125499358
+    ],
+    "paired_p": 0.4038593797,
+    "wilcoxon_p": 0.162726575,
+    "tost_005_p": [
+     1.02e-18,
+     4.61e-15
+    ],
+    "equivalent_005": true,
+    "tost_002_p": [
+     2.59e-06,
+     0.0011
+    ],
+    "equivalent_002": true,
+    "n_pairs": 13700,
+    "identical": 0.0659124088,
+    "mean_abs_diff": 0.3337587591,
+    "arm_correlation": 0.0224341457,
+    "residual_correlation": -0.0162054799,
+    "residual_correlation_ci": [
+     -0.0322980338,
+     -0.0009898679
+    ],
+    "between_patient_sd_own": 0.2913489663,
+    "between_patient_sd_donor": 0.2907717708
+   },
+   "d2": {
+    "schedule": "d2",
+    "n_patients": 100,
+    "own_auroc": 0.6255584656,
+    "own_auroc_ci": [
+     0.6174126653,
+     0.6340569775
+    ],
+    "donor_auroc": 0.6193277778,
+    "donor_auroc_ci": [
+     0.6141075463,
+     0.6244143651
+    ],
+    "parsed_own": 1.0,
+    "parsed_donor": 1.0,
+    "diff_mean": 0.0062306878,
+    "diff_sd": 0.0462259673,
+    "diff_ci90": [
+     -0.0014446309,
+     0.0139060066
+    ],
+    "paired_p": 0.1807744579,
+    "wilcoxon_p": 0.1711702341,
+    "tost_005_p": [
+     1.14e-21,
+     7.9e-16
+    ],
+    "equivalent_005": true,
+    "tost_002_p": [
+     6.93e-08,
+     0.00182
+    ],
+    "equivalent_002": true,
+    "n_pairs": 13700,
+    "identical": 0.0732846715,
+    "mean_abs_diff": 0.3312885401,
+    "arm_correlation": 0.0301256742,
+    "residual_correlation": -0.0041516625,
+    "residual_correlation_ci": [
+     -0.0218691907,
+     0.0144780875
+    ],
+    "between_patient_sd_own": 0.2913489663,
+    "between_patient_sd_donor": 0.2905545934
+   },
+   "d3": {
+    "schedule": "d3",
+    "n_patients": 100,
+    "own_auroc": 0.6255584656,
+    "own_auroc_ci": [
+     0.6174126653,
+     0.6340569775
+    ],
+    "donor_auroc": 0.6179335979,
+    "donor_auroc_ci": [
+     0.6128339749,
+     0.6232030291
+    ],
+    "parsed_own": 1.0,
+    "parsed_donor": 1.0,
+    "diff_mean": 0.0076248677,
+    "diff_sd": 0.0496578591,
+    "diff_ci90": [
+     -0.0006202793,
+     0.0158700147
+    ],
+    "paired_p": 0.1278556737,
+    "wilcoxon_p": 0.0806947671,
+    "tost_005_p": [
+     1.81e-20,
+     8.52e-14
+    ],
+    "equivalent_005": true,
+    "tost_002_p": [
+     1.13e-07,
+     0.00718
+    ],
+    "equivalent_002": true,
+    "n_pairs": 13700,
+    "identical": 0.0670072993,
+    "mean_abs_diff": 0.331339781,
+    "arm_correlation": 0.0309485268,
+    "residual_correlation": -0.0021051531,
+    "residual_correlation_ci": [
+     -0.0169207726,
+     0.0128500989
+    ],
+    "between_patient_sd_own": 0.2913489663,
+    "between_patient_sd_donor": 0.2918674351
+   }
+  },
+  "raw_expression_auroc": 0.6467592593,
+  "indicator_floor": 0.6261904762,
+  "raw_percentile_auroc": 0.628707672,
+  "schedule_spread": {
+   "schedules": [
+    "d1",
+    "d2",
+    "d3"
+   ],
+   "diff_means": [
+    0.004210582,
+    0.0062306878,
+    0.0076248677
+   ],
+   "min": 0.004210582,
+   "max": 0.0076248677
+  },
+  "pooled_donor": {
+   "n": 100,
+   "mean": 0.0060220459,
+   "sd": 0.0441560089,
+   "ci90": [
+    -0.0013095788,
+    0.0133536705
+   ],
+   "paired_p": 0.176,
+   "tost_005_p": [
+    8.89e-23,
+    6.7e-17
+   ],
+   "equivalent_005": true,
+   "tost_002_p": [
+    2.62e-08,
+    0.00103
+   ],
+   "equivalent_002": true,
+   "tost_001_p": [
+    0.000227,
+    0.185
+   ],
+   "equivalent_001": false
+  },
+  "crossed_bootstrap_d1": {
+   "B": 10000,
+   "seeds": [
+    29,
+    1029,
+    2029
+   ],
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "mean": 0.0040564811,
+     "ci90": [
+      -0.007491,
+      0.0154612782
+     ],
+     "ci95": [
+      -0.0098405178,
+      0.0177818796
+     ]
+    },
+    "1029": {
+     "n_draws": 10000,
+     "mean": 0.0042009225,
+     "ci90": [
+      -0.0073697728,
+      0.0155305686
+     ],
+     "ci95": [
+      -0.0097673794,
+      0.0178591534
+     ]
+    },
+    "2029": {
+     "n_draws": 10000,
+     "mean": 0.0041203946,
+     "ci90": [
+      -0.0073832938,
+      0.0154885269
+     ],
+     "ci95": [
+      -0.0096492059,
+      0.0176618549
+     ]
+    }
+   },
+   "ci90_lower_range": [
+    -0.007491,
+    -0.0073697728
+   ],
+   "ci90_upper_range": [
+    0.0154612782,
+    0.0155305686
+   ],
+   "within_002_90_all_seeds": true,
+   "within_005_90_all_seeds": true
+  },
+  "blind_subset": {
+   "n_patients": 20,
+   "blind_auroc": 0.5730595238,
+   "own_auroc": 0.6203492063,
+   "donor_auroc": 0.6175185185,
+   "determinism": {
+    "n_prompt_pairs": 190,
+    "n_cell_pairs": 57000,
+    "identical": 0.9983333333,
+    "mean_abs_diff": 0.0003166667,
+    "identical_expr": 0.997080292,
+    "mean_abs_diff_expr": 0.0004014599,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 20,
+     "mean_diff": 0.0472896825,
+     "sd": 0.0569352739,
+     "paired_p": 0.00147,
+     "ci90": [
+      0.0252758951,
+      0.0693034699
+     ]
+    },
+    "shuffled": {
+     "n": 20,
+     "mean_diff": 0.0444589947,
+     "sd": 0.0243252501,
+     "paired_p": 1.22e-07,
+     "ci90": [
+      0.0350537377,
+      0.0538642517
+     ]
+    }
+   },
+   "mean_move_from_blind": {
+    "patient": 0.2989927007,
+    "shuffled": 0.2929160584
+   }
+  }
+ },
+ "wording2": {
+  "run": "replication/w2",
+  "wording": 2,
+  "model": "mistral-small-3.2-24b-instruct",
+  "n_patients": 40,
+  "n_reactions": 300,
+  "n_expression_bearing": 137,
+  "label_base_rate": 0.3,
+  "blocks_completed": 4,
+  "n_calls": 30000,
+  "resent_calls": 0,
+  "transport_errors_left": 0,
+  "unparsed": 0,
+  "minutes": 12.9,
+  "first_call": "2026-11-14T08:39:00+0700",
+  "last_block_finished": "2026-11-14T08:51:52+0700",
+  "patients": [
+   247,
+   618,
+   204,
+   564,
+   273,
+   83,
+   388,
+   277,
+   47,
+   22,
+   262,
+   582,
+   433,
+   30,
+   302,
+   63,
+   400,
+   156,
+   335,
+   413,
+   491,
+   534,
+   269,
+   585,
+   44,
+   405,
+   143,
+   403,
+   128,
+   202,
+   80,
+   84,
+   375,
+   387,
+   297,
+   554,
+   290,
+   27,
+   289,
+   475
+  ],
+  "design_master_sha256": "2f39d5fc87a1cce2fe210e457f35ad8120d464c04968c42d9be48bda32bc6869",
+  "code_sha256": {
+   "replication_probe": "1790bd6c577463fe7158539f37bff1462191a5bba29860e8c684cadf6b63378f",
+   "llm_probe": "42c96654256a741077e42d155c2e75449879cce4095921ffe4caa88c182cb86a"
+  },
+  "donor": {
+   "d1": {
+    "schedule": "d1",
+    "n_patients": 40,
+    "own_auroc": 0.6231957672,
+    "own_auroc_ci": [
+     0.6114700066,
+     0.6341781415
+    ],
+    "donor_auroc": 0.6168134921,
+    "donor_auroc_ci": [
+     0.6103373016,
+     0.622994461
+    ],
+    "parsed_own": 1.0,
+    "parsed_donor": 1.0,
+    "diff_mean": 0.0063822751,
+    "diff_sd": 0.0424691536,
+    "diff_ci90": [
+     -0.0049315986,
+     0.0176961489
+    ],
+    "paired_p": 0.3477339758,
+    "wilcoxon_p": 0.3974238319,
+    "tost_005_p": [
+     1.41e-10,
+     5.32e-08
+    ],
+    "equivalent_005": true,
+    "tost_002_p": [
+     0.000169,
+     0.0247
+    ],
+    "equivalent_002": true,
+    "n_pairs": 5480,
+    "identical": 0.1034671533,
+    "mean_abs_diff": 0.2586970803,
+    "arm_correlation": 0.0728207172,
+    "residual_correlation": -0.0017608959,
+    "residual_correlation_ci": [
+     -0.0286104374,
+     0.0290600254
+    ],
+    "between_patient_sd_own": 0.2264735689,
+    "between_patient_sd_donor": 0.2282404172
+   }
+  },
+  "raw_expression_auroc": 0.6466865079,
+  "indicator_floor": 0.6261904762,
+  "raw_percentile_auroc": 0.6286375661,
+  "crossed_bootstrap_d1": {
+   "B": 10000,
+   "seeds": [
+    29,
+    1029,
+    2029
+   ],
+   "per_seed": {
+    "29": {
+     "n_draws": 10000,
+     "mean": 0.0062980133,
+     "ci90": [
+      -0.0087509933,
+      0.0215591168
+     ],
+     "ci95": [
+      -0.0115019225,
+      0.024750599
+     ]
+    },
+    "1029": {
+     "n_draws": 10000,
+     "mean": 0.0064298265,
+     "ci90": [
+      -0.0088715981,
+      0.0215125561
+     ],
+     "ci95": [
+      -0.0118877908,
+      0.024453133
+     ]
+    },
+    "2029": {
+     "n_draws": 10000,
+     "mean": 0.0062817354,
+     "ci90": [
+      -0.0086833178,
+      0.0213251634
+     ],
+     "ci95": [
+      -0.0114640928,
+      0.0245432288
+     ]
+    }
+   },
+   "ci90_lower_range": [
+    -0.0088715981,
+    -0.0086833178
+   ],
+   "ci90_upper_range": [
+    0.0213251634,
+    0.0215591168
+   ],
+   "within_002_90_all_seeds": false,
+   "within_005_90_all_seeds": true
+  },
+  "blind_subset": {
+   "n_patients": 20,
+   "blind_auroc": 0.5475092593,
+   "own_auroc": 0.6193611111,
+   "donor_auroc": 0.6094603175,
+   "determinism": {
+    "n_prompt_pairs": 190,
+    "n_cell_pairs": 57000,
+    "identical": 0.9973684211,
+    "mean_abs_diff": 0.0003631579,
+    "identical_expr": 0.998540146,
+    "mean_abs_diff_expr": 0.0001459854,
+    "note": "identical prompts, temperature 0, repeated across the patient axis; the _expr figures are on the expression-bearing reactions only"
+   },
+   "arms_vs_blind": {
+    "patient": {
+     "n": 20,
+     "mean_diff": 0.0718518519,
+     "sd": 0.0448814757,
+     "paired_p": 8.36e-07,
+     "ci90": [
+      0.0544986155,
+      0.0892050882
+     ]
+    },
+    "shuffled": {
+     "n": 20,
+     "mean_diff": 0.0619510582,
+     "sd": 0.0177116849,
+     "paired_p": 2.63e-12,
+     "ci90": [
+      0.0551029087,
+      0.0687992077
+     ]
+    }
+   },
+   "mean_move_from_blind": {
+    "patient": 0.2422335766,
+    "shuffled": 0.2386970803
+   }
+  }
+ },
+ "paraphrase": {
+  "n_patients": 40,
+  "own_between_wordings": {
+   "n_pairs": 5480,
+   "mean_abs_diff": 0.0908430657,
+   "identical": 0.3259124088,
+   "correlation": 0.8249280717
+  },
+  "donor_between_wordings": {
+   "n_pairs": 5480,
+   "mean_abs_diff": 0.095350365,
+   "identical": 0.3284671533,
+   "correlation": 0.8022726529
+  },
+  "own_vs_donor_wording1": {
+   "n_pairs": 5480,
+   "mean_abs_diff": 0.3322518248,
+   "identical": 0.0633211679,
+   "correlation": 0.0236081312
+  },
+  "own_vs_donor_wording2": {
+   "n_pairs": 5480,
+   "mean_abs_diff": 0.2586970803,
+   "identical": 0.1034671533,
+   "correlation": 0.0728207172
+  },
+  "own_auroc_wording1": 0.6272400794,
+  "own_auroc_wording2": 0.6231957672,
+  "own_auroc_wording2_minus_wording1": {
+   "n": 40,
+   "mean": -0.0040443122,
+   "sd": 0.0217936991,
+   "ci90": [
+    -0.0098502004,
+    0.0017615761
+   ],
+   "paired_p": 0.248,
+   "tost_005_p": [
+    2.06e-16,
+    9.77e-19
+   ],
+   "equivalent_005": true,
+   "tost_002_p": [
+    2e-05,
+    1.15e-08
+   ],
+   "equivalent_002": true,
+   "tost_001_p": [
+    0.0459,
+    0.000109
+   ],
+   "equivalent_001": true
+  },
+  "own_minus_donor_wording1_same_patients": {
+   "n": 40,
+   "mean": 0.0083723545,
+   "sd": 0.0522232837,
+   "ci90": [
+    -0.0055400404,
+    0.0222847494
+   ],
+   "paired_p": 0.317,
+   "tost_005_p": [
+    8.61e-09,
+    5.5e-06
+   ],
+   "equivalent_005": true,
+   "tost_002_p": [
+    0.000708,
+    0.0835
+   ],
+   "equivalent_002": false,
+   "tost_001_p": [
+    0.016,
+    0.422
+   ],
+   "equivalent_001": false
+  },
+  "own_minus_donor_wording2": {
+   "n": 40,
+   "mean": 0.0063822751,
+   "sd": 0.0424691536,
+   "ci90": [
+    -0.0049315986,
+    0.0176961489
+   ],
+   "paired_p": 0.348,
+   "tost_005_p": [
+    1.41e-10,
+    5.32e-08
+   ],
+   "equivalent_005": true,
+   "tost_002_p": [
+    0.000169,
+    0.0247
+   ],
+   "equivalent_002": true,
+   "tost_001_p": [
+    0.00968,
+    0.297
+   ],
+   "equivalent_001": false
+  },
+  "blind_between_wordings": {
+   "n_pairs": 6000,
+   "mean_abs_diff": 0.1353416667,
+   "identical": 0.4325,
+   "correlation": 0.7749631006,
+   "n_patients": 20
+  },
+  "paraphrase_over_swap": 0.2734163033
+ },
+ "decision": {
+  "diff_mean": 0.004210582,
+  "ci90": [
+   -0.0041287718,
+   0.0125499358
+  ],
+  "equivalent_002": true,
+  "equivalent_005": true,
+  "interval_excludes_zero": false,
+  "n_patients": 100
+ }
+}

@@ -1,0 +1,93 @@
+{
+ "note": "facts of the course of the collection on the second and third backbones that no archive holds; entered by hand from the log of the launcher on the second host (not archived here, because it names local paths) and from the outputs of code/provenance/tokenization_check.py on the two hosts; code/replication_backbones_record.py joins them with what the archives and the serving records hold",
+ "plan_public_before_first_call": true,
+ "check_calls": {
+  "note": "600 patient-blind prompts of an earlier design (results/repr), sent through the collector's --bench option before the first call of each backbone on the sample; nothing of them is stored (Section 5 of the plan)",
+  "b3": {
+   "calls": 600,
+   "parsed": 600,
+   "concurrent_requests": 24,
+   "seconds": 18.1,
+   "calls_per_second": 33.24,
+   "ended_local": "2026-11-14T08:18:08+07:00"
+  },
+  "b2": {
+   "calls": 600,
+   "parsed": 600,
+   "concurrent_requests": 24,
+   "seconds": 37.6,
+   "calls_per_second": 15.97,
+   "ended_local": "2026-11-14T09:21:44+07:00"
+  }
+ },
+ "tokenization_check": {
+  "note": "not part of the plan: the token identifiers that each backbone's own tokenizer and chat template produce for the first prompts of the sample (wording 1, block 1, in the order of the collector's seeded permutation), computed on the first host, where the earlier collections of the two backbones ran, and on the second host; code/provenance/tokenization_check.py; no model is loaded and no call is made. The check was first made on 13 November 2026, before the plan was pushed, and its outputs were not stored then. It was repeated on 14 November 2026, after the collection, with the script as it is published here, and the lines below are of that run",
+  "prompts": 500,
+  "wording": 1,
+  "block": 1,
+  "prompts_file_sha256": "f3a759596a8b95b21a171fe799b2f9ab40a64e712c284de0030e97f2ac57e8c2",
+  "backbones": {
+   "mistral-small-3.2-24b-instruct": {
+    "first host": {
+     "prompts": 500,
+     "tokens": 121683,
+     "ids_sha256": "7f17308b8d22e1565f112c2e0d25551006a204ad65626186a5c5fbbe317a45b6",
+     "libraries": {
+      "mistral_common": "1.11.0"
+     }
+    },
+    "second host": {
+     "prompts": 500,
+     "tokens": 121683,
+     "ids_sha256": "7f17308b8d22e1565f112c2e0d25551006a204ad65626186a5c5fbbe317a45b6",
+     "libraries": {
+      "mistral_common": "1.11.0"
+     }
+    }
+   },
+   "gemma-4-31b-it": {
+    "first host": {
+     "prompts": 500,
+     "tokens": 132464,
+     "ids_sha256": "5849c9a0d71c08b74a5def7c699bb3d9c9ae7bc5eb88c94a4bd5ecfdcec68f50",
+     "rendered_first_sha256": "cb89f0a060e794099ecb011028383a9be65cf20e46031a88955aa08bc2638fbf",
+     "libraries": {
+      "transformers": "5.5.4",
+      "tokenizers": "0.22.2"
+     }
+    },
+    "second host": {
+     "prompts": 500,
+     "tokens": 132464,
+     "ids_sha256": "5849c9a0d71c08b74a5def7c699bb3d9c9ae7bc5eb88c94a4bd5ecfdcec68f50",
+     "rendered_first_sha256": "cb89f0a060e794099ecb011028383a9be65cf20e46031a88955aa08bc2638fbf",
+     "libraries": {
+      "transformers": "5.5.4",
+      "tokenizers": "0.22.2"
+     }
+    }
+   }
+  },
+  "python": {
+   "first host": "3.10.12",
+   "second host": "3.12.3"
+  },
+  "chat_template_sha256": {
+   "gemma-4-31b-it": "85a08664d16d8f3be4416c92427b3ac10df1024ac566cc0b4bc3bab409393f98"
+  }
+ },
+ "departures": [
+  {
+   "departure": "First start of the launcher",
+   "what_happened": "The launcher was first started at 07:40:27 on 14 November 2026 (local time, UTC+7), when the accelerator was free. Neither server came up: the second host does not allow files in its temporary directory to be executed, and the serving library compiles a module there when it starts and could not load it. The launcher ended at 07:46:22. It had sent no call: no check call and no call of the sample. It was started again, unchanged, at 08:16:54 with the environment variable TMPDIR of the calling shell set to a directory on the home file system. The prompts, the parser, the sample, the serving flags and the launcher are those of the commit of the plan.",
+   "release_note": "One departure from the plan is recorded: the first start of the launcher ended before any call, because the second host does not allow files in its temporary directory to be executed, and the launcher was started again unchanged with that directory moved."
+  }
+ ],
+ "departures_sentence": "One departure from the plan is recorded, and it does not depend on an answer. The first start of the launcher ended before any call had been sent, because the second host does not allow files in its temporary directory to be executed and the serving library compiles a module there. The launcher was started again unchanged, with the temporary directory moved to another file system.",
+ "notes": [
+  {
+   "note": "A launcher that waited before the push",
+   "what_happened": "Before the plan was pushed, a launcher from a local commit with the same tree as the plan's commit (tree 037b84f54e9b) was started on the second host at 17:34 on 13 November 2026 (local time, UTC+7) and waited for the training jobs of the other study to end. The flag file that lets the launcher start dates from that minute, although the header of the launcher says that it is created once the plan is public. After the push (21:59 local time) that launcher was stopped, the checkout was replaced by a clone of the public commit (22:00), and the launcher of the clone was started. The first launcher had started no server and sent no call, and its checkout holds no result."
+  }
+ ]
+}

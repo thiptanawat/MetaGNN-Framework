@@ -23,3 +23,4 @@ and the serving flags they use are recorded in the manuscript's serving section.
 | `run_msi2_qwen.sh` | the frozen percentile-only interface on the main backbone, three cohorts by three configurations |
 | `run_msi2_local.sh` | the same on the two locally served backbones |
 | `run_replication_backbones.sh` | the replication of the own-versus-donor contrast on the second and third backbones, on a second host (`REPLICATION_BACKBONES_PLAN_2026-11-13.md`); committed with that plan, before it ran |
+| `tokenization_check.py` | not a launcher: the check that the two hosts turn the first prompts of the replication sample into the same token identifiers for the second and third backbones; its outputs are in `results/replication/backbones_course.json` |

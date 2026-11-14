@@ -1,0 +1,141 @@
+{
+ "note": "outside SECOND_COHORT_PLAN_2026-11-13.md: cell p0r0 of the family-disjoint split under the matched selection rule, retrained at further training seeds with the folds fixed, own-expression arm against cohort-mean arm; AUROC on held-out reactions of held-out patients; made on the second cohort after the outcome of Section 6 was known",
+ "cell": "p0r0",
+ "default_seed": 2024,
+ "further_seeds": [
+  2025,
+  2026
+ ],
+ "cohorts": {
+  "cohort1": {
+   "directory": "results/fam",
+   "by_seed": {
+    "2024": {
+     "own": 0.7903,
+     "cohort_mean": 0.7645,
+     "difference": 0.0258,
+     "epochs_own": 17,
+     "epochs_cohort_mean": 16,
+     "n_train": 424,
+     "n_test": 125
+    },
+    "2025": {
+     "own": 0.7776,
+     "cohort_mean": 0.7551,
+     "difference": 0.0225,
+     "epochs_own": 16,
+     "epochs_cohort_mean": 16,
+     "n_train": 424,
+     "n_test": 125
+    },
+    "2026": {
+     "own": 0.7854,
+     "cohort_mean": 0.7716,
+     "difference": 0.0138,
+     "epochs_own": 16,
+     "epochs_cohort_mean": 18,
+     "n_train": 424,
+     "n_test": 125
+    }
+   },
+   "seeds": [
+    2024,
+    2025,
+    2026
+   ],
+   "differences": [
+    0.0258,
+    0.0225,
+    0.0138
+   ],
+   "min": 0.0138,
+   "max": 0.0258,
+   "spread": 0.012,
+   "one_sign": true,
+   "own_min": 0.7776,
+   "own_max": 0.7903,
+   "cohort_mean_min": 0.7551,
+   "cohort_mean_max": 0.7716
+  },
+  "cohort2": {
+   "directory": "results/cohort2/fam",
+   "by_seed": {
+    "2024": {
+     "own": 0.7744,
+     "cohort_mean": 0.7994,
+     "difference": -0.025,
+     "epochs_own": 16,
+     "epochs_cohort_mean": 36,
+     "n_train": 744,
+     "n_test": 219
+    },
+    "2025": {
+     "own": 0.7902,
+     "cohort_mean": 0.7844,
+     "difference": 0.0058,
+     "epochs_own": 16,
+     "epochs_cohort_mean": 17,
+     "n_train": 744,
+     "n_test": 219
+    },
+    "2026": {
+     "own": 0.7704,
+     "cohort_mean": 0.7884,
+     "difference": -0.018,
+     "epochs_own": 25,
+     "epochs_cohort_mean": 21,
+     "n_train": 744,
+     "n_test": 219
+    }
+   },
+   "seeds": [
+    2024,
+    2025,
+    2026
+   ],
+   "differences": [
+    -0.025,
+    0.0058,
+    -0.018
+   ],
+   "min": -0.025,
+   "max": 0.0058,
+   "spread": 0.0308,
+   "one_sign": false,
+   "own_min": 0.7704,
+   "own_max": 0.7902,
+   "cohort_mean_min": 0.7844,
+   "cohort_mean_max": 0.7994
+  }
+ },
+ "first_cohort_check": "equal to data/results_p1.json, robustness.fam.seed_replicates",
+ "run_record": {
+  "what": "outside SECOND_COHORT_PLAN_2026-11-13.md: cell p0r0 of the second cohort at the training seeds 2025 and 2026, own-expression and cohort-mean arms, family-disjoint split, matched selection rule; made after the outcome of Section 6 was known",
+  "launcher": "code/gpu_queue_cohort2_seed.sh",
+  "host": "a second workstation; one NVIDIA H100 (80 GB), driver 580.178.04; the four runs together on that accelerator",
+  "python": "3.12.3",
+  "libraries": {
+   "torch": "2.10.0+cu128",
+   "cuda": "12.8",
+   "cudnn": "9.10.2 (91002)",
+   "torch_geometric": "2.7.0",
+   "numpy": "2.2.6",
+   "scipy": "1.15.3",
+   "scikit_learn": "1.7.2"
+  },
+  "repository_commit_of_the_code": "36cb74db9ac92da92523b9612f35001e8a01742f",
+  "code_sha256": {
+   "code/double_holdout_ctrl.py": "dece7d5fc7e2dce5551aea5eae5483b621812b3adcbd0018163c5ed74b272101",
+   "code/trainer.py": "3ada4f074503483900d7710699f9f893268535771d2a4e72cc43fdc547c646f9",
+   "code/gpu_queue_cohort2_seed.sh": "64bb5be89b02884a6aff59546fb57205c7062c17a07393350003568bd249fd55",
+   "data/families/families_union.json": "3f8041ec6fab8aa9b5024be097cf78413385fd2528ed5c4a4aae8484390d343a"
+  },
+  "first_run_started_local": "2026-11-14T13:12:38+07:00",
+  "last_run_finished_local": "2026-11-14T14:50:03+07:00",
+  "runs": 4,
+  "notes": [
+   "The runs were made on the second workstation, in the environment of the 30 runs of Section 6, at a lowered scheduling priority.",
+   "The script that reads the check (code/second_cohort_seed.py) was written before any of the four runs had finished."
+  ]
+ }
+}

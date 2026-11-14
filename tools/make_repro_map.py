@@ -51,7 +51,7 @@ SOURCES = {
         "fig:phenotype": ("results/phenotype_probe.json, results/phenotype_null_*.json", "phenotype_probe.py, phenotype_null.py; drawn by make_figures_p1.py"),
         "tab:dsim": ("results/diagnostic_sim.json", "diagnostic_sim.py"),
         "tab:checks": ("none: a summary table written into the discussion", "not generated"),
-        "tab:cohort2": ("data/results_cohort2.json, computed from results/cohort2/naive_allfolds*.json and results/cohort2/naive_pooled*.json beside the first cohort's results/naive_allfolds*.json and results/naive_pooled*.json", "build_second_cohort.py (features of the second cohort), naive_baselines_allfolds.py, pooled_baselines.py, second_cohort_stats.py"),
+        "tab:cohort2": ("data/results_cohort2.json, computed from results/cohort2/naive_allfolds*.json and results/cohort2/naive_pooled*.json beside the first cohort's results/naive_allfolds*.json and results/naive_pooled*.json; for the graph scorer's rows, data/results_cohort2_graph.json, computed from results/cohort2/fam/*.json beside the first cohort's results/fam/*.json", "build_second_cohort.py (features of the second cohort), naive_baselines_allfolds.py, pooled_baselines.py, second_cohort_stats.py; double_holdout_ctrl.py (the cells), second_cohort_graph.py"),
     },
     "paper2": {
         "tab:main": ("results/repr_il/ (Design A), results/pilot/ (Design B), results/repr40_il/ (Design E)", "llm_probe.py (collection), stats.py (statistics)"),
@@ -80,6 +80,7 @@ SOURCES = {
         "tab:replication": ("results/replication/w1/, results/replication/w2/, results/replication_frozen.json", "replication_probe.py (collection), replication_stats.py (statistics)"),
         "fig:replication": ("results_frozen.json, results/replication_frozen.json, results/replication_posthoc.json", "stats.py, replication_stats.py and replication_posthoc.py; drawn by make_figures.py"),
         "tab:replposthoc": ("results/replication/w1/, results/replication_posthoc.json", "replication_posthoc.py (exploratory, outside the plan)"),
+        "tab:replbackbones": ("results/replication_b2/, results/replication_b3/, results/replication_frozen_b2.json, results/replication_frozen_b3.json, results/replication_reference_b2.json, results/replication_reference_b3.json, results/replication_frozen.json, results/replication_posthoc.json", "replication_probe.py (collection; code/provenance/run_replication_backbones.sh is the launcher that ran), replication_backbones.py (replication_stats.py and replication_posthoc.one_design, unchanged, on each backbone's archive)"),
     },
 }
 

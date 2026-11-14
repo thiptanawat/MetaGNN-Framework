@@ -112,6 +112,15 @@ SCRIPTS = [
          policy=dict(selection="validation patients over all training reactions",
                      checkpoint="the epoch with the best validation AUROC is restored before scoring",
                      endpoint="local GPU, one CUDA device per run", target="reconstruction-membership proxy label")),
+    dict(family="graph model cells, family-disjoint reaction split, second cohort",
+         pattern=r"^gnn_B_mb[\d.]+_p\d_r\d(_mean)?(_ts\d+)?_ivr_fam\.json$", where=os.path.join("cohort2", "fam"),
+         runner="code/double_holdout_ctrl.py --inner_val_rxn 0.2 --family_map data/families/families_union.json --family_tag fam, "
+                "launched by code/gpu_queue_cohort2.sh on the second cohort's directory as code/build_second_cohort.py writes it "
+                "(the 30 cells of Section 6 of the plan) and, outside the plan, by code/gpu_queue_cohort2_seed.sh (cell p0r0 at two "
+                "further training seeds, files tagged _ts<seed>); summarized by code/second_cohort_graph.py and code/second_cohort_seed.py",
+         policy=dict(selection="an inner partition of the training reactions drawn family by family",
+                     checkpoint="the epoch with the best inner-validation AUROC is restored before scoring",
+                     endpoint="local GPU, one CUDA device per run", target="reconstruction-membership proxy label")),
     dict(family="linear reference rows, second cohort", pattern=r"^naive_(allfolds|pooled)(_fam)?\.json$", where="cohort2",
          runner="code/naive_baselines_allfolds.py and code/pooled_baselines.py, with P1_DATA set to the second cohort's "
                 "directory as code/build_second_cohort.py writes it (P1_FAMILY_MAP set for the _fam files); summarized by "
