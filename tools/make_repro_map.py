@@ -52,6 +52,8 @@ SOURCES = {
         "tab:dsim": ("results/diagnostic_sim.json", "diagnostic_sim.py"),
         "tab:checks": ("none: a summary table written into the discussion", "not generated"),
         "tab:cohort2": ("data/results_cohort2.json, computed from results/cohort2/naive_allfolds*.json and results/cohort2/naive_pooled*.json beside the first cohort's results/naive_allfolds*.json and results/naive_pooled*.json; for the graph scorer's rows, data/results_cohort2_graph.json, computed from results/cohort2/fam/*.json beside the first cohort's results/fam/*.json; for the rows of the second training seed, data/results_cohort2_graph_seed.json (the cells tagged _ts2025 under results/cohort2/fam/) and data/results_cohort1_graph_seed.json (results/fam_seed2025/*.json)", "build_second_cohort.py (features of the second cohort), naive_baselines_allfolds.py, pooled_baselines.py, second_cohort_stats.py; double_holdout_ctrl.py (the cells), second_cohort_graph.py, second_cohort_graph_seed.py, first_cohort_graph_seed.py"),
+        "tab:cohortTwoLength": ("data/results_cohort2_graph_length.json, computed from results/cohort2/fam_len/*.json (the cells of Section 8 of the plan, tagged _len_ep<E>) and, for the differences under the stopping rule, data/results_cohort2_graph_seed.json", "double_holdout_len.py (the cells), second_cohort_graph_length.py"),
+        "tab:cohortTwoValidation": ("data/results_cohort2_graph_length.json (the validation course that each cell of results/cohort2/fam_len/ records)", "double_holdout_len.py (the cells), second_cohort_graph_length.py"),
     },
     "paper2": {
         "tab:main": ("results/repr_il/ (Design A), results/pilot/ (Design B), results/repr40_il/ (Design E)", "llm_probe.py (collection), stats.py (statistics)"),

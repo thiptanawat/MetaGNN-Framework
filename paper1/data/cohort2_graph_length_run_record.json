@@ -1,0 +1,497 @@
+{
+ "note": "the record of the runs of Section 8 of SECOND_COHORT_PLAN_2026-11-13.md; written from the facts that a collector read on the second workstation (launch times, the times, sizes and SHA-256 of the result files, the environment, the code hashes; no score)",
+ "plan_commit": "709dccdd2642865d24d17389d8a89c8050cc4672",
+ "plan_pushed_utc": "2026-11-15T08:28:30Z",
+ "plan_pushed_date_words": "15 November 2026",
+ "plan_pushed_utc_source": "the push of f9c1b06 to 709dccd on the main branch as the repository activity of the hosting service records it; the log of the push on the author's machine gives the same second",
+ "plan_seen_public_from_the_workstation_utc": "2026-11-15T08:28:46Z",
+ "first_run_launched_utc": "2026-11-15T08:29:07Z",
+ "last_result_written_utc": "2026-11-15T20:24:25Z",
+ "seconds_between_push_and_first_run": 37,
+ "plan_public_before_first_run": true,
+ "runs": 60,
+ "result_files": 180,
+ "launchers": {
+  "2024": {
+   "launcher": "paper1/code/gpu_queue_cohort2_len.sh",
+   "call": "SEED=2024 GPU=1",
+   "accelerator": "accelerator 1 of the second workstation",
+   "started_utc": [
+    "2026-11-15T08:29:07Z"
+   ],
+   "drained_utc": [
+    "2026-11-15T19:41:41Z"
+   ],
+   "jobs_issued": 30,
+   "jobs_issued_twice": [],
+   "queue_log_sha256": "8950035d83909b0137ee4a7163b43a2c985206ad112d58cd5b1c215a819f9628",
+   "lines_of_other_kinds_in_the_queue_log": 0,
+   "output_of_the_launcher_bytes": 0
+  },
+  "2025": {
+   "launcher": "paper1/code/gpu_queue_cohort2_len.sh",
+   "call": "SEED=2025 GPU=0",
+   "accelerator": "accelerator 0 of the second workstation",
+   "started_utc": [
+    "2026-11-15T08:29:07Z"
+   ],
+   "drained_utc": [
+    "2026-11-15T19:43:41Z"
+   ],
+   "jobs_issued": 30,
+   "jobs_issued_twice": [],
+   "queue_log_sha256": "4352447fb355f93c579bc036f31b1c213b787609f2cf03ecb7c60fd722d590e4",
+   "lines_of_other_kinds_in_the_queue_log": 0,
+   "output_of_the_launcher_bytes": 0
+  }
+ },
+ "read_before_all_cells_existed": "none: no result file and no job log of the section was read before all 180 result files existed; progress was followed by counting files and processes, and the cells were then read once by code/second_cohort_graph_length.py",
+ "run_sentence": "The runs were made on the second workstation, in the environment of the other graph runs of this cohort, the 30 of the first seed on one of its two accelerators and the 30 of the second seed on the other, at most four at a time on each. The first was launched at 08:29 UTC on 15 November 2026 and the last result file was written at 20:24 UTC on 15 November 2026. No result of the section was read before all 180 result files existed, and the analysis script was then run once.",
+ "environment": {
+  "python": "Python 3.12.3",
+  "accelerators": "0, NVIDIA H100 80GB HBM3, 580.178.04\n1, NVIDIA H100 80GB HBM3, 580.178.04",
+  "libraries": {
+   "torch": "2.10.0+cu128",
+   "cuda": "12.8",
+   "cudnn": "91002",
+   "torch_geometric": "2.7.0",
+   "numpy": "2.2.6",
+   "scipy": "1.15.3",
+   "scikit_learn": "1.7.2"
+  },
+  "code_sha256": {
+   "double_holdout_len.py": "66e3b8c98aac1e5e987f4f44fa5d6d53f1ad3887ff99db4b7590b91118bcf97f",
+   "double_holdout_ctrl.py": "dece7d5fc7e2dce5551aea5eae5483b621812b3adcbd0018163c5ed74b272101",
+   "trainer.py": "3ada4f074503483900d7710699f9f893268535771d2a4e72cc43fdc547c646f9",
+   "family_folds.py": "a2850789dc2031558e1e09d1e5f6e60a1015813af8e200161ab0346925100818",
+   "families_union.json": "3f8041ec6fab8aa9b5024be097cf78413385fd2528ed5c4a4aae8484390d343a",
+   "gpu_queue_cohort2_len.sh": "984fe4e56d2048940a7ccf55660346b960f9fc26df625f0c0a1e9f4acf85901c"
+  }
+ },
+ "jobs": {
+  "2024": {
+   "0": {
+    "cell": "p0r0",
+    "arm": "own",
+    "launched_utc": "2026-11-15T08:29:07Z",
+    "results_written_utc": "2026-11-15T09:51:59Z",
+    "minutes": 82.9
+   },
+   "1": {
+    "cell": "p0r0",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T08:31:37Z",
+    "results_written_utc": "2026-11-15T10:04:18Z",
+    "minutes": 92.7
+   },
+   "2": {
+    "cell": "p0r1",
+    "arm": "own",
+    "launched_utc": "2026-11-15T08:34:07Z",
+    "results_written_utc": "2026-11-15T10:07:38Z",
+    "minutes": 93.5
+   },
+   "3": {
+    "cell": "p0r1",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T08:36:37Z",
+    "results_written_utc": "2026-11-15T10:12:14Z",
+    "minutes": 95.6
+   },
+   "4": {
+    "cell": "p0r2",
+    "arm": "own",
+    "launched_utc": "2026-11-15T09:52:10Z",
+    "results_written_utc": "2026-11-15T11:26:13Z",
+    "minutes": 94.0
+   },
+   "5": {
+    "cell": "p0r2",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T10:04:41Z",
+    "results_written_utc": "2026-11-15T11:40:27Z",
+    "minutes": 95.8
+   },
+   "6": {
+    "cell": "p1r0",
+    "arm": "own",
+    "launched_utc": "2026-11-15T10:08:11Z",
+    "results_written_utc": "2026-11-15T11:42:27Z",
+    "minutes": 94.3
+   },
+   "7": {
+    "cell": "p1r0",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T10:12:41Z",
+    "results_written_utc": "2026-11-15T11:48:19Z",
+    "minutes": 95.6
+   },
+   "8": {
+    "cell": "p1r1",
+    "arm": "own",
+    "launched_utc": "2026-11-15T11:26:15Z",
+    "results_written_utc": "2026-11-15T13:00:11Z",
+    "minutes": 93.9
+   },
+   "9": {
+    "cell": "p1r1",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T11:40:46Z",
+    "results_written_utc": "2026-11-15T13:16:19Z",
+    "minutes": 95.5
+   },
+   "10": {
+    "cell": "p1r2",
+    "arm": "own",
+    "launched_utc": "2026-11-15T11:43:16Z",
+    "results_written_utc": "2026-11-15T13:17:21Z",
+    "minutes": 94.1
+   },
+   "11": {
+    "cell": "p1r2",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T11:48:46Z",
+    "results_written_utc": "2026-11-15T13:23:52Z",
+    "minutes": 95.1
+   },
+   "12": {
+    "cell": "p2r0",
+    "arm": "own",
+    "launched_utc": "2026-11-15T13:00:20Z",
+    "results_written_utc": "2026-11-15T14:33:42Z",
+    "minutes": 93.4
+   },
+   "13": {
+    "cell": "p2r0",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T13:16:50Z",
+    "results_written_utc": "2026-11-15T14:51:40Z",
+    "minutes": 94.8
+   },
+   "14": {
+    "cell": "p2r1",
+    "arm": "own",
+    "launched_utc": "2026-11-15T13:19:20Z",
+    "results_written_utc": "2026-11-15T14:53:11Z",
+    "minutes": 93.8
+   },
+   "15": {
+    "cell": "p2r1",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T13:24:51Z",
+    "results_written_utc": "2026-11-15T15:00:10Z",
+    "minutes": 95.3
+   },
+   "16": {
+    "cell": "p2r2",
+    "arm": "own",
+    "launched_utc": "2026-11-15T14:34:25Z",
+    "results_written_utc": "2026-11-15T16:08:18Z",
+    "minutes": 93.9
+   },
+   "17": {
+    "cell": "p2r2",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T14:51:55Z",
+    "results_written_utc": "2026-11-15T16:27:17Z",
+    "minutes": 95.4
+   },
+   "18": {
+    "cell": "p3r0",
+    "arm": "own",
+    "launched_utc": "2026-11-15T14:54:25Z",
+    "results_written_utc": "2026-11-15T16:28:22Z",
+    "minutes": 94.0
+   },
+   "19": {
+    "cell": "p3r0",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T15:00:56Z",
+    "results_written_utc": "2026-11-15T16:36:01Z",
+    "minutes": 95.1
+   },
+   "20": {
+    "cell": "p3r1",
+    "arm": "own",
+    "launched_utc": "2026-11-15T16:08:29Z",
+    "results_written_utc": "2026-11-15T17:41:46Z",
+    "minutes": 93.3
+   },
+   "21": {
+    "cell": "p3r1",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T16:28:00Z",
+    "results_written_utc": "2026-11-15T18:02:45Z",
+    "minutes": 94.8
+   },
+   "22": {
+    "cell": "p3r2",
+    "arm": "own",
+    "launched_utc": "2026-11-15T16:30:30Z",
+    "results_written_utc": "2026-11-15T18:04:13Z",
+    "minutes": 93.7
+   },
+   "23": {
+    "cell": "p3r2",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T16:37:00Z",
+    "results_written_utc": "2026-11-15T18:12:12Z",
+    "minutes": 95.2
+   },
+   "24": {
+    "cell": "p4r0",
+    "arm": "own",
+    "launched_utc": "2026-11-15T17:42:35Z",
+    "results_written_utc": "2026-11-15T19:16:09Z",
+    "minutes": 93.6
+   },
+   "25": {
+    "cell": "p4r0",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T18:03:06Z",
+    "results_written_utc": "2026-11-15T19:38:11Z",
+    "minutes": 95.1
+   },
+   "26": {
+    "cell": "p4r1",
+    "arm": "own",
+    "launched_utc": "2026-11-15T18:05:36Z",
+    "results_written_utc": "2026-11-15T19:39:09Z",
+    "minutes": 93.5
+   },
+   "27": {
+    "cell": "p4r1",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T18:13:06Z",
+    "results_written_utc": "2026-11-15T19:46:15Z",
+    "minutes": 93.2
+   },
+   "28": {
+    "cell": "p4r2",
+    "arm": "own",
+    "launched_utc": "2026-11-15T19:16:40Z",
+    "results_written_utc": "2026-11-15T20:17:12Z",
+    "minutes": 60.5
+   },
+   "29": {
+    "cell": "p4r2",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T19:39:11Z",
+    "results_written_utc": "2026-11-15T20:23:02Z",
+    "minutes": 43.9
+   }
+  },
+  "2025": {
+   "0": {
+    "cell": "p0r0",
+    "arm": "own",
+    "launched_utc": "2026-11-15T08:29:07Z",
+    "results_written_utc": "2026-11-15T09:52:07Z",
+    "minutes": 83.0
+   },
+   "1": {
+    "cell": "p0r0",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T08:31:37Z",
+    "results_written_utc": "2026-11-15T10:04:34Z",
+    "minutes": 93.0
+   },
+   "2": {
+    "cell": "p0r1",
+    "arm": "own",
+    "launched_utc": "2026-11-15T08:34:07Z",
+    "results_written_utc": "2026-11-15T10:07:55Z",
+    "minutes": 93.8
+   },
+   "3": {
+    "cell": "p0r1",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T08:36:37Z",
+    "results_written_utc": "2026-11-15T10:12:43Z",
+    "minutes": 96.1
+   },
+   "4": {
+    "cell": "p0r2",
+    "arm": "own",
+    "launched_utc": "2026-11-15T09:52:10Z",
+    "results_written_utc": "2026-11-15T11:26:19Z",
+    "minutes": 94.2
+   },
+   "5": {
+    "cell": "p0r2",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T10:04:41Z",
+    "results_written_utc": "2026-11-15T11:40:08Z",
+    "minutes": 95.5
+   },
+   "6": {
+    "cell": "p1r0",
+    "arm": "own",
+    "launched_utc": "2026-11-15T10:08:11Z",
+    "results_written_utc": "2026-11-15T11:41:55Z",
+    "minutes": 93.7
+   },
+   "7": {
+    "cell": "p1r0",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T10:13:41Z",
+    "results_written_utc": "2026-11-15T11:48:53Z",
+    "minutes": 95.2
+   },
+   "8": {
+    "cell": "p1r1",
+    "arm": "own",
+    "launched_utc": "2026-11-15T11:27:15Z",
+    "results_written_utc": "2026-11-15T13:00:58Z",
+    "minutes": 93.7
+   },
+   "9": {
+    "cell": "p1r1",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T11:40:46Z",
+    "results_written_utc": "2026-11-15T13:16:12Z",
+    "minutes": 95.4
+   },
+   "10": {
+    "cell": "p1r2",
+    "arm": "own",
+    "launched_utc": "2026-11-15T11:43:16Z",
+    "results_written_utc": "2026-11-15T13:17:24Z",
+    "minutes": 94.1
+   },
+   "11": {
+    "cell": "p1r2",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T11:49:46Z",
+    "results_written_utc": "2026-11-15T13:25:06Z",
+    "minutes": 95.3
+   },
+   "12": {
+    "cell": "p2r0",
+    "arm": "own",
+    "launched_utc": "2026-11-15T13:01:20Z",
+    "results_written_utc": "2026-11-15T14:34:51Z",
+    "minutes": 93.5
+   },
+   "13": {
+    "cell": "p2r0",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T13:16:50Z",
+    "results_written_utc": "2026-11-15T14:51:56Z",
+    "minutes": 95.1
+   },
+   "14": {
+    "cell": "p2r1",
+    "arm": "own",
+    "launched_utc": "2026-11-15T13:19:20Z",
+    "results_written_utc": "2026-11-15T14:53:13Z",
+    "minutes": 93.9
+   },
+   "15": {
+    "cell": "p2r1",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T13:25:51Z",
+    "results_written_utc": "2026-11-15T15:00:50Z",
+    "minutes": 95.0
+   },
+   "16": {
+    "cell": "p2r2",
+    "arm": "own",
+    "launched_utc": "2026-11-15T14:35:25Z",
+    "results_written_utc": "2026-11-15T16:08:53Z",
+    "minutes": 93.5
+   },
+   "17": {
+    "cell": "p2r2",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T14:52:55Z",
+    "results_written_utc": "2026-11-15T16:28:02Z",
+    "minutes": 95.1
+   },
+   "18": {
+    "cell": "p3r0",
+    "arm": "own",
+    "launched_utc": "2026-11-15T14:55:25Z",
+    "results_written_utc": "2026-11-15T16:29:22Z",
+    "minutes": 94.0
+   },
+   "19": {
+    "cell": "p3r0",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T15:00:56Z",
+    "results_written_utc": "2026-11-15T16:35:46Z",
+    "minutes": 94.8
+   },
+   "20": {
+    "cell": "p3r1",
+    "arm": "own",
+    "launched_utc": "2026-11-15T16:09:29Z",
+    "results_written_utc": "2026-11-15T17:43:10Z",
+    "minutes": 93.7
+   },
+   "21": {
+    "cell": "p3r1",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T16:29:00Z",
+    "results_written_utc": "2026-11-15T18:04:18Z",
+    "minutes": 95.3
+   },
+   "22": {
+    "cell": "p3r2",
+    "arm": "own",
+    "launched_utc": "2026-11-15T16:31:30Z",
+    "results_written_utc": "2026-11-15T18:05:44Z",
+    "minutes": 94.2
+   },
+   "23": {
+    "cell": "p3r2",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T16:36:00Z",
+    "results_written_utc": "2026-11-15T18:11:14Z",
+    "minutes": 95.2
+   },
+   "24": {
+    "cell": "p4r0",
+    "arm": "own",
+    "launched_utc": "2026-11-15T17:43:35Z",
+    "results_written_utc": "2026-11-15T19:17:10Z",
+    "minutes": 93.6
+   },
+   "25": {
+    "cell": "p4r0",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T18:05:06Z",
+    "results_written_utc": "2026-11-15T19:40:20Z",
+    "minutes": 95.2
+   },
+   "26": {
+    "cell": "p4r1",
+    "arm": "own",
+    "launched_utc": "2026-11-15T18:07:36Z",
+    "results_written_utc": "2026-11-15T19:41:39Z",
+    "minutes": 94.0
+   },
+   "27": {
+    "cell": "p4r1",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T18:12:06Z",
+    "results_written_utc": "2026-11-15T19:46:27Z",
+    "minutes": 94.3
+   },
+   "28": {
+    "cell": "p4r2",
+    "arm": "own",
+    "launched_utc": "2026-11-15T19:17:40Z",
+    "results_written_utc": "2026-11-15T20:18:38Z",
+    "minutes": 61.0
+   },
+   "29": {
+    "cell": "p4r2",
+    "arm": "cohort_mean",
+    "launched_utc": "2026-11-15T19:41:11Z",
+    "results_written_utc": "2026-11-15T20:24:25Z",
+    "minutes": 43.2
+   }
+  }
+ }
+}

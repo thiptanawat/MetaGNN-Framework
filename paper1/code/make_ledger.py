@@ -132,6 +132,15 @@ SCRIPTS = [
          policy=dict(selection="an inner partition of the training reactions drawn family by family",
                      checkpoint="the epoch with the best inner-validation AUROC is restored before scoring",
                      endpoint="local GPU, one CUDA device per run", target="reconstruction-membership proxy label")),
+    dict(family="graph model cells, family-disjoint reaction split, second cohort, equal training length",
+         pattern=r"^gnn_B_mb[\d.]+_p\d_r\d(_mean)?(_ts2025)?_ivr_fam_len_ep(1|7|13)\.json$", where=os.path.join("cohort2", "fam_len"),
+         runner="code/double_holdout_len.py --inner_val_rxn 0.2 --family_map data/families/families_union.json --family_tag fam "
+                "--score_epochs 1,7,13, launched by code/gpu_queue_cohort2_len.sh once for each training seed (Section 8 of the plan: "
+                "both arms on every cell at the training seeds 2024 and 2025, trained for 13 epochs and scored after 1, 7 and 13 epochs; "
+                "files tagged _len_ep<E>, those of the seed 2025 also _ts2025); summarized by code/second_cohort_graph_length.py",
+         policy=dict(selection="none: no early stopping; the inner-validation AUROC is recorded after every epoch and selects nothing",
+                     checkpoint="none: the weights after 1, 7 and 13 epochs are scored as they are",
+                     endpoint="local GPU, one CUDA device per run", target="reconstruction-membership proxy label")),
     dict(family="linear reference rows, second cohort", pattern=r"^naive_(allfolds|pooled)(_fam)?\.json$", where="cohort2",
          runner="code/naive_baselines_allfolds.py and code/pooled_baselines.py, with P1_DATA set to the second cohort's "
                 "directory as code/build_second_cohort.py writes it (P1_FAMILY_MAP set for the _fam files); summarized by "

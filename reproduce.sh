@@ -9,7 +9,7 @@ cd "$(dirname "$0")"
 MODE=${1:-analysis}
 # the committed results were written with the versions of requirements.txt; say so when others are installed
 python3 tools/check_environment.py
-echo "== paper 1 =="
+echo "== Reaction-Scoring Audit (paper1/) =="
 python3 paper1/code/split_audit.py
 # the label-blind reaction families the family-disjoint split rests on, rebuilt from the reference
 # network alone (about forty seconds on CPU); the committed maps are its output
@@ -42,6 +42,11 @@ fi
 if [ -d paper1/results/fam_seed2025 ]; then
     python3 paper1/code/first_cohort_graph_seed.py >/dev/null
 fi
+# Section 8 of the second-cohort plan: the two arms at equal training length (results/cohort2/fam_len/, the
+# files tagged _len_ep<E>); the step is skipped in a checkout without that directory
+if [ -d paper1/results/cohort2/fam_len ]; then
+    python3 paper1/code/second_cohort_graph_length.py >/dev/null
+fi
 # the ledger hashes every result and data file, so it runs after the last script that writes one
 # (build_results_p1.py writes data/results_p1.json) and before the macros that quote its counts; the
 # macro file, the figures and the ledger itself are not hashed, so nothing hashed changes after this
@@ -51,11 +56,11 @@ python3 paper1/code/make_figures_p1.py
 python3 paper1/code/check_macros_p1.py
 # every hash in the ledger is checked against the file it names, so a stale ledger fails the run
 python3 paper1/code/verify_ledger.py
-echo "== paper 2 =="
+echo "== Language-Model Evidence (paper2/) =="
 # Every generator whose output make_numbers.py reads runs here, so that deleting a derived file and
 # rerunning this driver puts it back. msi2_stats.py resamples the external-cohort contrasts with
 # 10,000-draw nulls over 21 runs and crossed_boot_10k.py draws 10,000 crossed bootstrap replicates,
-# so the paper 2 block takes roughly twenty minutes; nothing in it needs a GPU or the network.
+# so this block takes roughly twenty minutes; nothing in it needs a GPU or the network.
 # replication_design.py --check rebuilds the sample of the prespecified replication from its seed and
 # compares it with the committed file; replication_stats.py computes the replication's statistics and
 # replication_posthoc.py the one analysis added outside its plan (the contrast of the printed numbers).

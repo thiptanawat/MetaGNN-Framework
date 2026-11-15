@@ -2211,6 +2211,157 @@ if os.path.exists(_cf2p):
         "(Supplementary Section~\\ref{supp:theFamilyDisjoint}).")
     cmd("cfTwoShortClause", "\\cfTwoPat{} when the grid was retrained at a second training seed on a second workstation")
 
+# the two arms of the graph scorer on the second cohort at equal training length (Section 8 of the plan;
+# code/second_cohort_graph_length.py); present only when those cells exist. The sentences below were written
+# while the runs of that section were under way and before any of their results was read, so they report
+# whatever the runs give: every number is read from the result file and every reading follows the rule of the plan.
+_clp = os.path.join(HERE, "data", "results_cohort2_graph_length.json")
+if os.path.exists(_clp):
+    _CL = json.load(open(_clp)); _cls = sorted(_CL["seeds"], key=int)
+    if not os.path.exists(_cg2p):
+        raise SystemExit("results_cohort2_graph_length.json needs data/results_cohort2_graph_seed.json (Section 7 of the plan) beside it")
+    if [int(x) for x in _CL["lengths"]] != [1, 7, 13] or abs(_CL["margin"] - 0.02) > 1e-12 or abs(_CL["half"] - 0.5) > 1e-12:
+        raise SystemExit("results_cohort2_graph_length.json: the lengths, the margin or the share are not those of Section 8")
+    _both = len(_cls) == 2
+    if _cls != ([_k1, _k2] if _both else [_k1]):
+        raise SystemExit("results_cohort2_graph_length.json: the seeds analysed are not those that Section 8 provides for")
+    _LT = dict(zip(("A", "B", "C"), [str(x) for x in _CL["lengths"]]))          # length tag -> epochs
+    _ST = dict(zip(("One", "Two"), _cls))                                       # seed tag -> training seed
+    _ord = {"One": "first", "Two": "second"}
+    _plan6 = {_k1: _ca["mean"], _k2: _cb["mean"]}                               # Sections 6 and 7 (results_cohort2_graph_seed.json): \cgPat, \cgTwoPat
+    _stop = {"One": ("\\cgReal{}", "\\cgMean{}"), "Two": ("\\cgTwoReal{}", "\\cgTwoMean{}")}     # each arm under the stopping rule
+    def _csg(v, nd=2):
+        """A ratio for a sentence or a table; a value that rounds to zero carries no sign."""
+        x = "%.*f" % (nd, v)
+        return ("%.*f" % (nd, 0.0)) if float(x) == 0 else x
+    for _tag, _s in _ST.items():
+        _S = _CL["seeds"][_s]; _pl = _S["planned"]
+        if abs(_pl["difference_mean"] - _plan6[_s]) > 1e-9:
+            raise SystemExit("results_cohort2_graph_length.json: the planned difference of the seed %s differs from results_cohort2_graph_seed.json" % _s)
+        if _S["reference"]["length"] != {"2024": 13, "2025": 7}[_s]:
+            raise SystemExit("results_cohort2_graph_length.json: the reference length of the seed %s is not that of Section 8" % _s)
+        if len(_S["validation_course_mean"]["own"]) != 13 or len(_S["validation_course_mean"]["cohort_mean"]) != 13:
+            raise SystemExit("results_cohort2_graph_length.json: the validation course of the seed %s does not hold 13 epochs" % _s)
+        cmd("cl%sSeed" % _tag, _s); cmd("cl%sPlanned" % _tag, _pl["difference_mean"], "{:+.4f}")
+        cmd("cl%sRef" % _tag, _S["reference"]["length"], "int")
+        cmd("cl%sRefPat" % _tag, _S["reference"]["mean"], "{:+.4f}"); cmd("cl%sRefShare" % _tag, _csg(_S["reference"]["share_of_planned_difference"]))
+        cmd("cl%sStopOwn" % _tag, int(round(_pl["epochs_median"]["own"])), "int"); cmd("cl%sStopMean" % _tag, int(round(_pl["epochs_median"]["cohort_mean"])), "int")
+        for _lt, _ep in _LT.items():
+            _E = _S["lengths"][_ep]; _c = _E["contrast"]; _p = "cl%s%s" % (_tag, _lt)
+            cmd(_p + "Own", _E["arms"]["own"]["mean"]); cmd(_p + "OwnSD", _E["arms"]["own"]["sd"])
+            cmd(_p + "Mean", _E["arms"]["cohort_mean"]["mean"]); cmd(_p + "MeanSD", _E["arms"]["cohort_mean"]["sd"])
+            cmd(_p + "ValOwn", _E["arms"]["own"]["val_AUROC_mean"]); cmd(_p + "ValMean", _E["arms"]["cohort_mean"]["val_AUROC_mean"])
+            cmd(_p + "Pat", _c["mean"], "{:+.4f}"); cmd(_p + "PatSD", _c["sd"])
+            cmd(_p + "PatMin", _c["min"], "{:+.4f}"); cmd(_p + "PatMax", _c["max"], "{:+.4f}")
+            cmd(_p + "PatNeg", _c["n_negative"], "int"); cmd(_p + "PatN", _c["n_cells"], "int"); cmd(_p + "PatP", pfmt(_c["signflip_p"]))
+            cmd(_p + "FlipPfold", "{:.4g}".format(_c["signflip_p_patient_folds"])); cmd(_p + "FlipRfold", "{:.4g}".format(_c["signflip_p_reaction_folds"]))
+            cmd(_p + "Share", _csg(_E["share_of_planned_difference"]))
+    cmd("clLenA", int(_LT["A"]), "int"); cmd("clLenB", int(_LT["B"]), "int"); cmd("clLenC", int(_LT["C"]), "int")
+    _nrun = 2 * len(_cls) * _CL["seeds"][_cls[0]]["lengths"]["1"]["contrast"]["n_cells"]
+    cmd("clRuns", _nrun, "int"); cmd("clFiles", _nrun * len(_LT), "int")
+    _rd = _CL["reading"]; _kw, _nm = _rd["n_within_margin"], _rd["n_means"]
+    _cmg = "$%g$" % _CL["margin"]
+    cmd("clWithinN", _kw, "int"); cmd("clMeansN", _nm, "int")
+    # the reading of the margin (Section 8: the number of the seed-by-length means within 0.02 AUROC of zero is reported)
+    _mph = (("all %s means lie within %s AUROC of zero" % (_word(_nm), _cmg)) if _kw == _nm else
+            ("none of the %s means lies within %s AUROC of zero" % (_word(_nm), _cmg)) if _kw == 0 else
+            ("%s of the %s means lie%s within %s AUROC of zero" % (_word(_kw), _word(_nm), "s" if _kw == 1 else "", _cmg)))
+    cmd("clMarginPhrase", _mph)
+    cmd("clMarginSentence", _mph[0].upper() + _mph[1:] + ", the range that the plan reads as agreement with the first cohort.")
+    # the reading of the training length (Section 8: at the reference length, the sign of the planned difference and at least half its size)
+    _keep = {_tag: bool(_CL["seeds"][_s]["reference"]["keeps_half"]) for _tag, _s in _ST.items()}
+    for _tag, _s in _ST.items():
+        if bool(_rd["keeps_half"][_s]) != _keep[_tag] or _keep[_tag] != (_CL["seeds"][_s]["reference"]["share_of_planned_difference"] >= _CL["half"]):
+            raise SystemExit("results_cohort2_graph_length.json: the reading and the reference entry of the seed %s differ" % _s)
+    _NOT = "does not account for most of the difference under the stopping rule"
+    _DOES = "accounts for most of the difference under the stopping rule"
+    _shr = {_tag: _CL["seeds"][_s]["reference"]["share_of_planned_difference"] for _tag, _s in _ST.items()}
+    # what the difference at the reference length did, beside the difference under the stopping rule
+    _did = {_tag: ("kept at least half of its size" if _keep[_tag] else "changed sign" if _shr[_tag] < 0 else "was less than half as large") for _tag in _ST}
+    _BYRULE = "so by the rule fixed in advance the longer training of the cohort-mean arm accounts for most of it"
+    _NOTRULE = "so by the rule fixed in advance the longer training of the cohort-mean arm does not account for most of it"
+    if not _both:
+        _lr = "the longer training of the cohort-mean arm %s at this seed" % (_NOT if _keep["One"] else _DOES)
+        _lrs = "it does not account for most of it at this seed" if _keep["One"] else "it accounts for most of it at this seed"
+        _short = "the difference %s at the one training seed that could be analysed, %s" % (
+            _did["One"], _NOTRULE if _keep["One"] else _BYRULE)
+    elif _keep["One"] and _keep["Two"]:
+        _lr = "the longer training of the cohort-mean arm %s at either seed" % _NOT
+        _lrs = "it does not account for most of it at either seed"
+        _short = "the difference kept at least half of its size at both training seeds, " + _NOTRULE
+    elif not _keep["One"] and not _keep["Two"]:
+        _lr = "the longer training of the cohort-mean arm %s at both seeds" % _DOES
+        _lrs = "it accounts for most of it at both seeds"
+        _short = (("the difference %s at both training seeds, %s" % (_did["One"], _BYRULE)) if _did["One"] == _did["Two"] else
+                  ("the difference %s at the first training seed and %s at the second, %s" % (_did["One"], _did["Two"], _BYRULE)))
+    else:
+        _a, _b = ("first", "second") if _keep["One"] else ("second", "first")
+        _lr = ("the longer training of the cohort-mean arm %s at the %s seed and accounts for most of it at the %s, so the two seeds do not agree" % (_NOT, _a, _b))
+        _lrs = "it does not account for most of it at the %s seed and does at the %s, so the two seeds do not agree" % (_a, _b)
+        _short = ("the difference kept at least half of its size at the %s training seed and %s at the %s, so whether the longer training accounts for "
+                  "most of it is not settled" % (_a, _did["Two" if _keep["One"] else "One"], _b))
+    _negnote = " (a negative multiple means that the difference changed sign)" if any(v < 0 for v in _shr.values()) else ""
+    _negsent = " A negative ratio means that the difference changed sign." if any(v < 0 for v in _shr.values()) else ""
+    cmd("clLengthReading", _lr)
+    # the equal-length differences in the order of the lengths, and the ratios at the reference lengths
+    def _three(tag): return "\\cl%sAPat{}, \\cl%sBPat{} and \\cl%sCPat{}" % (tag, tag, tag)
+    if _both:
+        _vals = "%s at the first seed and %s at the second" % (_three("One"), _three("Two"))
+        _refs = ("At the epoch at which the stopping rule had scored the cohort-mean arm at the median, \\clOneRef{} at the first seed and \\clTwoRef{} at the "
+                 "second, the equal-length difference was \\clOneRefShare{} and \\clTwoRefShare{} times the difference under that rule" + _negnote)
+    else:
+        _vals = "%s at the first training seed, the one seed whose runs could be completed" % _three("One")
+        _refs = ("At the epoch at which the stopping rule had scored the cohort-mean arm at the median, \\clOneRef{}, the equal-length difference was "
+                 "\\clOneRefShare{} times the difference under that rule" + _negnote)
+    cmd("clMainSentence",
+        "For that reason a last section of the plan, public before its \\clRuns{} runs, removed the stopping rule and trained both arms for the same number "
+        "of epochs. After \\clLenA{}, \\clLenB{} and \\clLenC{} epochs the difference was %s; \\clMarginPhrase{}. %s. The section fixed one half of that difference as "
+        "the size from which the longer training is read as not accounting for most of it, and by this rule %s "
+        "(Supplementary Section~\\ref{supp:cohort2}; Supplementary Table~\\ref{tab:cohortTwoLength})." % (_vals, _refs, _lrs))
+    cmd("clDiscSentence",
+        "On the second cohort the cohort-mean arm also trained longer than the own-expression arm under the same stopping rule. With that rule removed and "
+        "both arms trained equally long, %s. %s" % (_short, (_mph[0].upper() + _mph[1:]).replace("means", "equal-length means") + "."))
+    # the supplement: the rows of the table, the course of the validation AUROC, and what an arm scores at its own length here and under the stopping rule
+    _rows = []
+    for _tag in _ST:
+        for _lt in _LT:
+            _p = "\\cl%s%s" % (_tag, _lt)
+            _isref = int(_LT[_lt]) == _CL["seeds"][_ST[_tag]]["reference"]["length"]
+            _rows.append("%s & \\clLen%s{}%s & %sOwn{} (%sOwnSD{}) & %sMean{} (%sMeanSD{}) & %sPat{} (%sPatSD{}) & %sPatMin{} to %sPatMax{} & %sPatNeg{} & %sPatP{} & %sShare{} \\\\"
+                         % (_ord[_tag] if _lt == "A" else "", _lt, "$^{\\ast}$" if _isref else "", _p, _p, _p, _p, _p, _p, _p, _p, _p, _p, _p))
+    _per = len(_LT)
+    cmd("clTableRows", " \\midrule ".join(" ".join(_rows[i:i + _per]) for i in range(0, len(_rows), _per)))
+    _vrows = []
+    for _tag, _s in _ST.items():
+        for _arm, _nm2 in (("own", "own expression"), ("cohort_mean", "cohort-mean expression")):
+            _vrows.append("%s seed, %s & %s \\\\" % (_ord[_tag], _nm2, " & ".join("%.4f" % x for x in _CL["seeds"][_s]["validation_course_mean"][_arm])))
+    cmd("clValRows", " ".join(_vrows))
+    def _own_note(tag):
+        ref = "C" if _CL["seeds"][_ST[tag]]["reference"]["length"] == 13 else "B"
+        return ("at the %s seed the own-expression arm scores \\cl%sAOwn{} after \\clLenA{} epoch here and %s under the stopping rule, and the cohort-mean arm "
+                "\\cl%s%sMean{} after \\cl%sRef{} epochs here and %s under that rule" % (_ord[tag], tag, _stop[tag][0], tag, ref, tag, _stop[tag][1]))
+    cmd("clOwnArmNote", "; ".join(_own_note(_tag) for _tag in _ST))
+    # where and when the runs were made, and whether the section was public before them (data/cohort2_graph_length_run_record.json)
+    _r8l = _CL.get("run_record")
+    if not _r8l:
+        raise SystemExit("data/cohort2_graph_length_run_record.json is missing (where and when the runs of Section 8 were made)")
+    if not _r8l["plan_public_before_first_run"]:
+        raise SystemExit("cohort2_graph_length_run_record.json: the record does not say that the section was public before its first run; the sentences here assume it")
+    cmd("clPlanSentence",
+        "The section was public before the first of its runs started: commit \\texttt{%s} was pushed at %s UTC on %s, the workstation read it from the "
+        "public repository at %s UTC, and the first run was launched at %s UTC."
+        % (_r8l["plan_commit"][:7], _r8l["plan_pushed_utc"][11:19], _r8l["plan_pushed_date_words"], _r8l["plan_seen_public_from_the_workstation_utc"][11:19],
+           _r8l["first_run_launched_utc"][11:19]))
+    cmd("clRunSentence", _r8l.get("run_sentence", ""))
+    cmd("clOneSeedSentence", "" if _both else (" " + _r8l["one_seed_sentence"]))
+    cmd("clPatience", _CL["patience_of_the_stopping_rule"], "int")
+    cmd("clSeedsPhrase", "at both training seeds" if _both else "at the first training seed")
+    cmd("clPlannedPhrase", "\\cgPat{} at the first training seed and \\cgTwoPat{} at the second" if _both else "\\cgPat{}")
+    cmd("clRefSentence",
+        ("At the reference length the difference is \\clOneRefPat{} at the first seed, against \\cgPat{} under the stopping rule, a ratio of "
+         "\\clOneRefShare{}, and \\clTwoRefPat{} at the second, against \\cgTwoPat{}, a ratio of \\clTwoRefShare{}." + _negsent) if _both else
+        ("At the reference length the difference is \\clOneRefPat{}, against \\cgPat{} under the stopping rule, a ratio of \\clOneRefShare{}." + _negsent))
+
 _byname = {}
 for _line in L:                      # the last definition of a name wins, so an explicit word macro overrides an automatic one
     _byname[_line.split("}")[0]] = _line

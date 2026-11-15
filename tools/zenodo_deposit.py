@@ -417,13 +417,17 @@ def merge_related(existing, additions):
 def code_description(tag, commit, snapshot_sha, snapshot_name, data_concept_doi):
     """The description of a version of the code record. It names the studies by what they do and the
     version by its commit, so that it reads the same whatever the tag is called. The two analyses
-    added in benchmark-validity-2026-11c and their extensions in benchmark-validity-2026-11d and
-    benchmark-validity-2026-11e are named from those releases on, so that the text of an earlier version,
-    when it is set again, does not list what that version does not hold."""
+    added in benchmark-validity-2026-11c and their extensions in benchmark-validity-2026-11d,
+    benchmark-validity-2026-11e and benchmark-validity-2026-11f are named from those releases on, so that
+    the text of an earlier version, when it is set again, does not list what that version does not hold."""
     since_11c = not (tag.startswith("journal-") or tag == "benchmark-validity-2026-11b")
     since_11d = since_11c and tag != "benchmark-validity-2026-11c"
     since_11e = since_11d and tag != "benchmark-validity-2026-11d"
+    since_11f = since_11e and tag != "benchmark-validity-2026-11e"
     cohort2 = ("the linear rows and the graph scorer repeated on a second cohort with their plan, the graph scorer's "
+               "grid on both cohorts at a second training seed, its two arms on the second cohort at equal training "
+               "length, " if since_11f else
+               "the linear rows and the graph scorer repeated on a second cohort with their plan, the graph scorer's "
                "grid on both cohorts at a second training seed, " if since_11e else
                "the linear rows and the graph scorer repeated on a second cohort with their plan, " if since_11d else
                "the linear rows repeated on a second cohort with their plan, " if since_11c else "")

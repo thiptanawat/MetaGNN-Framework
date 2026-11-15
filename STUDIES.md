@@ -106,6 +106,8 @@ The output follows its input in rank order and on no attribute adds to it.
 
 **The second cohort at a second training seed.** Section 7 of that plan repeats the whole grid at the training seed 2025, both arms on each of the 15 cells. The paired difference over cells is -0.0133 (standard deviation 0.0228, negative in 11 of 15); the per-cell mean of the two seeds' differences is -0.0135 (standard deviation 0.0164, negative in 12 of 15) (`paper1/data/results_cohort2_graph_seed.json`).
 
+**The two arms on the second cohort at equal training length.** Under the stopping rule of Sections 6 and 7 the cohort-mean arm was trained longer than the own-expression arm. Section 8 of that plan removes the rule: both arms are trained for 13 epochs on every cell and scored after 1, 7 and 13 epochs (60 runs). The paired difference over cells is -0.0049, -0.0210, -0.0244 at the seed 2024 and +0.0014, -0.0179, -0.0206 at the seed 2025, against -0.0138 and -0.0133 under the stopping rule; 3 of the 6 equal-length means lie within 0.02 AUROC of zero. At the reference length the difference is 1.77 times the planned one after 13 epochs at the seed 2024 and 1.34 times the planned one after 7 epochs at the seed 2025. The reading that the section fixed: at both seeds the difference at the reference length has the sign of the planned difference and at least half its size, so the longer training of the cohort-mean arm is not read as accounting for most of the planned difference. These are descriptions of dependent cells, and the section fixed no test (`paper1/data/results_cohort2_graph_length.json`).
+
 **The first cohort at a second training seed.** `paper1/FIRST_COHORT_SEED_PLAN_2026-11-15.md` repeats the whole grid of the first cohort at the training seed 2025, both arms on each of the 15 cells. The paired difference over cells is -0.0130 (standard deviation 0.0228, negative in 10 of 15); the per-cell mean of the two seeds' differences is -0.0096 (standard deviation 0.0227, negative in 8 of 15) (`paper1/data/results_cohort1_graph_seed.json`).
 
 ## Language-Model Evidence in brief
@@ -231,9 +233,10 @@ every p-value in the Reaction-Scoring Audit traces back to them), `strata.json`,
 permutation nulls, `mask_scores.json`, `arm_noise.json`, `collapse_noise.json` and
 `fam_clean_scores.json`. A reader who wants to re-derive those rollups rather than take them
 from the repository needs the arrays; a reader who wants to check that the reported numbers
-follow from the rollups does not. The cells trained later (the second cohort and the grid of the
-first cohort at a second training seed) wrote 92 further arrays, from which no committed file is
-computed; they are attached to the same release as two further tarballs, and
+follow from the rollups does not. The cells trained later (the second cohort, the grid of the
+first cohort at a second training seed and the equal-length runs of the second cohort) wrote 272
+further arrays, from which no committed file is computed; they are attached to the same release as
+four further tarballs, and
 `paper1/data/prediction_arrays_added.json` describes them. The external audit's per-arm predictions are small and are
 committed under `paper1/results/deepmeta/preds/`, with the pipeline that produced them under
 `paper1/code/deepmeta_audit/`.

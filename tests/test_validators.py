@@ -58,7 +58,7 @@ def test_validator(exp_id: str, module_name: str):
         for c in report.checks:
             if not c.passed:
                 lines.append(
-                    f"  ❌ {c.name}: "
+                    f"  [FAIL] {c.name}: "
                     f"expected={c.expected!r}, observed={c.observed!r}"
                 )
                 if c.note:

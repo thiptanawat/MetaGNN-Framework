@@ -85,6 +85,7 @@ python3 paper1/code/second_cohort_graph.py
 python3 paper1/code/second_cohort_seed.py
 python3 paper1/code/second_cohort_graph_seed.py   # only when the cells tagged _ts2025 exist
 python3 paper1/code/first_cohort_graph_seed.py    # only when results/fam_seed2025/ exists
+python3 paper1/code/second_cohort_graph_length.py # only when results/cohort2/fam_len/ exists
 python3 paper1/code/make_ledger.py
 python3 paper1/code/make_numbers_p1.py
 python3 paper1/code/make_figures_p1.py
@@ -97,8 +98,9 @@ last scripts that write a hashed file (`build_results_p1.py` writes `data/result
 `second_cohort_stats.py` writes `data/results_cohort2.json`, `second_cohort_graph.py` writes
 `data/results_cohort2_graph.json`, `second_cohort_seed.py` writes
 `data/results_cohort2_seed.json`, `second_cohort_graph_seed.py` writes
-`data/results_cohort2_graph_seed.json` and `first_cohort_graph_seed.py` writes
-`data/results_cohort1_graph_seed.json`)
+`data/results_cohort2_graph_seed.json`, `first_cohort_graph_seed.py` writes
+`data/results_cohort1_graph_seed.json` and `second_cohort_graph_length.py` writes
+`data/results_cohort2_graph_length.json`)
 and before the macros that quote its counts, so nothing it hashes changes after it is written;
 `verify_ledger.py` then checks every hash against the file it names and fails the run on a
 mismatch, which is what catches a ledger committed beside newer results.
@@ -135,13 +137,16 @@ per-patient held-out AUROC recomputed from the array equals the figure the resul
 to the four decimals it carries, for all 299.
 
 The cells that were trained later wrote arrays of the same kind: the 62 cells of the second cohort
-(`results/cohort2/fam/`) and the 30 cells of the first cohort's grid at the second training seed
-(`results/fam_seed2025/`), 92 arrays and 1.35 GB. No committed file is computed from them; the
-figures reported from these cells are in their result files. They are attached to the same tagged
-release as two further tarballs, `preds_cohort2_fam.tar` and `preds_fam_seed2025.tar`, and are not part of the
-data record. `paper1/data/prediction_arrays_added.json` describes them,
+(`results/cohort2/fam/`), the 30 cells of the first cohort's grid at the second training seed
+(`results/fam_seed2025/`) and the 60 runs of the second cohort at equal training length
+(`results/cohort2/fam_len/`, three arrays for each run), 272 arrays and 4.45 GB. No committed file is
+computed from them; the figures reported from these cells are in their result files. They are
+attached to the same tagged release as four further tarballs (`preds_cohort2_fam.tar`, `preds_fam_seed2025.tar`, `preds_cohort2_fam_len_seed2024.tar` and `preds_cohort2_fam_len_seed2025.tar`)
+and are not part of the data record. The arrays of the equal-length runs are packed by training
+seed, because one tarball would exceed the size a release asset may have; both unpack into
+`cohort2_fam_len/`. `paper1/data/prediction_arrays_added.json` describes them,
 `paper1/data/prediction_arrays_added.sha256` lists every array and
-`paper1/data/prediction_array_tarballs_added.sha256` the two tarballs. Unpacked under
+`paper1/data/prediction_array_tarballs_added.sha256` the four tarballs. Unpacked under
 `paper1/results/prediction_arrays/` beside the others, they are checked with
 
 ```
@@ -257,6 +262,26 @@ departures.
   stops if a cell is missing, checks the first seed's contrast against
   `data/results_cohort2_graph.json`, and writes `data/results_cohort1_graph_seed.json`.
   `reproduce.sh` runs it only when `results/fam_seed2025/` exists.
+- **The two arms at equal training length.** Section 8 of the second-cohort plan fixes it, with its
+  driver (`code/double_holdout_len.py`), its launcher (`code/gpu_queue_cohort2_len.sh`) and its
+  analysis script (`code/second_cohort_graph_length.py`), before any of its runs. The driver is
+  `double_holdout_ctrl.py` without the stopping rule and the checkpoint selection: a cell is trained
+  for 13 epochs and scored after 1, 7 and 13 epochs with the weights of that epoch. Both arms run on
+  every cell of the grid at the training seeds 2024 and 2025, 60 runs. The launcher is called once
+  for each seed:
+
+  ```
+  SEED=2024 GPU=1 DATA=<built second cohort> OUT=<output directory> bash paper1/code/gpu_queue_cohort2_len.sh
+  SEED=2025 GPU=0 DATA=<built second cohort> OUT=<output directory> bash paper1/code/gpu_queue_cohort2_len.sh
+  ```
+
+  The two calls may run at the same time on two accelerators or one after the other on one, and
+  the driver skips a cell whose result files exist. A run writes three result files, tagged
+  `_len_ep1`, `_len_ep7` and `_len_ep13`; the 180 files are under `results/cohort2/fam_len/`, and
+  `data/cohort2_graph_length_run_record.json` records where and when the runs were made.
+  `second_cohort_graph_length.py` reads them beside `data/results_cohort2_graph_seed.json`, stops
+  if a file is missing, and writes `data/results_cohort2_graph_length.json`. `reproduce.sh` runs it
+  only when `results/cohort2/fam_len/` exists.
 
 ## What needs the GPU host or the deposited cohort
 
@@ -326,4 +351,6 @@ _Generated by `tools/make_repro_map.py` from the documents built on 2026-11-15; 
 | `tab:naive` (Table S13) | Naive predictors on held-out reactions. | results/naive_baselines.json, results/naive_baselines2.json | naive_baselines.py, naive_baselines2.py |
 | `tab:synth` (Table S14) | The audit on a synthetic patient-varying target. | results/synth/*.json | double_holdout_ctrl.py with the synthetic target options |
 | `tab:cohort2` (Table S15) | The decomposition on two cohorts. | data/results_cohort2.json, computed from results/cohort2/naive_allfolds*.json and results/cohort2/naive_pooled*.json beside the first cohort's results/naive_allfolds*.json and results/naive_pooled*.json; for the graph scorer's rows, data/results_cohort2_graph.json, computed from results/cohort2/fam/*.json beside the first cohort's results/fam/*.json; for the rows of the second training seed, data/results_cohort2_graph_seed.json (the cells tagged _ts2025 under results/cohort2/fam/) and data/results_cohort1_graph_seed.json (results/fam_seed2025/*.json) | build_second_cohort.py (features of the second cohort), naive_baselines_allfolds.py, pooled_baselines.py, second_cohort_stats.py; double_holdout_ctrl.py (the cells), second_cohort_graph.py, second_cohort_graph_seed.py, first_cohort_graph_seed.py |
+| `tab:cohortTwoLength` (Table S16) | The two arms of the graph scorer on the second cohort at equal training length. | data/results_cohort2_graph_length.json, computed from results/cohort2/fam_len/*.json (the cells of Section 8 of the plan, tagged _len_ep<E>) and, for the differences under the stopping rule, data/results_cohort2_graph_seed.json | double_holdout_len.py (the cells), second_cohort_graph_length.py |
+| `tab:cohortTwoValidation` (Table S17) | Validation AUROC of the two arms after every epoch of the equal-length runs. | data/results_cohort2_graph_length.json (the validation course that each cell of results/cohort2/fam_len/ records) | double_holdout_len.py (the cells), second_cohort_graph_length.py |
 <!-- map:end -->

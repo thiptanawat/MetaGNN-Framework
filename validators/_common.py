@@ -49,7 +49,7 @@ class Check:
     note: str = ""
 
     def format(self, indent: int = 2) -> str:
-        symbol = "✅" if self.passed else "❌"
+        symbol = "[PASS]" if self.passed else "[FAIL]"
         head = f"{' ' * indent}{symbol} {self.name}"
         bits = []
         if self.expected is not None:
@@ -96,9 +96,9 @@ class ValidationReport:
 
     def format(self) -> str:
         if self.skipped:
-            return (f"⚪ {self.experiment} — SKIPPED\n"
+            return (f"[SKIP] {self.experiment} — SKIPPED\n"
                     f"   {self.skip_reason}")
-        head_symbol = "✅" if self.passed else "❌"
+        head_symbol = "[PASS]" if self.passed else "[FAIL]"
         lines = [
             f"{head_symbol} {self.experiment}: {self.description}",
             f"   Manuscript: {self.manuscript_anchor}",

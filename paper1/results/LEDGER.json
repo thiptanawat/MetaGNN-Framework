@@ -1,8 +1,8 @@
 {
  "_generated_by": "code/make_ledger.py",
  "note": "One row per result family behind Reaction-Scoring Audit: what produced it, the settings its own output records, the checkpoint policy and endpoint, and a SHA-256 of every file. Fields a result file does not carry are absent rather than guessed. The prediction arrays the mask and clean-subset rescorings read are not committed; they are attached to the tagged release, and prediction_arrays below records their checksums.",
- "n_families": 21,
- "n_result_files": 438,
+ "n_families": 22,
+ "n_result_files": 618,
  "data_records": [
   {
    "file": "data/activity_labels_ht29.pt",
@@ -23,6 +23,11 @@
    "file": "data/cohort2_expression_qc.json",
    "bytes": 534,
    "sha256": "66c4010ba81fb3280db778e169f0cfc11506b86506d32f9a3222d1b7af2faaa1"
+  },
+  {
+   "file": "data/cohort2_graph_length_run_record.json",
+   "bytes": 14070,
+   "sha256": "c0d27b4ef2eed1a0036e7ccd15e9f52c3eb70877ee3aeec7f862df84ac828e01"
   },
   {
    "file": "data/cohort2_graph_run_record.json",
@@ -91,18 +96,18 @@
   },
   {
    "file": "data/prediction_array_tarballs_added.sha256",
-   "bytes": 177,
-   "sha256": "4341235fe45054ef48fcdd3d3edc7cf7e79743caf02123c68f39761095b9d566"
+   "bytes": 379,
+   "sha256": "d27afa21dd8dab8bf2f37dc876fc7fd4a79afd6e60e147b18774ad89ba9a0b34"
   },
   {
    "file": "data/prediction_arrays_added.json",
-   "bytes": 19387,
-   "sha256": "56f1478ff7ad3f81f31b7d21ac279097cc374b3a9983141dbd17d05a9efcf376"
+   "bytes": 57024,
+   "sha256": "236f909f440f4d7ded35a1634675db89b675941b7f3f2b7b787760ce3bd76c14"
   },
   {
    "file": "data/prediction_arrays_added.sha256",
-   "bytes": 11182,
-   "sha256": "5bef040ee347eede6620f07f71f6c912b24187603532fe0f702ec048db8b6836"
+   "bytes": 35002,
+   "sha256": "c37c8fc96c4ae7e9614a05a19c5c913a902c7be3aaabab686641fa70fb81129d"
   },
   {
    "file": "data/recon3d_aligned.json.gz",
@@ -123,6 +128,11 @@
    "file": "data/results_cohort2_graph.json",
    "bytes": 8959,
    "sha256": "bf321e02aa028034aa6448a9e68f6b1308f2444a6b22f08fdaa41268f618753c"
+  },
+  {
+   "file": "data/results_cohort2_graph_length.json",
+   "bytes": 29305,
+   "sha256": "840070b20fab17c7db3bd92fa82feec7339ee60ae9927db766cc6cedbfa41665"
   },
   {
    "file": "data/results_cohort2_graph_seed.json",
@@ -2954,6 +2964,965 @@
      "file": "results/fam_seed2025/gnn_B_mb0.0_p4_r2_ts2025_ivr_fam.json",
      "bytes": 737,
      "sha256": "3173f9a0f6e69c65154851d1ad5133ad183bfb7602442b0b31d5c5f19b33599f"
+    }
+   ]
+  },
+  {
+   "family": "graph model cells, family-disjoint reaction split, second cohort, equal training length",
+   "directory": "results/cohort2/fam_len",
+   "runner": "code/double_holdout_len.py --inner_val_rxn 0.2 --family_map data/families/families_union.json --family_tag fam --score_epochs 1,7,13, launched by code/gpu_queue_cohort2_len.sh once for each training seed (Section 8 of the plan: both arms on every cell at the training seeds 2024 and 2025, trained for 13 epochs and scored after 1, 7 and 13 epochs; files tagged _len_ep<E>, those of the seed 2025 also _ts2025); summarized by code/second_cohort_graph_length.py",
+   "policy": {
+    "selection": "none: no early stopping; the inner-validation AUROC is recorded after every epoch and selects nothing",
+    "checkpoint": "none: the weights after 1, 7 and 13 epochs are scored as they are",
+    "endpoint": "local GPU, one CUDA device per run",
+    "target": "reconstruction-membership proxy label"
+   },
+   "n_files": 180,
+   "settings": {
+    "data": "brca",
+    "epochs": {
+     "min": 1,
+     "max": 13,
+     "n_distinct": 3
+    },
+    "expr_transform": "none",
+    "family_map": "families_union.json",
+    "family_scheme": "union",
+    "feature_mode": {
+     "min": "mean",
+     "max": "real",
+     "n_distinct": 2
+    },
+    "inner_val_rxn": 0.2,
+    "n_active_labels": 3379,
+    "n_fit_rxn": {
+     "min": 5543,
+     "max": 5647,
+     "n_distinct": 12
+    },
+    "n_heldout_families": {
+     "min": 1572,
+     "max": 1749,
+     "n_distinct": 3
+    },
+    "n_heldout_rxn": {
+     "min": 3500,
+     "max": 3600,
+     "n_distinct": 2
+    },
+    "n_inner_val_rxn": {
+     "min": 1411,
+     "max": 1475,
+     "n_distinct": 10
+    },
+    "n_test": 219,
+    "n_train": 744,
+    "train_seed": {
+     "min": 2024,
+     "max": 2025,
+     "n_distinct": 2
+    }
+   },
+   "files": [
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "4a7c4552b259b42e79e6227f5f68171aeec426659ecb0a0e0ff266a470c62adb"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_ivr_fam_len_ep13.json",
+     "bytes": 940,
+     "sha256": "3a4e8363220092bc2d10f7817add2faf075d34fdf49daf2140cff6d6d8eb47f8"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "4c843f17f1a8a16bb3cd4d85dc53366fd428160bed9eae99b99c618f71010b0e"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_mean_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "ffd3bcac9f938f578c38a7d47afc90f3f3ef779fc86f34d86d0a73287f3e8514"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_mean_ivr_fam_len_ep13.json",
+     "bytes": 943,
+     "sha256": "3f6f3a5f8e7a202cef49dddf1c49baf937a909afb69ba5133d4b75f970ffde74"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_mean_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "2a1c5e5b4f7c1b45d851b8895298356884e0bcfd9c071cb44fd7c56988fbb79a"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "f7d0e929086383fc0bfd37022c1b42423cd339fcd56a5e69ef246d045d222112"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 939,
+     "sha256": "b2ed0e107bb29332113f311a37d9e2b34b73ed66ab12a700fcae6707d069cd74"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 877,
+     "sha256": "1e66048314bea5e76d93eb29e905e8be8ca1e005751c6038d92f3359e87ed5de"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "5fd924dd1c76f0f859a7764ed7f425936112f9795f661b3630d7f251c0745c81"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 943,
+     "sha256": "fb174e01cf6d013a37c9bebfff090082af785141ea604f4c180bfe0f7d5ae43d"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r0_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "ec664947e71e3351eb1db928120e39ad5b1187fd3b98b21e4f9bb6cee096bf1a"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "89cc9893ce900c46f3b4029b05cd1dc621ee3c7a5739d6e66a9679106637ca8b"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "4653f01e658fc8eaa926d46d63b840760e20dedab3b764498f0441cd9cd31f31"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "1db276070b226490545e89411950323ca566e6b7434a7912ac8a27307917a22f"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_mean_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "19893c9fd2387b3fbdf2d6104ea9948b254f556fb625280a8520439eb91c06a8"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_mean_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "5b6f8cddcb3c3a13be37bdfffc8e3537db8bb6f49af03ef77ef4e021e09ac227"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_mean_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "cc7c13c0be81bdbef198eaec7aaa65c9b0885dedcf40f839d22709463d14dd66"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 819,
+     "sha256": "89af384296292aa1edb0c210bec6d1ccdbf9508fb1c53ff5be3d42391f22d478"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "74bf92c92b40cb804bc469e5239ff91a91db081a88ea6ef96e6131c60735a5dd"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "f66d3b862008709807011a81a2275751652e358e018f05fdeffe20e264b0f514"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "ce1c0609177f802eb5d5d8d6fe1f08d3173e5140989a630e88e0af8496f1a113"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 943,
+     "sha256": "c21f604d76ce93eb7a5e74d3bbf6c8bf15abc0ca7262c47ff2c73d0318877d84"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r1_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "e50eb6571e51addeef53078637d77a1f1fe829e1fcd5c57f001f50b170d6266d"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "ee9170cfc83f279e6552762d041ec2ec3f682b7b2ce7884d41db77d006546e9e"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "e0c481ebc11896c07e00fa3262376862e0f957a49732af98aa8420f69945b2cb"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "1c9c3dc319eeb6a72f3e851a670d5944c5f0d8794e870ec59756b7b85aad1238"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_mean_ivr_fam_len_ep1.json",
+     "bytes": 819,
+     "sha256": "f05f2b80beb995a623e0555b14a64e22feedcd16f0fc6c53908d8a56bc1bd8dc"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_mean_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "83e7c44ae5489d552ea281d7985f4f2ebeb518bd439e5314d5f5a09177c66ce6"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_mean_ivr_fam_len_ep7.json",
+     "bytes": 879,
+     "sha256": "95960765b2ed935f243216ed45684da25c1bdeed3d6799f41642b9f6f265550d"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "913b61acb78144c4d0f04ea5899a02268c3f8b478ea6d8eb80fdc1b81c8192fa"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 940,
+     "sha256": "a247d4ac2477e971f2ea3d2196ce40f151e5968d1859a4c58a242e0084e682cf"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "4cc3a46ec8dc2d89203dbf31744bce9cd0184d148dc98b8f91fe803f0a52dd77"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "89a0356f86d1dec2faf9c476e70c7c2dc1cad02476d42c3bd6d35c25d233c81f"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "d506fe72654d6280c7dba21b1ce101b08e0a76703072da73506b05f2a743b740"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p0_r2_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "78062f59b017040f75b6cd2f5e8005ef67322f351cc6c7ac890476ad5d8d5120"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "1738b1c8a6734ccbf6e04e0fa39ad58d2bb372d4e34da2b22dc5a05e3304e123"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "6ca6a84ba3bf0baff94e8465196bba845b284a3506b4558aab605ff6fc01a00e"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "e6e378d9d0ef509ba0385d0ba9c95e394ef1ab9c2b1d04183bf366d16dd947f0"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_mean_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "f20094c8ddbd7a0c544f8ebffdf3ab4b872a6f0d65c904a222f9101300e09d24"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_mean_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "9718f248c2d73fb6dd1bbfb62b78e96a131319a7e3e3141cc313b30d690c01ff"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_mean_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "eb5fb161efc5b8640cbac28b08cd4a0239fc06c97da14aee5b63471b7164dae5"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "19356e9e077c0ca219f71ce6f1ffe1afd092ff252446243910486996bcb38c4a"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "bc12961fd0329d936acfdae94bb25e5782f0f911efc106e934f1f5f8e70819ea"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "f86e96b5ccc87a2067f5a70bf7bdd61ef49522ae11163d02351b326c4f046793"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "744e186f07d1dd5436a0ec5ed29ab6c42eb526a242375ac9e7111452c0a24cd6"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "170f8bb335032ea0ad3fdf7687d4a33611a2a0803b76d5d64c5e2b94539f6f71"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r0_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "093f3ab6bf63be2954141aaae45e8ee770318f03b3382ac04f027ce19a59776c"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "0c39dd357491dc5eba4b6de773a52f177a5e08f47a5a4571cc7c44713c1b9b6d"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "277c1536a9c63f03d8869851356ba122f2f33a3e550bc3e71ea91bc74524f0e0"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "fecae6cc3aaebad213fddfbb4d7606b26910e3e612b5c68b78ad3452dab19494"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_mean_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "32fa3c50cab8fc5cf2964532f0433a5401bd777788cee279d9481b7e5f9f5da0"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_mean_ivr_fam_len_ep13.json",
+     "bytes": 937,
+     "sha256": "7a5b0032aacc88dded635c16ef50899ac2b8cf5cc640e1ee737e91e055dbdbc3"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_mean_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "8eef64fd4efd4d006271c0e59d56e60a7b0790c85ca0fa7a94c236960b9bc1f1"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "d9ef03dd59f82a6aabcd9727051f9551a6f823bffd66af9198c51f3ec5c02d91"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 943,
+     "sha256": "e22bb586db88b97bad9eb98cd1572f8e0903b9397a78fe659092c222bc92d98d"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "5ca3a05a4e43223981e25449781f804d805f0d17fd91f481bfbed1593b669321"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "2bee74e588ed2bb348bd53a9c0cde0b2c5b2850c9131f769bbc7265d6b7e06af"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "c5061e70adaddeacc2ca780f650a537cf4fe6c21eb8813c10ae9f6befa951761"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r1_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "129a17b542725c2394eff9fccfb2984b818f59de4ffcd3fb66a644a3306b6d66"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_ivr_fam_len_ep1.json",
+     "bytes": 820,
+     "sha256": "3e983829ff4f30772c9f9251e01afdd36e84973bf7a9432168122c56add70adb"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_ivr_fam_len_ep13.json",
+     "bytes": 939,
+     "sha256": "06dc838a2edae8af7d7e7cebffdacc33f08818206020a84dbdf15a043eb32dfe"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_ivr_fam_len_ep7.json",
+     "bytes": 879,
+     "sha256": "563dbbc5c7bc98a7e812dfb084c4f022383eb50a55a6a4a3d4daa3ec1efdc8f9"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_mean_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "963658bb0f0b88a81885a1f6410414ff202baabfc38b3f25183bf7f4b14dd88b"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_mean_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "aab643ca12b95c5a7ca761501aa7fabc473269e785778171b5aad82b5ce5cb51"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_mean_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "3787c6011e4d698c63617a6664f2b90153b48594d3987d44ee0147de3d7c7a48"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "6efe2e74f7ad8b512f526782c0121e84e8cff99b9c656132cfdcc5bede8d059f"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "4bf483d95bf42acff5cf6448348bfc169d2fa657ee4bb201fd85972698142caa"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "044f7cceeceb2321e0114fc0e16cf3f5d2e554c2d8ed59a51bda334178571ab2"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "7c7b2bb2dc8e8093117e22db588dc84442f9a2d6868ede8619c2dcdb8b819a6a"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 940,
+     "sha256": "b4c092640f1506f21bd0865de68968e99b6023e6cdcd65cc8f76673758f091e5"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p1_r2_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "adc6a20741abd786d5013e77e3727de85d75deaf66c8381334719c89e3c957b0"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "6e3f920b3861bfed2ed8afad14bfc26416f6f972a91b1b6d0234453404f25767"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "d1412bcfb694eb9f535e60053bc90dabd0445c8d3d1d4ec1641fc519d3526420"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "f716bdc9165b481cb615b8e806d9989a94f43a560de303c966619799953c3f24"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_mean_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "876a95a09543ba1c89f46644e8a5bb7e0d3581f7ea013a1a1d4342786d2c0fea"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_mean_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "14d3016bb8f608a5241b4f364267880392d090f808a31c5d836fe6b54c4887e9"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_mean_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "4ad780f47c7ab66618fccad81c9db661082809514c6cc70775babbb1e25cd0ff"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 820,
+     "sha256": "f5bd928b9b1ecab6c39f973d6495c7af04e5defa86a141ac2c4951e298c58aa9"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "dce2fcdd71deb2cba61a2911359a1bfabba03e94935cc925c36a1f3eb403dbe9"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "26b26205acb994dbb56b91b6932bce64f4a63b0e0ad2d7ba93134a4b2ac2f9e8"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "2100381c1dc226deb2e7723285b194168e73ba9ceff7d92c83993f8d95961a60"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "d2e66f7cf7399da9f7ed56d5c2ac2ab89937b454a969fe90b8146bad255be2a9"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r0_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "79e83b8e692e342d284cf80545b0785e182c564bf906aeeffc580fe1f56eb974"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "1965de0d4efbb7e429d7b36932f205734cc7190457c1352e725415fb99f0dd39"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_ivr_fam_len_ep13.json",
+     "bytes": 943,
+     "sha256": "48473d0629938928c4bc23ff14f84421285c1e55b05e6a2966e0c0bf5d863f16"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "6198bfd46038b43369184b090fbc4bdbe7374e18f999e7c598d815acf79aea17"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_mean_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "e652ace553dfc46342a016b0ee58392972894de91bffca352bc811caa8aadc97"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_mean_ivr_fam_len_ep13.json",
+     "bytes": 940,
+     "sha256": "a2b6a4bf0da47ae024be87af95c370dc4e59a8ddf79927e05ee235239ee5ca1e"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_mean_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "ab695d7d3d393255bfa55eb1d64f7b84d89ddf96bfda99ca1b3b15136bb15ac9"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "a481cf6a3ef6beb303bdf6f11decab686e5063977e9f9e0548ef1b48481aa1b4"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 940,
+     "sha256": "0e36ff2e51d6d124b8ac83d3e6cadcced152fcfe49734c705da07f57bcbfa052"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 879,
+     "sha256": "c20a8125a09826b7ea0d5c7f96a1ee9ae276949b541c7f2d496eaac0abf19837"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "1133c59be5c5a96c18a1b7c5d6e095b3f0370bc80263bbbc02df7bad205368d9"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "967759e0dfcab9690c00632f79fe51a059618efbc3c22f0e087f9dc38cc26860"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r1_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 878,
+     "sha256": "eda691a4f144a7deba32824a65ab7b1be25701e4383364dd8110417b16f743b9"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "8b5cfc576d5b1344e37fc9e9f609f979d1101dc74126afcbb8dbf1efd27b002b"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_ivr_fam_len_ep13.json",
+     "bytes": 937,
+     "sha256": "aafed085bd0e89c8ef72d70dc7452dc321578a76ea4abe2ca06b4a18533216cf"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_ivr_fam_len_ep7.json",
+     "bytes": 879,
+     "sha256": "a9d17925f6f0aef86fc572c8a1e1c83958c3616fe10f7c75d63e2203ed24c330"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_mean_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "b079b1771cd08b48157c1bd21a9895d8a28484ed5f8c4b94530b2340bca4196b"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_mean_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "20fcbe2944ce8eca62c866c744328c99d025fed627c6460395096c8aee0214b5"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_mean_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "b86223423d3d9f7fe146ee72f11d669ef96af5817b6f2d2aed11d8a753e2b7e2"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "1e2435a8c49e5b572095cd21a9c47cc1564d7d47e49918f8ad5ee1607b0fc316"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "c6526fdf0614e9064c8d0b973d57c0673e6e1a7d784e7cf97156f95e6d66ec98"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "60fbed09bcef27cada9ebb5c87c4cb3c295ba11231f91fe76068f10bc84849bf"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 820,
+     "sha256": "1645a94c194f0a3bda4609fee9d0dee9420fadd6a2be17c5d85f46939af11ffc"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 940,
+     "sha256": "ffdc0c32d1e3aa121dedc9a3904c7b9251fc0cad76386446bae6897673d7b987"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p2_r2_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 879,
+     "sha256": "c907a6a9c860a45ef884bf1e806f8c9cd9febca7c45178c436331778ae3c41d4"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_ivr_fam_len_ep1.json",
+     "bytes": 820,
+     "sha256": "fa38b33ebaaeafa4b4a998a49e8d0697bbe1ea58cfd1d7ef3ac199062fa9a4de"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "20a0a96ad080172bff30ae1ae429b89e96471ef0cf1289e1513ed602a173bb91"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "73292c946c9b0a9776cc63822d7d8cbbb1f385fe4a25d7fa3c3ce682ba30eea4"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_mean_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "43594149918004232d523dd7aa4093d4ea1b5110165ee5885a87db63cc438533"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_mean_ivr_fam_len_ep13.json",
+     "bytes": 939,
+     "sha256": "bef72a1e08c48ad1592b2003b478b27fd1babbb2d3fd9389a5f157a713fca2db"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_mean_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "7321313b0fdd2bd22cf4044bc386162e8e73f3b5ad72724fe0ce172c82fc7c93"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "1b74c598a1cd285a59d117369ac8b1cea4477be16695cfbcbfc13923fbf4f625"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 937,
+     "sha256": "fe33c91b57354020776ac693172799864088b4727ba2b43e7a8b888aff5ffd13"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 879,
+     "sha256": "be95df8f2ca0e7b924a13cd63a2dbf53aac9679b4ea8d3c4014f75bcc01691a3"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 820,
+     "sha256": "334fc1c660765021133aac4a6ec8f64b27737935449efc87fc70624569b93d21"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "1453f70a71916564082877ff7407112c5904930208cb2cc5d386883abc459dfa"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r0_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 877,
+     "sha256": "d4cdb9e4a4fe4ae8efea78636ac6e1fb076f86d0003fb50b8c82158d636ee16a"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_ivr_fam_len_ep1.json",
+     "bytes": 820,
+     "sha256": "a0d68058df04be202fad11f8e438db8ee9a137a57b5e608e8f44ae2247ce843a"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_ivr_fam_len_ep13.json",
+     "bytes": 940,
+     "sha256": "d28fcbfaa7eb2a736ae781a73073c9e47c879a5699a94dc5ce218a6b0c87036e"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "98aa0303448deb064cf98d0aeafc2453bd7140537dbad75c80363885e0894e8d"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_mean_ivr_fam_len_ep1.json",
+     "bytes": 820,
+     "sha256": "04a5ee017d6a8b26d12c1b67a087dbbd44cdca391fbc21abe1930f78ca326d48"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_mean_ivr_fam_len_ep13.json",
+     "bytes": 943,
+     "sha256": "3eb4edfb09cea9ca30547fcc46475628b9aa8c97157b1b074ee6720a9fbb6967"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_mean_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "319436b077895fb82b05a890ebe7f4e53271109c9380398b7e2bebea151319df"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "684fbc566ba021e9a408a2baaefd1522face5d2ca66899638b04125f5a12cb49"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "8abca37326d964680cf8a39bcae2ab5b014efe05c4f0bda9e7824ddf93e38bdb"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "d6d50a346ee393eeeb9114d3e19266cc087c985130acdb4d05391e75265bba5a"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "f9b60ede9b5935fde537290f5fdd9864b94925b87a63695035caa10f4ff57f61"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "6cfb48b20ecf9d5dbfde7f62c580a2504cd95aabbbe8cdf354ccec539a59fc29"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r1_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 878,
+     "sha256": "642e7f43d3b6f670f469efab6a7461b29e95363cca27a284cf5a07ee10e29301"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "f8c6630d09a4e8e85192f14af11bc031b33b22c306a7bf709ebde8173d3b22d1"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "134daf5f2adac43f129413a33cb790238a117c255aaa2b5739a768175e957897"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "3e88c926938c2aab5d99e0c794edd2393151636cb2d9ba6dee75c0672cdc2a59"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_mean_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "c6c4a0db53a3954b68a62a8557cc189d2d5c274b79114805eedaf698f4ebe26a"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_mean_ivr_fam_len_ep13.json",
+     "bytes": 939,
+     "sha256": "9db3797ed2a3bb20d52e8fe7f81393b85e24b75d2cfe0f272a6136848d1617de"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_mean_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "83537a6cf0a226a35c0c76c440df29cb075d64a84596789adae0568ac7bedb36"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "a3c24cd5f95a9e67fb2823c281fe759e6362c679e442610826b1c103049ba48b"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 943,
+     "sha256": "22c0543b0e20017b8a5ce6e49b17c84586d82fb503d981e451f8ab6ef2036d22"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 882,
+     "sha256": "4a1e9bbf0aea270b4e220028b7366ea90a19a9bfba0358383c38cfe48fc47d8b"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "457d75be61c9adbb916310699b4a6947b53bddeadd96ac7303752bd648ad37ee"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "66f4ea62ea952022a5c4f985580b28eb0fff9f945b8845c8046f46cc88c94225"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p3_r2_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "3ac305a08316042c02241e5d13df67e8eae2e5575e633abc9e48d1ee0c0a5998"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "01fc070c6ee78f4b0497049e359326f112bb35bceff77a209a774860def9eb20"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "86f4591a1830047e477a48d880dab6621b78f0bf258555468d334ccc3a71ae4d"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_ivr_fam_len_ep7.json",
+     "bytes": 878,
+     "sha256": "73101e766cc1ab5c058bd7c54994234b67bdf78f8937eaec84aa5551bd1bbaa5"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_mean_ivr_fam_len_ep1.json",
+     "bytes": 820,
+     "sha256": "05c4c04077e4d6e63e1c9b4aa6d6d13a4e1043f4a446a9a273482ed611b23545"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_mean_ivr_fam_len_ep13.json",
+     "bytes": 940,
+     "sha256": "9ae4affdeb3dfb4653716f93f19a93202a78959b05f84d232c05a7f3d0f62bac"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_mean_ivr_fam_len_ep7.json",
+     "bytes": 879,
+     "sha256": "282ebeddf6888f2235e464afe6a5e6627b98c86703ba54b374c7b19dcf92ea54"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "a1a53057b537e530d2f5523d1586d7cde82c2990266c558fbf833a587b9ad457"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "5954bcbfa62b5328dcfc9b801211385fa74758332f1951517d96f0c84de58327"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "0cbc4e265e9ac3b6e18859f4e4fa0b6b67e45fa89ecfa7de6321c7fc7c6cd02a"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "fb492d1d5364aa946fb6fa1223fc507d2eeffd3f2408e17a91e6fc20e408e899"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 940,
+     "sha256": "0685dae4a04fd82f9fdc01cdfe2d272dafca87bf1aa1e9d502a8a3f189d4e310"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r0_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "a61ba325493326450d70e299ca9769d9b3c448c1a69a675873a878ce336ab22e"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "9929845a063e5380c70b57db4f3390b286224ff79854416e973608d01efa2d63"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_ivr_fam_len_ep13.json",
+     "bytes": 940,
+     "sha256": "80aeae4c45c70a9053e7e309169f1a75eaa6e34aff1de978ca9addaa7b7b18db"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_ivr_fam_len_ep7.json",
+     "bytes": 878,
+     "sha256": "901cc94621d1b7ec4aed5c9894e33a3990b1d3b5d16303e6c34ad632a1071a9a"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_mean_ivr_fam_len_ep1.json",
+     "bytes": 820,
+     "sha256": "8f8e8afc08c95fe8ebf865640b9054c129f0b5813cea91ab843fbaeba3e84009"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_mean_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "e0d92a88526056acecc373773e6a3ba4386d1aefbfb0096f141db2621555373c"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_mean_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "a4a42a6625577e038946ae73dc99d8c278b111bddeb287758be73138c6c2852b"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 820,
+     "sha256": "b73af7908e168611bc831ad1a25fd9960ff112856798bd0eb7d9ee6b0248b39c"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 939,
+     "sha256": "67dc3afbe05801a67cd6ba12b8e494898992ca9b504c532b7bf0f4bd33372765"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 877,
+     "sha256": "e175e7e04a80ae2354656a5ef6b61220cdd2e6454e8cf9c5dcb7be18d4aec2ab"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "6485f73cec5b6b30b9d5276ff46108cbe3ae948b532e5b3d43e11d0ff922416d"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 934,
+     "sha256": "f4a5229a2db2fa0f8193ae1e1db60a8baa270e06bc3b0e025949d5f94383c075"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r1_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "1b654e240c71020fff0608496819ceb387deff70d8c4d17248b37624a3c29441"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "79a3d2857920f34260b91d09779a11c3a97d8b0319bba9351ca61802fb7ae41f"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_ivr_fam_len_ep13.json",
+     "bytes": 942,
+     "sha256": "7dec17d1573fc7205e135705c01f932063f6b605123b65874b57b70f06ad5d94"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_ivr_fam_len_ep7.json",
+     "bytes": 881,
+     "sha256": "b003c2cfd7cce917aba974b40564ccb5a55791776d563a4a5719dd4ec7159fab"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_mean_ivr_fam_len_ep1.json",
+     "bytes": 822,
+     "sha256": "0f269c97402155316f84eceba4d4d19231dc13b29f3c7c5dc72d9198dae935ca"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_mean_ivr_fam_len_ep13.json",
+     "bytes": 941,
+     "sha256": "d3f15c2b66d578d41a73802d3d57102234b39c2b905723e051421195d78ecacb"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_mean_ivr_fam_len_ep7.json",
+     "bytes": 879,
+     "sha256": "c24202a8dea00bdc029d77950ec92b02b7a5c15fcff289a5ec0ce6b824256a09"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_mean_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 820,
+     "sha256": "94d786fb6a1e78446b7ff566a168b281de05b3bee37838dacb1b31d5035b89fa"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_mean_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 938,
+     "sha256": "6025c64c8e85dd08bf74b6da3f610f8a8ea1ff114ef6d9b37debdbd68184558e"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_mean_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 880,
+     "sha256": "a977df93bc85b9bb37c894ea3190116f91616115e8142f0269545861953e41fd"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_ts2025_ivr_fam_len_ep1.json",
+     "bytes": 821,
+     "sha256": "0c27fa12cf89659296c3704f6eaffb798cfb7fed458520d23eb998d246f4f3e0"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_ts2025_ivr_fam_len_ep13.json",
+     "bytes": 940,
+     "sha256": "6bf0c076a29f64820da34163999e64d42df02d7db95bef174c6f43c8d741f693"
+    },
+    {
+     "file": "results/cohort2/fam_len/gnn_B_mb0.0_p4_r2_ts2025_ivr_fam_len_ep7.json",
+     "bytes": 879,
+     "sha256": "965fc078bd46fac271fddbc456d64678ecb94c5731d8d3e112668dcb32fab584"
     }
    ]
   },

@@ -169,3 +169,41 @@ Sections 6 and 7 trained both arms under one stopping rule, and under that rule 
 | Reporting | the result is reported whatever it is, beside those of Sections 6 and 7, with any deviation listed under a dated heading below |
 
 A further length, a third seed and the first cohort are not part of this section. On the first cohort the two arms stopped after a median of 16 epochs each at the seed of the primary grid.
+
+### Record of the runs of Section 8 (15 and 16 November 2026)
+
+Section 8 was public from 15:28 on 15 November 2026, local time (08:28 UTC; commit `709dccdd` on the main branch). The second workstation read that commit from the public repository at 08:28:46 UTC, and the first of the 60 runs was launched at 08:29:07 UTC, 37 seconds after the push. The last result file was written at 03:24 on 16 November, local time. The launcher that the section names was called once for each seed, at the same time: `SEED=2024 GPU=1` on accelerator 1 of the second workstation; `SEED=2025 GPU=0` on accelerator 0 of the second workstation, with at most four runs at a time on each. No job was issued twice. Workstation, environment and scheduling priority are those recorded for Sections 6 and 7, and the driver, the launcher and the analysis script are the files committed with the section (their SHA-256 values are in the record).
+
+Nothing was read before the runs were complete: no result file and no job log of the section was opened before all 180 result files existed, and progress was followed by counting files and processes. The analysis script was run once, when all 60 runs existed.
+
+Deviations from Section 8: none.
+
+The record of the runs is `data/cohort2_graph_length_run_record.json`, which lists every job with its launch time and the time at which its result files were written. The cells are in `results/cohort2/fam_len/` (60 runs, three result files each), and `code/second_cohort_graph_length.py` writes `data/results_cohort2_graph_length.json`.
+
+### Outcome of Section 8
+
+| Training seed | Epochs | Own-expression arm | Cohort-mean arm | Primary quantity: own minus cohort mean, mean over the 15 cells | Standard deviation over cells | Range over cells | Negative cells | Sign-flip p (cells, patient folds, reaction folds) | Share of the planned difference |
+|---|---|---|---|---|---|---|---|---|---|
+| 2024 | 1 | 0.7912 | 0.7961 | -0.0049 | 0.0187 | -0.0397 to +0.0208 | 8 of 15 | 0.3256, 0.3125, 1 | 0.36 |
+| 2024 | 7 | 0.7810 | 0.8020 | -0.0210 | 0.0162 | -0.0524 to +0.0096 | 14 of 15 | 0.00025, 0.0625, 0.25 | 1.53 |
+| 2024 | 13 (reference length) | 0.7814 | 0.8058 | -0.0244 | 0.0157 | -0.0516 to -0.0019 | 15 of 15 | 0.000062, 0.0625, 0.25 | 1.77 |
+| 2025 | 1 | 0.7909 | 0.7895 | +0.0014 | 0.0223 | -0.0551 to +0.0325 | 6 of 15 | 0.8237, 0.75, 1 | -0.10 |
+| 2025 | 7 (reference length) | 0.7826 | 0.8005 | -0.0179 | 0.0233 | -0.0684 to +0.0223 | 11 of 15 | 0.0098, 0.0625, 0.25 | 1.34 |
+| 2025 | 13 | 0.7817 | 0.8022 | -0.0206 | 0.0161 | -0.0536 to +0.0014 | 14 of 15 | 0.00019, 0.0625, 0.25 | 1.55 |
+
+The planned differences, under the stopping rule, are -0.0138 at the seed 2024 and -0.0133 at the seed 2025.
+
+Reading of the margin fixed in Section 8: 3 of the 6 equal-length means lie within 0.02 AUROC of zero.
+
+Reading of the training length fixed in Section 8: at both seeds the difference at the reference length has the sign of the planned difference and at least half its size, so the longer training of the cohort-mean arm is not read as accounting for most of the planned difference.
+
+Beside it, as descriptions. The mean validation AUROC of each arm after every epoch, over the 15 cells; it selected nothing in these runs:
+
+| Training seed, arm | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2024, own expression | 0.7677 | 0.7466 | 0.7428 | 0.7354 | 0.7382 | 0.7384 | 0.7378 | 0.7350 | 0.7385 | 0.7395 | 0.7384 | 0.7378 | 0.7381 |
+| 2024, cohort-mean expression | 0.7638 | 0.7496 | 0.7562 | 0.7526 | 0.7517 | 0.7542 | 0.7549 | 0.7567 | 0.7518 | 0.7579 | 0.7547 | 0.7585 | 0.7614 |
+| 2025, own expression | 0.7648 | 0.7440 | 0.7399 | 0.7431 | 0.7412 | 0.7413 | 0.7428 | 0.7403 | 0.7375 | 0.7391 | 0.7426 | 0.7411 | 0.7434 |
+| 2025, cohort-mean expression | 0.7551 | 0.7540 | 0.7527 | 0.7502 | 0.7492 | 0.7553 | 0.7507 | 0.7518 | 0.7524 | 0.7548 | 0.7579 | 0.7570 | 0.7581 |
+
+As the section says, these runs do not repeat those of Sections 6 and 7: at the seed 2024 the own-expression arm scores 0.7912 after 1 epoch here against 0.7924 under the stopping rule, and the cohort-mean arm 0.8058 after 13 epochs here against 0.8062; at the seed 2025 the own-expression arm scores 0.7909 after 1 epoch here against 0.7917 under the stopping rule, and the cohort-mean arm 0.8005 after 7 epochs here against 0.8050. The comparison of this section is between the two arms within these runs. Every figure describes 15 dependent cells at each seed, and no test was fixed.

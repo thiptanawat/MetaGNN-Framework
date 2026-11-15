@@ -1,5 +1,7 @@
 # Reviewer-facing validators
 
+> **Note, November 2026.** This page describes the validators of the project's earlier stage and is kept as a record. The command and the output shown below are those of that stage, and the result files they read are not part of this repository. Two of the results named here were later corrected by the authors: the 220-patient benchmark rests on a set that was later found to be synthetic, and the near-ceiling score on the breast cohort is label leakage. The top-level `README.md` states both.
+
 Per-experiment validators that load the **shipped output of each
 experiment** (checkpoints, per-fold predictions, summary JSONs) and
 verify they match the manuscript's headline numbers — **without
@@ -17,17 +19,17 @@ python experiments/validate.py                  # validates all 11 experiments
 Expected output (when `shared_data/` is correctly wired):
 
 ```
-✅ E01: Headline 220-patient CRC benchmark           (14 checks)
-✅ E02: 220-cohort multi-seed robustness              (38 checks)
-✅ E03: 624-cohort multi-seed robustness              (38 checks)
-✅ E04: Cross-cohort zero-shot transfer (220↔624)     (13 checks)
-✅ E05: 3D-feature ablation (Table 5)                 (17 checks)
-✅ E07: MSI-stratified analysis (Table 6)             ( 9 checks)
-✅ E08: Clustering pilot Pass F                       (18 checks)
-✅ E09: Seed-ensemble (Pass D, Table 7)               (20 checks)
-✅ E10: BRCA cross-cancer transfer (Table 8)          (15 checks)
-✅ E11: LUAD cross-cancer transfer (Table 9)          (10 checks)
-✅ E14: FBA viability of GNN-selected reactions       (15 checks)
+[PASS] E01: Headline 220-patient CRC benchmark           (14 checks)
+[PASS] E02: 220-cohort multi-seed robustness              (38 checks)
+[PASS] E03: 624-cohort multi-seed robustness              (38 checks)
+[PASS] E04: Cross-cohort zero-shot transfer (220↔624)     (13 checks)
+[PASS] E05: 3D-feature ablation (Table 5)                 (17 checks)
+[PASS] E07: MSI-stratified analysis (Table 6)             ( 9 checks)
+[PASS] E08: Clustering pilot Pass F                       (18 checks)
+[PASS] E09: Seed-ensemble (Pass D, Table 7)               (20 checks)
+[PASS] E10: BRCA cross-cancer transfer (Table 8)          (15 checks)
+[PASS] E11: LUAD cross-cancer transfer (Table 9)          (10 checks)
+[PASS] E14: FBA viability of GNN-selected reactions       (15 checks)
 Summary: 11 passed, 0 failed, 0 skipped
 ```
 

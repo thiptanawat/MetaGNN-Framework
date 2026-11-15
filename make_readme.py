@@ -237,6 +237,25 @@ if os.path.exists(_gs):
           f"{f4(_t['sd'])}, negative in {_t['n_negative']} of {_t['n_cells']}); the per-cell mean of the two seeds' differences is "
           f"{s4(_b['mean'])} (standard deviation {f4(_b['sd'])}, negative in {_b['n_negative']} of {_b['n_cells']}) "
           f"(`paper1/data/results_cohort2_graph_seed.json`).", ""]
+# Section 8 of the same plan: the two arms at equal training length. The paragraph was written before any result of the
+# section was read: the numbers come from the result file and the two readings are the sentences the analysis script wrote.
+_gl = os.path.join(HERE, "paper1", "data", "results_cohort2_graph_length.json")
+if os.path.exists(_gl):
+    _GL = json.load(open(_gl)); _sds = [str(x) for x in _GL["seeds_analysed"]]; _lens = [str(x) for x in _GL["lengths"]]
+    def _r2(x): return "0.00" if ("%.2f" % x) in ("-0.00", "0.00") else "%.2f" % x
+    def _z4(x): return "0.0000" if s4(x) in ("+0.0000", "-0.0000") else s4(x)
+    _vals = " and ".join(", ".join(_z4(_GL["seeds"][s]["lengths"][n]["contrast"]["mean"]) for n in _lens) + f" at the seed {s}" for s in _sds)
+    _pl = " and ".join(s4(_GL["seeds"][s]["planned"]["difference_mean"]) for s in _sds)
+    _rf = " and ".join(f"{_r2(_GL['seeds'][s]['reference']['share_of_planned_difference'])} times the planned one after "
+                       f"{_GL['seeds'][s]['reference']['length']} epochs at the seed {s}" for s in _sds)
+    _nr = 2 * len(_sds) * _GL["seeds"][_sds[0]]["lengths"][_lens[0]]["contrast"]["n_cells"]
+    L += [f"**The two arms on the second cohort at equal training length.** Under the stopping rule of Sections 6 and 7 the cohort-mean arm "
+          f"was trained longer than the own-expression arm. Section 8 of that plan removes the rule: both arms are trained for {_lens[-1]} "
+          f"epochs on every cell and scored after {', '.join(_lens[:-1])} and {_lens[-1]} epochs ({_nr} runs"
+          f"{'' if len(_sds) == 2 else '; the first training seed alone could be analysed'}). The paired difference over cells is {_vals}, "
+          f"against {_pl} under the stopping rule; {_GL['reading']['margin']}. At the reference length the difference is {_rf}. The reading "
+          f"that the section fixed: {_GL['reading']['training_length']}. These are descriptions of dependent cells, and the section fixed no "
+          f"test (`paper1/data/results_cohort2_graph_length.json`).", ""]
 # the same second seed on the first cohort (paper1/FIRST_COHORT_SEED_PLAN_2026-11-15.md)
 _g1p = os.path.join(HERE, "paper1", "data", "results_cohort1_graph_seed.json")
 if os.path.exists(_g1p):
