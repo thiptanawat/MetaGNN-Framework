@@ -9,3 +9,6 @@ venv/
 # Zenodo deposit tool: the working archive and the open-draft state, never committed
 .zenodo_work/
 tools/.zenodo_state.json
+
+# the answer files of the second replication are committed compressed (raw.json.gz); reproduce.sh unpacks them
+paper2/results/replication2_b*/w1/raw.json

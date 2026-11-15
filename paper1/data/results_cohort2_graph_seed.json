@@ -1,0 +1,1025 @@
+{
+ "note": "the graph scorer on the second cohort under the family-disjoint split and the matched selection rule, own-expression arm against cohort-mean arm on the 15 cells of the 5 x 3 grid, at the training seed of Section 6 and at a second training seed; AUROC on held-out reactions of held-out patients; Section 7 of SECOND_COHORT_PLAN_2026-11-13.md",
+ "margin": 0.02,
+ "primary": "paired difference over cells, own minus cohort mean, at the second training seed",
+ "seeds": {
+  "2024": {
+   "train_seed": 2024,
+   "arms": {
+    "own": {
+     "per_cell": {
+      "p0r0": 0.7744,
+      "p0r1": 0.7794,
+      "p0r2": 0.8024,
+      "p1r0": 0.7676,
+      "p1r1": 0.8047,
+      "p1r2": 0.7856,
+      "p2r0": 0.7776,
+      "p2r1": 0.8168,
+      "p2r2": 0.7865,
+      "p3r0": 0.7763,
+      "p3r1": 0.8215,
+      "p3r2": 0.8149,
+      "p4r0": 0.7692,
+      "p4r1": 0.8057,
+      "p4r2": 0.804
+     },
+     "mean": 0.79244,
+     "sd": 0.0183550616,
+     "epochs": {
+      "min": 16,
+      "max": 30,
+      "median": 16.0
+     }
+    },
+    "cohort_mean": {
+     "per_cell": {
+      "p0r0": 0.7994,
+      "p0r1": 0.7909,
+      "p0r2": 0.8179,
+      "p1r0": 0.7693,
+      "p1r1": 0.8114,
+      "p1r2": 0.8333,
+      "p2r0": 0.7701,
+      "p2r1": 0.82,
+      "p2r2": 0.8253,
+      "p3r0": 0.7893,
+      "p3r1": 0.8187,
+      "p3r2": 0.8152,
+      "p4r0": 0.7947,
+      "p4r1": 0.8159,
+      "p4r2": 0.8219
+     },
+     "mean": 0.80622,
+     "sd": 0.0196294676,
+     "epochs": {
+      "min": 16,
+      "max": 67,
+      "median": 28.0
+     }
+    }
+   },
+   "contrast": {
+    "per_cell": {
+     "p0r0": -0.025,
+     "p0r1": -0.0115,
+     "p0r2": -0.0155,
+     "p1r0": -0.0017,
+     "p1r1": -0.0067,
+     "p1r2": -0.0477,
+     "p2r0": 0.0075,
+     "p2r1": -0.0032,
+     "p2r2": -0.0388,
+     "p3r0": -0.013,
+     "p3r1": 0.0028,
+     "p3r2": -0.0003,
+     "p4r0": -0.0255,
+     "p4r1": -0.0102,
+     "p4r2": -0.0179
+    },
+    "mean": -0.01378,
+    "sd": 0.0153432256,
+    "min": -0.0477,
+    "max": 0.0075,
+    "n_cells": 15,
+    "n_negative": 13,
+    "n_positive": 2,
+    "signflip_p": 0.0018310547,
+    "within_margin": true,
+    "signflip_p_patient_folds": 0.0625,
+    "signflip_floor_patient_folds": 0.0625,
+    "signflip_p_reaction_folds": 0.25,
+    "signflip_floor_reaction_folds": 0.25
+   },
+   "training_length": {
+    "epoch_gap_per_cell": {
+     "p0r0": 20,
+     "p0r1": -3,
+     "p0r2": 0,
+     "p1r0": -14,
+     "p1r1": 10,
+     "p1r2": 0,
+     "p2r0": 0,
+     "p2r1": 12,
+     "p2r2": 40,
+     "p3r0": 44,
+     "p3r1": 31,
+     "p3r2": 24,
+     "p4r0": 51,
+     "p4r1": 0,
+     "p4r2": 47
+    },
+    "mean_epoch_gap": 17.4666666667,
+    "pearson_difference_with_epoch_gap": -0.2493078565,
+    "spearman_difference_with_epoch_gap": -0.3045168624,
+    "cells_with_equal_length": 4,
+    "mean_difference_where_gap_at_most_2": -0.016475,
+    "n_cells_where_gap_at_most_2": 4
+   }
+  },
+  "2025": {
+   "train_seed": 2025,
+   "arms": {
+    "own": {
+     "per_cell": {
+      "p0r0": 0.7902,
+      "p0r1": 0.7772,
+      "p0r2": 0.7958,
+      "p1r0": 0.7861,
+      "p1r1": 0.8148,
+      "p1r2": 0.7804,
+      "p2r0": 0.769,
+      "p2r1": 0.8161,
+      "p2r2": 0.7825,
+      "p3r0": 0.7798,
+      "p3r1": 0.8122,
+      "p3r2": 0.7976,
+      "p4r0": 0.7621,
+      "p4r1": 0.8121,
+      "p4r2": 0.7993
+     },
+     "mean": 0.79168,
+     "sd": 0.0170377815,
+     "epochs": {
+      "min": 16,
+      "max": 35,
+      "median": 16.0
+     }
+    },
+    "cohort_mean": {
+     "per_cell": {
+      "p0r0": 0.7844,
+      "p0r1": 0.808,
+      "p0r2": 0.8223,
+      "p1r0": 0.7662,
+      "p1r1": 0.7879,
+      "p1r2": 0.814,
+      "p2r0": 0.7999,
+      "p2r1": 0.8185,
+      "p2r2": 0.8376,
+      "p3r0": 0.7889,
+      "p3r1": 0.8033,
+      "p3r2": 0.8282,
+      "p4r0": 0.7896,
+      "p4r1": 0.8158,
+      "p4r2": 0.8104
+     },
+     "mean": 0.805,
+     "sd": 0.0190222051,
+     "epochs": {
+      "min": 16,
+      "max": 68,
+      "median": 22.0
+     }
+    }
+   },
+   "contrast": {
+    "per_cell": {
+     "p0r0": 0.0058,
+     "p0r1": -0.0308,
+     "p0r2": -0.0265,
+     "p1r0": 0.0199,
+     "p1r1": 0.0269,
+     "p1r2": -0.0336,
+     "p2r0": -0.0309,
+     "p2r1": -0.0024,
+     "p2r2": -0.0551,
+     "p3r0": -0.0091,
+     "p3r1": 0.0089,
+     "p3r2": -0.0306,
+     "p4r0": -0.0275,
+     "p4r1": -0.0037,
+     "p4r2": -0.0111
+    },
+    "mean": -0.01332,
+    "sd": 0.0227719815,
+    "min": -0.0551,
+    "max": 0.0269,
+    "n_cells": 15,
+    "n_negative": 11,
+    "n_positive": 4,
+    "signflip_p": 0.0399169922,
+    "within_margin": true,
+    "signflip_p_patient_folds": 0.125,
+    "signflip_floor_patient_folds": 0.0625,
+    "signflip_p_reaction_folds": 0.25,
+    "signflip_floor_reaction_folds": 0.25
+   },
+   "training_length": {
+    "epoch_gap_per_cell": {
+     "p0r0": 1,
+     "p0r1": 52,
+     "p0r2": 0,
+     "p1r0": 5,
+     "p1r1": 0,
+     "p1r2": 38,
+     "p2r0": 24,
+     "p2r1": 0,
+     "p2r2": 0,
+     "p3r0": 12,
+     "p3r1": 6,
+     "p3r2": 26,
+     "p4r0": -13,
+     "p4r1": 0,
+     "p4r2": 17
+    },
+    "mean_epoch_gap": 11.2,
+    "pearson_difference_with_epoch_gap": -0.3556120833,
+    "spearman_difference_with_epoch_gap": -0.3564225541,
+    "cells_with_equal_length": 5,
+    "mean_difference_where_gap_at_most_2": -0.0091666667,
+    "n_cells_where_gap_at_most_2": 6
+   }
+  }
+ },
+ "both_seeds": {
+  "what": "per cell, the mean of the two seeds' differences",
+  "per_cell": {
+   "p0r0": -0.0096,
+   "p0r1": -0.02115,
+   "p0r2": -0.021,
+   "p1r0": 0.0091,
+   "p1r1": 0.0101,
+   "p1r2": -0.04065,
+   "p2r0": -0.0117,
+   "p2r1": -0.0028,
+   "p2r2": -0.04695,
+   "p3r0": -0.01105,
+   "p3r1": 0.00585,
+   "p3r2": -0.01545,
+   "p4r0": -0.0265,
+   "p4r1": -0.00695,
+   "p4r2": -0.0145
+  },
+  "mean": -0.01355,
+  "sd": 0.0164067713,
+  "min": -0.04695,
+  "max": 0.0101,
+  "n_cells": 15,
+  "n_negative": 12,
+  "n_positive": 3,
+  "signflip_p": 0.0051879883,
+  "within_margin": true,
+  "signflip_p_patient_folds": 0.0625,
+  "signflip_floor_patient_folds": 0.0625,
+  "signflip_p_reaction_folds": 0.25,
+  "signflip_floor_reaction_folds": 0.25
+ },
+ "between_seeds": {
+  "grid_mean_second_minus_first": 0.00046,
+  "mean_abs_change_of_a_cell": 0.0161,
+  "max_abs_change_of_a_cell": 0.0384,
+  "cells_with_one_sign": 11,
+  "n_cells": 15,
+  "pearson": 0.4618701713,
+  "spearman": 0.3857142857
+ },
+ "reading": {
+  "mean": -0.01332,
+  "sd": 0.0227719815,
+  "n_negative": 11,
+  "n_cells": 15,
+  "within_margin": true,
+  "agreement": "the mean lies within 0.02 AUROC of zero, which the plan reads as agreement with the first cohort"
+ },
+ "default_seed_check": "equal to data/results_cohort2_graph.json (mean, negative cells)",
+ "run_record": {
+  "note": "the record of the runs of Section 7 of SECOND_COHORT_PLAN_2026-11-13.md; written by hand and from the facts that collect_run_facts.py read on the second workstation (launch times, file times, minutes and epochs; no score)",
+  "plan_commit": "9d3b8a8f286718450d0fb2335201532a0024af74",
+  "plan_pushed_utc": "2026-11-14T13:57:25Z",
+  "plan_pushed_date_words": "14 November 2026",
+  "first_new_run_launched_utc": "2026-11-14T14:03:18Z",
+  "minutes_between_push_and_first_new_run": 5.9,
+  "plan_public_before_first_new_run": true,
+  "new_runs": 28,
+  "reused_runs": 2,
+  "reused": "the two runs of cell p0r0 at this seed were made in the check of 14 November 2026 (gpu_queue_cohort2_seed.sh) and their result files were in the output directory before the queue started; the driver skipped them",
+  "plan_launcher": {
+   "launcher": "paper1/code/gpu_queue_cohort2_seed2025.sh",
+   "accelerator": "first accelerator of the second workstation",
+   "jobs_issued": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "started_local": "2026-11-14T20:58:18+07:00",
+   "stopped_local": "2026-11-15T02:26:10+07:00",
+   "stopped": "by hand, after it had issued the first sixteen jobs of its list and while it waited for a free slot; the runs it had started went on to their end"
+  },
+  "second_accelerator": {
+   "launcher": "paper1/code/gpu_queue_cohort2_seed2025_gpu0.sh",
+   "launcher_sha256": "b2df51fec93a0400e0c7bf8e2eadba69dc9b845dac49724a6d26c00af7c40378",
+   "accelerator": "second accelerator of the second workstation",
+   "jobs": [
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+   ],
+   "instances": [
+    {
+     "started_local": "2026-11-15T00:47:52+07:00",
+     "jobs": "29 down to 23",
+     "settings": "GPU=0 FIRST=22 LAST=29",
+     "stopped_local": "2026-11-15T02:26:10+07:00"
+    },
+    {
+     "started_local": "2026-11-15T02:34:36+07:00",
+     "jobs": "22 down to 16",
+     "settings": "GPU=0 FIRST=16 LAST=22 MAXJ=8 FREE_MB=30000"
+    }
+   ],
+   "instances_stopped_before_issuing_a_job": {
+    "started_local": "2026-11-15T02:26:10+07:00",
+    "stopped_local": "2026-11-15T02:34:36+07:00",
+    "what": "two instances of the same copy (jobs 22 down to 20 on the second accelerator, 19 down to 16 on the first) were started and stopped again before either had issued a job"
+   },
+   "why": "to shorten the wall-clock time, and from 02:34 to release the first accelerator for the collections of the other study",
+   "difference_from_the_plan_launcher": "the same job list and the same job arguments (the options --out and --data are given in the other order); a job is skipped if its result file exists or if it is already running; the jobs are issued from the end of the list"
+  },
+  "jobs_issued_twice": [],
+  "read_before_all_cells_existed": {
+   "what": "on 15 November 2026 at 04:17 local time the last lines of the log of job 12 were printed to learn its run time, and they hold the result record of that run: the held-out AUROC of the own-expression arm of cell p2r0 at this seed",
+   "consequence": "none on the analysis: the cohort-mean run of that cell had not ended, no difference was known, the analysis script and the reading were public, and the sentences that report the outcome had been written and hashed at 01:04 on 15 November",
+   "other_values_read": "none; the cells were read by code/second_cohort_graph_seed.py after all 30 existed"
+  },
+  "environment": {
+   "python": "Python 3.12.3",
+   "accelerators": "0, NVIDIA H100 80GB HBM3, 580.178.04\n1, NVIDIA H100 80GB HBM3, 580.178.04",
+   "libraries": {
+    "torch": "2.10.0+cu128",
+    "cuda": "12.8",
+    "cudnn": "91002",
+    "torch_geometric": "2.7.0",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "scikit_learn": "1.7.2"
+   },
+   "code_sha256": {
+    "double_holdout_ctrl.py": "dece7d5fc7e2dce5551aea5eae5483b621812b3adcbd0018163c5ed74b272101",
+    "families_union.json": "3f8041ec6fab8aa9b5024be097cf78413385fd2528ed5c4a4aae8484390d343a",
+    "gpu_queue_cohort1_seed2025.sh": "74e00d7b8c71782ec4060cf0ff279b4960fea0f0533f1e7afba3580c96af7d3b",
+    "gpu_queue_cohort2_seed2025.sh": "8b693d6bb523bf4d8ca89cd965335762ae35cb3b2d4006c7d40a10fa9bddec1d",
+    "gpu_queue_cohort2_seed2025_gpu0.sh": "b2df51fec93a0400e0c7bf8e2eadba69dc9b845dac49724a6d26c00af7c40378",
+    "trainer.py": "3ada4f074503483900d7710699f9f893268535771d2a4e72cc43fdc547c646f9"
+   }
+  },
+  "cells": [
+   {
+    "file": "gnn_B_mb0.0_p0_r0_mean_ts2025_ivr_fam.json",
+    "cell": "p0r0",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 79.3,
+    "epochs": 17,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-14T14:34:31+0700",
+    "sha256": "aa8ce27bb428a520b6c620433bbfc322b8a9b411a52b05c5d49890c56ba07527"
+   },
+   {
+    "file": "gnn_B_mb0.0_p0_r0_ts2025_ivr_fam.json",
+    "cell": "p0r0",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 69.5,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-14T14:22:26+0700",
+    "sha256": "463542d50b6fbacfe4298d8f67c42331b9390feb3c2b6484dfece10313d77392"
+   },
+   {
+    "file": "gnn_B_mb0.0_p0_r1_mean_ts2025_ivr_fam.json",
+    "cell": "p0r1",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 301.5,
+    "epochs": 68,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T02:07:33+0700",
+    "sha256": "f49af1deb307f76fc60cae4bec1acf7a61220b1835f215118d58b7ec3dee9276"
+   },
+   {
+    "file": "gnn_B_mb0.0_p0_r1_ts2025_ivr_fam.json",
+    "cell": "p0r1",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 69.2,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-14T22:12:40+0700",
+    "sha256": "067a68a1e76199cab728e01961866f84795605f82a474f659f7f63b4b016cdc6"
+   },
+   {
+    "file": "gnn_B_mb0.0_p0_r2_mean_ts2025_ivr_fam.json",
+    "cell": "p0r2",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 82.0,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-14T22:32:56+0700",
+    "sha256": "3da8d23a8d23e36c0d79dd7d8ef90e8058126fc26628d7d04af67c3cc46e506a"
+   },
+   {
+    "file": "gnn_B_mb0.0_p0_r2_ts2025_ivr_fam.json",
+    "cell": "p0r2",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 79.4,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-14T22:27:49+0700",
+    "sha256": "96f1d0757f99d2883635de0eb6b5f70e3964ed2b7cea3cc35e371967734cc88f"
+   },
+   {
+    "file": "gnn_B_mb0.0_p1_r0_mean_ts2025_ivr_fam.json",
+    "cell": "p1r0",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 103.3,
+    "epochs": 21,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T00:11:21+0700",
+    "sha256": "e9fe2a163cc312d2685417f0ef17b49744b0e21922c765478e1c6fde25575bb9"
+   },
+   {
+    "file": "gnn_B_mb0.0_p1_r0_ts2025_ivr_fam.json",
+    "cell": "p1r0",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 80.3,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-14T23:33:52+0700",
+    "sha256": "54d6a75a0c6cd8ade3f3a1c683d057a3364c111a7c318d7f08275be868fc7eaf"
+   },
+   {
+    "file": "gnn_B_mb0.0_p1_r1_mean_ts2025_ivr_fam.json",
+    "cell": "p1r1",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 81.5,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T00:55:35+0700",
+    "sha256": "693b72b56176fe32d15512ce93e1e24119bd24aa45ba8e3d0eea1abdd0d7f4d4"
+   },
+   {
+    "file": "gnn_B_mb0.0_p1_r1_ts2025_ivr_fam.json",
+    "cell": "p1r1",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 80.4,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-14T23:53:59+0700",
+    "sha256": "6cea5010df8f35cd69082abab87fa0659c7903fe12fb0ac9c27d3231cf7cf660"
+   },
+   {
+    "file": "gnn_B_mb0.0_p1_r2_mean_ts2025_ivr_fam.json",
+    "cell": "p1r2",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 244.4,
+    "epochs": 54,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T04:16:35+0700",
+    "sha256": "57b3623edf06bb93cdbbe00988ccaa1b6730d3432b5d81a3c3b04becf15d5731"
+   },
+   {
+    "file": "gnn_B_mb0.0_p1_r2_ts2025_ivr_fam.json",
+    "cell": "p1r2",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 79.7,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T01:14:21+0700",
+    "sha256": "301711b3a9283c3aa7493db235d04a0b3ca213bc68265a5aa98eefd18e0072a0"
+   },
+   {
+    "file": "gnn_B_mb0.0_p2_r0_mean_ts2025_ivr_fam.json",
+    "cell": "p2r0",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 183.9,
+    "epochs": 40,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T04:19:06+0700",
+    "sha256": "82903ba3c50074e647987523785eb30005d4e9361f000dcab59edd0c4ddd4ba5"
+   },
+   {
+    "file": "gnn_B_mb0.0_p2_r0_ts2025_ivr_fam.json",
+    "cell": "p2r0",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 79.9,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T02:16:37+0700",
+    "sha256": "27406d08e431e485c9dc39bf342d401e1778f092d8be96059de4305e72b11407"
+   },
+   {
+    "file": "gnn_B_mb0.0_p2_r1_mean_ts2025_ivr_fam.json",
+    "cell": "p2r1",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 138.7,
+    "epochs": 35,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T04:35:58+0700",
+    "sha256": "23462e20b396aee1f08f5eb0279ea671d57bcb5145fc356d9c92b55b419faefe"
+   },
+   {
+    "file": "gnn_B_mb0.0_p2_r1_ts2025_ivr_fam.json",
+    "cell": "p2r1",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 145.1,
+    "epochs": 35,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T04:32:50+0700",
+    "sha256": "005bc48ce93703d6fff3833ada3921188a41329a35028addb5a78956f3f8e329"
+   },
+   {
+    "file": "gnn_B_mb0.0_p2_r2_mean_ts2025_ivr_fam.json",
+    "cell": "p2r2",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 79.9,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T06:59:21+0700",
+    "sha256": "b2b6c95d06a9d899612c201cc0a7fb7398026263758a9ca0a3357ddfdfc66680"
+   },
+   {
+    "file": "gnn_B_mb0.0_p2_r2_ts2025_ivr_fam.json",
+    "cell": "p2r2",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 69.8,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T07:02:42+0700",
+    "sha256": "74c1890a17e89734db67c581f35dd9975c299892e07ae83dfd46d9426e0625ee"
+   },
+   {
+    "file": "gnn_B_mb0.0_p3_r0_mean_ts2025_ivr_fam.json",
+    "cell": "p3r0",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 130.1,
+    "epochs": 28,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T07:00:30+0700",
+    "sha256": "8b2c34cedca6a63f19ec07072045bcdcea10bc25bb876ea227889eb2373438b0"
+   },
+   {
+    "file": "gnn_B_mb0.0_p3_r0_ts2025_ivr_fam.json",
+    "cell": "p3r0",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 80.1,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T06:52:04+0700",
+    "sha256": "3cb069170e25af4935a1ec47fe48b91f360e60cbfb33461825d86ecd57e00973"
+   },
+   {
+    "file": "gnn_B_mb0.0_p3_r1_mean_ts2025_ivr_fam.json",
+    "cell": "p3r1",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 107.4,
+    "epochs": 22,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T05:38:46+0700",
+    "sha256": "93420fb84467faf5d3f060b430db44652baa06bd17b295a41b102bcd35e41fba"
+   },
+   {
+    "file": "gnn_B_mb0.0_p3_r1_ts2025_ivr_fam.json",
+    "cell": "p3r1",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 79.7,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T05:52:38+0700",
+    "sha256": "cf64a058a1c05c70936ac248dc4fc8764deef9d625e1d106e1c0602cbbbd6776"
+   },
+   {
+    "file": "gnn_B_mb0.0_p3_r2_mean_ts2025_ivr_fam.json",
+    "cell": "p3r2",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 193.2,
+    "epochs": 42,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T05:31:20+0700",
+    "sha256": "33fd317c59cdd1a8fc7b72a903544e07d28e0d6458f6448931b9ab2b3ea37296"
+   },
+   {
+    "file": "gnn_B_mb0.0_p3_r2_ts2025_ivr_fam.json",
+    "cell": "p3r2",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 80.2,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T04:32:00+0700",
+    "sha256": "3f902d027866254e8201db0992ba7cb9e91f434100807d8d2f31c4e07b675075"
+   },
+   {
+    "file": "gnn_B_mb0.0_p4_r0_mean_ts2025_ivr_fam.json",
+    "cell": "p4r0",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 102.3,
+    "epochs": 21,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T03:50:24+0700",
+    "sha256": "eb77fe609fc55e97fccf5e7a85fff8e762eeb218223792cd628a5e2d26887135"
+   },
+   {
+    "file": "gnn_B_mb0.0_p4_r0_ts2025_ivr_fam.json",
+    "cell": "p4r0",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 154.4,
+    "epochs": 34,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T04:50:00+0700",
+    "sha256": "3e6cc5d64cc4f7c21447cccf246a96b4e9cd08b42536618c6b763029985b2835"
+   },
+   {
+    "file": "gnn_B_mb0.0_p4_r1_mean_ts2025_ivr_fam.json",
+    "cell": "p4r1",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 81.6,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T02:14:38+0700",
+    "sha256": "24dc9159acd6e0bc2986cdde399eaccaaed0baec5d2a2ccb88579780bb44d2ee"
+   },
+   {
+    "file": "gnn_B_mb0.0_p4_r1_ts2025_ivr_fam.json",
+    "cell": "p4r1",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 80.2,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T02:15:46+0700",
+    "sha256": "95d35e07abcc8e0eba493e57bbb1b44d36ca7f274aa4bbe4c0beb92812ee9bc9"
+   },
+   {
+    "file": "gnn_B_mb0.0_p4_r2_mean_ts2025_ivr_fam.json",
+    "cell": "p4r2",
+    "arm": "cohort_mean",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 142.8,
+    "epochs": 33,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T03:10:52+0700",
+    "sha256": "ade033334d29766c51089c62393a9c85bddafb80d7b60ee1def1bce6775244a8"
+   },
+   {
+    "file": "gnn_B_mb0.0_p4_r2_ts2025_ivr_fam.json",
+    "cell": "p4r2",
+    "arm": "own",
+    "train_seed": 2025,
+    "data": "brca",
+    "minutes": 77.3,
+    "epochs": 16,
+    "n_train": 744,
+    "n_test": 219,
+    "written_local": "2026-11-15T02:07:51+0700",
+    "sha256": "620ca79624e4fa8b6069858a1f0806400173db7940f4ca939a9d7ccc59465b8c"
+   }
+  ],
+  "jobs": {
+   "0": [
+    {
+     "launched": "2026-11-14T20:58:18+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p0r0",
+     "arm": "own"
+    }
+   ],
+   "1": [
+    {
+     "launched": "2026-11-14T21:00:48+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p0r0",
+     "arm": "cohort_mean"
+    }
+   ],
+   "2": [
+    {
+     "launched": "2026-11-14T21:03:18+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p0r1",
+     "arm": "own"
+    }
+   ],
+   "3": [
+    {
+     "launched": "2026-11-14T21:05:48+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p0r1",
+     "arm": "cohort_mean"
+    }
+   ],
+   "4": [
+    {
+     "launched": "2026-11-14T21:08:18+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p0r2",
+     "arm": "own"
+    }
+   ],
+   "5": [
+    {
+     "launched": "2026-11-14T21:10:49+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p0r2",
+     "arm": "cohort_mean"
+    }
+   ],
+   "6": [
+    {
+     "launched": "2026-11-14T22:13:23+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p1r0",
+     "arm": "own"
+    }
+   ],
+   "7": [
+    {
+     "launched": "2026-11-14T22:27:53+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p1r0",
+     "arm": "cohort_mean"
+    }
+   ],
+   "8": [
+    {
+     "launched": "2026-11-14T22:33:24+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p1r1",
+     "arm": "own"
+    }
+   ],
+   "9": [
+    {
+     "launched": "2026-11-14T23:33:57+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p1r1",
+     "arm": "cohort_mean"
+    }
+   ],
+   "10": [
+    {
+     "launched": "2026-11-14T23:54:28+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p1r2",
+     "arm": "own"
+    }
+   ],
+   "11": [
+    {
+     "launched": "2026-11-15T00:11:59+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p1r2",
+     "arm": "cohort_mean"
+    }
+   ],
+   "12": [
+    {
+     "launched": "2026-11-15T00:56:32+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p2r0",
+     "arm": "own"
+    }
+   ],
+   "13": [
+    {
+     "launched": "2026-11-15T01:15:03+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p2r0",
+     "arm": "cohort_mean"
+    }
+   ],
+   "14": [
+    {
+     "launched": "2026-11-15T02:07:35+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p2r1",
+     "arm": "own"
+    }
+   ],
+   "15": [
+    {
+     "launched": "2026-11-15T02:17:06+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025.log",
+     "cell": "p2r1",
+     "arm": "cohort_mean"
+    }
+   ],
+   "16": [
+    {
+     "launched": "2026-11-15T05:52:48+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p2r2",
+     "arm": "own"
+    }
+   ],
+   "17": [
+    {
+     "launched": "2026-11-15T05:39:17+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p2r2",
+     "arm": "cohort_mean"
+    }
+   ],
+   "18": [
+    {
+     "launched": "2026-11-15T05:31:47+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p3r0",
+     "arm": "own"
+    }
+   ],
+   "19": [
+    {
+     "launched": "2026-11-15T04:50:14+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p3r0",
+     "arm": "cohort_mean"
+    }
+   ],
+   "20": [
+    {
+     "launched": "2026-11-15T04:32:43+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p3r1",
+     "arm": "own"
+    }
+   ],
+   "21": [
+    {
+     "launched": "2026-11-15T03:51:11+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p3r1",
+     "arm": "cohort_mean"
+    }
+   ],
+   "22": [
+    {
+     "launched": "2026-11-15T03:11:38+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p3r2",
+     "arm": "own"
+    }
+   ],
+   "23": [
+    {
+     "launched": "2026-11-15T02:17:57+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p3r2",
+     "arm": "cohort_mean"
+    }
+   ],
+   "24": [
+    {
+     "launched": "2026-11-15T02:15:27+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p4r0",
+     "arm": "own"
+    }
+   ],
+   "25": [
+    {
+     "launched": "2026-11-15T02:07:57+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p4r0",
+     "arm": "cohort_mean"
+    }
+   ],
+   "26": [
+    {
+     "launched": "2026-11-15T00:55:22+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p4r1",
+     "arm": "own"
+    }
+   ],
+   "27": [
+    {
+     "launched": "2026-11-15T00:52:52+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p4r1",
+     "arm": "cohort_mean"
+    }
+   ],
+   "28": [
+    {
+     "launched": "2026-11-15T00:50:22+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p4r2",
+     "arm": "own"
+    }
+   ],
+   "29": [
+    {
+     "launched": "2026-11-15T00:47:52+07:00",
+     "queue_log": "gpu_queue_cohort2_ts2025_gpu0.log",
+     "cell": "p4r2",
+     "arm": "cohort_mean"
+    }
+   ]
+  }
+ }
+}

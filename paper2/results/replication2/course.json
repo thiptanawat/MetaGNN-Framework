@@ -1,0 +1,39 @@
+{
+ "note": "facts of the course of the collection that no archive holds; entered by hand from the logs of the launchers on the two hosts (not archived here, because they name local paths); code/replication2_record.py joins them with what the archives and the serving records hold",
+ "check_calls": {
+  "note": "600 patient-blind prompts of an earlier design (results/repr), sent through the collector's --bench option before the first call of each backbone on the sample; nothing of them is stored (Section 6 of the plan)",
+  "b1": {
+   "calls": 600,
+   "parsed": 600,
+   "concurrent_requests": 24,
+   "seconds": 37.3,
+   "calls_per_second": 16.09,
+   "ended_local": "2026-11-14T22:00:52+07:00"
+  },
+  "b3": {
+   "calls": 600,
+   "parsed": 600,
+   "concurrent_requests": 24,
+   "seconds": 17.3,
+   "calls_per_second": 34.72,
+   "ended_local": "2026-11-15T04:42:17+07:00"
+  },
+  "b2": {
+   "calls": 600,
+   "parsed": 600,
+   "concurrent_requests": 24,
+   "seconds": 37.6,
+   "calls_per_second": 15.95,
+   "ended_local": "2026-11-15T06:19:30+07:00"
+  }
+ },
+ "notes": [
+  "The answer file of every backbone (w1/raw.json) is committed compressed, as w1/raw.json.gz (gzip), because the file of the main backbone is larger than the 100 MB that the hosting service accepts for one file; reproduce.sh unpacks the three files before anything reads them, and the SHA-256 that code/collection_manifest.py records is that of the unpacked file.",
+  "Main backbone (b1): 20 of 20 blocks, no call sent again, no transport error left and no answer that could not be parsed; the collector ended with status 0 at 2026-11-15T02:15:04+07:00.",
+  "Third backbone (b3): 20 of 20 blocks, no call sent again, no transport error left and no answer that could not be parsed; the collection ended with status 0 at 2026-11-15T06:16:00+07:00.",
+  "Second backbone (b2): 20 of 20 blocks, no call sent again, no transport error left and no answer that could not be parsed; the collection ended with status 0 at 2026-11-15T10:53:40+07:00.",
+  "Second and third backbones: the launcher issued on the second host is code/provenance/run_replication2_local_acc1.sh, which is code/provenance/run_replication2_local.sh with the wait for the training jobs of the other study written for the accelerator it serves on alone. The published launcher had been waiting since 14 November for the training jobs of the whole host and was replaced on 15 November at 02:35 local time, before it had issued anything, because the other study by then also ran training jobs on the other accelerator of that host. Section 6 of the plan names the condition as the accelerator being free of those jobs. Nothing after the wait differs between the two files, and the calls were issued from the checkout of the plan's commit."
+ ],
+ "departures": [],
+ "departures_sentence": "No departure from the plan is recorded."
+}

@@ -118,3 +118,57 @@ The three backbones are three questions. No test is adjusted for the others, no 
 ## 8. Deviations
 
 None at the time of the commit.
+
+### Record after the collection (15 November 2026)
+
+The commit that holds this plan, the sample, the analysis script and the launchers is `e825337`. It was pushed at 14:55:49 UTC on 14 November 2026 (21:55:49 local time, UTC+7; the push is in the public activity record of the repository). The first call on the sample was sent at 15:00:53 UTC (22:00:53 local time), 5 minutes after the push, to the main backbone. All three collections are complete: for each backbone 20 of the 20 blocks, 200 patients and 246,000 calls, with the arms and the order of Sections 5 and 6. The sample file that the collectors read has the SHA-256 that Section 3 names. No statistic of Section 7 was computed on the archive of a backbone before the collection of that backbone had ended.
+
+| | Qwen3.8-27B (b1) | Mistral Small 3.2 24B Instruct (b3) | Gemma 4 31B-it (b2) |
+|---|---|---|---|
+| Served by | the service of the first host; its record, read at 15:00:14 UTC, names the model source `Qwen/Qwen3.8-27B-FP8` and two healthy replicas | one local vLLM process on the second host; 17 files of the snapshot compared with `results/model_records.json`, all identical | one local vLLM process on the second host; 8 files of the snapshot compared with `results/model_records.json`, all identical |
+| Serving record | read 15:00:14 UTC, before the first call | written 21:41:56 UTC, before the first call | written 23:18:49 UTC, before the first call |
+| Check calls before the collection (600 patient-blind prompts of an earlier design) | 600 of 600 parsed | 600 of 600 parsed | 600 of 600 parsed |
+| First call on the sample, last reply (local time) | 22:00:53 on 14 November, 02:15:00 on 15 November | 04:42:17 on 15 November, 06:15:56 on 15 November | 06:19:31 on 15 November, 10:53:36 on 15 November |
+| Calls answered per second over that time | 16.1 | 43.8 | 15.0 |
+| Calls sent a second time; calls left without an answer; answers that could not be parsed | 0; 0; 0 | 0; 0; 0 | 0; 0; 0 |
+
+No departure from the plan is recorded. The following points are recorded beside it; none depends on an answer of a model.
+
+| Point | What happened |
+|---|---|
+| Answer files | The answer file of every backbone (w1/raw.json) is committed compressed, as w1/raw.json.gz (gzip), because the file of the main backbone is larger than the 100 MB that the hosting service accepts for one file; reproduce.sh unpacks the three files before anything reads them, and the SHA-256 that code/collection_manifest.py records is that of the unpacked file. |
+| Main backbone | 20 of 20 blocks, no call sent again, no transport error left and no answer that could not be parsed; the collector ended with status 0 at 2026-11-15T02:15:04+07:00. |
+| Third backbone | 20 of 20 blocks, no call sent again, no transport error left and no answer that could not be parsed; the collection ended with status 0 at 2026-11-15T06:16:00+07:00. |
+| Second backbone | 20 of 20 blocks, no call sent again, no transport error left and no answer that could not be parsed; the collection ended with status 0 at 2026-11-15T10:53:40+07:00. |
+| Second and third backbones | The launcher issued on the second host is code/provenance/run_replication2_local_acc1.sh, which is code/provenance/run_replication2_local.sh with the wait for the training jobs of the other study written for the accelerator it serves on alone. The published launcher had been waiting since 14 November for the training jobs of the whole host and was replaced on 15 November at 02:35 local time, before it had issued anything, because the other study by then also ran training jobs on the other accelerator of that host. Section 6 of the plan names the condition as the accelerator being free of those jobs. Nothing after the wait differs between the two files, and the calls were issued from the checkout of the plan's commit. |
+
+The course of the collection is in `results/replication2/record.json`, which `code/replication2_record.py` writes from the archives, the serving records and `results/replication2/course.json`.
+
+### Outcome
+
+| Quantity (200 patients; 90% interval in parentheses) | Main backbone (Qwen3.8-27B) | Second backbone (Gemma 4 31B-it) | Third backbone (Mistral Small 3.2 24B Instruct) |
+|---|---|---|---|
+| Primary: own minus donor, donor schedule d1 | +0.0001 (-0.0038 to +0.0039) | +0.0007 (-0.0032 to +0.0047) | -0.0027 (-0.0091 to +0.0037) |
+| Own arm, donor arm under d1 (AUROC) | 0.6157, 0.6156 | 0.5717, 0.5709 | 0.6125, 0.6152 |
+| Own minus donor, donor schedule d2 | -0.0019 (-0.0059 to +0.0020) | -0.0022 (-0.0064 to +0.0020) | -0.0050 (-0.0115 to +0.0015) |
+| Own minus donor, donor schedule d3 | -0.0000 (-0.0041 to +0.0040) | -0.0003 (-0.0048 to +0.0043) | -0.0029 (-0.0093 to +0.0036) |
+| Own minus donor, mean of the three schedules | -0.0006 (-0.0041 to +0.0029) | -0.0006 (-0.0044 to +0.0032) | -0.0035 (-0.0094 to +0.0023) |
+| Patient-blind arm on the first two blocks (20 patients; AUROC) | 0.5453 | 0.4826 | 0.5987 |
+| Raw-expression ranking, availability indicator (AUROC) | 0.6988, 0.6608 | 0.6988, 0.6608 | 0.6988, 0.6608 |
+| Printed percentile ranked with no model: own minus donor, mean of the three schedules | -0.0015 (-0.0042 to +0.0012) | -0.0015 (-0.0042 to +0.0012) | -0.0015 (-0.0042 to +0.0012) |
+| Reference of Section 7: model minus printed percentile, mean of the three schedules | +0.0009 (-0.0009 to +0.0026) | +0.0009 (-0.0012 to +0.0031) | -0.0020 (-0.0060 to +0.0020) |
+| Model minus printed percentile, donor schedule d1 | +0.0008 (-0.0011 to +0.0028) | +0.0015 (-0.0008 to +0.0038) | -0.0019 (-0.0063 to +0.0024) |
+| Model minus printed percentile, donor schedule d2 | +0.0003 (-0.0018 to +0.0024) | +0.0000 (-0.0023 to +0.0023) | -0.0027 (-0.0072 to +0.0017) |
+| Model minus printed percentile, donor schedule d3 | +0.0015 (-0.0006 to +0.0035) | +0.0012 (-0.0014 to +0.0038) | -0.0014 (-0.0057 to +0.0029) |
+| Correlation across patients between the two differences | 0.86 | 0.83 | 0.80 |
+| Model minus printed percentile over both replication samples (300 patients) | +0.0011 (-0.0004 to +0.0026) | +0.0004 (-0.0013 to +0.0021) | -0.0007 (-0.0038 to +0.0025) |
+
+The contrast of the printed percentile depends on the sample only and is the same in every column.
+
+Decision rules of Section 7, for each backbone separately:
+
+- **Main backbone (Qwen3.8-27B).** Primary analysis: (1) the 90% interval lies inside the margin 0.02 and inside the margin 0.05, so equivalence is declared at 0.02 and at 0.05; (2) the interval includes zero, so no difference is reported; (3) the result is reported in the main text of the manuscript. Printed-number reference: (1) the 90% interval of model minus printed percentile lies inside the margin 0.01, so equivalence within 0.01 AUROC is declared; (2) it includes zero, so the two differences are described as not distinguishable; (3) the result is reported in the main text. At the exploratory margin 0.005, equivalence would be declared.
+- **Second backbone (Gemma 4 31B-it).** Primary analysis: (1) the 90% interval lies inside the margin 0.02 and inside the margin 0.05, so equivalence is declared at 0.02 and at 0.05; (2) the interval includes zero, so no difference is reported; (3) the result is reported in the main text of the manuscript. Printed-number reference: (1) the 90% interval of model minus printed percentile lies inside the margin 0.01, so equivalence within 0.01 AUROC is declared; (2) it includes zero, so the two differences are described as not distinguishable; (3) the result is reported in the main text. At the exploratory margin 0.005, equivalence would be declared.
+- **Third backbone (Mistral Small 3.2 24B Instruct).** Primary analysis: (1) the 90% interval lies inside the margin 0.02 and inside the margin 0.05, so equivalence is declared at 0.02 and at 0.05; (2) the interval includes zero, so no difference is reported; (3) the result is reported in the main text of the manuscript. Printed-number reference: (1) the 90% interval of model minus printed percentile lies inside the margin 0.01, so equivalence within 0.01 AUROC is declared; (2) it includes zero, so the two differences are described as not distinguishable; (3) the result is reported in the main text. At the exploratory margin 0.005, equivalence would not be declared.
+
+No estimate is pooled over backbones and no test is adjusted for the others. Every quantity of Section 7 is in `results/replication2_frozen_<tag>.json` and `results/replication2_reference_<tag>.json`.

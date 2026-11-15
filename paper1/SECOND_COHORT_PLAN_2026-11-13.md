@@ -120,3 +120,32 @@ Section 6 was run at one training seed, and the check above shows that the diffe
 | Reporting | the result is reported whatever it is, beside that of Section 6, with any deviation listed under a dated heading below |
 
 The seed 2025 is the first of the two further seeds of the first cohort's check. A third seed is not part of this section.
+
+### Record of the runs of Section 7 (14 and 15 November 2026)
+
+Section 7 was public from 20:57 on 14 November 2026, local time (13:57 UTC; commit `9d3b8a8f`, tag `benchmark-validity-2026-11d`). The first of its 28 new runs was issued 6 minutes later, at 21:03, and the last cell was written at 07:02 on 15 November, local time. The two runs of cell p0r0 were reused from the check above, as the section says. The analysis script was run once, after all 30 cells existed. Workstation, code and scheduling priority are those recorded for Section 6. Two further points are recorded; neither depends on a result.
+
+| Point | What happened |
+|---|---|
+| Launcher | The plan's launcher (`code/gpu_queue_cohort2_seed2025.sh`) issued the first sixteen jobs of its list on one accelerator of the second workstation. It was stopped at 02:26 on 15 November, while it waited for a free slot, and the runs it had started ran to their end. The last fourteen jobs were issued on the second accelerator of that workstation by a copy of the launcher (`code/gpu_queue_cohort2_seed2025_gpu0.sh`), from 00:47 on 15 November. The copy builds the same job list with the same job arguments, issues it from its end, and skips a job whose result file exists or that is already running. This shortened the wall-clock time and, from 02:34, left the first accelerator to the collections of the other study. No job was run twice. |
+| One value seen before the cells were complete | At 04:17 on 15 November the last lines of the log of one finished run were printed to learn its run time. They hold the result record of that run: the held-out AUROC of the own-expression arm of cell p2r0 at the second seed. The cohort-mean run of that cell had not ended, so no difference was known. The analysis script and the reading of this section were public, and the sentences that report the outcome in the manuscript had been written before. No other value was read before all 30 cells existed. |
+
+The record of the runs is `data/cohort2_graph_seed_run_record.json`, which lists every job with its launcher and its launch time. The cells are in `results/cohort2/fam/` (the files whose names carry `_ts2025`), and `code/second_cohort_graph_seed.py` writes `data/results_cohort2_graph_seed.json`.
+
+### Outcome of Section 7
+
+| Quantity (second cohort) | Second training seed (2025) | Training seed of Section 6 |
+|---|---|---|
+| Own-expression arm, AUROC, mean over cells | 0.7917 | 0.7924 |
+| Cohort-mean arm, AUROC, mean over cells | 0.8050 | 0.8062 |
+| Primary quantity: own minus cohort mean, mean over the 15 cells | -0.0133 | -0.0138 |
+| Standard deviation over cells | 0.0228 | 0.0153 |
+| Range over cells | -0.0551 to +0.0269 | -0.0477 to +0.0075 |
+| Negative cells | 11 of 15 | 13 of 15 |
+| Sign-flip p with cells, patient folds and reaction folds flipped | 0.04, 0.125, 0.25 | 0.0019, 0.0625, 0.25 |
+| Epochs of the own-expression arm, median (range) | 16 (16 to 35) | 16 (16 to 30) |
+| Epochs of the cohort-mean arm, median (range) | 22 (16 to 68) | 28 (16 to 67) |
+
+Reading fixed in Section 7: at the second seed the mean lies within 0.02 AUROC of zero, which the plan reads as agreement with the first cohort. One of the 15 values, that of cell p0r0 (+0.0058), was known when the section was fixed.
+
+Beside it, as descriptions. Averaged over the two seeds cell by cell, the difference is -0.0135 (standard deviation over cells 0.0164, range -0.0469 to +0.0101, negative in 12 of 15 cells). Between the seeds the mean over the grid changed by +0.0005, the difference of a single cell by 0.0161 on average and by at most 0.0384, and 11 of the 15 cells kept their sign; across the cells the two seeds' differences correlate at +0.46 (Pearson) and +0.39 (Spearman). Training length: at the second seed the cohort-mean arm trained 11.2 epochs longer than the own-expression arm on average (17.5 epochs longer at the seed of Section 6), the difference in AUROC correlates with that gap across the cells at -0.36 (Pearson; -0.25 at the seed of Section 6), and over the cells whose two arms stopped within two epochs of each other the mean difference is -0.0092 over 6 cells (-0.0165 over 4 cells at the seed of Section 6). The figures for the seed of Section 6 were computed after its outcome was known. Whether training length causes the difference between the arms was not tested.

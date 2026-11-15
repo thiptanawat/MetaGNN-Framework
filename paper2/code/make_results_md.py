@@ -188,6 +188,34 @@ if len(_bb) == 2 and _os.path.exists(_gp):
     _row("model minus printed percentile, schedule 1", lambda f_, r_: _c2(r_['model_minus_printed_percentile']['d1']['mean'], r_['model_minus_printed_percentile']['d1']['ci90']))
     _row("own minus donor, second wording (40 patients)", lambda f_, r_: _c2(f_['wording2']['donor']['d1']['diff_mean'], f_['wording2']['donor']['d1']['diff_ci90']))
     w("")
+# the second replication (REPLICATION2_PLAN_2026-11-14.md), written only for the backbones whose two result files exist
+_b2r = {}
+for _t, _lab in (('b1', 'main backbone'), ('b2', 'second backbone'), ('b3', 'third backbone')):
+    _f = _os.path.join(PATHS.ROOT, 'results', f'replication2_frozen_{_t}.json'); _r = _os.path.join(PATHS.ROOT, 'results', f'replication2_reference_{_t}.json')
+    if _os.path.exists(_f) and _os.path.exists(_r): _b2r[_t] = (_lab, json.load(open(_f)), json.load(open(_r)))
+if _b2r:
+    w("## The second replication on a new sample\n")
+    w("Plan: `REPLICATION2_PLAN_2026-11-14.md`, committed before the first call on the sample. Statistics: `code/replication2.py` "
+      "(`replication_stats.py` unchanged on each archive), written to `results/replication2_frozen_<tag>.json`; the comparison with the printed "
+      "percentile, pooled over the three donor schedules, is in `results/replication2_reference_<tag>.json`. Each backbone is read separately; "
+      "no test is adjusted for the others and nothing is pooled over backbones. The printed percentile ranks the same reactions for every backbone, "
+      "so its row differs between columns only if the completed blocks differ.\n")
+    _tags = list(_b2r)
+    def _ci(m, c): return f"{m:+.4f} [{c[0]:+.4f}, {c[1]:+.4f}]"
+    w("| quantity (wording 1, 90% intervals) | " + " | ".join(f"{_b2r[t][0]} ({_b2r[t][1]['backbone']})" for t in _tags) + " |\n|---|" + "---|" * len(_tags))
+    def _row2(lab, fn): w(f"| {lab} | " + " | ".join(fn(_b2r[t][1], _b2r[t][2]) for t in _tags) + " |")
+    _row2("patients, blocks of ten completed", lambda f_, r_: f"{f_['wording1']['n_patients']}, {f_['wording1']['blocks_completed']}")
+    _row2("own arm, AUROC", lambda f_, r_: f"{f_['wording1']['donor']['d1']['own_auroc']:.4f}")
+    _row2("donor arm, schedule 1, AUROC", lambda f_, r_: f"{f_['wording1']['donor']['d1']['donor_auroc']:.4f}")
+    _row2("own minus donor, schedule 1 (primary)", lambda f_, r_: _ci(f_['decision']['diff_mean'], f_['decision']['ci90']))
+    _row2("primary contrast inside the 0.02 margin", lambda f_, r_: 'yes' if f_['decision']['equivalent_002'] else 'no')
+    _row2("primary contrast inside the 0.05 margin", lambda f_, r_: 'yes' if f_['decision']['equivalent_005'] else 'no')
+    _row2("90% interval of the primary contrast excludes zero", lambda f_, r_: 'yes' if f_['decision']['interval_excludes_zero'] else 'no')
+    _row2("model, own minus donor, mean of the three schedules", lambda f_, r_: _ci(r_['pooled']['language_model']['mean'], r_['pooled']['language_model']['ci90']))
+    _row2("printed percentile, no model, mean of the three schedules", lambda f_, r_: _ci(r_['pooled']['printed_percentile']['mean'], r_['pooled']['printed_percentile']['ci90']))
+    _row2("model minus printed percentile, mean of the three schedules", lambda f_, r_: _ci(r_['pooled']['model_minus_printed_percentile']['mean'], r_['pooled']['model_minus_printed_percentile']['ci90']))
+    _row2("reading fixed by the plan (margin 0.01)", lambda f_, r_: r_['pooled']['reading']['sentence'])
+    w("")
 w("## References\n")
 w("Every reference in the manuscript was resolved against PubMed E-utilities, the Crossref API or the "
   "arXiv API before use; the procedure and its outcome are in `docs/VERIFICATION.md` at the repository root.")

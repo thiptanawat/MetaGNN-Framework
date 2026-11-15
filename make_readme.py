@@ -228,6 +228,24 @@ if os.path.exists(_sp):
               f"({', '.join(str(x) for x in _SD['further_seeds'])}), both arms: the difference at that cell is "
               f"{', '.join(s4(v) for v in _s2['differences'])} across the three seeds, against {', '.join(s4(v) for v in _s1['differences'])} "
               f"for the same cell of the first cohort (`paper1/data/results_cohort2_seed.json`).")
+# Section 7 of the same plan: the whole grid of the second cohort at a second training seed
+_gs = os.path.join(HERE, "paper1", "data", "results_cohort2_graph_seed.json")
+if os.path.exists(_gs):
+    _GS = json.load(open(_gs)); _t = _GS["seeds"]["2025"]["contrast"]; _b = _GS["both_seeds"]
+    L += [f"**The second cohort at a second training seed.** Section 7 of that plan repeats the whole grid at the training seed 2025, "
+          f"both arms on each of the {_t['n_cells']} cells. The paired difference over cells is {s4(_t['mean'])} (standard deviation "
+          f"{f4(_t['sd'])}, negative in {_t['n_negative']} of {_t['n_cells']}); the per-cell mean of the two seeds' differences is "
+          f"{s4(_b['mean'])} (standard deviation {f4(_b['sd'])}, negative in {_b['n_negative']} of {_b['n_cells']}) "
+          f"(`paper1/data/results_cohort2_graph_seed.json`).", ""]
+# the same second seed on the first cohort (paper1/FIRST_COHORT_SEED_PLAN_2026-11-15.md)
+_g1p = os.path.join(HERE, "paper1", "data", "results_cohort1_graph_seed.json")
+if os.path.exists(_g1p):
+    _G1 = json.load(open(_g1p)); _t1 = _G1["seeds"]["2025"]["contrast"]; _b1 = _G1["both_seeds"]
+    L += [f"**The first cohort at a second training seed.** `paper1/FIRST_COHORT_SEED_PLAN_2026-11-15.md` repeats the whole grid of the "
+          f"first cohort at the training seed 2025, both arms on each of the {_t1['n_cells']} cells. The paired difference over cells is "
+          f"{s4(_t1['mean'])} (standard deviation {f4(_t1['sd'])}, negative in {_t1['n_negative']} of {_t1['n_cells']}); the per-cell mean "
+          f"of the two seeds' differences is {s4(_b1['mean'])} (standard deviation {f4(_b1['sd'])}, negative in {_b1['n_negative']} of "
+          f"{_b1['n_cells']}) (`paper1/data/results_cohort1_graph_seed.json`).", ""]
 
 R2 = P2["runs"]; A, E, B = R2["A_representative"], R2["E_representative40"], R2["B_balanced"]
 XS = P2.get("cross_session", {}).get("arms", {}).get("patient", {})

@@ -1,0 +1,442 @@
+{
+ "backbone": "gemma-4-31b-it",
+ "archive": "results/replication2_b2",
+ "plan": "REPLICATION2_PLAN_2026-11-14.md",
+ "margin": 0.01,
+ "margin_exploratory": 0.005,
+ "note": "the own-versus-donor contrast of the printed percentile and of the printed value with no model, beside the contrast of the language model: per donor schedule (replication_posthoc.one_design, unchanged) and pooled over the donor schedules; named in the plan before the first call on this sample",
+ "pooled": {
+  "schedules": [
+   "d1",
+   "d2",
+   "d3"
+  ],
+  "n_patients": 200,
+  "language_model": {
+   "n": 200,
+   "mean": -0.0005764418,
+   "sd": 0.0327181069,
+   "ci90": [
+    -0.0043996409,
+    0.0032467574
+   ],
+   "paired_p": 0.8034922457,
+   "excludes_zero": false,
+   "tost_001_p": [
+    3.35e-05,
+    4.25e-06
+   ],
+   "equivalent_001": true,
+   "tost_0005_p": [
+    0.0287,
+    0.00842
+   ],
+   "equivalent_0005": true
+  },
+  "printed_percentile": {
+   "n": 200,
+   "mean": -0.0014994142,
+   "sd": 0.0231804535,
+   "ci90": [
+    -0.0042081128,
+    0.0012092844
+   ],
+   "paired_p": 0.3614163934,
+   "excludes_zero": false,
+   "tost_001_p": [
+    2.63e-07,
+    1.75e-11
+   ],
+   "equivalent_001": true,
+   "tost_0005_p": [
+    0.017,
+    5.11e-05
+   ],
+   "equivalent_0005": true
+  },
+  "model_minus_printed_percentile": {
+   "n": 200,
+   "mean": 0.0009229725,
+   "sd": 0.0184841805,
+   "ci90": [
+    -0.0012369539,
+    0.0030828989
+   ],
+   "paired_p": 0.4809141185,
+   "excludes_zero": false,
+   "tost_001_p": [
+    5.48e-15,
+    2.63e-11
+   ],
+   "equivalent_001": true,
+   "tost_0005_p": [
+    5.04e-06,
+    0.00104
+   ],
+   "equivalent_0005": true
+  },
+  "correlation_across_patients": 0.8347235633,
+  "reading": {
+   "equivalent_within_margin": true,
+   "margin": 0.01,
+   "excludes_zero": false,
+   "sign": 0,
+   "sentence": "equivalent within 0.01 AUROC to what ranking the printed percentile gives; the 90% interval includes zero, so the two are described as not distinguishable"
+  }
+ },
+ "per_schedule": {
+  "n_patients": 200,
+  "n_reactions": 300,
+  "n_expression_bearing": 158,
+  "printed_value": {
+   "d1": {
+    "own_auroc": 0.6988275467,
+    "donor_auroc": 0.6989726556,
+    "diff": {
+     "n": 200,
+     "mean": -0.0001451089,
+     "sd": 0.0094380919,
+     "ci90": [
+      -0.0012479754,
+      0.0009577576
+     ],
+     "paired_p": 0.8280939309,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "d2": {
+    "own_auroc": 0.6988275467,
+    "donor_auroc": 0.6994375366,
+    "diff": {
+     "n": 200,
+     "mean": -0.0006099899,
+     "sd": 0.00994578,
+     "ci90": [
+      -0.0017721811,
+      0.0005522014
+     ],
+     "paired_p": 0.3867901397,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "d3": {
+    "own_auroc": 0.6988275467,
+    "donor_auroc": 0.6994139731,
+    "diff": {
+     "n": 200,
+     "mean": -0.0005864263,
+     "sd": 0.0098885082,
+     "ci90": [
+      -0.0017419252,
+      0.0005690726
+     ],
+     "paired_p": 0.4026536807,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "mean_of_schedules": {
+    "n": 200,
+    "mean": -0.000447175,
+    "sd": 0.0086570591,
+    "ci90": [
+     -0.0014587758,
+     0.0005644257
+    ],
+    "paired_p": 0.4659417582,
+    "within_002": true,
+    "excludes_zero": false
+   }
+  },
+  "printed_percentile": {
+   "d1": {
+    "own_auroc": 0.6585455828,
+    "donor_auroc": 0.6593097343,
+    "diff": {
+     "n": 200,
+     "mean": -0.0007641514,
+     "sd": 0.0261108255,
+     "ci90": [
+      -0.0038152719,
+      0.002286969
+     ],
+     "paired_p": 0.6794081274,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "d2": {
+    "own_auroc": 0.6585455828,
+    "donor_auroc": 0.6607766654,
+    "diff": {
+     "n": 200,
+     "mean": -0.0022310826,
+     "sd": 0.0263217731,
+     "ci90": [
+      -0.0053068529,
+      0.0008446877
+     ],
+     "paired_p": 0.2320647696,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "d3": {
+    "own_auroc": 0.6585455828,
+    "donor_auroc": 0.6600485915,
+    "diff": {
+     "n": 200,
+     "mean": -0.0015030087,
+     "sd": 0.0267436294,
+     "ci90": [
+      -0.004628074,
+      0.0016220567
+     ],
+     "paired_p": 0.4276785577,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "mean_of_schedules": {
+    "n": 200,
+    "mean": -0.0014994142,
+    "sd": 0.0231804535,
+    "ci90": [
+     -0.0042081128,
+     0.0012092844
+    ],
+    "paired_p": 0.3614163934,
+    "within_002": true,
+    "excludes_zero": false
+   }
+  },
+  "language_model": {
+   "d1": {
+    "own_auroc": 0.5716699505,
+    "donor_auroc": 0.5709257681,
+    "diff": {
+     "n": 200,
+     "mean": 0.0007441823,
+     "sd": 0.0339100845,
+     "ci90": [
+      -0.0032183026,
+      0.0047066673
+     ],
+     "paired_p": 0.7566121539,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "d2": {
+    "own_auroc": 0.5716699505,
+    "donor_auroc": 0.5738862559,
+    "diff": {
+     "n": 200,
+     "mean": -0.0022163054,
+     "sd": 0.0359783187,
+     "ci90": [
+      -0.0064204692,
+      0.0019878583
+     ],
+     "paired_p": 0.3847101754,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "d3": {
+    "own_auroc": 0.5716699505,
+    "donor_auroc": 0.5719271527,
+    "diff": {
+     "n": 200,
+     "mean": -0.0002572022,
+     "sd": 0.0388000005,
+     "ci90": [
+      -0.004791087,
+      0.0042766827
+     ],
+     "paired_p": 0.9254043578,
+     "within_002": true,
+     "excludes_zero": false
+    }
+   },
+   "mean_of_schedules": {
+    "n": 200,
+    "mean": -0.0005764418,
+    "sd": 0.0327181069,
+    "ci90": [
+     -0.0043996409,
+     0.0032467574
+    ],
+    "paired_p": 0.8034922457,
+    "within_002": true,
+    "excludes_zero": false
+   }
+  },
+  "association": {
+   "d1": {
+    "model_with_printed_value": {
+     "n": 200,
+     "pearson": 0.7158883059,
+     "pearson_ci90": [
+      0.6538350655,
+      0.7683758264
+     ],
+     "spearman": 0.7246222785
+    },
+    "model_with_printed_percentile": {
+     "n": 200,
+     "pearson": 0.8224800123,
+     "pearson_ci90": [
+      0.7807326407,
+      0.8569175635
+     ],
+     "spearman": 0.807573545
+    }
+   },
+   "d2": {
+    "model_with_printed_value": {
+     "n": 200,
+     "pearson": 0.718223731,
+     "pearson_ci90": [
+      0.6565784848,
+      0.7703375467
+     ],
+     "spearman": 0.7270434251
+    },
+    "model_with_printed_percentile": {
+     "n": 200,
+     "pearson": 0.842540964,
+     "pearson_ci90": [
+      0.8050065593,
+      0.8733572699
+     ],
+     "spearman": 0.8442208719
+    }
+   },
+   "d3": {
+    "model_with_printed_value": {
+     "n": 200,
+     "pearson": 0.7202133697,
+     "pearson_ci90": [
+      0.6589169971,
+      0.772008034
+     ],
+     "spearman": 0.7038532358
+    },
+    "model_with_printed_percentile": {
+     "n": 200,
+     "pearson": 0.8317792465,
+     "pearson_ci90": [
+      0.7919691472,
+      0.864546894
+     ],
+     "spearman": 0.8187684364
+    }
+   }
+  },
+  "model_minus_printed_value": {
+   "d1": {
+    "n": 200,
+    "mean": 0.0008892912,
+    "sd": 0.0279416593,
+    "ci90": [
+     -0.0023757671,
+     0.0041543496
+    ],
+    "paired_p": 0.6531299104,
+    "within_002": true,
+    "excludes_zero": false
+   },
+   "d2": {
+    "n": 200,
+    "mean": -0.0016063156,
+    "sd": 0.0296538438,
+    "ci90": [
+     -0.0050714473,
+     0.0018588162
+    ],
+    "paired_p": 0.4445461319,
+    "within_002": true,
+    "excludes_zero": false
+   },
+   "d3": {
+    "n": 200,
+    "mean": 0.0003292241,
+    "sd": 0.0324124693,
+    "ci90": [
+     -0.0034582604,
+     0.0041167087
+    ],
+    "paired_p": 0.8859251077,
+    "within_002": true,
+    "excludes_zero": false
+   }
+  },
+  "model_minus_printed_percentile": {
+   "d1": {
+    "n": 200,
+    "mean": 0.0015083338,
+    "sd": 0.0193697714,
+    "ci90": [
+     -0.0007550763,
+     0.0037717439
+    ],
+    "paired_p": 0.2721158424,
+    "within_002": true,
+    "excludes_zero": false
+   },
+   "d2": {
+    "n": 200,
+    "mean": 1.47771e-05,
+    "sd": 0.0197858643,
+    "ci90": [
+     -0.0022972545,
+     0.0023268088
+    ],
+    "paired_p": 0.9915833969,
+    "within_002": true,
+    "excludes_zero": false
+   },
+   "d3": {
+    "n": 200,
+    "mean": 0.0012458065,
+    "sd": 0.0222365817,
+    "ci90": [
+     -0.0013525981,
+     0.0038442111
+    ],
+    "paired_p": 0.4291208669,
+    "within_002": true,
+    "excludes_zero": false
+   }
+  }
+ },
+ "both_samples": {
+  "note": "mean of \"model minus printed percentile\" (mean of the three schedules) over the patients of the first and of the second replication sample together; descriptive, no decision rests on it",
+  "n_first": 100,
+  "n_second": 200,
+  "model_minus_printed_percentile": {
+   "n": 300,
+   "mean": 0.0004273079,
+   "sd": 0.0179558069,
+   "ci90": [
+    -0.0012831769,
+    0.0021377928
+   ],
+   "paired_p": 0.6804960842,
+   "excludes_zero": false,
+   "tost_001_p": [
+    5.42e-21,
+    2.48e-18
+   ],
+   "equivalent_001": true,
+   "tost_0005_p": [
+    1.55e-07,
+    7.19e-06
+   ],
+   "equivalent_0005": true
+  }
+ }
+}

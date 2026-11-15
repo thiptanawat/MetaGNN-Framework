@@ -113,4 +113,25 @@ if [ -n "${ENDPOINT3:-}" ]; then
   $PR3 --wording 2 --blocks 1-4 --arms reaction patient shuffled --out results/replication_b3/w2
   $PR3 --wording 1 --blocks 5-10 --arms reaction patient shuffled shuffled_d2 shuffled_d3 --out results/replication_b3/w1
 fi
+# ---- the second replication, on a new sample (REPLICATION2_PLAN_2026-11-14.md) ------------------
+# The sample is results/replication2/design_master.json (written by code/replication2_design.py before
+# the first call), named through --master; wording 1 only, blocks 1 to 20 of ten patients in the order
+# of the draw, the patient-blind arm in the first two blocks. Before the first call of a backbone, 600
+# patient-blind prompts of an earlier design measure the rate and show that answers parse (nothing of
+# them is stored); the plan stops a collection in which fewer than 570 of them parse. The serving
+# records (results/replication2_<tag>/serving_record.json) are written by the launchers under
+# code/provenance/ before the first call, and the night window of the main backbone's shared service
+# is kept by run_replication2_service.sh; neither is part of this file.
+R2="--master results/replication2/design_master.json --workers 24 --block_size 10 --blind_blocks 2"
+ARMS2="reaction patient shuffled shuffled_d2 shuffled_d3"
+python3 code/replication_probe.py --url $ENDPOINT --model $MODEL $R2 --bench 600 --out results/replication2_b1/unused
+python3 code/replication_probe.py --url $ENDPOINT --model $MODEL $R2 --wording 1 --blocks 1-20 --arms $ARMS2 --out results/replication2_b1/w1
+if [ -n "${ENDPOINT3:-}" ]; then   # the third backbone is collected before the second, as the plan orders them
+  python3 code/replication_probe.py --url $ENDPOINT3 --model $M3 $PLAIN3 $R2 --bench 600 --out results/replication2_b3/unused
+  python3 code/replication_probe.py --url $ENDPOINT3 --model $M3 $PLAIN3 $R2 --wording 1 --blocks 1-20 --arms $ARMS2 --out results/replication2_b3/w1
+fi
+if [ -n "${ENDPOINT2:-}" ]; then
+  python3 code/replication_probe.py --url $ENDPOINT2 --model $M2 $R2 --bench 600 --out results/replication2_b2/unused
+  python3 code/replication_probe.py --url $ENDPOINT2 --model $M2 $R2 --wording 1 --blocks 1-20 --arms $ARMS2 --out results/replication2_b2/w1
+fi
 echo "collection complete; now: bash ../reproduce.sh analysis"

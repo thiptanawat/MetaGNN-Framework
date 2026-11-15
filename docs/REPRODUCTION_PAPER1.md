@@ -83,6 +83,8 @@ python3 paper1/code/build_results_p1.py
 python3 paper1/code/second_cohort_stats.py
 python3 paper1/code/second_cohort_graph.py
 python3 paper1/code/second_cohort_seed.py
+python3 paper1/code/second_cohort_graph_seed.py   # only when the cells tagged _ts2025 exist
+python3 paper1/code/first_cohort_graph_seed.py    # only when results/fam_seed2025/ exists
 python3 paper1/code/make_ledger.py
 python3 paper1/code/make_numbers_p1.py
 python3 paper1/code/make_figures_p1.py
@@ -93,8 +95,10 @@ python3 paper1/code/verify_ledger.py
 and then the Language-Model Evidence chain, and finally `tools/check_release.py`. The ledger runs after the
 last scripts that write a hashed file (`build_results_p1.py` writes `data/results_p1.json`,
 `second_cohort_stats.py` writes `data/results_cohort2.json`, `second_cohort_graph.py` writes
-`data/results_cohort2_graph.json` and `second_cohort_seed.py` writes
-`data/results_cohort2_seed.json`)
+`data/results_cohort2_graph.json`, `second_cohort_seed.py` writes
+`data/results_cohort2_seed.json`, `second_cohort_graph_seed.py` writes
+`data/results_cohort2_graph_seed.json` and `first_cohort_graph_seed.py` writes
+`data/results_cohort1_graph_seed.json`)
 and before the macros that quote its counts, so nothing it hashes changes after it is written;
 `verify_ledger.py` then checks every hash against the file it names and fails the run on a
 mismatch, which is what catches a ledger committed beside newer results.
@@ -115,8 +119,8 @@ and an explicit note that the path check was skipped, not a pass.
 
 Each training cell wrote one array beside its result file (`<cell>_preds.npz`: scores and
 uncertainties for the cell's test patients over all reactions, the held-out and fit masks and,
-for the synthetic cells, the per-patient labels). There are 299 of them, 2.9 GB in all, too
-large to commit. They are attached to the tagged release named in `release.json` as one
+for the synthetic cells, the per-patient labels). The ten result families of the first cohort hold
+299 of them, 2.9 GB in all, too large to commit. They are attached to the tagged release named in `release.json` as one
 tarball per result family (`preds_dh.tar`, `preds_ctrl.tar`, `preds_rewire.tar`,
 `preds_fam.tar`, `preds_ivr.tar`, `preds_synth.tar`, `preds_ht29.tar`, `preds_seedrep.tar`,
 `preds_rankgnn.tar`, `preds_permute.tar`), and their checksums are committed:
@@ -129,6 +133,24 @@ tarballs, check them against the tarball list, unpack them under
 array was checked, before release, against the result file written beside it: the mean
 per-patient held-out AUROC recomputed from the array equals the figure the result file reports
 to the four decimals it carries, for all 299.
+
+The cells that were trained later wrote arrays of the same kind: the 62 cells of the second cohort
+(`results/cohort2/fam/`) and the 30 cells of the first cohort's grid at the second training seed
+(`results/fam_seed2025/`), 92 arrays and 1.35 GB. No committed file is computed from them; the
+figures reported from these cells are in their result files. They are attached to the same tagged
+release as two further tarballs, `preds_cohort2_fam.tar` and `preds_fam_seed2025.tar`, and are not part of the
+data record. `paper1/data/prediction_arrays_added.json` describes them,
+`paper1/data/prediction_arrays_added.sha256` lists every array and
+`paper1/data/prediction_array_tarballs_added.sha256` the two tarballs. Unpacked under
+`paper1/results/prediction_arrays/` beside the others, they are checked with
+
+```
+cd paper1/results/prediction_arrays && sha256sum -c ../../data/prediction_arrays_added.sha256
+```
+
+`python3 paper1/code/check_arrays.py <array directory> <result directory> <cohort directory>`
+recomputes the per-patient AUROC a cell reports from its array and compares it with the result
+file; before release the two agreed to the four decimals the result file carries for all 92.
 
 The scripts of level 2 read the arrays from the directory named by `P1_OUTD` (default
 `~/metagnn/out`); point it at `paper1/results/prediction_arrays` after unpacking.
@@ -201,8 +223,40 @@ departures.
   files only.
 - **A second training seed on the full grid.** Section 7 of the plan fixes it, with its launcher
   (`code/gpu_queue_cohort2_seed2025.sh`) and its analysis script (`code/second_cohort_graph_seed.py`).
-  Its runs had not started when this release was cut, except the two of cell p0r0, which the check
-  above had made; the script is not part of `reproduce.sh` until the cells exist.
+  The grid is the one of Section 6 (both arms, 15 cells, matched selection rule) with
+  `--train_seed 2025`; the folds stay on the default seed. The two runs of cell p0r0 are those of the
+  check above, and the driver skips a cell whose file exists, so copy their files into the output
+  directory before starting. The launcher is started as
+
+  ```
+  GPU=1 DATA=<built second cohort> OUT=<output directory> bash paper1/code/gpu_queue_cohort2_seed2025.sh
+  ```
+
+  and `gpu_queue_cohort2_seed2025_gpu0.sh` issues the last jobs of the same list on a second
+  accelerator (`GPU=0 FIRST=<first job index> LAST=<last job index>` with the same `DATA` and
+  `OUT`). The 30 cells are the files tagged `_ts2025` under `results/cohort2/fam/`, and
+  `data/cohort2_graph_seed_run_record.json` records where and when they were made.
+  `second_cohort_graph_seed.py` reads them beside the default-seed files, stops if a cell is
+  missing, and writes `data/results_cohort2_graph_seed.json`. `reproduce.sh` runs it only when the
+  cells of the last grid position (`p4_r2`) at this seed exist.
+- **The same second seed on the first cohort.** `paper1/FIRST_COHORT_SEED_PLAN_2026-11-15.md`
+  fixes it, with `code/gpu_queue_cohort1_seed2025.sh` and `code/first_cohort_graph_seed.py`, before
+  any of its runs. The settings are those of the primary grid (`code/gpu_queue8.sh`: family-disjoint
+  split, matched selection rule, graph attention scorer without the mass-balance term) with
+  `--train_seed 2025`, both arms, 30 runs. The queue is started as
+
+  ```
+  GPU=0 DATA=<first cohort> OUT=<output directory> bash paper1/code/gpu_queue_cohort1_seed2025.sh
+  GPU=1 ORDER=down DATA=<first cohort> OUT=<output directory> bash paper1/code/gpu_queue_cohort1_seed2025.sh
+  ```
+
+  The second line is optional: a copy on a second accelerator works through the same list from its
+  end, and a job whose file exists or that is already running is skipped. The cells are under
+  `results/fam_seed2025/`; `data/cohort1_graph_seed_run_record.json` records where and when they
+  were made. `first_cohort_graph_seed.py` reads them and the first seed's grid under `results/fam/`,
+  stops if a cell is missing, checks the first seed's contrast against
+  `data/results_cohort2_graph.json`, and writes `data/results_cohort1_graph_seed.json`.
+  `reproduce.sh` runs it only when `results/fam_seed2025/` exists.
 
 ## What needs the GPU host or the deposited cohort
 
@@ -237,7 +291,7 @@ departures.
 ## Table and figure map
 
 <!-- map:start -->
-_Generated by `tools/make_repro_map.py` from the documents built on 2026-11-14; the manuscript sources are not in the public checkout, so this is the last built numbering._
+_Generated by `tools/make_repro_map.py` from the documents built on 2026-11-15; the manuscript sources are not in the public checkout, so this is the last built numbering._
 
 ### Main text
 
@@ -271,5 +325,5 @@ _Generated by `tools/make_repro_map.py` from the documents built on 2026-11-14; 
 | `tab:collapse` (Table S12) | Collapsing predictions to their cohort mean. | results/collapse.json, results/collapse_noise.json, results/arm_noise.json | compare_ctrl.py, collapse_noise.py, arm_noise.py |
 | `tab:naive` (Table S13) | Naive predictors on held-out reactions. | results/naive_baselines.json, results/naive_baselines2.json | naive_baselines.py, naive_baselines2.py |
 | `tab:synth` (Table S14) | The audit on a synthetic patient-varying target. | results/synth/*.json | double_holdout_ctrl.py with the synthetic target options |
-| `tab:cohort2` (Table S15) | The decomposition on two cohorts. | data/results_cohort2.json, computed from results/cohort2/naive_allfolds*.json and results/cohort2/naive_pooled*.json beside the first cohort's results/naive_allfolds*.json and results/naive_pooled*.json; for the graph scorer's rows, data/results_cohort2_graph.json, computed from results/cohort2/fam/*.json beside the first cohort's results/fam/*.json | build_second_cohort.py (features of the second cohort), naive_baselines_allfolds.py, pooled_baselines.py, second_cohort_stats.py; double_holdout_ctrl.py (the cells), second_cohort_graph.py |
+| `tab:cohort2` (Table S15) | The decomposition on two cohorts. | data/results_cohort2.json, computed from results/cohort2/naive_allfolds*.json and results/cohort2/naive_pooled*.json beside the first cohort's results/naive_allfolds*.json and results/naive_pooled*.json; for the graph scorer's rows, data/results_cohort2_graph.json, computed from results/cohort2/fam/*.json beside the first cohort's results/fam/*.json; for the rows of the second training seed, data/results_cohort2_graph_seed.json (the cells tagged _ts2025 under results/cohort2/fam/) and data/results_cohort1_graph_seed.json (results/fam_seed2025/*.json) | build_second_cohort.py (features of the second cohort), naive_baselines_allfolds.py, pooled_baselines.py, second_cohort_stats.py; double_holdout_ctrl.py (the cells), second_cohort_graph.py, second_cohort_graph_seed.py, first_cohort_graph_seed.py |
 <!-- map:end -->

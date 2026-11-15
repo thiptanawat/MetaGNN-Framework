@@ -1,0 +1,697 @@
+{
+ "note": "the plan of the second replication and the course of its collection; written by code/replication2_record.py from the archives, the serving records and results/replication2/course.json; times of calls are those of the collector's clock; local time is UTC+7, the local time of the plan",
+ "plan": "REPLICATION2_PLAN_2026-11-14.md",
+ "plan_commit": "e82533756fa19c38079e8ac29ccd4be9b1c1515d",
+ "plan_pushed_utc": "2026-11-14T14:55:49Z",
+ "plan_pushed_source": "the public activity record of the repository",
+ "sample_file": "results/replication2/design_master.json",
+ "sample_sha256": "eb1df4423b5e16d2b4887ad0a5bab42e7e99a4123d5ea3ab5025b22bcae546db",
+ "sample_sha256_in_plan": "eb1df4423b5e16d2b4887ad0a5bab42e7e99a4123d5ea3ab5025b22bcae546db",
+ "sample_file_is_the_one_of_the_plan": true,
+ "first_call_utc": "2026-11-14T15:00:53Z",
+ "first_call_local": "2026-11-14T22:00:53+07:00",
+ "first_call_backbone": "b1",
+ "plan_public_before_first_call": true,
+ "hours_between_push_and_first_call": 0.08,
+ "hours_between_push_and_first_call_by_backbone": {
+  "b1": 0.08,
+  "b3": 6.77,
+  "b2": 8.4
+ },
+ "backbones_with_an_archive": [
+  "b1",
+  "b3",
+  "b2"
+ ],
+ "backbones_without_an_archive": [],
+ "collection_order": [
+  "b1",
+  "b3",
+  "b2"
+ ],
+ "backbones": {
+  "b1": {
+   "served_name": "qwen3-8-27b",
+   "model_in_archive": "qwen3-8-27b",
+   "blocks_complete": 20,
+   "patients": 200,
+   "reactions": 300,
+   "calls": 246000,
+   "first_call_utc": "2026-11-14T15:00:53Z",
+   "first_call_local": "2026-11-14T22:00:53+07:00",
+   "last_reply_utc": "2026-11-14T19:15:00Z",
+   "last_reply_local": "2026-11-15T02:15:00+07:00",
+   "hours": 4.2354,
+   "calls_per_second": 16.134,
+   "rate_note": "calls answered, divided by the time from the first call sent to the last reply received, the pauses between blocks (for the main backbone, the days between the night windows) included",
+   "hours_between_push_and_first_call": 0.08,
+   "plan_public_before_first_call": true,
+   "calls_sent_again": 0,
+   "transport_errors_left": 0,
+   "unparsed": 0,
+   "answers_without_a_probability": 0,
+   "answers_cut_at_the_token_limit": 0,
+   "calls_with_more_than_one_attempt": 0,
+   "concurrent_requests": [
+    24
+   ],
+   "temperature": 0.0,
+   "max_tokens": 160,
+   "plain_chat": false,
+   "block_order": [
+    "w1 block 1",
+    "w1 block 2",
+    "w1 block 3",
+    "w1 block 4",
+    "w1 block 5",
+    "w1 block 6",
+    "w1 block 7",
+    "w1 block 8",
+    "w1 block 9",
+    "w1 block 10",
+    "w1 block 11",
+    "w1 block 12",
+    "w1 block 13",
+    "w1 block 14",
+    "w1 block 15",
+    "w1 block 16",
+    "w1 block 17",
+    "w1 block 18",
+    "w1 block 19",
+    "w1 block 20"
+   ],
+   "block_order_as_planned": true,
+   "arms_per_block": {
+    "1": [
+     "reaction",
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "2": [
+     "reaction",
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "3": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "4": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "5": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "6": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "7": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "8": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "9": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "10": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "11": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "12": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "13": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "14": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "15": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "16": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "17": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "18": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "19": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "20": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ]
+   },
+   "arms_as_planned": true,
+   "patients_are_the_first_of_the_sample_in_order": true,
+   "reactions_are_those_of_the_sample": true,
+   "design_master_sha256_in_archive": "eb1df4423b5e16d2b4887ad0a5bab42e7e99a4123d5ea3ab5025b22bcae546db",
+   "design_master_sha256_of_file": "eb1df4423b5e16d2b4887ad0a5bab42e7e99a4123d5ea3ab5025b22bcae546db",
+   "design_master_sha256_matches": true,
+   "collector_sha256": {
+    "replication_probe": "2145515c4b7ceb1f8cd245796a5fc95aa9ba7568665dfb4c73badbee6dba14ed",
+    "llm_probe": "42c96654256a741077e42d155c2e75449879cce4095921ffe4caa88c182cb86a"
+   },
+   "serving_record": "the service's own record, reduced by code/replication_service_record.py",
+   "model_source": "Qwen/Qwen3.8-27B-FP8",
+   "replicas": 2,
+   "read_at": "2026-11-14T22:00:14+0700",
+   "read_at_utc": "2026-11-14T15:00:14Z",
+   "application_status": "RUNNING",
+   "deployment_status": "HEALTHY",
+   "model_id": "qwen3-8-27b",
+   "ray_version": "2.55.0",
+   "full_record_sha256": "d315babb2e11695ac806dda52ba4356d820a9bd18770767a1932606d51e451f8",
+   "serving_record_before_first_call": true,
+   "check_calls_before_the_collection": {
+    "calls": 600,
+    "parsed": 600,
+    "concurrent_requests": 24,
+    "seconds": 37.3,
+    "calls_per_second": 16.09,
+    "ended_local": "2026-11-14T22:00:52+07:00"
+   }
+  },
+  "b3": {
+   "served_name": "mistral-small-3.2-24b-instruct",
+   "model_in_archive": "mistral-small-3.2-24b-instruct",
+   "blocks_complete": 20,
+   "patients": 200,
+   "reactions": 300,
+   "calls": 246000,
+   "first_call_utc": "2026-11-14T21:42:17Z",
+   "first_call_local": "2026-11-15T04:42:17+07:00",
+   "last_reply_utc": "2026-11-14T23:15:56Z",
+   "last_reply_local": "2026-11-15T06:15:56+07:00",
+   "hours": 1.5608,
+   "calls_per_second": 43.78,
+   "rate_note": "calls answered, divided by the time from the first call sent to the last reply received, the pauses between blocks (for the main backbone, the days between the night windows) included",
+   "hours_between_push_and_first_call": 6.77,
+   "plan_public_before_first_call": true,
+   "calls_sent_again": 0,
+   "transport_errors_left": 0,
+   "unparsed": 0,
+   "answers_without_a_probability": 0,
+   "answers_cut_at_the_token_limit": 0,
+   "calls_with_more_than_one_attempt": 0,
+   "concurrent_requests": [
+    24
+   ],
+   "temperature": 0.0,
+   "max_tokens": 160,
+   "plain_chat": true,
+   "block_order": [
+    "w1 block 1",
+    "w1 block 2",
+    "w1 block 3",
+    "w1 block 4",
+    "w1 block 5",
+    "w1 block 6",
+    "w1 block 7",
+    "w1 block 8",
+    "w1 block 9",
+    "w1 block 10",
+    "w1 block 11",
+    "w1 block 12",
+    "w1 block 13",
+    "w1 block 14",
+    "w1 block 15",
+    "w1 block 16",
+    "w1 block 17",
+    "w1 block 18",
+    "w1 block 19",
+    "w1 block 20"
+   ],
+   "block_order_as_planned": true,
+   "arms_per_block": {
+    "1": [
+     "reaction",
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "2": [
+     "reaction",
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "3": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "4": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "5": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "6": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "7": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "8": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "9": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "10": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "11": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "12": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "13": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "14": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "15": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "16": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "17": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "18": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "19": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "20": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ]
+   },
+   "arms_as_planned": true,
+   "patients_are_the_first_of_the_sample_in_order": true,
+   "reactions_are_those_of_the_sample": true,
+   "design_master_sha256_in_archive": "eb1df4423b5e16d2b4887ad0a5bab42e7e99a4123d5ea3ab5025b22bcae546db",
+   "design_master_sha256_of_file": "eb1df4423b5e16d2b4887ad0a5bab42e7e99a4123d5ea3ab5025b22bcae546db",
+   "design_master_sha256_matches": true,
+   "collector_sha256": {
+    "replication_probe": "2145515c4b7ceb1f8cd245796a5fc95aa9ba7568665dfb4c73badbee6dba14ed",
+    "llm_probe": "42c96654256a741077e42d155c2e75449879cce4095921ffe4caa88c182cb86a"
+   },
+   "serving_record": "code/replication_serving_record.py",
+   "weights_identical_to_record": true,
+   "weight_files": 17,
+   "weight_bytes": 96065055110,
+   "artifact_digest": "3d7cf83bb69dfb553766f52aa7d39de437d6782fece29fca1e2f51e762519fd2",
+   "revision": "95a6d26c4bfb886c58daf9d3f7332c857cb27b43",
+   "other_files": {
+    ".gitattributes": "not on record",
+    "README.md": "identical"
+   },
+   "serving_record_written_utc": "2026-11-14T21:41:56Z",
+   "serving_record_before_first_call": true,
+   "serving_record_plan": "REPLICATION2_PLAN_2026-11-14.md",
+   "study_commit": "e82533756fa19c38079e8ac29ccd4be9b1c1515d",
+   "libraries": {
+    "vllm": "0.19.0",
+    "torch": "2.10.0",
+    "transformers": "5.5.4",
+    "tokenizers": "0.22.2",
+    "mistral_common": "1.11.0",
+    "huggingface_hub": "1.11.0",
+    "safetensors": "0.7.0",
+    "numpy": "2.2.6",
+    "torch_cuda": "12.8",
+    "torch_cudnn": 91002
+   },
+   "libraries_as_in_the_extension": true,
+   "python": "3.12.3",
+   "accelerator": "1, NVIDIA H100 80GB HBM3, 81559 MiB, 580.178.04",
+   "host_label": "second host",
+   "check_calls_before_the_collection": {
+    "calls": 600,
+    "parsed": 600,
+    "concurrent_requests": 24,
+    "seconds": 17.3,
+    "calls_per_second": 34.72,
+    "ended_local": "2026-11-15T04:42:17+07:00"
+   }
+  },
+  "b2": {
+   "served_name": "gemma-4-31b-it",
+   "model_in_archive": "gemma-4-31b-it",
+   "blocks_complete": 20,
+   "patients": 200,
+   "reactions": 300,
+   "calls": 246000,
+   "first_call_utc": "2026-11-14T23:19:31Z",
+   "first_call_local": "2026-11-15T06:19:31+07:00",
+   "last_reply_utc": "2026-11-15T03:53:36Z",
+   "last_reply_local": "2026-11-15T10:53:36+07:00",
+   "hours": 4.5681,
+   "calls_per_second": 14.959,
+   "rate_note": "calls answered, divided by the time from the first call sent to the last reply received, the pauses between blocks (for the main backbone, the days between the night windows) included",
+   "hours_between_push_and_first_call": 8.4,
+   "plan_public_before_first_call": true,
+   "calls_sent_again": 0,
+   "transport_errors_left": 0,
+   "unparsed": 0,
+   "answers_without_a_probability": 0,
+   "answers_cut_at_the_token_limit": 0,
+   "calls_with_more_than_one_attempt": 0,
+   "concurrent_requests": [
+    24
+   ],
+   "temperature": 0.0,
+   "max_tokens": 160,
+   "plain_chat": false,
+   "block_order": [
+    "w1 block 1",
+    "w1 block 2",
+    "w1 block 3",
+    "w1 block 4",
+    "w1 block 5",
+    "w1 block 6",
+    "w1 block 7",
+    "w1 block 8",
+    "w1 block 9",
+    "w1 block 10",
+    "w1 block 11",
+    "w1 block 12",
+    "w1 block 13",
+    "w1 block 14",
+    "w1 block 15",
+    "w1 block 16",
+    "w1 block 17",
+    "w1 block 18",
+    "w1 block 19",
+    "w1 block 20"
+   ],
+   "block_order_as_planned": true,
+   "arms_per_block": {
+    "1": [
+     "reaction",
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "2": [
+     "reaction",
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "3": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "4": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "5": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "6": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "7": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "8": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "9": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "10": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "11": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "12": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "13": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "14": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "15": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "16": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "17": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "18": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "19": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ],
+    "20": [
+     "patient",
+     "shuffled",
+     "shuffled_d2",
+     "shuffled_d3"
+    ]
+   },
+   "arms_as_planned": true,
+   "patients_are_the_first_of_the_sample_in_order": true,
+   "reactions_are_those_of_the_sample": true,
+   "design_master_sha256_in_archive": "eb1df4423b5e16d2b4887ad0a5bab42e7e99a4123d5ea3ab5025b22bcae546db",
+   "design_master_sha256_of_file": "eb1df4423b5e16d2b4887ad0a5bab42e7e99a4123d5ea3ab5025b22bcae546db",
+   "design_master_sha256_matches": true,
+   "collector_sha256": {
+    "replication_probe": "2145515c4b7ceb1f8cd245796a5fc95aa9ba7568665dfb4c73badbee6dba14ed",
+    "llm_probe": "42c96654256a741077e42d155c2e75449879cce4095921ffe4caa88c182cb86a"
+   },
+   "serving_record": "code/replication_serving_record.py",
+   "weights_identical_to_record": true,
+   "weight_files": 8,
+   "weight_bytes": 62578636733,
+   "artifact_digest": "91824b237f5988e840b56c7f64b07e3fcb0a9da97bf2bcb5ce7c08cf5e800485",
+   "revision": "439edf5652646a0d1bd8b46bfdc1d3645761a445",
+   "other_files": {
+    ".gitattributes": "not on record",
+    "README.md": "not on record",
+    "chat_template.jinja": "identical"
+   },
+   "serving_record_written_utc": "2026-11-14T23:18:49Z",
+   "serving_record_before_first_call": true,
+   "serving_record_plan": "REPLICATION2_PLAN_2026-11-14.md",
+   "study_commit": "e82533756fa19c38079e8ac29ccd4be9b1c1515d",
+   "libraries": {
+    "vllm": "0.19.0",
+    "torch": "2.10.0",
+    "transformers": "5.5.4",
+    "tokenizers": "0.22.2",
+    "mistral_common": "1.11.0",
+    "huggingface_hub": "1.11.0",
+    "safetensors": "0.7.0",
+    "numpy": "2.2.6",
+    "torch_cuda": "12.8",
+    "torch_cudnn": 91002
+   },
+   "libraries_as_in_the_extension": true,
+   "python": "3.12.3",
+   "accelerator": "1, NVIDIA H100 80GB HBM3, 81559 MiB, 580.178.04",
+   "host_label": "second host",
+   "check_calls_before_the_collection": {
+    "calls": 600,
+    "parsed": 600,
+    "concurrent_requests": 24,
+    "seconds": 37.6,
+    "calls_per_second": 15.95,
+    "ended_local": "2026-11-15T06:19:30+07:00"
+   }
+  }
+ },
+ "notes": [
+  "The answer file of every backbone (w1/raw.json) is committed compressed, as w1/raw.json.gz (gzip), because the file of the main backbone is larger than the 100 MB that the hosting service accepts for one file; reproduce.sh unpacks the three files before anything reads them, and the SHA-256 that code/collection_manifest.py records is that of the unpacked file.",
+  "Main backbone (b1): 20 of 20 blocks, no call sent again, no transport error left and no answer that could not be parsed; the collector ended with status 0 at 2026-11-15T02:15:04+07:00.",
+  "Third backbone (b3): 20 of 20 blocks, no call sent again, no transport error left and no answer that could not be parsed; the collection ended with status 0 at 2026-11-15T06:16:00+07:00.",
+  "Second backbone (b2): 20 of 20 blocks, no call sent again, no transport error left and no answer that could not be parsed; the collection ended with status 0 at 2026-11-15T10:53:40+07:00.",
+  "Second and third backbones: the launcher issued on the second host is code/provenance/run_replication2_local_acc1.sh, which is code/provenance/run_replication2_local.sh with the wait for the training jobs of the other study written for the accelerator it serves on alone. The published launcher had been waiting since 14 November for the training jobs of the whole host and was replaced on 15 November at 02:35 local time, before it had issued anything, because the other study by then also ran training jobs on the other accelerator of that host. Section 6 of the plan names the condition as the accelerator being free of those jobs. Nothing after the wait differs between the two files, and the calls were issued from the checkout of the plan's commit."
+ ],
+ "departures": [],
+ "departures_sentence": "No departure from the plan is recorded."
+}

@@ -40,8 +40,9 @@ for d in sorted(glob.glob(os.path.join(RES, "*", "design.json")) +
         # the collector of the replication reads its donors from the archived sample file and records a start
         # time for each block, so the default of the earlier collectors does not describe it
         rows[run]["defaults_not_recorded"].pop("donor_seed", None)
+        _master = "results/replication2/design_master.json" if run.startswith("replication2_") else "results/replication/design_master.json"
         rows[run]["recorded_elsewhere"] = dict(
-            donor_seed="the donors are read from results/replication/design_master.json, one schedule per donor arm",
+            donor_seed="the donors are read from %s, one schedule per donor arm" % _master,
             started_at="the start of each block is recorded under blocks")
 
 have = {k: sum(1 for r in rows.values() if k in (r.get("records") or {})) for k in FIELDS}

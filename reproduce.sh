@@ -32,6 +32,16 @@ python3 paper1/code/second_cohort_stats.py >/dev/null
 python3 paper1/code/second_cohort_graph.py >/dev/null
 # outside that plan: one cell of the second cohort at two further training seeds, as on the first cohort
 python3 paper1/code/second_cohort_seed.py >/dev/null
+# Section 7 of that plan: the whole grid of the second cohort at a second training seed, read once its cells
+# (the files tagged _ts2025 under results/cohort2/fam/) exist; the step is skipped in a checkout without them
+if ls paper1/results/cohort2/fam/gnn_B_mb0.0_p4_r2*_ts2025_ivr_fam.json >/dev/null 2>&1; then
+    python3 paper1/code/second_cohort_graph_seed.py >/dev/null
+fi
+# FIRST_COHORT_SEED_PLAN_2026-11-15.md: the same second seed on the full grid of the first cohort
+# (results/fam_seed2025/); the step is skipped in a checkout without that directory
+if [ -d paper1/results/fam_seed2025 ]; then
+    python3 paper1/code/first_cohort_graph_seed.py >/dev/null
+fi
 # the ledger hashes every result and data file, so it runs after the last script that writes one
 # (build_results_p1.py writes data/results_p1.json) and before the macros that quote its counts; the
 # macro file, the figures and the ledger itself are not hashed, so nothing hashed changes after this
@@ -52,9 +62,19 @@ echo "== paper 2 =="
 # replication_backbones.py runs the same two computations, unchanged, on the archives of the second and
 # third backbones (REPLICATION_BACKBONES_PLAN_2026-11-13.md), and replication_backbones_record.py
 # writes the record of that plan and of its collection from the archives and the serving records.
+# replication2_design.py --check rebuilds the sample of the second replication (REPLICATION2_PLAN_2026-11-14.md)
+# from its seed and compares it with the committed file; replication2.py runs the statistics of the first
+# plan and the printed-number reference on each archive of that replication that is present, and
+# replication2_record.py writes the record of its plan and collection. Without an archive the last two
+# print one line and end, so a checkout that holds the sample and no collection still passes.
 # the order the collection host gave tied expression values is archived (paper2/cohort_order.npz),
 # so the ranks do not depend on the processor; the check ties the archive to the cohort matrix, to
 # the percentiles stored in the positive-control records and to the probe panel
+# the answer files of the second replication are committed compressed, because a file in the repository
+# may not exceed 100 MB; they are unpacked here, beside the compressed files, before anything reads them
+for f in paper2/results/replication2_b?/w1/raw.json.gz; do
+  if [ -f "$f" ] && [ ! -f "${f%.gz}" ]; then gunzip -k "$f"; fi
+done
 ( cd paper2 && python3 code/export_cohort_order.py --check >/dev/null \
   && python3 code/stats.py && python3 code/msi_stats.py >/dev/null \
   && python3 code/collection_manifest.py >/dev/null \
@@ -67,6 +87,9 @@ echo "== paper 2 =="
   && python3 code/replication_posthoc.py >/dev/null \
   && python3 code/replication_backbones.py >/dev/null \
   && python3 code/replication_backbones_record.py >/dev/null \
+  && python3 code/replication2_design.py --check >/dev/null \
+  && python3 code/replication2.py >/dev/null \
+  && python3 code/replication2_record.py >/dev/null \
   && python3 code/make_numbers.py && python3 code/check_macros.py \
   && python3 code/make_results_md.py && python3 code/make_figures.py )
 echo "== README tables =="

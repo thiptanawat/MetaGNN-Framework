@@ -402,6 +402,20 @@ if _os.path.exists(_gp):
     if 'wording2' in _G:
         _d = _G['wording2']['donor']['d1']
         _rows.append((f"Replication, second wording (n = {_G['wording2']['n_patients']})", _d['diff_mean'], _d['diff_ci90'], 'replication'))
+    # the second replication (REPLICATION2_PLAN_2026-11-14.md), main backbone: drawn once all three backbones of that
+    # replication have been read, the condition under which the text describes it (code/make_numbers.py)
+    _g2 = [_os.path.join(PATHS.ROOT, 'results', f'replication2_{_k}_{_t}.json') for _t in ('b1', 'b2', 'b3') for _k in ('frozen', 'reference')]
+    _second = all(_os.path.exists(_f) for _f in _g2)
+    if _second:
+        _G2 = json.load(open(_g2[0])); _V1 = _G2['wording1']; _n2 = _V1['n_patients']
+        for _s, _lab in (('d1', 'Second replication, schedule 1, primary'), ('d2', 'Second replication, schedule 2'),
+                         ('d3', 'Second replication, schedule 3')):
+            if _s in _V1['donor']:
+                _d = _V1['donor'][_s]
+                _rows.append((f"{_lab} (n = {_n2})", _d['diff_mean'], _d['diff_ci90'], 'primary2' if _s == 'd1' else 'replication2'))
+        if 'pooled_donor' in _V1:
+            _rows.append((f"Second replication, mean of three donor arms (n = {_n2})", _V1['pooled_donor']['mean'],
+                          _V1['pooled_donor']['ci90'], 'replication2'))
     # the printed numbers of the replication ranked with no model (replication_posthoc.py; exploratory)
     _xp = _os.path.join(PATHS.ROOT, 'results', 'replication_posthoc.json')
     if _os.path.exists(_xp):
@@ -409,6 +423,9 @@ if _os.path.exists(_gp):
         for _k, _lab in (('printed_percentile', 'Printed percentile, no model, schedule 1'), ('printed_value', 'Printed value, no model, schedule 1')):
             _d = _XR[_k]['d1']['diff']
             _rows.append((f"{_lab} (n = {_d['n']})", _d['mean'], _d['ci90'], 'reference'))
+    if _second:      # the reference that the plan of the second replication names: the printed percentile, mean of the three schedules
+        _pp = json.load(open(_g2[1]))['pooled']['printed_percentile']
+        _rows.append((f"Printed percentile, no model, second sample, three schedules (n = {_pp['n']})", _pp['mean'], _pp['ci90'], 'reference'))
     fig, ax = plt.subplots(figsize=(W, 0.27 * len(_rows) + 0.85))
     ax.axvspan(-0.02, 0.02, color=LGREY, alpha=0.6, lw=0, zorder=0)
     for _m in (-0.05, 0.05): ax.axvline(_m, color=GREY, lw=0.8, ls=':', zorder=1)
@@ -416,12 +433,14 @@ if _os.path.exists(_gp):
     for _i, (_lab, _mu, _ci, _kind) in enumerate(_rows):
         _y = len(_rows) - 1 - _i; _col = {'earlier': GREY, 'reference': ORANGE}.get(_kind, BLUE)
         ax.plot(_ci, [_y, _y], color=_col, lw=1.2 if _kind == 'earlier' else 1.7, solid_capstyle='butt', zorder=2)
-        ax.plot([_mu], [_y], marker='D' if _kind == 'primary' else 'o', ms=5.2 if _kind == 'primary' else 4.2,
+        ax.plot([_mu], [_y], marker='D' if _kind in ('primary', 'primary2') else 'o', ms=5.2 if _kind in ('primary', 'primary2') else 4.2,
                 color=_col, mec='white', mew=0.5, zorder=3)
     ax.set_yticks(range(len(_rows))); ax.set_yticklabels([_r[0] for _r in _rows][::-1])
     for _t, _r in zip(ax.get_yticklabels(), _rows[::-1]):
-        if _r[3] == 'primary': _t.set_fontweight('bold')
+        if _r[3] in ('primary', 'primary2'): _t.set_fontweight('bold')
     ax.axhline(len(_rows) - sum(1 for _r in _rows if _r[3] == 'earlier') - 0.5, color=LGREY, lw=0.8)
+    if any(_r[3] in ('primary2', 'replication2') for _r in _rows):      # a line between the two replications
+        ax.axhline(len(_rows) - sum(1 for _r in _rows if _r[3] in ('earlier', 'primary', 'replication')) - 0.5, color=LGREY, lw=0.8)
     if any(_r[3] == 'reference' for _r in _rows):
         ax.axhline(sum(1 for _r in _rows if _r[3] == 'reference') - 0.5, color=LGREY, lw=0.8)
     _lim = max(0.06, max(max(abs(_r[2][0]), abs(_r[2][1])) for _r in _rows) + 0.006)

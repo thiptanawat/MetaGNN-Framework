@@ -309,6 +309,7 @@ if _est:
     _nk = len({_kinds.get(k, k) for k, _ in _est})
     cmd("estKinds", _nk, "int"); cmd("estKindsWord", {3: "three", 4: "four", 5: "five", 6: "six"}.get(_nk, str(_nk)))
     cmd("estMax", max(_vals), "{:+.4f}"); cmd("estMin", min(_vals), "{:+.4f}")
+    _est_lo, _est_hi = min(_vals), max(_vals)
     cmd("estNeg", sum(1 for v in _vals if v < -0.001), "int"); cmd("estPos", sum(1 for v in _vals if v > 0.001), "int")
     cmd("estZero", sum(1 for v in _vals if abs(v) <= 0.001), "int")
     _nw = {0: "none", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight"}
@@ -833,6 +834,13 @@ if os.path.exists(_LG):
         # companion when present, else from the released tarballs' recorded total
         _gib = _pa.get("total_bytes")
         if _gib: cmd("ledgerArraysGB", _gib / 1e9, "{:.1f}")
+
+# ---- the prediction arrays of the cells trained after the ten families (data/prediction_arrays_added.json) ----
+_AA = os.path.join(HERE, "data", "prediction_arrays_added.json")
+if os.path.exists(_AA):
+    _aa = json.load(open(_AA))
+    cmd("addedArrays", _aa["n_arrays"], "int"); cmd("addedTarballs", len(_aa["tarballs"]), "int")
+    cmd("addedArraysGB", _aa["arrays_total_bytes"] / 1e9, "{:.2f}")
 
 # ---- status -----------------------------------------------------------------
 St = R["status"]
@@ -1869,6 +1877,20 @@ for _ck, _cp in (("cohort1", "co"), ("cohort2", "ct")):
             cmd(_pre + "P", pfmt(_c["signflip_p"]))
 _c2c = [C2["cohorts"]["cohort2"][s]["contrasts"][k]["mean"] for s in ("random", "family") for k in _CONN]
 _c1c = [C2["cohorts"]["cohort1"][s]["contrasts"][k]["mean"] for s in ("random", "family") for k in _CONN]
+# the one row of the two-cohort table that reads the same in both cohorts to four decimals, given to five (a caption note)
+_spr = [C2["cohorts"][_ck]["random"]["rows"]["structure_plus_perpat"]["mean"] for _ck in ("cohort1", "cohort2")]
+cmd("coRndStructPerFive", _spr[0], "{:.5f}"); cmd("ctRndStructPerFive", _spr[1], "{:.5f}")
+cmd("cRndStructPerNote", " The row of the network features with own expression on the random split reads the same in both cohorts to four "
+    "decimals by coincidence (\\coRndStructPerFive{} and \\ctRndStructPerFive{})."
+    if (f"{_spr[0]:.4f}" == f"{_spr[1]:.4f}" and f"{_spr[0]:.5f}" != f"{_spr[1]:.5f}") else "")
+# the first cohort's linear contrasts that lie outside the range of the related estimates of the main figure
+_out1 = [_sx for _sx in ("random", "family") for _kx in _CONN
+         if not (_est_lo <= C2["cohorts"]["cohort1"][_sx]["contrasts"][_kx]["mean"] <= _est_hi)]
+_nw6 = ["None", "One", "Two", "Three", "Four", "Five", "Six"]
+_where = ("on the family-disjoint split" if set(_out1) == {"family"} else "on the random split" if set(_out1) == {"random"} else "on both splits")
+cmd("coConOutsideSentence", ("%s of the first cohort's six values, %s%s, lie%s outside the range of Figure~\\ref{fig:personalization}, "
+    "whose estimates rest on the random split except for the primary contrast."
+    % (_nw6[len(_out1)], "both " if len(_out1) == 2 and len(set(_out1)) == 1 else "", _where, "s" if len(_out1) == 1 else "")) if _out1 else "")
 cmd("ctConMin", min(_c2c), "{:+.4f}"); cmd("ctConMax", max(_c2c), "{:+.4f}")
 cmd("coConMin", min(_c1c), "{:+.4f}"); cmd("coConMax", max(_c1c), "{:+.4f}")
 cmd("ctConWithin", "all six lie" if max(abs(x) for x in _c2c) < 0.02 else "not all six lie")
@@ -1998,6 +2020,196 @@ if os.path.exists(_csp):
     _want = [_fsr["default_seed"]["delta"]] + [_fsr["by_seed"][k]["delta"] for k in _order[1:]]
     if any(abs(a - _c1s["by_seed"][k]["difference"]) > 1e-9 for a, k in zip(_want, _order)):
         raise SystemExit("results_cohort2_seed.json: the first cohort's seed replicates differ from data/results_p1.json")
+
+# the graph scorer on the second cohort at a second training seed on the full grid (Section 7 of the plan;
+# code/second_cohort_graph_seed.py); present only when those cells exist. The sentences below were written
+# before any result of that section was read, so they report whatever it gives.
+_cg2p = os.path.join(HERE, "data", "results_cohort2_graph_seed.json")
+if os.path.exists(_cg2p):
+    _G2 = json.load(open(_cg2p)); _k1, _k2 = sorted(_G2["seeds"], key=int)
+    _sa, _sb = _G2["seeds"][_k1], _G2["seeds"][_k2]; _ca = _sa["contrast"]; _cb = _sb["contrast"]; _bo = _G2["both_seeds"]; _bt = _G2["between_seeds"]
+    if abs(_ca["mean"] - _gc["mean"]) > 1e-9 or _ca["n_negative"] != _gc["n_negative"]:
+        raise SystemExit("results_cohort2_graph_seed.json: the contrast of the first seed differs from results_cohort2_graph.json")
+    _mg = "$%g$" % _G2["margin"]
+    cmd("cgTwoSeed", _k2)
+    cmd("cgTwoReal", _sb["arms"]["own"]["mean"]); cmd("cgTwoRealSD", _sb["arms"]["own"]["sd"])
+    cmd("cgTwoMean", _sb["arms"]["cohort_mean"]["mean"]); cmd("cgTwoMeanSD", _sb["arms"]["cohort_mean"]["sd"])
+    cmd("cgTwoPat", _cb["mean"], "{:+.4f}"); cmd("cgTwoPatSD", _cb["sd"])
+    cmd("cgTwoPatMin", _cb["min"], "{:+.4f}"); cmd("cgTwoPatMax", _cb["max"], "{:+.4f}")
+    cmd("cgTwoPatNeg", _cb["n_negative"], "int"); cmd("cgTwoPatPos", _cb["n_positive"], "int"); cmd("cgTwoPatN", _cb["n_cells"], "int")
+    cmd("cgTwoPatP", pfmt(_cb["signflip_p"]))
+    cmd("cgTwoFlipPfold", "{:.4g}".format(_cb["signflip_p_patient_folds"])); cmd("cgTwoFlipRfold", "{:.4g}".format(_cb["signflip_p_reaction_folds"]))
+    # the reading the plan fixed (a mean within the margin), worded for each of the four cases
+    _w1, _w2 = bool(_ca["within_margin"]), bool(_cb["within_margin"])
+    cmd("cgTwoWithinPhrase",
+        ("this mean also lies within %s AUROC of zero" % _mg) if (_w1 and _w2) else
+        ("this mean, unlike that of the first seed, does not lie within %s AUROC of zero" % _mg) if (_w1 and not _w2) else
+        ("this mean, unlike that of the first seed, lies within %s AUROC of zero" % _mg) if _w2 else
+        ("this mean does not lie within %s AUROC of zero either" % _mg))
+    cmd("cgTwoCells", ", ".join("{:+.4f}".format(_cb["per_cell"][c]) for c in _g2["cells"]))
+    # the per-cell mean of the two seeds' differences
+    cmd("cgBothPat", _bo["mean"], "{:+.4f}"); cmd("cgBothPatSD", _bo["sd"])
+    cmd("cgBothPatMin", _bo["min"], "{:+.4f}"); cmd("cgBothPatMax", _bo["max"], "{:+.4f}")
+    cmd("cgBothPatNeg", _bo["n_negative"], "int"); cmd("cgBothPatP", pfmt(_bo["signflip_p"]))
+    cmd("cgBothFlipPfold", "{:.4g}".format(_bo["signflip_p_patient_folds"])); cmd("cgBothFlipRfold", "{:.4g}".format(_bo["signflip_p_reaction_folds"]))
+    cmd("cgBothWithinPhrase", ("lies within %s AUROC of zero" % _mg) if _bo["within_margin"] else ("does not lie within %s AUROC of zero" % _mg))
+    # agreement between the two seeds
+    cmd("cgBetweenGrid", _bt["grid_mean_second_minus_first"], "{:+.4f}"); cmd("cgBetweenGridAbs", abs(_bt["grid_mean_second_minus_first"]))
+    cmd("cgBetweenMeanAbs", _bt["mean_abs_change_of_a_cell"]); cmd("cgBetweenMaxAbs", _bt["max_abs_change_of_a_cell"])
+    cmd("cgBetweenSameSign", _bt["cells_with_one_sign"], "int")
+    cmd("cgBetweenPearson", _bt["pearson"], "{:+.2f}"); cmd("cgBetweenSpearman", _bt["spearman"], "{:+.2f}")
+    # training length at each seed
+    _len = {}
+    for _tag, _S in (("One", _sa), ("Two", _sb)):
+        _t = _S["training_length"]; _len[_tag] = _t
+        cmd("cgLenGap" + _tag, _t["mean_epoch_gap"], "{:+.1f}"); cmd("cgLenGapAbs" + _tag, abs(_t["mean_epoch_gap"]), "{:.1f}")
+        cmd("cgLenCorr" + _tag, _t["pearson_difference_with_epoch_gap"], "{:+.2f}")
+        cmd("cgLenSpear" + _tag, _t["spearman_difference_with_epoch_gap"], "{:+.2f}")
+        cmd("cgLenNearN" + _tag, _t["n_cells_where_gap_at_most_2"], "int")
+        cmd("cgLenNearDiff" + _tag, _t["mean_difference_where_gap_at_most_2"], "{:+.4f}")
+        cmd("cgLenEqual" + _tag, _t["cells_with_equal_length"], "int")
+        cmd("cgEpOwn" + _tag, "{:g}".format(_S["arms"]["own"]["epochs"]["median"]))
+        cmd("cgEpMean" + _tag, "{:g}".format(_S["arms"]["cohort_mean"]["epochs"]["median"]))
+    def _sg(v, nd):
+        """A signed value for a formula; a value that rounds to zero carries no sign."""
+        x = "%+.*f" % (nd, v)
+        return ("%.*f" % (nd, 0.0)) if float(x) == 0 else x.replace("-", "{-}")
+    def _longer(t):
+        g = t["mean_epoch_gap"]
+        if g > 0: return "the cohort-mean arm trained %.1f epochs longer than the own-expression arm on average" % g
+        if g < 0: return "the own-expression arm trained %.1f epochs longer than the cohort-mean arm on average" % -g
+        return "the two arms trained equally long on average"
+    def _corr(t):
+        r, rs = t["pearson_difference_with_epoch_gap"], t["spearman_difference_with_epoch_gap"]
+        if r is None: return "has no defined correlation with that gap, which is the same in every cell"
+        return "correlates with that gap at $r = %s$ (Spearman $%s$)" % (_sg(r, 2), _sg(rs, 2))
+    def _near(t):
+        n = t["n_cells_where_gap_at_most_2"]
+        if not n: return "no cell had its two arms stop within two epochs of each other"
+        return "in the %s cell%s whose two arms stopped within two epochs of each other the %sdifference was $%s$" % (
+            _word(n), "" if n == 1 else "s", "" if n == 1 else "mean ", _sg(t["mean_difference_where_gap_at_most_2"], 4))
+    cmd("cgLenSentence",
+        "Section~6 of the plan left open whether the longer training of the cohort-mean arm accounts for the difference between the arms, "
+        "and this section fixed three descriptions of it: the gap in epochs between the arms (cohort-mean arm minus own-expression arm), "
+        "the correlation of the difference in AUROC with that gap across the cells, where a negative value means that the own-expression "
+        "arm falls further behind in the cells in which the cohort-mean arm trained longer, and the difference in the cells whose arms "
+        "stopped within two epochs of each other. At the first seed %s; the difference in AUROC %s, and %s. At the second seed %s; "
+        "the difference %s, and %s. These describe \\cgTwoPatN{} dependent cells at each seed and do not test whether training length "
+        "accounts for the difference; those of the first seed were computed after its outcome was known."
+        % (_longer(_len["One"]), _corr(_len["One"]), _near(_len["One"]), _longer(_len["Two"]), _corr(_len["Two"]), _near(_len["Two"])))
+    # where and when the cells of the second seed were computed (data/cohort2_graph_seed_run_record.json)
+    _r7 = _G2.get("run_record")
+    if not _r7:
+        raise SystemExit("data/cohort2_graph_seed_run_record.json is missing (where and when the cells of the second seed were computed)")
+    cmd("cgTwoNewRuns", _r7["new_runs"], "int"); cmd("cgTwoReusedRuns", _r7["reused_runs"], "int")
+    cmd("cgTwoPlanMinutes", _r7["minutes_between_push_and_first_new_run"], "{:.0f}")
+    cmd("cgTwoPlanSentence",
+        "The section was public %s minutes before the first of its new runs started (commit \\texttt{%s}, pushed at %s UTC on %s)."
+        % ("{:.0f}".format(_r7["minutes_between_push_and_first_new_run"]), _r7["plan_commit"][:7], _r7["plan_pushed_utc"][11:16], _r7["plan_pushed_date_words"]))
+    _sec = _r7.get("second_accelerator")
+    cmd("cgTwoHostSentence",
+        "The runs were made on the second workstation, in the environment of the first seed's runs."
+        + ((" To shorten the wall-clock time, the last %s jobs of the launcher's list were issued on a second accelerator of that workstation by a copy "
+            "of the launcher (\\texttt{paper1/code/%s}) with the job arguments of the plan's launcher. This departure from the plan's "
+            "launcher was made while the runs were under way, when no result of the section other than the reused cell had been read."
+            % (_word(len(_sec["jobs"])), _sec["launcher"].split("/")[-1].replace("_", "\\_"))) if _sec else "")
+        + ((" " + _r7["duplicates_sentence"]) if _r7.get("duplicates_sentence") else ""))
+    # sentences for the main text
+    cmd("cgTwoMainSentence",
+        "A further section of the plan, added after that check and public before the \\cgTwoNewRuns{} runs it still needed, repeated the "
+        "whole grid at a second training seed. There the difference was \\cgTwoPat{} (standard deviation \\cgTwoPatSD{}, range "
+        "\\cgTwoPatMin{} to \\cgTwoPatMax{}; negative in \\cgTwoPatNeg{} of the \\cgTwoPatN{} cells; sign-flip $p = \\cgTwoPatP{}$ with the cells flipped singly), and \\cgTwoWithinPhrase{}. Averaged "
+        "over the two seeds cell by cell, the difference was \\cgBothPat{} (standard deviation \\cgBothPatSD{}; negative in "
+        "\\cgBothPatNeg{} cells). Between the seeds the mean over the grid changed by \\cgBetweenGridAbs{} AUROC and a single cell by "
+        "\\cgBetweenMeanAbs{} on average, and \\cgBetweenSameSign{} of the \\cgTwoPatN{} cells kept their sign. These figures are "
+        "descriptive as well.")
+    cmd("cgTwoDiscSentence",
+        "Retrained at a second training seed, the grid gave \\cgTwoPat{} (\\cgTwoPatSD{}; negative in \\cgTwoPatNeg{} of \\cgTwoPatN{} cells). "
+        "Its mean moved by \\cgBetweenGridAbs{} between the seeds, while a single cell moved by \\cgBetweenMeanAbs{} on average and "
+        "\\cgBetweenSameSign{} of the \\cgTwoPatN{} cells kept their sign.")
+
+# the graph scorer on the FIRST cohort at a second training seed on the full grid (FIRST_COHORT_SEED_PLAN_2026-11-15.md;
+# code/first_cohort_graph_seed.py); present only when those cells exist. The sentences below were written before any
+# run of that plan had started, so they report whatever it gives.
+_cf2p = os.path.join(HERE, "data", "results_cohort1_graph_seed.json")
+if os.path.exists(_cf2p):
+    _F2 = json.load(open(_cf2p)); _k1, _k2 = sorted(_F2["seeds"], key=int)
+    _fa, _fb = _F2["seeds"][_k1], _F2["seeds"][_k2]; _xa = _fa["contrast"]; _xb = _fb["contrast"]; _fo = _F2["both_seeds"]; _ft = _F2["between_seeds"]
+    if abs(_xa["mean"] - _g1["contrast"]["mean"]) > 1e-9 or _xa["n_negative"] != _g1["contrast"]["n_negative"]:
+        raise SystemExit("results_cohort1_graph_seed.json: the contrast of the first seed differs from results_cohort2_graph.json")
+    _fmg = "$%g$" % _F2["margin"]
+    cmd("cfTwoSeed", _k2)
+    cmd("cfTwoReal", _fb["arms"]["own"]["mean"]); cmd("cfTwoRealSD", _fb["arms"]["own"]["sd"])
+    cmd("cfTwoMean", _fb["arms"]["cohort_mean"]["mean"]); cmd("cfTwoMeanSD", _fb["arms"]["cohort_mean"]["sd"])
+    cmd("cfTwoPat", _xb["mean"], "{:+.4f}"); cmd("cfTwoPatSD", _xb["sd"])
+    cmd("cfTwoPatMin", _xb["min"], "{:+.4f}"); cmd("cfTwoPatMax", _xb["max"], "{:+.4f}")
+    cmd("cfTwoPatNeg", _xb["n_negative"], "int"); cmd("cfTwoPatPos", _xb["n_positive"], "int"); cmd("cfTwoPatN", _xb["n_cells"], "int")
+    cmd("cfTwoPatP", pfmt(_xb["signflip_p"]))
+    cmd("cfTwoFlipPfold", "{:.4g}".format(_xb["signflip_p_patient_folds"])); cmd("cfTwoFlipRfold", "{:.4g}".format(_xb["signflip_p_reaction_folds"]))
+    # the reading that the plan fixed
+    cmd("cfTwoWithinPhrase",
+        ("this mean lies within %s AUROC of zero, which the plan reads as agreement with the first seed" % _fmg) if _xb["within_margin"] else
+        ("this mean lies outside %s AUROC of zero, so the primary contrast depends on the training seed or the workstation to that extent" % _fmg))
+    cmd("cfTwoWithinShort", ("within %s of zero" % _fmg) if _xb["within_margin"] else ("outside %s of zero" % _fmg))
+    cmd("cfBothPat", _fo["mean"], "{:+.4f}"); cmd("cfBothPatSD", _fo["sd"])
+    cmd("cfBothPatMin", _fo["min"], "{:+.4f}"); cmd("cfBothPatMax", _fo["max"], "{:+.4f}")
+    cmd("cfBothPatNeg", _fo["n_negative"], "int"); cmd("cfBothPatP", pfmt(_fo["signflip_p"]))
+    cmd("cfBothFlipPfold", "{:.4g}".format(_fo["signflip_p_patient_folds"])); cmd("cfBothFlipRfold", "{:.4g}".format(_fo["signflip_p_reaction_folds"]))
+    cmd("cfBetweenGrid", _ft["grid_mean_second_minus_first"], "{:+.4f}"); cmd("cfBetweenGridAbs", abs(_ft["grid_mean_second_minus_first"]))
+    cmd("cfBetweenMeanAbs", _ft["mean_abs_change_of_a_cell"]); cmd("cfBetweenMaxAbs", _ft["max_abs_change_of_a_cell"])
+    cmd("cfBetweenSameSign", _ft["cells_with_one_sign"], "int")
+    cmd("cfBetweenPearson", _ft["pearson"], "{:+.2f}"); cmd("cfBetweenSpearman", _ft["spearman"], "{:+.2f}")
+    def _fsg(v, nd):
+        x = "%+.*f" % (nd, v)
+        return ("%.*f" % (nd, 0.0)) if float(x) == 0 else x.replace("-", "{-}")
+    def _flonger(t):
+        g = t["mean_epoch_gap"]
+        if g > 0: return "the cohort-mean arm trained %.1f epochs longer than the own-expression arm on average" % g
+        if g < 0: return "the own-expression arm trained %.1f epochs longer than the cohort-mean arm on average" % -g
+        return "the two arms trained equally long on average"
+    def _fcorr(t):
+        r, rs = t["pearson_difference_with_epoch_gap"], t["spearman_difference_with_epoch_gap"]
+        if r is None: return "has no defined correlation with that gap, which is the same in every cell"
+        return "correlates with that gap at $r = %s$ (Spearman $%s$)" % (_fsg(r, 2), _fsg(rs, 2))
+    def _fnear(t):
+        n = t["n_cells_where_gap_at_most_2"]
+        if not n: return "no cell had its two arms stop within two epochs of each other"
+        return "in the %s cell%s whose two arms stopped within two epochs of each other the %sdifference was $%s$" % (
+            _word(n), "" if n == 1 else "s", "" if n == 1 else "mean ", _fsg(t["mean_difference_where_gap_at_most_2"], 4))
+    _l1, _l2 = _fa["training_length"], _fb["training_length"]
+    cmd("cfLenSentence",
+        "Training length was described as on the second cohort (Supplementary Section~\\ref{supp:cohort2}). At the first seed %s; the difference in "
+        "AUROC %s, and %s. At the second seed %s; the difference %s, and %s."
+        % (_flonger(_l1), _fcorr(_l1), _fnear(_l1), _flonger(_l2), _fcorr(_l2), _fnear(_l2)))
+    # cell p0r0 at the second seed on the two workstations
+    _w2 = _F2.get("cell_p0r0_second_seed_on_two_workstations")
+    cmd("cfHostCellSentence",
+        ("At cell p0r0 and this seed the earlier check had trained both arms on the first workstation, where they scored %.4f and %.4f, a "
+         "difference of $%s$; on the second workstation the same cell scored %.4f and %.4f, a difference of $%s$."
+         % (_w2["first_workstation"]["own"], _w2["first_workstation"]["cohort_mean"], _fsg(_w2["first_workstation"]["difference"], 4),
+            _w2["second_workstation"]["own"], _w2["second_workstation"]["cohort_mean"], _fsg(_w2["second_workstation"]["difference"], 4))) if _w2 else "")
+    # where and when the cells were computed, and whether the plan was public before them (data/cohort1_graph_seed_run_record.json)
+    _r8 = _F2.get("run_record")
+    if not _r8:
+        raise SystemExit("data/cohort1_graph_seed_run_record.json is missing (where and when the cells of the second seed were computed)")
+    if _r8["plan_public_before_first_run"]:
+        cmd("cfPlanSentence", "The plan (\\texttt{paper1/FIRST\\_COHORT\\_SEED\\_PLAN\\_2026-11-15.md}) was public %.0f minutes before the first run started "
+            "(commit \\texttt{%s})." % (_r8["minutes_between_plan_and_first_run"], _r8["plan_commit"][:7]))
+        cmd("cfPlanShort", "under a plan that was public before its runs")
+    else:
+        cmd("cfPlanSentence", "The plan (\\texttt{paper1/FIRST\\_COHORT\\_SEED\\_PLAN\\_2026-11-15.md}) was fixed before the first run: the SHA-256 of the plan, "
+            "the launcher and the analysis script was recorded %.0f minutes before that run started. The plan was made public with the results and not "
+            "before, so a reader cannot verify that order." % _r8["minutes_between_plan_and_first_run"])
+        cmd("cfPlanShort", "under a plan that was fixed before its runs and published with the results")
+    cmd("cfRunSentence", _r8.get("run_sentence", ""))
+    cmd("cfTwoMainSentence",
+        "The whole grid was then retrained at a second training seed, \\cfPlanShort{}. These runs were made on a second workstation, so seed and "
+        "workstation differ together from the primary grid, while both arms of a cell share one workstation. There the difference was \\cfTwoPat{} "
+        "(standard deviation \\cfTwoPatSD{}, range \\cfTwoPatMin{} to \\cfTwoPatMax{}; negative in \\cfTwoPatNeg{} of the \\cfTwoPatN{} cells; "
+        "sign-flip $p = \\cfTwoPatP{}$), and \\cfTwoWithinPhrase{}. Between the two grids the mean changed by \\cfBetweenGridAbs{} AUROC and a single "
+        "cell by \\cfBetweenMeanAbs{} on average, and \\cfBetweenSameSign{} of the \\cfTwoPatN{} cells kept their sign "
+        "(Supplementary Section~\\ref{supp:theFamilyDisjoint}).")
+    cmd("cfTwoShortClause", "\\cfTwoPat{} when the grid was retrained at a second training seed on a second workstation")
 
 _byname = {}
 for _line in L:                      # the last definition of a name wins, so an explicit word macro overrides an automatic one

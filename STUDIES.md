@@ -104,6 +104,10 @@ The output follows its input in rank order and on no attribute adds to it.
 
 **The graph scorer on the second cohort.** Section 6 of that plan, fixed before any such run, names the driver of the first cohort unchanged, the family-disjoint split, the matched selection rule and the default training seed, with the own-expression arm and the cohort-mean arm on each of the 15 cells (30 runs). Own expression scores 0.7924 and cohort-mean expression 0.8062, a paired difference of -0.0138 over cells (standard deviation 0.0153, range -0.0477 to +0.0075, negative in 13 of 15), against -0.0062 on the first cohort (standard deviation 0.0245, negative in 8 of 15). The plan reads a mean within 0.02 AUROC of zero as agreement with the first cohort, and this mean lies within that range. The cells share patients, reactions and one label vector and the plan fixed no test, so these are descriptions. The runs were made on a second workstation (`paper1/data/cohort2_graph_run_record.json`). Outside the plan, cell p0r0 was retrained at two further training seeds (2025, 2026), both arms: the difference at that cell is -0.0250, +0.0058, -0.0180 across the three seeds, against +0.0258, +0.0225, +0.0138 for the same cell of the first cohort (`paper1/data/results_cohort2_seed.json`).
 
+**The second cohort at a second training seed.** Section 7 of that plan repeats the whole grid at the training seed 2025, both arms on each of the 15 cells. The paired difference over cells is -0.0133 (standard deviation 0.0228, negative in 11 of 15); the per-cell mean of the two seeds' differences is -0.0135 (standard deviation 0.0164, negative in 12 of 15) (`paper1/data/results_cohort2_graph_seed.json`).
+
+**The first cohort at a second training seed.** `paper1/FIRST_COHORT_SEED_PLAN_2026-11-15.md` repeats the whole grid of the first cohort at the training seed 2025, both arms on each of the 15 cells. The paired difference over cells is -0.0130 (standard deviation 0.0228, negative in 10 of 15); the per-cell mean of the two seeds' differences is -0.0096 (standard deviation 0.0227, negative in 8 of 15) (`paper1/data/results_cohort1_graph_seed.json`).
+
 ## Language-Model Evidence in brief
 
 A language model (qwen3-8-27b) asked to score the same reactions from each patient's transcriptome. Three prompt arms: patient-blind, the patient's own value, and a stranger's value in the same slot (a new donor for every reaction).
@@ -227,7 +231,10 @@ every p-value in the Reaction-Scoring Audit traces back to them), `strata.json`,
 permutation nulls, `mask_scores.json`, `arm_noise.json`, `collapse_noise.json` and
 `fam_clean_scores.json`. A reader who wants to re-derive those rollups rather than take them
 from the repository needs the arrays; a reader who wants to check that the reported numbers
-follow from the rollups does not. The external audit's per-arm predictions are small and are
+follow from the rollups does not. The cells trained later (the second cohort and the grid of the
+first cohort at a second training seed) wrote 92 further arrays, from which no committed file is
+computed; they are attached to the same release as two further tarballs, and
+`paper1/data/prediction_arrays_added.json` describes them. The external audit's per-arm predictions are small and are
 committed under `paper1/results/deepmeta/preds/`, with the pipeline that produced them under
 `paper1/code/deepmeta_audit/`.
 

@@ -1553,6 +1553,253 @@ for _xp in ('results/replication_posthoc.json', 'replication_posthoc.json'):
         cmd('rxEPat', _XE['n_patients'], 'int')
     break
 
+# the second prespecified replication (REPLICATION2_PLAN_2026-11-14.md). replication2.py writes, for each backbone whose
+# collection has ended, results/replication2_frozen_<tag>.json and results/replication2_reference_<tag>.json; the block
+# below runs for the backbones whose two files exist. TeX control words cannot hold digits, so the names are rq, then
+# A (b1, the main backbone), B (b2) or C (b3), then the quantity. rqPct* describes the printed percentile with no model,
+# which depends on the sample only, and is written once. The sample facts need no model.
+for _mp in ('results/replication2/design_master.json', 'replication2/design_master.json'):
+    if not os.path.exists(_mp): continue
+    _m2 = json.load(open(_mp))
+    cmd('rqRxn', _m2['n_reactions'], 'int'); cmd('rqPat', _m2['n_patients_max'], 'int')
+    cmd('rqPoolRxn', _m2['pool_reactions'], 'int'); cmd('rqPoolPat', _m2['pool_patients'], 'int')
+    cmd('rqSeed', str(_m2['seed']))
+    break
+_rq_pct = None; _RQ = {}
+for _t2, _L2 in (('b1', 'A'), ('b2', 'B'), ('b3', 'C')):
+    _fz = os.path.join('results', f'replication2_frozen_{_t2}.json'); _rf = os.path.join('results', f'replication2_reference_{_t2}.json')
+    if not (os.path.exists(_fz) and os.path.exists(_rf)): continue
+    _G2 = json.load(open(_fz)); _R2 = json.load(open(_rf)); _W2 = _G2['wording1']; _D2 = _W2['donor']['d1']; _P2 = _R2['pooled']
+    _RQ[_t2] = (_G2, _R2)
+    _q = 'rq' + _L2
+    _inside = lambda ok: 'inside' if ok else 'not inside'
+    cmd(_q + 'N', _W2['n_patients'], 'int'); cmd(_q + 'Blocks', _W2['blocks_completed'], 'int'); cmd(_q + 'Calls', _W2['n_calls'], 'int')
+    cmd(_q + 'Own', _D2['own_auroc']); cmd(_q + 'Donor', _D2['donor_auroc'])
+    cmd(_q + 'Diff', _D2['diff_mean'], '{:+.4f}'); cmd(_q + 'DiffLo', _D2['diff_ci90'][0], '{:+.4f}'); cmd(_q + 'DiffHi', _D2['diff_ci90'][1], '{:+.4f}')
+    cmd(_q + 'DiffSD', _D2['diff_sd']); cmd(_q + 'DiffP', _D2['paired_p'], 'p')
+    cmd(_q + 'EqTwo', _inside(_D2['equivalent_002'])); cmd(_q + 'EqFive', _inside(_D2['equivalent_005']))
+    cmd(_q + 'ExclZero', 'excludes' if _G2['decision']['interval_excludes_zero'] else 'includes')
+    for _s2, _nm2 in (('d2', 'DTwo'), ('d3', 'DThree')):
+        if _s2 in _W2['donor']:
+            _e2 = _W2['donor'][_s2]
+            cmd(f'{_q}Diff{_nm2}', _e2['diff_mean'], '{:+.4f}')
+            cmd(f'{_q}Diff{_nm2}Lo', _e2['diff_ci90'][0], '{:+.4f}'); cmd(f'{_q}Diff{_nm2}Hi', _e2['diff_ci90'][1], '{:+.4f}')
+    if 'pooled_donor' in _W2:
+        _pd2 = _W2['pooled_donor']
+        cmd(_q + 'Pool', _pd2['mean'], '{:+.4f}'); cmd(_q + 'PoolLo', _pd2['ci90'][0], '{:+.4f}'); cmd(_q + 'PoolHi', _pd2['ci90'][1], '{:+.4f}')
+    _cb2 = _W2['crossed_bootstrap_d1']
+    cmd(_q + 'CrossLo', min(_cb2['ci90_lower_range']), '{:+.4f}'); cmd(_q + 'CrossHi', max(_cb2['ci90_upper_range']), '{:+.4f}')
+    if 'blind_subset' in _W2: cmd(_q + 'Blind', _W2['blind_subset']['blind_auroc'])
+    cmd(_q + 'RawExpr', _W2['raw_expression_auroc']); cmd(_q + 'Indicator', _W2['indicator_floor'])
+    cmd(_q + 'Unparsed', _W2['unparsed'], 'int'); cmd(_q + 'Resent', _W2['resent_calls'], 'int')
+    # the reference of the printed numbers: pooled over the three donor schedules
+    _lm, _pc, _ex = _P2['language_model'], _P2['printed_percentile'], _P2['model_minus_printed_percentile']
+    cmd(_q + 'RefModel', _lm['mean'], '{:+.4f}'); cmd(_q + 'RefModelLo', _lm['ci90'][0], '{:+.4f}'); cmd(_q + 'RefModelHi', _lm['ci90'][1], '{:+.4f}')
+    _pct_now = tuple(f'{v:+.4f}' for v in (_pc['mean'], _pc['ci90'][0], _pc['ci90'][1]))
+    if _rq_pct is None:
+        _rq_pct = (_t2, _pct_now)
+        cmd('rqPct', _pc['mean'], '{:+.4f}'); cmd('rqPctLo', _pc['ci90'][0], '{:+.4f}'); cmd('rqPctHi', _pc['ci90'][1], '{:+.4f}')
+    elif _pct_now != _rq_pct[1]:
+        sys.exit(f'the pooled printed percentile of {_t2} {_pct_now} differs from that of {_rq_pct[0]} {_rq_pct[1]}; '
+                 'it depends on the sample only, so the archives hold different patients (an incomplete collection?)')
+    cmd(_q + 'Ref', _ex['mean'], '{:+.4f}'); cmd(_q + 'RefLo', _ex['ci90'][0], '{:+.4f}'); cmd(_q + 'RefHi', _ex['ci90'][1], '{:+.4f}')
+    cmd(_q + 'RefSD', _ex['sd'])
+    cmd(_q + 'RefEq', _inside(_ex['equivalent_001'])); cmd(_q + 'RefEqHalf', _inside(_ex['equivalent_0005']))
+    cmd(_q + 'RefZero', 'excludes' if _ex['excludes_zero'] else 'includes')
+    cmd(_q + 'RefWord', {0: 'not distinguishable from', 1: 'larger than', -1: 'smaller than'}[_P2['reading']['sign']])
+    cmd(_q + 'RefCorr', _P2['correlation_across_patients'], '{:.2f}')
+    for _s2, _nm2 in (('d1', 'DOne'), ('d2', 'DTwo'), ('d3', 'DThree')):
+        _e2 = _R2['per_schedule']['model_minus_printed_percentile'][_s2]
+        cmd(f'{_q}Ref{_nm2}', _e2['mean'], '{:+.4f}')
+        cmd(f'{_q}Ref{_nm2}Lo', _e2['ci90'][0], '{:+.4f}'); cmd(f'{_q}Ref{_nm2}Hi', _e2['ci90'][1], '{:+.4f}')
+    if 'both_samples' in _R2:
+        _bs = _R2['both_samples']['model_minus_printed_percentile']
+        cmd(_q + 'Both', _bs['mean'], '{:+.4f}'); cmd(_q + 'BothLo', _bs['ci90'][0], '{:+.4f}'); cmd(_q + 'BothHi', _bs['ci90'][1], '{:+.4f}')
+        cmd(_q + 'BothN', _bs['n'], 'int')
+
+# The sentences that read the second replication, one wording per outcome of the rules the plan fixed. They were
+# written before any statistic of that replication was computed and exist only when all three backbones have their
+# two result files and the record of the collection (results/replication2/record.json) is present.
+if len(_RQ) == 3:
+    _T3 = ('b1', 'b2', 'b3'); _bn = dict(b1='main', b2='second', b3='third'); _L3 = dict(b1='A', b2='B', b3='C')
+    _mn = dict(b1='Qwen3.8-27B', b2='Gemma~4 31B-it', b3='Mistral Small 3.2 24B')
+    def _bset(tags):
+        tags = [t for t in _T3 if t in tags]
+        if len(tags) == 3: return 'all three backbones'
+        if len(tags) == 2: return 'the %s and %s backbones' % (_bn[tags[0]], _bn[tags[1]])
+        return 'the %s backbone' % _bn[tags[0]]
+    def _mset(tags):
+        tags = [t for t in _T3 if t in tags]
+        return 'all three models' if len(tags) == 3 else (_mn[tags[0]] if len(tags) == 1 else ' and '.join(_mn[t] for t in tags))
+    _d1 = {t: _RQ[t][0]['wording1']['donor']['d1'] for t in _T3}
+    _ex = {t: _RQ[t][1]['pooled']['model_minus_printed_percentile'] for t in _T3}
+    _rd = {t: _RQ[t][1]['pooled']['reading'] for t in _T3}
+    _np = {t: _RQ[t][0]['wording1']['n_patients'] for t in _T3}
+    _cls = {t: ('n' if _d1[t]['equivalent_002'] else ('w' if _d1[t]['equivalent_005'] else 'o')) for t in _T3}
+    _xz = {t: bool(_d1[t]['diff_ci90'][0] > 0 or _d1[t]['diff_ci90'][1] < 0) for t in _T3}
+    _pos = {t: _d1[t]['diff_mean'] > 0 for t in _T3}
+    _eq = {t: bool(_ex[t]['equivalent_001']) for t in _T3}
+    _sg = {t: int(_rd[t]['sign']) for t in _T3}
+    _who = lambda cond: [t for t in _T3 if cond(t)]
+    # patients: one number when every backbone completed the same blocks
+    _same_n = len(set(_np.values())) == 1
+    cmd('rqPatDone', str(_np['b1']) if _same_n else '%d, %d and %d' % (_np['b1'], _np['b2'], _np['b3']))
+    cmd('rqAbsPatients', ('%d' % _np['b1']) if _same_n else ('%d to %d' % (min(_np.values()), max(_np.values()))))
+    cmd('rqCompleteSentence', 'Every backbone completed the 20 blocks of the plan.' if all(_RQ[t][0]['wording1']['blocks_completed'] == 20 for t in _T3) else
+        'The main backbone completed \\rqABlocks{} of the 20 blocks of the plan, the second \\rqBBlocks{} and the third \\rqCBlocks{}; only completed '
+        'blocks are analyzed, as the plan fixes, so the backbones are read on \\rqPatDone{} patients.')
+    # ---- the primary contrast against the two margins and against zero
+    _est = ('\\rqADiff{} (90\\% interval \\rqADiffLo{} to \\rqADiffHi{}) for the main backbone, \\rqBDiff{} (\\rqBDiffLo{} to \\rqBDiffHi{}) for the '
+            'second and \\rqCDiff{} (\\rqCDiffLo{} to \\rqCDiffHi{}) for the third')
+    _n, _w, _o = _who(lambda t: _cls[t] == 'n'), _who(lambda t: _cls[t] == 'w'), _who(lambda t: _cls[t] == 'o')
+    if len(_n) == 3: _marg = ['All three intervals lie inside the narrower margin of $\\pm 0.02$']
+    elif len(_w) == 3: _marg = ['All three intervals lie outside the narrower margin of $\\pm 0.02$ and inside the wider one of $\\pm 0.05$']
+    elif len(_o) == 3: _marg = ['None of the three intervals lies inside either margin ($\\pm 0.02$ and $\\pm 0.05$)']
+    else:
+        _marg = []
+        if _n: _marg.append('For %s the interval lies inside the narrower margin of $\\pm 0.02$' % _bset(_n))
+        if _w: _marg.append('For %s the interval lies outside the narrower margin of $\\pm 0.02$ and inside the wider one of $\\pm 0.05$' % _bset(_w))
+        if _o: _marg.append('For %s the interval lies inside neither margin ($\\pm 0.02$ and $\\pm 0.05$)' % _bset(_o))
+    _zx, _zi = _who(lambda t: _xz[t]), _who(lambda t: not _xz[t])
+    _side = lambda t: 'above' if _pos[t] else 'below'
+    if not _zx: _zero = ['None of the three intervals excludes zero']
+    elif len(_zx) == 3 and len({_pos[t] for t in _T3}) == 1:
+        _zero = ['All three intervals exclude zero, with the own arm %s the donor arm' % _side('b1')]
+    else:
+        _zero = []
+        for _sd in (True, False):
+            _g = [t for t in _zx if _pos[t] == _sd]
+            if _g: _zero.append('For %s the interval excludes zero, with the own arm %s the donor arm' % (_bset(_g), 'above' if _sd else 'below'))
+        if _zi: _zero.append('For %s the interval includes zero' % _bset(_zi))
+    if len(_n) == 3 and not _zx:
+        _verdict = 'All three intervals lie inside the narrower margin of $\\pm 0.02$, and none excludes zero.'
+    else:
+        _verdict = '. '.join(_marg + _zero) + '.'
+    cmd('rqPrimarySentence', 'The own-minus-donor difference on the first donor schedule, the primary contrast of each backbone, is ' + _est + '. ' + _verdict)
+    cmd('rqPrimaryVerdict', _verdict)
+    # ---- the printed-number reference, read by the rule of the plan
+    cmd('rqReferenceSentence',
+        'Ranked with no model, the printed percentile gives an own-minus-donor difference of \\rqPct{} (\\rqPctLo{} to \\rqPctHi{}) on this sample, '
+        'averaged over the three donor schedules. The model\'s difference minus that of the printed percentile, both averaged over the three schedules, '
+        'is \\rqARef{} (\\rqARefLo{} to \\rqARefHi{}) for the main backbone, \\rqBRef{} (\\rqBRefLo{} to \\rqBRefHi{}) for the second and \\rqCRef{} '
+        '(\\rqCRefLo{} to \\rqCRefHi{}) for the third.')
+    _e, _ne = _who(lambda t: _eq[t]), _who(lambda t: not _eq[t])
+    if len(_e) == 3: _eqs = 'Equivalence of the two differences within $0.01$ AUROC, the reading that the plan fixed, is declared for all three backbones.'
+    elif not _e: _eqs = 'Equivalence of the two differences within $0.01$ AUROC, the reading that the plan fixed, is declared for none of the three backbones.'
+    else: _eqs = ('Equivalence of the two differences within $0.01$ AUROC, the reading that the plan fixed, is declared for %s and not for %s.'
+                  % (_bset(_e), _bset(_ne)))
+    _s0, _sp, _sm = _who(lambda t: _sg[t] == 0), _who(lambda t: _sg[t] > 0), _who(lambda t: _sg[t] < 0)
+    if len(_s0) == 3:
+        _dis = ['No interval of that contrast excludes zero, so no backbone\'s difference is distinguishable from what ranking the printed percentile gives']
+    else:
+        _dis = []
+        if _sp: _dis.append('For %s the interval lies above zero, so the model\'s difference is larger than that of the printed percentile' % _bset(_sp))
+        if _sm: _dis.append('For %s the interval lies below zero, so the model\'s difference is smaller than that of the printed percentile' % _bset(_sm))
+        if _s0: _dis.append('For %s the interval includes zero, so the two differences are not distinguishable' % _bset(_s0))
+    cmd('rqReadingSentence', _eqs + ' ' + '. '.join(_dis) + '.')
+    # ---- one clause on the reference for the short statements, and the direction where an interval excludes zero
+    if len(_e) == 3: _refc = 'each was equivalent within $0.01$ AUROC to the difference that ranking the printed percentile gives with no model'
+    elif not _e: _refc = 'for none of them was equivalence within $0.01$ AUROC to the difference that ranking the printed percentile gives with no model declared'
+    else: _refc = ('equivalence within $0.01$ AUROC to the difference that ranking the printed percentile gives with no model was declared for %s and not '
+                   'for %s' % (_bset(_e), _bset(_ne)))
+    _dirc = ''
+    if _sp or _sm:
+        _bits = []
+        if _sp: _bits.append('that of %s was larger than the printed percentile\'s' % _bset(_sp))
+        if _sm: _bits.append('that of %s was smaller' % _bset(_sm) if _sp else 'that of %s was smaller than the printed percentile\'s' % _bset(_sm))
+        _dirc = '; ' + ' and '.join(_bits)
+    cmd('rqReferenceClause', _refc + _dirc)
+    # the primary margins in one clause
+    if len(_n) == 3: _margc = 'all inside the narrower margin of $\\pm 0.02$'
+    elif not _n: _margc = 'none inside the narrower margin of $\\pm 0.02$'
+    else: _margc = 'inside the narrower margin of $\\pm 0.02$ for %s and not for %s' % (_bset(_n), _bset(_w + _o))
+    cmd('rqMarginClause', _margc)
+    # ---- closing of the Results paragraph, and one sentence each for the Introduction, the Discussion and the Conclusion
+    _first3 = [json.load(open(os.path.join('results', f)))['wording1']['donor']['d1']
+               for f in ('replication_frozen.json', 'replication_frozen_b2.json', 'replication_frozen_b3.json')]
+    _six = [bool(d['diff_ci90'][0] > 0 or d['diff_ci90'][1] < 0) for d in _first3] + [_xz[t] for t in _T3]
+    # added after the results had been read: what became of the main backbone's interval, in one sentence
+    if _six[0] and not _xz['b1']:
+        _again = ' For the main backbone, whose interval excluded zero on the first sample, the interval on the second sample includes zero.'
+    elif _six[0] and _xz['b1']: _again = ' For the main backbone the interval excludes zero on both samples.'
+    else: _again = ''
+    cmd('rqClosing', 'On a second sample of new patients and reactions, twice the size of the first, the own-minus-donor differences of the three backbones '
+        'were \\rqADiff{}, \\rqBDiff{} and \\rqCDiff{}, ' + _margc + '; ' + _refc + _dirc + '.' + _again)
+    # added after the results had been read: the count of intervals that exclude zero beside its expectation when every
+    # true difference is zero (six intervals at the 90% level: 6 x 0.10)
+    _nz6 = sum(_six); _cw6 = ['none', 'one', 'two', 'three', 'four', 'five', 'six']
+    cmd('rqSixSentence', 'Of the six primary 90\\%% intervals of the two replications, %s exclude%s zero; were every true difference zero, '
+        '0.6 such intervals would be expected.' % (_cw6[_nz6], 's' if _nz6 <= 1 else ''))
+    cmd('rqIntroSentence', 'A second replication on \\rqPatDone{} further patients, whose plan named that comparison in advance for all three backbones, gave '
+        '\\rqADiff{}, \\rqBDiff{} and \\rqCDiff{}, ' + _margc + '; ' + _refc + _dirc + '.')
+    cmd('rqDiscSentence', 'A second replication then put the comparison under a plan for all three backbones, on \\rqPatDone{} further patients: '
+        + _refc + _dirc + '.')
+    cmd('rqConcSentence', 'A second replication on \\rqPatDone{} further patients gave \\rqADiff{}, \\rqBDiff{} and \\rqCDiff{} for the three backbones, '
+        + _margc + ', and ' + _refc + _dirc + '.' + ('' if _zx else ' None of its three intervals excludes zero.'))
+    # ---- the abstract: the six primary intervals of the two replications in one clause (how many lie inside the narrower
+    # margin, how many exclude zero), the reference of the second replication in another (model names, as the abstract uses them)
+    _in6 = sum(1 for d in _first3 if d['equivalent_002']) + len(_n)
+    _z6 = sum(1 for d in _first3 if (d['diff_ci90'][0] > 0 or d['diff_ci90'][1] < 0)) + len(_zx)
+    _cw = ['none', 'one', 'two', 'three', 'four', 'five', 'six']
+    # the values are listed in the order of _six; when the only interval that excludes zero is the first one listed, the clause says so
+    _zc = ', only the first excluding zero' if _six == [True, False, False, False, False, False] else ' and ' + _cw[_z6] + ' excluding zero'
+    cmd('rqAbsMargin', ('all six' if _in6 == 6 else _cw[_in6] + ' of six') + ' 90\\% intervals inside $\\pm 0.02$' + _zc)
+    if len(_e) == 3: _ar = 'each was equivalent within 0.01 to ranking the printed percentile without a model'
+    elif not _e: _ar = 'equivalence within 0.01 to ranking the printed percentile without a model was declared for none'
+    else: _ar = 'equivalence within 0.01 to ranking the printed percentile without a model held for %s only' % _mset(_e)
+    if _sp and _sm: _ar += '; %s exceeded that ranking and %s fell below it' % (_mset(_sp), _mset(_sm))
+    elif _sp: _ar += '; %s exceeded that ranking' % _mset(_sp)
+    elif _sm: _ar += '; %s fell below that ranking' % _mset(_sm)
+    cmd('rqAbsReference', _ar)
+    # added after the results had been read: the printed percentile's own difference on the second sample, beside the
+    # first sample's (whose three schedules are read by replication_posthoc.py)
+    _pp2 = _RQ['b1'][1]['pooled']['printed_percentile']
+    _pp2x = bool(_pp2['ci90'][0] > 0 or _pp2['ci90'][1] < 0)
+    _px = json.load(open(os.path.join('results', 'replication_posthoc.json')))['replication']['printed_percentile']
+    _s1 = {_px[_s]['diff']['mean'] > 0 for _s in ('d1', 'd2', 'd3')}
+    if len(_s1) != 1: sys.exit('the printed percentile changes sign over the schedules of the first sample; no wording was prepared for that')
+    _same12 = (next(iter(_s1)) == (_pp2['mean'] > 0))
+    cmd('rqPctLimitSentence', 'On the second sample the printed percentile gave \\rqPct{} (\\rqPctLo{} to \\rqPctHi{}), averaged over the three schedules, '
+        + ('of the same sign' if _same12 else 'of the opposite sign') + ' and with an interval that '
+        + ('excludes' if _pp2x else 'includes') + ' zero (Supplementary Table~\\ref{tab:repltwo}), so '
+        + (('both samples point to such a difference.' if _same12 else 'the two samples disagree on its direction.') if _pp2x else
+           ('the second sample neither confirms nor contradicts such a difference.' if _same12 else 'the two samples do not agree on such a difference.')))
+    # ---- the plan and the course of the collection (results/replication2/record.json)
+    _qrp = os.path.join('results', 'replication2', 'record.json')
+    if not os.path.exists(_qrp):
+        raise SystemExit('results/replication2/record.json is missing (the record of the plan and of the collection of the second replication)')
+    _qr = json.load(open(_qrp))
+    if set(_qr['backbones']) != set(_T3): raise SystemExit('results/replication2/record.json does not cover the three backbones')
+    cmd('rqPlanCommit', '\\texttt{' + _qr['plan_commit'][:12] + '}')
+    cmd('rqPushLeadMinutes', 60.0 * _qr['hours_between_push_and_first_call'], '{:.0f}')
+    if _qr['plan_public_before_first_call']:
+        cmd('rqPlanSentence', 'The second replication followed a third plan, committed to the public repository before the first call on its sample '
+            '(commit \\rqPlanCommit{}, pushed \\rqPushLeadMinutes{} minutes before that call); like the others, it was lodged with no registry.')
+        cmd('rqPlanShort', 'Its plan was public before its first call.')
+        cmd('rqLimitSentence', 'The plan of the second replication was likewise published by the authors before its first call and lodged with no registry.')
+    else:
+        cmd('rqPlanSentence', 'The second replication followed a third plan that was fixed before the first call on its sample and was published with the '
+            'results. It was not public before the collection, so a reader cannot verify that order.')
+        cmd('rqPlanShort', 'Its plan was fixed before its first call but was not public until the results were released.')
+        cmd('rqLimitSentence', 'The plan of the second replication was fixed before its first call but was not public until the results were released, so '
+            'a reader cannot verify that its analyses were fixed in advance.')
+    for _t in _T3:
+        _b = _qr['backbones'][_t]; _q = 'rq' + _L3[_t]
+        cmd(_q + 'Hours', _b['hours'], '{:.1f}'); cmd(_q + 'Rate', _b['calls_per_second'], '{:.1f}')
+        cmd(_q + 'CheckParsed', _b['check_calls_before_the_collection']['parsed'], 'int')
+        cmd(_q + 'CheckCalls', _b['check_calls_before_the_collection']['calls'], 'int')
+        cmd(_q + 'SentAgain', _b['calls_sent_again'], 'int'); cmd(_q + 'Missing', _b['answers_without_a_probability'], 'int')
+        cmd(_q + 'FirstCall', _b['first_call_local'][:16].replace('T', ' ')); cmd(_q + 'LastReply', _b['last_reply_local'][:16].replace('T', ' '))
+    cmd('rqCallsAll', sum(_qr['backbones'][t]['calls'] for t in _T3), 'int')
+    _miss = {t: _qr['backbones'][t]['answers_without_a_probability'] for t in _T3}
+    cmd('rqMissingSentence', 'Every answer of the three collections could be parsed, so no cell is missing.' if not any(_miss.values()) else
+        'Answers that could not be parsed leave \\rqAMissing{} cells missing for the main backbone, \\rqBMissing{} for the second and \\rqCMissing{} '
+        'for the third; they are not imputed.')
+    cmd('rqDepartures', _qr['departures_sentence'])
+    for _t in ('b2', 'b3'):
+        if not _qr['backbones'][_t]['weights_identical_to_record']:
+            raise SystemExit(f'record.json: the weight files of {_t} are not recorded as identical to results/model_records.json')
+
 # a negative number is set with a minus sign and not a hyphen, in prose as in a formula; a hyphen
 # inside an identifier, a date, an exponent or a formula that is already in math mode is left alone
 _NEG = re.compile(r'(?<![\w.{}$\\^-])-(?=\d)')

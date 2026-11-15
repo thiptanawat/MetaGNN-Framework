@@ -117,7 +117,18 @@ SCRIPTS = [
          runner="code/double_holdout_ctrl.py --inner_val_rxn 0.2 --family_map data/families/families_union.json --family_tag fam, "
                 "launched by code/gpu_queue_cohort2.sh on the second cohort's directory as code/build_second_cohort.py writes it "
                 "(the 30 cells of Section 6 of the plan) and, outside the plan, by code/gpu_queue_cohort2_seed.sh (cell p0r0 at two "
-                "further training seeds, files tagged _ts<seed>); summarized by code/second_cohort_graph.py and code/second_cohort_seed.py",
+                "further training seeds, files tagged _ts<seed>) and by code/gpu_queue_cohort2_seed2025.sh (Section 7 of the plan: the whole "
+                "grid at the training seed 2025, files tagged _ts2025, with its last jobs issued by code/gpu_queue_cohort2_seed2025_gpu0.sh "
+                "on a second accelerator); summarized by code/second_cohort_graph.py, code/second_cohort_seed.py and "
+                "code/second_cohort_graph_seed.py",
+         policy=dict(selection="an inner partition of the training reactions drawn family by family",
+                     checkpoint="the epoch with the best inner-validation AUROC is restored before scoring",
+                     endpoint="local GPU, one CUDA device per run", target="reconstruction-membership proxy label")),
+    dict(family="graph model cells, family-disjoint reaction split, second training seed (2025)",
+         pattern=r"^gnn_B_mb[\d.]+_p\d_r\d(_mean)?_ts2025_ivr_fam\.json$", where="fam_seed2025",
+         runner="code/double_holdout_ctrl.py --inner_val_rxn 0.2 --family_map data/families/families_union.json --family_tag fam "
+                "--train_seed 2025, launched by code/gpu_queue_cohort1_seed2025.sh on the second workstation "
+                "(FIRST_COHORT_SEED_PLAN_2026-11-15.md); summarized by code/first_cohort_graph_seed.py",
          policy=dict(selection="an inner partition of the training reactions drawn family by family",
                      checkpoint="the epoch with the best inner-validation AUROC is restored before scoring",
                      endpoint="local GPU, one CUDA device per run", target="reconstruction-membership proxy label")),

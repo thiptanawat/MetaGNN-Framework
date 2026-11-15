@@ -148,6 +148,24 @@ Plan: `REPLICATION_BACKBONES_PLAN_2026-11-13.md`, committed before the first cal
 | model minus printed percentile, schedule 1 | +0.0026 [-0.0007, +0.0058] | -0.0020 [-0.0054, +0.0013] | +0.0007 [-0.0050, +0.0064] |
 | own minus donor, second wording (40 patients) | +0.0029 [-0.0042, +0.0100] | +0.0073 [-0.0023, +0.0169] | +0.0064 [-0.0049, +0.0177] |
 
+## The second replication on a new sample
+
+Plan: `REPLICATION2_PLAN_2026-11-14.md`, committed before the first call on the sample. Statistics: `code/replication2.py` (`replication_stats.py` unchanged on each archive), written to `results/replication2_frozen_<tag>.json`; the comparison with the printed percentile, pooled over the three donor schedules, is in `results/replication2_reference_<tag>.json`. Each backbone is read separately; no test is adjusted for the others and nothing is pooled over backbones. The printed percentile ranks the same reactions for every backbone, so its row differs between columns only if the completed blocks differ.
+
+| quantity (wording 1, 90% intervals) | main backbone (qwen3-8-27b) | second backbone (gemma-4-31b-it) | third backbone (mistral-small-3.2-24b-instruct) |
+|---|---|---|---|
+| patients, blocks of ten completed | 200, 20 | 200, 20 | 200, 20 |
+| own arm, AUROC | 0.6157 | 0.5717 | 0.6125 |
+| donor arm, schedule 1, AUROC | 0.6156 | 0.5709 | 0.6152 |
+| own minus donor, schedule 1 (primary) | +0.0001 [-0.0038, +0.0039] | +0.0007 [-0.0032, +0.0047] | -0.0027 [-0.0091, +0.0037] |
+| primary contrast inside the 0.02 margin | yes | yes | yes |
+| primary contrast inside the 0.05 margin | yes | yes | yes |
+| 90% interval of the primary contrast excludes zero | no | no | no |
+| model, own minus donor, mean of the three schedules | -0.0006 [-0.0041, +0.0029] | -0.0006 [-0.0044, +0.0032] | -0.0035 [-0.0094, +0.0023] |
+| printed percentile, no model, mean of the three schedules | -0.0015 [-0.0042, +0.0012] | -0.0015 [-0.0042, +0.0012] | -0.0015 [-0.0042, +0.0012] |
+| model minus printed percentile, mean of the three schedules | +0.0009 [-0.0009, +0.0026] | +0.0009 [-0.0012, +0.0031] | -0.0020 [-0.0060, +0.0020] |
+| reading fixed by the plan (margin 0.01) | equivalent within 0.01 AUROC to what ranking the printed percentile gives; the 90% interval includes zero, so the two are described as not distinguishable | equivalent within 0.01 AUROC to what ranking the printed percentile gives; the 90% interval includes zero, so the two are described as not distinguishable | equivalent within 0.01 AUROC to what ranking the printed percentile gives; the 90% interval includes zero, so the two are described as not distinguishable |
+
 ## References
 
 Every reference in the manuscript was resolved against PubMed E-utilities, the Crossref API or the arXiv API before use; the procedure and its outcome are in `docs/VERIFICATION.md` at the repository root.

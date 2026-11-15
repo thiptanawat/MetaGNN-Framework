@@ -1,0 +1,507 @@
+{
+ "note": "Prediction arrays of the cells that were trained after the ten result families of the first cohort were released. The driver wrote one array beside each result file, as for every other cell. No committed file is computed from these arrays: the figures reported from these cells are in the result files. They are released so that those figures can be recomputed (code/check_arrays.py). They are attached to the tagged release named in release.json, one tarball per result directory, and are not part of the data record.",
+ "n_arrays": 92,
+ "arrays_total_bytes": 1348332165,
+ "tarballs_total_bytes": 1348413440,
+ "checksums": "data/prediction_arrays_added.sha256",
+ "tarball_checksums": "data/prediction_array_tarballs_added.sha256",
+ "local_root": "results/prediction_arrays",
+ "tarballs": [
+  {
+   "file": "preds_cohort2_fam.tar",
+   "family": "cohort2_fam",
+   "what": "the cells of the second cohort: the plan's grid, the second training seed's grid and the two cells of the one-cell check at a third seed",
+   "result_files": "paper1/results/cohort2/fam",
+   "bytes": 1059543040,
+   "sha256": "9eccc0b94e2b9708ef0fbfb679b7aa59eccc64c92a68603464f0ee67134d2a0e",
+   "n_arrays": 62,
+   "arrays_bytes": 1059487472,
+   "labels_of": "brca",
+   "checked_against_result_files": {
+    "n": 62,
+    "agree": 62,
+    "script": "code/check_arrays.py"
+   },
+   "arrays": [
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r0_ivr_fam_preds.npz",
+     "bytes": 16913301,
+     "sha256": "080a44028ae6c1e8f60e60ed236424393775eaa8c9e7fc2eea02135abfb4468c"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r0_mean_ivr_fam_preds.npz",
+     "bytes": 17380276,
+     "sha256": "329c0b615b2c9dab054dac14763fbf5829d1cbc9b654366ca11065c5aac830c3"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r0_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17188715,
+     "sha256": "76bb3b642b4089f507f15bd40455e30ac4df824385fef7ff49bbc1d1bd29c2f0"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r0_mean_ts2026_ivr_fam_preds.npz",
+     "bytes": 17263326,
+     "sha256": "98b58168a4f1db07a03d486fc5cacacaedf89f89aaed6995a59abb24ce44eac4"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r0_ts2025_ivr_fam_preds.npz",
+     "bytes": 16923160,
+     "sha256": "d08c30e9688246b5414da38815f68b178dd3e281ce38ebd27e1c1d5306009bd0"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r0_ts2026_ivr_fam_preds.npz",
+     "bytes": 17278657,
+     "sha256": "adc43e3dfa775c7d5907a3bf5be0f0e8a70c3f87e360aa78f39c18c06fe2e5bb"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r1_ivr_fam_preds.npz",
+     "bytes": 17194216,
+     "sha256": "8e6046e1aeedf9a7e7620682fc8a74d035f272498fa5ba9601969322e8a41f09"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r1_mean_ivr_fam_preds.npz",
+     "bytes": 17083289,
+     "sha256": "aded9168387cd7ee1172074ffe4639cff8fb3e385e0413adb34d308f5555924e"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r1_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17218266,
+     "sha256": "4c04716a53012986cec55accff3e9504b521f1819cad167e987915ad69a265d3"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r1_ts2025_ivr_fam_preds.npz",
+     "bytes": 16968828,
+     "sha256": "6d87e0082c0f3ff14041aa348e6ef7b8e56ca081db54b84d2da27393ae3dff12"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r2_ivr_fam_preds.npz",
+     "bytes": 16913944,
+     "sha256": "d66190aab7b75422b81448ba473c6f750f63e56f0c0ada991fe3dbcabeed0350"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r2_mean_ivr_fam_preds.npz",
+     "bytes": 17073177,
+     "sha256": "749a679af8b38da010e87ab5f81fe276a319d5eff215273af52ef63558a5da2e"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r2_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17023474,
+     "sha256": "402f62054bf6fc4c12aa20bb7ab8c5e01ceca4e01f4868b40a14043253e05f1d"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p0_r2_ts2025_ivr_fam_preds.npz",
+     "bytes": 16976142,
+     "sha256": "61c46fbf86abf38be15f401f97251beeb14881fa1179978b6173f68c7a5735e9"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r0_ivr_fam_preds.npz",
+     "bytes": 17218262,
+     "sha256": "11e1fb6be2f38de74bcad36a30a8b0d768d1adaae5f2ccade66e021248ca0b46"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r0_mean_ivr_fam_preds.npz",
+     "bytes": 17063034,
+     "sha256": "39f46e71ff64c505b68209efaa478833e0f5d1b25e0640ba32d862e829e214d0"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r0_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17325750,
+     "sha256": "01c8b536103d24f51f0d0d3e429896540cf59f4391002b2f8a6492e7c8510953"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r0_ts2025_ivr_fam_preds.npz",
+     "bytes": 16870716,
+     "sha256": "3acf56c638327ea791cf7f1d5e50b57c39efa3d9ce41de25af14d502126a595e"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r1_ivr_fam_preds.npz",
+     "bytes": 16954714,
+     "sha256": "7d9d92b57bc6cd41c894cfb8da033462183c93bb5d13a42d41230d57da33a0d9"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r1_mean_ivr_fam_preds.npz",
+     "bytes": 17328226,
+     "sha256": "6524b2b2ab1476da701476c463cb8021bf190221c0446f27ce952e01797129d5"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r1_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17031850,
+     "sha256": "a5d752b2d476849b863637518da8c80a07fb211157fc230a96134c972bdb75cf"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r1_ts2025_ivr_fam_preds.npz",
+     "bytes": 16865729,
+     "sha256": "814f5782d2ec5cfecd324a28fcc338e5a9a7b9300ed0bdd5b7c949c73fc00ac7"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r2_ivr_fam_preds.npz",
+     "bytes": 16971413,
+     "sha256": "39ba9e42e1973ffac8b8227ce7a8fe2be5501b149c5d89e9f4b00dfa7d4b393c"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r2_mean_ivr_fam_preds.npz",
+     "bytes": 17020471,
+     "sha256": "11dc9b3c50a560318a688a3fa3a2de4542b17852c13b80efff4b2dfa89fde57d"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r2_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17327347,
+     "sha256": "6b6937c2fc4f108d5824dbbf711db7588ea42ac24079fad8a282567d4bda7033"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p1_r2_ts2025_ivr_fam_preds.npz",
+     "bytes": 16937414,
+     "sha256": "1b8ed5a53e96bb8edbb63801c0c04725d7e00b53231ad9699d08e5f387e8150d"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r0_ivr_fam_preds.npz",
+     "bytes": 16907251,
+     "sha256": "c9586585cd54943e98e89329a8ef9d1f0ca4013953f16303e1251a820d739d9e"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r0_mean_ivr_fam_preds.npz",
+     "bytes": 17021501,
+     "sha256": "6d933141750915c008edb53177bfb5dbc95ec63f44196eb1176f64ba44acb195"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r0_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17226564,
+     "sha256": "b49d25824f4b4891f4f5e0d3c3f4533a4db3f435fb9a8f8b0c58e13bdfe6954d"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r0_ts2025_ivr_fam_preds.npz",
+     "bytes": 16915699,
+     "sha256": "a82e8d20b91458e64c5b84035e641c5735f4b45ee9e04519f5c81e2175f14340"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r1_ivr_fam_preds.npz",
+     "bytes": 16876763,
+     "sha256": "c53b3fc7b4c1e185b833c54218fba35b15f260fccb4ef579b63c6d42d27890f9"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r1_mean_ivr_fam_preds.npz",
+     "bytes": 17267993,
+     "sha256": "3d554fa292bfbe53f17be641131830cd14ba46e32e1c6bf5964a6b4758759276"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r1_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17269599,
+     "sha256": "2367e70758b7d2ee8fdc4048ccab41ccd459c791a44e03b80b0489c1fab278c5"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r1_ts2025_ivr_fam_preds.npz",
+     "bytes": 17307792,
+     "sha256": "775de16cbb849d7e0d3a75f8240d35dbdcb6ead2024c4687917614d8db9718c6"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r2_ivr_fam_preds.npz",
+     "bytes": 16980353,
+     "sha256": "861a98f278523f39437a4fd53ff947f730ac9fc1b8c8a67ed54a36fa5aa52e98"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r2_mean_ivr_fam_preds.npz",
+     "bytes": 17342009,
+     "sha256": "8a26cc5be4fd35b9db22e26fb7739fc6d941fafdf071d83eb1adcbcd468a1154"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r2_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17091194,
+     "sha256": "e02d65a36c35193b7c55e9259d692f117de954a2ba49af006bbc4e07afc88350"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p2_r2_ts2025_ivr_fam_preds.npz",
+     "bytes": 16934459,
+     "sha256": "8d65558683e25ce44fb7e6370afc26b149c4d04b26a20b7f646eac14a8a378d9"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r0_ivr_fam_preds.npz",
+     "bytes": 16922120,
+     "sha256": "a304a1b3790c3e0bfe5a8b1bcc5b607e747d1776f454e2e38c676dbf5aa18225"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r0_mean_ivr_fam_preds.npz",
+     "bytes": 17272516,
+     "sha256": "781136df5eacba80b6f4f413f1cfccafcc043bbd0fcaefd9beca94984d2ae07e"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r0_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17295807,
+     "sha256": "8c43cdbeab41cc79f7de938aab54feefb8b88b3b01ec70be3290c37e8a4699e9"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r0_ts2025_ivr_fam_preds.npz",
+     "bytes": 16978312,
+     "sha256": "2b52925503a6f186e25e40584ced0889111eec6416770588e78db2a9110c6702"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r1_ivr_fam_preds.npz",
+     "bytes": 16860838,
+     "sha256": "5debe1f44d4b8d3466fc6305bc39a8286552c8753f2797f175d7252e1a82b7a2"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r1_mean_ivr_fam_preds.npz",
+     "bytes": 17074344,
+     "sha256": "d68f64dce43498d2d2460c13d6c8e1a62b110a149bb99d30bc4e9055a1a1096b"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r1_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17198412,
+     "sha256": "4d08491bba06856726a24aa819f072464e95dc737eb55a3cc5dd1e275d41d027"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r1_ts2025_ivr_fam_preds.npz",
+     "bytes": 16921071,
+     "sha256": "bcb86f5954f88bae2feca62af9ce5475aefff1e4662dbfd58050607e81c9f527"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r2_ivr_fam_preds.npz",
+     "bytes": 16946676,
+     "sha256": "e261ae7a3cb1c2ab3a1509fdba9e3c2121363768a0bab34f8e221d8ec65ae8da"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r2_mean_ivr_fam_preds.npz",
+     "bytes": 17189785,
+     "sha256": "d60da14a92a44372577bffebf4960e1c5717a4e743b63fd9eaf5e95e0b4fedff"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r2_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17341989,
+     "sha256": "80ad9276349cf832097a22314b7da116869639dc6ddef16197c362c8559c50a9"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p3_r2_ts2025_ivr_fam_preds.npz",
+     "bytes": 16939847,
+     "sha256": "f90c8105e4688a3e5c646be4c078984b98fc7bf803ff965e1907cd84e26ad063"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r0_ivr_fam_preds.npz",
+     "bytes": 16920998,
+     "sha256": "c402faec67174c70a95c2ed92ce2ce94a34b397a0271854c56e9c836bfbfeef7"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r0_mean_ivr_fam_preds.npz",
+     "bytes": 17213547,
+     "sha256": "70aa298f1e9763015ff6fb3414a0cfdb4b6d3564f4d7e7363ba8e02dbd95fa94"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r0_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17282573,
+     "sha256": "8fc0487f06086d07e5276882664eaeefee0693e0293490c5c32f04e225acadb9"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r0_ts2025_ivr_fam_preds.npz",
+     "bytes": 17318515,
+     "sha256": "b451c90632ecae8d289a0a9e129504777eae9d44acff9d0280b86479c66b1a6f"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r1_ivr_fam_preds.npz",
+     "bytes": 16942184,
+     "sha256": "a50a45feff53e78c665acb85173618c035dc4bc5b4ecdb422ba787d4cf0df7cb"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r1_mean_ivr_fam_preds.npz",
+     "bytes": 17007937,
+     "sha256": "8a8c960bc0cccabc57939e65f52bad72491beeeb331b4f59da84cb91f8fdef0b"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r1_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17005306,
+     "sha256": "eef1b6042563add7c38358966f238922901cf31d0c4c9a17332293bd68e0508f"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r1_ts2025_ivr_fam_preds.npz",
+     "bytes": 16952913,
+     "sha256": "8fe5c9597020491e5c2895acaaa2f37acf19e3e9011ede8880dea89584f280d2"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r2_ivr_fam_preds.npz",
+     "bytes": 16919627,
+     "sha256": "7663666f030f3849db3638ad3c704e12b4b88505df02abed27c66fd4cafbf1e2"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r2_mean_ivr_fam_preds.npz",
+     "bytes": 17281413,
+     "sha256": "247485cb4c1c5fd94b10fd766e17d194f0f60a91469adf87b340845f8c50f355"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r2_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 17297446,
+     "sha256": "f4c9e46956e337e8515c85951569cdf726daf347c9857c0cd3276119789fc886"
+    },
+    {
+     "file": "cohort2_fam/gnn_B_mb0.0_p4_r2_ts2025_ivr_fam_preds.npz",
+     "bytes": 16948422,
+     "sha256": "b801f9eea4eae80070fe0cddab912971678ff8988b0fc7a4bc3fb186899cd6fd"
+    }
+   ]
+  },
+  {
+   "file": "preds_fam_seed2025.tar",
+   "family": "fam_seed2025",
+   "what": "the second training seed's grid of the first cohort",
+   "result_files": "paper1/results/fam_seed2025",
+   "bytes": 288870400,
+   "sha256": "723e2133e5757ed7b950c2c80688ddc6763dd03b78698eca4b975ff6efcd8e04",
+   "n_arrays": 30,
+   "arrays_bytes": 288844693,
+   "labels_of": "crc_624",
+   "checked_against_result_files": {
+    "n": 30,
+    "agree": 30,
+    "script": "code/check_arrays.py"
+   },
+   "arrays": [
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p0_r0_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9634054,
+     "sha256": "c656a38b26ad0e53b5e979cbda9ba768a84486b9a1cf8e586d96f61098930e3f"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p0_r0_ts2025_ivr_fam_preds.npz",
+     "bytes": 9560617,
+     "sha256": "25a3db46fd0ea7638fe6e61a1cd8cfe21b89bfb94f9db370375a7863a3db145e"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p0_r1_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9631248,
+     "sha256": "1616d0bf9e91caae3c97940c8ef8787cef625f09470ee85560fe16aff9e8f0cf"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p0_r1_ts2025_ivr_fam_preds.npz",
+     "bytes": 9540898,
+     "sha256": "ee80cf0a0a8c73dec4531e7a168dc9bd3ec8b8724ad514b7100268931c531126"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p0_r2_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9672614,
+     "sha256": "57f8a56ffd528e19c8d8383b7b1a6d8eb3f7faf2d8b745aa374f3e984a30a898"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p0_r2_ts2025_ivr_fam_preds.npz",
+     "bytes": 9582467,
+     "sha256": "15b5eab329336501ebdafcbe4da92faf8bd7157bdc15c0a4204b164b4a95042e"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p1_r0_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9617878,
+     "sha256": "2e3f093160b41d85b40a34a45143ecb5d9d1338b90443ae218d6a47f5e685806"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p1_r0_ts2025_ivr_fam_preds.npz",
+     "bytes": 9666372,
+     "sha256": "bb1abf452126f2a54fe4550ec2f775695d658e7a9d1653e331c3722db05ae7dd"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p1_r1_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9641231,
+     "sha256": "584bf897cf6a260510596d6f9521fa867311c220ab867f96c902d63a35aeecf9"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p1_r1_ts2025_ivr_fam_preds.npz",
+     "bytes": 9578270,
+     "sha256": "2cc46742bee930e19a6535086637fe721586e042400e29998086751098fc90ce"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p1_r2_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9668624,
+     "sha256": "3010a69366fba6ff3cc82a2c94489efbaa316b69900738c216ba7906ab101b1a"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p1_r2_ts2025_ivr_fam_preds.npz",
+     "bytes": 9609885,
+     "sha256": "7b1f0a7020c4604f52c1e223196d41597b58936365f67755024e66b47e0c6053"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p2_r0_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9619079,
+     "sha256": "15eb03e2b4bf04fcb7a767ae9d87c97259d5a0971f8117256d617e6cd5aeef77"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p2_r0_ts2025_ivr_fam_preds.npz",
+     "bytes": 9666593,
+     "sha256": "7d778cc4f818038b79d76f58dfa9b81a827dc9b53b3e12b2b7774c332a294325"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p2_r1_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9832638,
+     "sha256": "0e09ade4ddde0484e715724b22d0796520ef84f7e5fb946c805709b75f9f3a00"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p2_r1_ts2025_ivr_fam_preds.npz",
+     "bytes": 9575508,
+     "sha256": "ad29925832e2b70711a87b362d77083e0a4519880879ee4199fb54827b37d449"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p2_r2_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9644416,
+     "sha256": "289e880295d3266cfef2c3debd83c06fc2ec47447049fa83f2812947335039fc"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p2_r2_ts2025_ivr_fam_preds.npz",
+     "bytes": 9612592,
+     "sha256": "cf1e38d1465d7ad8638279d82f531534ffb14d226f078476fac6cfcf48d2881d"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p3_r0_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9769103,
+     "sha256": "525bf5a65670c0fe4c68bb49814879b360ba5b85ab8d7b5736ddf9cd4697e215"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p3_r0_ts2025_ivr_fam_preds.npz",
+     "bytes": 9602527,
+     "sha256": "33c79d6ce8d0cb193b75b29e3811b66dc8405a18e4ee7ab83b2856ca05970b5f"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p3_r1_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9629388,
+     "sha256": "77af6986686b601324b30b972230cc71ac8aca29ab46104e398591e8f8cebbae"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p3_r1_ts2025_ivr_fam_preds.npz",
+     "bytes": 9550211,
+     "sha256": "4ad96ee4c8139210ee7edc55aa2b303c70a7bbf397b874d906d824c569d10320"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p3_r2_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9659840,
+     "sha256": "088b0b2f4abee638fd751ffbdf317d2f663532af1f4f2379f0568867da515d1d"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p3_r2_ts2025_ivr_fam_preds.npz",
+     "bytes": 9612871,
+     "sha256": "5449897bb3ab6762c3e578a2422d9e231693c1a7606174236e693f3a9c560172"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p4_r0_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9756974,
+     "sha256": "0b41eee82abbf971e74137fb1b0accd3f573aaebf83e6193922137aeb1252fd2"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p4_r0_ts2025_ivr_fam_preds.npz",
+     "bytes": 9524031,
+     "sha256": "c17892ad50f192802600aa1f0c41017d775ea23cbc1dd36215e29e175b330c77"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p4_r1_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9538743,
+     "sha256": "0d37ca9e6729ce433b277b8535da5850f0c05afe5df46e00d384179ea7a07c96"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p4_r1_ts2025_ivr_fam_preds.npz",
+     "bytes": 9463323,
+     "sha256": "68bea23c67ee024add01b63267bc5431c490d698f1a7cfc407e7f529b9362dac"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p4_r2_mean_ts2025_ivr_fam_preds.npz",
+     "bytes": 9837026,
+     "sha256": "a7c3529a301471f7fe8ed3cee24b3915f48c75777abe95ac77da1bc77d662ba2"
+    },
+    {
+     "file": "fam_seed2025/gnn_B_mb0.0_p4_r2_ts2025_ivr_fam_preds.npz",
+     "bytes": 9545672,
+     "sha256": "e7aed6212afdae711ea20ee41b5312503d5e29a70e38b468c309813bfff1b47c"
+    }
+   ]
+  }
+ ]
+}
