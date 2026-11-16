@@ -1,21 +1,21 @@
 {
- "generated": "2026-11-12T03:38:02Z",
+ "generated": "2026-11-16T04:20:10Z",
  "site": "https://zenodo.org",
  "code": {
   "concept": "21217568",
-  "previous_record": 24136503,
-  "snapshot": "MetaGNN-Framework-benchmark-validity-2026-11b.zip",
-  "snapshot_sha256": "fb27bf40b05ff16baa6dae8c11c0eb4df3d6666995144ba76d09b5181029a994",
-  "snapshot_size": 36332960,
-  "snapshot_route": "git archive of benchmark-validity-2026-11b (672709b7e97bb139a8c3550c289abead2794e072) in this checkout",
-  "tag": "benchmark-validity-2026-11b",
-  "commit": "672709b7e97bb139a8c3550c289abead2794e072",
-  "record_id": 24141224,
-  "doi": "10.5281/zenodo.24141224",
+  "previous_record": 24141224,
+  "snapshot": "MetaGNN-Framework-benchmark-validity-2026-11f.zip",
+  "snapshot_sha256": "23aabddda6a44acf64e5e013d6687423d5842853241099ff2614e6bcc1f4278a",
+  "snapshot_size": 124732317,
+  "snapshot_route": "git archive of benchmark-validity-2026-11f (0e081b63806d4ce97c4dc811b5a4e57db8c11e00) in this checkout",
+  "tag": "benchmark-validity-2026-11f",
+  "commit": "0e081b63806d4ce97c4dc811b5a4e57db8c11e00",
+  "record_id": 24173796,
+  "doi": "10.5281/zenodo.24173796",
   "conceptdoi": "10.5281/zenodo.21217568",
-  "url": "https://zenodo.org/record/24141224",
+  "url": "https://zenodo.org/record/24173796",
   "published": true,
-  "published_at": "2026-11-12T03:38:11Z"
+  "published_at": "2026-11-16T04:20:27Z"
  },
  "data": {
   "concept": "21217578",
